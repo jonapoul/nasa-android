@@ -1,0 +1,41 @@
+---
+complexity:
+  LongParameterList:
+    ignoreDefaultParameters: true
+    functionThreshold: 10
+  TooManyFunctions:
+    thresholdInObjects: 20
+    thresholdInClasses: 20
+    thresholdInInterfaces: 20
+    ignorePrivate: true
+  LongMethod:
+    threshold: 100
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+  SwallowedException:
+    ignoredExceptionTypes:
+      - "CancellationException"
+naming:
+  FunctionNaming:
+    functionPattern: "[a-zA-Z][a-zA-Z0-9]*"
+style:
+  MaxLineLength:
+    maxLineLength: 120
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+    ignoreAnnotated:
+      - "Preview"
+      - "PreviewThemes"
+  UnusedPrivateMember:
+    ignoreAnnotated:
+      - "Preview"
+      - "PreviewThemes"
+      - "ScreenPreview"
+  ForbiddenComment:
+    active: false
+  UnnecessaryAbstractClass:
+    active: false
+  ReturnCount:
+    max: 5

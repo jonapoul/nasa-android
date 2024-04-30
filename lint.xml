@@ -1,0 +1,7 @@
+<lint>
+    <!-- https://slackhq.github.io/compose-lints/rules/ -->
+    <issue id="ComposeCompositionLocalUsage" severity="ignore"/>
+    <issue id="ComposeUnstableReceiver" severity="ignore"/>
+
+    <issue id="ComposeM2Api" severity="error"/>
+</lint>

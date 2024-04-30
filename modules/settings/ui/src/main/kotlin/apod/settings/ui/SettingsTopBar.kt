@@ -1,0 +1,42 @@
+package apod.settings.ui
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
+import apod.core.ui.color.Theme
+import apod.core.ui.color.topAppBarColors
+import apod.settings.res.R
+
+@Composable
+internal fun SettingsTopBar(
+  theme: Theme,
+  scrollBehavior: TopAppBarScrollBehavior,
+  onClickBack: () -> Unit,
+) {
+  TopAppBar(
+    colors = theme.topAppBarColors(),
+    navigationIcon = {
+      IconButton(onClick = onClickBack) {
+        Icon(
+          imageVector = Icons.Filled.Close,
+          contentDescription = stringResource(id = R.string.settings_toolbar_back),
+        )
+      }
+    },
+    title = {
+      Text(
+        text = stringResource(id = R.string.settings_toolbar_title),
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+      )
+    },
+    scrollBehavior = scrollBehavior,
+  )
+}

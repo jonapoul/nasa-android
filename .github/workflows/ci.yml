@@ -1,0 +1,54 @@
+name: Check
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+  checks: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 19
+          distribution: "zulu"
+
+      - name: Add permissions
+        run: chmod +x ./gradlew
+
+      - name: Add dummy API key
+        run: |
+          touch local-api.properties
+          echo "nasaApiKey=SOME_DUMMY_API_KEY" >> local-api.properties
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          generate-job-summary: false
+          cache-read-only: false
+
+      - name: Check
+        run: ./gradlew check
+
+      - name: Generate test coverage
+        run: echo "COVERAGE=$(./gradlew -q printInstructionCoverage)" >> $GITHUB_ENV
+
+      - name: Update dynamic badge gist
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 6bf1b7a292bc61bcca966bee22e8b456
+          filename: coverage-badge.json
+          label: coverage
+          message: ${{ env.COVERAGE }}%
+          valColorRange: ${{ env.COVERAGE }}
+          minColorRange: 0
+          maxColorRange: 100

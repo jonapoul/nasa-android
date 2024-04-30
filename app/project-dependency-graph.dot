@@ -1,0 +1,100 @@
+digraph {
+edge ["dir"="forward"]
+graph ["dpi"="100","label"="app","labelloc"="t","fontsize"="30","ranksep"="1.5"]
+node ["style"="filled"]
+":app" ["shape"="box","fillcolor"="#5555FF"]
+":modules:about:di" ["fillcolor"="#FCB103","shape"="box"]
+":modules:about:data" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:core:http" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:about:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:about:res" ["fillcolor"="#55FFFF","shape"="box"]
+":modules:about:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:core:url" ["fillcolor"="#55FF55","shape"="box"]
+":modules:core:res" ["fillcolor"="#55FFFF","shape"="box"]
+":modules:core:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:core:model" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:navigation" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:apod:data:di" ["fillcolor"="#FCB103","shape"="box"]
+":modules:apod:data:api" ["fillcolor"="#55FF55","shape"="box"]
+":modules:apod:data:model" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
+":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:apod:screen-single:res" ["fillcolor"="#55FFFF","shape"="box"]
+":modules:apod:screen-single:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:core:theme" ["fillcolor"="#55FF55","shape"="box"]
+":modules:settings:keys" ["fillcolor"="#55FF55","shape"="box"]
+":modules:licenses:di" ["fillcolor"="#FCB103","shape"="box"]
+":modules:licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:licenses:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:licenses:res" ["fillcolor"="#55FFFF","shape"="box"]
+":modules:settings:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:settings:res" ["fillcolor"="#55FFFF","shape"="box"]
+{
+edge ["dir"="none"]
+graph ["rank"="same"]
+":app"
+}
+subgraph "cluster_legend" {
+edge ["dir"="none"]
+graph ["label"="Legend","fontsize"="15"]
+"Legend" ["style"="filled","fillcolor"="#bbbbbb","shape"="none","margin"="0","fontsize"="12","label"=<
+<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
+<TR><TD>Android App</TD><TD BGCOLOR="#5555FF">module-name</TD></TR>
+<TR><TD>Android ViewModel</TD><TD BGCOLOR="#FF5555">module-name</TD></TR>
+<TR><TD>Android Hilt</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
+<TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
+<TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
+<TR><TD>Android Resources</TD><TD BGCOLOR="#55FFFF">module-name</TD></TR>
+<TR><TD>Kotlin</TD><TD BGCOLOR="#A17EFF">module-name</TD></TR>
+</TABLE>
+>]
+}
+":app" -> ":modules:about:di" ["style"="dotted"]
+":app" -> ":modules:about:ui" ["style"="dotted"]
+":app" -> ":modules:apod:data:di" ["style"="dotted"]
+":app" -> ":modules:apod:screen-single:ui" ["style"="dotted"]
+":app" -> ":modules:core:model" ["style"="dotted"]
+":app" -> ":modules:core:res" ["style"="dotted"]
+":app" -> ":modules:core:theme" ["style"="dotted"]
+":app" -> ":modules:core:ui" ["style"="dotted"]
+":app" -> ":modules:licenses:di" ["style"="dotted"]
+":app" -> ":modules:licenses:ui" ["style"="dotted"]
+":app" -> ":modules:navigation" ["style"="dotted"]
+":app" -> ":modules:settings:ui" ["style"="dotted"]
+":modules:about:di" -> ":modules:about:data"
+":modules:about:di" -> ":modules:core:http" ["style"="dotted"]
+":modules:about:ui" -> ":modules:about:res" ["style"="dotted"]
+":modules:about:ui" -> ":modules:about:vm" ["style"="dotted"]
+":modules:about:ui" -> ":modules:core:res" ["style"="dotted"]
+":modules:about:ui" -> ":modules:core:ui" ["style"="dotted"]
+":modules:about:ui" -> ":modules:navigation" ["style"="dotted"]
+":modules:about:vm" -> ":modules:about:data"
+":modules:about:vm" -> ":modules:core:url"
+":modules:core:ui" -> ":modules:core:model"
+":modules:core:ui" -> ":modules:core:res" ["style"="dotted"]
+":modules:apod:data:di" -> ":modules:apod:data:api"
+":modules:apod:data:di" -> ":modules:apod:data:db"
+":modules:apod:data:di" -> ":modules:core:http" ["style"="dotted"]
+":modules:apod:data:api" -> ":modules:apod:data:model"
+":modules:apod:data:api" -> ":modules:core:model" ["style"="dotted"]
+":modules:apod:data:db" -> ":modules:apod:data:model"
+":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:res" ["style"="dotted"]
+":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:vm" ["style"="dotted"]
+":modules:apod:screen-single:ui" -> ":modules:core:res" ["style"="dotted"]
+":modules:apod:screen-single:ui" -> ":modules:core:ui" ["style"="dotted"]
+":modules:apod:screen-single:ui" -> ":modules:navigation" ["style"="dotted"]
+":modules:apod:screen-single:vm" -> ":modules:apod:data:model"
+":modules:core:theme" -> ":modules:core:model"
+":modules:core:theme" -> ":modules:settings:keys" ["style"="dotted"]
+":modules:settings:keys" -> ":modules:core:model"
+":modules:licenses:di" -> ":modules:licenses:data"
+":modules:licenses:ui" -> ":modules:licenses:vm"
+":modules:licenses:ui" -> ":modules:licenses:res" ["style"="dotted"]
+":modules:licenses:ui" -> ":modules:core:ui" ["style"="dotted"]
+":modules:licenses:vm" -> ":modules:core:url"
+":modules:licenses:vm" -> ":modules:licenses:data"
+":modules:settings:ui" -> ":modules:core:ui" ["style"="dotted"]
+":modules:settings:ui" -> ":modules:settings:keys" ["style"="dotted"]
+":modules:settings:ui" -> ":modules:settings:res" ["style"="dotted"]
+}
