@@ -14,6 +14,7 @@ dependencies {
   implementation(projects.modules.core.res)
   implementation(projects.modules.core.ui)
   implementation(projects.modules.navigation)
+  implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

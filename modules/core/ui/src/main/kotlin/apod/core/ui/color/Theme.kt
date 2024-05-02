@@ -2,9 +2,6 @@
 
 package apod.core.ui.color
 
-import androidx.compose.material3.TopAppBarColors
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
@@ -102,11 +99,3 @@ sealed interface Theme {
   val preferenceSubtitle: Color
   val preferenceSubtitleDisabled: Color
 }
-
-@Composable
-fun Theme.topAppBarColors(): TopAppBarColors = TopAppBarDefaults.topAppBarColors(
-  containerColor = toolbarBackground,
-  titleContentColor = toolbarText,
-  actionIconContentColor = toolbarButton,
-  navigationIconContentColor = toolbarButton,
-)

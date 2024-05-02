@@ -7,5 +7,6 @@
 
   <string name="apod_single_copyright">Copyright: %1$s</string>
 
-  <string name="apod_failed_title">Failed: %1$s</string>
+  <string name="apod_failed_title">Failed loading!</string>
+  <string name="apod_failed_retry">Retry</string>
 </resources>

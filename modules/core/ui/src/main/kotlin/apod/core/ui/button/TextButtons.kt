@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
@@ -21,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
+import apod.core.ui.color.bareButton
+import apod.core.ui.color.primaryButton
+import apod.core.ui.color.regularButton
 import apod.core.ui.font.ApodFontFamily
 import apod.core.ui.font.style
 import apod.core.ui.preview.PreviewColumn
@@ -46,7 +47,7 @@ fun PrimaryTextButton(
   style: TextStyle = ButtonPrimaryTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.primary(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.primaryButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
   onClick: () -> Unit,
 ) {
@@ -78,7 +79,7 @@ fun RegularTextButton(
   style: TextStyle = ButtonRegularTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.regular(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.regularButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
   onClick: () -> Unit,
 ) {
@@ -111,7 +112,7 @@ fun PrimaryTextButtonWithLoading(
   style: TextStyle = ButtonPrimaryTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.primary(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.primaryButton(pressed) },
   onClick: () -> Unit,
 ) {
   PrimaryTextButton(
@@ -161,7 +162,7 @@ fun BareTextButton(
   style: TextStyle = ButtonBareTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.bare(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.bareButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
   onClick: () -> Unit,
 ) {
@@ -229,41 +230,6 @@ private fun RowScope.DefaultTextButtonContent(
     fontSize = fontSize,
   )
 }
-
-@Stable
-@Composable
-private fun Theme.primary(isPressed: Boolean) = ButtonDefaults.buttonColors(
-  containerColor = if (isPressed) buttonPrimaryBackgroundSelected else buttonPrimaryBackground,
-  disabledContainerColor = buttonPrimaryDisabledBackground,
-  contentColor = if (isPressed) buttonPrimaryTextSelected else buttonPrimaryText,
-  disabledContentColor = buttonPrimaryDisabledText,
-)
-
-@Stable
-@Composable
-fun Theme.regular(
-  isPressed: Boolean,
-  container: Color = buttonRegularBackground,
-  containerPressed: Color = buttonRegularBackgroundSelected,
-  containerDisabled: Color = buttonRegularDisabledBackground,
-  text: Color = buttonRegularText,
-  textPressed: Color = buttonRegularTextSelected,
-  textDisabled: Color = buttonRegularDisabledText,
-) = ButtonDefaults.buttonColors(
-  containerColor = if (isPressed) containerPressed else container,
-  disabledContainerColor = containerDisabled,
-  contentColor = if (isPressed) textPressed else text,
-  disabledContentColor = textDisabled,
-)
-
-@Stable
-@Composable
-private fun Theme.bare(isPressed: Boolean) = ButtonDefaults.buttonColors(
-  containerColor = if (isPressed) buttonBareBackgroundSelected else buttonBareBackground,
-  disabledContainerColor = buttonBareDisabledBackground,
-  contentColor = if (isPressed) buttonBareTextSelected else buttonBareText,
-  disabledContentColor = buttonBareDisabledText,
-)
 
 private val ButtonPrimaryTextStyle: TextStyle
   @Composable

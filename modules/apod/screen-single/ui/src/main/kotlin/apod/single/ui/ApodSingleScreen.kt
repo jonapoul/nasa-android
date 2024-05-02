@@ -69,6 +69,8 @@ data class ApodSingleScreen(
           is ApodSingleAction.ShowDescriptionDialog -> TODO()
 
           is ApodSingleAction.ShowImageFullscreen -> TODO()
+
+          is ApodSingleAction.RetryLoad -> TODO()
         }
       },
     )

@@ -11,7 +11,6 @@ import apod.core.ui.color.DarkTheme
 import apod.core.ui.color.LightTheme
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.MidnightTheme
-import apod.core.ui.color.Theme
 import apod.core.ui.font.apodTypography
 
 @Composable

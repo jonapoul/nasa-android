@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -67,23 +68,43 @@ private fun ApodSingleContent(
       onAction = onAction,
       theme = theme,
     )
-//
-//    ItemFooter(
-//      modifier = Modifier
-//        .wrapContentHeight()
-//        .padding(horizontal = 8.dp, vertical = 4.dp),
-//      item = item,
-//      onAction = onAction,
-//      theme = theme,
-//    )
+
+    if (state is LoadState.Success) {
+      ItemFooter(
+        modifier = Modifier
+          .wrapContentHeight()
+          .padding(horizontal = 8.dp, vertical = 4.dp),
+        item = state.item,
+        onAction = onAction,
+        theme = theme,
+      )
+    }
   }
 }
 
 @ScreenPreview
 @Composable
-private fun PreviewSingle() = PreviewScreen {
+private fun PreviewSuccess() = PreviewScreen {
   ApodSingleScreenImpl(
     state = LoadState.Success(EXAMPLE_ITEM),
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewFailure() = PreviewScreen {
+  ApodSingleScreenImpl(
+    state = LoadState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewLoading() = PreviewScreen {
+  ApodSingleScreenImpl(
+    state = LoadState.Loading(EXAMPLE_DATE),
     onAction = {},
   )
 }
