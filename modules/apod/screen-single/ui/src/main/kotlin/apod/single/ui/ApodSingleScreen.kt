@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import apod.navigation.NavScreens
+import apod.single.vm.ApodItem
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ApodSingleViewModel
 import cafe.adriel.voyager.core.registry.rememberScreen
@@ -46,30 +47,34 @@ data class ApodSingleScreen(
       clickedSettings = false
     }
 
+    var showDescriptionItem by remember { mutableStateOf<ApodItem?>(null) }
+    val immutableItem = showDescriptionItem
+    if (immutableItem != null) {
+      DescriptionDialog(
+        item = immutableItem,
+        onCancel = { showDescriptionItem = null },
+      )
+    }
+
     ApodSingleScreenImpl(
       state = state,
-      onAction = {
-        when (it) {
-          ApodSingleAction.NavAbout -> {
+      onAction = { action ->
+        when (action) {
+          is ApodSingleAction.NavAbout -> {
             clickedAbout = true
           }
 
-          ApodSingleAction.NavSettings -> {
+          is ApodSingleAction.NavSettings -> {
             clickedSettings = true
           }
 
-          is ApodSingleAction.LoadNext -> {
-            viewModel.loadNext()
+          is ApodSingleAction.ShowDescriptionDialog -> {
+            showDescriptionItem = action.item
           }
 
-          is ApodSingleAction.LoadPrevious -> {
-            viewModel.loadPrevious()
-          }
-
-          is ApodSingleAction.ShowDescriptionDialog -> TODO()
-
+          is ApodSingleAction.LoadNext -> viewModel.loadNext()
+          is ApodSingleAction.LoadPrevious -> viewModel.loadPrevious()
           is ApodSingleAction.ShowImageFullscreen -> TODO()
-
           is ApodSingleAction.RetryLoad -> TODO()
         }
       },

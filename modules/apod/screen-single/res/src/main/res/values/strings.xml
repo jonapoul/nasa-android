@@ -9,4 +9,6 @@
 
   <string name="apod_failed_title">Failed loading!</string>
   <string name="apod_failed_retry">Retry</string>
+
+  <string name="apod_desc_dialog_ok">OK</string>
 </resources>
