@@ -1,7 +1,6 @@
 package apod.single.ui
 
 import alakazam.android.ui.compose.VerticalSpacer
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,24 +16,32 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import apod.core.ui.ShimmerBlockShape
 import apod.core.ui.button.PrimaryTextButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
+import apod.core.ui.shimmer
+import apod.data.model.ApodMediaType
 import apod.single.res.R
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
-import apod.core.res.R as CoreR
+import coil.compose.AsyncImage
 
 @Composable
 internal fun ItemContent(
@@ -75,27 +82,53 @@ internal fun ItemContent(
         ItemContentSuccess(
           modifier = Modifier.fillMaxSize(),
           state = state,
-          theme = theme,
         )
       }
     }
   }
 }
 
-@Suppress("UNUSED_PARAMETER", "UnusedParameter")
 @Composable
 private fun ItemContentSuccess(
   state: ScreenState.Success,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  Image(
-    modifier = modifier.fillMaxSize(),
-    painter = painterResource(id = CoreR.mipmap.app_icon_round), // TODO: replace
-    contentDescription = null,
-    contentScale = ContentScale.Fit,
-    alignment = Alignment.Center,
-  )
+  Box(
+    modifier = modifier,
+    contentAlignment = Alignment.Center,
+  ) {
+    var isLoading by remember { mutableStateOf(true) }
+    if (isLoading) {
+      Box(
+        modifier = Modifier
+          .fillMaxSize()
+          .padding(32.dp)
+          .clip(ShimmerBlockShape)
+          .shimmer(theme, durationMillis = 3000),
+      )
+    }
+
+    val item = state.item
+    val url = when (item.mediaType) {
+      ApodMediaType.Image -> item.url
+      ApodMediaType.Video -> item.thumbnailUrl
+      ApodMediaType.Other -> item.thumbnailUrl ?: item.url
+    }
+
+    val fallback = rememberVectorPainter(Icons.Filled.Warning)
+    AsyncImage(
+      modifier = Modifier.fillMaxSize(),
+      model = url,
+      contentDescription = item.title,
+      contentScale = ContentScale.Fit,
+      alignment = Alignment.Center,
+      fallback = fallback,
+      onLoading = { isLoading = true },
+      onSuccess = { isLoading = false },
+      onError = { isLoading = false },
+    )
+  }
 }
 
 @Composable

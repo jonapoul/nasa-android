@@ -27,6 +27,8 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import kotlinx.collections.immutable.persistentListOf
 
+private const val DEFAULT_DURATION_MS = 1000
+
 // Adapted from https://proandroiddev.com/shimmer-shadow-loading-effect-animation-with-jetpack-compose-f4b3de28dc2b
 @SuppressLint("ComposeModifierComposed")
 fun Modifier.shimmer(
@@ -34,7 +36,7 @@ fun Modifier.shimmer(
   color: Theme.() -> Color = { pageTextLoading },
   widthOfShadowBrush: Int = 500,
   angleOfAxisY: Float = 270f,
-  durationMillis: Int = 1000,
+  durationMillis: Int = DEFAULT_DURATION_MS,
 ): Modifier {
   return composed {
     val baseColor = theme.color()
@@ -74,12 +76,13 @@ fun ShimmeringBlock(
   shape: Shape = ShimmerBlockShape,
   theme: Theme = LocalTheme.current,
   color: Theme.() -> Color = { pageTextLoading },
+  durationMillis: Int = DEFAULT_DURATION_MS,
 ) {
   Box(
     modifier = modifier
       .clip(shape)
       .height(30.dp)
-      .shimmer(theme, color),
+      .shimmer(theme, color, durationMillis = durationMillis),
   )
 }
 
