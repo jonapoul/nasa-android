@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
-  api(projects.modules.apod.data.model)
+  api(projects.modules.core.model)
   api(libs.androidx.room.runtime)
   api(libs.kotlinx.coroutines)
   implementation(libs.androidx.room.common)

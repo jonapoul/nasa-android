@@ -53,9 +53,15 @@ cafe.adriel.voyager:voyager-core-android:1.1.0-alpha04
 cafe.adriel.voyager:voyager-core:1.1.0-alpha04
 com.google.guava:listenablefuture:1.0
 com.jakewharton.timber:timber:5.0.1
+org.jetbrains.kotlin:kotlin-stdlib-common:1.9.23
 org.jetbrains.kotlin:kotlin-stdlib:1.9.23
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2
+org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.5.0
+org.jetbrains.kotlinx:kotlinx-datetime:0.5.0
+org.jetbrains.kotlinx:kotlinx-serialization-bom:1.6.3
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.3
+org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3
 org.jetbrains:annotations:23.0.0

@@ -1,7 +1,7 @@
 package apod.data.repo
 
 import apod.core.model.ApiKey
-import apod.data.model.ApodItem
+import apod.core.model.ApodItem
 import kotlinx.datetime.LocalDate
 
 sealed interface LoadResult {

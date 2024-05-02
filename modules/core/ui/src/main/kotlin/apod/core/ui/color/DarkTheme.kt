@@ -16,7 +16,9 @@ internal class DarkTheme : Theme {
   override val cardShadow = ColorPalette.navy700
 
   override val toolbarBackground = ColorPalette.grey900
+  override val toolbarBackgroundSubdued = ColorPalette.grey800
   override val toolbarText = ColorPalette.white
+  override val toolbarTextSubdued = ColorPalette.grey200
   override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.navy600

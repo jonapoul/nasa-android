@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
+  api(projects.modules.core.model)
+  api(libs.kotlinx.datetime)
   api(libs.voyager.core)
   implementation(libs.androidx.compose.runtime)
 }

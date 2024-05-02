@@ -16,7 +16,6 @@ node ["style"="filled"]
 ":modules:navigation" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:data:di" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
-":modules:apod:data:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-single:res" ["fillcolor"="#55FFFF","shape"="box"]
@@ -75,23 +74,21 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:about:vm" -> ":modules:core:url"
 ":modules:core:ui" -> ":modules:core:model"
 ":modules:core:ui" -> ":modules:core:res" ["style"="dotted"]
+":modules:navigation" -> ":modules:core:model"
 ":modules:apod:data:di" -> ":modules:apod:data:api"
 ":modules:apod:data:di" -> ":modules:apod:data:db"
 ":modules:apod:data:di" -> ":modules:core:http" ["style"="dotted"]
-":modules:apod:data:api" -> ":modules:apod:data:model"
-":modules:apod:data:api" -> ":modules:core:model" ["style"="dotted"]
-":modules:apod:data:db" -> ":modules:apod:data:model"
+":modules:apod:data:api" -> ":modules:core:model"
+":modules:apod:data:db" -> ":modules:core:model"
 ":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:res" ["style"="dotted"]
 ":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:vm" ["style"="dotted"]
 ":modules:apod:screen-single:ui" -> ":modules:core:ui" ["style"="dotted"]
 ":modules:apod:screen-single:ui" -> ":modules:navigation" ["style"="dotted"]
-":modules:apod:screen-single:vm" -> ":modules:apod:data:model"
+":modules:apod:screen-single:vm" -> ":modules:core:model"
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo" ["style"="dotted"]
-":modules:apod:screen-single:vm" -> ":modules:core:model" ["style"="dotted"]
-":modules:apod:data:repo" -> ":modules:apod:data:model"
+":modules:apod:data:repo" -> ":modules:core:model"
 ":modules:apod:data:repo" -> ":modules:apod:data:api" ["style"="dotted"]
 ":modules:apod:data:repo" -> ":modules:apod:data:db" ["style"="dotted"]
-":modules:apod:data:repo" -> ":modules:core:model" ["style"="dotted"]
 ":modules:core:theme" -> ":modules:core:model"
 ":modules:core:theme" -> ":modules:settings:keys" ["style"="dotted"]
 ":modules:settings:keys" -> ":modules:core:model"

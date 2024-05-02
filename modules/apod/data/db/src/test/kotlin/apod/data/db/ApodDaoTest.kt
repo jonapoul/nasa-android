@@ -1,7 +1,7 @@
 package apod.data.db
 
 import alakazam.test.db.RoomDatabaseRule
-import apod.data.model.ApodMediaType
+import apod.core.model.ApodMediaType
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate

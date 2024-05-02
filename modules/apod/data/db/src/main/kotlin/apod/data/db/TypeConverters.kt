@@ -1,7 +1,7 @@
 package apod.data.db
 
 import androidx.room.TypeConverter
-import apod.data.model.ApodMediaType
+import apod.core.model.ApodMediaType
 import kotlinx.datetime.LocalDate
 
 internal object ApodMediaTypeConverter {

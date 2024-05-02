@@ -3,7 +3,7 @@ package apod.data.db
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import apod.data.model.ApodMediaType
+import apod.core.model.ApodMediaType
 import kotlinx.datetime.LocalDate
 
 @Entity(tableName = "apod")

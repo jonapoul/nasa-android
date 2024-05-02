@@ -7,11 +7,10 @@ android {
 }
 
 dependencies {
-  api(projects.modules.apod.data.model)
+  api(projects.modules.core.model)
   api(libs.kotlinx.coroutines)
   implementation(projects.modules.apod.data.api)
   implementation(projects.modules.apod.data.db)
-  implementation(projects.modules.core.model)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.javaxInject)
   implementation(libs.kotlinx.datetime)

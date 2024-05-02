@@ -8,6 +8,7 @@ import apod.core.http.buildOkHttp
 import apod.licenses.ui.LicensesScreen
 import apod.navigation.NavScreens
 import apod.settings.ui.SettingsScreen
+import apod.single.ui.ApodFullScreen
 import apod.single.ui.ApodSingleScreen
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import coil.Coil
@@ -34,7 +35,8 @@ class ApodApplication : Application(), ImageLoaderFactory {
     Timber.d("manufacturer=${bc.manufacturer} model=${bc.model} os=${bc.os} platform=${bc.platform}")
 
     ScreenRegistry {
-      register<NavScreens.Home> { ApodSingleScreen() }
+      register<NavScreens.Home> { ApodSingleScreen(it.date) }
+      register<NavScreens.FullScreen> { ApodFullScreen(it.item) }
       register<NavScreens.About> { AboutScreen() }
       register<NavScreens.Licenses> { LicensesScreen() }
       register<NavScreens.Settings> { SettingsScreen() }

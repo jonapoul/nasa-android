@@ -1,6 +1,6 @@
 package apod.data.api
 
-import apod.data.model.ApodMediaType
+import apod.core.model.ApodMediaType
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -21,7 +21,9 @@ sealed interface Theme {
   val cardShadow: Color
 
   val toolbarBackground: Color
+  val toolbarBackgroundSubdued: Color
   val toolbarText: Color
+  val toolbarTextSubdued: Color
   val toolbarButton: Color
 
   val menuItemBackground: Color

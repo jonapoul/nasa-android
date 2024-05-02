@@ -1,8 +1,8 @@
 package apod.data.repo
 
+import apod.core.model.ApodItem
 import apod.data.api.ApodResponseModel
 import apod.data.db.ApodEntity
-import apod.data.model.ApodItem
 
 internal fun ApodEntity.toItem(): ApodItem = ApodItem(
   date = date,

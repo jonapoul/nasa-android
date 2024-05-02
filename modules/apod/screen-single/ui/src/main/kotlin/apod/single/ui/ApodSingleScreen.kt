@@ -7,7 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import apod.data.model.ApodItem
+import apod.core.model.ApodItem
 import apod.navigation.NavScreens
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ApodSingleViewModel
@@ -46,6 +46,13 @@ data class ApodSingleScreen(
       clickedSettings = false
     }
 
+    var fullScreenItem by remember { mutableStateOf<ApodItem?>(null) }
+    val immutableFullScreenItem = fullScreenItem
+    if (immutableFullScreenItem != null) {
+      val displayScreen = rememberScreen(NavScreens.FullScreen(immutableFullScreenItem))
+      navigator.push(displayScreen)
+    }
+
     var showDescriptionItem by remember { mutableStateOf<ApodItem?>(null) }
     val immutableItem = showDescriptionItem
     if (immutableItem != null) {
@@ -71,10 +78,13 @@ data class ApodSingleScreen(
             showDescriptionItem = action.item
           }
 
+          is ApodSingleAction.ShowImageFullscreen -> {
+            fullScreenItem = action.item
+          }
+
           is ApodSingleAction.LoadNext -> viewModel.loadNext()
           is ApodSingleAction.LoadPrevious -> viewModel.loadPrevious()
           is ApodSingleAction.RetryLoad -> viewModel.load(action.date)
-          is ApodSingleAction.ShowImageFullscreen -> TODO()
         }
       },
     )

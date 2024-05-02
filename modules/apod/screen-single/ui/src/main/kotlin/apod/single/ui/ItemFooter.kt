@@ -17,11 +17,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import apod.core.model.ApodItem
 import apod.core.ui.CardShape
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
-import apod.data.model.ApodItem
 import apod.single.res.R
 import apod.single.vm.ApodSingleAction
 

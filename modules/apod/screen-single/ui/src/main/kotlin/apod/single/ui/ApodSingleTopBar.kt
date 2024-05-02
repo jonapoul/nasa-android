@@ -23,7 +23,7 @@ import apod.single.res.R
 import apod.single.vm.ApodSingleAction
 
 @Composable
-internal fun ApodViewTopBar(
+internal fun ApodSingleTopBar(
   theme: Theme,
   onAction: (ApodSingleAction) -> Unit,
 ) {

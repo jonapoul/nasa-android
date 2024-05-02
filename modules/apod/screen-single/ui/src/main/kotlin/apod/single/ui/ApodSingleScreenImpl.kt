@@ -26,7 +26,7 @@ internal fun ApodSingleScreenImpl(
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { ApodViewTopBar(theme, onAction) },
+    topBar = { ApodSingleTopBar(theme, onAction) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       ApodSingleContent(

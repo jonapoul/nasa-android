@@ -16,7 +16,9 @@ internal class LightTheme : Theme {
   override val cardShadow = ColorPalette.navy700
 
   override val toolbarBackground = ColorPalette.grey700
+  override val toolbarBackgroundSubdued = ColorPalette.grey600
   override val toolbarText = ColorPalette.white
+  override val toolbarTextSubdued = ColorPalette.grey200
   override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.navy50

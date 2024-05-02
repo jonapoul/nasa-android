@@ -3,7 +3,7 @@ package apod.data.api
 import alakazam.test.core.CoroutineRule
 import alakazam.test.core.getResourceAsStream
 import apod.core.model.ApiKey
-import apod.data.model.ApodMediaType
+import apod.core.model.ApodMediaType
 import apod.test.http.MockWebServerRule
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate

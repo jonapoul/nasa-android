@@ -1,4 +1,4 @@
-package apod.data.model
+package apod.core.model
 
 import androidx.compose.runtime.Immutable
 import kotlinx.datetime.LocalDate

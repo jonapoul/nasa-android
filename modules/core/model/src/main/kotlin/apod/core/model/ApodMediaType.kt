@@ -1,4 +1,4 @@
-package apod.data.model
+package apod.core.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

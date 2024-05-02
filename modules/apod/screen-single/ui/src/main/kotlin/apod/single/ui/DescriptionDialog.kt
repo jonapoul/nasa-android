@@ -11,11 +11,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import apod.core.model.ApodItem
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.dialog.DialogContent
 import apod.core.ui.preview.PreviewColumn
-import apod.data.model.ApodItem
 import apod.single.res.R
 
 @Composable

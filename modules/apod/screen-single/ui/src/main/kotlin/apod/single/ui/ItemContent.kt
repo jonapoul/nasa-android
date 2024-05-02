@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import apod.core.model.ApodMediaType
 import apod.core.ui.ShimmerBlockShape
 import apod.core.ui.button.PrimaryTextButton
 import apod.core.ui.color.LocalTheme
@@ -37,7 +38,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.core.ui.shimmer
-import apod.data.model.ApodMediaType
 import apod.single.res.R
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState

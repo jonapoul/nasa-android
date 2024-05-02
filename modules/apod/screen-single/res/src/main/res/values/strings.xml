@@ -11,4 +11,6 @@
   <string name="apod_failed_retry">Retry</string>
 
   <string name="apod_desc_dialog_ok">OK</string>
+
+  <string name="apod_fullscreen_back">Back</string>
 </resources>
