@@ -3,13 +3,17 @@ name: Check
 on:
   push:
     branches: [ "main" ]
+  pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: write
   checks: write
 
 jobs:
-  main:
+  check:
+    if: github.actor != 'dependabot[bot]'
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

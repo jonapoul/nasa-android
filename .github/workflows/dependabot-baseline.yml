@@ -1,0 +1,47 @@
+name: Dependabot Baseline
+
+on:
+  pull_request:
+    branches:
+      - 'dependabot**'
+
+jobs:
+  baseline:
+    if: github.actor == 'dependabot[bot]'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 19
+          distribution: "zulu"
+
+      - name: Add permissions
+        run: chmod +x ./gradlew
+
+      - name: Add dummy API key
+        run: |
+          touch local-api.properties
+          echo "nasaApiKey=SOME_DUMMY_API_KEY" >> local-api.properties
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          generate-job-summary: false
+          cache-read-only: false
+
+      - name: Generate dependency baseline
+        run: ./gradlew dependencyGuardBaseline
+
+      - name: Push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git add -A
+          git commit -m "Dependency guard baseline"
+          git push
