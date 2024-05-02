@@ -13,7 +13,7 @@ sealed interface ScreenState {
   ) : ScreenState
 
   data class Success(
-      val item: ApodItem,
+    val item: ApodItem,
   ) : ScreenState
 
   data class Failed(

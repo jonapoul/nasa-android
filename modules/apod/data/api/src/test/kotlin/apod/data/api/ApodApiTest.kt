@@ -11,6 +11,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNull
 import kotlin.test.fail
 
 class ApodApiTest {
@@ -31,19 +32,14 @@ class ApodApiTest {
   fun `No API key gives failure`() = runTest {
     // Given
     val errorJson = readJson(filename = "no-api-key.json")
-    webServerRule.enqueue(errorJson)
+    webServerRule.enqueue(errorJson, code = 404)
 
     // When
     val response = apodApi.getToday(apiKey = ApiKey(API_KEY))
 
-    // Then the response was parsed. Yes I know the key was actually passed in, this is just testing deserialization
-    assertEquals(
-      actual = response,
-      expected = SingleApodResponse.Failure(
-        code = "API_KEY_MISSING",
-        message = "No api_key was supplied. Get one at https://api.nasa.gov:443",
-      ),
-    )
+    // Then the response was in the error body, not the regular body
+    assertEquals(actual = response.errorBody()?.string(), expected = errorJson)
+    assertNull(response.body())
   }
 
   @Test
@@ -56,7 +52,7 @@ class ApodApiTest {
     val response = apodApi.getToday(apiKey = ApiKey(API_KEY))
 
     // Then the response was deserialized properly
-    assertEquals(actual = response, expected = SingleApodResponse.Success(EXAMPLE_APOD_ITEM))
+    assertEquals(actual = response.body(), expected = EXAMPLE_APOD_ITEM)
 
     // And the request URL/params were encoded properly
     val url = webServerRule.server.takeRequest().requestUrl ?: fail("No request URL?")
@@ -79,7 +75,7 @@ class ApodApiTest {
     )
 
     // Then the response was deserialized properly
-    assertEquals(actual = response, expected = SingleApodResponse.Success(EXAMPLE_APOD_ITEM))
+    assertEquals(actual = response.body(), expected = EXAMPLE_APOD_ITEM)
 
     // And the request URL/params were encoded properly
     val url = webServerRule.server.takeRequest().requestUrl ?: fail("No request URL?")
@@ -96,7 +92,7 @@ class ApodApiTest {
   private companion object {
     const val API_KEY = "SOME_DUMMY_API_KEY"
 
-    private val EXAMPLE_APOD_ITEM = ApodResponseItem(
+    private val EXAMPLE_APOD_ITEM = ApodResponseModel(
       title = "GK Per: Nova and Planetary Nebula",
       date = LocalDate.parse("2024-04-30"),
       mediaType = ApodMediaType.Image,

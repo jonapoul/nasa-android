@@ -15,9 +15,9 @@ internal class LightTheme : Theme {
   override val cardBackground = ColorPalette.white
   override val cardShadow = ColorPalette.navy700
 
-  override val toolbarBackground = ColorPalette.grey900
-  override val toolbarText = ColorPalette.orange100
-  override val toolbarButton = ColorPalette.orange100
+  override val toolbarBackground = ColorPalette.grey700
+  override val toolbarText = ColorPalette.white
+  override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.navy50
   override val menuItemBackgroundSelected = ColorPalette.navy100
@@ -28,13 +28,13 @@ internal class LightTheme : Theme {
   override val dialogBackground = ColorPalette.white
   override val dialogProgressWheelTrack = ColorPalette.grey100
 
-  override val buttonPrimaryText = ColorPalette.white
-  override val buttonPrimaryTextSelected = ColorPalette.white
-  override val buttonPrimaryBackground = ColorPalette.orange700
-  override val buttonPrimaryBackgroundSelected = ColorPalette.orange500
-  override val buttonPrimaryBorder = ColorPalette.orange700
-  override val buttonPrimaryShadow = ColorPalette.black.copy(alpha = 0.3f)
-  override val buttonPrimaryDisabledText = ColorPalette.white
+  override val buttonPrimaryText = Color.White
+  override val buttonPrimaryTextSelected = buttonPrimaryText
+  override val buttonPrimaryBackground = ColorPalette.blue500
+  override val buttonPrimaryBackgroundSelected = ColorPalette.blue300
+  override val buttonPrimaryBorder = ColorPalette.blue500
+  override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.3f)
+  override val buttonPrimaryDisabledText = Color.White
   override val buttonPrimaryDisabledBackground = ColorPalette.navy300
   override val buttonPrimaryDisabledBorder = ColorPalette.navy300
 

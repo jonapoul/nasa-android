@@ -1,6 +1,6 @@
 package apod.data.repo
 
-import apod.data.api.ApodResponseItem
+import apod.data.api.ApodResponseModel
 import apod.data.db.ApodEntity
 import apod.data.model.ApodItem
 
@@ -15,7 +15,7 @@ internal fun ApodEntity.toItem(): ApodItem = ApodItem(
   thumbnailUrl = thumbnailUrl,
 )
 
-internal fun ApodResponseItem.toItem(): ApodItem = ApodItem(
+internal fun ApodResponseModel.toItem(): ApodItem = ApodItem(
   date = date,
   title = title,
   explanation = explanation,

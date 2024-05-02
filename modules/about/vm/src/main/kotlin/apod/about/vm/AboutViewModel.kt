@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
-class AboutViewModel @Inject constructor(
+class AboutViewModel @Inject internal constructor(
   private val buildConfig: IBuildConfig,
   private val githubRepository: GithubRepository,
   private val urlOpener: UrlOpener,

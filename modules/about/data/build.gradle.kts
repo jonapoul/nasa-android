@@ -6,9 +6,9 @@ plugins {
 dependencies {
   api(libs.kotlinx.datetime)
   api(libs.kotlinx.serialization.core)
-  api(libs.alakazam.kotlin.core)
-  api(libs.javaxInject)
   api(libs.retrofit.core)
+  implementation(libs.alakazam.kotlin.core)
+  implementation(libs.javaxInject)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.serialization.json)
   testImplementation(projects.modules.core.http)

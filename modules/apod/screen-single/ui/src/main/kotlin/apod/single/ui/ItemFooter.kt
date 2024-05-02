@@ -21,8 +21,8 @@ import apod.core.ui.CardShape
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
-import apod.single.res.R
 import apod.data.model.ApodItem
+import apod.single.res.R
 import apod.single.vm.ApodSingleAction
 
 @Composable
@@ -37,8 +37,8 @@ internal fun ItemFooter(
       .fillMaxWidth()
       .wrapContentHeight()
       .background(theme.cardBackground, CardShape)
-      .padding(16.dp)
-      .clickable { onAction(ApodSingleAction.ShowDescriptionDialog(item)) },
+      .clickable { onAction(ApodSingleAction.ShowDescriptionDialog(item)) }
+      .padding(16.dp),
     verticalArrangement = Arrangement.Top,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
@@ -56,7 +56,7 @@ internal fun ItemFooter(
       text = item.explanation,
       color = theme.pageText,
       fontSize = 13.sp,
-      maxLines = 10,
+      maxLines = 7,
       overflow = TextOverflow.Ellipsis,
     )
   }

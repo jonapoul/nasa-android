@@ -21,7 +21,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ApodSingleViewModel @Inject constructor(
+class ApodSingleViewModel @Inject internal constructor(
   private val clock: Clock,
   private val apodRepository: ApodRepository,
   timeZoneProvider: TimeZoneProvider,
@@ -40,7 +40,7 @@ class ApodSingleViewModel @Inject constructor(
     viewModelScope.launch {
       when (val result = apodRepository.loadApodItem(date, today)) {
         is LoadResult.Failure ->
-          mutableState.update { ScreenState.Failed(dateToLoad, result.reason) }
+          mutableState.update { ScreenState.Failed(dateToLoad, result.getReason()) }
 
         is LoadResult.Success ->
           mutableState.update { ScreenState.Success(result.item) }
@@ -70,6 +70,17 @@ class ApodSingleViewModel @Inject constructor(
   }
 
   private fun today(): LocalDate = clock.todayIn(timeZone)
+
+  // TODO: handle i10n with string resources
+  private fun LoadResult.Failure.getReason(): String = when (this) {
+    is LoadResult.Failure.OutOfRange -> "Tried loading $date. $message"
+    is LoadResult.Failure.NoApod -> "No APOD exists for $date"
+    is LoadResult.Failure.InvalidAuth -> "Invalid API key - $key"
+    is LoadResult.Failure.OtherHttp -> "HTTP code $code - $message"
+    is LoadResult.Failure.Json -> "Failed parsing response from server"
+    LoadResult.Failure.Network -> "Network problem: does your phone have an internet connection?"
+    is LoadResult.Failure.Other -> "Unexpected problem: $message"
+  }
 
   private companion object {
     val ONE_DAY = DatePeriod(days = 1)

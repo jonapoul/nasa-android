@@ -2,6 +2,7 @@ package apod.data.api
 
 import apod.core.model.ApiKey
 import kotlinx.datetime.LocalDate
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -33,21 +34,21 @@ interface ApodApi {
   suspend fun getToday(
     @Query("api_key") apiKey: ApiKey,
     @Query("thumbs") thumbs: Boolean = true,
-  ): SingleApodResponse
+  ): Response<ApodResponseModel>
 
   @GET(ENDPOINT)
   suspend fun getByDate(
     @Query("api_key") apiKey: ApiKey,
     @Query("date") date: LocalDate,
     @Query("thumbs") thumbs: Boolean = true,
-  ): SingleApodResponse
+  ): Response<ApodResponseModel>
 
   @GET(ENDPOINT)
   suspend fun getRandom(
     @Query("api_key") apiKey: ApiKey,
     @Query("count") count: Int = 1,
     @Query("thumbs") thumbs: Boolean = true,
-  ): MultipleApodResponse
+  ): List<ApodResponseModel>
 
   @GET(ENDPOINT)
   suspend fun getRange(
@@ -55,7 +56,7 @@ interface ApodApi {
     @Query("start_date") startDate: LocalDate,
     @Query("end_date") endDate: LocalDate,
     @Query("thumbs") thumbs: Boolean = true,
-  ): MultipleApodResponse
+  ): List<ApodResponseModel>
 
   private companion object {
     const val ENDPOINT = "/planetary/apod"

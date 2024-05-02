@@ -14,7 +14,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-internal class ApodActivityViewModel @Inject constructor(
+internal class ApodActivityViewModel @Inject internal constructor(
   private val scope: CoroutineScope,
   themePreferences: ThemePreferences,
 ) : ViewModel() {

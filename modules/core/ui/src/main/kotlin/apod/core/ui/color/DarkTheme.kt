@@ -16,8 +16,8 @@ internal class DarkTheme : Theme {
   override val cardShadow = ColorPalette.navy700
 
   override val toolbarBackground = ColorPalette.grey900
-  override val toolbarText = ColorPalette.orange200
-  override val toolbarButton = ColorPalette.orange200
+  override val toolbarText = ColorPalette.white
+  override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.navy600
   override val menuItemBackgroundSelected = ColorPalette.navy500
@@ -28,12 +28,12 @@ internal class DarkTheme : Theme {
   override val dialogBackground = ColorPalette.grey700
   override val dialogProgressWheelTrack = ColorPalette.grey600
 
-  override val buttonPrimaryText = ColorPalette.white
-  override val buttonPrimaryTextSelected = ColorPalette.white
-  override val buttonPrimaryBackground = ColorPalette.orange700
-  override val buttonPrimaryBackgroundSelected = ColorPalette.orange800
-  override val buttonPrimaryBorder = ColorPalette.orange700
-  override val buttonPrimaryShadow = ColorPalette.black.copy(alpha = 0.6f)
+  override val buttonPrimaryText = Color.White
+  override val buttonPrimaryTextSelected = Color.White
+  override val buttonPrimaryBackground = ColorPalette.blue400
+  override val buttonPrimaryBackgroundSelected = ColorPalette.blue600
+  override val buttonPrimaryBorder = ColorPalette.blue400
+  override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.6f)
   override val buttonPrimaryDisabledText = ColorPalette.navy700
   override val buttonPrimaryDisabledBackground = ColorPalette.navy400
   override val buttonPrimaryDisabledBorder = ColorPalette.navy400

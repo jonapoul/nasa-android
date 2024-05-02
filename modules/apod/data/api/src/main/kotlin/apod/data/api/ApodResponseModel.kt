@@ -6,10 +6,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApodResponseItem(
+data class ApodResponseModel(
   // Date of image. Included in response because of default values
   @SerialName("date")
-  @Serializable(LocalDateSerializer::class)
   val date: LocalDate,
 
   // The title of the image

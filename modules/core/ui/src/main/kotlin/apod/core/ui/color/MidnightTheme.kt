@@ -16,8 +16,8 @@ internal class MidnightTheme : Theme {
   override val cardShadow = ColorPalette.grey900
 
   override val toolbarBackground = ColorPalette.grey700
-  override val toolbarText = ColorPalette.orange300
-  override val toolbarButton = ColorPalette.orange300
+  override val toolbarText = ColorPalette.white
+  override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.grey200
   override val menuItemBackgroundSelected = ColorPalette.grey500
@@ -28,12 +28,12 @@ internal class MidnightTheme : Theme {
   override val dialogBackground = ColorPalette.grey800
   override val dialogProgressWheelTrack = ColorPalette.grey700
 
-  override val buttonPrimaryText = ColorPalette.white
-  override val buttonPrimaryTextSelected = ColorPalette.black
-  override val buttonPrimaryBackground = ColorPalette.orange800
-  override val buttonPrimaryBackgroundSelected = ColorPalette.orange900
-  override val buttonPrimaryBorder = ColorPalette.orange800
-  override val buttonPrimaryShadow = ColorPalette.black.copy(alpha = 0.6f)
+  override val buttonPrimaryText = Color.White
+  override val buttonPrimaryTextSelected = Color.Black
+  override val buttonPrimaryBackground = ColorPalette.blue800
+  override val buttonPrimaryBackgroundSelected = ColorPalette.blue500
+  override val buttonPrimaryBorder = ColorPalette.blue300
+  override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.6f)
   override val buttonPrimaryDisabledText = ColorPalette.grey400
   override val buttonPrimaryDisabledBackground = ColorPalette.grey700
   override val buttonPrimaryDisabledBorder = ColorPalette.grey700

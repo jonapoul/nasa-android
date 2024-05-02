@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import apod.core.ui.ShimmeringBlock
-import apod.core.ui.button.RegularIconButton
+import apod.core.ui.button.PrimaryIconButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
@@ -40,9 +40,9 @@ internal fun ItemHeader(
       .wrapContentHeight()
       .padding(8.dp),
     horizontalArrangement = Arrangement.Center,
-    verticalAlignment = Alignment.CenterVertically,
+    verticalAlignment = Alignment.Top,
   ) {
-    RegularIconButton(
+    PrimaryIconButton(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
       contentDescription = "",
       onClick = {
@@ -76,7 +76,7 @@ internal fun ItemHeader(
       )
     }
 
-    RegularIconButton(
+    PrimaryIconButton(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
       contentDescription = "",
       onClick = {

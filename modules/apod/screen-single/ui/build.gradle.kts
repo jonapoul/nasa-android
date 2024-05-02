@@ -8,6 +8,7 @@ android {
 
 dependencies {
   api(libs.androidx.compose.runtime)
+  api(libs.kotlinx.datetime)
   api(libs.voyager.core)
   implementation(projects.modules.apod.screenSingle.res)
   implementation(projects.modules.apod.screenSingle.vm)
@@ -15,7 +16,6 @@ dependencies {
   implementation(projects.modules.core.ui)
   implementation(projects.modules.navigation)
   implementation(libs.alakazam.android.compose)
-  implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
   implementation(libs.androidx.compose.material.icons.core)
@@ -29,6 +29,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
 }

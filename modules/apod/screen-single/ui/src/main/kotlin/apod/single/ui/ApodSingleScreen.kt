@@ -7,8 +7,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import apod.navigation.NavScreens
 import apod.data.model.ApodItem
+import apod.navigation.NavScreens
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ApodSingleViewModel
 import cafe.adriel.voyager.core.registry.rememberScreen

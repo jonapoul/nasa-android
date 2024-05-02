@@ -6,7 +6,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.builtins.ListSerializer
 import javax.inject.Inject
 
-class LicensesRepository @Inject constructor(
+class LicensesRepository @Inject internal constructor(
   private val assetsProvider: AssetsProvider,
   private val io: IODispatcher,
   private val default: DefaultDispatcher,
