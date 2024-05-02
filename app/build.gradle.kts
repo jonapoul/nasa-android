@@ -39,6 +39,7 @@ android {
     buildConfigField("kotlinx.datetime.Instant", "BUILD_TIME", kotlinTime)
     buildConfigField("String", "GIT_HASH", "\"${versionName}\"")
     val apiKey = rootLocalProperties(filename = "local-api.properties").getStringOrThrow(key = "nasaApiKey")
+    if (apiKey.isBlank()) error("Empty nasaApiKey property")
     buildConfigField("String", "API_KEY", "\"${apiKey}\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
