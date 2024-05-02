@@ -19,13 +19,13 @@ TODO
 
 # Building
 
-Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local.properties` file in the root of the project directory like:
+Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local-api.properties` file in the root of the project directory like:
 
 ```properties
 nasaApiKey=MY_API_KEY
 ```
 
-Optionally, if you want to sign the built APK with a custom keystore, add some extra properties in the same file like below:
+Optionally, if you want to sign the built APK with a custom keystore, add some extra properties in `local-keystore.properties` like below:
 
 ```properties
 keyFile=relative/path/to/keystore.jks
