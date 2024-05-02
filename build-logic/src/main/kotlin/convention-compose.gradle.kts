@@ -27,9 +27,6 @@ ext.apply {
 
 tasks.withType<KotlinCompile> {
   kotlinOptions {
-    // Allow M3 experimental APIs - most of them are experimental anyway
-    freeCompilerArgs += "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
-
     // From https://chrisbanes.me/posts/composable-metrics/
     val propertyRoot = "plugin:androidx.compose.compiler.plugins.kotlin"
     val metricReportDir = project.layout.buildDirectory.dir("compose_metrics").get().asFile

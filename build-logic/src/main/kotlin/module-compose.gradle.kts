@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   kotlin("android")
   id("com.android.library")
@@ -8,4 +10,11 @@ plugins {
 
 dependencyGuard {
   configuration("releaseRuntimeClasspath")
+}
+
+tasks.withType<KotlinCompile> {
+  kotlinOptions {
+    // Allow M3 experimental APIs - most of them are experimental anyway
+    freeCompilerArgs += "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+  }
 }
