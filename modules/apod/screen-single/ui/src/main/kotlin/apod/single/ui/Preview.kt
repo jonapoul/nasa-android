@@ -1,7 +1,7 @@
 package apod.single.ui
 
 import apod.data.model.ApodMediaType
-import apod.single.vm.ApodItem
+import apod.data.model.ApodItem
 import kotlinx.datetime.LocalDate
 
 internal val EXAMPLE_DATE = LocalDate.parse("2024-04-30")

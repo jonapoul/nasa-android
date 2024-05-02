@@ -1,22 +1,23 @@
 package apod.single.vm
 
 import androidx.compose.runtime.Immutable
+import apod.data.model.ApodItem
 import kotlinx.datetime.LocalDate
 
 @Immutable
-sealed interface LoadState {
-  data object Inactive : LoadState
+sealed interface ScreenState {
+  data object Inactive : ScreenState
 
   data class Loading(
     val date: LocalDate,
-  ) : LoadState
+  ) : ScreenState
 
   data class Success(
-    val item: ApodItem,
-  ) : LoadState
+      val item: ApodItem,
+  ) : ScreenState
 
   data class Failed(
     val date: LocalDate,
     val message: String,
-  ) : LoadState
+  ) : ScreenState
 }

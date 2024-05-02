@@ -16,7 +16,7 @@ import apod.core.ui.color.Theme
 import apod.core.ui.dialog.DialogContent
 import apod.core.ui.preview.PreviewColumn
 import apod.single.res.R
-import apod.single.vm.ApodItem
+import apod.data.model.ApodItem
 
 @Composable
 internal fun DescriptionDialog(

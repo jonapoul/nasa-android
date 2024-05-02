@@ -15,7 +15,7 @@ node ["style"="filled"]
 ":modules:core:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:navigation" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:data:di" ["fillcolor"="#FCB103","shape"="box"]
-":modules:apod:data:api" ["fillcolor"="#55FF55","shape"="box"]
+":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
@@ -85,6 +85,8 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-single:ui" -> ":modules:core:ui" ["style"="dotted"]
 ":modules:apod:screen-single:ui" -> ":modules:navigation" ["style"="dotted"]
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:model"
+":modules:apod:screen-single:vm" -> ":modules:apod:data:api" ["style"="dotted"]
+":modules:apod:screen-single:vm" -> ":modules:apod:data:db" ["style"="dotted"]
 ":modules:core:theme" -> ":modules:core:model"
 ":modules:core:theme" -> ":modules:settings:keys" ["style"="dotted"]
 ":modules:settings:keys" -> ":modules:core:model"

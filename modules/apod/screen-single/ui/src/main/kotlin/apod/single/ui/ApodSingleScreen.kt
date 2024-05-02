@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import apod.navigation.NavScreens
-import apod.single.vm.ApodItem
+import apod.data.model.ApodItem
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ApodSingleViewModel
 import cafe.adriel.voyager.core.registry.rememberScreen
@@ -18,6 +18,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.datetime.LocalDate
 
+// Null date parameter = load the latest item from APOD. Otherwise, attempt to pull that specific date.
 data class ApodSingleScreen(
   val date: LocalDate? = null,
 ) : Screen {
@@ -28,9 +29,7 @@ data class ApodSingleScreen(
     val viewModel = getViewModel<ApodSingleViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    if (date != null) {
-      LaunchedEffect(date) { viewModel.load(date) }
-    }
+    LaunchedEffect(date) { viewModel.load(date) }
 
     val aboutScreen = rememberScreen(NavScreens.About)
     val settingsScreen = rememberScreen(NavScreens.Settings)
@@ -74,8 +73,8 @@ data class ApodSingleScreen(
 
           is ApodSingleAction.LoadNext -> viewModel.loadNext()
           is ApodSingleAction.LoadPrevious -> viewModel.loadPrevious()
+          is ApodSingleAction.RetryLoad -> viewModel.load(action.date)
           is ApodSingleAction.ShowImageFullscreen -> TODO()
-          is ApodSingleAction.RetryLoad -> TODO()
         }
       },
     )

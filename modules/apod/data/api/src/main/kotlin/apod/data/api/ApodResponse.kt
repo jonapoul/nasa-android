@@ -12,9 +12,9 @@ sealed interface SingleApodResponse {
 
   @Serializable
   data class Failure(
-    @SerialName("code") val code: String,
-    @SerialName("message") val message: String,
-  ) : SingleApodResponse
+    @SerialName("code") override val code: String,
+    @SerialName("message") override val message: String,
+  ) : SingleApodResponse, FailureResponse
 }
 
 @Serializable(MultipleResponseSerializer::class)
@@ -26,7 +26,14 @@ sealed interface MultipleApodResponse {
 
   @Serializable
   data class Failure(
-    @SerialName("code") val code: String,
-    @SerialName("message") val message: String,
-  ) : MultipleApodResponse
+    @SerialName("code") override val code: String,
+    @SerialName("message") override val message: String,
+  ) : MultipleApodResponse, FailureResponse
+}
+
+interface FailureResponse {
+  val code: String
+  val message: String
+
+  fun fullMessage(): String = "$code - $message"
 }

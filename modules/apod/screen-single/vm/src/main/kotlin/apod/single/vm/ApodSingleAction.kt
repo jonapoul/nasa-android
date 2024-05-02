@@ -1,6 +1,7 @@
 package apod.single.vm
 
 import androidx.compose.runtime.Immutable
+import apod.data.model.ApodItem
 import kotlinx.datetime.LocalDate
 
 @Immutable

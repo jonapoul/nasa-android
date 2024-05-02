@@ -33,12 +33,12 @@ import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.single.res.R
 import apod.single.vm.ApodSingleAction
-import apod.single.vm.LoadState
+import apod.single.vm.ScreenState
 import apod.core.res.R as CoreR
 
 @Composable
 internal fun ItemContent(
-  state: LoadState,
+  state: ScreenState,
   onAction: (ApodSingleAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -47,22 +47,22 @@ internal fun ItemContent(
     modifier = modifier
       .fillMaxWidth()
       .padding(horizontal = 16.dp)
-      .clickable(enabled = state is LoadState.Success) {
-        if (state is LoadState.Success) {
+      .clickable(enabled = state is ScreenState.Success) {
+        if (state is ScreenState.Success) {
           onAction(ApodSingleAction.ShowImageFullscreen(state.item))
         }
       },
     contentAlignment = Alignment.Center,
   ) {
     when (state) {
-      LoadState.Inactive, is LoadState.Loading -> {
+      ScreenState.Inactive, is ScreenState.Loading -> {
         ItemContentLoading(
           modifier = Modifier.wrapContentSize(),
           theme = theme,
         )
       }
 
-      is LoadState.Failed -> {
+      is ScreenState.Failed -> {
         ItemContentFailure(
           modifier = Modifier.fillMaxSize(),
           state = state,
@@ -71,7 +71,7 @@ internal fun ItemContent(
         )
       }
 
-      is LoadState.Success -> {
+      is ScreenState.Success -> {
         ItemContentSuccess(
           modifier = Modifier.fillMaxSize(),
           state = state,
@@ -85,7 +85,7 @@ internal fun ItemContent(
 @Suppress("UNUSED_PARAMETER", "UnusedParameter")
 @Composable
 private fun ItemContentSuccess(
-  state: LoadState.Success,
+  state: ScreenState.Success,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -100,7 +100,7 @@ private fun ItemContentSuccess(
 
 @Composable
 private fun ItemContentFailure(
-  state: LoadState.Failed,
+  state: ScreenState.Failed,
   onAction: (ApodSingleAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -161,7 +161,7 @@ private fun ItemContentLoading(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ItemContent(
-    state = LoadState.Success(EXAMPLE_ITEM),
+    state = ScreenState.Success(EXAMPLE_ITEM),
     onAction = {},
   )
 }
@@ -170,7 +170,7 @@ private fun PreviewSuccess() = PreviewScreen {
 @Composable
 private fun PreviewFailure() = PreviewScreen {
   ItemContent(
-    state = LoadState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
+    state = ScreenState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
     onAction = {},
   )
 }
@@ -179,7 +179,7 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ItemContent(
-    state = LoadState.Loading(EXAMPLE_DATE),
+    state = ScreenState.Loading(EXAMPLE_DATE),
     onAction = {},
   )
 }

@@ -25,11 +25,11 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.single.vm.ApodSingleAction
-import apod.single.vm.LoadState
+import apod.single.vm.ScreenState
 
 @Composable
 internal fun ItemHeader(
-  state: LoadState,
+  state: ScreenState,
   onAction: (ApodSingleAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -90,12 +90,12 @@ internal fun ItemHeader(
 
 @Composable
 private fun ItemTitle(
-  state: LoadState,
+  state: ScreenState,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
   when (state) {
-    is LoadState.Loading, LoadState.Inactive -> {
+    is ScreenState.Loading, ScreenState.Inactive -> {
       ShimmeringBlock(
         modifier = modifier
           .height(20.dp)
@@ -105,7 +105,7 @@ private fun ItemTitle(
       )
     }
 
-    is LoadState.Success -> {
+    is ScreenState.Success -> {
       Text(
         text = state.item.title,
         color = theme.pageTextPositive,
@@ -115,7 +115,7 @@ private fun ItemTitle(
       )
     }
 
-    is LoadState.Failed -> {
+    is ScreenState.Failed -> {
       // Do nothing
     }
   }
@@ -123,12 +123,12 @@ private fun ItemTitle(
 
 @Composable
 private fun ItemDate(
-  state: LoadState,
+  state: ScreenState,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
   when (state) {
-    LoadState.Inactive -> {
+    ScreenState.Inactive -> {
       ShimmeringBlock(
         modifier = modifier
           .height(20.dp)
@@ -138,7 +138,7 @@ private fun ItemDate(
       )
     }
 
-    is LoadState.Loading -> {
+    is ScreenState.Loading -> {
       Text(
         text = state.date.toString(),
         color = theme.pageTextSubdued,
@@ -147,7 +147,7 @@ private fun ItemDate(
       )
     }
 
-    is LoadState.Success -> {
+    is ScreenState.Success -> {
       Text(
         text = state.item.date.toString(),
         color = theme.pageTextSubdued,
@@ -156,7 +156,7 @@ private fun ItemDate(
       )
     }
 
-    is LoadState.Failed -> {
+    is ScreenState.Failed -> {
       Text(
         text = state.date.toString(),
         color = theme.pageTextSubdued,
@@ -171,7 +171,7 @@ private fun ItemDate(
 @Composable
 private fun PreviewSuccess() = PreviewColumn {
   ItemHeader(
-    state = LoadState.Success(EXAMPLE_ITEM),
+    state = ScreenState.Success(EXAMPLE_ITEM),
     onAction = {},
   )
 }
@@ -180,7 +180,7 @@ private fun PreviewSuccess() = PreviewColumn {
 @Composable
 private fun PreviewFailure() = PreviewColumn {
   ItemHeader(
-    state = LoadState.Failed(EXAMPLE_DATE, message = "Something broke"),
+    state = ScreenState.Failed(EXAMPLE_DATE, message = "Something broke"),
     onAction = {},
   )
 }
@@ -189,7 +189,7 @@ private fun PreviewFailure() = PreviewColumn {
 @Composable
 private fun PreviewLoading() = PreviewColumn {
   ItemHeader(
-    state = LoadState.Loading(EXAMPLE_DATE),
+    state = ScreenState.Loading(EXAMPLE_DATE),
     onAction = {},
   )
 }
@@ -198,7 +198,7 @@ private fun PreviewLoading() = PreviewColumn {
 @Composable
 private fun PreviewInactive() = PreviewColumn {
   ItemHeader(
-    state = LoadState.Inactive,
+    state = ScreenState.Inactive,
     onAction = {},
   )
 }

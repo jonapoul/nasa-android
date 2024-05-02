@@ -1,16 +1,16 @@
 package apod.single.ui
 
 import androidx.compose.runtime.Stable
-import apod.single.vm.LoadState
+import apod.single.vm.ScreenState
 import kotlinx.datetime.LocalDate
 
 @Stable
-internal fun LoadState.ifHasDate(block: (LocalDate) -> Unit) {
+internal fun ScreenState.ifHasDate(block: (LocalDate) -> Unit) {
   val date = when (this) {
-    LoadState.Inactive -> return
-    is LoadState.Failed -> date
-    is LoadState.Loading -> date
-    is LoadState.Success -> item.date
+    ScreenState.Inactive -> return
+    is ScreenState.Failed -> date
+    is ScreenState.Loading -> date
+    is ScreenState.Success -> item.date
   }
   block(date)
 }

@@ -150,6 +150,7 @@ dependencies {
 
   implementation(libs.alakazam.android.core)
   implementation(libs.alakazam.kotlin.core)
+  implementation(libs.alakazam.kotlin.time)
   implementation(libs.androidx.activity.compose)
   implementation(libs.androidx.activity.core)
   implementation(libs.androidx.activity.ktx)

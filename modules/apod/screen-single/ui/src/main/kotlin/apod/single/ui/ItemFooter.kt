@@ -22,7 +22,7 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.single.res.R
-import apod.single.vm.ApodItem
+import apod.data.model.ApodItem
 import apod.single.vm.ApodSingleAction
 
 @Composable

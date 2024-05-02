@@ -17,11 +17,11 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.single.vm.ApodSingleAction
-import apod.single.vm.LoadState
+import apod.single.vm.ScreenState
 
 @Composable
 internal fun ApodSingleScreenImpl(
-  state: LoadState,
+  state: ScreenState,
   onAction: (ApodSingleAction) -> Unit,
 ) {
   val theme = LocalTheme.current
@@ -41,7 +41,7 @@ internal fun ApodSingleScreenImpl(
 
 @Composable
 private fun ApodSingleContent(
-  state: LoadState,
+  state: ScreenState,
   onAction: (ApodSingleAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -69,7 +69,7 @@ private fun ApodSingleContent(
       theme = theme,
     )
 
-    if (state is LoadState.Success) {
+    if (state is ScreenState.Success) {
       ItemFooter(
         modifier = Modifier
           .wrapContentHeight()
@@ -86,7 +86,7 @@ private fun ApodSingleContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = LoadState.Success(EXAMPLE_ITEM),
+    state = ScreenState.Success(EXAMPLE_ITEM),
     onAction = {},
   )
 }
@@ -95,7 +95,7 @@ private fun PreviewSuccess() = PreviewScreen {
 @Composable
 private fun PreviewFailure() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = LoadState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
+    state = ScreenState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
     onAction = {},
   )
 }
@@ -104,7 +104,7 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = LoadState.Loading(EXAMPLE_DATE),
+    state = ScreenState.Loading(EXAMPLE_DATE),
     onAction = {},
   )
 }

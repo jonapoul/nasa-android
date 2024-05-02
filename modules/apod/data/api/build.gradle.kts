@@ -1,10 +1,6 @@
 plugins {
-  id("module-android")
+  id("module-kotlin")
   alias(libs.plugins.kotlin.serialization)
-}
-
-android {
-  namespace = "apod.data.api"
 }
 
 dependencies {

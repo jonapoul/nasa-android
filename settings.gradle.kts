@@ -36,6 +36,7 @@ include(":modules:apod:data:api")
 include(":modules:apod:data:db")
 include(":modules:apod:data:di")
 include(":modules:apod:data:model")
+include(":modules:apod:data:repo")
 
 include(":modules:apod:screen-single:res")
 include(":modules:apod:screen-single:ui")
