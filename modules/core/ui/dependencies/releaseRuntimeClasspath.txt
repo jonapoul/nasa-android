@@ -74,10 +74,10 @@ com.google.guava:listenablefuture:1.0
 com.jakewharton.timber:timber:5.0.1
 dev.jonpoulton.alakazam:android-ui-compose:4.5.2
 dev.jonpoulton.alakazam:kotlin-core:4.5.2
-org.jetbrains.kotlin:kotlin-stdlib-common:1.9.23
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0-RC2
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.20
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20
-org.jetbrains.kotlin:kotlin-stdlib:1.9.23
+org.jetbrains.kotlin:kotlin-stdlib:2.0.0-RC2
 org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.7
 org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1
