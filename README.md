@@ -35,6 +35,7 @@ keyPassword=password-of-key
 ```
 
 # Download
+foo
 
 Go to the [releases page](https://github.com/jonapoul/apod-android/releases) to download the latest APK.
 
