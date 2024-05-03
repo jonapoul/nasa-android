@@ -13,8 +13,8 @@ dependencyGuard {
 }
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
+  compilerOptions {
     // Allow M3 experimental APIs - most of them are experimental anyway
-    freeCompilerArgs += "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
+    freeCompilerArgs.add("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
   }
 }

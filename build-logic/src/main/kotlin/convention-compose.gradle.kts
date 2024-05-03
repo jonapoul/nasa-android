@@ -26,16 +26,16 @@ ext.apply {
 }
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
+  compilerOptions {
     // From https://chrisbanes.me/posts/composable-metrics/
     val propertyRoot = "plugin:androidx.compose.compiler.plugins.kotlin"
     val metricReportDir = project.layout.buildDirectory.dir("compose_metrics").get().asFile
-    freeCompilerArgs += listOf("-P", "$propertyRoot:reportsDestination=${metricReportDir.absolutePath}")
-    freeCompilerArgs += listOf("-P", "$propertyRoot:metricsDestination=${metricReportDir.absolutePath}")
+    freeCompilerArgs.addAll("-P", "$propertyRoot:reportsDestination=${metricReportDir.absolutePath}")
+    freeCompilerArgs.addAll("-P", "$propertyRoot:metricsDestination=${metricReportDir.absolutePath}")
 
     // From https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file
     val stabilityConfigFile = rootProject.file("compose-stability.conf").absolutePath
-    freeCompilerArgs += listOf("-P", "$propertyRoot:stabilityConfigurationPath=$stabilityConfigFile")
+    freeCompilerArgs.addAll("-P", "$propertyRoot:stabilityConfigurationPath=$stabilityConfigFile")
   }
 }
 

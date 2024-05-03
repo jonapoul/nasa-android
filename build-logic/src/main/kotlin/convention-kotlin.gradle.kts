@@ -1,12 +1,13 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    jvmTarget = "19"
-    freeCompilerArgs += listOf(
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_19)
+    freeCompilerArgs.addAll(
       "-Xjvm-default=all-compatibility",
       "-opt-in=kotlin.RequiresOptIn",
     )
