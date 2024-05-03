@@ -2,7 +2,7 @@ package apod.data.repo
 
 import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.requireMessage
-import apod.core.model.ApiKeyProvider
+import apod.core.model.ApiKey
 import apod.core.model.ApodItem
 import apod.core.model.Calendar
 import apod.data.api.ApodApi
@@ -24,9 +24,8 @@ class ApodRepository @Inject internal constructor(
   private val api: ApodApi,
   private val dao: ApodDao,
   private val calendar: Calendar,
-  private val apiKeyProvider: ApiKeyProvider,
 ) {
-  suspend fun loadApodItem(date: LocalDate?): LoadResult {
+  suspend fun loadApodItem(key: ApiKey, date: LocalDate?): LoadResult {
     // First query the local database for info on this date's APOD entry
     val today = calendar.today()
     val itemFromDb = withContext(io) { dao.get(date ?: today) }?.toItem()
@@ -36,7 +35,7 @@ class ApodRepository @Inject internal constructor(
     }
 
     // If it didn't exist locally, query the API to pull it down and store it in the DB
-    val result = loadFromApi(date)
+    val result = loadFromApi(key, date)
     if (result is LoadResult.Success) {
       val item = result.item
       val entity = item.toEntity()
@@ -46,13 +45,12 @@ class ApodRepository @Inject internal constructor(
     return result
   }
 
-  private suspend fun loadFromApi(date: LocalDate?): LoadResult {
+  private suspend fun loadFromApi(key: ApiKey, date: LocalDate?): LoadResult {
     return try {
-      val apiKey = apiKeyProvider.get()
       val response = if (date == null) {
-        withContext(io) { api.getToday(apiKey) }
+        withContext(io) { api.getToday(key) }
       } else {
-        withContext(io) { api.getByDate(apiKey, date) }
+        withContext(io) { api.getByDate(key, date) }
       }
 
       if (response.isSuccessful) {
@@ -63,7 +61,7 @@ class ApodRepository @Inject internal constructor(
       } else {
         // Attempt to decode the error response body as JSON to pull out the reason
         val errorBody = response.errorBody()?.string()
-        return parseHttpFailure(date, response.code(), errorBody)
+        return parseHttpFailure(key, date, response.code(), errorBody)
       }
     } catch (e: SerializationException) {
       Timber.e(e, "Failed deserializing response")
@@ -77,14 +75,14 @@ class ApodRepository @Inject internal constructor(
     }
   }
 
-  private fun parseHttpFailure(date: LocalDate?, code: Int, body: String?): LoadResult.Failure {
+  private fun parseHttpFailure(key: ApiKey, date: LocalDate?, code: Int, body: String?): LoadResult.Failure {
     if (body.isNullOrBlank()) {
       return LoadResult.Failure.OtherHttp(code, message = "Empty error body")
     }
 
     if (code == CODE_FORBIDDEN) {
       // Unauthorised, so an invalid API key is loaded into the app
-      return LoadResult.Failure.InvalidAuth(key = apiKeyProvider.get())
+      return LoadResult.Failure.InvalidAuth(key)
     }
 
     // Expect response in the format: { "code": 400, "msg": "Some message", "service_version": "v1" }

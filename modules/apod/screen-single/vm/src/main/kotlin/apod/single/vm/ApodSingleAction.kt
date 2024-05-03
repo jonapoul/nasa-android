@@ -1,6 +1,7 @@
 package apod.single.vm
 
 import androidx.compose.runtime.Immutable
+import apod.core.model.ApiKey
 import apod.core.model.ApodItem
 import kotlinx.datetime.LocalDate
 
@@ -8,9 +9,10 @@ import kotlinx.datetime.LocalDate
 sealed interface ApodSingleAction {
   data object NavAbout : ApodSingleAction
   data object NavSettings : ApodSingleAction
+  data object RegisterForApiKey : ApodSingleAction
   data class ShowImageFullscreen(val item: ApodItem) : ApodSingleAction
   data class ShowDescriptionDialog(val item: ApodItem) : ApodSingleAction
-  data class LoadPrevious(val current: LocalDate) : ApodSingleAction
-  data class LoadNext(val current: LocalDate) : ApodSingleAction
-  data class RetryLoad(val date: LocalDate?) : ApodSingleAction
+  data class LoadPrevious(val key: ApiKey, val current: LocalDate) : ApodSingleAction
+  data class LoadNext(val key: ApiKey, val current: LocalDate) : ApodSingleAction
+  data class RetryLoad(val key: ApiKey, val date: LocalDate?) : ApodSingleAction
 }

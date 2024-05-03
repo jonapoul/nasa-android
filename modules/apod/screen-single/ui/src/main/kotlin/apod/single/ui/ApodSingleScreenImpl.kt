@@ -86,7 +86,7 @@ private fun ApodSingleContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = ScreenState.Success(EXAMPLE_ITEM),
+    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
     onAction = {},
   )
 }
@@ -95,7 +95,11 @@ private fun PreviewSuccess() = PreviewScreen {
 @Composable
 private fun PreviewFailure() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = ScreenState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
+    state = ScreenState.Failed(
+      EXAMPLE_DATE,
+      EXAMPLE_KEY,
+      message = "Something broke! Here's some more rubbish too for preview",
+    ),
     onAction = {},
   )
 }
@@ -104,7 +108,16 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = ScreenState.Loading(EXAMPLE_DATE),
+    state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewNoApiKey() = PreviewScreen {
+  ApodSingleScreenImpl(
+    state = ScreenState.NoApiKey(EXAMPLE_DATE),
     onAction = {},
   )
 }

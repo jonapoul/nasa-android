@@ -1,5 +1,6 @@
 package apod.single.ui
 
+import apod.core.model.ApiKey
 import apod.core.model.ApodItem
 import apod.core.model.ApodMediaType
 import kotlinx.datetime.LocalDate
@@ -29,3 +30,5 @@ internal val EXAMPLE_ITEM = ApodItem(
   hdUrl = "https://apod.nasa.gov/apod/image/2404/GKPerWide_DSC_4329.jpg",
   thumbnailUrl = null,
 )
+
+internal val EXAMPLE_KEY = ApiKey(value = "abc-123")

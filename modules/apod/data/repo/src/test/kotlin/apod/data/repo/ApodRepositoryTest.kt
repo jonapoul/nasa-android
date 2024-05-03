@@ -42,7 +42,6 @@ class ApodRepositoryTest {
   private lateinit var repository: ApodRepository
   private lateinit var dao: ApodDao
   private lateinit var api: ApodApi
-  private var apiKey: ApiKey = API_KEY
 
   @Before
   fun before() {
@@ -54,7 +53,6 @@ class ApodRepositoryTest {
       api = api,
       dao = dao,
       calendar = { TODAY },
-      apiKeyProvider = { apiKey },
     )
   }
 
@@ -70,7 +68,7 @@ class ApodRepositoryTest {
     assertNull(dao.get(DATE))
 
     // When we query for the latest from the API
-    val result = repository.loadApodItem(date = null)
+    val result = repository.loadApodItem(API_KEY, date = null)
 
     // Then the item is parsed and returned
     assertEquals(
@@ -96,7 +94,7 @@ class ApodRepositoryTest {
     dao.insert(entity)
 
     // When
-    val result = repository.loadApodItem(DATE)
+    val result = repository.loadApodItem(API_KEY, DATE)
 
     // Then the item is returned
     assertEquals(expected = LoadResult.Success(ITEM), actual = result)
@@ -115,7 +113,7 @@ class ApodRepositoryTest {
 
     // When we query the API
     val invalidDate = LocalDate.parse("1994-01-01")
-    val result = repository.loadApodItem(invalidDate)
+    val result = repository.loadApodItem(API_KEY, invalidDate)
 
     // Then a failure is returned
     assertIs<LoadResult.Failure.OutOfRange>(result)
@@ -130,10 +128,10 @@ class ApodRepositoryTest {
     )
 
     // and our key is dodgy
-    apiKey = ApiKey(value = "this is not a valid key")
+    val dodgyKey = ApiKey(value = "this is not a valid key")
 
     // When we query the API
-    val result = repository.loadApodItem(DATE)
+    val result = repository.loadApodItem(dodgyKey, DATE)
 
     // Then a failure is returned
     assertIs<LoadResult.Failure.InvalidAuth>(result)
@@ -145,7 +143,7 @@ class ApodRepositoryTest {
     webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "invalid-response-format.json"))
 
     // When we query the API
-    val result = repository.loadApodItem(DATE)
+    val result = repository.loadApodItem(API_KEY, DATE)
 
     // Then a failure is returned
     assertIs<LoadResult.Failure.Json>(result)
@@ -157,7 +155,7 @@ class ApodRepositoryTest {
     webServerRule.enqueue(code = 404, body = readJsonFromResource(name = "nonexistent-date.json"))
 
     // When we query the API
-    val result = repository.loadApodItem(DATE)
+    val result = repository.loadApodItem(API_KEY, DATE)
 
     // Then a failure is returned
     assertEquals(expected = LoadResult.Failure.NoApod(DATE), actual = result)
@@ -169,7 +167,7 @@ class ApodRepositoryTest {
     webServerRule.server.shutdown()
 
     // When we query the API
-    val result = repository.loadApodItem(DATE)
+    val result = repository.loadApodItem(API_KEY, DATE)
 
     // Then a failure is returned
     assertEquals(expected = LoadResult.Failure.Network, actual = result)
@@ -181,7 +179,7 @@ class ApodRepositoryTest {
     webServerRule.enqueue(code = 405, body = readJsonFromResource(name = "other-http.json"))
 
     // When we query the API
-    val result = repository.loadApodItem(DATE)
+    val result = repository.loadApodItem(API_KEY, DATE)
 
     // Then a failure is returned
     assertEquals(

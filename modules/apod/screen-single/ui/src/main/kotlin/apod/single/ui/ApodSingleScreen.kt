@@ -28,8 +28,11 @@ data class ApodSingleScreen(
 
     val viewModel = getViewModel<ApodSingleViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val apiKey by viewModel.apiKey.collectAsStateWithLifecycle()
 
-    LaunchedEffect(date) { viewModel.load(date) }
+    apiKey?.let { key ->
+      LaunchedEffect(date) { viewModel.load(key, date) }
+    }
 
     val aboutScreen = rememberScreen(NavScreens.About)
     val settingsScreen = rememberScreen(NavScreens.Settings)
@@ -82,9 +85,13 @@ data class ApodSingleScreen(
             fullScreenItem = action.item
           }
 
-          is ApodSingleAction.LoadNext -> viewModel.loadNext()
-          is ApodSingleAction.LoadPrevious -> viewModel.loadPrevious()
-          is ApodSingleAction.RetryLoad -> viewModel.load(action.date)
+          is ApodSingleAction.LoadNext -> viewModel.loadNext(action.key)
+
+          is ApodSingleAction.LoadPrevious -> viewModel.loadPrevious(action.key)
+
+          is ApodSingleAction.RetryLoad -> viewModel.load(action.key, action.date)
+
+          ApodSingleAction.RegisterForApiKey -> viewModel.registerForApiKey()
         }
       },
     )

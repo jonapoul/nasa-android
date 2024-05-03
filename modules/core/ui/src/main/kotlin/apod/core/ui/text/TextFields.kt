@@ -1,31 +1,24 @@
 package apod.core.ui.text
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.MenuDefaults
-import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,7 +26,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import apod.core.ui.CardShape
 import apod.core.ui.color.LocalTheme
-import apod.core.ui.color.Theme
+import apod.core.ui.color.dropDownMenuItem
+import apod.core.ui.color.exposedDropDownMenu
+import apod.core.ui.color.textField
 import apod.core.ui.font.ApodFontFamily
 import apod.core.ui.preview.PreviewColumn
 import kotlinx.collections.immutable.ImmutableList
@@ -56,12 +51,9 @@ fun ApodTextField(
 ) {
   val theme = LocalTheme.current
   val isFocused by interactionSource.collectIsFocusedAsState()
-  val borderColor = if (isFocused) theme.formInputBorderSelected else theme.formInputBackgroundSelected
-
-  var fieldModifier = modifier.border(1.dp, borderColor, shape)
-
+  var fieldModifier = modifier
   if (isFocused) {
-    fieldModifier = fieldModifier.shadow(4.dp, shape, ambientColor = theme.formInputShadowSelected)
+    fieldModifier = fieldModifier.shadow(4.dp, shape, ambientColor = theme.formInputShadow)
   }
 
   TextField(
@@ -130,35 +122,6 @@ fun ApodExposedDropDownMenu(
     }
   }
 }
-
-@Stable
-@Composable
-private fun Theme.textField(): TextFieldColors = TextFieldDefaults.colors(
-  focusedTextColor = formInputTextSelected,
-  unfocusedTextColor = formInputText,
-  focusedPlaceholderColor = formInputTextPlaceholderSelected,
-  unfocusedPlaceholderColor = formInputTextPlaceholder,
-  focusedIndicatorColor = Color.Transparent,
-  unfocusedIndicatorColor = Color.Transparent,
-  disabledIndicatorColor = Color.Transparent,
-  focusedContainerColor = formInputBackgroundSelected,
-  unfocusedContainerColor = formInputBackground,
-  cursorColor = formInputText,
-  selectionColors = TextSelectionColors(formInputTextSelected, formInputBackgroundSelected),
-)
-
-@Stable
-@Composable
-private fun Theme.exposedDropDownMenu(): TextFieldColors = textField().copy(
-  focusedTrailingIconColor = formInputText,
-  unfocusedTrailingIconColor = formInputText,
-)
-
-@Stable
-@Composable
-private fun Theme.dropDownMenuItem(): MenuItemColors = MenuDefaults.itemColors().copy(
-  textColor = formInputText,
-)
 
 @Preview
 @Composable

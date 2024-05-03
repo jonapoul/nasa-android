@@ -27,7 +27,7 @@ internal class DarkTheme : Theme {
   override val menuItemTextSelected = ColorPalette.blue400
   override val menuBorder = ColorPalette.navy800
 
-  override val dialogBackground = ColorPalette.grey700
+  override val dialogBackground = ColorPalette.grey600
   override val dialogProgressWheelTrack = ColorPalette.grey600
 
   override val buttonPrimaryText = Color.White
@@ -74,14 +74,10 @@ internal class DarkTheme : Theme {
   override val errorText = ColorPalette.red200
   override val errorBorder = ColorPalette.red500
 
-  override val formInputBackground = ColorPalette.navy800
-  override val formInputBackgroundSelected = ColorPalette.navy700
-  override val formInputBorderSelected = ColorPalette.blue400
-  override val formInputText = ColorPalette.navy150
-  override val formInputTextSelected = ColorPalette.black
+  override val formInputBackground = ColorPalette.grey700
+  override val formInputShadow = ColorPalette.blue200
+  override val formInputText = ColorPalette.grey100
   override val formInputTextPlaceholder = ColorPalette.navy500
-  override val formInputTextPlaceholderSelected = ColorPalette.navy600
-  override val formInputShadowSelected = ColorPalette.blue200
 
   override val checkboxText = ColorPalette.navy150
   override val checkboxBackgroundSelected = ColorPalette.blue300

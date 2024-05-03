@@ -34,6 +34,8 @@ internal fun ItemHeader(
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
+  if (state is ScreenState.NoApiKey) return
+
   Row(
     modifier = modifier
       .fillMaxWidth()
@@ -46,8 +48,8 @@ internal fun ItemHeader(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
       contentDescription = "",
       onClick = {
-        state.ifHasDate {
-          onAction(ApodSingleAction.LoadPrevious(it))
+        state.ifHasDateAndKey { date, key ->
+          onAction(ApodSingleAction.LoadPrevious(key, date))
         }
       },
     )
@@ -57,7 +59,7 @@ internal fun ItemHeader(
         .weight(1f)
         .wrapContentHeight(),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.Top,
+      verticalArrangement = Arrangement.Center,
     ) {
       ItemTitle(
         modifier = Modifier
@@ -80,8 +82,8 @@ internal fun ItemHeader(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
       contentDescription = "",
       onClick = {
-        state.ifHasDate {
-          onAction(ApodSingleAction.LoadNext(it))
+        state.ifHasDateAndKey { date, key ->
+          onAction(ApodSingleAction.LoadNext(key, date))
         }
       },
     )
@@ -95,7 +97,7 @@ private fun ItemTitle(
   theme: Theme = LocalTheme.current,
 ) {
   when (state) {
-    is ScreenState.Loading, ScreenState.Inactive -> {
+    is ScreenState.NoApiKey, is ScreenState.Loading, ScreenState.Inactive -> {
       ShimmeringBlock(
         modifier = modifier
           .height(20.dp)
@@ -127,43 +129,29 @@ private fun ItemDate(
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  when (state) {
-    ScreenState.Inactive -> {
-      ShimmeringBlock(
-        modifier = modifier
-          .height(20.dp)
-          .padding(horizontal = 8.dp, vertical = 2.dp),
-        theme = theme,
-        color = { pageTextSubdued },
-      )
-    }
+  val date = when (state) {
+    ScreenState.Inactive -> null
+    is ScreenState.NoApiKey -> state.date
+    is ScreenState.Failed -> state.date
+    is ScreenState.Loading -> state.date
+    is ScreenState.Success -> state.item.date
+  }
 
-    is ScreenState.Loading -> {
-      Text(
-        text = state.date.toString(),
-        color = theme.pageTextSubdued,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-      )
-    }
-
-    is ScreenState.Success -> {
-      Text(
-        text = state.item.date.toString(),
-        color = theme.pageTextSubdued,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-      )
-    }
-
-    is ScreenState.Failed -> {
-      Text(
-        text = state.date.toString(),
-        color = theme.pageTextSubdued,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-      )
-    }
+  if (date == null) {
+    ShimmeringBlock(
+      modifier = modifier
+        .height(20.dp)
+        .padding(horizontal = 8.dp, vertical = 2.dp),
+      theme = theme,
+      color = { pageTextSubdued },
+    )
+  } else {
+    Text(
+      text = date.toString(),
+      color = theme.pageTextSubdued,
+      fontWeight = FontWeight.Bold,
+      textAlign = TextAlign.Center,
+    )
   }
 }
 
@@ -171,7 +159,7 @@ private fun ItemDate(
 @Composable
 private fun PreviewSuccess() = PreviewColumn {
   ItemHeader(
-    state = ScreenState.Success(EXAMPLE_ITEM),
+    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
     onAction = {},
   )
 }
@@ -180,7 +168,7 @@ private fun PreviewSuccess() = PreviewColumn {
 @Composable
 private fun PreviewFailure() = PreviewColumn {
   ItemHeader(
-    state = ScreenState.Failed(EXAMPLE_DATE, message = "Something broke"),
+    state = ScreenState.Failed(EXAMPLE_DATE, EXAMPLE_KEY, message = "Something broke"),
     onAction = {},
   )
 }
@@ -189,7 +177,7 @@ private fun PreviewFailure() = PreviewColumn {
 @Composable
 private fun PreviewLoading() = PreviewColumn {
   ItemHeader(
-    state = ScreenState.Loading(EXAMPLE_DATE),
+    state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
     onAction = {},
   )
 }

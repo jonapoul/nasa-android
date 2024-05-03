@@ -27,7 +27,7 @@ internal class MidnightTheme : Theme {
   override val menuItemTextSelected = ColorPalette.blue400
   override val menuBorder = ColorPalette.grey800
 
-  override val dialogBackground = ColorPalette.grey800
+  override val dialogBackground = ColorPalette.grey700
   override val dialogProgressWheelTrack = ColorPalette.grey700
 
   override val buttonPrimaryText = Color.White
@@ -75,13 +75,9 @@ internal class MidnightTheme : Theme {
   override val errorBorder = ColorPalette.red500
 
   override val formInputBackground = ColorPalette.grey800
-  override val formInputBackgroundSelected = ColorPalette.grey700
-  override val formInputBorderSelected = ColorPalette.blue300
-  override val formInputText = ColorPalette.grey150
-  override val formInputTextSelected = ColorPalette.black
+  override val formInputShadow = ColorPalette.blue400
+  override val formInputText = ColorPalette.grey50
   override val formInputTextPlaceholder = ColorPalette.grey400
-  override val formInputTextPlaceholderSelected = ColorPalette.grey100
-  override val formInputShadowSelected = ColorPalette.blue400
 
   override val checkboxText = ColorPalette.grey150
   override val checkboxToggleBackground = ColorPalette.grey400

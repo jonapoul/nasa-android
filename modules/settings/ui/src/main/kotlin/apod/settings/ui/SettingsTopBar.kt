@@ -13,17 +13,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.settings.res.R
+import apod.settings.vm.SettingsAction
 
 @Composable
 internal fun SettingsTopBar(
   theme: Theme,
   scrollBehavior: TopAppBarScrollBehavior,
-  onClickBack: () -> Unit,
+  onAction: (SettingsAction) -> Unit,
 ) {
   TopAppBar(
     colors = theme.topAppBarColors(),
     navigationIcon = {
-      IconButton(onClick = onClickBack) {
+      IconButton(onClick = { onAction(SettingsAction.NavBack) }) {
         Icon(
           imageVector = Icons.Filled.Close,
           contentDescription = stringResource(id = R.string.settings_toolbar_back),

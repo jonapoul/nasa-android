@@ -57,6 +57,8 @@ include(":modules:navigation")
 
 include(":modules:settings:res")
 include(":modules:settings:ui")
+include(":modules:settings:vm")
 
 include(":modules:test:android")
 include(":modules:test:http")
+include(":modules:test:prefs")

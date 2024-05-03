@@ -10,6 +10,11 @@
   <string name="apod_failed_title">Failed loading!</string>
   <string name="apod_failed_retry">Retry</string>
 
+  <string name="apod_no_key_title">No API key!</string>
+  <string name="apod_no_key_message">Click below to open the NASA website and register for a free API key.\n\nOnce done, open the settings page and paste your key into the \"API Key\" option.</string>
+  <string name="apod_no_key_register">Register</string>
+  <string name="apod_no_key_settings">Settings</string>
+
   <string name="apod_desc_dialog_ok">OK</string>
 
   <string name="apod_fullscreen_back">Back</string>

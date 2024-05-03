@@ -3,6 +3,7 @@
   <string name="settings_toolbar_title">Settings</string>
   <string name="settings_not_set">Not set</string>
   <string name="settings_dialog_cancel">Cancel</string>
+  <string name="settings_dialog_ok">Save</string>
 
   <string name="settings_style_category">Style</string>
   <string name="settings_theme_title">App Theme</string>
@@ -10,4 +11,11 @@
   <string name="settings_theme_light">Light</string>
   <string name="settings_theme_dark">Dark</string>
   <string name="settings_theme_midnight">Midnight</string>
+
+  <string name="settings_auth_category">Authentication</string>
+  <string name="settings_key_title">API Key</string>
+  <string name="settings_key_hint">Enter key</string>
+  <string name="settings_key_set">Set successfully</string>
+  <string name="settings_key_not_set">Not set</string>
+  <string name="settings_key_button">Register for an API key</string>
 </resources>

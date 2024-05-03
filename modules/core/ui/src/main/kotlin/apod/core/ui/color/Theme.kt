@@ -80,13 +80,9 @@ sealed interface Theme {
   val errorBorder: Color
 
   val formInputBackground: Color
-  val formInputBackgroundSelected: Color
-  val formInputBorderSelected: Color
-  val formInputShadowSelected: Color
+  val formInputShadow: Color
   val formInputText: Color
   val formInputTextPlaceholder: Color
-  val formInputTextPlaceholderSelected: Color
-  val formInputTextSelected: Color
 
   val checkboxText: Color
   val checkboxBackgroundSelected: Color

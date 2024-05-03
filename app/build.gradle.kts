@@ -2,7 +2,6 @@ import blueprint.core.getStringOrThrow
 import blueprint.core.gitVersionCode
 import blueprint.core.gitVersionName
 import blueprint.core.intProperty
-import blueprint.core.rootLocalProperties
 import blueprint.core.rootLocalPropertiesOrNull
 
 plugins {
@@ -38,9 +37,8 @@ android {
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"
     buildConfigField("kotlinx.datetime.Instant", "BUILD_TIME", kotlinTime)
     buildConfigField("String", "GIT_HASH", "\"${versionName}\"")
-    val apiKey = rootLocalProperties(filename = "local-api.properties").getStringOrThrow(key = "nasaApiKey")
-    if (apiKey.isBlank()) error("Empty nasaApiKey property")
-    buildConfigField("String", "API_KEY", "\"${apiKey}\"")
+    val apiKey = rootLocalPropertiesOrNull(filename = "local-api.properties")?.get(key = "nasaApiKey")?.toString()
+    buildConfigField("String", "API_KEY", if (apiKey == null) "null" else "\"${apiKey}\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     multiDexEnabled = true
@@ -151,6 +149,7 @@ dependencies {
   implementation(projects.modules.settings.ui)
 
   implementation(libs.alakazam.android.core)
+  implementation(libs.alakazam.android.prefs)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.alakazam.kotlin.time)
   implementation(libs.androidx.activity.compose)
@@ -180,4 +179,6 @@ dependencies {
   implementation(libs.timber)
   implementation(libs.voyager.core)
   implementation(libs.voyager.navigator)
+
+  testImplementation(projects.modules.test.prefs)
 }

@@ -29,6 +29,7 @@ node ["style"="filled"]
 ":modules:licenses:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:settings:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:settings:res" ["fillcolor"="#55FFFF","shape"="box"]
+":modules:settings:vm" ["fillcolor"="#FF5555","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
@@ -84,6 +85,7 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-single:ui" -> ":modules:core:ui" ["style"="dotted"]
 ":modules:apod:screen-single:ui" -> ":modules:navigation" ["style"="dotted"]
 ":modules:apod:screen-single:vm" -> ":modules:core:model"
+":modules:apod:screen-single:vm" -> ":modules:core:url"
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo" ["style"="dotted"]
 ":modules:apod:data:repo" -> ":modules:core:model"
 ":modules:apod:data:repo" -> ":modules:apod:data:api" ["style"="dotted"]
@@ -98,4 +100,7 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:settings:ui" -> ":modules:core:model"
 ":modules:settings:ui" -> ":modules:core:ui" ["style"="dotted"]
 ":modules:settings:ui" -> ":modules:settings:res" ["style"="dotted"]
+":modules:settings:ui" -> ":modules:settings:vm" ["style"="dotted"]
+":modules:settings:vm" -> ":modules:core:url"
+":modules:settings:vm" -> ":modules:core:model" ["style"="dotted"]
 }

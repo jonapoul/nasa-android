@@ -2,6 +2,7 @@ package apod.data.di
 
 import apod.core.http.buildOkHttp
 import apod.core.http.buildRetrofit
+import apod.core.model.NASA_API_URL
 import apod.data.api.ApodApi
 import apod.data.api.ApodJson
 import dagger.Module
@@ -19,7 +20,7 @@ internal class ApodApiModule {
     return buildRetrofit(
       client = buildOkHttp { Timber.tag("APOD").v(it) },
       json = ApodJson,
-      url = "https://api.nasa.gov",
+      url = NASA_API_URL,
     ).create()
   }
 }

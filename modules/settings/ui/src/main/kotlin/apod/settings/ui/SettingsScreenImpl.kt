@@ -1,5 +1,6 @@
 package apod.settings.ui
 
+import alakazam.android.ui.compose.VerticalSpacer
 import alakazam.kotlin.core.PrefPair
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -7,43 +8,50 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ColorLens
 import androidx.compose.material.icons.filled.FormatPaint
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastMap
 import apod.core.model.SettingsKeys
 import apod.core.model.ThemeType
 import apod.core.ui.BackgroundSurface
+import apod.core.ui.button.PrimaryTextButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.settings.res.R
+import apod.settings.vm.SettingsAction
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 internal fun SettingsScreenImpl(
-  onClickBack: () -> Unit,
+  onAction: (SettingsAction) -> Unit,
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
   val theme = LocalTheme.current
   Scaffold(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-    topBar = { SettingsTopBar(theme, scrollBehavior, onClickBack) },
+    topBar = { SettingsTopBar(theme, scrollBehavior, onAction) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       SettingsScreenContent(
         modifier = Modifier.padding(innerPadding),
         theme = theme,
+        onAction = onAction,
       )
     }
   }
@@ -51,6 +59,7 @@ internal fun SettingsScreenImpl(
 
 @Composable
 private fun SettingsScreenContent(
+  onAction: (SettingsAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -62,6 +71,7 @@ private fun SettingsScreenContent(
       .fillMaxWidth()
       .fillMaxHeight(),
     verticalArrangement = Arrangement.Top,
+    horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     SettingsCategory(
       icon = Icons.Filled.FormatPaint,
@@ -77,6 +87,25 @@ private fun SettingsScreenContent(
       entries = themeEntries(),
       theme = theme,
       preferences = preferences,
+    )
+
+    VerticalSpacer(20.dp)
+
+    SettingsCategory(
+      icon = Icons.Filled.Lock,
+      title = stringResource(id = R.string.settings_auth_category),
+      theme = theme,
+    )
+
+    ApiKeyPreference(
+      theme = theme,
+      preferences = preferences,
+    )
+
+    PrimaryTextButton(
+      modifier = Modifier.wrapContentWidth(),
+      text = stringResource(id = R.string.settings_key_button),
+      onClick = { onAction(SettingsAction.RegisterForKey) },
     )
   }
 }
@@ -98,6 +127,6 @@ private fun <T, R> PrefPair<T>.map(transform: (T) -> R): PrefPair<R> = PrefPair(
 @Composable
 private fun PreviewSettings() = PreviewScreen {
   SettingsScreenImpl(
-    onClickBack = {},
+    onAction = {},
   )
 }

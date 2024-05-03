@@ -14,6 +14,5 @@
   - alakazam, other libs
 - LoadResult to string with resources
 - open apod item in browser
-- enter api key in prefs
-  - allow none in build scripts
-- K2
+- simplify build graph
+  - apis, core-model, etc.

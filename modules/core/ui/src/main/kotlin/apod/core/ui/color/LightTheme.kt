@@ -74,14 +74,10 @@ internal class LightTheme : Theme {
   override val errorText = ColorPalette.red500
   override val errorBorder = ColorPalette.red500
 
-  override val formInputBackground = ColorPalette.navy50
-  override val formInputBackgroundSelected = ColorPalette.white
-  override val formInputBorderSelected = ColorPalette.blue500
+  override val formInputBackground = ColorPalette.navy100
+  override val formInputShadow = ColorPalette.blue300
   override val formInputText = ColorPalette.navy900
-  override val formInputTextSelected = ColorPalette.navy50
   override val formInputTextPlaceholder = ColorPalette.navy300
-  override val formInputTextPlaceholderSelected = ColorPalette.navy200
-  override val formInputShadowSelected = ColorPalette.blue300
 
   override val checkboxText = ColorPalette.white
   override val checkboxBackgroundSelected = ColorPalette.blue500

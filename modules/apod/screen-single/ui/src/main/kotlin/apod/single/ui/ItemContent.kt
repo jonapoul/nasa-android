@@ -1,16 +1,19 @@
 package apod.single.ui
 
+import alakazam.android.ui.compose.HorizontalSpacer
 import alakazam.android.ui.compose.VerticalSpacer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -62,6 +65,14 @@ internal fun ItemContent(
     contentAlignment = Alignment.Center,
   ) {
     when (state) {
+      is ScreenState.NoApiKey -> {
+        ItemContentNoKey(
+          modifier = Modifier.fillMaxSize(),
+          onAction = onAction,
+          theme = theme,
+        )
+      }
+
       ScreenState.Inactive, is ScreenState.Loading -> {
         ItemContentLoading(
           modifier = Modifier.wrapContentSize(),
@@ -173,8 +184,64 @@ private fun ItemContentFailure(
 
     PrimaryTextButton(
       text = stringResource(id = R.string.apod_failed_retry),
-      onClick = { onAction(ApodSingleAction.RetryLoad(state.date)) },
+      onClick = { onAction(ApodSingleAction.RetryLoad(state.key, state.date)) },
     )
+  }
+}
+
+@Composable
+private fun ItemContentNoKey(
+  onAction: (ApodSingleAction) -> Unit,
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
+) {
+  Column(
+    modifier = modifier
+      .wrapContentSize()
+      .padding(32.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center,
+  ) {
+    Icon(
+      modifier = Modifier.size(70.dp),
+      imageVector = Icons.Filled.Key,
+      contentDescription = null,
+      tint = theme.warningText,
+    )
+
+    VerticalSpacer(10.dp)
+
+    Text(
+      text = stringResource(id = R.string.apod_no_key_title),
+      textAlign = TextAlign.Center,
+      fontWeight = FontWeight.Bold,
+      color = theme.warningText,
+      fontSize = 25.sp,
+    )
+
+    VerticalSpacer(20.dp)
+
+    Text(
+      text = stringResource(id = R.string.apod_no_key_message),
+      textAlign = TextAlign.Center,
+      color = theme.warningText,
+    )
+
+    VerticalSpacer(20.dp)
+
+    Row {
+      PrimaryTextButton(
+        text = stringResource(id = R.string.apod_no_key_register),
+        onClick = { onAction(ApodSingleAction.RegisterForApiKey) },
+      )
+
+      HorizontalSpacer(20.dp)
+
+      PrimaryTextButton(
+        text = stringResource(id = R.string.apod_no_key_settings),
+        onClick = { onAction(ApodSingleAction.NavSettings) },
+      )
+    }
   }
 }
 
@@ -194,7 +261,7 @@ private fun ItemContentLoading(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ItemContent(
-    state = ScreenState.Success(EXAMPLE_ITEM),
+    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
     onAction = {},
   )
 }
@@ -203,7 +270,11 @@ private fun PreviewSuccess() = PreviewScreen {
 @Composable
 private fun PreviewFailure() = PreviewScreen {
   ItemContent(
-    state = ScreenState.Failed(EXAMPLE_DATE, message = "Something broke! Here's some more rubbish too for preview"),
+    state = ScreenState.Failed(
+      EXAMPLE_DATE,
+      EXAMPLE_KEY,
+      message = "Something broke! Here's some more rubbish too for preview",
+    ),
     onAction = {},
   )
 }
@@ -212,7 +283,16 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ItemContent(
-    state = ScreenState.Loading(EXAMPLE_DATE),
+    state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewNoApiKey() = PreviewScreen {
+  ItemContent(
+    state = ScreenState.NoApiKey(EXAMPLE_DATE),
     onAction = {},
   )
 }

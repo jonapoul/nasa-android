@@ -5,6 +5,7 @@ import android.app.Application
 import apod.about.ui.AboutScreen
 import apod.android.BuildConfig
 import apod.core.http.buildOkHttp
+import apod.core.model.ApiKey
 import apod.licenses.ui.LicensesScreen
 import apod.navigation.NavScreens
 import apod.settings.ui.SettingsScreen
@@ -26,6 +27,9 @@ class ApodApplication : Application(), ImageLoaderFactory {
   @Inject
   lateinit var bc: IBuildConfig
 
+  @Inject
+  lateinit var apiKeyManager: ApiKeyManager
+
   override fun onCreate() {
     super.onCreate()
     Timber.plant(ApodTree())
@@ -33,6 +37,11 @@ class ApodApplication : Application(), ImageLoaderFactory {
     Timber.i("onCreate")
     Timber.d("name=${bc.versionName} code=${bc.versionCode} time=${bc.buildTime}")
     Timber.d("manufacturer=${bc.manufacturer} model=${bc.model} os=${bc.os} platform=${bc.platform}")
+
+    // API_KEY can be null, based on gradle script logic
+    @Suppress("UNNECESSARY_SAFE_CALL")
+    val buildKey = BuildConfig.API_KEY?.let(::ApiKey)
+    apiKeyManager.set(buildKey)
 
     ScreenRegistry {
       register<NavScreens.Home> { ApodSingleScreen(it.date) }

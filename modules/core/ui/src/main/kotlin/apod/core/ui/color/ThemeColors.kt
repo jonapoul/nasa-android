@@ -1,7 +1,11 @@
 package apod.core.ui.color
 
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MenuDefaults
+import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -58,4 +62,32 @@ fun Theme.radioButton() = RadioButtonColors(
   unselectedColor = pageText,
   disabledSelectedColor = buttonPrimaryDisabledBackground,
   disabledUnselectedColor = buttonRegularDisabledBackground,
+)
+
+@Stable
+@Composable
+fun Theme.textField(): TextFieldColors = TextFieldDefaults.colors(
+  focusedTextColor = formInputText,
+  unfocusedTextColor = formInputText,
+  focusedPlaceholderColor = formInputTextPlaceholder,
+  unfocusedPlaceholderColor = formInputTextPlaceholder,
+  focusedIndicatorColor = Color.Transparent,
+  unfocusedIndicatorColor = Color.Transparent,
+  disabledIndicatorColor = Color.Transparent,
+  focusedContainerColor = formInputBackground,
+  unfocusedContainerColor = formInputBackground,
+  cursorColor = formInputText,
+)
+
+@Stable
+@Composable
+fun Theme.exposedDropDownMenu(): TextFieldColors = textField().copy(
+  focusedTrailingIconColor = formInputText,
+  unfocusedTrailingIconColor = formInputText,
+)
+
+@Stable
+@Composable
+fun Theme.dropDownMenuItem(): MenuItemColors = MenuDefaults.itemColors().copy(
+  textColor = formInputText,
 )
