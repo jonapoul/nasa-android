@@ -105,7 +105,7 @@ androidx.sqlite:sqlite-framework:2.4.0
 androidx.sqlite:sqlite:2.4.0
 androidx.startup:startup-runtime:1.1.1
 androidx.tracing:tracing:1.0.0
-androidx.transition:transition:1.4.1
+androidx.transition:transition:1.5.0
 androidx.vectordrawable:vectordrawable-animated:1.1.0
 androidx.vectordrawable:vectordrawable:1.1.0
 androidx.versionedparcelable:versionedparcelable:1.1.1
@@ -122,7 +122,7 @@ cafe.adriel.voyager:voyager-screenmodel:1.1.0-alpha04
 com.fredporciuncula:flow-preferences:1.9.1
 com.github.tony19:logback-android:3.0.0
 com.google.accompanist:accompanist-drawablepainter:0.32.0
-com.google.android.material:material:1.11.0
+com.google.android.material:material:1.12.0
 com.google.code.findbugs:jsr305:3.0.2
 com.google.dagger:dagger-lint-aar:2.51.1
 com.google.dagger:dagger:2.51.1
