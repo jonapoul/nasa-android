@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+  api(libs.alakazam.kotlin.core)
   api(libs.kotlinx.datetime)
   api(libs.kotlinx.serialization.core)
   compileOnly(libs.alakazam.kotlin.compose.annotations)

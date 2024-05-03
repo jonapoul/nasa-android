@@ -53,6 +53,7 @@ cafe.adriel.voyager:voyager-core-android:1.1.0-alpha04
 cafe.adriel.voyager:voyager-core:1.1.0-alpha04
 com.google.guava:listenablefuture:1.0
 com.jakewharton.timber:timber:5.0.1
+dev.jonpoulton.alakazam:kotlin-core:4.5.2
 org.jetbrains.kotlin:kotlin-stdlib-common:1.9.23
 org.jetbrains.kotlin:kotlin-stdlib:1.9.23
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0-RC2

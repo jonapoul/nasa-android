@@ -1,7 +1,7 @@
 package apod.settings.ui
 
-import alakazam.android.prefs.core.PrefPair
 import alakazam.android.ui.compose.OnDispose
+import alakazam.kotlin.core.PrefPair
 import android.content.SharedPreferences
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

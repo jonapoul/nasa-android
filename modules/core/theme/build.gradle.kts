@@ -9,7 +9,7 @@ android {
 dependencies {
   api(projects.modules.core.model)
   api(libs.flowpreferences)
-  implementation(projects.modules.settings.keys)
   implementation(libs.alakazam.android.prefs)
+  implementation(libs.alakazam.kotlin.core)
   implementation(libs.javaxInject)
 }

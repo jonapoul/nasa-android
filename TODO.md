@@ -16,4 +16,4 @@
 - open apod item in browser
 - enter api key in prefs
   - allow none in build scripts
-- merge settings keys into core model
+- K2

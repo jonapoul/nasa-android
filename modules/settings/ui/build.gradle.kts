@@ -7,13 +7,13 @@ android {
 }
 
 dependencies {
+  api(projects.modules.core.model)
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
   implementation(projects.modules.core.ui)
-  implementation(projects.modules.settings.keys)
   implementation(projects.modules.settings.res)
   implementation(libs.alakazam.android.compose)
-  implementation(libs.alakazam.android.prefs)
+  implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

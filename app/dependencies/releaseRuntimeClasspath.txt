@@ -137,11 +137,11 @@ com.squareup.okio:okio-jvm:3.8.0
 com.squareup.okio:okio:3.8.0
 com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0
 com.squareup.retrofit2:retrofit:2.11.0
-dev.jonpoulton.alakazam:android-core:4.5.1
-dev.jonpoulton.alakazam:android-prefs-core:4.5.1
-dev.jonpoulton.alakazam:android-ui-compose:4.5.1
-dev.jonpoulton.alakazam:kotlin-core:4.5.1
-dev.jonpoulton.alakazam:kotlin-time:4.5.1
+dev.jonpoulton.alakazam:android-core:4.5.2
+dev.jonpoulton.alakazam:android-prefs-core:4.5.2
+dev.jonpoulton.alakazam:android-ui-compose:4.5.2
+dev.jonpoulton.alakazam:kotlin-core:4.5.2
+dev.jonpoulton.alakazam:kotlin-time:4.5.2
 io.coil-kt:coil-base:2.6.0
 io.coil-kt:coil-compose-base:2.6.0
 io.coil-kt:coil-compose:2.6.0

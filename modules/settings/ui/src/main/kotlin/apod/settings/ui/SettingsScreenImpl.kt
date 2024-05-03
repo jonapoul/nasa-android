@@ -1,6 +1,6 @@
 package apod.settings.ui
 
-import alakazam.android.prefs.core.PrefPair
+import alakazam.kotlin.core.PrefPair
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,13 +19,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.util.fastMap
+import apod.core.model.SettingsKeys
 import apod.core.model.ThemeType
 import apod.core.ui.BackgroundSurface
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
-import apod.settings.keys.SettingsKeys
 import apod.settings.res.R
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList

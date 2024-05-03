@@ -14,7 +14,6 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    mavenLocal()
   }
 }
 
@@ -56,7 +55,6 @@ include(":modules:licenses:vm")
 
 include(":modules:navigation")
 
-include(":modules:settings:keys")
 include(":modules:settings:res")
 include(":modules:settings:ui")
 
