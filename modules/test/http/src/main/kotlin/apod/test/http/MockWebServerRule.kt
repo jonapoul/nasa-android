@@ -8,6 +8,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import retrofit2.create
+import kotlin.test.assertEquals
 
 class MockWebServerRule : TestWatcher() {
   lateinit var server: MockWebServer
@@ -35,6 +36,10 @@ class MockWebServerRule : TestWatcher() {
 
   fun enqueue(response: MockResponse) {
     server.enqueue(response)
+  }
+
+  fun assertRequestCount(expected: Int) {
+    assertEquals(expected = expected, actual = server.requestCount)
   }
 
   inline fun <reified T : Any> buildApi(json: Json = Json): T {

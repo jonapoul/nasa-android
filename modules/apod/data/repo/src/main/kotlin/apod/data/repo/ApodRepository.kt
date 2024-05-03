@@ -4,6 +4,7 @@ import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.requireMessage
 import apod.core.model.ApiKeyProvider
 import apod.core.model.ApodItem
+import apod.core.model.Calendar
 import apod.data.api.ApodApi
 import apod.data.api.ApodJson
 import apod.data.api.FailureResponse
@@ -11,9 +12,8 @@ import apod.data.db.ApodDao
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.SerializationException
-import retrofit2.HttpException
 import timber.log.Timber
-import java.net.UnknownHostException
+import java.io.IOException
 import javax.inject.Inject
 
 /**
@@ -23,20 +23,20 @@ class ApodRepository @Inject internal constructor(
   private val io: IODispatcher,
   private val api: ApodApi,
   private val dao: ApodDao,
-  apiKeyProvider: ApiKeyProvider,
+  private val calendar: Calendar,
+  private val apiKeyProvider: ApiKeyProvider,
 ) {
-  private val apiKey = apiKeyProvider.get()
-
-  suspend fun loadApodItem(requested: LocalDate?, today: LocalDate): LoadResult {
+  suspend fun loadApodItem(date: LocalDate?): LoadResult {
     // First query the local database for info on this date's APOD entry
-    val itemFromDb = dao.get(requested ?: today)?.toItem()
+    val today = calendar.today()
+    val itemFromDb = withContext(io) { dao.get(date ?: today) }?.toItem()
     if (itemFromDb != null) {
       Timber.d("Fetched from DB: $itemFromDb")
       return LoadResult.Success(itemFromDb)
     }
 
     // If it didn't exist locally, query the API to pull it down and store it in the DB
-    val result = loadFromApi(requested)
+    val result = loadFromApi(date)
     if (result is LoadResult.Success) {
       val item = result.item
       val entity = item.toEntity()
@@ -48,6 +48,7 @@ class ApodRepository @Inject internal constructor(
 
   private suspend fun loadFromApi(date: LocalDate?): LoadResult {
     return try {
+      val apiKey = apiKeyProvider.get()
       val response = if (date == null) {
         withContext(io) { api.getToday(apiKey) }
       } else {
@@ -67,11 +68,8 @@ class ApodRepository @Inject internal constructor(
     } catch (e: SerializationException) {
       Timber.e(e, "Failed deserializing response")
       LoadResult.Failure.Json(e.requireMessage())
-    } catch (e: HttpException) {
-      Timber.w(e, "code = ${e.code()}, message = ${e.message()}")
-      parseHttpFailure(date, e.code(), e.message())
-    } catch (e: UnknownHostException) {
-      Timber.w(e, "Probably don't have a network on the phone")
+    } catch (e: IOException) {
+      Timber.w(e, "Probably don't have internet on the phone")
       LoadResult.Failure.Network
     } catch (e: Exception) {
       Timber.w(e, "Failed fetching $date from API")
@@ -80,29 +78,23 @@ class ApodRepository @Inject internal constructor(
   }
 
   private fun parseHttpFailure(date: LocalDate?, code: Int, body: String?): LoadResult.Failure {
-    if (body == null) {
+    if (body.isNullOrBlank()) {
       return LoadResult.Failure.OtherHttp(code, message = "Empty error body")
     }
 
     if (code == CODE_FORBIDDEN) {
       // Unauthorised, so an invalid API key is loaded into the app
-      return LoadResult.Failure.InvalidAuth(apiKey)
+      return LoadResult.Failure.InvalidAuth(key = apiKeyProvider.get())
     }
 
     // Expect response in the format: { "code": 400, "msg": "Some message", "service_version": "v1" }
-    val failure = try {
-      ApodJson.decodeFromString(FailureResponse.serializer(), body)
-    } catch (e: SerializationException) {
-      Timber.w(e, "Failed deserializing $body")
-      return LoadResult.Failure.Json("Failed deserializing error body: $body")
-    }
+    val message = ApodJson.decodeFromString(FailureResponse.serializer(), body).message
 
     date ?: error("Expected non-null date")
-    val message = failure.message
     return when {
       // In this case, the returned message contains the full allowed range. We can just show it to the user directly
       code == CODE_BAD_REQUEST ->
-        LoadResult.Failure.OutOfRange(date, message)
+        LoadResult.Failure.OutOfRange(message)
 
       code == CODE_NOT_FOUND && message.contains(NO_APOD_MESSAGE) ->
         LoadResult.Failure.NoApod(date)
@@ -120,8 +112,8 @@ class ApodRepository @Inject internal constructor(
 
     // Copyright sometimes has newlines scattered in the middle of the string, so just remove them all for sanity
     copyright = copyright
+      ?.replace(oldValue = "\n", newValue = " ")
       ?.trim()
-      ?.replace(oldValue = "\n", newValue = "")
       ?.takeIf { it.isNotBlank() },
   )
 

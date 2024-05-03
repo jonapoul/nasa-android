@@ -18,4 +18,8 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)
   implementation(libs.retrofit.core)
+  testImplementation(projects.modules.test.http)
+  testImplementation(libs.test.alakazam.db)
+  testImplementation(libs.androidx.room.runtime)
+  testImplementation(libs.test.okhttp)
 }

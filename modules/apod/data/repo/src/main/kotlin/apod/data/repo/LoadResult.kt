@@ -9,7 +9,7 @@ sealed interface LoadResult {
 
   sealed interface Failure : LoadResult {
     // Date must be from 16/06/1995 to current date
-    data class OutOfRange(val date: LocalDate, val message: String) : Failure
+    data class OutOfRange(val message: String) : Failure
 
     // No APOD was provided for the given date, even though it's within range. More common in early APOD days
     data class NoApod(val date: LocalDate) : Failure

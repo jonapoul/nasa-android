@@ -1,14 +1,12 @@
 package apod.core.ui
 
 import android.app.Activity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import apod.core.model.ThemeType
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 

@@ -12,5 +12,5 @@ sealed interface ApodSingleAction {
   data class ShowDescriptionDialog(val item: ApodItem) : ApodSingleAction
   data class LoadPrevious(val current: LocalDate) : ApodSingleAction
   data class LoadNext(val current: LocalDate) : ApodSingleAction
-  data class RetryLoad(val date: LocalDate) : ApodSingleAction
+  data class RetryLoad(val date: LocalDate?) : ApodSingleAction
 }

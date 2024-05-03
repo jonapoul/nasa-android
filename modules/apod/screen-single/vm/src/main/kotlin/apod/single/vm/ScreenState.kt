@@ -9,7 +9,7 @@ sealed interface ScreenState {
   data object Inactive : ScreenState
 
   data class Loading(
-    val date: LocalDate,
+    val date: LocalDate?,
   ) : ScreenState
 
   data class Success(
@@ -17,7 +17,7 @@ sealed interface ScreenState {
   ) : ScreenState
 
   data class Failed(
-    val date: LocalDate,
+    val date: LocalDate?,
     val message: String,
   ) : ScreenState
 }
