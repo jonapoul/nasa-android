@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import apod.data.db.ApodDao
 import apod.data.db.ApodDatabase
-import apod.data.db.DateDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,8 +27,4 @@ internal class ApodDatabaseModule {
   @Provides
   @Singleton
   fun apodDao(db: ApodDatabase): ApodDao = db.apodDao()
-
-  @Provides
-  @Singleton
-  fun dateDao(db: ApodDatabase): DateDao = db.dateDao()
 }

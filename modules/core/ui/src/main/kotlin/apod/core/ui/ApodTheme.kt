@@ -30,11 +30,7 @@ fun ApodTheme(
   CompositionLocalProvider(
     LocalTheme provides theme,
   ) {
-    SetStatusBarColors(
-      type = type,
-      theme = theme,
-      darkTheme = systemDarkTheme,
-    )
+    SetStatusBarColors(theme)
 
     val materialColorScheme = when (theme) {
       is LightTheme -> lightColorScheme(surface = theme.pageBackground)

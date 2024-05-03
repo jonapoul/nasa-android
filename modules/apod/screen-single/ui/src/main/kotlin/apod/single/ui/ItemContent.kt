@@ -53,7 +53,7 @@ internal fun ItemContent(
   Box(
     modifier = modifier
       .fillMaxWidth()
-      .padding(horizontal = 16.dp)
+      .padding(horizontal = 8.dp)
       .clickable(enabled = state is ScreenState.Success) {
         if (state is ScreenState.Success) {
           onAction(ApodSingleAction.ShowImageFullscreen(state.item))
