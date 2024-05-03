@@ -71,7 +71,6 @@ class ApodSingleViewModel @Inject internal constructor(
 
   private fun today(): LocalDate = clock.todayIn(timeZone)
 
-  // TODO: handle i10n with string resources
   private fun LoadResult.Failure.getReason(): String = when (this) {
     is LoadResult.Failure.OutOfRange -> "Tried loading $date. $message"
     is LoadResult.Failure.NoApod -> "No APOD exists for $date"
