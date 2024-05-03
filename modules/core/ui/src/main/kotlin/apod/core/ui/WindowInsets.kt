@@ -14,11 +14,9 @@ import apod.core.ui.color.Theme
 
 @Composable
 internal fun SetStatusBarColors(
-  type: ThemeType,
   theme: Theme = LocalTheme.current,
   statusBarColor: Color = theme.toolbarBackground,
   navigationBarColor: Color = theme.pageBackground,
-  darkTheme: Boolean = isSystemInDarkTheme(),
 ) {
   val view = LocalView.current
 
@@ -27,12 +25,7 @@ internal fun SetStatusBarColors(
       val window = (view.context as Activity).window
       window.navigationBarColor = navigationBarColor.toArgb()
       window.statusBarColor = statusBarColor.toArgb()
-      WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = when (type) {
-        ThemeType.Dark -> false
-        ThemeType.Midnight -> false
-        ThemeType.Light -> true
-        ThemeType.System -> !darkTheme
-      }
+      WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = false
     }
   }
 }
