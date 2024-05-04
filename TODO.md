@@ -13,8 +13,7 @@
 - LoadResult to string with resources
 - open apod item in browser
 - https://composablehorizons.github.io/compose-menu/
-- handle videos
-  - single
-  - grid
 - switch between grid and list view
   - save setting in prefs
+- progress indicator on HD images
+- display rate limits, error dialog when run out

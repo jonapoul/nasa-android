@@ -93,6 +93,7 @@ data class ApodSingleScreen(
           is ApodSingleAction.NavAbout -> navigator.push(aboutScreen)
           is ApodSingleAction.NavSettings -> navigator.push(settingsScreen)
           is ApodSingleAction.RetryLoad -> loadCounter++
+          is ApodSingleAction.OpenVideo -> viewModel.openVideo(action.url)
           ApodSingleAction.RegisterForApiKey -> viewModel.registerForApiKey()
 
           is ApodSingleAction.ShowDescriptionDialog -> {

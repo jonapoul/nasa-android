@@ -28,6 +28,7 @@ import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.core.ui.screens.LoadFailure
 import apod.core.ui.screens.NoApiKey
+import apod.core.ui.screens.VideoOverlay
 import apod.core.ui.shimmer
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
@@ -46,7 +47,12 @@ internal fun ItemContent(
       .padding(horizontal = 8.dp)
       .clickable(enabled = state is ScreenState.Success) {
         if (state is ScreenState.Success) {
-          onAction(ApodSingleAction.ShowImageFullscreen(state.item))
+          val action = when (state.item.mediaType) {
+            ApodMediaType.Image -> ApodSingleAction.ShowImageFullscreen(state.item)
+            ApodMediaType.Video -> ApodSingleAction.OpenVideo(state.item.url)
+            ApodMediaType.Other -> error("No idea how to handle this!") // TODO???
+          }
+          onAction(action)
         }
       },
     contentAlignment = Alignment.Center,
@@ -127,6 +133,12 @@ private fun ItemContentSuccess(
       onSuccess = { isLoading = false },
       onError = { isLoading = false },
     )
+
+    VideoOverlay(
+      item = item,
+      modifier = Modifier.fillMaxSize(),
+      theme = theme,
+    )
   }
 }
 
@@ -147,6 +159,19 @@ private fun ItemContentLoading(
 private fun PreviewSuccess() = PreviewScreen {
   ItemContent(
     state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewSuccessVideo() = PreviewScreen {
+  val item = EXAMPLE_ITEM.copy(
+    thumbnailUrl = EXAMPLE_ITEM.url,
+    mediaType = ApodMediaType.Video,
+  )
+  ItemContent(
+    state = ScreenState.Success(item, EXAMPLE_KEY),
     onAction = {},
   )
 }

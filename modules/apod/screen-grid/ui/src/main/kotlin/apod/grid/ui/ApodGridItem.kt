@@ -26,10 +26,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import apod.core.model.ApodItem
+import apod.core.model.ApodMediaType
 import apod.core.ui.ShimmerBlockShape
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
+import apod.core.ui.screens.VideoOverlay
 import apod.core.ui.shimmer
 import apod.grid.vm.ApodGridAction
 import coil.compose.AsyncImage
@@ -71,6 +73,12 @@ internal fun ApodGridItem(
       onError = { isLoading = false },
     )
 
+    VideoOverlay(
+      item = item,
+      modifier = Modifier.size(ITEM_SIZE),
+      theme = theme,
+    )
+
     Column(
       modifier = Modifier
         .fillMaxWidth()
@@ -101,6 +109,18 @@ internal fun ApodGridItem(
 private fun PreviewGridItem() = PreviewColumn {
   ApodGridItem(
     item = EXAMPLE_ITEM_1.copy(title = "Even longer title to show ellipsis at the end"),
+    onAction = {},
+  )
+}
+
+@Preview
+@Composable
+private fun PreviewVideoItem() = PreviewColumn {
+  ApodGridItem(
+    item = EXAMPLE_ITEM_1.copy(
+      thumbnailUrl = EXAMPLE_ITEM_1.url,
+      mediaType = ApodMediaType.Video,
+    ),
     onAction = {},
   )
 }

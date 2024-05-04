@@ -54,6 +54,10 @@ class ApodSingleViewModel @Inject internal constructor(
     urlOpener.openUrl(NASA_API_URL)
   }
 
+  fun openVideo(url: String) {
+    urlOpener.openUrl(url)
+  }
+
   fun load(key: ApiKey, config: SingleScreenConfig) {
     val mostRecent = mostRecentDate
     val configToLoad = if (mostRecent == null) config else SingleScreenConfig.Specific(mostRecent)
