@@ -7,14 +7,13 @@ android {
 }
 
 dependencies {
+  api(projects.modules.about.vm)
+  api(projects.modules.core.ui)
+  api(projects.modules.navigation)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.coroutines)
   api(libs.voyager.core)
   implementation(projects.modules.about.res)
-  implementation(projects.modules.about.vm)
-  implementation(projects.modules.core.res)
-  implementation(projects.modules.core.ui)
-  implementation(projects.modules.navigation)
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.compose.animation.core)

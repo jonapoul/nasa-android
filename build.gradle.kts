@@ -34,29 +34,19 @@ dependencyAnalysis {
 
   issues {
     all {
-      // Failure
-      onRedundantPlugins {
-        severity(value = "fail")
-      }
+      onAny { severity(value = "fail") }
+
+      onRuntimeOnly { severity(value = "ignore") }
 
       onIncorrectConfiguration {
-        severity(value = "fail")
+        exclude(libs.kotlin.stdlib, libs.test.junit)
         exclude(
-          libs.kotlin.stdlib,
-          libs.test.junit,
+          ":modules:core:http",
+          ":modules:core:res",
         )
       }
 
-      onUnusedAnnotationProcessors {
-        severity(value = "fail")
-      }
-
-      onUsedTransitiveDependencies {
-        severity(value = "fail")
-      }
-
       onUnusedDependencies {
-        severity(value = "fail")
         exclude("com.squareup.okhttp3:okhttp")
         exclude(
           libs.test.alakazam.core,
@@ -77,11 +67,6 @@ dependencyAnalysis {
           libs.kotlin.stdlib,
           libs.timber,
         )
-      }
-
-      // Ignore
-      onRuntimeOnly {
-        severity(value = "ignore")
       }
     }
   }

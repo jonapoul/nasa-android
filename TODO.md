@@ -14,5 +14,3 @@
   - alakazam, other libs
 - LoadResult to string with resources
 - open apod item in browser
-- simplify build graph
-  - apis, core-model, etc.

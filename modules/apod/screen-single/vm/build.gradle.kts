@@ -7,10 +7,9 @@ android {
 }
 
 dependencies {
-  api(projects.modules.core.model)
+  api(projects.modules.apod.data.repo)
   api(projects.modules.core.url)
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
-  implementation(projects.modules.apod.data.repo)
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

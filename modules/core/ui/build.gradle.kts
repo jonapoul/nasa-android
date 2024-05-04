@@ -8,9 +8,9 @@ android {
 
 dependencies {
   api(projects.modules.core.model)
+  api(projects.modules.core.res)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.immutable)
-  implementation(projects.modules.core.res)
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.coreKtx)
   implementation(libs.androidx.compose.animation.core)

@@ -7,13 +7,13 @@ android {
 }
 
 dependencies {
+  api(projects.modules.apod.screenSingle.vm)
+  api(projects.modules.core.ui)
+  api(projects.modules.navigation)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
   implementation(projects.modules.apod.screenSingle.res)
-  implementation(projects.modules.apod.screenSingle.vm)
-  implementation(projects.modules.core.ui)
-  implementation(projects.modules.navigation)
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
