@@ -1,23 +1,14 @@
 package apod.single.ui
 
-import alakazam.android.ui.compose.HorizontalSpacer
-import alakazam.android.ui.compose.VerticalSpacer
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,20 +19,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import apod.core.model.ApodMediaType
 import apod.core.ui.ShimmerBlockShape
-import apod.core.ui.button.PrimaryTextButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
+import apod.core.ui.screens.LoadFailure
+import apod.core.ui.screens.NoApiKey
 import apod.core.ui.shimmer
-import apod.single.res.R
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
 import coil.compose.AsyncImage
@@ -66,9 +53,10 @@ internal fun ItemContent(
   ) {
     when (state) {
       is ScreenState.NoApiKey -> {
-        ItemContentNoKey(
+        NoApiKey(
           modifier = Modifier.fillMaxSize(),
-          onAction = onAction,
+          onClickRegister = { onAction(ApodSingleAction.RegisterForApiKey) },
+          onClickSettings = { onAction(ApodSingleAction.NavSettings) },
           theme = theme,
         )
       }
@@ -81,10 +69,10 @@ internal fun ItemContent(
       }
 
       is ScreenState.Failed -> {
-        ItemContentFailure(
+        LoadFailure(
           modifier = Modifier.fillMaxSize(),
-          state = state,
-          onAction = onAction,
+          message = state.message,
+          onRetryLoad = { onAction(ApodSingleAction.RetryLoad(state.key, state.date)) },
           theme = theme,
         )
       }
@@ -139,109 +127,6 @@ private fun ItemContentSuccess(
       onSuccess = { isLoading = false },
       onError = { isLoading = false },
     )
-  }
-}
-
-@Composable
-private fun ItemContentFailure(
-  state: ScreenState.Failed,
-  onAction: (ApodSingleAction) -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-) {
-  Column(
-    modifier = modifier
-      .wrapContentSize()
-      .padding(16.dp),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center,
-  ) {
-    Icon(
-      modifier = Modifier.size(70.dp),
-      imageVector = Icons.Filled.Warning,
-      contentDescription = null,
-      tint = theme.errorText,
-    )
-
-    VerticalSpacer(10.dp)
-
-    Text(
-      text = stringResource(id = R.string.apod_failed_title),
-      textAlign = TextAlign.Center,
-      fontWeight = FontWeight.Bold,
-      color = theme.errorText,
-      fontSize = 25.sp,
-    )
-
-    VerticalSpacer(10.dp)
-
-    Text(
-      text = state.message,
-      textAlign = TextAlign.Center,
-    )
-
-    VerticalSpacer(20.dp)
-
-    PrimaryTextButton(
-      text = stringResource(id = R.string.apod_failed_retry),
-      onClick = { onAction(ApodSingleAction.RetryLoad(state.key, state.date)) },
-    )
-  }
-}
-
-@Composable
-private fun ItemContentNoKey(
-  onAction: (ApodSingleAction) -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-) {
-  Column(
-    modifier = modifier
-      .wrapContentSize()
-      .padding(32.dp),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center,
-  ) {
-    Icon(
-      modifier = Modifier.size(70.dp),
-      imageVector = Icons.Filled.Key,
-      contentDescription = null,
-      tint = theme.warningText,
-    )
-
-    VerticalSpacer(10.dp)
-
-    Text(
-      text = stringResource(id = R.string.apod_no_key_title),
-      textAlign = TextAlign.Center,
-      fontWeight = FontWeight.Bold,
-      color = theme.warningText,
-      fontSize = 25.sp,
-    )
-
-    VerticalSpacer(20.dp)
-
-    Text(
-      text = stringResource(id = R.string.apod_no_key_message),
-      textAlign = TextAlign.Center,
-      color = theme.warningText,
-    )
-
-    VerticalSpacer(20.dp)
-
-    Row {
-      PrimaryTextButton(
-        text = stringResource(id = R.string.apod_no_key_register),
-        onClick = { onAction(ApodSingleAction.RegisterForApiKey) },
-      )
-
-      HorizontalSpacer(20.dp)
-
-      PrimaryTextButton(
-        text = stringResource(id = R.string.apod_no_key_settings),
-        onClick = { onAction(ApodSingleAction.NavSettings) },
-      )
-    }
   }
 }
 

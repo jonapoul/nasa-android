@@ -1,6 +1,7 @@
 package apod.single.vm
 
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import apod.core.model.ApiKey
 import apod.core.model.ApodItem
 import kotlinx.datetime.LocalDate
@@ -28,4 +29,28 @@ sealed interface ScreenState {
     val key: ApiKey,
     val message: String,
   ) : ScreenState
+}
+
+@Stable
+fun ScreenState.ifHasDate(block: (LocalDate) -> Unit) {
+  val date = dateOrNull() ?: return
+  block(date)
+}
+
+@Stable
+fun ScreenState.dateOrNull(): LocalDate? = when (this) {
+  ScreenState.Inactive -> null
+  is ScreenState.NoApiKey -> date
+  is ScreenState.Failed -> date
+  is ScreenState.Loading -> date
+  is ScreenState.Success -> item.date
+}
+
+@Stable
+fun ScreenState.apiKeyOrNull(): ApiKey? = when (this) {
+  ScreenState.Inactive -> null
+  is ScreenState.NoApiKey -> null
+  is ScreenState.Failed -> key
+  is ScreenState.Loading -> key
+  is ScreenState.Success -> key
 }

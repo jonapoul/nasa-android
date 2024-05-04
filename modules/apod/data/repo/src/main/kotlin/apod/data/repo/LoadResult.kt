@@ -4,29 +4,43 @@ import apod.core.model.ApiKey
 import apod.core.model.ApodItem
 import kotlinx.datetime.LocalDate
 
-sealed interface LoadResult {
-  data class Success(val item: ApodItem) : LoadResult
+sealed interface SingleLoadResult {
+  data class Success(val item: ApodItem) : SingleLoadResult
+}
 
-  sealed interface Failure : LoadResult {
-    // Date must be from 16/06/1995 to current date
-    data class OutOfRange(val message: String) : Failure
+sealed interface MultipleLoadResult {
+  data class Success(val items: List<ApodItem>) : MultipleLoadResult
+}
 
-    // No APOD was provided for the given date, even though it's within range. More common in early APOD days
-    data class NoApod(val date: LocalDate) : Failure
+sealed interface FailureResult : SingleLoadResult, MultipleLoadResult {
+  // Date must be from 16/06/1995 to current date
+  data class OutOfRange(val message: String) : FailureResult
 
-    // Unexpected JSON format when parsing a response
-    data class InvalidAuth(val key: ApiKey) : Failure
+  // No APOD was provided for the given date, even though it's within range. More common in early APOD days
+  data class NoApod(val date: LocalDate) : FailureResult
 
-    // HTTP failure beyond those above
-    data class OtherHttp(val code: Int, val message: String?) : Failure
+  // Unexpected JSON format when parsing a response
+  data class InvalidAuth(val key: ApiKey) : FailureResult
 
-    // Unexpected JSON format when parsing a response
-    data class Json(val message: String) : Failure
+  // HTTP failure beyond those above
+  data class OtherHttp(val code: Int, val message: String?) : FailureResult
 
-    // Network problem - probably don't have internet on the phone
-    data object Network : Failure
+  // Unexpected JSON format when parsing a response
+  data class Json(val message: String) : FailureResult
 
-    // Something else?
-    data class Other(val message: String) : Failure
-  }
+  // Network problem - probably don't have internet on the phone
+  data object Network : FailureResult
+
+  // Something else?
+  data class Other(val message: String) : FailureResult
+}
+
+fun FailureResult.reason(): String = when (this) {
+  is FailureResult.OutOfRange -> message
+  is FailureResult.NoApod -> "No APOD exists for $date"
+  is FailureResult.InvalidAuth -> "Invalid API key - $key"
+  is FailureResult.OtherHttp -> "HTTP code $code - $message"
+  is FailureResult.Json -> "Failed parsing response from server"
+  FailureResult.Network -> "Network problem: does your phone have an internet connection?"
+  is FailureResult.Other -> "Unexpected problem: $message"
 }

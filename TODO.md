@@ -1,11 +1,10 @@
 - clear cache from settings, with confirmation
 - zoom/pan buttons on display screen?
+- zoom slider on grid screen
 - select specific date
   - scroll calendar, or manual entry
-- grid screen, current month
-  - select specific month
+- select specific month in grid screen
 - draggable description panel, not dialog
-- use sealed interface for loading instead of nullable LocalDate
 - increase min test coverage
 - update readme
   - screenshots
@@ -13,3 +12,9 @@
   - alakazam, other libs
 - LoadResult to string with resources
 - open apod item in browser
+- https://composablehorizons.github.io/compose-menu/
+- handle videos
+  - single
+  - grid
+- switch between grid and list view
+  - save setting in prefs

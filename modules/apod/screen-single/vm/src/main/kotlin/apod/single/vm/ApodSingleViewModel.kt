@@ -5,11 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
-import apod.core.model.ApodLoadType
 import apod.core.model.NASA_API_URL
+import apod.core.model.SingleScreenConfig
 import apod.core.url.UrlOpener
-import apod.data.repo.ApodRepository
-import apod.data.repo.LoadResult
+import apod.data.repo.FailureResult
+import apod.data.repo.SingleApodRepository
+import apod.data.repo.SingleLoadResult
+import apod.data.repo.reason
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,12 +23,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ApodSingleViewModel @Inject internal constructor(
-  private val apodRepository: ApodRepository,
+  private val repository: SingleApodRepository,
   private val urlOpener: UrlOpener,
   apiKeyProvider: ApiKeyProvider,
   private val savedState: SavedStateHandle,
@@ -53,26 +54,25 @@ class ApodSingleViewModel @Inject internal constructor(
     urlOpener.openUrl(NASA_API_URL)
   }
 
-  fun load(key: ApiKey, type: ApodLoadType) {
+  fun load(key: ApiKey, config: SingleScreenConfig) {
     val mostRecent = mostRecentDate
-    val typeToLoad = if (mostRecent == null) type else ApodLoadType.Specific(mostRecent)
-    Timber.d("load $type mostRecent=$mostRecent typeToLoad=$typeToLoad")
+    val configToLoad = if (mostRecent == null) config else SingleScreenConfig.Specific(mostRecent)
 
-    when (typeToLoad) {
-      ApodLoadType.Random -> {
+    when (configToLoad) {
+      SingleScreenConfig.Random -> {
         mutableState.update { ScreenState.Loading(date = null, key) }
-        loadData(key, date = null) { apodRepository.loadRandom(key) }
+        loadData(key, date = null) { repository.loadRandom(key) }
       }
 
-      ApodLoadType.Today -> {
+      SingleScreenConfig.Today -> {
         mutableState.update { ScreenState.Loading(date = null, key) }
-        loadData(key, date = null) { apodRepository.loadToday(key) }
+        loadData(key, date = null) { repository.loadToday(key) }
       }
 
-      is ApodLoadType.Specific -> {
-        mostRecentDate = typeToLoad.date
-        mutableState.update { ScreenState.Loading(typeToLoad.date, key) }
-        loadData(key, typeToLoad.date) { apodRepository.loadSpecific(key, typeToLoad.date) }
+      is SingleScreenConfig.Specific -> {
+        mostRecentDate = configToLoad.date
+        mutableState.update { ScreenState.Loading(configToLoad.date, key) }
+        loadData(key, configToLoad.date) { repository.loadSpecific(key, configToLoad.date) }
       }
     }
   }
@@ -80,36 +80,22 @@ class ApodSingleViewModel @Inject internal constructor(
   private fun loadData(
     key: ApiKey,
     date: LocalDate?,
-    getResult: suspend () -> LoadResult,
+    getResult: suspend () -> SingleLoadResult,
   ) {
     viewModelScope.launch {
       when (val result = getResult()) {
-        is LoadResult.Success -> {
+        is SingleLoadResult.Success -> {
           mutableState.update { ScreenState.Success(result.item, key) }
           mostRecentDate = result.item.date
         }
 
-        is LoadResult.Failure -> {
-          val reason = when (result) {
-            is LoadResult.Failure.OutOfRange -> result.message
-            is LoadResult.Failure.NoApod -> "No APOD exists for $date"
-            is LoadResult.Failure.InvalidAuth -> "Invalid API key - $key"
-            is LoadResult.Failure.OtherHttp -> "HTTP code ${result.code} - ${result.message}"
-            is LoadResult.Failure.Json -> "Failed parsing response from server"
-            LoadResult.Failure.Network -> "Network problem: does your phone have an internet connection?"
-            is LoadResult.Failure.Other -> "Unexpected problem: ${result.message}"
-          }
+        is FailureResult -> {
+          val reason = result.reason()
           mutableState.update { ScreenState.Failed(date, key, reason) }
         }
       }
     }
   }
 
-  private fun currentDate(): LocalDate? = when (val current = mutableState.value) {
-    ScreenState.Inactive -> null
-    is ScreenState.NoApiKey -> current.date
-    is ScreenState.Failed -> current.date
-    is ScreenState.Loading -> current.date
-    is ScreenState.Success -> current.item.date
-  }
+  private fun currentDate(): LocalDate? = mutableState.value.dateOrNull()
 }

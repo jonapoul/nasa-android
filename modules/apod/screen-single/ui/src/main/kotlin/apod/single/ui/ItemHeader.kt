@@ -1,5 +1,6 @@
 package apod.single.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +27,7 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
+import apod.single.vm.ifHasDate
 
 @Composable
 internal fun ItemHeader(
@@ -38,6 +40,7 @@ internal fun ItemHeader(
 
   Row(
     modifier = modifier
+      .background(theme.toolbarBackgroundSubdued)
       .fillMaxWidth()
       .wrapContentHeight()
       .padding(8.dp),
@@ -104,14 +107,14 @@ private fun ItemTitle(
           .height(20.dp)
           .padding(horizontal = 8.dp, vertical = 0.dp),
         theme = theme,
-        color = { pageTextPositiveLoading },
+        color = { toolbarText },
       )
     }
 
     is ScreenState.Success -> {
       Text(
         text = state.item.title,
-        color = theme.pageTextPositive,
+        color = theme.toolbarText,
         fontWeight = FontWeight.Bold,
         fontSize = 20.sp,
         textAlign = TextAlign.Center,
@@ -144,12 +147,12 @@ private fun ItemDate(
         .height(20.dp)
         .padding(horizontal = 8.dp, vertical = 2.dp),
       theme = theme,
-      color = { pageTextSubdued },
+      color = { toolbarTextSubdued },
     )
   } else {
     Text(
       text = date.toString(),
-      color = theme.pageTextSubdued,
+      color = theme.toolbarTextSubdued,
       fontWeight = FontWeight.Bold,
       textAlign = TextAlign.Center,
     )

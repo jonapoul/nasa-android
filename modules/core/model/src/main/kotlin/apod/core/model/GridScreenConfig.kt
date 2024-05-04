@@ -6,13 +6,13 @@ import kotlinx.serialization.Serializable
 
 // Needs to be serializable so we can pass it as a screen parameter with Voyager.
 @Immutable
-sealed interface ApodLoadType {
+sealed interface GridScreenConfig {
   @Serializable
-  data object Today : ApodLoadType
+  data object ThisMonth : GridScreenConfig
 
   @Serializable
-  data object Random : ApodLoadType
+  data object Random : GridScreenConfig
 
   @Serializable
-  data class Specific(val date: LocalDate) : ApodLoadType
+  data class Specific(val date: LocalDate) : GridScreenConfig
 }

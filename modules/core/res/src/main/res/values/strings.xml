@@ -1,3 +1,11 @@
 <resources>
   <string name="app_name">APOD Android</string>
+
+  <string name="failed_title">Failed loading!</string>
+  <string name="failed_retry">Retry</string>
+
+  <string name="no_key_title">No API key!</string>
+  <string name="no_key_message">Click below to open the NASA website and register for a free API key.\n\nOnce done, open the settings page and paste your key into the \"API Key\" option.</string>
+  <string name="no_key_register">Register</string>
+  <string name="no_key_settings">Settings</string>
 </resources>

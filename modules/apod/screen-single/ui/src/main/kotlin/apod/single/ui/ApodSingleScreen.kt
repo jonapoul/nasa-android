@@ -9,7 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import apod.core.model.ApodItem
-import apod.core.model.ApodLoadType
+import apod.core.model.GridScreenConfig
+import apod.core.model.SingleScreenConfig
 import apod.core.ui.getViewModel
 import apod.navigation.NavScreens
 import apod.single.vm.ApodSingleAction
@@ -24,7 +25,7 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
 data class ApodSingleScreen(
-  val loadType: ApodLoadType,
+  val config: SingleScreenConfig,
 ) : Screen {
   @Suppress("CyclomaticComplexMethod")
   @Composable
@@ -37,7 +38,7 @@ data class ApodSingleScreen(
     // Load counter increments if the API call failed and the user presses "reload"
     var loadCounter by remember { mutableIntStateOf(0) }
     apiKey?.let { key ->
-      LaunchedEffect(loadType, loadCounter) { viewModel.load(key, loadType) }
+      LaunchedEffect(config, loadCounter) { viewModel.load(key, config) }
     }
 
     val aboutScreen = rememberScreen(NavScreens.About)
@@ -63,15 +64,24 @@ data class ApodSingleScreen(
     var loadSpecificDate by remember { mutableStateOf<LocalDate?>(null) }
     val immutableSpecificDate = loadSpecificDate
     if (immutableSpecificDate != null) {
-      val type = ApodLoadType.Specific(immutableSpecificDate)
-      val screen = rememberScreen(NavScreens.Apod(type))
+      val specific = SingleScreenConfig.Specific(immutableSpecificDate)
+      val screen = rememberScreen(NavScreens.Apod(specific))
       navigator.replace(screen)
       loadSpecificDate = null
     }
 
+    var gridDate by remember { mutableStateOf<LocalDate?>(null) }
+    val immutableGridDate = gridDate
+    if (immutableGridDate != null) {
+      val specific = GridScreenConfig.Specific(immutableGridDate)
+      val screen = rememberScreen(NavScreens.Grid(specific))
+      navigator.push(screen)
+      gridDate = null
+    }
+
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.Apod(ApodLoadType.Random))
+      val screen = rememberScreen(NavScreens.Apod(SingleScreenConfig.Random))
       navigator.replace(screen)
       loadRandom = false
     }
@@ -99,6 +109,10 @@ data class ApodSingleScreen(
 
           is ApodSingleAction.LoadPrevious -> {
             loadSpecificDate = action.current - ONE_DAY
+          }
+
+          is ApodSingleAction.NavGrid -> {
+            gridDate = action.current
           }
 
           is ApodSingleAction.LoadRandom -> {

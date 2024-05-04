@@ -14,7 +14,6 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
   implementation(projects.modules.apod.screenSingle.res)
-  implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
   implementation(libs.androidx.compose.material.icons.core)

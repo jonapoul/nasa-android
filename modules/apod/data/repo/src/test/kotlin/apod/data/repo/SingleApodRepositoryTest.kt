@@ -26,7 +26,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 @RunWith(RobolectricTestRunner::class)
-class ApodRepositoryTest {
+class SingleApodRepositoryTest {
   @get:Rule
   val coroutineRule = CoroutineRule()
 
@@ -39,7 +39,7 @@ class ApodRepositoryTest {
   @get:Rule
   val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
-  private lateinit var repository: ApodRepository
+  private lateinit var repository: SingleApodRepository
   private lateinit var dao: ApodDao
   private lateinit var api: ApodApi
 
@@ -48,11 +48,12 @@ class ApodRepositoryTest {
     dao = databaseRule.database.apodDao()
     api = webServerRule.buildApi(json = ApodJson)
 
-    repository = ApodRepository(
+    repository = SingleApodRepository(
       io = IODispatcher(coroutineRule.dispatcher),
       api = api,
       dao = dao,
       calendar = { TODAY },
+      sharedRepository = SharedRepository(),
     )
   }
 
@@ -61,7 +62,7 @@ class ApodRepositoryTest {
     // Given a valid response is returned from the server
     webServerRule.enqueue(
       code = 200,
-      body = readJsonFromResource(name = "valid-response-with-newlines.json"),
+      body = readJsonFromResource(name = "single-valid-with-newlines.json"),
     )
 
     // and the database doesn't have anything
@@ -72,7 +73,7 @@ class ApodRepositoryTest {
 
     // Then the item is parsed and returned
     assertEquals(
-      expected = LoadResult.Success(ITEM),
+      expected = SingleLoadResult.Success(ITEM),
       actual = result,
     )
 
@@ -97,7 +98,7 @@ class ApodRepositoryTest {
     val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then the item is returned
-    assertEquals(expected = LoadResult.Success(ITEM), actual = result)
+    assertEquals(expected = SingleLoadResult.Success(ITEM), actual = result)
 
     // but the API wasn't queried
     webServerRule.assertRequestCount(expected = 0)
@@ -116,7 +117,7 @@ class ApodRepositoryTest {
     val result = repository.loadSpecific(API_KEY, invalidDate)
 
     // Then a failure is returned
-    assertIs<LoadResult.Failure.OutOfRange>(result)
+    assertIs<FailureResult.OutOfRange>(result)
   }
 
   @Test
@@ -134,7 +135,7 @@ class ApodRepositoryTest {
     val result = repository.loadSpecific(dodgyKey, DATE)
 
     // Then a failure is returned
-    assertIs<LoadResult.Failure.InvalidAuth>(result)
+    assertIs<FailureResult.InvalidAuth>(result)
   }
 
   @Test
@@ -146,7 +147,7 @@ class ApodRepositoryTest {
     val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
-    assertIs<LoadResult.Failure.Json>(result)
+    assertIs<FailureResult.Json>(result)
   }
 
   @Test
@@ -158,7 +159,7 @@ class ApodRepositoryTest {
     val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
-    assertEquals(expected = LoadResult.Failure.NoApod(DATE), actual = result)
+    assertEquals(expected = FailureResult.NoApod(DATE), actual = result)
   }
 
   @Test
@@ -170,7 +171,7 @@ class ApodRepositoryTest {
     val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
-    assertEquals(expected = LoadResult.Failure.Network, actual = result)
+    assertEquals(expected = FailureResult.Network, actual = result)
   }
 
   @Test
@@ -183,7 +184,7 @@ class ApodRepositoryTest {
 
     // Then a failure is returned
     assertEquals(
-      expected = LoadResult.Failure.OtherHttp(code = 405, message = "Some other problem"),
+      expected = FailureResult.OtherHttp(code = 405, message = "Some other problem"),
       actual = result,
     )
   }
@@ -191,7 +192,7 @@ class ApodRepositoryTest {
   @Test
   fun `Fetch random item`() = runTest {
     // Given the server returns a successful random response
-    webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "valid-random.json"))
+    webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "single-valid-random.json"))
 
     // When we query the API
     val result = repository.loadRandom(API_KEY)
@@ -208,7 +209,7 @@ class ApodRepositoryTest {
       hdUrl = "https://apod.nasa.gov/apod/image/0604/rhearings_cassini_big.jpg",
       thumbnailUrl = null,
     )
-    assertEquals(expected = LoadResult.Success(randomItem), actual = result)
+    assertEquals(expected = SingleLoadResult.Success(randomItem), actual = result)
 
     // and the database has an entry on the given date
     assertNotNull(dao.get(date))

@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import apod.core.model.ApodLoadType
+import apod.core.model.SingleScreenConfig
 import apod.core.ui.ApodTheme
 import apod.single.ui.ApodSingleScreen
 import cafe.adriel.voyager.navigator.Navigator
@@ -26,7 +26,7 @@ class ApodActivity : ComponentActivity() {
     setContent {
       val theme by viewModel.theme.collectAsStateWithLifecycle()
       ApodTheme(theme) {
-        Navigator(ApodSingleScreen(ApodLoadType.Today))
+        Navigator(ApodSingleScreen(SingleScreenConfig.Today))
       }
     }
   }

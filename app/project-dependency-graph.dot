@@ -17,9 +17,12 @@ node ["style"="filled"]
 ":modules:apod:data:di" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
+":modules:apod:screen-grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:apod:screen-grid:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
+":modules:apod:screen-grid:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-single:vm" ["fillcolor"="#FF5555","shape"="box"]
-":modules:apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-single:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:core:theme" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:licenses:di" ["fillcolor"="#FCB103","shape"="box"]
@@ -53,6 +56,7 @@ graph ["label"="Legend","fontsize"="15"]
 ":app" -> ":modules:about:di" ["style"="dotted"]
 ":app" -> ":modules:about:ui" ["style"="dotted"]
 ":app" -> ":modules:apod:data:di" ["style"="dotted"]
+":app" -> ":modules:apod:screen-grid:ui" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-single:ui" ["style"="dotted"]
 ":app" -> ":modules:core:theme" ["style"="dotted"]
 ":app" -> ":modules:licenses:di" ["style"="dotted"]
@@ -74,14 +78,20 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:data:di" -> ":modules:core:http"
 ":modules:apod:data:api" -> ":modules:core:model"
 ":modules:apod:data:db" -> ":modules:core:model"
+":modules:apod:screen-grid:ui" -> ":modules:apod:screen-grid:vm"
+":modules:apod:screen-grid:ui" -> ":modules:core:ui"
+":modules:apod:screen-grid:ui" -> ":modules:navigation"
+":modules:apod:screen-grid:ui" -> ":modules:apod:screen-grid:res" ["style"="dotted"]
+":modules:apod:screen-grid:vm" -> ":modules:apod:data:repo"
+":modules:apod:screen-grid:vm" -> ":modules:core:url"
+":modules:apod:data:repo" -> ":modules:apod:data:api"
+":modules:apod:data:repo" -> ":modules:apod:data:db"
 ":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:vm"
 ":modules:apod:screen-single:ui" -> ":modules:core:ui"
 ":modules:apod:screen-single:ui" -> ":modules:navigation"
 ":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:res" ["style"="dotted"]
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo"
 ":modules:apod:screen-single:vm" -> ":modules:core:url"
-":modules:apod:data:repo" -> ":modules:apod:data:api"
-":modules:apod:data:repo" -> ":modules:apod:data:db"
 ":modules:core:theme" -> ":modules:core:model"
 ":modules:licenses:di" -> ":modules:licenses:data"
 ":modules:licenses:ui" -> ":modules:core:ui"

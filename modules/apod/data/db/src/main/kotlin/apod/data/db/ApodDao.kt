@@ -12,6 +12,9 @@ interface ApodDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insert(entity: ApodEntity)
 
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  suspend fun insertAll(entities: List<ApodEntity>)
+
   @Query("SELECT * FROM apod WHERE date = :date LIMIT 1")
   suspend fun get(date: LocalDate): ApodEntity?
 

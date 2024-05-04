@@ -19,6 +19,7 @@ dependencies {
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
   implementation(libs.androidx.compose.material.icons.core)
+  implementation(libs.androidx.compose.material.icons.extended)
   implementation(libs.androidx.compose.ui.core)
   implementation(libs.androidx.compose.ui.geometry)
   implementation(libs.androidx.compose.ui.graphics)

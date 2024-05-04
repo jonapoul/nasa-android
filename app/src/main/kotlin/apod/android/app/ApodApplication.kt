@@ -6,6 +6,7 @@ import apod.about.ui.AboutScreen
 import apod.android.BuildConfig
 import apod.core.http.buildOkHttp
 import apod.core.model.ApiKey
+import apod.grid.ui.ApodGridScreen
 import apod.licenses.ui.LicensesScreen
 import apod.navigation.NavScreens
 import apod.settings.ui.SettingsScreen
@@ -44,7 +45,8 @@ class ApodApplication : Application(), ImageLoaderFactory {
     apiKeyManager.set(buildKey)
 
     ScreenRegistry {
-      register<NavScreens.Apod> { ApodSingleScreen(it.type) }
+      register<NavScreens.Apod> { ApodSingleScreen(it.config) }
+      register<NavScreens.Grid> { ApodGridScreen(it.config) }
       register<NavScreens.FullScreen> { ApodFullScreen(it.item) }
       register<NavScreens.About> { AboutScreen() }
       register<NavScreens.Licenses> { LicensesScreen() }

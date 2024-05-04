@@ -9,11 +9,12 @@ import kotlinx.datetime.LocalDate
 sealed interface ApodSingleAction {
   data object NavAbout : ApodSingleAction
   data object NavSettings : ApodSingleAction
+  data class NavGrid(val current: LocalDate) : ApodSingleAction
   data object RegisterForApiKey : ApodSingleAction
   data class ShowImageFullscreen(val item: ApodItem) : ApodSingleAction
   data class ShowDescriptionDialog(val item: ApodItem) : ApodSingleAction
   data class LoadPrevious(val current: LocalDate) : ApodSingleAction
   data class LoadNext(val current: LocalDate) : ApodSingleAction
-  data class LoadRandom(val key: ApiKey) : ApodSingleAction
+  data object LoadRandom : ApodSingleAction
   data class RetryLoad(val key: ApiKey, val date: LocalDate?) : ApodSingleAction
 }

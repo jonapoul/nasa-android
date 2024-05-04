@@ -40,6 +40,10 @@ include(":modules:apod:screen-single:res")
 include(":modules:apod:screen-single:ui")
 include(":modules:apod:screen-single:vm")
 
+include(":modules:apod:screen-grid:res")
+include(":modules:apod:screen-grid:ui")
+include(":modules:apod:screen-grid:vm")
+
 include(":modules:core:http")
 include(":modules:core:res")
 include(":modules:core:model")
