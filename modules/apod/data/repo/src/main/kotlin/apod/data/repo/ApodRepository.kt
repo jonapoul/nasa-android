@@ -7,17 +7,23 @@ import apod.core.model.ApodItem
 import apod.core.model.Calendar
 import apod.data.api.ApodApi
 import apod.data.api.ApodJson
+import apod.data.api.ApodResponseModel
 import apod.data.api.FailureResponse
 import apod.data.db.ApodDao
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.SerializationException
+import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
 /**
  * Performs data layer access of [ApodItem]s from a local database primarily, or a remote API if not already cached.
+ * Specifically, it handles requesting a single item from the API, which can be one of:
+ * - today (date == null)
+ * - one specific date
+ * - one random date
  */
 class ApodRepository @Inject internal constructor(
   private val io: IODispatcher,
@@ -25,38 +31,73 @@ class ApodRepository @Inject internal constructor(
   private val dao: ApodDao,
   private val calendar: Calendar,
 ) {
-  suspend fun loadApodItem(key: ApiKey, date: LocalDate?): LoadResult {
+  suspend fun loadToday(key: ApiKey): LoadResult {
+    return loadFromDatabaseOrApi(key, date = null, getResponse = { api.getToday(key) })
+  }
+
+  suspend fun loadSpecific(key: ApiKey, date: LocalDate): LoadResult {
+    return loadFromDatabaseOrApi(key, date, getResponse = { api.getByDate(key, date) })
+  }
+
+  suspend fun loadRandom(key: ApiKey): LoadResult {
+    // Can't query the DB if we don't know what date we want, so go straight to API
+    val result = loadFromApi(
+      key = key,
+      date = null,
+      getResponse = { api.getRandom(key) },
+      parseBody = { it.first().toItem().trimmed() },
+    )
+    saveToDatabaseIfSuccessful(result)
+    return result
+  }
+
+  private suspend fun loadFromDatabaseOrApi(
+    key: ApiKey,
+    date: LocalDate?,
+    getResponse: suspend () -> Response<ApodResponseModel>,
+  ): LoadResult {
     // First query the local database for info on this date's APOD entry
-    val today = calendar.today()
-    val itemFromDb = withContext(io) { dao.get(date ?: today) }?.toItem()
+    val entity = withContext(io) {
+      dao.get(date ?: calendar.today())
+    }
+    val itemFromDb = entity?.toItem()
     if (itemFromDb != null) {
       Timber.d("Fetched from DB: $itemFromDb")
       return LoadResult.Success(itemFromDb)
     }
 
     // If it didn't exist locally, query the API to pull it down and store it in the DB
-    val result = loadFromApi(key, date)
+    val result = loadFromApi(
+      key = key,
+      date = date,
+      getResponse = getResponse,
+      parseBody = { it.toItem().trimmed() },
+    )
+    saveToDatabaseIfSuccessful(result)
+    return result
+  }
+
+  private suspend fun saveToDatabaseIfSuccessful(result: LoadResult) {
     if (result is LoadResult.Success) {
       val item = result.item
       val entity = item.toEntity()
       withContext(io) { dao.insert(entity) }
-      Timber.d("Fetched from API: $item")
+      Timber.d("Stored $entity in database")
     }
-    return result
   }
 
-  private suspend fun loadFromApi(key: ApiKey, date: LocalDate?): LoadResult {
+  private suspend fun <T : Any> loadFromApi(
+    key: ApiKey,
+    date: LocalDate?,
+    getResponse: suspend () -> Response<T>,
+    parseBody: (T) -> ApodItem,
+  ): LoadResult {
     return try {
-      val response = if (date == null) {
-        withContext(io) { api.getToday(key) }
-      } else {
-        withContext(io) { api.getByDate(key, date) }
-      }
-
+      val response = withContext(io) { getResponse() }
       if (response.isSuccessful) {
         // Received and parsed a-ok, so pass it down after removing pesky newlines and blank strings
         val body = response.body() ?: error("Null body")
-        val item = body.toItem().trimmed()
+        val item = parseBody(body)
         LoadResult.Success(item)
       } else {
         // Attempt to decode the error response body as JSON to pull out the reason
@@ -88,14 +129,13 @@ class ApodRepository @Inject internal constructor(
     // Expect response in the format: { "code": 400, "msg": "Some message", "service_version": "v1" }
     val message = ApodJson.decodeFromString(FailureResponse.serializer(), body).message
 
-    date ?: error("Expected non-null date")
     return when {
       // In this case, the returned message contains the full allowed range. We can just show it to the user directly
       code == CODE_BAD_REQUEST ->
         LoadResult.Failure.OutOfRange(message)
 
       code == CODE_NOT_FOUND && message.contains(NO_APOD_MESSAGE) ->
-        LoadResult.Failure.NoApod(date)
+        LoadResult.Failure.NoApod(date = date ?: error("Expected non-null date"))
 
       else ->
         LoadResult.Failure.OtherHttp(code, message)

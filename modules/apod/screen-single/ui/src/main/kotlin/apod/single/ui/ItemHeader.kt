@@ -48,8 +48,8 @@ internal fun ItemHeader(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
       contentDescription = "",
       onClick = {
-        state.ifHasDateAndKey { date, key ->
-          onAction(ApodSingleAction.LoadPrevious(key, date))
+        state.ifHasDate { date ->
+          onAction(ApodSingleAction.LoadPrevious(date))
         }
       },
     )
@@ -57,6 +57,7 @@ internal fun ItemHeader(
     Column(
       modifier = Modifier
         .weight(1f)
+        .padding(horizontal = 8.dp)
         .wrapContentHeight(),
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center,
@@ -82,8 +83,8 @@ internal fun ItemHeader(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
       contentDescription = "",
       onClick = {
-        state.ifHasDateAndKey { date, key ->
-          onAction(ApodSingleAction.LoadNext(key, date))
+        state.ifHasDate { date ->
+          onAction(ApodSingleAction.LoadNext(date))
         }
       },
     )

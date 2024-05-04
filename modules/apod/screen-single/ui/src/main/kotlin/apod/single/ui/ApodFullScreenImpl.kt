@@ -22,6 +22,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import apod.core.model.ApodItem
 import apod.core.ui.BackgroundSurface
@@ -32,6 +33,7 @@ import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.core.ui.shimmer
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 
 @Composable
 internal fun ApodFullScreenImpl(
@@ -110,7 +112,10 @@ private fun ApodFullScreenContent(
 
     AsyncImage(
       modifier = imageModifier,
-      model = item.hdUrl,
+      model = ImageRequest.Builder(LocalContext.current)
+        .data(item.hdUrl)
+        .crossfade(durationMillis = 200)
+        .build(),
       contentDescription = item.title,
       contentScale = ContentScale.Fit,
       alignment = Alignment.Center,

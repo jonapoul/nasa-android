@@ -48,7 +48,7 @@ interface ApodApi {
     @Query("api_key") apiKey: ApiKey,
     @Query("count") count: Int = 1,
     @Query("thumbs") thumbs: Boolean = true,
-  ): List<ApodResponseModel>
+  ): Response<List<ApodResponseModel>>
 
   @GET(ENDPOINT)
   suspend fun getRange(
@@ -56,7 +56,7 @@ interface ApodApi {
     @Query("start_date") startDate: LocalDate,
     @Query("end_date") endDate: LocalDate,
     @Query("thumbs") thumbs: Boolean = true,
-  ): List<ApodResponseModel>
+  ): Response<List<ApodResponseModel>>
 
   private companion object {
     const val ENDPOINT = "/planetary/apod"

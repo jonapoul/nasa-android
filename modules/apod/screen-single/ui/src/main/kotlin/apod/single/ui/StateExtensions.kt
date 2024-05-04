@@ -6,12 +6,24 @@ import apod.single.vm.ScreenState
 import kotlinx.datetime.LocalDate
 
 @Stable
-internal fun ScreenState.ifHasDateAndKey(block: (LocalDate, ApiKey) -> Unit) {
-  when (this) {
-    ScreenState.Inactive -> return
-    is ScreenState.NoApiKey -> return
-    is ScreenState.Failed -> block(date ?: return, key)
-    is ScreenState.Loading -> block(date ?: return, key)
-    is ScreenState.Success -> block(item.date, key)
-  }
+internal fun ScreenState.ifHasDate(block: (LocalDate) -> Unit) {
+  val date = dateOrNull() ?: return
+  block(date)
+}
+
+@Stable
+internal fun ScreenState.dateOrNull(): LocalDate? = when (this) {
+  ScreenState.Inactive, is ScreenState.NoApiKey -> null
+  is ScreenState.Failed -> date
+  is ScreenState.Loading -> date
+  is ScreenState.Success -> item.date
+}
+
+@Stable
+internal fun ScreenState.apiKeyOrNull(): ApiKey? = when (this) {
+  ScreenState.Inactive -> null
+  is ScreenState.NoApiKey -> null
+  is ScreenState.Failed -> key
+  is ScreenState.Loading -> key
+  is ScreenState.Success -> key
 }

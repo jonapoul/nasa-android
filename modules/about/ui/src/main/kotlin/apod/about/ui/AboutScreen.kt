@@ -12,10 +12,10 @@ import apod.about.vm.AboutAction
 import apod.about.vm.AboutViewModel
 import apod.about.vm.CheckUpdatesState
 import apod.core.ui.color.LocalTheme
+import apod.core.ui.getViewModel
 import apod.navigation.NavScreens
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.hilt.getViewModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 

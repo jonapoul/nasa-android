@@ -12,7 +12,8 @@ sealed interface ApodSingleAction {
   data object RegisterForApiKey : ApodSingleAction
   data class ShowImageFullscreen(val item: ApodItem) : ApodSingleAction
   data class ShowDescriptionDialog(val item: ApodItem) : ApodSingleAction
-  data class LoadPrevious(val key: ApiKey, val current: LocalDate) : ApodSingleAction
-  data class LoadNext(val key: ApiKey, val current: LocalDate) : ApodSingleAction
+  data class LoadPrevious(val current: LocalDate) : ApodSingleAction
+  data class LoadNext(val current: LocalDate) : ApodSingleAction
+  data class LoadRandom(val key: ApiKey) : ApodSingleAction
   data class RetryLoad(val key: ApiKey, val date: LocalDate?) : ApodSingleAction
 }

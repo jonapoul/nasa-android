@@ -2,6 +2,7 @@
   <string name="apod_single_toolbar_back">Back</string>
   <string name="apod_single_toolbar_title">APOD</string>
   <string name="apod_single_toolbar_menu">Menu</string>
+  <string name="apod_single_toolbar_random">Load Random</string>
   <string name="apod_single_menu_settings">Settings</string>
   <string name="apod_single_menu_about">About</string>
 

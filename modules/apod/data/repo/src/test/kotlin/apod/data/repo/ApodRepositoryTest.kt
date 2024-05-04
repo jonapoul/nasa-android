@@ -57,7 +57,7 @@ class ApodRepositoryTest {
   }
 
   @Test
-  fun `Handle valid response and store in database`() = runTest {
+  fun `Fetch today and store in database`() = runTest {
     // Given a valid response is returned from the server
     webServerRule.enqueue(
       code = 200,
@@ -68,7 +68,7 @@ class ApodRepositoryTest {
     assertNull(dao.get(DATE))
 
     // When we query for the latest from the API
-    val result = repository.loadApodItem(API_KEY, date = null)
+    val result = repository.loadToday(API_KEY)
 
     // Then the item is parsed and returned
     assertEquals(
@@ -94,7 +94,7 @@ class ApodRepositoryTest {
     dao.insert(entity)
 
     // When
-    val result = repository.loadApodItem(API_KEY, DATE)
+    val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then the item is returned
     assertEquals(expected = LoadResult.Success(ITEM), actual = result)
@@ -113,7 +113,7 @@ class ApodRepositoryTest {
 
     // When we query the API
     val invalidDate = LocalDate.parse("1994-01-01")
-    val result = repository.loadApodItem(API_KEY, invalidDate)
+    val result = repository.loadSpecific(API_KEY, invalidDate)
 
     // Then a failure is returned
     assertIs<LoadResult.Failure.OutOfRange>(result)
@@ -131,7 +131,7 @@ class ApodRepositoryTest {
     val dodgyKey = ApiKey(value = "this is not a valid key")
 
     // When we query the API
-    val result = repository.loadApodItem(dodgyKey, DATE)
+    val result = repository.loadSpecific(dodgyKey, DATE)
 
     // Then a failure is returned
     assertIs<LoadResult.Failure.InvalidAuth>(result)
@@ -143,7 +143,7 @@ class ApodRepositoryTest {
     webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "invalid-response-format.json"))
 
     // When we query the API
-    val result = repository.loadApodItem(API_KEY, DATE)
+    val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
     assertIs<LoadResult.Failure.Json>(result)
@@ -155,7 +155,7 @@ class ApodRepositoryTest {
     webServerRule.enqueue(code = 404, body = readJsonFromResource(name = "nonexistent-date.json"))
 
     // When we query the API
-    val result = repository.loadApodItem(API_KEY, DATE)
+    val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
     assertEquals(expected = LoadResult.Failure.NoApod(DATE), actual = result)
@@ -167,7 +167,7 @@ class ApodRepositoryTest {
     webServerRule.server.shutdown()
 
     // When we query the API
-    val result = repository.loadApodItem(API_KEY, DATE)
+    val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
     assertEquals(expected = LoadResult.Failure.Network, actual = result)
@@ -179,13 +179,39 @@ class ApodRepositoryTest {
     webServerRule.enqueue(code = 405, body = readJsonFromResource(name = "other-http.json"))
 
     // When we query the API
-    val result = repository.loadApodItem(API_KEY, DATE)
+    val result = repository.loadSpecific(API_KEY, DATE)
 
     // Then a failure is returned
     assertEquals(
       expected = LoadResult.Failure.OtherHttp(code = 405, message = "Some other problem"),
       actual = result,
     )
+  }
+
+  @Test
+  fun `Fetch random item`() = runTest {
+    // Given the server returns a successful random response
+    webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "valid-random.json"))
+
+    // When we query the API
+    val result = repository.loadRandom(API_KEY)
+
+    // Then a success is returned
+    val date = LocalDate.parse("2006-04-05")
+    val randomItem = ApodItem(
+      date = date,
+      title = "Slightly Beneath Saturn's Ring Plane",
+      explanation = "Shortened explanation for easier testing",
+      mediaType = ApodMediaType.Image,
+      copyright = null,
+      url = "https://apod.nasa.gov/apod/image/0604/rhearings_cassini.jpg",
+      hdUrl = "https://apod.nasa.gov/apod/image/0604/rhearings_cassini_big.jpg",
+      thumbnailUrl = null,
+    )
+    assertEquals(expected = LoadResult.Success(randomItem), actual = result)
+
+    // and the database has an entry on the given date
+    assertNotNull(dao.get(date))
   }
 
   private fun readJsonFromResource(name: String): String {

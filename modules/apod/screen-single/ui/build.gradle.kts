@@ -30,6 +30,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.coil.base)
   implementation(libs.coil.compose)
   implementation(libs.coil.composeBase)
   implementation(libs.kotlinx.coroutines)

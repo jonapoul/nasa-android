@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -21,12 +22,16 @@ import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.single.res.R
 import apod.single.vm.ApodSingleAction
+import apod.single.vm.ScreenState
 
 @Composable
 internal fun ApodSingleTopBar(
+  state: ScreenState,
   theme: Theme,
   onAction: (ApodSingleAction) -> Unit,
 ) {
+  val key = state.apiKeyOrNull()
+
   TopAppBar(
     colors = theme.topAppBarColors(),
     title = {
@@ -37,6 +42,15 @@ internal fun ApodSingleTopBar(
       )
     },
     actions = {
+      if (key != null) {
+        IconButton(onClick = { onAction(ApodSingleAction.LoadRandom(key)) }) {
+          Icon(
+            imageVector = Icons.Filled.Shuffle,
+            contentDescription = stringResource(id = R.string.apod_single_toolbar_random),
+          )
+        }
+      }
+
       var showMenu by remember { mutableStateOf(false) }
 
       IconButton(onClick = { showMenu = !showMenu }) {

@@ -44,7 +44,7 @@ class ApodApplication : Application(), ImageLoaderFactory {
     apiKeyManager.set(buildKey)
 
     ScreenRegistry {
-      register<NavScreens.Home> { ApodSingleScreen(it.date) }
+      register<NavScreens.Apod> { ApodSingleScreen(it.type) }
       register<NavScreens.FullScreen> { ApodFullScreen(it.item) }
       register<NavScreens.About> { AboutScreen() }
       register<NavScreens.Licenses> { LicensesScreen() }

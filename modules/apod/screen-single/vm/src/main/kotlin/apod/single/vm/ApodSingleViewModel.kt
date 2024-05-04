@@ -1,9 +1,11 @@
 package apod.single.vm
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
+import apod.core.model.ApodLoadType
 import apod.core.model.NASA_API_URL
 import apod.core.url.UrlOpener
 import apod.data.repo.ApodRepository
@@ -18,10 +20,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
-import kotlinx.datetime.minus
-import kotlinx.datetime.plus
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -30,7 +29,17 @@ class ApodSingleViewModel @Inject internal constructor(
   private val apodRepository: ApodRepository,
   private val urlOpener: UrlOpener,
   apiKeyProvider: ApiKeyProvider,
+  private val savedState: SavedStateHandle,
 ) : ViewModel() {
+  // This handles the case where user opens random screen (which has no intrinsic date), taps the image to view in HD,
+  // then presses back. By default it would see loadType as random and load another random image, but the user would
+  // probably want to go back to the item that was loaded previously.
+  private var mostRecentDate: LocalDate?
+    get() = savedState.get<String>("mostRecentDate")?.let(LocalDate::parse)
+    set(value) {
+      savedState["mostRecentDate"] = value?.toString()
+    }
+
   private val mutableState = MutableStateFlow<ScreenState>(ScreenState.Inactive)
   val state: StateFlow<ScreenState> = mutableState.asStateFlow()
 
@@ -40,37 +49,60 @@ class ApodSingleViewModel @Inject internal constructor(
     .onEach { if (it == null) mutableState.update { ScreenState.NoApiKey(currentDate()) } }
     .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = null)
 
-  fun load(key: ApiKey, date: LocalDate?) {
-    Timber.d("load $date")
-    mutableState.update { ScreenState.Loading(date, key) }
+  fun registerForApiKey() {
+    urlOpener.openUrl(NASA_API_URL)
+  }
 
-    viewModelScope.launch {
-      when (val result = apodRepository.loadApodItem(key, date)) {
-        is LoadResult.Failure ->
-          mutableState.update { ScreenState.Failed(date, key, result.getReason()) }
+  fun load(key: ApiKey, type: ApodLoadType) {
+    val mostRecent = mostRecentDate
+    val typeToLoad = if (mostRecent == null) type else ApodLoadType.Specific(mostRecent)
+    Timber.d("load $type mostRecent=$mostRecent typeToLoad=$typeToLoad")
 
-        is LoadResult.Success ->
-          mutableState.update { ScreenState.Success(result.item, key) }
+    when (typeToLoad) {
+      ApodLoadType.Random -> {
+        mutableState.update { ScreenState.Loading(date = null, key) }
+        loadData(key, date = null) { apodRepository.loadRandom(key) }
+      }
+
+      ApodLoadType.Today -> {
+        mutableState.update { ScreenState.Loading(date = null, key) }
+        loadData(key, date = null) { apodRepository.loadToday(key) }
+      }
+
+      is ApodLoadType.Specific -> {
+        mostRecentDate = typeToLoad.date
+        mutableState.update { ScreenState.Loading(typeToLoad.date, key) }
+        loadData(key, typeToLoad.date) { apodRepository.loadSpecific(key, typeToLoad.date) }
       }
     }
   }
 
-  fun loadNext(key: ApiKey) {
-    val currentDate = currentDate()
-    if (currentDate != null) {
-      load(key, date = currentDate + ONE_DAY)
-    }
-  }
+  private fun loadData(
+    key: ApiKey,
+    date: LocalDate?,
+    getResult: suspend () -> LoadResult,
+  ) {
+    viewModelScope.launch {
+      when (val result = getResult()) {
+        is LoadResult.Success -> {
+          mutableState.update { ScreenState.Success(result.item, key) }
+          mostRecentDate = result.item.date
+        }
 
-  fun loadPrevious(key: ApiKey) {
-    val currentDate = currentDate()
-    if (currentDate != null) {
-      load(key, date = currentDate - ONE_DAY)
+        is LoadResult.Failure -> {
+          val reason = when (result) {
+            is LoadResult.Failure.OutOfRange -> result.message
+            is LoadResult.Failure.NoApod -> "No APOD exists for $date"
+            is LoadResult.Failure.InvalidAuth -> "Invalid API key - $key"
+            is LoadResult.Failure.OtherHttp -> "HTTP code ${result.code} - ${result.message}"
+            is LoadResult.Failure.Json -> "Failed parsing response from server"
+            LoadResult.Failure.Network -> "Network problem: does your phone have an internet connection?"
+            is LoadResult.Failure.Other -> "Unexpected problem: ${result.message}"
+          }
+          mutableState.update { ScreenState.Failed(date, key, reason) }
+        }
+      }
     }
-  }
-
-  fun registerForApiKey() {
-    urlOpener.openUrl(NASA_API_URL)
   }
 
   private fun currentDate(): LocalDate? = when (val current = mutableState.value) {
@@ -79,19 +111,5 @@ class ApodSingleViewModel @Inject internal constructor(
     is ScreenState.Failed -> current.date
     is ScreenState.Loading -> current.date
     is ScreenState.Success -> current.item.date
-  }
-
-  private fun LoadResult.Failure.getReason(): String = when (this) {
-    is LoadResult.Failure.OutOfRange -> message
-    is LoadResult.Failure.NoApod -> "No APOD exists for $date"
-    is LoadResult.Failure.InvalidAuth -> "Invalid API key - $key"
-    is LoadResult.Failure.OtherHttp -> "HTTP code $code - $message"
-    is LoadResult.Failure.Json -> "Failed parsing response from server"
-    LoadResult.Failure.Network -> "Network problem: does your phone have an internet connection?"
-    is LoadResult.Failure.Other -> "Unexpected problem: $message"
-  }
-
-  private companion object {
-    val ONE_DAY = DatePeriod(days = 1)
   }
 }

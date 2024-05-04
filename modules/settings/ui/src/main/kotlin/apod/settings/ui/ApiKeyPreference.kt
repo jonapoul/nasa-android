@@ -152,7 +152,7 @@ private fun ApiKeyPreferenceDialogContent(
   theme: Theme = LocalTheme.current,
   preferences: SharedPreferences = rememberSharedPreferences(),
 ) {
-  var mutableValue by remember { mutableStateOf(currentValue ?: "") }
+  var mutableValue by remember { mutableStateOf(currentValue.orEmpty()) }
   val focusRequester = remember { FocusRequester() }
   val keyboard = LocalSoftwareKeyboardController.current
 

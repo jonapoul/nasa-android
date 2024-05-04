@@ -1,6 +1,5 @@
 - clear cache from settings, with confirmation
 - zoom/pan buttons on display screen?
-- random button
 - select specific date
   - scroll calendar, or manual entry
 - grid screen, current month
