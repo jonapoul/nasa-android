@@ -90,4 +90,7 @@ internal class LightTheme : Theme {
   override val preferenceForegroundDisabled = ColorPalette.grey400
   override val preferenceSubtitle = ColorPalette.grey400
   override val preferenceSubtitleDisabled = ColorPalette.grey300
+
+  override val progressBarBackground = ColorPalette.grey200
+  override val progressBarForeground = pageTextPrimary
 }

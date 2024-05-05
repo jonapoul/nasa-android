@@ -95,4 +95,7 @@ sealed interface Theme {
   val preferenceForegroundDisabled: Color
   val preferenceSubtitle: Color
   val preferenceSubtitleDisabled: Color
+
+  val progressBarBackground: Color
+  val progressBarForeground: Color
 }

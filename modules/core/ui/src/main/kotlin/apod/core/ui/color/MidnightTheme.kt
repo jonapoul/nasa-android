@@ -90,4 +90,7 @@ internal class MidnightTheme : Theme {
   override val preferenceForegroundDisabled = ColorPalette.grey400
   override val preferenceSubtitle = ColorPalette.grey400
   override val preferenceSubtitleDisabled = ColorPalette.grey600
+
+  override val progressBarBackground = ColorPalette.grey600
+  override val progressBarForeground = pageTextPrimary
 }

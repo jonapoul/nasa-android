@@ -4,6 +4,8 @@ import alakazam.android.core.IBuildConfig
 import android.app.Application
 import apod.about.ui.AboutScreen
 import apod.android.BuildConfig
+import apod.core.http.DownloadProgressInterceptor
+import apod.core.http.DownloadProgressStateHolder
 import apod.core.http.buildOkHttp
 import apod.core.model.ApiKey
 import apod.core.model.IMAGE_CACHE_DIR
@@ -32,6 +34,9 @@ class ApodApplication : Application(), ImageLoaderFactory {
   @Inject
   lateinit var apiKeyManager: ApiKeyManager
 
+  @Inject
+  lateinit var downloadProgressStateHolder: DownloadProgressStateHolder
+
   override fun onCreate() {
     super.onCreate()
     Timber.plant(ApodTree())
@@ -40,11 +45,13 @@ class ApodApplication : Application(), ImageLoaderFactory {
     Timber.d("name=${bc.versionName} code=${bc.versionCode} time=${bc.buildTime}")
     Timber.d("manufacturer=${bc.manufacturer} model=${bc.model} os=${bc.os} platform=${bc.platform}")
 
+    Timber.v("Setting API key...")
     // API_KEY can be null, based on gradle script logic
     @Suppress("UNNECESSARY_SAFE_CALL")
     val buildKey = BuildConfig.API_KEY?.let(::ApiKey)
     apiKeyManager.set(buildKey)
 
+    Timber.v("Registering screens...")
     ScreenRegistry {
       register<NavScreens.Apod> { ApodSingleScreen(it.config) }
       register<NavScreens.Grid> { ApodGridScreen(it.config) }
@@ -61,7 +68,8 @@ class ApodApplication : Application(), ImageLoaderFactory {
   }
 
   override fun newImageLoader(): ImageLoader {
-    val client = buildOkHttp { Timber.tag("COIL").v(it) }
+    val progressInterceptor = DownloadProgressInterceptor(downloadProgressStateHolder)
+    val client = buildOkHttp(progressInterceptor) { Timber.tag("COIL").v(it) }
     return ImageLoader.Builder(this)
       .memoryCache {
         MemoryCache.Builder(this)

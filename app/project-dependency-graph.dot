@@ -81,6 +81,7 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-single:ui" -> ":modules:core:ui"
 ":modules:apod:screen-single:ui" -> ":modules:nav:screens"
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo"
+":modules:apod:screen-single:vm" -> ":modules:core:http"
 ":modules:apod:screen-single:vm" -> ":modules:core:url"
 ":modules:apod:screen-single:vm" -> ":modules:nav:args"
 ":modules:licenses:di" -> ":modules:licenses:data"

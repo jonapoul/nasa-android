@@ -11,6 +11,7 @@ dependencies {
   api(projects.modules.apod.data.db)
   api(libs.kotlinx.coroutines)
   implementation(libs.alakazam.kotlin.core)
+  implementation(libs.androidx.sqlite)
   implementation(libs.javaxInject)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.core)

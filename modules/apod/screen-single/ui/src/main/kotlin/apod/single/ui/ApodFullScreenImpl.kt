@@ -1,13 +1,17 @@
 package apod.single.ui
 
+import alakazam.android.ui.compose.VerticalSpacer
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +28,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import apod.core.http.DOWNLOAD_IDENTIFIER_HEADER
 import apod.core.model.ApodItem
 import apod.core.ui.BackgroundSurface
 import apod.core.ui.ShimmerBlockShape
@@ -38,6 +43,7 @@ import coil.request.ImageRequest
 @Composable
 internal fun ApodFullScreenImpl(
   item: ApodItem,
+  progress: Float,
   onClickedBack: () -> Unit,
 ) {
   val theme = LocalTheme.current
@@ -48,6 +54,7 @@ internal fun ApodFullScreenImpl(
       ApodFullScreenContent(
         modifier = Modifier.padding(innerPadding),
         item = item,
+        progress = progress,
         theme = theme,
       )
     }
@@ -60,6 +67,7 @@ internal fun ApodFullScreenImpl(
 @Composable
 private fun ApodFullScreenContent(
   item: ApodItem,
+  progress: Float,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -87,13 +95,29 @@ private fun ApodFullScreenContent(
 
     var isLoading by remember { mutableStateOf(true) }
     if (isLoading) {
-      Box(
+      Column(
         modifier = Modifier
           .fillMaxSize()
-          .padding(32.dp)
-          .clip(ShimmerBlockShape)
-          .shimmer(theme, durationMillis = 3000),
-      )
+          .padding(32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+        Box(
+          modifier = Modifier
+            .fillMaxWidth()
+            .weight(1f)
+            .clip(ShimmerBlockShape)
+            .shimmer(theme, durationMillis = 3000),
+        )
+
+        VerticalSpacer(32.dp)
+
+        LinearProgressIndicator(
+          modifier = Modifier.fillMaxWidth(),
+          color = theme.progressBarForeground,
+          trackColor = theme.progressBarBackground,
+          progress = { progress },
+        )
+      }
     }
 
     val fallback = rememberVectorPainter(Icons.Filled.Warning)
@@ -110,11 +134,13 @@ private fun ApodFullScreenContent(
         .transformable(state)
     }
 
+    // Adding a custom header to the request, so our DownloadProgressInterceptor can identify it and track progress
     AsyncImage(
       modifier = imageModifier,
       model = ImageRequest.Builder(LocalContext.current)
         .data(item.hdUrl)
         .crossfade(durationMillis = 200)
+        .addHeader(DOWNLOAD_IDENTIFIER_HEADER, item.date.toString())
         .build(),
       contentDescription = item.title,
       contentScale = ContentScale.Fit,
@@ -135,6 +161,7 @@ private const val MAX_ZOOM = 10f
 private fun PreviewSuccess() = PreviewScreen {
   ApodFullScreenImpl(
     item = EXAMPLE_ITEM,
+    progress = 0.69f,
     onClickedBack = {},
   )
 }

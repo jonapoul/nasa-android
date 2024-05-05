@@ -90,4 +90,7 @@ internal class DarkTheme : Theme {
   override val preferenceForegroundDisabled = ColorPalette.grey300
   override val preferenceSubtitle = ColorPalette.grey400
   override val preferenceSubtitleDisabled = ColorPalette.grey500
+
+  override val progressBarBackground = ColorPalette.grey500
+  override val progressBarForeground = pageTextPrimary
 }

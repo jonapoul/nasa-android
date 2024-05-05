@@ -11,8 +11,8 @@
   - alakazam, other libs
 - LoadResult to string with resources
 - open apod item in browser
-- https://composablehorizons.github.io/compose-menu/
 - switch between grid and list view
   - save setting in prefs
-- progress indicator on HD images
-- display rate limits, error dialog when run out
+- display API rate limits somewhere
+  - error dialog when it runs out
+- daily notifications when APOD is released?
