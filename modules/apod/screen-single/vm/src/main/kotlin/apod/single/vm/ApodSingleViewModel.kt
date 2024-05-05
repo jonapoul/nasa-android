@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
 import apod.core.model.NASA_API_URL
-import apod.core.model.SingleScreenConfig
 import apod.core.url.UrlOpener
 import apod.data.repo.FailureResult
 import apod.data.repo.SingleApodRepository
 import apod.data.repo.SingleLoadResult
 import apod.data.repo.reason
+import apod.nav.ScreenConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -58,22 +58,22 @@ class ApodSingleViewModel @Inject internal constructor(
     urlOpener.openUrl(url)
   }
 
-  fun load(key: ApiKey, config: SingleScreenConfig) {
+  fun load(key: ApiKey, config: ScreenConfig) {
     val mostRecent = mostRecentDate
-    val configToLoad = if (mostRecent == null) config else SingleScreenConfig.Specific(mostRecent)
+    val configToLoad = if (mostRecent == null) config else ScreenConfig.Specific(mostRecent)
 
     when (configToLoad) {
-      SingleScreenConfig.Random -> {
+      ScreenConfig.Random -> {
         mutableState.update { ScreenState.Loading(date = null, key) }
         loadData(key, date = null) { repository.loadRandom(key) }
       }
 
-      SingleScreenConfig.Today -> {
+      ScreenConfig.Today -> {
         mutableState.update { ScreenState.Loading(date = null, key) }
         loadData(key, date = null) { repository.loadToday(key) }
       }
 
-      is SingleScreenConfig.Specific -> {
+      is ScreenConfig.Specific -> {
         mostRecentDate = configToLoad.date
         mutableState.update { ScreenState.Loading(configToLoad.date, key) }
         loadData(key, configToLoad.date) { repository.loadSpecific(key, configToLoad.date) }

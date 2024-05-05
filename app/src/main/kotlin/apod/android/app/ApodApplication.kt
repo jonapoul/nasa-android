@@ -8,7 +8,7 @@ import apod.core.http.buildOkHttp
 import apod.core.model.ApiKey
 import apod.grid.ui.ApodGridScreen
 import apod.licenses.ui.LicensesScreen
-import apod.navigation.NavScreens
+import apod.nav.NavScreens
 import apod.settings.ui.SettingsScreen
 import apod.single.ui.ApodFullScreen
 import apod.single.ui.ApodSingleScreen

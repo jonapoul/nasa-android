@@ -5,13 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
-import apod.core.model.GridScreenConfig
 import apod.core.model.NASA_API_URL
 import apod.core.url.UrlOpener
 import apod.data.repo.FailureResult
 import apod.data.repo.MultipleApodRepository
 import apod.data.repo.MultipleLoadResult
 import apod.data.repo.reason
+import apod.nav.ScreenConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,22 +52,22 @@ class ApodGridViewModel @Inject internal constructor(
     urlOpener.openUrl(NASA_API_URL)
   }
 
-  fun load(key: ApiKey, config: GridScreenConfig) {
+  fun load(key: ApiKey, config: ScreenConfig) {
     val mostRecent = mostRecentDate
-    val configToLoad = if (mostRecent == null) config else GridScreenConfig.Specific(mostRecent)
+    val configToLoad = if (mostRecent == null) config else ScreenConfig.Specific(mostRecent)
 
     when (configToLoad) {
-      GridScreenConfig.Random -> {
+      ScreenConfig.Random -> {
         mutableState.update { GridScreenState.Loading(date = null, key) }
         loadData(key, date = null) { repository.loadRandomMonth(key) }
       }
 
-      GridScreenConfig.ThisMonth -> {
+      ScreenConfig.Today -> {
         mutableState.update { GridScreenState.Loading(date = null, key) }
         loadData(key, date = null) { repository.loadThisMonth(key) }
       }
 
-      is GridScreenConfig.Specific -> {
+      is ScreenConfig.Specific -> {
         mostRecentDate = configToLoad.date
         mutableState.update { GridScreenState.Loading(configToLoad.date, key) }
         loadData(key, configToLoad.date) { repository.loadSpecificMonth(key, configToLoad.date) }

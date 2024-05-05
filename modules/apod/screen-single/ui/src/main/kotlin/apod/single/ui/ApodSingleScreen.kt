@@ -9,10 +9,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import apod.core.model.ApodItem
-import apod.core.model.GridScreenConfig
-import apod.core.model.SingleScreenConfig
 import apod.core.ui.getViewModel
-import apod.navigation.NavScreens
+import apod.nav.NavScreens
+import apod.nav.ScreenConfig
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ApodSingleViewModel
 import cafe.adriel.voyager.core.registry.rememberScreen
@@ -25,7 +24,7 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
 data class ApodSingleScreen(
-  val config: SingleScreenConfig,
+  val config: ScreenConfig,
 ) : Screen {
   @Suppress("CyclomaticComplexMethod")
   @Composable
@@ -64,7 +63,7 @@ data class ApodSingleScreen(
     var loadSpecificDate by remember { mutableStateOf<LocalDate?>(null) }
     val immutableSpecificDate = loadSpecificDate
     if (immutableSpecificDate != null) {
-      val specific = SingleScreenConfig.Specific(immutableSpecificDate)
+      val specific = ScreenConfig.Specific(immutableSpecificDate)
       val screen = rememberScreen(NavScreens.Apod(specific))
       navigator.replace(screen)
       loadSpecificDate = null
@@ -73,7 +72,7 @@ data class ApodSingleScreen(
     var gridDate by remember { mutableStateOf<LocalDate?>(null) }
     val immutableGridDate = gridDate
     if (immutableGridDate != null) {
-      val specific = GridScreenConfig.Specific(immutableGridDate)
+      val specific = ScreenConfig.Specific(immutableGridDate)
       val screen = rememberScreen(NavScreens.Grid(specific))
       navigator.push(screen)
       gridDate = null
@@ -81,7 +80,7 @@ data class ApodSingleScreen(
 
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.Apod(SingleScreenConfig.Random))
+      val screen = rememberScreen(NavScreens.Apod(ScreenConfig.Random))
       navigator.replace(screen)
       loadRandom = false
     }

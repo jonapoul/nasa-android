@@ -57,7 +57,8 @@ include(":modules:licenses:res")
 include(":modules:licenses:ui")
 include(":modules:licenses:vm")
 
-include(":modules:navigation")
+include(":modules:nav:args")
+include(":modules:nav:screens")
 
 include(":modules:settings:res")
 include(":modules:settings:ui")

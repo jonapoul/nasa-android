@@ -8,11 +8,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import apod.core.model.GridScreenConfig
 import apod.core.ui.getViewModel
 import apod.grid.vm.ApodGridAction
 import apod.grid.vm.ApodGridViewModel
-import apod.navigation.NavScreens
+import apod.nav.NavScreens
+import apod.nav.ScreenConfig
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -23,7 +23,7 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 
 data class ApodGridScreen(
-  val config: GridScreenConfig,
+  val config: ScreenConfig,
 ) : Screen {
   @Suppress("CyclomaticComplexMethod")
   @Composable
@@ -42,15 +42,24 @@ data class ApodGridScreen(
     var loadSpecificDate by remember { mutableStateOf<LocalDate?>(null) }
     val immutableSpecificDate = loadSpecificDate
     if (immutableSpecificDate != null) {
-      val config = GridScreenConfig.Specific(immutableSpecificDate)
+      val config = ScreenConfig.Specific(immutableSpecificDate)
       val screen = rememberScreen(NavScreens.Grid(config))
       navigator.replace(screen)
       loadSpecificDate = null
     }
 
+    var loadItemDate by remember { mutableStateOf<LocalDate?>(null) }
+    val immutableItemDate = loadItemDate
+    if (immutableItemDate != null) {
+      val config = ScreenConfig.Specific(immutableItemDate)
+      val screen = rememberScreen(NavScreens.Apod(config))
+      navigator.push(screen)
+      loadItemDate = null
+    }
+
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.Grid(GridScreenConfig.Random))
+      val screen = rememberScreen(NavScreens.Grid(ScreenConfig.Random))
       navigator.replace(screen)
       loadRandom = false
     }
@@ -68,7 +77,7 @@ data class ApodGridScreen(
       onAction = { action ->
         when (action) {
           is ApodGridAction.NavToItem -> {
-            loadSpecificDate = action.item.date
+            loadItemDate = action.item.date
           }
 
           is ApodGridAction.RetryLoad -> loadCounter++

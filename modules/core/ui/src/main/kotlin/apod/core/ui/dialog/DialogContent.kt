@@ -24,13 +24,13 @@ import apod.core.ui.color.Theme
 
 @Composable
 fun DialogContent(
-    title: String?,
-    content: @Composable ColumnScope.() -> Unit,
-    buttons: (@Composable RowScope.() -> Unit)?,
-    modifier: Modifier = Modifier,
-    icon: ImageVector? = null,
-    theme: Theme = LocalTheme.current,
-    titleColor: Color = theme.pageTextPrimary,
+  title: String?,
+  content: @Composable ColumnScope.() -> Unit,
+  buttons: (@Composable RowScope.() -> Unit)?,
+  modifier: Modifier = Modifier,
+  icon: ImageVector? = null,
+  theme: Theme = LocalTheme.current,
+  titleColor: Color = theme.pageTextPrimary,
 ) {
   Column(
     modifier = modifier
