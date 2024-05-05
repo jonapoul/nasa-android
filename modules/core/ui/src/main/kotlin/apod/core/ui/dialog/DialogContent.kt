@@ -1,12 +1,14 @@
 package apod.core.ui.dialog
 
 import alakazam.android.ui.compose.HorizontalSpacer
+import alakazam.android.ui.compose.VerticalSpacer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Icon
@@ -34,7 +36,7 @@ fun DialogContent(
 ) {
   Column(
     modifier = modifier
-      .wrapContentWidth()
+      .defaultMinSize(minWidth = 300.dp)
       .background(theme.dialogBackground)
       .padding(12.dp),
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,9 +65,13 @@ fun DialogContent(
       }
     }
 
+    VerticalSpacer(4.dp)
+
     CompositionLocalProvider(LocalContentColor provides theme.pageText) {
       content()
     }
+
+    VerticalSpacer(4.dp)
 
     buttons?.let {
       CompositionLocalProvider(LocalContentColor provides theme.pageTextPrimary) {
