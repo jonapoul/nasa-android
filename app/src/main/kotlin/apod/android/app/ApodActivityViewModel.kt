@@ -3,7 +3,6 @@ package apod.android.app
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.model.ThemeType
-import apod.core.theme.ThemePreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel

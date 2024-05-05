@@ -47,7 +47,6 @@ include(":modules:apod:screen-grid:vm")
 include(":modules:core:http")
 include(":modules:core:res")
 include(":modules:core:model")
-include(":modules:core:theme")
 include(":modules:core:ui")
 include(":modules:core:url")
 

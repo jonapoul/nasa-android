@@ -139,7 +139,6 @@ dependencies {
   implementation(projects.modules.apod.data.di)
   implementation(projects.modules.apod.screenGrid.ui)
   implementation(projects.modules.apod.screenSingle.ui)
-  implementation(projects.modules.core.theme)
   implementation(projects.modules.licenses.di)
   implementation(projects.modules.licenses.ui)
   implementation(projects.modules.settings.ui)

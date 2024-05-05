@@ -25,7 +25,6 @@ node ["style"="filled"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-single:vm" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:apod:screen-single:res" ["fillcolor"="#55FFFF","shape"="box"]
-":modules:core:theme" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:licenses:di" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
@@ -59,7 +58,6 @@ graph ["label"="Legend","fontsize"="15"]
 ":app" -> ":modules:apod:data:di" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-grid:ui" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-single:ui" ["style"="dotted"]
-":app" -> ":modules:core:theme" ["style"="dotted"]
 ":app" -> ":modules:licenses:di" ["style"="dotted"]
 ":app" -> ":modules:licenses:ui" ["style"="dotted"]
 ":app" -> ":modules:settings:ui" ["style"="dotted"]
@@ -96,7 +94,6 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo"
 ":modules:apod:screen-single:vm" -> ":modules:core:url"
 ":modules:apod:screen-single:vm" -> ":modules:nav:args"
-":modules:core:theme" -> ":modules:core:model"
 ":modules:licenses:di" -> ":modules:licenses:data"
 ":modules:licenses:ui" -> ":modules:core:ui"
 ":modules:licenses:ui" -> ":modules:licenses:vm"
