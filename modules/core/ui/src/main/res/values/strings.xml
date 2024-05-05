@@ -1,6 +1,8 @@
 <resources>
   <string name="app_name">APOD Android</string>
 
+  <string name="nav_back">Back</string>
+
   <string name="failed_title">Failed loading!</string>
   <string name="failed_retry">Retry</string>
 

@@ -1,7 +1,7 @@
 package apod.settings.ui
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -25,7 +25,7 @@ internal fun SettingsTopBar(
     navigationIcon = {
       IconButton(onClick = { onAction(SettingsAction.NavBack) }) {
         Icon(
-          imageVector = Icons.Filled.Close,
+          imageVector = Icons.AutoMirrored.Filled.ArrowBack,
           contentDescription = stringResource(id = R.string.settings_toolbar_back),
         )
       }

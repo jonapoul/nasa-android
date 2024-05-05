@@ -30,11 +30,12 @@ import apod.grid.vm.GridScreenState
 @Composable
 internal fun ApodGridScreenImpl(
   state: GridScreenState,
+  showBackButton: Boolean,
   onAction: (ApodGridAction) -> Unit,
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { ApodGridTopBar(onAction, theme) },
+    topBar = { ApodGridTopBar(showBackButton, onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       ApodGridContent(
@@ -142,6 +143,7 @@ private fun GridContent(
 private fun PreviewSuccess() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
+    showBackButton = true,
     onAction = {},
   )
 }
@@ -155,6 +157,7 @@ private fun PreviewFailure() = PreviewScreen {
       EXAMPLE_KEY,
       message = "Something broke! Here's some more rubbish too for preview",
     ),
+    showBackButton = true,
     onAction = {},
   )
 }
@@ -164,6 +167,7 @@ private fun PreviewFailure() = PreviewScreen {
 private fun PreviewLoading() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    showBackButton = true,
     onAction = {},
   )
 }
@@ -173,6 +177,7 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewNoKey() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.NoApiKey,
+    showBackButton = true,
     onAction = {},
   )
 }

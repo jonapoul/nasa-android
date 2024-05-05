@@ -74,6 +74,7 @@ data class ApodGridScreen(
 
     ApodGridScreenImpl(
       state = state,
+      showBackButton = navigator.size > 1,
       onAction = { action ->
         when (action) {
           is ApodGridAction.NavToItem -> {
@@ -97,6 +98,8 @@ data class ApodGridScreen(
           ApodGridAction.ShowCalendar -> {
             showCalendar = true
           }
+
+          ApodGridAction.NavBack -> navigator.pop()
 
           ApodGridAction.NavSettings -> navigator.push(settingsScreen)
 

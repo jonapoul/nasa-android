@@ -7,6 +7,7 @@ import kotlinx.datetime.LocalDate
 
 @Immutable
 sealed interface ApodSingleAction {
+  data object NavBack : ApodSingleAction
   data object NavAbout : ApodSingleAction
   data object NavSettings : ApodSingleAction
   data class NavGrid(val current: LocalDate) : ApodSingleAction

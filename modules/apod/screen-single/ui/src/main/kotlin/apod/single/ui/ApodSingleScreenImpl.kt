@@ -22,11 +22,12 @@ import apod.single.vm.ScreenState
 @Composable
 internal fun ApodSingleScreenImpl(
   state: ScreenState,
+  showBackButton: Boolean,
   onAction: (ApodSingleAction) -> Unit,
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { ApodSingleTopBar(state, onAction, theme) },
+    topBar = { ApodSingleTopBar(state, showBackButton, onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       ApodSingleContent(
@@ -88,6 +89,7 @@ private fun PreviewSuccess() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
     onAction = {},
+    showBackButton = false,
   )
 }
 
@@ -101,6 +103,7 @@ private fun PreviewFailure() = PreviewScreen {
       message = "Something broke! Here's some more rubbish too for preview",
     ),
     onAction = {},
+    showBackButton = true,
   )
 }
 
@@ -110,6 +113,7 @@ private fun PreviewLoading() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
     onAction = {},
+    showBackButton = false,
   )
 }
 
@@ -119,5 +123,6 @@ private fun PreviewNoApiKey() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.NoApiKey(EXAMPLE_DATE),
     onAction = {},
+    showBackButton = false,
   )
 }

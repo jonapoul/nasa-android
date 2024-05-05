@@ -8,6 +8,7 @@ import kotlinx.datetime.LocalDate
 @Immutable
 sealed interface ApodGridAction {
   data object RegisterForApiKey : ApodGridAction
+  data object NavBack : ApodGridAction
   data object NavSettings : ApodGridAction
   data class NavToItem(val item: ApodItem) : ApodGridAction
   data object ShowCalendar : ApodGridAction

@@ -1,6 +1,7 @@
 package apod.grid.ui
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.Icon
@@ -16,9 +17,11 @@ import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.core.ui.preview.PreviewColumn
 import apod.grid.vm.ApodGridAction
+import apod.core.ui.R as CoreR
 
 @Composable
 internal fun ApodGridTopBar(
+  showBackButton: Boolean,
   onAction: (ApodGridAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
@@ -30,6 +33,16 @@ internal fun ApodGridTopBar(
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
+    },
+    navigationIcon = {
+      if (showBackButton) {
+        IconButton(onClick = { onAction(ApodGridAction.NavBack) }) {
+          Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = stringResource(id = CoreR.string.nav_back),
+          )
+        }
+      }
     },
     actions = {
       IconButton(onClick = { onAction(ApodGridAction.ShowCalendar) }) {
@@ -53,6 +66,7 @@ internal fun ApodGridTopBar(
 private fun PreviewToolbar() = PreviewColumn {
   ApodGridTopBar(
     theme = LocalTheme.current,
+    showBackButton = true,
     onAction = {},
   )
 }

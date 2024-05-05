@@ -1,6 +1,7 @@
 package apod.single.ui
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
@@ -24,6 +25,7 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.core.ui.preview.PreviewColumn
+import apod.core.ui.R as CoreR
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
 import apod.single.vm.apiKeyOrNull
@@ -32,6 +34,7 @@ import apod.single.vm.dateOrNull
 @Composable
 internal fun ApodSingleTopBar(
   state: ScreenState,
+  showBackButton: Boolean,
   onAction: (ApodSingleAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
@@ -47,21 +50,31 @@ internal fun ApodSingleTopBar(
         overflow = TextOverflow.Ellipsis,
       )
     },
-    actions = {
-      if (key != null) {
-        IconButton(onClick = { onAction(ApodSingleAction.LoadRandom) }) {
+    navigationIcon = {
+      if (showBackButton) {
+        IconButton(onClick = { onAction(ApodSingleAction.NavBack) }) {
           Icon(
-            imageVector = Icons.Filled.Shuffle,
-            contentDescription = stringResource(id = R.string.apod_single_toolbar_random),
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = stringResource(id = CoreR.string.nav_back),
           )
         }
       }
-
+    },
+    actions = {
       if (date != null) {
         IconButton(onClick = { onAction(ApodSingleAction.NavGrid(date)) }) {
           Icon(
             imageVector = Icons.Filled.GridView,
             contentDescription = stringResource(id = R.string.apod_single_toolbar_grid),
+          )
+        }
+      }
+
+      if (key != null) {
+        IconButton(onClick = { onAction(ApodSingleAction.LoadRandom) }) {
+          Icon(
+            imageVector = Icons.Filled.Shuffle,
+            contentDescription = stringResource(id = R.string.apod_single_toolbar_random),
           )
         }
       }
@@ -101,6 +114,7 @@ internal fun ApodSingleTopBar(
 private fun PreviewSuccess() = PreviewColumn {
   ApodSingleTopBar(
     state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    showBackButton = true,
     onAction = {},
   )
 }
@@ -110,6 +124,7 @@ private fun PreviewSuccess() = PreviewColumn {
 private fun PreviewFailure() = PreviewColumn {
   ApodSingleTopBar(
     state = ScreenState.NoApiKey(EXAMPLE_DATE),
+    showBackButton = false,
     onAction = {},
   )
 }

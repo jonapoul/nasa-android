@@ -87,8 +87,10 @@ data class ApodSingleScreen(
 
     ApodSingleScreenImpl(
       state = state,
+      showBackButton = navigator.size > 1,
       onAction = { action ->
         when (action) {
+          is ApodSingleAction.NavBack -> navigator.pop()
           is ApodSingleAction.NavAbout -> navigator.push(aboutScreen)
           is ApodSingleAction.NavSettings -> navigator.push(settingsScreen)
           is ApodSingleAction.RetryLoad -> loadCounter++
