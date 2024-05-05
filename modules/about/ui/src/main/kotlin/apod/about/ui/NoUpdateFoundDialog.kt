@@ -48,7 +48,7 @@ private fun NoUpdateFoundDialogContent(
       TextButton(onClick = onDismiss) {
         Text(
           text = stringResource(id = R.string.about_no_update_ok),
-          color = theme.pageTextPositive,
+          color = theme.pageTextPrimary,
         )
       }
     },

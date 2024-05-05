@@ -98,7 +98,7 @@ private fun MonthTitle(
     ShimmeringBlock(
       modifier = modifier.height(40.dp),
       theme = theme,
-      color = { pageTextPositiveLoading },
+      color = { pageTextPrimary },
     )
   } else {
     val month = date.month.string()

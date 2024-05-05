@@ -109,8 +109,8 @@ private fun PreviewPositive() = PreviewColumn {
   ShimmeringBlock(
     modifier = Modifier
       .width(200.dp)
-      .background(theme.pageTextPositive),
-    color = { pageTextPositiveLoading },
+      .background(theme.pageBackground),
+    color = { pageTextPrimary },
   )
 }
 

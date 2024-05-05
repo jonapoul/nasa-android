@@ -48,7 +48,7 @@ internal fun ItemFooter(
         modifier = Modifier.fillMaxWidth(),
         text = stringResource(id = R.string.apod_single_copyright, copyright),
         fontWeight = FontWeight.Bold,
-        color = theme.pageTextPositive,
+        color = theme.pageTextPrimary,
       )
     }
 

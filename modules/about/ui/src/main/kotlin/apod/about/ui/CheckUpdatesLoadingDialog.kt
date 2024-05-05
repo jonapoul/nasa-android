@@ -57,7 +57,7 @@ private fun CheckUpdatesLoadingDialogContent(
         verticalAlignment = Alignment.CenterVertically,
       ) {
         CircularProgressIndicator(
-          color = theme.pageTextPositive,
+          color = theme.pageTextPrimary,
           trackColor = theme.dialogProgressWheelTrack,
         )
 
@@ -73,7 +73,7 @@ private fun CheckUpdatesLoadingDialogContent(
       TextButton(onClick = onCancel) {
         Text(
           text = stringResource(id = R.string.about_checking_updates_cancel),
-          color = theme.pageTextPositive,
+          color = theme.pageTextPrimary,
         )
       }
     },

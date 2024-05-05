@@ -51,7 +51,7 @@ internal fun LibraryItem(
       Text(
         text = library.project,
         fontWeight = FontWeight.W700,
-        color = theme.pageTextPositive,
+        color = theme.pageTextPrimary,
         fontSize = 15.sp,
       )
 

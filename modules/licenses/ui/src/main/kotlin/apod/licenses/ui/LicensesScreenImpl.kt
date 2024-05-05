@@ -82,7 +82,7 @@ private fun LoadingContent(
     contentAlignment = Alignment.Center,
   ) {
     CircularProgressIndicator(
-      color = theme.pageTextPositive,
+      color = theme.pageTextPrimary,
       trackColor = theme.dialogProgressWheelTrack,
     )
   }

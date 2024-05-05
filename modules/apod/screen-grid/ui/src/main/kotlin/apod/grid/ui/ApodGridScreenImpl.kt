@@ -102,7 +102,7 @@ private fun GridContent(
       GridScreenState.Inactive, is GridScreenState.Loading -> {
         CircularProgressIndicator(
           modifier = Modifier.wrapContentSize(),
-          color = theme.pageTextPositive,
+          color = theme.pageTextPrimary,
           trackColor = theme.dialogProgressWheelTrack,
         )
       }

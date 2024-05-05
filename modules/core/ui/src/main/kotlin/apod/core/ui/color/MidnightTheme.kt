@@ -8,9 +8,8 @@ internal class MidnightTheme : Theme {
   override val pageBackground = ColorPalette.grey900
   override val pageText = ColorPalette.grey100
   override val pageTextSubdued = ColorPalette.grey400
-  override val pageTextPositive = ColorPalette.blue200
+  override val pageTextPrimary = ColorPalette.blue200
   override val pageTextLoading = ColorPalette.grey300
-  override val pageTextPositiveLoading = ColorPalette.blue50
 
   override val cardBackground = ColorPalette.grey800
   override val cardShadow = ColorPalette.grey900

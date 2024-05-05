@@ -32,7 +32,7 @@ fun apodTypography(theme: Theme = LocalTheme.current): Typography {
     displayLarge = ApodFontFamily.style(FontWeight.W700, fontSize = 30.sp),
     displayMedium = ApodFontFamily.style(FontWeight.W600, fontSize = 25.sp),
     displaySmall = ApodFontFamily.style(FontWeight.W500, fontSize = 20.sp),
-    headlineLarge = ApodFontFamily.style(FontWeight.W700, theme.pageTextPositive, fontSize = 30.sp),
+    headlineLarge = ApodFontFamily.style(FontWeight.W700, theme.pageTextPrimary, fontSize = 30.sp),
     headlineMedium = ApodFontFamily.style(FontWeight.W600, theme.pageText, fontSize = 25.sp),
 //     headlineSmall =
 //     titleLarge =

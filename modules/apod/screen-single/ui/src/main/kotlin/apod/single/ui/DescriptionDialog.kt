@@ -62,7 +62,7 @@ private fun DescriptionDialogContent(
       TextButton(onClick = onCancel) {
         Text(
           text = stringResource(id = R.string.apod_desc_dialog_ok),
-          color = theme.pageTextPositive,
+          color = theme.pageTextPrimary,
         )
       }
     },

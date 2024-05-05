@@ -33,14 +33,14 @@ internal fun SettingsCategory(
       modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
       imageVector = icon,
       contentDescription = title,
-      tint = theme.pageTextPositive,
+      tint = theme.pageTextPrimary,
     )
 
     Text(
       modifier = Modifier.weight(1f),
       text = title,
       fontSize = 16.sp,
-      color = theme.pageTextPositive,
+      color = theme.pageTextPrimary,
     )
   }
 }

@@ -189,14 +189,14 @@ private fun ApiKeyPreferenceDialogContent(
     buttons = {
       TextButton(
         onClick = { onDismiss() },
-        content = { Text(text = stringResource(id = R.string.settings_dialog_cancel), color = theme.pageTextPositive) },
+        content = { Text(text = stringResource(id = R.string.settings_dialog_cancel), color = theme.pageTextPrimary) },
       )
       TextButton(
         onClick = {
           preferences.edit { putString(key, mutableValue) }
           onDismiss()
         },
-        content = { Text(text = stringResource(id = R.string.settings_dialog_ok), color = theme.pageTextPositive) },
+        content = { Text(text = stringResource(id = R.string.settings_dialog_ok), color = theme.pageTextPrimary) },
       )
     },
   )

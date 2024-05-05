@@ -149,7 +149,7 @@ private fun ItemContentLoading(
 ) {
   CircularProgressIndicator(
     modifier = modifier,
-    color = theme.pageTextPositive,
+    color = theme.pageTextPrimary,
     trackColor = theme.dialogProgressWheelTrack,
   )
 }

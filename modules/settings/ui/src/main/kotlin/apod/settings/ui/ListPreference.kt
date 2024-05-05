@@ -221,7 +221,7 @@ private fun ListPreferenceDialogContent(
       TextButton(onClick = onDismiss) {
         Text(
           text = stringResource(id = R.string.settings_dialog_cancel),
-          color = theme.pageTextPositive,
+          color = theme.pageTextPrimary,
         )
       }
     },

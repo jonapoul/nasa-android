@@ -58,8 +58,8 @@ fun Theme.bareButton(isPressed: Boolean) = ButtonDefaults.buttonColors(
 
 @Stable
 fun Theme.radioButton() = RadioButtonColors(
-  selectedColor = buttonPrimaryBackground,
-  unselectedColor = pageText,
+  selectedColor = pageTextPrimary,
+  unselectedColor = pageTextPrimary,
   disabledSelectedColor = buttonPrimaryDisabledBackground,
   disabledUnselectedColor = buttonRegularDisabledBackground,
 )

@@ -13,9 +13,8 @@ sealed interface Theme {
   val pageBackground: Color
   val pageText: Color
   val pageTextSubdued: Color
-  val pageTextPositive: Color
+  val pageTextPrimary: Color
   val pageTextLoading: Color
-  val pageTextPositiveLoading: Color
 
   val cardBackground: Color
   val cardShadow: Color

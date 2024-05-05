@@ -89,7 +89,7 @@ internal fun ApodGridItem(
         text = item.title,
         fontSize = 12.sp,
         lineHeight = 15.sp,
-        color = theme.pageTextPositive,
+        color = theme.pageTextPrimary,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
