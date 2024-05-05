@@ -1,14 +1,21 @@
 package apod.single.ui
 
+import alakazam.android.ui.compose.VerticalSpacer
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +26,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import apod.core.model.ApodMediaType
 import apod.core.ui.ShimmerBlockShape
 import apod.core.ui.color.LocalTheme
@@ -33,6 +44,7 @@ import apod.core.ui.shimmer
 import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
 import coil.compose.AsyncImage
+import apod.core.ui.R as CoreR
 
 @Composable
 internal fun ItemContent(
@@ -50,7 +62,7 @@ internal fun ItemContent(
           val action = when (state.item.mediaType) {
             ApodMediaType.Image -> ApodSingleAction.ShowImageFullscreen(state.item)
             ApodMediaType.Video -> ApodSingleAction.OpenVideo(state.item.url)
-            ApodMediaType.Other -> error("No idea how to handle this!") // TODO???
+            ApodMediaType.Other -> return@clickable
           }
           onAction(action)
         }
@@ -103,8 +115,15 @@ private fun ItemContentSuccess(
     modifier = modifier,
     contentAlignment = Alignment.Center,
   ) {
+    val item = state.item
+    val url = when (item.mediaType) {
+      ApodMediaType.Image -> item.url
+      ApodMediaType.Video -> item.thumbnailUrl ?: item.url
+      ApodMediaType.Other -> null
+    }
+
     var isLoading by remember { mutableStateOf(true) }
-    if (isLoading) {
+    if (!url.isNullOrEmpty() && isLoading) {
       Box(
         modifier = Modifier
           .fillMaxSize()
@@ -114,30 +133,68 @@ private fun ItemContentSuccess(
       )
     }
 
-    val item = state.item
-    val url = when (item.mediaType) {
-      ApodMediaType.Image -> item.url
-      ApodMediaType.Video -> item.thumbnailUrl
-      ApodMediaType.Other -> item.thumbnailUrl ?: item.url
-    }
+    if (url.isNullOrEmpty()) {
+      NoUrlToLoad(
+        modifier = Modifier.wrapContentSize(),
+        theme = theme,
+      )
+    } else {
+      val fallback = rememberVectorPainter(Icons.Filled.Warning)
+      AsyncImage(
+        modifier = Modifier.fillMaxSize(),
+        model = url,
+        contentDescription = item.title,
+        contentScale = ContentScale.Fit,
+        alignment = Alignment.Center,
+        fallback = fallback,
+        onLoading = { isLoading = true },
+        onSuccess = { isLoading = false },
+        onError = { isLoading = false },
+      )
 
-    val fallback = rememberVectorPainter(Icons.Filled.Warning)
-    AsyncImage(
-      modifier = Modifier.fillMaxSize(),
-      model = url,
-      contentDescription = item.title,
-      contentScale = ContentScale.Fit,
-      alignment = Alignment.Center,
-      fallback = fallback,
-      onLoading = { isLoading = true },
-      onSuccess = { isLoading = false },
-      onError = { isLoading = false },
+      VideoOverlay(
+        item = item,
+        modifier = Modifier.fillMaxSize(),
+        theme = theme,
+      )
+    }
+  }
+}
+
+@Composable
+private fun NoUrlToLoad(
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
+) {
+  Column(
+    modifier = modifier
+      .wrapContentSize()
+      .padding(16.dp),
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.Center,
+  ) {
+    Icon(
+      modifier = Modifier.size(70.dp),
+      imageVector = Icons.Filled.Info,
+      contentDescription = null,
+      tint = theme.warningText,
     )
 
-    VideoOverlay(
-      item = item,
-      modifier = Modifier.fillMaxSize(),
-      theme = theme,
+    VerticalSpacer(10.dp)
+
+    Text(
+      text = stringResource(id = CoreR.string.failed_title),
+      textAlign = TextAlign.Center,
+      fontWeight = FontWeight.Bold,
+      color = theme.warningText,
+      fontSize = 25.sp,
+    )
+
+    VerticalSpacer(10.dp)
+
+    Text(
+      text = stringResource(R.string.apod_no_url),
+      textAlign = TextAlign.Center,
     )
   }
 }
@@ -168,6 +225,21 @@ private fun PreviewSuccess() = PreviewScreen {
 private fun PreviewSuccessVideo() = PreviewScreen {
   val item = EXAMPLE_ITEM.copy(
     thumbnailUrl = EXAMPLE_ITEM.url,
+    mediaType = ApodMediaType.Video,
+  )
+  ItemContent(
+    state = ScreenState.Success(item, EXAMPLE_KEY),
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewSuccessOther() = PreviewScreen {
+  val item = EXAMPLE_ITEM.copy(
+    url = "",
+    thumbnailUrl = null,
+    hdUrl = null,
     mediaType = ApodMediaType.Video,
   )
   ItemContent(

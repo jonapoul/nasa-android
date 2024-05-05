@@ -25,7 +25,7 @@ data class ApodEntity(
   val copyright: String?,
 
   @ColumnInfo("url")
-  val url: String,
+  val url: String?,
 
   @ColumnInfo("hdurl")
   val hdUrl: String?,

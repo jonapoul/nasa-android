@@ -2,6 +2,7 @@ package apod.grid.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,7 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -50,8 +53,9 @@ internal fun ApodGridItem(
       .clickable { onAction(ApodGridAction.NavToItem(item)) },
     contentAlignment = Alignment.BottomCenter,
   ) {
+    val url = item.thumbnailUrl ?: item.url
     var isLoading by remember { mutableStateOf(true) }
-    if (isLoading) {
+    if (url.isNotEmpty() && isLoading) {
       Box(
         modifier = Modifier
           .size(ITEM_SIZE)
@@ -60,46 +64,68 @@ internal fun ApodGridItem(
       )
     }
 
-    val fallback = rememberVectorPainter(Icons.Filled.Warning)
-    AsyncImage(
-      modifier = Modifier.size(ITEM_SIZE),
-      model = item.thumbnailUrl ?: item.url,
-      contentDescription = item.title,
-      contentScale = ContentScale.Crop,
-      alignment = Alignment.Center,
-      fallback = fallback,
-      onLoading = { isLoading = true },
-      onSuccess = { isLoading = false },
-      onError = { isLoading = false },
-    )
-
-    VideoOverlay(
-      item = item,
-      modifier = Modifier.size(ITEM_SIZE),
-      theme = theme,
-    )
+    if (url.isNotEmpty()) {
+      val fallback = rememberVectorPainter(Icons.Filled.Warning)
+      AsyncImage(
+        modifier = Modifier.size(ITEM_SIZE),
+        model = url,
+        contentDescription = item.title,
+        contentScale = ContentScale.Crop,
+        alignment = Alignment.Center,
+        fallback = fallback,
+        onLoading = { isLoading = true },
+        onSuccess = { isLoading = false },
+        onError = { isLoading = false },
+      )
+    }
 
     Column(
-      modifier = Modifier
-        .fillMaxWidth()
-        .background(theme.cardBackground.copy(alpha = 0.6f))
-        .padding(8.dp),
+      modifier = Modifier.size(ITEM_SIZE),
+      verticalArrangement = Arrangement.Bottom,
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      Text(
-        text = item.title,
-        fontSize = 12.sp,
-        lineHeight = 15.sp,
-        color = theme.pageTextPrimary,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-      )
-      Text(
-        text = item.date.toString(),
-        fontSize = 12.sp,
-        lineHeight = 15.sp,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis,
-      )
+      if (item.mediaType == ApodMediaType.Other) {
+        Box(
+          modifier = Modifier.weight(1f),
+          contentAlignment = Alignment.Center,
+        ) {
+          Icon(
+            modifier = Modifier.size(70.dp),
+            imageVector = Icons.Filled.Info,
+            contentDescription = null,
+            tint = theme.warningText,
+          )
+        }
+      } else if (item.mediaType == ApodMediaType.Video) {
+        VideoOverlay(
+          item = item,
+          modifier = Modifier.size(100.dp),
+          theme = theme,
+        )
+      }
+
+      Column(
+        modifier = Modifier
+          .fillMaxWidth()
+          .background(theme.cardBackground.copy(alpha = 0.6f))
+          .padding(8.dp),
+      ) {
+        Text(
+          text = item.title,
+          fontSize = 12.sp,
+          lineHeight = 15.sp,
+          color = theme.pageTextPrimary,
+          maxLines = 1,
+          overflow = TextOverflow.Ellipsis,
+        )
+        Text(
+          text = item.date.toString(),
+          fontSize = 12.sp,
+          lineHeight = 15.sp,
+          maxLines = 1,
+          overflow = TextOverflow.Ellipsis,
+        )
+      }
     }
   }
 }
@@ -120,6 +146,20 @@ private fun PreviewVideoItem() = PreviewColumn {
     item = EXAMPLE_ITEM_1.copy(
       thumbnailUrl = EXAMPLE_ITEM_1.url,
       mediaType = ApodMediaType.Video,
+    ),
+    onAction = {},
+  )
+}
+
+@Preview
+@Composable
+private fun PreviewOtherItem() = PreviewColumn {
+  ApodGridItem(
+    item = EXAMPLE_ITEM_1.copy(
+      url = "",
+      thumbnailUrl = null,
+      hdUrl = null,
+      mediaType = ApodMediaType.Other,
     ),
     onAction = {},
   )

@@ -11,6 +11,7 @@ enum class ApodMediaType {
   @SerialName("video")
   Video,
 
+  // Only ever seen this in 2009-04-05: https://apod.nasa.gov/apod/ap090405.html. No image, no video?
   @SerialName("other")
   Other,
 }

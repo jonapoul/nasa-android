@@ -10,13 +10,17 @@ import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
 
 @Database(
-  version = 2,
+  version = 3,
   exportSchema = true,
   entities = [
     ApodEntity::class,
   ],
   autoMigrations = [
+    // deleted the "date" table
     AutoMigration(from = 1, to = 2, spec = Migration_1_to_2::class),
+
+    // set the "url" property from non-null to nullable
+    AutoMigration(from = 2, to = 3),
   ],
 )
 @TypeConverters(

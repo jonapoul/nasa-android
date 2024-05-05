@@ -10,7 +10,7 @@ internal fun ApodEntity.toItem(): ApodItem = ApodItem(
   explanation = explanation,
   mediaType = mediaType,
   copyright = copyright,
-  url = url,
+  url = url.orEmpty(),
   hdUrl = hdUrl,
   thumbnailUrl = thumbnailUrl,
 )
@@ -21,7 +21,7 @@ internal fun ApodResponseModel.toItem(): ApodItem = ApodItem(
   explanation = explanation,
   mediaType = mediaType,
   copyright = copyright,
-  url = url,
+  url = url.orEmpty(),
   hdUrl = hdUrl,
   thumbnailUrl = thumbnailUrl,
 )

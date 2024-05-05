@@ -27,9 +27,9 @@ data class ApodResponseModel(
   @SerialName("copyright")
   val copyright: String?,
 
-  // The URL of the APOD image or video
+  // The URL of the APOD image or video. Null only if mediaType is "other".
   @SerialName("url")
-  val url: String,
+  val url: String?,
 
   // The URL for any high-resolution image for that day. Returned regardless of 'hd' param
   // setting but will be omitted in the response IF it does not exist originally at APOD
