@@ -20,4 +20,10 @@ interface ApodDao {
 
   @Query("SELECT date FROM apod")
   fun observeDates(): Flow<List<LocalDate>>
+
+  @Query("SELECT COUNT(*) FROM apod")
+  fun itemCount(): Flow<Int>
+
+  @Query("DELETE FROM apod")
+  suspend fun clear()
 }

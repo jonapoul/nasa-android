@@ -6,6 +6,7 @@ import apod.about.ui.AboutScreen
 import apod.android.BuildConfig
 import apod.core.http.buildOkHttp
 import apod.core.model.ApiKey
+import apod.core.model.IMAGE_CACHE_DIR
 import apod.grid.ui.ApodGridScreen
 import apod.licenses.ui.LicensesScreen
 import apod.nav.NavScreens
@@ -69,7 +70,7 @@ class ApodApplication : Application(), ImageLoaderFactory {
       }
       .diskCache {
         DiskCache.Builder()
-          .directory(cacheDir.resolve("image_cache"))
+          .directory(cacheDir.resolve(IMAGE_CACHE_DIR))
           .maxSizeBytes(size = 100 * 1024 * 1024) // 100MB
           .build()
       }

@@ -8,6 +8,7 @@ android {
 
 dependencies {
   api(projects.modules.core.url)
-  implementation(projects.modules.core.model)
+  api(projects.modules.apod.data.repo)
+  implementation(libs.alakazam.android.core)
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

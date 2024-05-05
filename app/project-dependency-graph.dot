@@ -91,5 +91,5 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:settings:ui" -> ":modules:core:ui"
 ":modules:settings:ui" -> ":modules:settings:vm"
 ":modules:settings:vm" -> ":modules:core:url"
-":modules:settings:vm" -> ":modules:core:model" ["style"="dotted"]
+":modules:settings:vm" -> ":modules:apod:data:repo"
 }

@@ -6,4 +6,5 @@ import androidx.compose.runtime.Immutable
 sealed interface SettingsAction {
   data object NavBack : SettingsAction
   data object RegisterForKey : SettingsAction
+  data object ClearCache : SettingsAction
 }

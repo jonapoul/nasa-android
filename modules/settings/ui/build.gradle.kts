@@ -29,6 +29,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.util)
   implementation(libs.androidx.coreKtx)
   implementation(libs.androidx.lifecycle.common)
+  implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.androidx.preference.ktx)
   implementation(libs.kotlinx.coroutines)

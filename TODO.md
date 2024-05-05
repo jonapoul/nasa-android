@@ -1,4 +1,3 @@
-- clear cache from settings, with confirmation
 - zoom/pan buttons on display screen?
 - zoom slider on grid screen
 - select specific date
