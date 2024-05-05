@@ -1,5 +1,6 @@
 package apod.data.di
 
+import alakazam.android.core.IBuildConfig
 import apod.core.http.buildOkHttp
 import apod.core.http.buildRetrofit
 import apod.core.model.NASA_API_URL
@@ -16,9 +17,9 @@ import timber.log.Timber
 @InstallIn(SingletonComponent::class)
 internal class ApodApiModule {
   @Provides
-  fun api(): ApodApi {
+  fun api(buildConfig: IBuildConfig): ApodApi {
     return buildRetrofit(
-      client = buildOkHttp { Timber.tag("APOD").v(it) },
+      client = buildOkHttp(buildConfig.debug) { Timber.tag("APOD").v(it) },
       json = ApodJson,
       url = NASA_API_URL,
     ).create()

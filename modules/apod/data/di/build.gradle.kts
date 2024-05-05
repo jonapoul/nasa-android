@@ -10,6 +10,7 @@ dependencies {
   api(projects.modules.apod.data.api)
   api(projects.modules.apod.data.db)
   api(projects.modules.core.http)
+  api(libs.alakazam.android.core)
   api(libs.javaxInject)
   implementation(libs.androidx.room.runtime)
   implementation(libs.kotlin.stdlib)

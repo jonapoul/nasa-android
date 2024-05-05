@@ -44,7 +44,7 @@ class MockWebServerRule : TestWatcher() {
 
   inline fun <reified T : Any> buildApi(json: Json = Json): T {
     val retrofit = buildRetrofit(
-      client = buildOkHttp(log = null),
+      client = buildOkHttp(debug = true, log = null),
       url = server.url(path = "/").toString(),
       json = json,
     )

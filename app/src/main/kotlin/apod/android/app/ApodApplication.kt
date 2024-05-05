@@ -69,7 +69,7 @@ class ApodApplication : Application(), ImageLoaderFactory {
 
   override fun newImageLoader(): ImageLoader {
     val progressInterceptor = DownloadProgressInterceptor(downloadProgressStateHolder)
-    val client = buildOkHttp(progressInterceptor) { Timber.tag("COIL").v(it) }
+    val client = buildOkHttp(bc.debug, progressInterceptor) { Timber.tag("COIL").v(it) }
     return ImageLoader.Builder(this)
       .memoryCache {
         MemoryCache.Builder(this)

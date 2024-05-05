@@ -4,17 +4,21 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
-fun buildOkHttp(interceptor: Interceptor? = null, log: ((String) -> Unit)?): OkHttpClient {
+fun buildOkHttp(
+  debug: Boolean,
+  vararg interceptors: Interceptor,
+  log: ((String) -> Unit)?,
+): OkHttpClient {
   val builder = OkHttpClient.Builder()
 
-  if (log != null) {
+  if (debug && log != null) {
     val logger = HttpLoggingInterceptor { log(it) }
     logger.setLevel(HttpLoggingInterceptor.Level.BODY)
     builder.addInterceptor(logger)
   }
 
-  if (interceptor != null) {
-    builder.addInterceptor(interceptor)
+  interceptors.forEach {
+    builder.addInterceptor(it)
   }
 
   return builder.build()
