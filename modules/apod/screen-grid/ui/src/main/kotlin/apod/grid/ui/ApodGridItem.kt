@@ -65,7 +65,7 @@ internal fun ApodGridItem(
       modifier = Modifier.size(ITEM_SIZE),
       model = item.thumbnailUrl ?: item.url,
       contentDescription = item.title,
-      contentScale = ContentScale.Inside,
+      contentScale = ContentScale.Crop,
       alignment = Alignment.Center,
       fallback = fallback,
       onLoading = { isLoading = true },
