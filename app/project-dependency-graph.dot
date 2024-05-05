@@ -3,30 +3,30 @@ edge ["dir"="forward"]
 graph ["dpi"="100","label"="app","labelloc"="t","fontsize"="30","ranksep"="1.5"]
 node ["style"="filled"]
 ":app" ["shape"="box","fillcolor"="#5555FF"]
-":modules:about:di" ["fillcolor"="#FCB103","shape"="box"]
+":modules:about:di" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:about:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:core:http" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:about:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":modules:about:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:about:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:core:url" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:core:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:nav:screens" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:nav:args" ["fillcolor"="#55FF55","shape"="box"]
-":modules:apod:data:di" ["fillcolor"="#FCB103","shape"="box"]
+":modules:apod:data:di" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":modules:apod:screen-grid:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:apod:screen-grid:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":modules:apod:screen-single:vm" ["fillcolor"="#FF5555","shape"="box"]
-":modules:licenses:di" ["fillcolor"="#FCB103","shape"="box"]
+":modules:apod:screen-single:vm" ["fillcolor"="#FCB103","shape"="box"]
+":modules:licenses:di" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":modules:licenses:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:licenses:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:settings:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":modules:settings:vm" ["fillcolor"="#FF5555","shape"="box"]
+":modules:settings:vm" ["fillcolor"="#FCB103","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
@@ -38,8 +38,8 @@ graph ["label"="Legend","fontsize"="15"]
 "Legend" ["style"="filled","fillcolor"="#bbbbbb","shape"="none","margin"="0","fontsize"="12","label"=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
 <TR><TD>Android App</TD><TD BGCOLOR="#5555FF">module-name</TD></TR>
-<TR><TD>Android ViewModel</TD><TD BGCOLOR="#FF5555">module-name</TD></TR>
-<TR><TD>Android Hilt</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
+<TR><TD>Android Hilt</TD><TD BGCOLOR="#FF5555">module-name</TD></TR>
+<TR><TD>Android ViewModel</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
 <TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
 <TR><TD>Kotlin</TD><TD BGCOLOR="#A17EFF">module-name</TD></TR>

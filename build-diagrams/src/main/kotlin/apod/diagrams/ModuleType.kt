@@ -11,8 +11,8 @@ import org.gradle.api.Project
 
 internal enum class ModuleType(val string: String, val color: String) {
   AndroidApp(string = "Android App", color = "#5555FF"), // blue
-  AndroidViewModel(string = "Android ViewModel", color = "#FF5555"), // red
-  AndroidHilt(string = "Android Hilt", color = "#FCB103"), // orange
+  AndroidHilt(string = "Android Hilt", color = "#FF5555"), // red
+  AndroidViewModel(string = "Android ViewModel", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
   Kotlin(string = "Kotlin", color = "#A17EFF"), // purple
