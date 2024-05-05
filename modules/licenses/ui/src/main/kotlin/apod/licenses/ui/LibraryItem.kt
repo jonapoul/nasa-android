@@ -28,7 +28,6 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.licenses.data.LibraryModel
-import apod.licenses.res.R
 
 @Composable
 internal fun LibraryItem(

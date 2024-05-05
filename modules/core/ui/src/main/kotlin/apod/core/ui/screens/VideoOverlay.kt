@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
 import apod.core.model.ApodItem
 import apod.core.model.ApodMediaType
-import apod.core.res.R
+import apod.core.ui.R
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 
@@ -20,7 +20,6 @@ fun VideoOverlay(
   theme: Theme = LocalTheme.current,
 ) {
   if (item.mediaType == ApodMediaType.Video) {
-    // Video overlay
     Image(
       modifier = modifier,
       imageVector = Icons.Filled.PlayArrow,

@@ -41,7 +41,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.dialog.DialogContent
 import apod.core.ui.preview.PreviewColumn
 import apod.core.ui.text.ApodTextField
-import apod.settings.res.R
 import kotlinx.coroutines.delay
 import kotlin.time.Duration.Companion.milliseconds
 

@@ -19,7 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import apod.core.res.R
+import apod.core.ui.R
 import apod.core.ui.button.PrimaryTextButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme

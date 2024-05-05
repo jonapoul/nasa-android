@@ -37,7 +37,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.color.radioButton
 import apod.core.ui.dialog.DialogContent
 import apod.core.ui.preview.PreviewColumn
-import apod.settings.res.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 

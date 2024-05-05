@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import apod.about.res.R
 import apod.core.ui.CardShape
 import apod.core.ui.button.PrimaryIconButton
 import apod.core.ui.color.LocalTheme

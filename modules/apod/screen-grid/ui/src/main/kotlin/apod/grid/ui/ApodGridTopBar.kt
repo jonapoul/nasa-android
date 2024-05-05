@@ -15,7 +15,6 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.core.ui.preview.PreviewColumn
-import apod.grid.res.R
 import apod.grid.vm.ApodGridAction
 
 @Composable

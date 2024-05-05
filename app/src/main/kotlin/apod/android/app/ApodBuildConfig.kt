@@ -6,7 +6,7 @@ import android.os.Build
 import apod.android.BuildConfig
 import kotlinx.datetime.Instant
 import javax.inject.Inject
-import apod.core.res.R as CoreR
+import apod.core.ui.R as CoreR
 
 /**
  * Gives other modules access to the app module's build metadata.

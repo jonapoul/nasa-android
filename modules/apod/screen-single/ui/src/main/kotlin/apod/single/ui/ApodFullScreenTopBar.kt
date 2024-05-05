@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import apod.core.model.ApodItem
 import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
-import apod.single.res.R
 
 @Composable
 internal fun ApodFullScreenTopBar(

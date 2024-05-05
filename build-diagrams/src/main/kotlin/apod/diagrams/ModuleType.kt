@@ -4,7 +4,6 @@ import apod.diagrams.ModuleType.AndroidApp
 import apod.diagrams.ModuleType.AndroidCompose
 import apod.diagrams.ModuleType.AndroidHilt
 import apod.diagrams.ModuleType.AndroidLibrary
-import apod.diagrams.ModuleType.AndroidResources
 import apod.diagrams.ModuleType.AndroidViewModel
 import apod.diagrams.ModuleType.Kotlin
 import guru.nidi.graphviz.attribute.Color
@@ -16,7 +15,6 @@ internal enum class ModuleType(val string: String, val color: String) {
   AndroidHilt(string = "Android Hilt", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
-  AndroidResources(string = "Android Resources", color = "#55FFFF"), // orange
   Kotlin(string = "Kotlin", color = "#A17EFF"), // purple
 }
 
@@ -25,7 +23,6 @@ internal fun Project.moduleType(): ModuleType = when {
   plugins.hasPlugin("module-hilt") -> AndroidHilt
   plugins.hasPlugin("module-viewmodel") -> AndroidViewModel
   plugins.hasPlugin("module-compose") -> AndroidCompose
-  plugins.hasPlugin("module-resources") -> if (plugins.hasPlugin("module-kotlin")) AndroidLibrary else AndroidResources
   plugins.hasPlugin("module-android") -> AndroidLibrary
   plugins.hasPlugin("module-kotlin") -> Kotlin
   else -> error("Unknown module type for ${project.path}")

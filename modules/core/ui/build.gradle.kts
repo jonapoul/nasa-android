@@ -8,7 +8,6 @@ android {
 
 dependencies {
   api(projects.modules.core.model)
-  api(projects.modules.core.res)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.immutable)
   api(libs.voyager.core)

@@ -11,28 +11,22 @@ node ["style"="filled"]
 ":modules:core:url" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:core:model" ["fillcolor"="#A17EFF","shape"="box"]
-":modules:core:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:nav:screens" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:nav:args" ["fillcolor"="#55FF55","shape"="box"]
-":modules:about:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:apod:data:di" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-grid:vm" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
-":modules:apod:screen-grid:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-single:vm" ["fillcolor"="#FF5555","shape"="box"]
-":modules:apod:screen-single:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:licenses:di" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:licenses:vm" ["fillcolor"="#FF5555","shape"="box"]
-":modules:licenses:res" ["fillcolor"="#55FFFF","shape"="box"]
 ":modules:settings:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:settings:vm" ["fillcolor"="#FF5555","shape"="box"]
-":modules:settings:res" ["fillcolor"="#55FFFF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
@@ -48,7 +42,6 @@ graph ["label"="Legend","fontsize"="15"]
 <TR><TD>Android Hilt</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
 <TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
-<TR><TD>Android Resources</TD><TD BGCOLOR="#55FFFF">module-name</TD></TR>
 <TR><TD>Kotlin</TD><TD BGCOLOR="#A17EFF">module-name</TD></TR>
 </TABLE>
 >]
@@ -66,11 +59,9 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:about:ui" -> ":modules:about:vm"
 ":modules:about:ui" -> ":modules:core:ui"
 ":modules:about:ui" -> ":modules:nav:screens"
-":modules:about:ui" -> ":modules:about:res" ["style"="dotted"]
 ":modules:about:vm" -> ":modules:about:data"
 ":modules:about:vm" -> ":modules:core:url"
 ":modules:core:ui" -> ":modules:core:model"
-":modules:core:ui" -> ":modules:core:res"
 ":modules:nav:screens" -> ":modules:nav:args"
 ":modules:nav:screens" -> ":modules:core:model"
 ":modules:apod:data:di" -> ":modules:apod:data:api"
@@ -81,7 +72,6 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-grid:ui" -> ":modules:apod:screen-grid:vm"
 ":modules:apod:screen-grid:ui" -> ":modules:core:ui"
 ":modules:apod:screen-grid:ui" -> ":modules:nav:screens"
-":modules:apod:screen-grid:ui" -> ":modules:apod:screen-grid:res" ["style"="dotted"]
 ":modules:apod:screen-grid:vm" -> ":modules:apod:data:repo"
 ":modules:apod:screen-grid:vm" -> ":modules:core:url"
 ":modules:apod:screen-grid:vm" -> ":modules:nav:args"
@@ -90,19 +80,16 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:vm"
 ":modules:apod:screen-single:ui" -> ":modules:core:ui"
 ":modules:apod:screen-single:ui" -> ":modules:nav:screens"
-":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:res" ["style"="dotted"]
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo"
 ":modules:apod:screen-single:vm" -> ":modules:core:url"
 ":modules:apod:screen-single:vm" -> ":modules:nav:args"
 ":modules:licenses:di" -> ":modules:licenses:data"
 ":modules:licenses:ui" -> ":modules:core:ui"
 ":modules:licenses:ui" -> ":modules:licenses:vm"
-":modules:licenses:ui" -> ":modules:licenses:res" ["style"="dotted"]
 ":modules:licenses:vm" -> ":modules:core:url"
 ":modules:licenses:vm" -> ":modules:licenses:data"
 ":modules:settings:ui" -> ":modules:core:ui"
 ":modules:settings:ui" -> ":modules:settings:vm"
-":modules:settings:ui" -> ":modules:settings:res" ["style"="dotted"]
 ":modules:settings:vm" -> ":modules:core:url"
 ":modules:settings:vm" -> ":modules:core:model" ["style"="dotted"]
 }

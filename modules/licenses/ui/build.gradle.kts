@@ -11,7 +11,6 @@ dependencies {
   api(projects.modules.licenses.vm)
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
-  implementation(projects.modules.licenses.res)
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.annotation)

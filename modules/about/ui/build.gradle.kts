@@ -13,7 +13,6 @@ dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.coroutines)
   api(libs.voyager.core)
-  implementation(projects.modules.about.res)
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.compose.animation.core)

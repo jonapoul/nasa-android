@@ -31,7 +31,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.licenses.data.LibraryModel
-import apod.licenses.res.R
 import apod.licenses.vm.LicensesAction
 import apod.licenses.vm.LicensesState
 import kotlinx.collections.immutable.ImmutableList
