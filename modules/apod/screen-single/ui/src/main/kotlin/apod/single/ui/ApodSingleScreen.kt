@@ -78,6 +78,19 @@ data class ApodSingleScreen(
       gridDate = null
     }
 
+    var searchDate by remember { mutableStateOf<LocalDate?>(null) }
+    val immutableSearchDate = searchDate
+    if (immutableSearchDate != null) {
+      SearchDayDialog(
+        initialDate = immutableSearchDate,
+        onConfirm = {
+          loadSpecificDate = it
+          searchDate = null
+        },
+        onCancel = { searchDate = null }
+      )
+    }
+
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
       val screen = rememberScreen(NavScreens.Apod(ScreenConfig.Random()))
@@ -119,6 +132,10 @@ data class ApodSingleScreen(
 
           is ApodSingleAction.LoadRandom -> {
             loadRandom = true
+          }
+
+          is ApodSingleAction.SearchDate -> {
+            searchDate = action.current
           }
         }
       },

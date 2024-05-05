@@ -1,6 +1,8 @@
 package apod.core.ui.color
 
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DatePickerColors
+import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.RadioButtonColors
@@ -10,6 +12,7 @@ import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Stable
@@ -90,4 +93,14 @@ fun Theme.exposedDropDownMenu(): TextFieldColors = textField().copy(
 @Composable
 fun Theme.dropDownMenuItem(): MenuItemColors = MenuDefaults.itemColors().copy(
   textColor = formInputText,
+)
+
+@Stable
+@Composable
+fun Theme.datePicker(): DatePickerColors = DatePickerDefaults.colors(
+  containerColor = dialogBackground,
+  titleContentColor = pageTextPrimary,
+  headlineContentColor = pageTextPrimary,
+  selectedDayContainerColor = buttonPrimaryBackground,
+  selectedDayContentColor = buttonPrimaryText,
 )

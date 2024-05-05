@@ -3,7 +3,7 @@ package apod.data.repo
 import alakazam.kotlin.core.IODispatcher
 import apod.core.model.ApiKey
 import apod.core.model.Calendar
-import apod.core.model.EarliestApodDate
+import apod.core.model.EARLIEST_APOD_DATE
 import apod.data.api.ApodApi
 import apod.data.db.ApodDao
 import kotlinx.coroutines.withContext
@@ -37,7 +37,7 @@ class MultipleApodRepository @Inject internal constructor(
   suspend fun loadRandomMonth(key: ApiKey): MultipleLoadResult {
     val randomDate = LocalDate.fromEpochDays(
       epochDays = Random.nextInt(
-        from = EarliestApodDate.toEpochDays(),
+        from = EARLIEST_APOD_DATE.toEpochDays(),
         until = calendar.today().toEpochDays(),
       ),
     )
@@ -81,8 +81,8 @@ class MultipleApodRepository @Inject internal constructor(
   }
 
   private fun LocalDate.ensureWithinRange(
-    latest: LocalDate,
-    earliest: LocalDate = EarliestApodDate,
+      latest: LocalDate,
+      earliest: LocalDate = EARLIEST_APOD_DATE,
   ): LocalDate = when {
     this < earliest -> earliest
     this > latest -> latest

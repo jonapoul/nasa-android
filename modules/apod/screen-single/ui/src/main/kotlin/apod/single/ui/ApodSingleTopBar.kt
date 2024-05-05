@@ -5,6 +5,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.GridView
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.DropdownMenu
@@ -79,6 +80,13 @@ internal fun ApodSingleTopBar(
         }
       }
 
+      IconButton(onClick = { onAction(ApodSingleAction.SearchDate(state.dateOrNull())) }) {
+        Icon(
+          imageVector = Icons.Filled.Search,
+          contentDescription = stringResource(id = R.string.apod_single_toolbar_search),
+        )
+      }
+
       var showMenu by remember { mutableStateOf(false) }
 
       IconButton(onClick = { showMenu = !showMenu }) {
@@ -115,16 +123,6 @@ private fun PreviewSuccess() = PreviewColumn {
   ApodSingleTopBar(
     state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
     showBackButton = true,
-    onAction = {},
-  )
-}
-
-@Preview
-@Composable
-private fun PreviewFailure() = PreviewColumn {
-  ApodSingleTopBar(
-    state = ScreenState.NoApiKey(EXAMPLE_DATE),
-    showBackButton = false,
     onAction = {},
   )
 }

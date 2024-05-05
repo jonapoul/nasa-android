@@ -19,4 +19,5 @@ sealed interface ApodSingleAction {
   data class LoadNext(val current: LocalDate) : ApodSingleAction
   data object LoadRandom : ApodSingleAction
   data class RetryLoad(val key: ApiKey, val date: LocalDate?) : ApodSingleAction
+  data class SearchDate(val current: LocalDate?) : ApodSingleAction
 }

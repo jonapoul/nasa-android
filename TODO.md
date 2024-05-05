@@ -1,7 +1,5 @@
 - zoom/pan buttons on display screen?
 - zoom slider on grid screen
-- select specific date
-  - scroll calendar, or manual entry
 - select specific month in grid screen
 - draggable description panel, not dialog
 - increase min test coverage
@@ -16,3 +14,4 @@
 - display API rate limits somewhere
   - error dialog when it runs out
 - daily notifications when APOD is released?
+- disable next/prev buttons based on range
