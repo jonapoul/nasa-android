@@ -80,7 +80,7 @@ data class ApodSingleScreen(
 
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.Apod(ScreenConfig.Random))
+      val screen = rememberScreen(NavScreens.Apod(ScreenConfig.Random()))
       navigator.replace(screen)
       loadRandom = false
     }

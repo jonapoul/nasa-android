@@ -59,7 +59,7 @@ data class ApodGridScreen(
 
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.Grid(ScreenConfig.Random))
+      val screen = rememberScreen(NavScreens.Grid(ScreenConfig.Random()))
       navigator.replace(screen)
       loadRandom = false
     }

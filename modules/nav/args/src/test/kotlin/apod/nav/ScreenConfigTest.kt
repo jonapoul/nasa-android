@@ -8,6 +8,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import kotlin.test.assertEquals
+import kotlin.test.assertIs
 
 // readSerializable is deprecated, but we need it!
 @Suppress("DEPRECATION")
@@ -36,11 +37,11 @@ class ScreenConfigTest {
 
   @Test
   fun `Serialize random`() {
-    parcel.writeSerializable(ScreenConfig.Random)
+    parcel.writeSerializable(ScreenConfig.Random())
     parcel.setDataPosition(0)
 
     val config = parcel.readSerializable() as? ScreenConfig?
-    assertEquals(expected = ScreenConfig.Random, actual = config)
+    assertIs<ScreenConfig.Random>(config)
   }
 
   @Test

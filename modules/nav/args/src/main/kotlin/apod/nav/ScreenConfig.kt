@@ -16,15 +16,17 @@ sealed interface ScreenConfig : Serializable {
     private fun readResolve(): Any = Today
   }
 
-  data object Random : ScreenConfig {
-    private fun readResolve(): Any = Random
-  }
+  // Using a psuedo-random seed here helps ensure that we can properly reload the screen when we hit the random
+  // button multiple times in a row. If we make this a data object instead, the second randomise won't work!
+  // The seed value is only used to ensure equals() and hashCode() return pseudo-unique values every time we create
+  // a new screen - it's not referenced anywhere. There's probably a better way of doing this...
+  data class Random(
+    val seed: Long = System.currentTimeMillis(),
+  ) : ScreenConfig
 
-  /**
-   * Needs custom serialization of [LocalDate] because it's not [Serializable].
-   * Annoyingly I can't get serialization to work without making [date] a var - but I pinky-promise to the compose
-   * compiler that I won't change it at runtime.
-   */
+  // Needs custom serialization of [LocalDate] because it's not [Serializable]. Annoyingly I can't get serialization
+  // to work without making [date] a var - but we're using [Immutable] to pinky-promise to the compose compiler that
+  // we won't change it at runtime.
   @Immutable
   data class Specific(var date: LocalDate) : ScreenConfig {
     @Throws(IOException::class)

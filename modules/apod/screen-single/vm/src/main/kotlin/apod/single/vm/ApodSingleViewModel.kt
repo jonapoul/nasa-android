@@ -63,7 +63,7 @@ class ApodSingleViewModel @Inject internal constructor(
     val configToLoad = if (mostRecent == null) config else ScreenConfig.Specific(mostRecent)
 
     when (configToLoad) {
-      ScreenConfig.Random -> {
+      is ScreenConfig.Random -> {
         mutableState.update { ScreenState.Loading(date = null, key) }
         loadData(key, date = null) { repository.loadRandom(key) }
       }

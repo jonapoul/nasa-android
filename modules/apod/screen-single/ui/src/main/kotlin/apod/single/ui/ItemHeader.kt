@@ -65,7 +65,7 @@ internal fun ItemHeader(
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center,
     ) {
-      ItemTitle(
+      ItemDate(
         modifier = Modifier
           .fillMaxWidth()
           .wrapContentHeight(),
@@ -73,7 +73,7 @@ internal fun ItemHeader(
         theme = theme,
       )
 
-      ItemDate(
+      ItemTitle(
         modifier = Modifier
           .fillMaxWidth()
           .wrapContentHeight(),
