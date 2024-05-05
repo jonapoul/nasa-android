@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import apod.core.ui.CardShape
 import apod.core.ui.color.LocalTheme
+import apod.core.ui.color.Theme
 import apod.core.ui.color.dropDownMenuItem
 import apod.core.ui.color.exposedDropDownMenu
 import apod.core.ui.color.textField
@@ -82,17 +83,18 @@ fun ApodExposedDropDownMenu(
   onValueChange: (String) -> Unit,
   options: ImmutableList<String>,
   modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
 ) {
   var expanded by remember { mutableStateOf(false) }
   var selectedOptionText by remember { mutableStateOf(value) }
-  val theme = LocalTheme.current
 
   ExposedDropdownMenuBox(
+    modifier = modifier,
     expanded = expanded,
     onExpandedChange = { expanded = it },
   ) {
     ApodTextField(
-      modifier = modifier.menuAnchor(),
+      modifier = Modifier.menuAnchor(),
       readOnly = true,
       placeholderText = null,
       value = selectedOptionText,

@@ -35,7 +35,7 @@ internal fun ApodGridScreenImpl(
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { ApodGridTopBar(showBackButton, onAction, theme) },
+    topBar = { ApodGridTopBar(state, showBackButton, onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       ApodGridContent(

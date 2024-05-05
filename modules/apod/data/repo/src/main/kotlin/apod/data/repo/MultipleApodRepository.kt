@@ -81,8 +81,8 @@ class MultipleApodRepository @Inject internal constructor(
   }
 
   private fun LocalDate.ensureWithinRange(
-      latest: LocalDate,
-      earliest: LocalDate = EARLIEST_APOD_DATE,
+    latest: LocalDate,
+    earliest: LocalDate = EARLIEST_APOD_DATE,
   ): LocalDate = when {
     this < earliest -> earliest
     this > latest -> latest

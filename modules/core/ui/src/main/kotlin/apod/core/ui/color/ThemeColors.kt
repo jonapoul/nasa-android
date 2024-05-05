@@ -12,7 +12,6 @@ import androidx.compose.material3.TopAppBarColors
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Stable
@@ -91,7 +90,7 @@ fun Theme.exposedDropDownMenu(): TextFieldColors = textField().copy(
 
 @Stable
 @Composable
-fun Theme.dropDownMenuItem(): MenuItemColors = MenuDefaults.itemColors().copy(
+fun Theme.dropDownMenuItem(): MenuItemColors = MenuDefaults.itemColors(
   textColor = formInputText,
 )
 

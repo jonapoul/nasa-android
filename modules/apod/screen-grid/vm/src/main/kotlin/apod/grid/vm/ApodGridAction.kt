@@ -16,4 +16,5 @@ sealed interface ApodGridAction {
   data class LoadPrevious(val date: LocalDate) : ApodGridAction
   data class LoadNext(val date: LocalDate) : ApodGridAction
   data class RetryLoad(val key: ApiKey, val date: LocalDate?) : ApodGridAction
+  data class SearchMonth(val current: LocalDate?) : ApodGridAction
 }

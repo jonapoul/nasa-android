@@ -3,6 +3,7 @@
   <string name="apod_grid_toolbar_title">Month View</string>
   <string name="apod_grid_toolbar_calendar">Select month</string>
   <string name="apod_grid_toolbar_random">Random month</string>
+  <string name="apod_grid_toolbar_search">Search for month</string>
 
   <string name="month_1">January</string>
   <string name="month_2">February</string>
@@ -16,4 +17,9 @@
   <string name="month_10">October</string>
   <string name="month_11">November</string>
   <string name="month_12">December</string>
+
+  <string name="search_dialog_title">Select month</string>
+  <string name="search_dialog_confirm">Confirm</string>
+  <string name="search_dialog_cancel">Cancel</string>
+  <string name="search_dialog_out_of_range">Selection must be from June 1995 to %1$s inclusive.</string>
 </resources>

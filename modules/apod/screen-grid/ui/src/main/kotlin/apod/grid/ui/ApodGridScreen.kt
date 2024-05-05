@@ -48,6 +48,19 @@ data class ApodGridScreen(
       loadSpecificDate = null
     }
 
+    var searchDate by remember { mutableStateOf<LocalDate?>(null) }
+    val immutableSearchDate = searchDate
+    if (immutableSearchDate != null) {
+      SearchMonthDialog(
+        initialDate = immutableSearchDate,
+        onConfirm = {
+          loadSpecificDate = it
+          searchDate = null
+        },
+        onCancel = { searchDate = null },
+      )
+    }
+
     var loadItemDate by remember { mutableStateOf<LocalDate?>(null) }
     val immutableItemDate = loadItemDate
     if (immutableItemDate != null) {
@@ -79,6 +92,10 @@ data class ApodGridScreen(
         when (action) {
           is ApodGridAction.NavToItem -> {
             loadItemDate = action.item.date
+          }
+
+          is ApodGridAction.SearchMonth -> {
+            searchDate = action.current
           }
 
           is ApodGridAction.RetryLoad -> loadCounter++

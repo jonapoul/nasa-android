@@ -3,6 +3,7 @@ package apod.grid.ui
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -17,10 +18,13 @@ import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.core.ui.preview.PreviewColumn
 import apod.grid.vm.ApodGridAction
+import apod.grid.vm.GridScreenState
+import apod.grid.vm.dateOrNull
 import apod.core.ui.R as CoreR
 
 @Composable
 internal fun ApodGridTopBar(
+  state: GridScreenState,
   showBackButton: Boolean,
   onAction: (ApodGridAction) -> Unit,
   theme: Theme = LocalTheme.current,
@@ -57,6 +61,12 @@ internal fun ApodGridTopBar(
           contentDescription = stringResource(id = R.string.apod_grid_toolbar_random),
         )
       }
+      IconButton(onClick = { onAction(ApodGridAction.SearchMonth(state.dateOrNull())) }) {
+        Icon(
+          imageVector = Icons.Filled.Search,
+          contentDescription = stringResource(id = R.string.apod_grid_toolbar_search),
+        )
+      }
     },
   )
 }
@@ -65,7 +75,7 @@ internal fun ApodGridTopBar(
 @Composable
 private fun PreviewToolbar() = PreviewColumn {
   ApodGridTopBar(
-    theme = LocalTheme.current,
+    state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
     showBackButton = true,
     onAction = {},
   )

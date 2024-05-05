@@ -87,7 +87,7 @@ data class ApodSingleScreen(
           loadSpecificDate = it
           searchDate = null
         },
-        onCancel = { searchDate = null }
+        onCancel = { searchDate = null },
       )
     }
 

@@ -15,3 +15,4 @@
   - error dialog when it runs out
 - daily notifications when APOD is released?
 - disable next/prev buttons based on range
+- add nasa license to about page

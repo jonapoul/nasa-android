@@ -20,7 +20,7 @@ internal class MidnightTheme : Theme {
   override val toolbarTextSubdued = ColorPalette.grey200
   override val toolbarButton = ColorPalette.white
 
-  override val menuItemBackground = ColorPalette.grey200
+  override val menuItemBackground = ColorPalette.grey600
   override val menuItemBackgroundSelected = ColorPalette.grey500
   override val menuItemText = ColorPalette.grey100
   override val menuItemTextSelected = ColorPalette.blue400
