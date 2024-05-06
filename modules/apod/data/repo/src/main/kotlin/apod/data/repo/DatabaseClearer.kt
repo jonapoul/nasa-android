@@ -10,7 +10,7 @@ import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
-class DatabaseClearer @Inject internal constructor(
+class DatabaseClearer @Inject constructor(
   database: ApodDatabase,
   private val dao: ApodDao,
   private val io: IODispatcher,

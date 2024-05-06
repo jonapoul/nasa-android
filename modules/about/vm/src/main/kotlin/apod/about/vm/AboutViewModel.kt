@@ -34,13 +34,11 @@ class AboutViewModel @Inject internal constructor(
   private var checkUpdatesJob: Job? = null
 
   fun openRepo() {
-    Timber.v("openRepo")
-    urlOpener.openUrl(url = buildConfig.repoUrl)
+    openUrl(url = buildConfig.repoUrl)
   }
 
   fun reportIssues() {
-    Timber.v("reportIssues")
-    urlOpener.openUrl(url = "${buildConfig.repoUrl}/issues/new")
+    openUrl(url = "${buildConfig.repoUrl}/issues/new")
   }
 
   fun openUrl(url: String) {
@@ -51,10 +49,10 @@ class AboutViewModel @Inject internal constructor(
   fun fetchLatestRelease() {
     Timber.v("fetchLatestRelease")
     checkUpdatesJob?.cancel()
-    checkUpdatesJob = viewModelScope.launch {
-      mutableCheckUpdatesState.update { CheckUpdatesState.Checking }
-      val state = githubRepository.fetchLatestRelease()
+    mutableCheckUpdatesState.update { CheckUpdatesState.Checking }
 
+    checkUpdatesJob = viewModelScope.launch {
+      val state = githubRepository.fetchLatestRelease()
       mutableCheckUpdatesState.update {
         when (state) {
           LatestReleaseState.NoNewUpdate -> CheckUpdatesState.NoUpdateFound

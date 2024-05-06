@@ -1,13 +1,14 @@
-- zoom/pan buttons on display screen?
-- zoom slider on grid screen
-- draggable description panel, not dialog
-- increase min test coverage
+- Better testing
+  - Integrated from VM
+  - UI with kaspresso
+- zoom/pan buttons on fullscreen images? Or some other way of making it more obvious that you can
+- draggable description panel, so you can pull it up from the bottom as a consistent panel, instead of a dialog
 - update readme
   - screenshots
   - design decisions
-  - alakazam, other libs
-- open apod item in browser
-- open image in browser
+  - libs used
+- open webpage in browser on APOD website
+- open image in browser directly
 - switch between grid and linear list view
 - display API rate limits somewhere
   - error dialog when it runs out

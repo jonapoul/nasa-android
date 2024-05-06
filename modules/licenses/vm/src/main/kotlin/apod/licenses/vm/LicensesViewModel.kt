@@ -1,7 +1,6 @@
 package apod.licenses.vm
 
 import alakazam.kotlin.core.exhaustive
-import alakazam.kotlin.core.requireMessage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.url.UrlOpener
@@ -34,7 +33,7 @@ class LicensesViewModel @Inject internal constructor(
     mutableState.update { LicensesState.Loading }
     viewModelScope.launch {
       val licensesState = when (val loadState = licensesRepository.loadLicenses()) {
-        is LicensesLoadState.Failure -> LicensesState.Error(loadState.cause.requireMessage())
+        is LicensesLoadState.Failure -> LicensesState.Error(loadState.cause)
         is LicensesLoadState.Success -> loadState.toLicensesState()
       }.exhaustive
 

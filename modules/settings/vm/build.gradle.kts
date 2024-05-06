@@ -12,4 +12,5 @@ dependencies {
   api(libs.alakazam.android.core)
   api(libs.kotlinx.coroutines)
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+  testImplementation(libs.test.alakazam.db)
 }

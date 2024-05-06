@@ -2,6 +2,7 @@ package apod.licenses.data
 
 import alakazam.kotlin.core.DefaultDispatcher
 import alakazam.kotlin.core.IODispatcher
+import alakazam.kotlin.core.requireMessage
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.builtins.ListSerializer
 import javax.inject.Inject
@@ -28,6 +29,6 @@ class LicensesRepository @Inject internal constructor(
 
     LicensesLoadState.Success(cleanedLibraries)
   } catch (e: Exception) {
-    LicensesLoadState.Failure(e)
+    LicensesLoadState.Failure(e.requireMessage())
   }
 }

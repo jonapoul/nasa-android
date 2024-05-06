@@ -57,7 +57,7 @@ class SettingsViewModel @Inject internal constructor(
     }
   }
 
-  private fun refreshCacheSize() {
+  fun refreshCacheSize() {
     mutableCacheSize.update { imageCache.calculateSize() }
   }
 }

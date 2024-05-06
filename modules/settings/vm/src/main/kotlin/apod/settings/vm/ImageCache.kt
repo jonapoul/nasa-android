@@ -6,7 +6,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 internal class ImageCache @Inject constructor(context: Context) {
-  private val cacheDir = context.cacheDir.resolve(IMAGE_CACHE_DIR)
+  internal val cacheDir = context.cacheDir.resolve(IMAGE_CACHE_DIR)
 
   fun calculateSize(): FileSize {
     return cacheDir.walkTopDown()

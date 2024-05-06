@@ -39,7 +39,8 @@ class ApodSingleViewModel @Inject internal constructor(
 ) : ViewModel() {
   // This handles the case where user opens random screen (which has no intrinsic date), taps the image to view in HD,
   // then presses back. By default it would see loadType as random and load another random image, but the user would
-  // probably want to go back to the item that was loaded previously.
+  // probably want to go back to the item that was loaded previously. So this stores the most recently-loaded date so
+  // we can reload it if needed.
   private var mostRecentDate: LocalDate?
     get() = savedState.get<String>("mostRecentDate")?.let(LocalDate::parse)
     set(value) {
