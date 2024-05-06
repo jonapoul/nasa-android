@@ -11,11 +11,30 @@
 
 A demo app for viewing NASA's open Astronomy Photo Of The Day (APOD) service on an Android device.
 
-The regular APOD can be viewed on the web at https://apod.nasa.gov/apod/astropix.html, for reference. This project makes use of the NASA open APIs, documented over here: https://api.nasa.gov/
+The regular APOD can be viewed on the web at https://apod.nasa.gov/apod/astropix.html, for reference. This project makes use of the NASA open APIs, documented over here: https://api.nasa.gov/.
+
+The app pulls metadata about each image from the APOD service, then caches that data in a SQLite database on the phone. It then downloads and cache the images locally. You can also:
+- Open the image in full-screen view and zoom/pan around
+- Navigate backwards/forwards in time between posts
+- Load a random post from the entire archive
+- Load the post from a specific date
+- Display a month's posts in a grid format for viewing thumbnails
+- Change the app's theme between light, dark or midnight
+- Clear the app's image/metadata cache for testing purposes
 
 # Screenshots
 
-TODO
+## Home page
+
+| Light Theme | Dark Theme | Midnight Theme |
+|--|--|--|
+| ![home-light.png](docs%2Fhome-light.png) | ![home-dark.png](docs%2Fhome-dark.png) | ![home-midnight.png](docs%2Fhome-midnight.png) |
+
+## Other screens
+
+| Grid display | Settings | About |
+|--|--|--|
+| ![grid.png](docs%2Fgrid.png) | ![settings.png](docs%2Fsettings.png) | ![about.png](docs%2Fabout.png) |
 
 # Building
 
@@ -30,12 +49,15 @@ The APK will be dumped in
 Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local-api.properties` file in the root of the project directory like:
 
 ```properties
-nasaApiKey=MY_API_KEY
+# not a real key...
+nasaApiKey=yUJkwoyIRswfwR19MEVyfJ5JIwEjBEBoYOx2WqnC
+
+## Alternatively, use the DEMO_KEY made available by NASA to test services. Be aware that it will be heavily
+## restricted in how many requests the app will be able to make. See https://api.nasa.gov/#demo_key-rate-limits
+#nasaApiKey=DEMO_KEY
 ```
 
-Alternatively, you can omit this property and just enter the API key at runtime. The key will be saved in the app's preferences.
-
-If you like, you can try it out without registering at all by using NASA's `DEMO_KEY` - this gives you a very rate-limited access to the API for demo purposes. See https://api.nasa.gov/#demo_key-rate-limits for more info.
+If you like, you can omit this property entirely and just enter the API key at runtime - the app will prompt you do to this if none has been saved.
 
 ## Keystore
 
@@ -56,10 +78,33 @@ Go to the [releases page](https://github.com/jonapoul/apod-android/releases) to 
 
 # Module Structure
 
+In the diagram below:
 - Dotted line = `implementation`
 - Solid line = `api`
 
+Different types of module have been coloured to indicate their rough function. In this project I've separated the UI layer from the associated screen's ViewModel, as well as the various data layer components. This allows different Gradle build configs to be applied to each as required.
+
 ![project-dependency-graph.png](app/project-dependency-graph.png)
+
+# Libraries
+
+This project uses (amongst others):
+
+| Name | Purpose |
+|--|--|
+| Jetpack Compose | UI framework |
+| Voyager | Screen navigation in Compose |
+| Retrofit + OkHttp | HTTP API requests |
+| kotlinx-serialization | JSON serialization |
+| Room | SQLite databases |
+| Timber | Logging |
+| Coil | Image loading |
+| Hilt | Dependency injection |
+| Turbine | Testing flows |
+| JUnit 4 | Testing |
+| MockK | Testing |
+
+See the [libs.versions.toml](gradle/libs.versions.toml) file for a full listing.
 
 # License
 
