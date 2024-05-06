@@ -27,7 +27,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 import apod.core.ui.preview.PreviewColumn
 import apod.single.vm.ScreenState
-import apod.single.vm.apiKeyOrNull
 import apod.single.vm.dateOrNull
 import apod.core.ui.R as CoreR
 

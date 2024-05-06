@@ -28,8 +28,6 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.grid.vm.GridScreenState
-import apod.grid.vm.dateOrNull
-import apod.grid.vm.ifHasDate
 import kotlinx.datetime.Month
 import java.time.Month as JavaMonth
 
