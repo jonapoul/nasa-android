@@ -8,6 +8,7 @@ import apod.core.model.ApiKeyProvider
 import apod.core.model.Calendar
 import apod.core.model.EARLIEST_APOD_DATE
 import apod.core.model.NASA_API_URL
+import apod.core.model.NavButtonsState
 import apod.core.url.UrlOpener
 import apod.data.repo.FailureResult
 import apod.data.repo.SingleApodRepository

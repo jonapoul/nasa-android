@@ -11,12 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import apod.core.model.NavButtonsState
 import apod.core.ui.BackgroundSurface
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
-import apod.single.vm.NavButtonsState
 import apod.single.vm.ScreenState
 
 @Composable

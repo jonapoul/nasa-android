@@ -2,7 +2,6 @@ package apod.single.vm
 
 import apod.core.http.DownloadProgressStateHolder
 import apod.core.http.DownloadState
-import app.cash.turbine.Turbine
 import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
@@ -49,7 +48,7 @@ class ApodFullScreenViewModelTest {
     }
   }
 
-  private suspend fun TurbineTestContext<Float>.assertDownloadProgress(expected: Float)  {
+  private suspend fun TurbineTestContext<Float>.assertDownloadProgress(expected: Float) {
     assertEquals(expected, awaitItem())
   }
 
@@ -60,7 +59,7 @@ class ApodFullScreenViewModelTest {
         bytesRead = read,
         contentLength = total,
         done = done,
-      )
+      ),
     )
   }
 }

@@ -22,18 +22,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import apod.core.model.NavButtonsState
 import apod.core.ui.ShimmeringBlock
 import apod.core.ui.button.PrimaryIconButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.grid.vm.GridScreenState
+import apod.grid.vm.dateOrNull
 import kotlinx.datetime.Month
 import java.time.Month as JavaMonth
 
 @Composable
 internal fun MonthHeader(
   state: GridScreenState,
+  navButtons: NavButtonsState,
   onAction: (ApodGridAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -55,6 +58,7 @@ internal fun MonthHeader(
       modifier = Modifier.wrapContentSize(),
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
       contentDescription = "",
+      enabled = navButtons.enablePrevButton,
       onClick = {
         state.ifHasDate { date ->
           onAction(ApodGridAction.LoadPrevious(date))
@@ -74,6 +78,7 @@ internal fun MonthHeader(
       modifier = Modifier.wrapContentSize(),
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
       contentDescription = "",
+      enabled = navButtons.enableNextButton,
       onClick = {
         state.ifHasDate { date ->
           onAction(ApodGridAction.LoadNext(date))
@@ -134,6 +139,7 @@ fun Month.string(): String = stringResource(
 private fun PreviewSuccess() = PreviewColumn {
   MonthHeader(
     state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
+    navButtons = NavButtonsState.BothEnabled,
     onAction = {},
   )
 }
@@ -143,6 +149,7 @@ private fun PreviewSuccess() = PreviewColumn {
 private fun PreviewLoading() = PreviewColumn {
   MonthHeader(
     state = GridScreenState.Loading(date = null, EXAMPLE_KEY),
+    navButtons = NavButtonsState(enableNextButton = false, enablePrevButton = true),
     onAction = {},
   )
 }

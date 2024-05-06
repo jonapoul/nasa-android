@@ -20,12 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import apod.core.model.NavButtonsState
 import apod.core.ui.ShimmeringBlock
 import apod.core.ui.button.PrimaryIconButton
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
-import apod.single.vm.NavButtonsState
 import apod.single.vm.ScreenState
 
 @Composable

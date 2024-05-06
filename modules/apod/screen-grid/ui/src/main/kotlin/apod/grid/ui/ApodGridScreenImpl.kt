@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import apod.core.model.NavButtonsState
 import apod.core.ui.BackgroundSurface
 import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
@@ -29,6 +30,7 @@ import apod.grid.vm.GridScreenState
 @Composable
 internal fun ApodGridScreenImpl(
   state: GridScreenState,
+  navButtons: NavButtonsState,
   showBackButton: Boolean,
   onAction: (ApodGridAction) -> Unit,
 ) {
@@ -40,6 +42,7 @@ internal fun ApodGridScreenImpl(
       ApodGridContent(
         modifier = Modifier.padding(innerPadding),
         state = state,
+        navButtons = navButtons,
         onAction = onAction,
         theme = theme,
       )
@@ -50,6 +53,7 @@ internal fun ApodGridScreenImpl(
 @Composable
 private fun ApodGridContent(
   state: GridScreenState,
+  navButtons: NavButtonsState,
   onAction: (ApodGridAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -63,6 +67,7 @@ private fun ApodGridContent(
   ) {
     MonthHeader(
       state = state,
+      navButtons = navButtons,
       onAction = onAction,
       theme = theme,
     )
@@ -142,6 +147,7 @@ private fun GridContent(
 private fun PreviewSuccess() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
+    navButtons = NavButtonsState.BothEnabled,
     showBackButton = true,
     onAction = {},
   )
@@ -156,6 +162,7 @@ private fun PreviewFailure() = PreviewScreen {
       EXAMPLE_KEY,
       message = "Something broke! Here's some more rubbish too for preview",
     ),
+    navButtons = NavButtonsState(enableNextButton = false, enablePrevButton = true),
     showBackButton = true,
     onAction = {},
   )
@@ -166,6 +173,7 @@ private fun PreviewFailure() = PreviewScreen {
 private fun PreviewLoading() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    navButtons = NavButtonsState(enableNextButton = true, enablePrevButton = false),
     showBackButton = true,
     onAction = {},
   )
@@ -176,6 +184,7 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewNoKey() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.NoApiKey,
+    navButtons = NavButtonsState.BothDisabled,
     showBackButton = true,
     onAction = {},
   )

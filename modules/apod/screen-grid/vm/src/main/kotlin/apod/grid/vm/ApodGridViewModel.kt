@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
+import apod.core.model.Calendar
+import apod.core.model.EARLIEST_APOD_DATE
 import apod.core.model.NASA_API_URL
+import apod.core.model.NavButtonsState
 import apod.core.url.UrlOpener
 import apod.data.repo.FailureResult
 import apod.data.repo.MultipleApodRepository
@@ -19,6 +22,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -31,6 +35,7 @@ class ApodGridViewModel @Inject internal constructor(
   private val repository: MultipleApodRepository,
   private val urlOpener: UrlOpener,
   apiKeyProvider: ApiKeyProvider,
+  calendar: Calendar,
   private val savedState: SavedStateHandle,
 ) : ViewModel() {
   private var mostRecentDate: LocalDate?
@@ -41,6 +46,27 @@ class ApodGridViewModel @Inject internal constructor(
 
   private val mutableState = MutableStateFlow<GridScreenState>(GridScreenState.Inactive)
   val state: StateFlow<GridScreenState> = mutableState.asStateFlow()
+
+  private val mutableNavButtonsState = MutableStateFlow(NavButtonsState.BothDisabled)
+  val navButtonsState: StateFlow<NavButtonsState> = mutableNavButtonsState.asStateFlow()
+
+  init {
+    viewModelScope.launch {
+      mutableState
+        .map { it.dateOrNull() }
+        .distinctUntilChanged()
+        .collect { date ->
+          val today = calendar.today()
+          val navButtonState = when {
+            date == null -> NavButtonsState.BothDisabled
+            date.matchesMonth(today) -> NavButtonsState(enablePrevButton = true, enableNextButton = false)
+            date.matchesMonth(EARLIEST_APOD_DATE) -> NavButtonsState(enablePrevButton = false, enableNextButton = true)
+            else -> NavButtonsState.BothEnabled
+          }
+          mutableNavButtonsState.update { navButtonState }
+        }
+    }
+  }
 
   val apiKey: StateFlow<ApiKey?> = apiKeyProvider
     .observe()
@@ -93,5 +119,9 @@ class ApodGridViewModel @Inject internal constructor(
         }
       }
     }
+  }
+
+  private fun LocalDate.matchesMonth(other: LocalDate): Boolean {
+    return this.year == other.year && this.month == other.month
   }
 }

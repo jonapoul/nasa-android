@@ -1,4 +1,4 @@
-package apod.single.vm
+package apod.core.model
 
 import androidx.compose.runtime.Immutable
 

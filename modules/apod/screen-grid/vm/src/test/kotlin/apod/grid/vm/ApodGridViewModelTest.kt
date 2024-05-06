@@ -3,6 +3,9 @@ package apod.grid.vm
 import androidx.lifecycle.SavedStateHandle
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
+import apod.core.model.Calendar
+import apod.core.model.EARLIEST_APOD_DATE
+import apod.core.model.NavButtonsState
 import apod.core.url.UrlOpener
 import apod.data.repo.FailureResult
 import apod.data.repo.MultipleApodRepository
@@ -31,6 +34,7 @@ class ApodGridViewModelTest {
   private lateinit var viewModel: ApodGridViewModel
   private lateinit var apiKeyProvider: ApiKeyProvider
   private lateinit var savedStateHandle: SavedStateHandle
+  private lateinit var calendar: Calendar
 
   // mock
   private lateinit var repository: MultipleApodRepository
@@ -40,6 +44,7 @@ class ApodGridViewModelTest {
   fun before() {
     savedStateHandle = SavedStateHandle(initialState = emptyMap())
     apiKeyProvider = ApiKeyProvider { flowOf(API_KEY) }
+    calendar = Calendar { TODAY }
     repository = mockk()
     urlOpener = mockk(relaxed = true)
     buildViewModel()
@@ -133,7 +138,7 @@ class ApodGridViewModelTest {
   @Test
   fun `Reload previous date, even if in random config`() = runTest {
     // Given the repo is set to return the month successfully
-    val april = LocalDate(year = 2024, month =  Month.APRIL, dayOfMonth = 1)
+    val april = LocalDate(year = 2024, month = Month.APRIL, dayOfMonth = 1)
     coEvery { repository.loadSpecificMonth(API_KEY, april) } returns MultipleLoadResult.Success(EXAMPLE_ITEMS)
 
     // and the saved state has a previously-loaded date saved. This happens if we selected random, so if we go back
@@ -177,16 +182,67 @@ class ApodGridViewModelTest {
     }
   }
 
+  @Test
+  fun `Loading the current month disables the next button`() = runTest {
+    // Given the current date is in May
+    val may = LocalDate(year = 2024, month = Month.MAY, dayOfMonth = 1)
+    calendar = Calendar { may }
+    buildViewModel()
+
+    // and we can load data from May
+    val item = EXAMPLE_ITEM_1.copy(date = may)
+    coEvery { repository.loadSpecificMonth(API_KEY, may) } returns MultipleLoadResult.Success(persistentListOf(item))
+
+    viewModel.navButtonsState.test {
+      // no data loaded yet, so both disabled
+      assertEquals(NavButtonsState.BothDisabled, awaitItem())
+
+      // When we load data
+      viewModel.load(API_KEY, ScreenConfig.Specific(may))
+      testScheduler.advanceUntilIdle()
+
+      // Then the next button is disabled, since there isn't an available month after this one
+      assertEquals(
+        actual = awaitItem(),
+        expected = NavButtonsState(enablePrevButton = true, enableNextButton = false),
+      )
+    }
+  }
+  @Test
+  fun `Loading the earliest month disables the previous button`() = runTest {
+    // Given we can load data from the earliest month
+    val item = EXAMPLE_ITEM_1.copy(date = EARLIEST_APOD_DATE)
+    coEvery { repository.loadSpecificMonth(API_KEY, EARLIEST_APOD_DATE) } returns
+      MultipleLoadResult.Success(persistentListOf(item))
+
+    viewModel.navButtonsState.test {
+      // no data loaded yet, so both disabled
+      assertEquals(NavButtonsState.BothDisabled, awaitItem())
+
+      // When we load data
+      viewModel.load(API_KEY, ScreenConfig.Specific(EARLIEST_APOD_DATE))
+      testScheduler.advanceUntilIdle()
+
+      // Then the previous button is disabled, since there isn't an available month before this one
+      assertEquals(
+        actual = awaitItem(),
+        expected = NavButtonsState(enablePrevButton = false, enableNextButton = true),
+      )
+    }
+  }
+
   private fun buildViewModel() {
     viewModel = ApodGridViewModel(
       repository = repository,
       urlOpener = urlOpener,
       apiKeyProvider = apiKeyProvider,
+      calendar = calendar,
       savedState = savedStateHandle,
     )
   }
 
   private companion object {
     val API_KEY = ApiKey(value = "my-api-key")
+    val TODAY = LocalDate.parse("2024-05-03")
   }
 }
