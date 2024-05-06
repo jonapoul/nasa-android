@@ -1,9 +1,9 @@
-package apod.settings.vm
+package apod.settings.ui
 
 import androidx.compose.runtime.Immutable
 
 @Immutable
-sealed interface SettingsAction {
+internal sealed interface SettingsAction {
   data object NavBack : SettingsAction
   data object RegisterForKey : SettingsAction
   data object ClearCache : SettingsAction

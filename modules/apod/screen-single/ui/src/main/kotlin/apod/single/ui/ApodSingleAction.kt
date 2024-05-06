@@ -1,4 +1,4 @@
-package apod.single.vm
+package apod.single.ui
 
 import androidx.compose.runtime.Immutable
 import apod.core.model.ApiKey
@@ -6,7 +6,7 @@ import apod.core.model.ApodItem
 import kotlinx.datetime.LocalDate
 
 @Immutable
-sealed interface ApodSingleAction {
+internal sealed interface ApodSingleAction {
   data object NavBack : ApodSingleAction
   data object NavAbout : ApodSingleAction
   data object NavSettings : ApodSingleAction

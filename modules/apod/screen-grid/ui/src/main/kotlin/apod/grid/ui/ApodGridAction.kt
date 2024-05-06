@@ -1,4 +1,4 @@
-package apod.grid.vm
+package apod.grid.ui
 
 import androidx.compose.runtime.Immutable
 import apod.core.model.ApiKey
@@ -6,7 +6,7 @@ import apod.core.model.ApodItem
 import kotlinx.datetime.LocalDate
 
 @Immutable
-sealed interface ApodGridAction {
+internal sealed interface ApodGridAction {
   data object RegisterForApiKey : ApodGridAction
   data object NavBack : ApodGridAction
   data object NavSettings : ApodGridAction

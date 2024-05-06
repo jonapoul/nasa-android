@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
-import apod.about.vm.AboutAction
 import apod.about.vm.BuildState
 import apod.core.ui.BackgroundSurface
 import apod.core.ui.color.LocalTheme

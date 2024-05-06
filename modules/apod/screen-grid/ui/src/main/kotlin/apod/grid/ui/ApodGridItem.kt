@@ -36,7 +36,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.core.ui.screens.VideoOverlay
 import apod.core.ui.shimmer
-import apod.grid.vm.ApodGridAction
 import coil.compose.AsyncImage
 
 @Composable

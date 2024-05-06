@@ -41,7 +41,6 @@ import apod.core.ui.screens.LoadFailure
 import apod.core.ui.screens.NoApiKey
 import apod.core.ui.screens.VideoOverlay
 import apod.core.ui.shimmer
-import apod.single.vm.ApodSingleAction
 import apod.single.vm.ScreenState
 import coil.compose.AsyncImage
 import apod.core.ui.R as CoreR

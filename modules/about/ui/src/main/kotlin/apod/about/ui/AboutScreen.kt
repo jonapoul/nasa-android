@@ -8,7 +8,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import apod.about.vm.AboutAction
 import apod.about.vm.AboutViewModel
 import apod.about.vm.CheckUpdatesState
 import apod.core.ui.color.LocalTheme

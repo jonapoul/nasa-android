@@ -1,9 +1,9 @@
-package apod.licenses.vm
+package apod.licenses.ui
 
 import androidx.compose.runtime.Immutable
 
 @Immutable
-sealed interface LicensesAction {
+internal sealed interface LicensesAction {
   data object NavBack : LicensesAction
   data object Reload : LicensesAction
   data class LaunchUrl(val url: String) : LicensesAction

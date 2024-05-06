@@ -10,7 +10,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import apod.about.vm.AboutAction
 import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
 

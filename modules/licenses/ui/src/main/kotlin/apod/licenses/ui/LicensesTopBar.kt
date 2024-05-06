@@ -11,7 +11,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import apod.core.ui.color.Theme
 import apod.core.ui.color.topAppBarColors
-import apod.licenses.vm.LicensesAction
 
 @Composable
 internal fun LicensesTopBar(

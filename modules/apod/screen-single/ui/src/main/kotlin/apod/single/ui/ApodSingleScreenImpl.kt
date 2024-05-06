@@ -16,7 +16,6 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
-import apod.single.vm.ApodSingleAction
 import apod.single.vm.NavButtonsState
 import apod.single.vm.ScreenState
 

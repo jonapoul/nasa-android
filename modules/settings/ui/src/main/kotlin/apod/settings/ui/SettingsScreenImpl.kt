@@ -38,7 +38,6 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.settings.vm.FileSize
-import apod.settings.vm.SettingsAction
 import apod.settings.vm.kilobytes
 import apod.settings.vm.megabytes
 import kotlinx.collections.immutable.persistentListOf

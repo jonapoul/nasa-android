@@ -12,7 +12,6 @@ import apod.core.model.ApodItem
 import apod.core.ui.getViewModel
 import apod.nav.NavScreens
 import apod.nav.ScreenConfig
-import apod.single.vm.ApodSingleAction
 import apod.single.vm.ApodSingleViewModel
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen

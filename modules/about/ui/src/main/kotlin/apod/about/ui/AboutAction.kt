@@ -1,9 +1,9 @@
-package apod.about.vm
+package apod.about.ui
 
 import androidx.compose.runtime.Immutable
 
 @Immutable
-sealed interface AboutAction {
+internal sealed interface AboutAction {
   data object NavBack : AboutAction
   data object ViewLicenses : AboutAction
   data object CheckUpdates : AboutAction
