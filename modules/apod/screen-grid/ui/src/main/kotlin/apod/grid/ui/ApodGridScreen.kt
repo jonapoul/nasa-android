@@ -54,8 +54,8 @@ data class ApodGridScreen(
       SearchMonthDialog(
         initialDate = immutableSearchDate,
         onConfirm = {
-          loadSpecificDate = it
           searchDate = null
+          loadSpecificDate = it
         },
         onCancel = { searchDate = null },
       )
@@ -75,12 +75,6 @@ data class ApodGridScreen(
       val screen = rememberScreen(NavScreens.Grid(ScreenConfig.Random()))
       navigator.replace(screen)
       loadRandom = false
-    }
-
-    var showCalendar by remember { mutableStateOf(false) }
-    if (showCalendar) {
-      // TODO: show calendar
-      showCalendar = false
     }
 
     val settingsScreen = rememberScreen(NavScreens.Settings)
@@ -111,10 +105,6 @@ data class ApodGridScreen(
 
           is ApodGridAction.LoadRandom -> {
             loadRandom = true
-          }
-
-          ApodGridAction.ShowCalendar -> {
-            showCalendar = true
           }
 
           ApodGridAction.NavBack -> navigator.pop()

@@ -2,7 +2,6 @@ package apod.grid.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Shuffle
 import androidx.compose.material3.Icon
@@ -48,12 +47,6 @@ internal fun ApodGridTopBar(
       }
     },
     actions = {
-      IconButton(onClick = { onAction(ApodGridAction.ShowCalendar) }) {
-        Icon(
-          imageVector = Icons.Filled.CalendarMonth,
-          contentDescription = stringResource(id = R.string.apod_grid_toolbar_calendar),
-        )
-      }
       IconButton(onClick = { onAction(ApodGridAction.LoadRandom) }) {
         Icon(
           imageVector = Icons.Filled.Shuffle,
