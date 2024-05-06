@@ -92,7 +92,7 @@ com.googlecode.juniversalchardet:juniversalchardet:1.0.3
 com.gradle:develocity-gradle-plugin-adapters:1.0.2
 com.jaredsburrows.license:com.jaredsburrows.license.gradle.plugin:0.9.7
 com.jaredsburrows:gradle-license-plugin:0.9.7
-com.lordcodes.turtle:turtle:0.9.0
+com.lordcodes.turtle:turtle:0.10.0
 com.osacky.doctor:com.osacky.doctor.gradle.plugin:0.10.0
 com.osacky.doctor:doctor-plugin:0.10.0
 com.squareup.moshi:moshi-adapters:1.14.0
