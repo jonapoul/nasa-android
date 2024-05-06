@@ -1,18 +1,14 @@
 - zoom/pan buttons on display screen?
 - zoom slider on grid screen
-- select specific month in grid screen
 - draggable description panel, not dialog
 - increase min test coverage
 - update readme
   - screenshots
   - design decisions
   - alakazam, other libs
-- LoadResult to string with resources
 - open apod item in browser
-- switch between grid and list view
-  - save setting in prefs
+- open image in browser
+- switch between grid and linear list view
 - display API rate limits somewhere
   - error dialog when it runs out
 - daily notifications when APOD is released?
-- disable next/prev buttons based on range
-- add nasa license to about page

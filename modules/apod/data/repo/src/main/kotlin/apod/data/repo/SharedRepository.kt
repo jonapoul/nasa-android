@@ -7,16 +7,11 @@ import apod.data.api.ApodJson
 import apod.data.api.FailureResponse
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.SerializationException
-import retrofit2.Response
 import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
 internal class SharedRepository @Inject constructor() {
-  fun pullRateLimitRemaining(response: Response<*>): Int? {
-    return response.headers().get("X-RateLimit-Remaining")?.toIntOrNull()
-  }
-
   fun parseFailure(e: Exception): FailureResult = when (e) {
     is SerializationException -> {
       Timber.e(e, "Failed deserializing response")

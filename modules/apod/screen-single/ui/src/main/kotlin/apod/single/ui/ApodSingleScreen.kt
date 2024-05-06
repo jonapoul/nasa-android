@@ -33,6 +33,7 @@ data class ApodSingleScreen(
     val viewModel = getViewModel<ApodSingleViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
     val apiKey by viewModel.apiKey.collectAsStateWithLifecycle()
+    val navButtons by viewModel.navButtonsState.collectAsStateWithLifecycle()
 
     // Load counter increments if the API call failed and the user presses "reload"
     var loadCounter by remember { mutableIntStateOf(0) }
@@ -100,6 +101,7 @@ data class ApodSingleScreen(
 
     ApodSingleScreenImpl(
       state = state,
+      navButtons = navButtons,
       showBackButton = navigator.size > 1,
       onAction = { action ->
         when (action) {

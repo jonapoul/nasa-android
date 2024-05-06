@@ -17,11 +17,13 @@ import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewScreen
 import apod.core.ui.preview.ScreenPreview
 import apod.single.vm.ApodSingleAction
+import apod.single.vm.NavButtonsState
 import apod.single.vm.ScreenState
 
 @Composable
 internal fun ApodSingleScreenImpl(
   state: ScreenState,
+  navButtons: NavButtonsState,
   showBackButton: Boolean,
   onAction: (ApodSingleAction) -> Unit,
 ) {
@@ -33,6 +35,7 @@ internal fun ApodSingleScreenImpl(
       ApodSingleContent(
         modifier = Modifier.padding(innerPadding),
         state = state,
+        navButtons = navButtons,
         onAction = onAction,
         theme = theme,
       )
@@ -43,6 +46,7 @@ internal fun ApodSingleScreenImpl(
 @Composable
 private fun ApodSingleContent(
   state: ScreenState,
+  navButtons: NavButtonsState,
   onAction: (ApodSingleAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -56,6 +60,7 @@ private fun ApodSingleContent(
   ) {
     ItemHeader(
       state = state,
+      navButtons = navButtons,
       onAction = onAction,
       modifier = Modifier,
       theme = theme,
@@ -88,6 +93,7 @@ private fun ApodSingleContent(
 private fun PreviewSuccess() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    navButtons = NavButtonsState.BothEnabled,
     onAction = {},
     showBackButton = false,
   )
@@ -102,6 +108,7 @@ private fun PreviewFailure() = PreviewScreen {
       EXAMPLE_KEY,
       message = "Something broke! Here's some more rubbish too for preview",
     ),
+    navButtons = NavButtonsState(enableNextButton = false, enablePrevButton = true),
     onAction = {},
     showBackButton = true,
   )
@@ -112,6 +119,7 @@ private fun PreviewFailure() = PreviewScreen {
 private fun PreviewLoading() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    navButtons = NavButtonsState(enableNextButton = true, enablePrevButton = false),
     onAction = {},
     showBackButton = false,
   )
@@ -122,6 +130,7 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewNoApiKey() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.NoApiKey(EXAMPLE_DATE),
+    navButtons = NavButtonsState.BothDisabled,
     onAction = {},
     showBackButton = false,
   )

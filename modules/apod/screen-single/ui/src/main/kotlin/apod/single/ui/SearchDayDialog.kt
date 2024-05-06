@@ -37,7 +37,7 @@ internal fun SearchDayDialog(
   val colors = theme.datePicker()
 
   val state = rememberDatePickerState(
-    initialSelectedDateMillis = today.toEpochDays() * DateUtils.DAY_IN_MILLIS,
+    initialSelectedDateMillis = initialDate.toEpochDays() * DateUtils.DAY_IN_MILLIS,
     yearRange = yearRange,
     initialDisplayMode = DisplayMode.Picker,
     selectableDates = ApodSelectableDates(today, yearRange),

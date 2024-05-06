@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import apod.core.model.ApiKey
 import apod.core.model.ApiKeyProvider
+import apod.core.model.Calendar
+import apod.core.model.EARLIEST_APOD_DATE
 import apod.core.model.NASA_API_URL
 import apod.core.url.UrlOpener
 import apod.data.repo.FailureResult
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -30,6 +33,7 @@ class ApodSingleViewModel @Inject internal constructor(
   private val repository: SingleApodRepository,
   private val urlOpener: UrlOpener,
   apiKeyProvider: ApiKeyProvider,
+  calendar: Calendar,
   private val savedState: SavedStateHandle,
 ) : ViewModel() {
   // This handles the case where user opens random screen (which has no intrinsic date), taps the image to view in HD,
@@ -43,6 +47,27 @@ class ApodSingleViewModel @Inject internal constructor(
 
   private val mutableState = MutableStateFlow<ScreenState>(ScreenState.Inactive)
   val state: StateFlow<ScreenState> = mutableState.asStateFlow()
+
+  private val mutableNavButtonsState = MutableStateFlow(NavButtonsState.BothDisabled)
+  val navButtonsState: StateFlow<NavButtonsState> = mutableNavButtonsState.asStateFlow()
+
+  init {
+    val today = calendar.today()
+    viewModelScope.launch {
+      mutableState
+        .map { it.dateOrNull() }
+        .distinctUntilChanged()
+        .collect { date ->
+          val navButtonState = when (date) {
+            null -> NavButtonsState.BothDisabled
+            today -> NavButtonsState(enablePrevButton = true, enableNextButton = false)
+            EARLIEST_APOD_DATE -> NavButtonsState(enablePrevButton = false, enableNextButton = true)
+            else -> NavButtonsState.BothEnabled
+          }
+          mutableNavButtonsState.update { navButtonState }
+        }
+    }
+  }
 
   val apiKey: StateFlow<ApiKey?> = apiKeyProvider
     .observe()

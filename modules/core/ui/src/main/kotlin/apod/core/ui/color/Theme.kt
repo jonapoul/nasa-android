@@ -42,7 +42,6 @@ sealed interface Theme {
   val buttonPrimaryShadow: Color
   val buttonPrimaryDisabledText: Color
   val buttonPrimaryDisabledBackground: Color
-  val buttonPrimaryDisabledBorder: Color
 
   val buttonRegularText: Color
   val buttonRegularTextSelected: Color

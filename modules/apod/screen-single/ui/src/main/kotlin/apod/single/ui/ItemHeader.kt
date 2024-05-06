@@ -26,12 +26,14 @@ import apod.core.ui.color.LocalTheme
 import apod.core.ui.color.Theme
 import apod.core.ui.preview.PreviewColumn
 import apod.single.vm.ApodSingleAction
+import apod.single.vm.NavButtonsState
 import apod.single.vm.ScreenState
 import apod.single.vm.ifHasDate
 
 @Composable
 internal fun ItemHeader(
   state: ScreenState,
+  navButtons: NavButtonsState,
   onAction: (ApodSingleAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -50,6 +52,7 @@ internal fun ItemHeader(
     PrimaryIconButton(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
       contentDescription = "",
+      enabled = navButtons.enablePrevButton,
       onClick = {
         state.ifHasDate { date ->
           onAction(ApodSingleAction.LoadPrevious(date))
@@ -84,6 +87,7 @@ internal fun ItemHeader(
 
     PrimaryIconButton(
       imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
+      enabled = navButtons.enableNextButton,
       contentDescription = "",
       onClick = {
         state.ifHasDate { date ->
@@ -164,6 +168,7 @@ private fun ItemDate(
 private fun PreviewSuccess() = PreviewColumn {
   ItemHeader(
     state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    navButtons = NavButtonsState.BothEnabled,
     onAction = {},
   )
 }
@@ -173,6 +178,7 @@ private fun PreviewSuccess() = PreviewColumn {
 private fun PreviewFailure() = PreviewColumn {
   ItemHeader(
     state = ScreenState.Failed(EXAMPLE_DATE, EXAMPLE_KEY, message = "Something broke"),
+    navButtons = NavButtonsState(enableNextButton = false, enablePrevButton = true),
     onAction = {},
   )
 }
@@ -182,6 +188,7 @@ private fun PreviewFailure() = PreviewColumn {
 private fun PreviewLoading() = PreviewColumn {
   ItemHeader(
     state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    navButtons = NavButtonsState(enableNextButton = true, enablePrevButton = false),
     onAction = {},
   )
 }
@@ -191,6 +198,7 @@ private fun PreviewLoading() = PreviewColumn {
 private fun PreviewInactive() = PreviewColumn {
   ItemHeader(
     state = ScreenState.Inactive,
+    navButtons = NavButtonsState.BothDisabled,
     onAction = {},
   )
 }

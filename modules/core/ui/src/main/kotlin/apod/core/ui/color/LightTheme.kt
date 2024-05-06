@@ -35,9 +35,8 @@ internal class LightTheme : Theme {
   override val buttonPrimaryBackgroundSelected = ColorPalette.blue300
   override val buttonPrimaryBorder = ColorPalette.blue500
   override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.3f)
-  override val buttonPrimaryDisabledText = Color.White
-  override val buttonPrimaryDisabledBackground = ColorPalette.navy300
-  override val buttonPrimaryDisabledBorder = ColorPalette.navy300
+  override val buttonPrimaryDisabledText = ColorPalette.grey300
+  override val buttonPrimaryDisabledBackground = ColorPalette.grey500
 
   override val buttonRegularText = ColorPalette.black
   override val buttonRegularTextSelected = ColorPalette.navy900
