@@ -101,7 +101,7 @@ private fun MonthYearPicker(
   theme: Theme = LocalTheme.current,
 ) {
   val today = remember { Clock.System.todayIn(TimeZone.currentSystemDefault()) }
-  val dateRange = remember { minDate..today }
+  val dateRange = remember { LocalDate(minDate.year, minDate.month, dayOfMonth = 1)..today }
   val yearRange = remember { minDate.year..today.year }
 
   val months = remember { Month.entries.toImmutableList() }
