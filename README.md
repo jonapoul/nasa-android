@@ -19,11 +19,25 @@ TODO
 
 # Building
 
+## Command Line
+Open in Android Studio and run:
+```sh
+./gradlew app:assembleRelease
+```
+The APK will be dumped in
+
+## API Key
 Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local-api.properties` file in the root of the project directory like:
 
 ```properties
 nasaApiKey=MY_API_KEY
 ```
+
+Alternatively, you can omit this property and just enter the API key at runtime. The key will be saved in the app's preferences.
+
+If you like, you can try it out without registering at all by using NASA's `DEMO_KEY` - this gives you a very rate-limited access to the API for demo purposes. See https://api.nasa.gov/#demo_key-rate-limits for more info.
+
+## Keystore
 
 Optionally, if you want to sign the built APK with a custom keystore, add some extra properties in `local-keystore.properties` like below:
 
@@ -33,6 +47,8 @@ keyFilePassword=password-of-keystore-file
 keyAlias=key-alias
 keyPassword=password-of-key
 ```
+
+The APK will still build (unsigned) if these properties are omitted.
 
 # Download
 

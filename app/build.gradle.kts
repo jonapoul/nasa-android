@@ -33,6 +33,7 @@ android {
     targetSdk = intProperty(key = "apod.targetSdk")
     versionCode = gitVersionCode()
     versionName = gitVersionName()
+    setProperty("archivesBaseName", "$applicationId-$versionName")
 
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"
     buildConfigField("kotlinx.datetime.Instant", "BUILD_TIME", kotlinTime)
