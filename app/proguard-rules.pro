@@ -1,10 +1,3 @@
-#### logback-android
--keep class ch.qos.** { *; }
--keep class org.slf4j.** { *; }
--keepattributes *Annotation*
--dontwarn javax.mail.**
--dontwarn org.slf4j.**
-
 #### kotlinx.serialization
 -dontwarn kotlinx.serialization.KSerializer
 -dontwarn kotlinx.serialization.Serializable

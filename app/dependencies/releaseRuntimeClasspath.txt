@@ -120,7 +120,6 @@ cafe.adriel.voyager:voyager-navigator:1.1.0-alpha04
 cafe.adriel.voyager:voyager-screenmodel-android:1.1.0-alpha04
 cafe.adriel.voyager:voyager-screenmodel:1.1.0-alpha04
 com.fredporciuncula:flow-preferences:1.9.1
-com.github.tony19:logback-android:3.0.0
 com.google.accompanist:accompanist-drawablepainter:0.32.0
 com.google.android.material:material:1.12.0
 com.google.code.findbugs:jsr305:3.0.2

@@ -169,7 +169,6 @@ dependencies {
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.datetime)
-  implementation(libs.logback)
   implementation(libs.material)
   implementation(libs.okhttp.core)
   implementation(libs.timber)
