@@ -22,6 +22,9 @@ sealed interface FailureResult : SingleLoadResult, MultipleLoadResult {
   // Unexpected JSON format when parsing a response
   data class InvalidAuth(val key: ApiKey) : FailureResult
 
+  // The rate limit associated with your API key was exceeded
+  data class RateLimitExceeded(val key: ApiKey) : FailureResult
+
   // HTTP failure beyond those above
   data class OtherHttp(val code: Int, val message: String?) : FailureResult
 
@@ -39,6 +42,7 @@ fun FailureResult.reason(): String = when (this) {
   is FailureResult.OutOfRange -> message
   is FailureResult.NoApod -> "No APOD exists for $date"
   is FailureResult.InvalidAuth -> "Invalid API key - $key"
+  is FailureResult.RateLimitExceeded -> "Rate limit exceeded"
   is FailureResult.OtherHttp -> "HTTP code $code - $message"
   is FailureResult.Json -> "Failed parsing response from server"
   FailureResult.Network -> "Network problem: does your phone have an internet connection?"

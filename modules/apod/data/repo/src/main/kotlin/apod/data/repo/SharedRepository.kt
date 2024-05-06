@@ -37,6 +37,8 @@ internal class SharedRepository @Inject constructor() {
     if (code == CODE_FORBIDDEN) {
       // Unauthorised, so an invalid API key is loaded into the app
       return FailureResult.InvalidAuth(key)
+    } else if (code == CODE_TOO_MANY_REQUESTS) {
+      return FailureResult.RateLimitExceeded(key)
     }
 
     // Expect response in the format: { "code": 400, "msg": "Some message", "service_version": "v1" }
@@ -77,5 +79,6 @@ internal class SharedRepository @Inject constructor() {
     const val CODE_BAD_REQUEST = 400
     const val CODE_FORBIDDEN = 403
     const val CODE_NOT_FOUND = 404
+    const val CODE_TOO_MANY_REQUESTS = 429
   }
 }
