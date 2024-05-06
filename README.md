@@ -43,7 +43,8 @@ Open in Android Studio and run:
 ```sh
 ./gradlew app:assembleRelease
 ```
-The APK will be dumped in
+
+The APK will be dumped in `app/build/outputs/apk/release`, relative to the project root.
 
 ## API Key
 Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local-api.properties` file in the root of the project directory like:

@@ -1,8 +1,8 @@
 import blueprint.core.getStringOrThrow
 import blueprint.core.gitVersionCode
-import blueprint.core.gitVersionName
 import blueprint.core.intProperty
 import blueprint.core.rootLocalPropertiesOrNull
+import blueprint.core.runGitCommandOrNull
 
 plugins {
   alias(libs.plugins.kotlin.android)
@@ -23,6 +23,12 @@ dependencyGuard {
   configuration("releaseRuntimeClasspath")
 }
 
+fun gitTagOrCommit(): String {
+  return runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0"))
+    ?: runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))
+    ?: error("Failed getting git version from ${project.path}")
+}
+
 android {
   namespace = "apod.android"
   compileSdk = intProperty(key = "apod.compileSdk")
@@ -32,7 +38,7 @@ android {
     minSdk = intProperty(key = "apod.minSdk")
     targetSdk = intProperty(key = "apod.targetSdk")
     versionCode = gitVersionCode()
-    versionName = gitVersionName()
+    versionName = gitTagOrCommit()
     setProperty("archivesBaseName", "$applicationId-$versionName")
 
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"

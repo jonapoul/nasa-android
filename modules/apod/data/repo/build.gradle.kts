@@ -9,10 +9,10 @@ android {
 dependencies {
   api(projects.modules.apod.data.api)
   api(projects.modules.apod.data.db)
+  api(libs.alakazam.kotlin.core)
+  api(libs.javaxInject)
   api(libs.kotlinx.coroutines)
-  implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.sqlite)
-  implementation(libs.javaxInject)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.kotlinx.serialization.json)
