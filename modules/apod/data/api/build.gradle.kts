@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+  api(projects.modules.apod.model)
   api(projects.modules.core.model)
   api(libs.kotlinx.datetime)
   api(libs.kotlinx.serialization.core)

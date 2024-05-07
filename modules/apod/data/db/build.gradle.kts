@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.data.db"
+  namespace = "nasa.apod.data.db"
 
   ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
-  api(projects.modules.core.model)
+  api(projects.modules.apod.model)
   api(libs.androidx.room.runtime)
   api(libs.kotlinx.coroutines)
   implementation(libs.androidx.room.common)

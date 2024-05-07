@@ -5,10 +5,10 @@ import com.android.build.api.dsl.CommonExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 
 extensions.getByType(CommonExtension::class).apply {
-  compileSdk = intProperty(key = "apod.compileSdk")
+  compileSdk = intProperty(key = "nasa.compileSdk")
 
   defaultConfig {
-    minSdk = intProperty(key = "apod.minSdk")
+    minSdk = intProperty(key = "nasa.minSdk")
   }
 
   compileOptions {

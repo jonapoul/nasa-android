@@ -6,11 +6,11 @@ import guru.nidi.graphviz.attribute.Font
 import guru.nidi.graphviz.attribute.Rank
 import guru.nidi.graphviz.attribute.Shape
 import guru.nidi.graphviz.parse.Parser
-import apod.diagrams.CheckDotFileTask
-import apod.diagrams.GenerateGraphVizPngTask
-import apod.diagrams.ModuleType
-import apod.diagrams.getOutputFile
-import apod.diagrams.projColor
+import nasa.diagrams.CheckDotFileTask
+import nasa.diagrams.GenerateGraphVizPngTask
+import nasa.diagrams.ModuleType
+import nasa.diagrams.getOutputFile
+import nasa.diagrams.projColor
 
 plugins {
   id("com.vanniktech.dependency.graph.generator")

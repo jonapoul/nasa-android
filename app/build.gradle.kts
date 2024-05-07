@@ -30,13 +30,13 @@ fun gitTagOrCommit(): String {
 }
 
 android {
-  namespace = "apod.android"
-  compileSdk = intProperty(key = "apod.compileSdk")
+  namespace = "nasa.android"
+  compileSdk = intProperty(key = "nasa.compileSdk")
 
   defaultConfig {
-    applicationId = "apod.android"
-    minSdk = intProperty(key = "apod.minSdk")
-    targetSdk = intProperty(key = "apod.targetSdk")
+    applicationId = "nasa.android"
+    minSdk = intProperty(key = "nasa.minSdk")
+    targetSdk = intProperty(key = "nasa.targetSdk")
     versionCode = gitVersionCode()
     versionName = gitTagOrCommit()
     setProperty("archivesBaseName", "$applicationId-$versionName")
@@ -146,6 +146,7 @@ dependencies {
   implementation(projects.modules.apod.data.di)
   implementation(projects.modules.apod.screenGrid.ui)
   implementation(projects.modules.apod.screenSingle.ui)
+  implementation(projects.modules.home.ui)
   implementation(projects.modules.licenses.di)
   implementation(projects.modules.licenses.ui)
   implementation(projects.modules.settings.ui)

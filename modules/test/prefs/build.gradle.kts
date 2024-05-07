@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.test.prefs"
+  namespace = "nasa.test.prefs"
 }
 
 dependencies {

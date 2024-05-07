@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.grid.ui"
+  namespace = "nasa.apod.grid.ui"
 }
 
 dependencies {

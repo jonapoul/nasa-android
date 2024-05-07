@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.settings.ui"
+  namespace = "nasa.settings.ui"
 }
 
 dependencies {

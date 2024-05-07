@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.nav.args"
+  namespace = "nasa.nav.args"
 }
 
 dependencies {

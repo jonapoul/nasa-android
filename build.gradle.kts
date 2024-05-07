@@ -40,7 +40,10 @@ dependencyAnalysis {
 
       onIncorrectConfiguration {
         exclude(libs.kotlin.stdlib, libs.test.junit)
-        exclude(":modules:core:http")
+        exclude(
+          ":modules:core:http",
+          ":modules:core:model",
+        )
       }
 
       onUnusedDependencies {

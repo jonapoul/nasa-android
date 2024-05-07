@@ -1,10 +1,10 @@
-<h1 align="center">NASA Astronomy Photo Of The Day (APOD)</h1>
+<h1 align="center">NASA Android</h1>
 
 <p align="center">
   <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
   <a href="https://android-arsenal.com/api?level=24"><img alt="API" src="https://img.shields.io/badge/API-24%2B-brightgreen.svg?style=flat"/></a>
-  <a href="https://github.com/jonapoul/apod-android"><img alt="Release" src="https://img.shields.io/github/v/release/jonapoul/apod-android"/></a>
-  <a href="https://github.com/jonapoul/apod-android"><img alt="Coverage" src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jonapoul/6bf1b7a292bc61bcca966bee22e8b456/raw/coverage-badge.json"/></a>
+  <a href="https://github.com/jonapoul/nasa-android"><img alt="Release" src="https://img.shields.io/github/v/release/jonapoul/nasa-android"/></a>
+  <a href="https://github.com/jonapoul/nasa-android"><img alt="Coverage" src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/jonapoul/6bf1b7a292bc61bcca966bee22e8b456/raw/coverage-badge.json"/></a>
 </p>
 
 # Summary
@@ -78,7 +78,7 @@ The APK will still build (unsigned) if these properties are omitted.
 
 # Download
 
-Go to the [releases page](https://github.com/jonapoul/apod-android/releases) to download the latest APK.
+Go to the [releases page](https://github.com/jonapoul/nasa-android/releases) to download the latest APK.
 
 # Module Structure
 

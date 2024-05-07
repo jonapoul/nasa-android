@@ -12,6 +12,7 @@ node ["style"="filled"]
 ":modules:core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:core:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:nav:screens" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:apod:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:nav:args" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:data:di" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
@@ -21,6 +22,8 @@ node ["style"="filled"]
 ":modules:apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-single:vm" ["fillcolor"="#FCB103","shape"="box"]
+":modules:home:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:home:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:licenses:di" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
@@ -51,6 +54,7 @@ graph ["label"="Legend","fontsize"="15"]
 ":app" -> ":modules:apod:data:di" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-grid:ui" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-single:ui" ["style"="dotted"]
+":app" -> ":modules:home:ui" ["style"="dotted"]
 ":app" -> ":modules:licenses:di" ["style"="dotted"]
 ":app" -> ":modules:licenses:ui" ["style"="dotted"]
 ":app" -> ":modules:settings:ui" ["style"="dotted"]
@@ -62,28 +66,37 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:about:vm" -> ":modules:about:data"
 ":modules:about:vm" -> ":modules:core:url"
 ":modules:core:ui" -> ":modules:core:model"
+":modules:nav:screens" -> ":modules:apod:model"
 ":modules:nav:screens" -> ":modules:nav:args"
-":modules:nav:screens" -> ":modules:core:model"
 ":modules:apod:data:di" -> ":modules:apod:data:api"
 ":modules:apod:data:di" -> ":modules:apod:data:db"
 ":modules:apod:data:di" -> ":modules:core:http"
+":modules:apod:data:api" -> ":modules:apod:model"
 ":modules:apod:data:api" -> ":modules:core:model"
-":modules:apod:data:db" -> ":modules:core:model"
+":modules:apod:data:db" -> ":modules:apod:model"
 ":modules:apod:screen-grid:ui" -> ":modules:apod:screen-grid:vm"
 ":modules:apod:screen-grid:ui" -> ":modules:core:ui"
 ":modules:apod:screen-grid:ui" -> ":modules:nav:screens"
 ":modules:apod:screen-grid:vm" -> ":modules:apod:data:repo"
+":modules:apod:screen-grid:vm" -> ":modules:apod:model"
 ":modules:apod:screen-grid:vm" -> ":modules:core:url"
 ":modules:apod:screen-grid:vm" -> ":modules:nav:args"
 ":modules:apod:data:repo" -> ":modules:apod:data:api"
 ":modules:apod:data:repo" -> ":modules:apod:data:db"
+":modules:apod:data:repo" -> ":modules:apod:model"
 ":modules:apod:screen-single:ui" -> ":modules:apod:screen-single:vm"
 ":modules:apod:screen-single:ui" -> ":modules:core:ui"
 ":modules:apod:screen-single:ui" -> ":modules:nav:screens"
 ":modules:apod:screen-single:vm" -> ":modules:apod:data:repo"
+":modules:apod:screen-single:vm" -> ":modules:apod:model"
 ":modules:apod:screen-single:vm" -> ":modules:core:http"
 ":modules:apod:screen-single:vm" -> ":modules:core:url"
 ":modules:apod:screen-single:vm" -> ":modules:nav:args"
+":modules:home:ui" -> ":modules:home:vm"
+":modules:home:ui" -> ":modules:core:ui"
+":modules:home:ui" -> ":modules:nav:screens"
+":modules:home:vm" -> ":modules:about:data"
+":modules:home:vm" -> ":modules:core:url"
 ":modules:licenses:di" -> ":modules:licenses:data"
 ":modules:licenses:ui" -> ":modules:core:ui"
 ":modules:licenses:ui" -> ":modules:licenses:vm"

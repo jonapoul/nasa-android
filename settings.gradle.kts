@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "apod-android"
+rootProject.name = "nasa-android"
 
 pluginManagement {
   repositories {
@@ -34,10 +34,9 @@ include(":modules:apod:data:api")
 include(":modules:apod:data:db")
 include(":modules:apod:data:di")
 include(":modules:apod:data:repo")
-
+include(":modules:apod:model")
 include(":modules:apod:screen-single:ui")
 include(":modules:apod:screen-single:vm")
-
 include(":modules:apod:screen-grid:ui")
 include(":modules:apod:screen-grid:vm")
 
@@ -45,6 +44,9 @@ include(":modules:core:http")
 include(":modules:core:model")
 include(":modules:core:ui")
 include(":modules:core:url")
+
+include(":modules:home:ui")
+include(":modules:home:vm")
 
 include(":modules:licenses:data")
 include(":modules:licenses:di")

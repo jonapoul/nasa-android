@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.about.vm"
+  namespace = "nasa.about.vm"
 }
 
 dependencies {

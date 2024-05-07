@@ -62,7 +62,7 @@ koverReport {
       rule {
         isEnabled = isRootProject
         bound {
-          minValue = intProperty(key = "apod.minTestCoverage")
+          minValue = intProperty(key = "nasa.minTestCoverage")
           metric = MetricType.INSTRUCTION
           aggregation = AggregationType.COVERED_PERCENTAGE
         }

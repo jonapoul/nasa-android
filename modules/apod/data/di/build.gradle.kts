@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.data.di"
+  namespace = "nasa.apod.data.di"
 }
 
 dependencies {

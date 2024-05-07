@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "apod.test.android"
+  namespace = "nasa.test.android"
 }
 
 dependencies {

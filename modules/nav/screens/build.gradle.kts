@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-  namespace = "apod.nav.screens"
+  namespace = "nasa.nav.screens"
 }
 
 dependencies {
+  api(projects.modules.apod.model)
   api(projects.modules.nav.args)
-  api(projects.modules.core.model)
   api(libs.voyager.core)
   implementation(libs.androidx.compose.runtime)
 }

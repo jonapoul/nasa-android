@@ -69,7 +69,7 @@
   </configuration>
   <configuration name="app" activateToolWindowBeforeRun="false" default="false" factoryName="Android App"
     type="AndroidRunConfigurationType">
-    <module name="apod-android.app.main" />
+    <module name="nasa-android.app.main" />
     <option name="DEPLOY" value="true" />
     <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
     <option name="DEPLOY_AS_INSTANT" value="false" />

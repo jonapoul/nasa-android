@@ -1,9 +1,9 @@
 [
   {
-    "url": "https://api.github.com/repos/jonapoul/apod-android/releases/149086344",
-    "assets_url": "https://api.github.com/repos/jonapoul/apod-android/releases/149086344/assets",
-    "upload_url": "https://uploads.github.com/repos/jonapoul/apod-android/releases/149086344/assets{?name,label}",
-    "html_url": "https://github.com/jonapoul/apod-android/releases/tag/2.3.4",
+    "url": "https://api.github.com/repos/jonapoul/nasa-android/releases/149086344",
+    "assets_url": "https://api.github.com/repos/jonapoul/nasa-android/releases/149086344/assets",
+    "upload_url": "https://uploads.github.com/repos/jonapoul/nasa-android/releases/149086344/assets{?name,label}",
+    "html_url": "https://github.com/jonapoul/nasa-android/releases/tag/2.3.4",
     "id": 149086344,
     "author": {
       "login": "github-actions[bot]",
@@ -34,16 +34,16 @@
     "created_at": "2024-03-30T09:47:11Z",
     "published_at": "2024-03-30T09:57:02Z",
     "assets": [],
-    "tarball_url": "https://api.github.com/repos/jonapoul/apod-android/tarball/2.3.4",
-    "zipball_url": "https://api.github.com/repos/jonapoul/apod-android/zipball/2.3.4",
-    "body": "## What's Changed\n* Added CI by @jonapoul in https://github.com/jonapoul/apod-android/pull/28\n* Fix StateHolder type by @jonapoul in https://github.com/jonapoul/apod-android/pull/29\n\n\n**Full Changelog**: https://github.com/jonapoul/apod-android/compare/1.1.0...2.3.4",
+    "tarball_url": "https://api.github.com/repos/jonapoul/nasa-android/tarball/2.3.4",
+    "zipball_url": "https://api.github.com/repos/jonapoul/nasa-android/zipball/2.3.4",
+    "body": "## What's Changed\n* Added CI by @jonapoul in https://github.com/jonapoul/nasa-android/pull/28\n* Fix StateHolder type by @jonapoul in https://github.com/jonapoul/nasa-android/pull/29\n\n\n**Full Changelog**: https://github.com/jonapoul/nasa-android/compare/1.1.0...2.3.4",
     "mentions_count": 1
   },
   {
-    "url": "https://api.github.com/repos/jonapoul/apod-android/releases/142505513",
-    "assets_url": "https://api.github.com/repos/jonapoul/apod-android/releases/142505513/assets",
-    "upload_url": "https://uploads.github.com/repos/jonapoul/apod-android/releases/142505513/assets{?name,label}",
-    "html_url": "https://github.com/jonapoul/apod-android/releases/tag/1.1.0",
+    "url": "https://api.github.com/repos/jonapoul/nasa-android/releases/142505513",
+    "assets_url": "https://api.github.com/repos/jonapoul/nasa-android/releases/142505513/assets",
+    "upload_url": "https://uploads.github.com/repos/jonapoul/nasa-android/releases/142505513/assets{?name,label}",
+    "html_url": "https://github.com/jonapoul/nasa-android/releases/tag/1.1.0",
     "id": 142505513,
     "author": {
       "login": "jonapoul",
@@ -74,15 +74,15 @@
     "created_at": "2024-02-18T18:09:16Z",
     "published_at": "2024-02-18T18:09:35Z",
     "assets": [],
-    "tarball_url": "https://api.github.com/repos/jonapoul/apod-android/tarball/1.1.0",
-    "zipball_url": "https://api.github.com/repos/jonapoul/apod-android/zipball/1.1.0",
-    "body": "**Full Changelog**: https://github.com/jonapoul/apod-android/compare/0.8.2...1.1.0"
+    "tarball_url": "https://api.github.com/repos/jonapoul/nasa-android/tarball/1.1.0",
+    "zipball_url": "https://api.github.com/repos/jonapoul/nasa-android/zipball/1.1.0",
+    "body": "**Full Changelog**: https://github.com/jonapoul/nasa-android/compare/0.8.2...1.1.0"
   },
   {
-    "url": "https://api.github.com/repos/jonapoul/apod-android/releases/139177710",
-    "assets_url": "https://api.github.com/repos/jonapoul/apod-android/releases/139177710/assets",
-    "upload_url": "https://uploads.github.com/repos/jonapoul/apod-android/releases/139177710/assets{?name,label}",
-    "html_url": "https://github.com/jonapoul/apod-android/releases/tag/0.8.2",
+    "url": "https://api.github.com/repos/jonapoul/nasa-android/releases/139177710",
+    "assets_url": "https://api.github.com/repos/jonapoul/nasa-android/releases/139177710/assets",
+    "upload_url": "https://uploads.github.com/repos/jonapoul/nasa-android/releases/139177710/assets{?name,label}",
+    "html_url": "https://github.com/jonapoul/nasa-android/releases/tag/0.8.2",
     "id": 139177710,
     "author": {
       "login": "jonapoul",
@@ -113,8 +113,8 @@
     "created_at": "2024-01-30T17:57:47Z",
     "published_at": "2024-01-30T18:02:39Z",
     "assets": [],
-    "tarball_url": "https://api.github.com/repos/jonapoul/apod-android/tarball/0.8.2",
-    "zipball_url": "https://api.github.com/repos/jonapoul/apod-android/zipball/0.8.2",
+    "tarball_url": "https://api.github.com/repos/jonapoul/nasa-android/tarball/0.8.2",
+    "zipball_url": "https://api.github.com/repos/jonapoul/nasa-android/zipball/0.8.2",
     "body": ""
   }
 ]
