@@ -1,4 +1,4 @@
-package nasa.apod.data.di
+package nasa.apod.di
 
 import android.content.Context
 import androidx.room.Room

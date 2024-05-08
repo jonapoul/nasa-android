@@ -1,4 +1,4 @@
-package nasa.apod.data.di
+package nasa.apod.di
 
 import alakazam.android.core.IBuildConfig
 import dagger.Module
