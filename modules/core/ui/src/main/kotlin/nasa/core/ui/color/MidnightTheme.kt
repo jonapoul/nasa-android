@@ -21,10 +21,7 @@ internal class MidnightTheme : Theme {
   override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.grey600
-  override val menuItemBackgroundSelected = ColorPalette.grey500
   override val menuItemText = ColorPalette.grey100
-  override val menuItemTextSelected = ColorPalette.blue400
-  override val menuBorder = ColorPalette.grey800
 
   override val dialogBackground = ColorPalette.grey700
   override val dialogProgressWheelTrack = ColorPalette.grey700
@@ -33,8 +30,6 @@ internal class MidnightTheme : Theme {
   override val buttonPrimaryTextSelected = Color.Black
   override val buttonPrimaryBackground = ColorPalette.blue800
   override val buttonPrimaryBackgroundSelected = ColorPalette.blue500
-  override val buttonPrimaryBorder = ColorPalette.blue300
-  override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.6f)
   override val buttonPrimaryDisabledText = ColorPalette.grey400
   override val buttonPrimaryDisabledBackground = ColorPalette.grey700
 
@@ -42,21 +37,8 @@ internal class MidnightTheme : Theme {
   override val buttonRegularTextSelected = ColorPalette.grey150
   override val buttonRegularBackground = ColorPalette.grey700
   override val buttonRegularBackgroundSelected = ColorPalette.grey500
-  override val buttonRegularBorder = ColorPalette.grey300
-  override val buttonRegularShadow = ColorPalette.black.copy(alpha = 0.4f)
-  override val buttonRegularSelectedText = ColorPalette.white
-  override val buttonRegularSelectedBackground = ColorPalette.blue500
   override val buttonRegularDisabledText = ColorPalette.grey500
   override val buttonRegularDisabledBackground = ColorPalette.grey700
-  override val buttonRegularDisabledBorder = ColorPalette.grey500
-
-  override val buttonBareText = ColorPalette.grey150
-  override val buttonBareTextSelected = ColorPalette.grey150
-  override val buttonBareBackground = Color.Transparent
-  override val buttonBareBackgroundSelected = Color(color = 0x4DC8C8C8)
-  override val buttonBareBackgroundActive = Color(color = 0x80C8C8C8)
-  override val buttonBareDisabledText = ColorPalette.grey500
-  override val buttonBareDisabledBackground = Color.Transparent
 
   override val calendarText = ColorPalette.grey50
   override val calendarBackground = ColorPalette.grey700
@@ -81,7 +63,6 @@ internal class MidnightTheme : Theme {
   override val checkboxToggleBackground = ColorPalette.grey400
   override val checkboxBackgroundSelected = ColorPalette.blue300
   override val checkboxBorderSelected = ColorPalette.blue300
-  override val checkboxShadowSelected = ColorPalette.blue500
 
   override val preferenceBackground = Color.Transparent
   override val preferenceBackgroundDisabled = ColorPalette.black.copy(alpha = 0.35f)

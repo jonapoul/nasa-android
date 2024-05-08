@@ -80,33 +80,6 @@ fun RegularIconButton(
 
 @Stable
 @Composable
-fun BareIconButton(
-  imageVector: ImageVector,
-  contentDescription: String,
-  onClick: () -> Unit,
-  modifier: Modifier = Modifier,
-  size: Dp? = null,
-  enabled: Boolean = true,
-  shape: Shape = DefaultButtonShape,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  content: @Composable () -> Unit = { DefaultIconButtonContent(imageVector, contentDescription, size) },
-) {
-  BasicIconButton(
-    imageVector = imageVector,
-    contentDescription = contentDescription,
-    onClick = onClick,
-    colors = { theme, isPressed -> theme.bare(isPressed) },
-    modifier = modifier,
-    size = size,
-    enabled = enabled,
-    shape = shape,
-    interactionSource = interactionSource,
-    content = content,
-  )
-}
-
-@Stable
-@Composable
 fun BasicIconButton(
   imageVector: ImageVector,
   contentDescription: String,
@@ -164,25 +137,6 @@ private fun Theme.regular(isPressed: Boolean) = IconButtonDefaults.filledIconBut
   contentColor = if (isPressed) buttonRegularTextSelected else buttonRegularText,
   disabledContentColor = buttonRegularDisabledText,
 )
-
-@Stable
-@Composable
-private fun Theme.bare(isPressed: Boolean) = IconButtonDefaults.filledIconButtonColors(
-  containerColor = if (isPressed) buttonBareBackgroundSelected else buttonBareBackground,
-  disabledContainerColor = buttonBareDisabledBackground,
-  contentColor = if (isPressed) buttonBareTextSelected else buttonBareText,
-  disabledContentColor = buttonBareDisabledText,
-)
-
-@Preview
-@Composable
-private fun Bare() = PreviewColumn {
-  BareIconButton(
-    imageVector = Icons.Filled.Check,
-    contentDescription = "Cancel",
-    onClick = {},
-  )
-}
 
 @Preview
 @Composable

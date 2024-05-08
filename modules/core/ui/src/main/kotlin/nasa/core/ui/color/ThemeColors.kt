@@ -50,15 +50,6 @@ fun Theme.regularButton(
 )
 
 @Stable
-@Composable
-fun Theme.bareButton(isPressed: Boolean) = ButtonDefaults.buttonColors(
-  containerColor = if (isPressed) buttonBareBackgroundSelected else buttonBareBackground,
-  disabledContainerColor = buttonBareDisabledBackground,
-  contentColor = if (isPressed) buttonBareTextSelected else buttonBareText,
-  disabledContentColor = buttonBareDisabledText,
-)
-
-@Stable
 fun Theme.radioButton() = RadioButtonColors(
   selectedColor = pageTextPrimary,
   unselectedColor = pageTextPrimary,
@@ -91,7 +82,9 @@ fun Theme.exposedDropDownMenu(): TextFieldColors = textField().copy(
 @Stable
 @Composable
 fun Theme.dropDownMenuItem(): MenuItemColors = MenuDefaults.itemColors(
-  textColor = formInputText,
+  textColor = menuItemText,
+  leadingIconColor = menuItemText,
+  trailingIconColor = menuItemText,
 )
 
 @Stable

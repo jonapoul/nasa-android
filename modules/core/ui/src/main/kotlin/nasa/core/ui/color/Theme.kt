@@ -26,10 +26,7 @@ sealed interface Theme {
   val toolbarButton: Color
 
   val menuItemBackground: Color
-  val menuItemBackgroundSelected: Color
   val menuItemText: Color
-  val menuItemTextSelected: Color
-  val menuBorder: Color
 
   val dialogBackground: Color
   val dialogProgressWheelTrack: Color
@@ -38,8 +35,6 @@ sealed interface Theme {
   val buttonPrimaryTextSelected: Color
   val buttonPrimaryBackground: Color
   val buttonPrimaryBackgroundSelected: Color
-  val buttonPrimaryBorder: Color
-  val buttonPrimaryShadow: Color
   val buttonPrimaryDisabledText: Color
   val buttonPrimaryDisabledBackground: Color
 
@@ -47,21 +42,8 @@ sealed interface Theme {
   val buttonRegularTextSelected: Color
   val buttonRegularBackground: Color
   val buttonRegularBackgroundSelected: Color
-  val buttonRegularBorder: Color
-  val buttonRegularShadow: Color
-  val buttonRegularSelectedText: Color
-  val buttonRegularSelectedBackground: Color
   val buttonRegularDisabledText: Color
   val buttonRegularDisabledBackground: Color
-  val buttonRegularDisabledBorder: Color
-
-  val buttonBareText: Color
-  val buttonBareTextSelected: Color
-  val buttonBareBackground: Color
-  val buttonBareBackgroundSelected: Color
-  val buttonBareBackgroundActive: Color
-  val buttonBareDisabledText: Color
-  val buttonBareDisabledBackground: Color
 
   val calendarText: Color
   val calendarBackground: Color
@@ -85,7 +67,6 @@ sealed interface Theme {
   val checkboxText: Color
   val checkboxBackgroundSelected: Color
   val checkboxBorderSelected: Color
-  val checkboxShadowSelected: Color
   val checkboxToggleBackground: Color
 
   val preferenceBackground: Color

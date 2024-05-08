@@ -21,10 +21,7 @@ internal class LightTheme : Theme {
   override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.navy50
-  override val menuItemBackgroundSelected = ColorPalette.navy100
   override val menuItemText = ColorPalette.navy900
-  override val menuItemTextSelected = ColorPalette.navy900
-  override val menuBorder = ColorPalette.navy100
 
   override val dialogBackground = ColorPalette.white
   override val dialogProgressWheelTrack = ColorPalette.grey100
@@ -33,8 +30,6 @@ internal class LightTheme : Theme {
   override val buttonPrimaryTextSelected = buttonPrimaryText
   override val buttonPrimaryBackground = ColorPalette.blue500
   override val buttonPrimaryBackgroundSelected = ColorPalette.blue300
-  override val buttonPrimaryBorder = ColorPalette.blue500
-  override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.3f)
   override val buttonPrimaryDisabledText = ColorPalette.grey300
   override val buttonPrimaryDisabledBackground = ColorPalette.grey500
 
@@ -42,21 +37,8 @@ internal class LightTheme : Theme {
   override val buttonRegularTextSelected = ColorPalette.navy900
   override val buttonRegularBackground = ColorPalette.navy200
   override val buttonRegularBackgroundSelected = ColorPalette.grey600
-  override val buttonRegularBorder = ColorPalette.navy150
-  override val buttonRegularShadow = ColorPalette.black.copy(alpha = 0.2f)
-  override val buttonRegularSelectedText = ColorPalette.white
-  override val buttonRegularSelectedBackground = ColorPalette.blue600
   override val buttonRegularDisabledText = ColorPalette.navy300
   override val buttonRegularDisabledBackground = ColorPalette.white
-  override val buttonRegularDisabledBorder = ColorPalette.navy150
-
-  override val buttonBareText = ColorPalette.navy900
-  override val buttonBareTextSelected = ColorPalette.navy900
-  override val buttonBareBackground = Color.Transparent
-  override val buttonBareBackgroundSelected = Color(color = 0x26646464)
-  override val buttonBareBackgroundActive = Color(color = 0x40646464)
-  override val buttonBareDisabledText = ColorPalette.navy300
-  override val buttonBareDisabledBackground = buttonBareBackground
 
   override val calendarText = ColorPalette.navy50
   override val calendarBackground = ColorPalette.navy900
@@ -80,7 +62,6 @@ internal class LightTheme : Theme {
   override val checkboxText = ColorPalette.white
   override val checkboxBackgroundSelected = ColorPalette.blue500
   override val checkboxBorderSelected = ColorPalette.blue500
-  override val checkboxShadowSelected = ColorPalette.blue300
   override val checkboxToggleBackground = ColorPalette.grey400
 
   override val preferenceBackground = Color.Transparent

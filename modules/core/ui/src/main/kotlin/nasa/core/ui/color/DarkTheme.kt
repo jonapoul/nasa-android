@@ -21,10 +21,7 @@ internal class DarkTheme : Theme {
   override val toolbarButton = ColorPalette.white
 
   override val menuItemBackground = ColorPalette.navy600
-  override val menuItemBackgroundSelected = ColorPalette.navy500
   override val menuItemText = ColorPalette.navy100
-  override val menuItemTextSelected = ColorPalette.blue400
-  override val menuBorder = ColorPalette.navy800
 
   override val dialogBackground = ColorPalette.grey600
   override val dialogProgressWheelTrack = ColorPalette.grey600
@@ -33,8 +30,6 @@ internal class DarkTheme : Theme {
   override val buttonPrimaryTextSelected = Color.White
   override val buttonPrimaryBackground = ColorPalette.blue400
   override val buttonPrimaryBackgroundSelected = ColorPalette.blue600
-  override val buttonPrimaryBorder = ColorPalette.blue400
-  override val buttonPrimaryShadow = Color.Black.copy(alpha = 0.6f)
   override val buttonPrimaryDisabledText = ColorPalette.navy500
   override val buttonPrimaryDisabledBackground = ColorPalette.grey600
 
@@ -42,21 +37,8 @@ internal class DarkTheme : Theme {
   override val buttonRegularTextSelected = ColorPalette.navy150
   override val buttonRegularBackground = ColorPalette.navy700
   override val buttonRegularBackgroundSelected = ColorPalette.navy600
-  override val buttonRegularBorder = ColorPalette.navy300
-  override val buttonRegularShadow = ColorPalette.black.copy(alpha = 0.4f)
-  override val buttonRegularSelectedText = ColorPalette.white
-  override val buttonRegularSelectedBackground = ColorPalette.blue600
   override val buttonRegularDisabledText = ColorPalette.navy500
   override val buttonRegularDisabledBackground = ColorPalette.navy800
-  override val buttonRegularDisabledBorder = ColorPalette.navy500
-
-  override val buttonBareText = ColorPalette.navy150
-  override val buttonBareTextSelected = ColorPalette.navy150
-  override val buttonBareBackground = Color.Transparent
-  override val buttonBareBackgroundSelected = ColorPalette.grey150.copy(alpha = 0.3f)
-  override val buttonBareBackgroundActive = ColorPalette.grey150.copy(alpha = 0.5f)
-  override val buttonBareDisabledText = ColorPalette.navy500
-  override val buttonBareDisabledBackground = Color.Transparent
 
   override val calendarText = ColorPalette.navy50
   override val calendarBackground = ColorPalette.navy900
@@ -80,7 +62,6 @@ internal class DarkTheme : Theme {
   override val checkboxText = ColorPalette.navy150
   override val checkboxBackgroundSelected = ColorPalette.blue300
   override val checkboxBorderSelected = ColorPalette.blue300
-  override val checkboxShadowSelected = ColorPalette.blue500
   override val checkboxToggleBackground = ColorPalette.grey700
 
   override val preferenceBackground = Color.Transparent

@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
-import nasa.core.ui.color.bareButton
 import nasa.core.ui.color.primaryButton
 import nasa.core.ui.color.regularButton
 import nasa.core.ui.font.NasaFontFamily
@@ -152,38 +151,6 @@ fun PrimaryTextButtonWithLoading(
 
 @Stable
 @Composable
-fun BareTextButton(
-  text: String,
-  modifier: Modifier = Modifier,
-  isEnabled: Boolean = true,
-  contentPadding: PaddingValues = DefaultButtonPadding,
-  shape: Shape = DefaultButtonShape,
-  interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-  style: TextStyle = ButtonBareTextStyle,
-  fontSize: TextUnit = TextUnit.Unspecified,
-  prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.bareButton(pressed) },
-  content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
-  onClick: () -> Unit,
-) {
-  BasicTextButton(
-    text = text,
-    modifier = modifier,
-    isEnabled = isEnabled,
-    contentPadding = contentPadding,
-    shape = shape,
-    interactionSource = interactionSource,
-    style = style,
-    fontSize = fontSize,
-    prefix = prefix,
-    onClick = onClick,
-    colors = colors,
-    content = content,
-  )
-}
-
-@Stable
-@Composable
 fun BasicTextButton(
   text: String,
   colors: @Composable (theme: Theme, isPressed: Boolean) -> ButtonColors,
@@ -240,20 +207,6 @@ private val ButtonRegularTextStyle: TextStyle
   @Composable
   @ReadOnlyComposable
   get() = NasaFontFamily.style(fontSize = 15.sp, color = LocalTheme.current.buttonRegularText)
-
-private val ButtonBareTextStyle: TextStyle
-  @Composable
-  @ReadOnlyComposable
-  get() = NasaFontFamily.style(fontSize = 15.sp, color = LocalTheme.current.buttonBareText)
-
-@Preview
-@Composable
-private fun PreviewBareButton() = PreviewColumn {
-  BareTextButton(
-    text = "Cancel",
-    onClick = {},
-  )
-}
 
 @Preview
 @Composable
