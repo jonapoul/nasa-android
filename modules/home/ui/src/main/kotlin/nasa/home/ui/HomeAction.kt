@@ -6,5 +6,6 @@ import androidx.compose.runtime.Immutable
 internal sealed interface HomeAction {
   data object NavAbout : HomeAction
   data object NavSettings : HomeAction
-  data object ApodToday : HomeAction
+  data object NavApodToday : HomeAction
+  data object NavGallery : HomeAction
 }

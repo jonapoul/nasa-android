@@ -45,6 +45,14 @@ include(":modules:core:model")
 include(":modules:core:ui")
 include(":modules:core:url")
 
+include(":modules:gallery:data:api")
+include(":modules:gallery:data:db")
+include(":modules:gallery:data:repo")
+include(":modules:gallery:di")
+include(":modules:gallery:model")
+include(":modules:gallery:ui")
+include(":modules:gallery:vm")
+
 include(":modules:home:ui")
 include(":modules:home:vm")
 

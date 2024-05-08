@@ -1,0 +1,17 @@
+com.squareup.okhttp3:okhttp:3.14.9
+com.squareup.okio:okio:1.17.2
+com.squareup.retrofit2:retrofit:2.11.0
+dev.jonpoulton.alakazam:kotlin-core:4.5.2
+org.jetbrains.kotlin:kotlin-stdlib-common:1.9.23
+org.jetbrains.kotlin:kotlin-stdlib:1.9.23
+org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0
+org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0
+org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0
+org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.5.0
+org.jetbrains.kotlinx:kotlinx-datetime:0.5.0
+org.jetbrains.kotlinx:kotlinx-serialization-bom:1.6.3
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.6.3
+org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.6.3
+org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3
+org.jetbrains:annotations:23.0.0

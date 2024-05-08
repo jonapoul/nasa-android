@@ -8,6 +8,7 @@ sealed interface NavScreens : ScreenProvider {
   data class ApodSingle(val config: ApodScreenConfig) : NavScreens
   data class ApodGrid(val config: ApodScreenConfig) : NavScreens
   data class ApodFullScreen(val item: ApodItem) : NavScreens
+  data object Gallery : NavScreens
   data object About : NavScreens
   data object Licenses : NavScreens
   data object Settings : NavScreens

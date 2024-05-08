@@ -12,6 +12,7 @@ dependencies {
   api(projects.modules.nav.screens)
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
+  implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

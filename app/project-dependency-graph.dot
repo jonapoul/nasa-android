@@ -14,7 +14,7 @@ node ["style"="filled"]
 ":modules:nav:screens" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:nav:args" ["fillcolor"="#55FF55","shape"="box"]
-":modules:apod:data:di" ["fillcolor"="#FF5555","shape"="box"]
+":modules:apod:di" ["fillcolor"="#FF5555","shape"="box"]
 ":modules:apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":modules:apod:data:db" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
@@ -22,6 +22,13 @@ node ["style"="filled"]
 ":modules:apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:apod:screen-single:vm" ["fillcolor"="#FCB103","shape"="box"]
+":modules:gallery:di" ["fillcolor"="#FF5555","shape"="box"]
+":modules:gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
+":modules:gallery:data:db" ["fillcolor"="#55FF55","shape"="box"]
+":modules:gallery:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":modules:gallery:vm" ["fillcolor"="#FCB103","shape"="box"]
+":modules:gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":modules:home:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":modules:home:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":modules:licenses:di" ["fillcolor"="#FF5555","shape"="box"]
@@ -51,9 +58,11 @@ graph ["label"="Legend","fontsize"="15"]
 }
 ":app" -> ":modules:about:di" ["style"="dotted"]
 ":app" -> ":modules:about:ui" ["style"="dotted"]
-":app" -> ":modules:apod:data:di" ["style"="dotted"]
+":app" -> ":modules:apod:di" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-grid:ui" ["style"="dotted"]
 ":app" -> ":modules:apod:screen-single:ui" ["style"="dotted"]
+":app" -> ":modules:gallery:di" ["style"="dotted"]
+":app" -> ":modules:gallery:ui" ["style"="dotted"]
 ":app" -> ":modules:home:ui" ["style"="dotted"]
 ":app" -> ":modules:licenses:di" ["style"="dotted"]
 ":app" -> ":modules:licenses:ui" ["style"="dotted"]
@@ -68,9 +77,9 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:core:ui" -> ":modules:core:model"
 ":modules:nav:screens" -> ":modules:apod:model"
 ":modules:nav:screens" -> ":modules:nav:args"
-":modules:apod:data:di" -> ":modules:apod:data:api"
-":modules:apod:data:di" -> ":modules:apod:data:db"
-":modules:apod:data:di" -> ":modules:core:http"
+":modules:apod:di" -> ":modules:apod:data:api"
+":modules:apod:di" -> ":modules:apod:data:db"
+":modules:apod:di" -> ":modules:core:http"
 ":modules:apod:data:api" -> ":modules:apod:model"
 ":modules:apod:data:api" -> ":modules:core:model"
 ":modules:apod:data:db" -> ":modules:apod:model"
@@ -92,11 +101,25 @@ graph ["label"="Legend","fontsize"="15"]
 ":modules:apod:screen-single:vm" -> ":modules:core:http"
 ":modules:apod:screen-single:vm" -> ":modules:core:url"
 ":modules:apod:screen-single:vm" -> ":modules:nav:args"
+":modules:gallery:di" -> ":modules:gallery:data:api"
+":modules:gallery:di" -> ":modules:gallery:data:db"
+":modules:gallery:di" -> ":modules:core:http"
+":modules:gallery:data:api" -> ":modules:gallery:model"
+":modules:gallery:data:api" -> ":modules:core:model"
+":modules:gallery:data:db" -> ":modules:gallery:model"
+":modules:gallery:ui" -> ":modules:gallery:vm"
+":modules:gallery:ui" -> ":modules:core:ui"
+":modules:gallery:ui" -> ":modules:nav:screens"
+":modules:gallery:vm" -> ":modules:gallery:data:repo"
+":modules:gallery:vm" -> ":modules:gallery:model"
+":modules:gallery:vm" -> ":modules:core:url"
+":modules:gallery:vm" -> ":modules:nav:args"
+":modules:gallery:data:repo" -> ":modules:gallery:data:api"
+":modules:gallery:data:repo" -> ":modules:gallery:data:db"
+":modules:gallery:data:repo" -> ":modules:gallery:model"
 ":modules:home:ui" -> ":modules:home:vm"
 ":modules:home:ui" -> ":modules:core:ui"
 ":modules:home:ui" -> ":modules:nav:screens"
-":modules:home:vm" -> ":modules:about:data"
-":modules:home:vm" -> ":modules:core:url"
 ":modules:licenses:di" -> ":modules:licenses:data"
 ":modules:licenses:ui" -> ":modules:core:ui"
 ":modules:licenses:ui" -> ":modules:licenses:vm"

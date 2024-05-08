@@ -45,6 +45,13 @@ class HomeScreen : Screen {
       clickedApodToday = false
     }
 
+    val galleryScreen = rememberScreen(NavScreens.Gallery)
+    var clickedGallery by remember { mutableStateOf(false) }
+    if (clickedGallery) {
+      navigator.push(galleryScreen)
+      clickedGallery = false
+    }
+
     HomeScreenImpl(
       theme = theme,
       onAction = { action ->
@@ -57,8 +64,12 @@ class HomeScreen : Screen {
             clickedSettings = true
           }
 
-          HomeAction.ApodToday -> {
+          HomeAction.NavApodToday -> {
             clickedApodToday = true
+          }
+
+          HomeAction.NavGallery -> {
+            clickedGallery = true
           }
         }
       },
