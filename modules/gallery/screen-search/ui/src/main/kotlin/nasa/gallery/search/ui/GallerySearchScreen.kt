@@ -1,4 +1,4 @@
-package nasa.gallery.ui
+package nasa.gallery.search.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -7,18 +7,16 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.core.ui.getViewModel
-import nasa.gallery.vm.GalleryViewModel
+import nasa.gallery.search.vm.SearchViewModel
 
-class GalleryScreen : Screen {
-  @Suppress("CyclomaticComplexMethod")
+class GallerySearchScreen : Screen {
   @Composable
   override fun Content() {
     val navigator = LocalNavigator.currentOrThrow
-    val viewModel = getViewModel<GalleryViewModel>()
+    val viewModel = getViewModel<SearchViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val apiKey by viewModel.apiKey.collectAsStateWithLifecycle()
 
-    GalleryScreenImpl(
+    SearchScreenImpl(
       state = state,
       onAction = { action ->
 //        when (action) {

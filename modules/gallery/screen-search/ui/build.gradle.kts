@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-  namespace = "nasa.gallery.ui"
+  namespace = "nasa.gallery.search.ui"
 }
 
 dependencies {
-  api(projects.modules.gallery.vm)
+  api(projects.modules.gallery.screenSearch.vm)
   api(projects.modules.core.ui)
   api(projects.modules.nav.screens)
   api(libs.androidx.compose.runtime)

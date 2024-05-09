@@ -1,4 +1,4 @@
-package nasa.gallery.ui
+package nasa.gallery.search.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,19 +13,19 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
-import nasa.gallery.vm.GalleryScreenState
+import nasa.gallery.search.vm.SearchScreenState
 
 @Composable
-internal fun GalleryScreenImpl(
-  state: GalleryScreenState,
-  onAction: (GalleryAction) -> Unit,
+internal fun SearchScreenImpl(
+  state: SearchScreenState,
+  onAction: (SearchAction) -> Unit,
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { GalleryTopBar(state, onAction, theme) },
+    topBar = { SearchTopBar(state, onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
-      GalleryContent(
+      SearchContent(
         modifier = Modifier.padding(innerPadding),
         state = state,
         onAction = onAction,
@@ -36,9 +36,9 @@ internal fun GalleryScreenImpl(
 }
 
 @Composable
-private fun GalleryContent(
-  state: GalleryScreenState,
-  onAction: (GalleryAction) -> Unit,
+private fun SearchContent(
+  state: SearchScreenState,
+  onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -55,8 +55,8 @@ private fun GalleryContent(
 @ScreenPreview
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
-  GalleryScreenImpl(
-    state = GalleryScreenState.Success(EXAMPLE_KEY),
+  SearchScreenImpl(
+    state = SearchScreenState.Success(""),
     onAction = {},
   )
 }
@@ -64,9 +64,8 @@ private fun PreviewSuccess() = PreviewScreen {
 @ScreenPreview
 @Composable
 private fun PreviewFailure() = PreviewScreen {
-  GalleryScreenImpl(
-    state = GalleryScreenState.Failed(
-      EXAMPLE_KEY,
+  SearchScreenImpl(
+    state = SearchScreenState.Failed(
       message = "Something broke! Here's some more rubbish too for preview",
     ),
     onAction = {},
@@ -76,8 +75,8 @@ private fun PreviewFailure() = PreviewScreen {
 @ScreenPreview
 @Composable
 private fun PreviewLoading() = PreviewScreen {
-  GalleryScreenImpl(
-    state = GalleryScreenState.Loading(EXAMPLE_KEY),
+  SearchScreenImpl(
+    state = SearchScreenState.Loading(""),
     onAction = {},
   )
 }
@@ -85,8 +84,8 @@ private fun PreviewLoading() = PreviewScreen {
 @ScreenPreview
 @Composable
 private fun PreviewNoKey() = PreviewScreen {
-  GalleryScreenImpl(
-    state = GalleryScreenState.NoApiKey,
+  SearchScreenImpl(
+    state = SearchScreenState.NoApiKey,
     onAction = {},
   )
 }

@@ -1,4 +1,4 @@
-package nasa.gallery.ui
+package nasa.gallery.search.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -14,13 +14,13 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
-import nasa.gallery.vm.GalleryScreenState
+import nasa.gallery.search.vm.SearchScreenState
 import nasa.core.ui.R as CoreR
 
 @Composable
-internal fun GalleryTopBar(
-  state: GalleryScreenState,
-  onAction: (GalleryAction) -> Unit,
+internal fun SearchTopBar(
+  state: SearchScreenState,
+  onAction: (SearchAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
   TopAppBar(
@@ -33,7 +33,7 @@ internal fun GalleryTopBar(
       )
     },
     navigationIcon = {
-      IconButton(onClick = { onAction(GalleryAction.NavBack) }) {
+      IconButton(onClick = { onAction(SearchAction.NavBack) }) {
         Icon(
           imageVector = Icons.AutoMirrored.Filled.ArrowBack,
           contentDescription = stringResource(id = CoreR.string.nav_back),
@@ -46,8 +46,8 @@ internal fun GalleryTopBar(
 @Preview
 @Composable
 private fun PreviewToolbar() = PreviewColumn {
-  GalleryTopBar(
-    state = GalleryScreenState.Success(EXAMPLE_KEY),
+  SearchTopBar(
+    state = SearchScreenState.Success(""),
     onAction = {},
   )
 }

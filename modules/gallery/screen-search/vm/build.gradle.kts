@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-  namespace = "nasa.gallery.vm"
+  namespace = "nasa.gallery.search.vm"
 }
 
 dependencies {

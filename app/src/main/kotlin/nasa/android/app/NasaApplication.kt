@@ -20,7 +20,7 @@ import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.buildOkHttp
 import nasa.core.model.ApiKey
 import nasa.core.model.IMAGE_CACHE_DIR
-import nasa.gallery.ui.GalleryScreen
+import nasa.gallery.search.ui.GallerySearchScreen
 import nasa.home.ui.HomeScreen
 import nasa.licenses.ui.LicensesScreen
 import nasa.nav.NavScreens
@@ -59,7 +59,7 @@ class NasaApplication : Application(), ImageLoaderFactory {
       register<NavScreens.ApodSingle> { ApodSingleScreen(it.config) }
       register<NavScreens.ApodGrid> { ApodGridScreen(it.config) }
       register<NavScreens.ApodFullScreen> { ApodFullScreen(it.item) }
-      register<NavScreens.Gallery> { GalleryScreen() }
+      register<NavScreens.Gallery> { GallerySearchScreen() }
       register<NavScreens.About> { AboutScreen() }
       register<NavScreens.Licenses> { LicensesScreen() }
       register<NavScreens.Settings> { SettingsScreen() }

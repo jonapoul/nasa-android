@@ -147,7 +147,7 @@ dependencies {
   implementation(projects.modules.apod.screenGrid.ui)
   implementation(projects.modules.apod.screenSingle.ui)
   implementation(projects.modules.gallery.di)
-  implementation(projects.modules.gallery.ui)
+  implementation(projects.modules.gallery.screenSearch.ui)
   implementation(projects.modules.home.ui)
   implementation(projects.modules.licenses.di)
   implementation(projects.modules.licenses.ui)
