@@ -19,8 +19,8 @@ import kotlinx.datetime.plus
 import nasa.apod.model.ApodItem
 import nasa.apod.single.vm.ApodSingleViewModel
 import nasa.core.ui.getViewModel
-import nasa.nav.NavScreens
 import nasa.nav.ApodScreenConfig
+import nasa.nav.NavScreens
 
 data class ApodSingleScreen(
   val config: ApodScreenConfig,

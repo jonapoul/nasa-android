@@ -5,11 +5,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import nasa.gallery.data.api.GalleryApi
-import nasa.gallery.data.api.GalleryJson
 import nasa.core.http.buildOkHttp
 import nasa.core.http.buildRetrofit
 import nasa.core.model.NASA_API_URL
+import nasa.gallery.data.api.GalleryApi
+import nasa.gallery.data.api.GalleryJson
 import retrofit2.create
 import timber.log.Timber
 

@@ -1,6 +1,14 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   id("module-kotlin")
   alias(libs.plugins.kotlin.serialization)
+}
+
+tasks.withType<KotlinCompile> {
+  kotlinOptions {
+    freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+  }
 }
 
 dependencies {

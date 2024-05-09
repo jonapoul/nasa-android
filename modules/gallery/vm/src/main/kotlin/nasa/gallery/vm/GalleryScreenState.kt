@@ -1,7 +1,6 @@
 package nasa.gallery.vm
 
 import androidx.compose.runtime.Immutable
-import kotlinx.datetime.LocalDate
 import nasa.core.model.ApiKey
 
 @Immutable

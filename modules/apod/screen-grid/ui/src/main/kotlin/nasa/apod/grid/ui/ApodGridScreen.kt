@@ -18,11 +18,11 @@ import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import nasa.apod.grid.vm.ApodGridViewModel
 import nasa.core.ui.getViewModel
-import nasa.nav.NavScreens
 import nasa.nav.ApodScreenConfig
+import nasa.nav.NavScreens
 
 data class ApodGridScreen(
-    val config: ApodScreenConfig,
+  val config: ApodScreenConfig,
 ) : Screen {
   @Suppress("CyclomaticComplexMethod")
   @Composable
