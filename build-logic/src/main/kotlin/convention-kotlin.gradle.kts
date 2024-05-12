@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 tasks.withType<KotlinCompile> {
   kotlinOptions {
-    jvmTarget = "19"
+    jvmTarget = "17"
     freeCompilerArgs += listOf(
       "-Xjvm-default=all-compatibility",
       "-opt-in=kotlin.RequiresOptIn",
@@ -14,8 +14,8 @@ tasks.withType<KotlinCompile> {
 }
 
 extensions.configure<JavaPluginExtension> {
-  sourceCompatibility = JavaVersion.VERSION_19
-  targetCompatibility = JavaVersion.VERSION_19
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
 }
 
 val libs = the<LibrariesForLibs>()

@@ -8,7 +8,7 @@ plugins {
 
 android {
   kotlinOptions {
-    jvmTarget = "19"
+    jvmTarget = "17"
   }
 
   buildFeatures {

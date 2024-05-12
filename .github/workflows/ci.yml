@@ -25,7 +25,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 19
+          java-version: 17
           distribution: "zulu"
 
       - name: Add permissions
