@@ -12,6 +12,7 @@ import nasa.gallery.search.vm.SearchViewModel
 class GallerySearchScreen : Screen {
   @Composable
   override fun Content() {
+    @Suppress("UnusedPrivateProperty")
     val navigator = LocalNavigator.currentOrThrow
     val viewModel = getViewModel<SearchViewModel>()
     val state by viewModel.state.collectAsStateWithLifecycle()

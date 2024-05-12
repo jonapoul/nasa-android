@@ -17,6 +17,7 @@ import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.search.vm.SearchScreenState
 import nasa.core.ui.R as CoreR
 
+@Suppress("UnusedParameter")
 @Composable
 internal fun SearchTopBar(
   state: SearchScreenState,

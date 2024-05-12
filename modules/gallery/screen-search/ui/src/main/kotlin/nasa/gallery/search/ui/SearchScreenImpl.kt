@@ -35,6 +35,7 @@ internal fun SearchScreenImpl(
   }
 }
 
+@Suppress("UnusedParameter")
 @Composable
 private fun SearchContent(
   state: SearchScreenState,

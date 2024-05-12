@@ -9,11 +9,11 @@ sealed interface SearchScreenState {
   data object NoApiKey : SearchScreenState
 
   data class Loading(
-    val placeholder: String
+    val placeholder: String,
   ) : SearchScreenState
 
   data class Success(
-    val placeholder: String
+    val placeholder: String,
   ) : SearchScreenState
 
   data class Failed(
