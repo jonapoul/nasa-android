@@ -21,7 +21,6 @@ enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 includeBuild("build-logic")
-includeBuild("build-diagrams")
 
 include(":app")
 
