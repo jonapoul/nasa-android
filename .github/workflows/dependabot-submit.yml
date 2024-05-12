@@ -23,10 +23,5 @@ jobs:
       - name: Add permissions
         run: chmod +x ./gradlew
 
-      - name: Add dummy API key
-        run: |
-          touch local-api.properties
-          echo "nasaApiKey=SOME_DUMMY_API_KEY" >> local-api.properties
-
       - name: Submit dependencies
         uses: gradle/actions/dependency-submission@v3

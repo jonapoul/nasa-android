@@ -101,10 +101,10 @@ org.jetbrains.kotlin:kotlin-stdlib-common:1.9.23
 org.jetbrains.kotlin:kotlin-stdlib:1.9.23
 org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.7
 org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7
-org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0
-org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0
-org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0
-org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0
+org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1
+org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.1
+org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.1
+org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1
 org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.5.0
 org.jetbrains.kotlinx:kotlinx-datetime:0.5.0
 org.jetbrains.kotlinx:kotlinx-serialization-bom:1.6.3
