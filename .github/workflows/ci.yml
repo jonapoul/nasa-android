@@ -31,11 +31,6 @@ jobs:
       - name: Add permissions
         run: chmod +x ./gradlew
 
-      - name: Add dummy API key
-        run: |
-          touch local-api.properties
-          echo "nasaApiKey=SOME_DUMMY_API_KEY" >> local-api.properties
-
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
