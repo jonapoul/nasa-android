@@ -1,22 +1,19 @@
 package nasa.gallery.search.vm
 
 import androidx.compose.runtime.Immutable
+import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
 sealed interface SearchScreenState {
-  data object Inactive : SearchScreenState
+  data object Empty : SearchScreenState
 
-  data object NoApiKey : SearchScreenState
-
-  data class Loading(
-    val placeholder: String,
-  ) : SearchScreenState
+  data object Searching : SearchScreenState
 
   data class Success(
-    val placeholder: String,
+    val results: ImmutableList<SearchResultItem>,
   ) : SearchScreenState
 
   data class Failed(
-    val message: String,
+    val reason: String,
   ) : SearchScreenState
 }

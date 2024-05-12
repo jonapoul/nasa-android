@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.collections.immutable.persistentListOf
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
@@ -28,7 +29,7 @@ internal fun SearchTopBar(
     colors = theme.topAppBarColors(),
     title = {
       Text(
-        text = stringResource(id = R.string.gallery_toolbar_title),
+        text = stringResource(id = R.string.search_toolbar_title),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
@@ -48,7 +49,9 @@ internal fun SearchTopBar(
 @Composable
 private fun PreviewToolbar() = PreviewColumn {
   SearchTopBar(
-    state = SearchScreenState.Success(""),
+    state = SearchScreenState.Success(
+      persistentListOf(EXAMPLE_ITEM_1),
+    ),
     onAction = {},
   )
 }

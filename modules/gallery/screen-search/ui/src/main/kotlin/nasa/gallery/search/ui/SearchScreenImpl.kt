@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -35,7 +36,6 @@ internal fun SearchScreenImpl(
   }
 }
 
-@Suppress("UnusedParameter")
 @Composable
 private fun SearchContent(
   state: SearchScreenState,
@@ -49,7 +49,26 @@ private fun SearchContent(
       .padding(horizontal = 8.dp),
     contentAlignment = Alignment.Center,
   ) {
-    // TBC
+    when (state) {
+      is SearchScreenState.Empty -> {
+        SearchEmpty(
+          onAction = onAction,
+          theme = theme,
+        )
+      }
+
+      SearchScreenState.Searching -> {
+        // TBC
+      }
+
+      is SearchScreenState.Failed -> {
+        // TBC
+      }
+
+      is SearchScreenState.Success -> {
+        // TBC
+      }
+    }
   }
 }
 
@@ -57,7 +76,9 @@ private fun SearchContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Success(""),
+    state = SearchScreenState.Success(
+      persistentListOf(EXAMPLE_ITEM_1),
+    ),
     onAction = {},
   )
 }
@@ -66,9 +87,7 @@ private fun PreviewSuccess() = PreviewScreen {
 @Composable
 private fun PreviewFailure() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Failed(
-      message = "Something broke! Here's some more rubbish too for preview",
-    ),
+    state = SearchScreenState.Failed(reason = "Something broke! Here's some more rubbish too for preview"),
     onAction = {},
   )
 }
@@ -77,16 +96,16 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Loading(""),
+    state = SearchScreenState.Searching,
     onAction = {},
   )
 }
 
 @ScreenPreview
 @Composable
-private fun PreviewNoKey() = PreviewScreen {
+private fun PreviewEmpty() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.NoApiKey,
+    state = SearchScreenState.Empty,
     onAction = {},
   )
 }
