@@ -9,4 +9,5 @@ android {
 dependencies {
   api(libs.javaxInject)
   implementation(libs.androidx.core)
+  implementation(libs.timber)
 }

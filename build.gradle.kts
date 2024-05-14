@@ -30,6 +30,7 @@ dependencyAnalysis {
     bundle(name = "kotlin-stdlib") { includeGroup(group = "org.jetbrains.kotlin") }
     bundle(name = "modules") { include("^:.*\$".toRegex()) }
     bundle(name = "okhttp") { includeGroup(group = "com.squareup.okhttp3") }
+    bundle(name = "viewModel") { include(regex = "androidx.lifecycle:lifecycle-viewmodel.*".toRegex()) }
   }
 
   issues {
@@ -39,7 +40,6 @@ dependencyAnalysis {
       onRuntimeOnly { severity(value = "ignore") }
 
       onIncorrectConfiguration {
-        exclude(libs.kotlin.stdlib, libs.test.junit)
         exclude(
           ":modules:core:http",
           ":modules:core:model",
@@ -61,11 +61,6 @@ dependencyAnalysis {
           libs.test.robolectric,
           libs.test.timber,
           libs.test.turbine,
-        )
-        exclude(
-          libs.androidx.compose.ui.toolingPreview,
-          libs.kotlin.stdlib,
-          libs.timber,
         )
       }
     }

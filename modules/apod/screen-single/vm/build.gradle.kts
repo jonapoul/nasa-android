@@ -15,5 +15,6 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
+  implementation(libs.timber)
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

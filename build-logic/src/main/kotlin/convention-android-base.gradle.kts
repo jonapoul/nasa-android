@@ -52,9 +52,7 @@ extensions.getByType(CommonExtension::class).apply {
 
 val libs = the<LibrariesForLibs>()
 val coreLibraryDesugaring by configurations
-val implementation by configurations
 
 dependencies {
   coreLibraryDesugaring(libs.android.desugaring)
-  implementation(libs.timber)
 }

@@ -1,5 +1,4 @@
-com.jakewharton.timber:timber:5.0.1
-org.jetbrains.kotlin:kotlin-stdlib:1.9.23
-org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.5.0
-org.jetbrains.kotlinx:kotlinx-datetime:0.5.0
-org.jetbrains:annotations:20.1.0
+org.jetbrains.kotlin:kotlin-stdlib:1.9.24
+org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.6.0
+org.jetbrains.kotlinx:kotlinx-datetime:0.6.0
+org.jetbrains:annotations:13.0

@@ -3,6 +3,7 @@ plugins {
 }
 
 dependencies {
+  api(libs.test.junit)
   api(libs.test.okhttp)
   implementation(projects.modules.core.http)
   implementation(libs.kotlinx.serialization.json)

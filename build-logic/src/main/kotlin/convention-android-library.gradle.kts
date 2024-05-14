@@ -1,5 +1,3 @@
-import org.gradle.accessors.dm.LibrariesForLibs
-
 plugins {
   kotlin("android")
   id("com.android.library")
@@ -22,11 +20,4 @@ android {
   packaging {
     resources.excludes.add("META-INF/*")
   }
-}
-
-val libs = the<LibrariesForLibs>()
-val implementation by configurations
-
-dependencies {
-  implementation(libs.timber)
 }

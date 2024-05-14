@@ -9,4 +9,5 @@ android {
 dependencies {
   api(projects.modules.licenses.data)
   api(libs.javaxInject)
+  implementation(libs.kotlin.stdlib)
 }
