@@ -10,9 +10,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.navigator.Navigator
 import dagger.hilt.android.AndroidEntryPoint
-import nasa.apod.single.ui.ApodSingleScreen
 import nasa.core.ui.NasaTheme
-import nasa.nav.ApodScreenConfig
+import nasa.home.ui.HomeScreen
 
 @AndroidEntryPoint
 class NasaActivity : ComponentActivity() {
@@ -26,7 +25,7 @@ class NasaActivity : ComponentActivity() {
     setContent {
       val theme by viewModel.theme.collectAsStateWithLifecycle()
       NasaTheme(theme) {
-        Navigator(ApodSingleScreen(ApodScreenConfig.Today))
+        Navigator(HomeScreen())
       }
     }
   }

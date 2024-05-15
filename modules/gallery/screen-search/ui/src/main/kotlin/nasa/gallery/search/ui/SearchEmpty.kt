@@ -13,10 +13,8 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 
-@Suppress("UNUSED_PARAMETER")
 @Composable
 internal fun SearchEmpty(
-  onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -28,6 +26,7 @@ internal fun SearchEmpty(
     Text(
       text = stringResource(id = R.string.search_empty_title),
       fontSize = 25.sp,
+      color = theme.pageText,
     )
   }
 }
@@ -36,6 +35,6 @@ internal fun SearchEmpty(
 @Composable
 private fun PreviewEmpty() = PreviewScreen {
   SearchEmpty(
-    onAction = {},
+    // TBC
   )
 }

@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package nasa.gallery.search.ui
 
 import androidx.compose.foundation.layout.Box
@@ -23,7 +25,7 @@ internal fun SearchScreenImpl(
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { SearchTopBar(state, onAction, theme) },
+    topBar = { SearchTopBar(onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       SearchContent(
@@ -52,7 +54,6 @@ private fun SearchContent(
     when (state) {
       is SearchScreenState.Empty -> {
         SearchEmpty(
-          onAction = onAction,
           theme = theme,
         )
       }

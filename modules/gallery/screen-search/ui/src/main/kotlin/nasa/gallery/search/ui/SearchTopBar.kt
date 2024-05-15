@@ -10,18 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import kotlinx.collections.immutable.persistentListOf
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
-import nasa.gallery.search.vm.SearchScreenState
 import nasa.core.ui.R as CoreR
 
-@Suppress("UnusedParameter")
 @Composable
 internal fun SearchTopBar(
-  state: SearchScreenState,
   onAction: (SearchAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
@@ -49,9 +45,6 @@ internal fun SearchTopBar(
 @Composable
 private fun PreviewToolbar() = PreviewColumn {
   SearchTopBar(
-    state = SearchScreenState.Success(
-      persistentListOf(EXAMPLE_ITEM_1),
-    ),
     onAction = {},
   )
 }
