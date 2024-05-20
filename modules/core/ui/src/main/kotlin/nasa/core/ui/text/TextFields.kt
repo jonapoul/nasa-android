@@ -49,8 +49,8 @@ fun NasaTextField(
   keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
   keyboardActions: KeyboardActions = KeyboardActions.Default,
   colors: TextFieldColors? = null,
+  theme: Theme = LocalTheme.current,
 ) {
-  val theme = LocalTheme.current
   val isFocused by interactionSource.collectIsFocusedAsState()
   var fieldModifier = modifier
   if (isFocused) {

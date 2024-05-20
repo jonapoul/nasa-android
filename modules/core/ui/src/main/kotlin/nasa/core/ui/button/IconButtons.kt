@@ -35,18 +35,20 @@ fun PrimaryIconButton(
   enabled: Boolean = true,
   shape: Shape = DefaultButtonShape,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  theme: Theme = LocalTheme.current,
   content: @Composable () -> Unit = { DefaultIconButtonContent(imageVector, contentDescription, size) },
 ) {
   BasicIconButton(
     imageVector = imageVector,
     contentDescription = contentDescription,
     onClick = onClick,
-    colors = { theme, isPressed -> theme.primary(isPressed) },
+    colors = { t, isPressed -> t.primary(isPressed) },
     modifier = modifier,
     size = size,
     enabled = enabled,
     shape = shape,
     interactionSource = interactionSource,
+    theme = theme,
     content = content,
   )
 }
@@ -62,18 +64,20 @@ fun RegularIconButton(
   enabled: Boolean = true,
   shape: Shape = DefaultButtonShape,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  theme: Theme = LocalTheme.current,
   content: @Composable () -> Unit = { DefaultIconButtonContent(imageVector, contentDescription, size) },
 ) {
   BasicIconButton(
     imageVector = imageVector,
     contentDescription = contentDescription,
     onClick = onClick,
-    colors = { theme, isPressed -> theme.regular(isPressed) },
+    colors = { t, isPressed -> t.regular(isPressed) },
     modifier = modifier,
     size = size,
     enabled = enabled,
     shape = shape,
     interactionSource = interactionSource,
+    theme = theme,
     content = content,
   )
 }
@@ -90,9 +94,9 @@ fun BasicIconButton(
   enabled: Boolean = true,
   shape: Shape = DefaultButtonShape,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+  theme: Theme = LocalTheme.current,
   content: @Composable () -> Unit = { DefaultIconButtonContent(imageVector, contentDescription, size) },
 ) {
-  val theme = LocalTheme.current
   val isPressed by interactionSource.collectIsPressedAsState()
   val buttonColors = colors(theme, isPressed)
   val background = if (enabled) buttonColors.containerColor else buttonColors.disabledContainerColor
