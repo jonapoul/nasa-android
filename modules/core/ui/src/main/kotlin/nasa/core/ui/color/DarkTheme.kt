@@ -54,7 +54,7 @@ internal class DarkTheme : Theme {
   override val errorText = ColorPalette.red200
   override val errorBorder = ColorPalette.red500
 
-  override val formInputBackground = ColorPalette.grey700
+  override val formInputBackground = ColorPalette.grey600
   override val formInputShadow = ColorPalette.blue200
   override val formInputText = ColorPalette.grey100
   override val formInputTextPlaceholder = ColorPalette.navy500
