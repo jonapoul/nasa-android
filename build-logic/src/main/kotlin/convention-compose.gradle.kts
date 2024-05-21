@@ -2,11 +2,12 @@ import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import org.gradle.accessors.dm.LibrariesForLibs
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
   id("convention-kotlin")
   id("convention-android-base")
+  id("org.jetbrains.kotlin.plugin.compose")
 }
 
 val libs = the<LibrariesForLibs>()
@@ -19,24 +20,14 @@ ext.apply {
   buildFeatures {
     compose = true
   }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
-  }
 }
 
-tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    // From https://chrisbanes.me/posts/composable-metrics/
-    val propertyRoot = "plugin:androidx.compose.compiler.plugins.kotlin"
-    val metricReportDir = project.layout.buildDirectory.dir("compose_metrics").get().asFile
-    freeCompilerArgs += listOf("-P", "$propertyRoot:reportsDestination=${metricReportDir.absolutePath}")
-    freeCompilerArgs += listOf("-P", "$propertyRoot:metricsDestination=${metricReportDir.absolutePath}")
-
-    // From https://developer.android.com/develop/ui/compose/performance/stability/fix#configuration-file
-    val stabilityConfigFile = rootProject.file("compose-stability.conf").absolutePath
-    freeCompilerArgs += listOf("-P", "$propertyRoot:stabilityConfigurationPath=$stabilityConfigFile")
-  }
+composeCompiler {
+  val metricReportDir = project.layout.buildDirectory.dir("compose_metrics").get().asFile
+  metricsDestination = metricReportDir
+  reportsDestination = metricReportDir
+  stabilityConfigurationFile = rootProject.file("compose-stability.conf")
+  targetKotlinPlatforms = setOf(KotlinPlatformType.androidJvm)
 }
 
 val implementation by configurations

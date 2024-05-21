@@ -14,6 +14,7 @@ kotlin {
 dependencies {
   implementation(libs.plugin.agp)
   implementation(libs.plugin.blueprint)
+  implementation(libs.plugin.compose)
   implementation(libs.plugin.dependencyGraph)
   implementation(libs.plugin.dependencyGuard)
   implementation(libs.plugin.detekt)
