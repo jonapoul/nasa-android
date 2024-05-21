@@ -1,13 +1,8 @@
-// https://publicobject.com/2024/01/30/internal-visibility/
-// Only used to access the "componentActivity" property, internal in Voyager
-@file:Suppress(
-  "CANNOT_OVERRIDE_INVISIBLE_MEMBER",
-  "INVISIBLE_MEMBER",
-  "INVISIBLE_REFERENCE",
-)
-
 package nasa.core.ui
 
+import android.content.Context
+import android.content.ContextWrapper
+import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -18,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.hilt.VoyagerHiltViewModelFactories
-import cafe.adriel.voyager.hilt.internal.componentActivity
 
 /**
  * This is an alternative to the [cafe.adriel.voyager.hilt.getViewModel] extension which comes with Voyager. We can't
@@ -39,7 +33,7 @@ inline fun <reified T : ViewModel> Screen.getViewModel(
     "No ViewModelStoreOwner was provided via LocalViewModelStoreOwner"
   }
 
-  val hash = hashCode()
+  val hash = remember(this) { hashCode() }
   return remember(T::class, hash) {
     val hasDefaultViewModelProviderFactory = requireNotNull(lifecycleOwner as? HasDefaultViewModelProviderFactory) {
       "$lifecycleOwner is not a androidx.lifecycle.HasDefaultViewModelProviderFactory"
@@ -63,3 +57,24 @@ inline fun <reified T : ViewModel> Screen.getViewModel(
     )
   }
 }
+
+/**
+ * Copied from [cafe.adriel.voyager.hilt.internal.findOwner], since it's internal in Voyager
+ */
+private inline fun <reified T> findOwner(context: Context): T? {
+  var innerContext = context
+  while (innerContext is ContextWrapper) {
+    if (innerContext is T) {
+      return innerContext
+    }
+    innerContext = innerContext.baseContext
+  }
+  return null
+}
+
+/**
+ * Copied from [cafe.adriel.voyager.hilt.internal.componentActivity], since it's internal in Voyager
+ */
+val Context.componentActivity: ComponentActivity
+  get() = findOwner<ComponentActivity>(this)
+    ?: error("Context must be a androidx.activity.ComponentActivity. Current is $this")
