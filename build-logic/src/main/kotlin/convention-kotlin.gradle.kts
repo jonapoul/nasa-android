@@ -1,9 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    jvmTarget = "17"
-    freeCompilerArgs += listOf(
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_17)
+    freeCompilerArgs.addAll(
       "-Xjvm-default=all-compatibility",
       "-opt-in=kotlin.RequiresOptIn",
     )
