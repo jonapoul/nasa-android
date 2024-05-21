@@ -6,8 +6,8 @@ plugins {
 }
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs += "-opt-in=kotlinx.serialization.ExperimentalSerializationApi"
+  compilerOptions {
+    freeCompilerArgs.add("-opt-in=kotlinx.serialization.ExperimentalSerializationApi")
   }
 }
 
