@@ -2,7 +2,7 @@
 # Plugins
 agp = "8.4.1"
 blueprint = "0.3.1"
-dependencyAnalysis = "1.31.0"
+dependencyAnalysis = "1.32.0"
 dependencyGraph = "0.8.0"
 dependencyGuard = "0.5.0"
 dependencyVersions = "0.51.0"
