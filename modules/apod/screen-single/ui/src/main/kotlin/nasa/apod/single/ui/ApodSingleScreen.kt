@@ -16,11 +16,14 @@ import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import nasa.apod.grid.nav.ApodGridNavScreen
 import nasa.apod.model.ApodItem
+import nasa.apod.nav.ApodScreenConfig
+import nasa.apod.single.nav.ApodFullScreenNavScreen
+import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.apod.single.vm.ApodSingleViewModel
 import nasa.core.ui.getViewModel
-import nasa.nav.ApodScreenConfig
-import nasa.nav.NavScreens
+import nasa.settings.nav.SettingsNavScreen
 
 data class ApodSingleScreen(
   val config: ApodScreenConfig,
@@ -40,12 +43,12 @@ data class ApodSingleScreen(
       LaunchedEffect(config, loadCounter) { viewModel.load(key, config) }
     }
 
-    val settingsScreen = rememberScreen(NavScreens.Settings)
+    val settingsScreen = rememberScreen(SettingsNavScreen)
 
     var displayItem by remember { mutableStateOf<ApodItem?>(null) }
     val immutableDisplayItem = displayItem
     if (immutableDisplayItem != null) {
-      val displayScreen = rememberScreen(NavScreens.ApodFullScreen(immutableDisplayItem))
+      val displayScreen = rememberScreen(ApodFullScreenNavScreen(immutableDisplayItem))
       navigator.push(displayScreen)
       displayItem = null
     }
@@ -63,7 +66,7 @@ data class ApodSingleScreen(
     val immutableSpecificDate = loadSpecificDate
     if (immutableSpecificDate != null) {
       val specific = ApodScreenConfig.Specific(immutableSpecificDate)
-      val screen = rememberScreen(NavScreens.ApodSingle(specific))
+      val screen = rememberScreen(ApodSingleNavScreen(specific))
       navigator.replace(screen)
       loadSpecificDate = null
     }
@@ -72,7 +75,7 @@ data class ApodSingleScreen(
     val immutableGridDate = gridDate
     if (immutableGridDate != null) {
       val specific = ApodScreenConfig.Specific(immutableGridDate)
-      val screen = rememberScreen(NavScreens.ApodGrid(specific))
+      val screen = rememberScreen(ApodGridNavScreen(specific))
       navigator.push(screen)
       gridDate = null
     }
@@ -92,7 +95,7 @@ data class ApodSingleScreen(
 
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.ApodSingle(ApodScreenConfig.Random()))
+      val screen = rememberScreen(ApodSingleNavScreen(ApodScreenConfig.Random()))
       navigator.replace(screen)
       loadRandom = false
     }

@@ -9,7 +9,6 @@ android {
 dependencies {
   api(projects.modules.gallery.data.api)
   api(projects.modules.gallery.data.db)
-  api(projects.modules.gallery.model)
   api(libs.alakazam.kotlin.core)
   api(libs.javaxInject)
   api(libs.kotlinx.coroutines)

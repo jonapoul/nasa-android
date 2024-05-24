@@ -1,0 +1,7 @@
+cafe.adriel.voyager:voyager-core-desktop:1.1.0-beta01
+cafe.adriel.voyager:voyager-core:1.1.0-beta01
+org.jetbrains.kotlin:kotlin-stdlib:2.0.0
+org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0-RC2
+org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0-RC2
+org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2
+org.jetbrains:annotations:23.0.0

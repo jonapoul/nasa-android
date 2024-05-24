@@ -16,7 +16,7 @@ import nasa.about.vm.AboutViewModel
 import nasa.about.vm.CheckUpdatesState
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
-import nasa.nav.NavScreens
+import nasa.licenses.nav.LicensesNavScreen
 
 class AboutScreen : Screen {
   @Composable
@@ -33,7 +33,7 @@ class AboutScreen : Screen {
       clickedBack = false
     }
 
-    val licensesScreen = rememberScreen(NavScreens.Licenses)
+    val licensesScreen = rememberScreen(LicensesNavScreen)
     var clickedLicenses by remember { mutableStateOf(false) }
     if (clickedLicenses) {
       navigator.push(licensesScreen)

@@ -16,10 +16,12 @@ import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
+import nasa.apod.grid.nav.ApodGridNavScreen
 import nasa.apod.grid.vm.ApodGridViewModel
+import nasa.apod.nav.ApodScreenConfig
+import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.core.ui.getViewModel
-import nasa.nav.ApodScreenConfig
-import nasa.nav.NavScreens
+import nasa.settings.nav.SettingsNavScreen
 
 data class ApodGridScreen(
   val config: ApodScreenConfig,
@@ -43,7 +45,7 @@ data class ApodGridScreen(
     val immutableSpecificDate = loadSpecificDate
     if (immutableSpecificDate != null) {
       val config = ApodScreenConfig.Specific(immutableSpecificDate)
-      val screen = rememberScreen(NavScreens.ApodGrid(config))
+      val screen = rememberScreen(ApodGridNavScreen(config))
       navigator.replace(screen)
       loadSpecificDate = null
     }
@@ -65,19 +67,19 @@ data class ApodGridScreen(
     val immutableItemDate = loadItemDate
     if (immutableItemDate != null) {
       val config = ApodScreenConfig.Specific(immutableItemDate)
-      val screen = rememberScreen(NavScreens.ApodSingle(config))
+      val screen = rememberScreen(ApodSingleNavScreen(config))
       navigator.push(screen)
       loadItemDate = null
     }
 
     var loadRandom by remember { mutableStateOf(false) }
     if (loadRandom) {
-      val screen = rememberScreen(NavScreens.ApodGrid(ApodScreenConfig.Random()))
+      val screen = rememberScreen(ApodGridNavScreen(ApodScreenConfig.Random()))
       navigator.replace(screen)
       loadRandom = false
     }
 
-    val settingsScreen = rememberScreen(NavScreens.Settings)
+    val settingsScreen = rememberScreen(SettingsNavScreen)
 
     ApodGridScreenImpl(
       state = state,

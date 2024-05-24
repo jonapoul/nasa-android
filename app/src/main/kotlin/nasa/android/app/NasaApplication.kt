@@ -10,9 +10,13 @@ import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.util.DebugLogger
 import dagger.hilt.android.HiltAndroidApp
+import nasa.about.nav.AboutNavScreen
 import nasa.about.ui.AboutScreen
 import nasa.android.BuildConfig
+import nasa.apod.grid.nav.ApodGridNavScreen
 import nasa.apod.grid.ui.ApodGridScreen
+import nasa.apod.single.nav.ApodFullScreenNavScreen
+import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.apod.single.ui.ApodFullScreen
 import nasa.apod.single.ui.ApodSingleScreen
 import nasa.core.http.DownloadProgressInterceptor
@@ -20,10 +24,13 @@ import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.buildOkHttp
 import nasa.core.model.ApiKey
 import nasa.core.model.IMAGE_CACHE_DIR
+import nasa.gallery.nav.GalleryNavScreen
 import nasa.gallery.search.ui.GallerySearchScreen
+import nasa.home.nav.HomeNavScreen
 import nasa.home.ui.HomeScreen
+import nasa.licenses.nav.LicensesNavScreen
 import nasa.licenses.ui.LicensesScreen
-import nasa.nav.NavScreens
+import nasa.settings.nav.SettingsNavScreen
 import nasa.settings.ui.SettingsScreen
 import timber.log.Timber
 import javax.inject.Inject
@@ -55,19 +62,18 @@ class NasaApplication : Application(), ImageLoaderFactory {
 
     Timber.v("Registering screens...")
     ScreenRegistry {
-      register<NavScreens.Home> { HomeScreen() }
-      register<NavScreens.ApodSingle> { ApodSingleScreen(it.config) }
-      register<NavScreens.ApodGrid> { ApodGridScreen(it.config) }
-      register<NavScreens.ApodFullScreen> { ApodFullScreen(it.item) }
-      register<NavScreens.Gallery> { GallerySearchScreen() }
-      register<NavScreens.About> { AboutScreen() }
-      register<NavScreens.Licenses> { LicensesScreen() }
-      register<NavScreens.Settings> { SettingsScreen() }
+      register<HomeNavScreen> { HomeScreen() }
+      register<ApodSingleNavScreen> { ApodSingleScreen(it.config) }
+      register<ApodGridNavScreen> { ApodGridScreen(it.config) }
+      register<ApodFullScreenNavScreen> { ApodFullScreen(it.item) }
+      register<GalleryNavScreen> { GallerySearchScreen() }
+      register<AboutNavScreen> { AboutScreen() }
+      register<LicensesNavScreen> { LicensesScreen() }
+      register<SettingsNavScreen> { SettingsScreen() }
     }
 
     Timber.v("Building ImageLoader...")
-    val imageLoader = newImageLoader()
-    Coil.setImageLoader(imageLoader)
+    Coil.setImageLoader(this)
     Timber.v("Done!")
   }
 

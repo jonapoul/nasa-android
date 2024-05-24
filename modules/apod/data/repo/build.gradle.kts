@@ -9,7 +9,6 @@ android {
 dependencies {
   api(projects.modules.apod.data.api)
   api(projects.modules.apod.data.db)
-  api(projects.modules.apod.model)
   api(libs.alakazam.kotlin.core)
   api(libs.javaxInject)
   api(libs.kotlinx.coroutines)

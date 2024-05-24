@@ -9,11 +9,14 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import nasa.about.nav.AboutNavScreen
+import nasa.apod.nav.ApodScreenConfig
+import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
+import nasa.gallery.nav.GalleryNavScreen
 import nasa.home.vm.HomeViewModel
-import nasa.nav.ApodScreenConfig
-import nasa.nav.NavScreens
+import nasa.settings.nav.SettingsNavScreen
 
 class HomeScreen : Screen {
   @Composable
@@ -24,28 +27,28 @@ class HomeScreen : Screen {
     @Suppress("UNUSED_VARIABLE")
     val viewModel = getViewModel<HomeViewModel>()
 
-    val aboutScreen = rememberScreen(NavScreens.About)
+    val aboutScreen = rememberScreen(AboutNavScreen)
     var clickedAbout by remember { mutableStateOf(false) }
     if (clickedAbout) {
       navigator.push(aboutScreen)
       clickedAbout = false
     }
 
-    val settingsScreen = rememberScreen(NavScreens.Settings)
+    val settingsScreen = rememberScreen(SettingsNavScreen)
     var clickedSettings by remember { mutableStateOf(false) }
     if (clickedSettings) {
       navigator.push(settingsScreen)
       clickedSettings = false
     }
 
-    val apodScreen = rememberScreen(NavScreens.ApodSingle(ApodScreenConfig.Today))
+    val apodScreen = rememberScreen(ApodSingleNavScreen(ApodScreenConfig.Today))
     var clickedApodToday by remember { mutableStateOf(false) }
     if (clickedApodToday) {
       navigator.push(apodScreen)
       clickedApodToday = false
     }
 
-    val galleryScreen = rememberScreen(NavScreens.Gallery)
+    val galleryScreen = rememberScreen(GalleryNavScreen)
     var clickedGallery by remember { mutableStateOf(false) }
     if (clickedGallery) {
       navigator.push(galleryScreen)

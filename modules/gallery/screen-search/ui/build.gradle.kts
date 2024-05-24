@@ -7,9 +7,9 @@ android {
 }
 
 dependencies {
+  api(projects.modules.gallery.nav)
   api(projects.modules.gallery.screenSearch.vm)
   api(projects.modules.core.ui)
-  api(projects.modules.nav.screens)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)

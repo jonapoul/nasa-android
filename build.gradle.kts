@@ -1,5 +1,4 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
-import javax.xml.parsers.DocumentBuilderFactory
 
 plugins {
   alias(libs.plugins.agp.app) apply false
@@ -32,6 +31,7 @@ dependencyAnalysis {
     bundle(name = "modules") { include("^:.*\$".toRegex()) }
     bundle(name = "okhttp") { includeGroup(group = "com.squareup.okhttp3") }
     bundle(name = "viewModel") { include(regex = "androidx.lifecycle:lifecycle-viewmodel.*".toRegex()) }
+    bundle(name = "voyagerCore") { include(regex = "cafe.adriel.voyager:voyager-core.*".toRegex()) }
   }
 
   issues {

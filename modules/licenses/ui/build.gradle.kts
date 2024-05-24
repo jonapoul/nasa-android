@@ -13,6 +13,7 @@ dependencies {
   api(libs.voyager.core)
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
+  implementation(libs.androidx.activity.core)
   implementation(libs.androidx.annotation)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

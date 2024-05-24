@@ -142,15 +142,19 @@ afterEvaluate {
 
 dependencies {
   implementation(projects.modules.about.di)
+  implementation(projects.modules.about.nav)
   implementation(projects.modules.about.ui)
   implementation(projects.modules.apod.di)
   implementation(projects.modules.apod.screenGrid.ui)
   implementation(projects.modules.apod.screenSingle.ui)
   implementation(projects.modules.gallery.di)
   implementation(projects.modules.gallery.screenSearch.ui)
+  implementation(projects.modules.home.nav)
   implementation(projects.modules.home.ui)
   implementation(projects.modules.licenses.di)
+  implementation(projects.modules.licenses.nav)
   implementation(projects.modules.licenses.ui)
+  implementation(projects.modules.settings.nav)
   implementation(projects.modules.settings.ui)
 
   implementation(libs.alakazam.android.core)

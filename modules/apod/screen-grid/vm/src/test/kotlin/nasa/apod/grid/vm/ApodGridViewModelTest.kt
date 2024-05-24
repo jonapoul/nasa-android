@@ -14,10 +14,10 @@ import nasa.apod.data.repo.MultipleApodRepository
 import nasa.apod.data.repo.MultipleLoadResult
 import nasa.apod.model.ApodNavButtonsState
 import nasa.apod.model.EARLIEST_APOD_DATE
+import nasa.apod.nav.ApodScreenConfig
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
 import nasa.core.url.UrlOpener
-import nasa.nav.ApodScreenConfig
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
