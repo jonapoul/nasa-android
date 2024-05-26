@@ -1,4 +1,4 @@
-package nasa.apod.di
+package nasa.android.di
 
 import android.content.Context
 import androidx.room.Room
@@ -7,16 +7,17 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import nasa.apod.data.db.ApodDao
-import nasa.apod.data.db.ApodDatabase
+import nasa.core.db.NasaDatabase
+import nasa.gallery.data.db.GalleryDao
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class ApodDatabaseModule {
+internal class DatabaseModule {
   @Provides
   @Singleton
-  fun db(context: Context): ApodDatabase {
-    return Room.databaseBuilder(context, ApodDatabase::class.java, name = "apod.db")
+  fun db(context: Context): NasaDatabase {
+    return Room.databaseBuilder(context, NasaDatabase::class.java, name = "nasa.db")
       .fallbackToDestructiveMigration()
       .addMigrations(
         // TBC
@@ -26,5 +27,9 @@ internal class ApodDatabaseModule {
 
   @Provides
   @Singleton
-  fun apodDao(db: ApodDatabase): ApodDao = db.apodDao()
+  fun apodDao(db: NasaDatabase): ApodDao = db.apodDao()
+
+  @Provides
+  @Singleton
+  fun galleryDao(db: NasaDatabase): GalleryDao = db.galleryDao()
 }

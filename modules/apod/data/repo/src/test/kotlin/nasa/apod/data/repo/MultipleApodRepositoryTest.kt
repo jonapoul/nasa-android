@@ -10,7 +10,7 @@ import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
 import nasa.apod.data.db.ApodDao
-import nasa.apod.data.db.ApodDatabase
+import nasa.core.db.NasaDatabase
 import nasa.core.model.ApiKey
 import nasa.test.http.MockWebServerRule
 import net.lachlanmckee.timberjunit.TimberTestRule
@@ -29,7 +29,7 @@ class MultipleApodRepositoryTest {
   val coroutineRule = CoroutineRule()
 
   @get:Rule
-  val databaseRule = RoomDatabaseRule(ApodDatabase::class)
+  val databaseRule = RoomDatabaseRule(NasaDatabase::class)
 
   @get:Rule
   val webServerRule = MockWebServerRule()

@@ -13,6 +13,5 @@ dependencies {
   compileOnly(libs.alakazam.kotlin.compose.annotations)
   testImplementation(projects.modules.core.http)
   testImplementation(projects.modules.test.http)
-  testImplementation(libs.okhttp.core)
   testImplementation(libs.test.okhttp)
 }

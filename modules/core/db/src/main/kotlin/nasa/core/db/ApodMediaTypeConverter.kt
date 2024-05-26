@@ -1,7 +1,6 @@
-package nasa.apod.data.db
+package nasa.core.db
 
 import androidx.room.TypeConverter
-import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodMediaType
 
 internal object ApodMediaTypeConverter {
@@ -10,12 +9,4 @@ internal object ApodMediaTypeConverter {
 
   @TypeConverter
   fun fromString(string: String): ApodMediaType = ApodMediaType.valueOf(string)
-}
-
-internal object LocalDateTypeConverter {
-  @TypeConverter
-  fun toString(date: LocalDate): String = date.toString()
-
-  @TypeConverter
-  fun fromString(string: String): LocalDate = LocalDate.parse(string)
 }

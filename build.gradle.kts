@@ -42,13 +42,12 @@ dependencyAnalysis {
 
       onIncorrectConfiguration {
         exclude(
-          ":modules:core:http",
           ":modules:core:model",
+          "javax.inject:javax.inject",
         )
       }
 
       onUnusedDependencies {
-        exclude("com.squareup.okhttp3:okhttp")
         exclude(
           libs.test.alakazam.core,
           libs.test.androidx.arch,

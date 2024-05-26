@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b0a149c4e227f8a0e4fb76a2f4bfcfb7",
+    "identityHash": "5c7857a26a0a71cde13dbcc7b2ec56aa",
     "entities": [
       {
         "tableName": "apod",
@@ -65,12 +65,32 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "gallery",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b0a149c4e227f8a0e4fb76a2f4bfcfb7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5c7857a26a0a71cde13dbcc7b2ec56aa')"
     ]
   }
 }

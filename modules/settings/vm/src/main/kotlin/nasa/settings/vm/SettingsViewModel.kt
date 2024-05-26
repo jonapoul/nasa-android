@@ -8,11 +8,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import nasa.apod.data.repo.DatabaseClearer
 import nasa.core.model.NASA_API_URL
 import nasa.core.url.UrlOpener
 import javax.inject.Inject
@@ -28,8 +26,7 @@ class SettingsViewModel @Inject internal constructor(
   val cacheSize: StateFlow<FileSize> = mutableCacheSize.asStateFlow()
 
   val databaseSize: StateFlow<FileSize> = databaseClearer
-    .fileSize()
-    .map { it.bytes }
+    .fileSize
     .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0.bytes)
 
   init {
@@ -59,5 +56,6 @@ class SettingsViewModel @Inject internal constructor(
 
   fun refreshCacheSize() {
     mutableCacheSize.update { imageCache.calculateSize() }
+    databaseClearer.updateFileSize()
   }
 }

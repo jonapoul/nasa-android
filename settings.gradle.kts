@@ -43,6 +43,7 @@ include(":modules:apod:screen-grid:nav")
 include(":modules:apod:screen-grid:ui")
 include(":modules:apod:screen-grid:vm")
 
+include(":modules:core:db")
 include(":modules:core:http")
 include(":modules:core:model")
 include(":modules:core:ui")

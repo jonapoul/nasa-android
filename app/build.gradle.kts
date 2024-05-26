@@ -172,6 +172,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.savedstate)
   implementation(libs.androidx.preference.ktx)
+  implementation(libs.androidx.room.runtime)
   implementation(libs.androidx.splash)
   implementation(libs.coil.base)
   implementation(libs.coil.core)

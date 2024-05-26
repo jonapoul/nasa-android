@@ -5,6 +5,7 @@ import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodMediaType
+import nasa.core.db.NasaDatabase
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -16,7 +17,7 @@ import kotlin.test.assertNull
 @RunWith(RobolectricTestRunner::class)
 class ApodDaoTest {
   @get:Rule
-  val databaseRule = RoomDatabaseRule(ApodDatabase::class)
+  val databaseRule = RoomDatabaseRule(NasaDatabase::class)
 
   private lateinit var apodDao: ApodDao
 

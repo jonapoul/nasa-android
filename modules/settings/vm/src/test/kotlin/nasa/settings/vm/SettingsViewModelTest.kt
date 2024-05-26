@@ -12,10 +12,10 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import nasa.apod.data.db.ApodDao
-import nasa.apod.data.db.ApodDatabase
-import nasa.apod.data.repo.DatabaseClearer
+import nasa.core.db.NasaDatabase
 import nasa.core.model.NASA_API_URL
 import nasa.core.url.UrlOpener
+import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,10 +26,13 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class SettingsViewModelTest {
   @get:Rule
-  val databaseRule = RoomDatabaseRule(ApodDatabase::class)
+  val databaseRule = RoomDatabaseRule(NasaDatabase::class, allowMainThread = true)
 
   @get:Rule
   val coroutineRule = CoroutineRule()
+
+  @get:Rule
+  val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
   // real
   private lateinit var viewModel: SettingsViewModel
@@ -52,7 +55,6 @@ class SettingsViewModelTest {
     databaseClearer = DatabaseClearer(
       io = IODispatcher(coroutineRule.dispatcher),
       database = databaseRule.database,
-      dao = dao,
     )
 
     viewModel = SettingsViewModel(

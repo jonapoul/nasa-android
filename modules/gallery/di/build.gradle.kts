@@ -12,6 +12,7 @@ dependencies {
   api(projects.modules.core.http)
   api(libs.alakazam.android.core)
   api(libs.javaxInject)
+  implementation(projects.modules.core.model)
   implementation(libs.androidx.room.runtime)
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.serialization.json)

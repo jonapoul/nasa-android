@@ -7,11 +7,11 @@ android {
 }
 
 dependencies {
-  api(projects.modules.core.ui)
+  api(projects.modules.apod.screenSingle.nav)
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
   implementation(projects.modules.about.nav)
-  implementation(projects.modules.apod.screenSingle.nav)
+  implementation(projects.modules.core.ui)
   implementation(projects.modules.gallery.nav)
   implementation(projects.modules.home.vm)
   implementation(projects.modules.settings.nav)

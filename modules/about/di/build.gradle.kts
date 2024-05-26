@@ -8,9 +8,9 @@ android {
 
 dependencies {
   api(projects.modules.about.data)
-  api(projects.modules.core.http)
   api(libs.alakazam.android.core)
   api(libs.javaxInject)
+  implementation(projects.modules.core.http)
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.json)
