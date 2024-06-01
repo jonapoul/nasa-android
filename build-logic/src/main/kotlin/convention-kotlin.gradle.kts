@@ -1,9 +1,10 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import nasa.gradle.javaVersion
+import nasa.gradle.jvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 tasks.withType<KotlinCompile> {
   compilerOptions {
-    jvmTarget.set(JvmTarget.JVM_17)
+    jvmTarget.set(project.jvmTarget())
     freeCompilerArgs.addAll(
       "-Xjvm-default=all-compatibility",
       "-opt-in=kotlin.RequiresOptIn",
@@ -11,7 +12,8 @@ tasks.withType<KotlinCompile> {
   }
 }
 
+val javaVersion = javaVersion()
 extensions.configure<JavaPluginExtension> {
-  sourceCompatibility = JavaVersion.VERSION_17
-  targetCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = javaVersion
+  targetCompatibility = javaVersion
 }

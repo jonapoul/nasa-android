@@ -39,7 +39,7 @@ The app pulls metadata about each image from the APOD service, then caches that 
 # Building
 
 ## JDK
-This project uses JDK 17 - so make sure you have this installed and selected in your IDE settings before building. I personally used the Zulu variant, but ideally there shouldn't be any practical difference.
+This project uses JDK 22 - so make sure you have this installed and selected in your IDE settings before building. I personally used the Zulu variant, but ideally there shouldn't be any practical difference.
 
 ## Command Line
 Open in Android Studio and run:

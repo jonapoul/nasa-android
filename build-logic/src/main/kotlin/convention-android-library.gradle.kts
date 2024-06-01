@@ -1,3 +1,5 @@
+import nasa.gradle.javaVersionString
+
 plugins {
   kotlin("android")
   id("com.android.library")
@@ -6,7 +8,7 @@ plugins {
 
 android {
   kotlinOptions {
-    jvmTarget = "17"
+    jvmTarget = javaVersionString()
   }
 
   buildFeatures {

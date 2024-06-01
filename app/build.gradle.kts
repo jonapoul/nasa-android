@@ -3,6 +3,7 @@ import blueprint.core.gitVersionCode
 import blueprint.core.intProperty
 import blueprint.core.rootLocalPropertiesOrNull
 import blueprint.core.runGitCommandOrNull
+import nasa.gradle.javaVersionString
 
 plugins {
   alias(libs.plugins.kotlin.android)
@@ -52,7 +53,7 @@ android {
   }
 
   kotlinOptions {
-    jvmTarget = "17"
+    jvmTarget = javaVersionString()
   }
 
   packaging {

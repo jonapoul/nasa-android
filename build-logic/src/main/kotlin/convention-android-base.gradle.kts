@@ -2,6 +2,7 @@
 
 import blueprint.core.intProperty
 import com.android.build.api.dsl.CommonExtension
+import nasa.gradle.javaVersion
 import org.gradle.accessors.dm.LibrariesForLibs
 
 extensions.getByType(CommonExtension::class).apply {
@@ -11,10 +12,11 @@ extensions.getByType(CommonExtension::class).apply {
     minSdk = intProperty(key = "nasa.minSdk")
   }
 
+  val javaVersion = javaVersion()
   compileOptions {
     isCoreLibraryDesugaringEnabled = true
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
   }
 
   buildFeatures {

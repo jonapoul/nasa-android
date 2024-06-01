@@ -1,14 +1,26 @@
+import java.util.Properties
+
 plugins {
   `kotlin-dsl`
 }
 
+// Pull java version property from project's root properties file, since build-logic doesn't have access to it
+val propsFile = file("../gradle.properties")
+if (!propsFile.exists()) {
+  error("No file found at ${propsFile.absolutePath}")
+}
+val props = Properties().also { it.load(propsFile.reader()) }
+val javaInt = props["nasa.javaVersion"]?.toString()?.toInt()
+  ?: error("Failed getting java version from $props")
+val javaVersion = JavaVersion.toVersion(javaInt)
+
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
-  targetCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = javaVersion
+  targetCompatibility = javaVersion
 }
 
 kotlin {
-  jvmToolchain(jdkVersion = 17)
+  jvmToolchain(javaInt)
 }
 
 dependencies {
