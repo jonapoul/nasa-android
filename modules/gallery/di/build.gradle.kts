@@ -8,10 +8,9 @@ android {
 
 dependencies {
   api(projects.modules.gallery.data.api)
-  api(projects.modules.gallery.data.db)
-  api(projects.modules.core.http)
   api(libs.alakazam.android.core)
   api(libs.javaxInject)
+  implementation(projects.modules.core.http)
   implementation(projects.modules.core.model)
   implementation(libs.androidx.room.runtime)
   implementation(libs.kotlin.stdlib)

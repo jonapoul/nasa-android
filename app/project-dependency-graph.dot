@@ -29,11 +29,11 @@ node ["style"="filled","shape"="box"]
 ":gallery:di" ["fillcolor"="#FF5555"]
 ":gallery:data:api" ["fillcolor"="#A17EFF"]
 ":gallery:model" ["fillcolor"="#A17EFF"]
-":gallery:data:db" ["fillcolor"="#55FF55"]
 ":gallery:screen-search:ui" ["fillcolor"="#FFFF55"]
 ":gallery:nav" ["fillcolor"="#A17EFF"]
 ":gallery:screen-search:vm" ["fillcolor"="#FCB103"]
 ":gallery:data:repo" ["fillcolor"="#55FF55"]
+":gallery:data:db" ["fillcolor"="#55FF55"]
 ":home:nav" ["fillcolor"="#A17EFF"]
 ":home:ui" ["fillcolor"="#FFFF55"]
 ":home:vm" ["fillcolor"="#FCB103"]
@@ -114,11 +114,9 @@ graph ["label"="Legend"]
 ":apod:screen-single:vm" -> ":core:http"
 ":apod:screen-single:vm" -> ":core:url"
 ":gallery:di" -> ":gallery:data:api"
-":gallery:di" -> ":gallery:data:db"
-":gallery:di" -> ":core:http"
+":gallery:di" -> ":core:http" ["style"="dotted"]
 ":gallery:di" -> ":core:model" ["style"="dotted"]
 ":gallery:data:api" -> ":gallery:model"
-":gallery:data:db" -> ":gallery:model"
 ":gallery:screen-search:ui" -> ":gallery:nav"
 ":gallery:screen-search:ui" -> ":gallery:screen-search:vm"
 ":gallery:screen-search:ui" -> ":core:ui"
