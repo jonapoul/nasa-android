@@ -3,9 +3,7 @@ package nasa.core.http
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class DownloadProgressInterceptor(
-  private val stateHolder: DownloadProgressStateHolder,
-) : Interceptor {
+class DownloadProgressInterceptor(private val stateHolder: DownloadProgressStateHolder) : Interceptor {
   override fun intercept(chain: Interceptor.Chain): Response {
     val originalResponse = chain.proceed(chain.request())
     val responseBuilder = originalResponse.newBuilder()

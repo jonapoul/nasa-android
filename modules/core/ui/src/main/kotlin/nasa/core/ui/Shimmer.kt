@@ -37,37 +37,35 @@ fun Modifier.shimmer(
   widthOfShadowBrush: Int = 500,
   angleOfAxisY: Float = 270f,
   durationMillis: Int = DEFAULT_DURATION_MS,
-): Modifier {
-  return composed {
-    val baseColor = theme.color()
-    val shimmerColors = persistentListOf(
-      baseColor.copy(alpha = 0.1f),
-      baseColor.copy(alpha = 0.2f),
-      baseColor.copy(alpha = 0.5f),
-      baseColor.copy(alpha = 0.2f),
-      baseColor.copy(alpha = 0.1f),
-    )
+): Modifier = composed {
+  val baseColor = theme.color()
+  val shimmerColors = persistentListOf(
+    baseColor.copy(alpha = 0.1f),
+    baseColor.copy(alpha = 0.2f),
+    baseColor.copy(alpha = 0.5f),
+    baseColor.copy(alpha = 0.2f),
+    baseColor.copy(alpha = 0.1f),
+  )
 
-    val transition = rememberInfiniteTransition(label = "")
+  val transition = rememberInfiniteTransition(label = "")
 
-    val translateAnimation = transition.animateFloat(
-      initialValue = 0f,
-      targetValue = (durationMillis + widthOfShadowBrush).toFloat(),
-      animationSpec = infiniteRepeatable(
-        animation = tween(durationMillis, easing = LinearEasing),
-        repeatMode = RepeatMode.Restart,
-      ),
-      label = "Shimmer loading animation",
-    )
+  val translateAnimation = transition.animateFloat(
+    initialValue = 0f,
+    targetValue = (durationMillis + widthOfShadowBrush).toFloat(),
+    animationSpec = infiniteRepeatable(
+      animation = tween(durationMillis, easing = LinearEasing),
+      repeatMode = RepeatMode.Restart,
+    ),
+    label = "Shimmer loading animation",
+  )
 
-    background(
-      brush = Brush.linearGradient(
-        colors = shimmerColors,
-        start = Offset(x = translateAnimation.value - widthOfShadowBrush, y = 0.0f),
-        end = Offset(x = translateAnimation.value, y = angleOfAxisY),
-      ),
-    )
-  }
+  background(
+    brush = Brush.linearGradient(
+      colors = shimmerColors,
+      start = Offset(x = translateAnimation.value - widthOfShadowBrush, y = 0.0f),
+      end = Offset(x = translateAnimation.value, y = angleOfAxisY),
+    ),
+  )
 }
 
 @Composable

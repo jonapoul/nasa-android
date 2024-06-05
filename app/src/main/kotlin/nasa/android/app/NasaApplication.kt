@@ -80,19 +80,20 @@ class NasaApplication : Application(), ImageLoaderFactory {
   override fun newImageLoader(): ImageLoader {
     val progressInterceptor = DownloadProgressInterceptor(downloadProgressStateHolder)
     val client = buildOkHttp(bc.debug, progressInterceptor) { Timber.tag("COIL").v(it) }
-    return ImageLoader.Builder(this)
+    return ImageLoader
+      .Builder(this)
       .memoryCache {
-        MemoryCache.Builder(this)
+        MemoryCache
+          .Builder(this)
           .maxSizePercent(percent = 0.2) // 20%, not 0.2%
           .build()
-      }
-      .diskCache {
-        DiskCache.Builder()
+      }.diskCache {
+        DiskCache
+          .Builder()
           .directory(cacheDir.resolve(IMAGE_CACHE_DIR))
           .maxSizeBytes(size = 100 * 1024 * 1024) // 100MB
           .build()
-      }
-      .respectCacheHeaders(true)
+      }.respectCacheHeaders(true)
       .networkObserverEnabled(true)
       .okHttpClient(client)
       .apply { if (bc.debug) logger(DebugLogger()) }

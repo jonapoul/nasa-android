@@ -9,13 +9,9 @@ import kotlin.coroutines.CoroutineContext
 fun buildSharedPreferences(
   context: Context = ApplicationProvider.getApplicationContext(),
   name: String = "prefs",
-): SharedPreferences {
-  return context.getSharedPreferences(name, Context.MODE_PRIVATE)
-}
+): SharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
 
 fun buildFlowSharedPreferences(
   coroutineContext: CoroutineContext,
   prefs: SharedPreferences = buildSharedPreferences(),
-): FlowSharedPreferences {
-  return FlowSharedPreferences(prefs, coroutineContext)
-}
+): FlowSharedPreferences = FlowSharedPreferences(prefs, coroutineContext)

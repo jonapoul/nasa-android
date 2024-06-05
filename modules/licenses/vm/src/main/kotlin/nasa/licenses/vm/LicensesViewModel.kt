@@ -41,12 +41,10 @@ class LicensesViewModel @Inject internal constructor(
     }
   }
 
-  private fun LicensesLoadState.Success.toLicensesState(): LicensesState {
-    return if (libraries.isEmpty()) {
-      LicensesState.NoneFound
-    } else {
-      LicensesState.Loaded(libraries.toImmutableList())
-    }
+  private fun LicensesLoadState.Success.toLicensesState(): LicensesState = if (libraries.isEmpty()) {
+    LicensesState.NoneFound
+  } else {
+    LicensesState.Loaded(libraries.toImmutableList())
   }
 
   fun openUrl(url: String) {

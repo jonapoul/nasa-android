@@ -34,7 +34,8 @@ data class LibraryModel(
   fun cleanedUp(): LibraryModel = copy(
     licenses = licenses.map { it.cleanUp() },
     developers = developers.map { if (it.matches(AOSP_REGEX)) AOSP else it },
-    dependency = dependency.split(":")
+    dependency = dependency
+      .split(":")
       .subList(fromIndex = 0, toIndex = 2)
       .joinToString(separator = ":"),
   )

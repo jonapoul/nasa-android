@@ -16,14 +16,12 @@ import javax.inject.Singleton
 internal class DatabaseModule {
   @Provides
   @Singleton
-  fun db(context: Context): NasaDatabase {
-    return Room.databaseBuilder(context, NasaDatabase::class.java, name = "nasa.db")
-      .fallbackToDestructiveMigration()
-      .addMigrations(
-        // TBC
-      )
-      .build()
-  }
+  fun db(context: Context): NasaDatabase = Room
+    .databaseBuilder(context, NasaDatabase::class.java, name = "nasa.db")
+    .fallbackToDestructiveMigration()
+    .addMigrations(
+      // TBC
+    ).build()
 
   @Provides
   @Singleton

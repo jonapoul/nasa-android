@@ -16,13 +16,10 @@ import javax.inject.Singleton
 internal class PreferencesModule {
   @Provides
   @Singleton
-  fun sharedPrefs(context: Context): SharedPreferences {
-    return PreferenceManager.getDefaultSharedPreferences(context)
-  }
+  fun sharedPrefs(context: Context): SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
   @Provides
   @Singleton
-  fun flowPrefs(sharedPreferences: SharedPreferences, io: IODispatcher): FlowSharedPreferences {
-    return FlowSharedPreferences(sharedPreferences, io)
-  }
+  fun flowPrefs(sharedPreferences: SharedPreferences, io: IODispatcher): FlowSharedPreferences =
+    FlowSharedPreferences(sharedPreferences, io)
 }

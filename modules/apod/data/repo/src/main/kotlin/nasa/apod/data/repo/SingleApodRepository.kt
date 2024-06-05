@@ -27,13 +27,17 @@ class SingleApodRepository @Inject internal constructor(
   private val calendar: Calendar,
   private val sharedRepository: SharedRepository,
 ) {
-  suspend fun loadToday(key: ApiKey): SingleLoadResult {
-    return loadFromDatabaseOrApi(key, date = null, getResponse = { api.getToday(key) })
-  }
+  suspend fun loadToday(key: ApiKey): SingleLoadResult = loadFromDatabaseOrApi(
+    key = key,
+    date = null,
+    getResponse = { api.getToday(key) },
+  )
 
-  suspend fun loadSpecific(key: ApiKey, date: LocalDate): SingleLoadResult {
-    return loadFromDatabaseOrApi(key, date, getResponse = { api.getByDate(key, date) })
-  }
+  suspend fun loadSpecific(key: ApiKey, date: LocalDate): SingleLoadResult = loadFromDatabaseOrApi(
+    key = key,
+    date = date,
+    getResponse = { api.getByDate(key, date) },
+  )
 
   suspend fun loadRandom(key: ApiKey): SingleLoadResult {
     // Can't query the DB if we don't know what date we want, so go straight to API

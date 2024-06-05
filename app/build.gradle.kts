@@ -24,11 +24,9 @@ dependencyGuard {
   configuration("releaseRuntimeClasspath")
 }
 
-fun gitTagOrCommit(): String {
-  return runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0"))
-    ?: runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))
-    ?: error("Failed getting git version from ${project.path}")
-}
+fun gitTagOrCommit(): String = runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0"))
+  ?: runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))
+  ?: error("Failed getting git version from ${project.path}")
 
 android {
   namespace = "nasa.android"

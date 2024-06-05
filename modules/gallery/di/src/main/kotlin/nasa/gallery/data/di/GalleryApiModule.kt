@@ -17,11 +17,9 @@ import timber.log.Timber
 @InstallIn(SingletonComponent::class)
 internal class GalleryApiModule {
   @Provides
-  fun api(buildConfig: IBuildConfig): GalleryApi {
-    return buildRetrofit(
-      client = buildOkHttp(buildConfig.debug) { Timber.tag("GALLERY").v(it) },
-      json = GalleryJson,
-      url = NASA_API_URL,
-    ).create()
-  }
+  fun api(buildConfig: IBuildConfig): GalleryApi = buildRetrofit(
+    client = buildOkHttp(buildConfig.debug) { Timber.tag("GALLERY").v(it) },
+    json = GalleryJson,
+    url = NASA_API_URL,
+  ).create()
 }

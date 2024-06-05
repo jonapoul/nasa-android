@@ -12,7 +12,5 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 internal class ToasterModule {
   @Provides
-  fun toaster(context: Context, main: MainDispatcher): Toaster {
-    return Toaster(main, context, context)
-  }
+  fun toaster(context: Context, main: MainDispatcher): Toaster = Toaster(main, context, context)
 }

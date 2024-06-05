@@ -133,9 +133,7 @@ class MultipleApodRepositoryTest {
     }
   }
 
-  private fun readJsonFromResource(name: String): String {
-    return getResourceAsStream(name).reader().readText()
-  }
+  private fun readJsonFromResource(name: String): String = getResourceAsStream(name).reader().readText()
 
   private companion object {
     val API_KEY = ApiKey(value = "SOME_DUMMY_KEY")

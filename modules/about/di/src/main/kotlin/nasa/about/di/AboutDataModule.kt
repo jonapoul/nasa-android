@@ -18,13 +18,11 @@ import timber.log.Timber
 @InstallIn(SingletonComponent::class)
 internal class AboutDataModule {
   @Provides
-  fun api(buildConfig: IBuildConfig): GithubApi {
-    return buildRetrofit(
-      client = buildOkHttp(buildConfig.debug) { Timber.tag("GITHUB").v(it) },
-      url = "https://api.github.com",
-      json = GithubJson,
-    ).create()
-  }
+  fun api(buildConfig: IBuildConfig): GithubApi = buildRetrofit(
+    client = buildOkHttp(buildConfig.debug) { Timber.tag("GITHUB").v(it) },
+    url = "https://api.github.com",
+    json = GithubJson,
+  ).create()
 
   @Provides
   fun buildConfig(buildConfig: IBuildConfig): BuildConfigProvider = BuildConfigProviderImpl(

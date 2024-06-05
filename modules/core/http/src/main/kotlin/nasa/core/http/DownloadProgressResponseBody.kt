@@ -18,8 +18,10 @@ internal class DownloadProgressResponseBody(
 
   override fun contentType() = responseBody.contentType()
 
-  override fun source() = bufferedSource ?: getForwardSource(responseBody.source()).buffer()
-    .also { bufferedSource = it }
+  override fun source() = bufferedSource
+    ?: getForwardSource(responseBody.source())
+      .buffer()
+      .also { bufferedSource = it }
 
   private fun getForwardSource(source: Source): Source = object : ForwardingSource(source) {
     private var totalBytesRead = 0L

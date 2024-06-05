@@ -130,14 +130,14 @@ private fun ApodFullScreenContent(
           scaleY = scale
           translationX = offset.x
           translationY = offset.y
-        }
-        .transformable(state)
+        }.transformable(state)
     }
 
     // Adding a custom header to the request, so our DownloadProgressInterceptor can identify it and track progress
     AsyncImage(
       modifier = imageModifier,
-      model = ImageRequest.Builder(LocalContext.current)
+      model = ImageRequest
+        .Builder(LocalContext.current)
         .data(item.hdUrl)
         .crossfade(durationMillis = 200)
         .addHeader(DOWNLOAD_IDENTIFIER_HEADER, item.date.toString())

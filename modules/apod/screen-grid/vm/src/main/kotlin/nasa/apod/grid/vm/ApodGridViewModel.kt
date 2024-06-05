@@ -120,7 +120,5 @@ class ApodGridViewModel @Inject internal constructor(
     }
   }
 
-  private fun LocalDate.matchesMonth(other: LocalDate): Boolean {
-    return this.year == other.year && this.month == other.month
-  }
+  private fun LocalDate.matchesMonth(other: LocalDate): Boolean = year == other.year && month == other.month
 }

@@ -15,14 +15,12 @@ import javax.inject.Singleton
 internal class GalleryDatabaseModule {
   @Provides
   @Singleton
-  fun db(context: Context): GalleryDatabase {
-    return Room.databaseBuilder(context, GalleryDatabase::class.java, name = "gallery.db")
-      .fallbackToDestructiveMigration()
-      .addMigrations(
-        // TBC
-      )
-      .build()
-  }
+  fun db(context: Context): GalleryDatabase = Room
+    .databaseBuilder(context, GalleryDatabase::class.java, "gallery.db")
+    .fallbackToDestructiveMigration()
+    .addMigrations(
+      // TBC
+    ).build()
 
   @Provides
   @Singleton

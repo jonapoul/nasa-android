@@ -17,11 +17,9 @@ import timber.log.Timber
 @InstallIn(SingletonComponent::class)
 internal class ApodApiModule {
   @Provides
-  fun api(buildConfig: IBuildConfig): ApodApi {
-    return buildRetrofit(
-      client = buildOkHttp(buildConfig.debug) { Timber.tag("APOD").v(it) },
-      json = ApodJson,
-      url = NASA_API_URL,
-    ).create()
-  }
+  fun api(buildConfig: IBuildConfig): ApodApi = buildRetrofit(
+    client = buildOkHttp(buildConfig.debug) { Timber.tag("APOD").v(it) },
+    json = ApodJson,
+    url = NASA_API_URL,
+  ).create()
 }

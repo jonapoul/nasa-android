@@ -15,7 +15,11 @@ internal class DatabaseClearer @Inject constructor(
   private val database: NasaDatabase,
   private val io: IODispatcher,
 ) {
-  private val dbFile = database.openHelper.readableDatabase.path?.let(::File) ?: error("Null file for $database")
+  private val dbFile = database
+    .openHelper
+    .readableDatabase
+    .path
+    ?.let(::File) ?: error("Null file for $database")
 
   private val mutableFileSize = MutableStateFlow(0.bytes)
   val fileSize: StateFlow<FileSize> = mutableFileSize.asStateFlow()

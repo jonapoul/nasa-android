@@ -91,7 +91,8 @@ internal object KeywordsSerializer : KSerializer<Keywords> {
 
   override fun deserialize(decoder: Decoder): Keywords {
     val jsonDecoder = decoder as? JsonDecoder ?: error("Only supports JSON")
-    val keywords = jsonDecoder.decodeJsonElement()
+    val keywords = jsonDecoder
+      .decodeJsonElement()
       .jsonArray
       .flatMap { element ->
         element.jsonPrimitive

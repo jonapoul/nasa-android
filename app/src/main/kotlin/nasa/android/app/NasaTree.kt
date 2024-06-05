@@ -8,7 +8,5 @@ internal class NasaTree : Timber.DebugTree() {
   }
 
   // Prepend the class name and line number (clickable in logcat) to each message
-  override fun createStackElementTag(element: StackTraceElement): String {
-    return "(${element.fileName}:${element.lineNumber})"
-  }
+  override fun createStackElementTag(element: StackTraceElement): String = "(${element.fileName}:${element.lineNumber})"
 }

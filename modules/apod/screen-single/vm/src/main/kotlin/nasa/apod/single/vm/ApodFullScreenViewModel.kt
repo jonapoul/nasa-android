@@ -15,13 +15,15 @@ import javax.inject.Inject
 class ApodFullScreenViewModel @Inject internal constructor(
   private val stateHolder: DownloadProgressStateHolder,
 ) : ViewModel() {
-  val downloadProgress: StateFlow<Float> = stateHolder.state.map { state ->
-    when {
-      state == null -> 0f
-      state.done -> 1f
-      else -> state.bytesRead.toFloat() / state.contentLength.toFloat()
-    }
-  }.stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0f)
+  val downloadProgress: StateFlow<Float> = stateHolder
+    .state
+    .map { state ->
+      when {
+        state == null -> 0f
+        state.done -> 1f
+        else -> state.bytesRead.toFloat() / state.contentLength.toFloat()
+      }
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0f)
 
   override fun onCleared() {
     Timber.v("onCleared")
