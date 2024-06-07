@@ -20,7 +20,7 @@ spotless = "6.25.0"
 turtle = "0.10.0"
 
 # Libraries
-alakazam = "4.5.2"
+alakazam = "4.5.3"
 android-desugaring = "2.0.4"
 androidx-activity = "1.9.0"
 androidx-annotation = "1.8.0"
