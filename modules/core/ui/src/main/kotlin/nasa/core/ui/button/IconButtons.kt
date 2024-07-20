@@ -154,10 +154,32 @@ private fun Regular() = PreviewColumn {
 
 @Preview
 @Composable
+private fun RegularDisabled() = PreviewColumn {
+  RegularIconButton(
+    imageVector = Icons.Filled.Info,
+    contentDescription = "Cancel",
+    onClick = {},
+    enabled = false,
+  )
+}
+
+@Preview
+@Composable
 private fun Primary() = PreviewColumn {
   PrimaryIconButton(
     imageVector = Icons.Filled.Check,
     contentDescription = "OK",
     onClick = {},
+  )
+}
+
+@Preview
+@Composable
+private fun PrimaryDisabled() = PreviewColumn {
+  PrimaryIconButton(
+    imageVector = Icons.Filled.Check,
+    contentDescription = "OK",
+    onClick = {},
+    enabled = false,
   )
 }

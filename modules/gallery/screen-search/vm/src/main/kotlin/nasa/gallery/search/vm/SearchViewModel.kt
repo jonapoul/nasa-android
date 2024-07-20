@@ -9,6 +9,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject internal constructor() : ViewModel() {
-  private val mutableState = MutableStateFlow<SearchScreenState>(SearchScreenState.Empty)
-  val state: StateFlow<SearchScreenState> = mutableState.asStateFlow()
+  private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.Empty)
+  val searchState: StateFlow<SearchState> = mutableSearchState.asStateFlow()
+
+  private val mutableFilterConfig = MutableStateFlow(DefaultFilterConfig)
+  val filterConfig: StateFlow<FilterConfig> = mutableFilterConfig.asStateFlow()
+
+  fun retrySearch() {
+    // TBC
+  }
+
+  fun performSearch() {
+    // TBC
+  }
+
+  @Suppress("UNUSED_PARAMETER")
+  fun enterSearchTerm(text: String) {
+    // TBC
+  }
+
+  @Suppress("UNUSED_PARAMETER")
+  fun setFilterConfig(config: FilterConfig) {
+    // TBC
+  }
 }

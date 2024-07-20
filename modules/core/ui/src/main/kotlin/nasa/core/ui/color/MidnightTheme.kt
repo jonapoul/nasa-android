@@ -30,7 +30,7 @@ internal class MidnightTheme : Theme {
   override val buttonPrimaryTextSelected = Color.Black
   override val buttonPrimaryBackground = ColorPalette.blue800
   override val buttonPrimaryBackgroundSelected = ColorPalette.blue500
-  override val buttonPrimaryDisabledText = ColorPalette.grey400
+  override val buttonPrimaryDisabledText = ColorPalette.grey500
   override val buttonPrimaryDisabledBackground = ColorPalette.grey700
 
   override val buttonRegularText = ColorPalette.grey150

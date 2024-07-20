@@ -1,37 +1,36 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package nasa.gallery.search.ui
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
-import nasa.gallery.search.vm.SearchScreenState
+import nasa.core.ui.screens.LoadFailure
+import nasa.gallery.search.vm.SearchState
 
 @Composable
 internal fun SearchScreenImpl(
-  state: SearchScreenState,
+  searchState: SearchState,
   onAction: (SearchAction) -> Unit,
+  theme: Theme = LocalTheme.current,
 ) {
-  val theme = LocalTheme.current
   Scaffold(
     topBar = { SearchTopBar(onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       SearchContent(
-        modifier = Modifier.padding(innerPadding),
-        state = state,
+        searchState = searchState,
         onAction = onAction,
+        modifier = Modifier.padding(innerPadding),
         theme = theme,
       )
     }
@@ -40,35 +39,49 @@ internal fun SearchScreenImpl(
 
 @Composable
 private fun SearchContent(
-  state: SearchScreenState,
+  searchState: SearchState,
   onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  Box(
-    modifier = modifier
-      .fillMaxWidth()
-      .padding(horizontal = 8.dp),
-    contentAlignment = Alignment.Center,
+  Column(
+    modifier = modifier.fillMaxSize(),
+    horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    when (state) {
-      is SearchScreenState.Empty -> {
-        SearchEmpty(
-          theme = theme,
-        )
-      }
+    SearchInput(
+      modifier = Modifier.fillMaxWidth(),
+      onAction = onAction,
+      theme = theme,
+    )
 
-      SearchScreenState.Searching -> {
-        // TBC
-      }
+    val contentsModifier = Modifier
+        .fillMaxWidth()
+        .weight(1f)
 
-      is SearchScreenState.Failed -> {
-        // TBC
-      }
+    when (searchState) {
+      SearchState.Empty -> SearchEmpty(
+        modifier = contentsModifier,
+        theme = theme,
+      )
 
-      is SearchScreenState.Success -> {
-        // TBC
-      }
+      SearchState.Searching -> SearchSearching(
+        modifier = contentsModifier,
+        theme = theme,
+      )
+
+      is SearchState.Failed -> LoadFailure(
+        modifier = contentsModifier,
+        message = searchState.reason,
+        onRetryLoad = { onAction(SearchAction.RetrySearch) },
+        theme = theme,
+      )
+
+      is SearchState.Success -> SearchSuccess(
+        modifier = contentsModifier,
+        items = searchState.results,
+        onAction = onAction,
+        theme = theme,
+      )
     }
   }
 }
@@ -77,7 +90,7 @@ private fun SearchContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Success(
+    searchState = SearchState.Success(
       persistentListOf(EXAMPLE_ITEM_1),
     ),
     onAction = {},
@@ -88,7 +101,7 @@ private fun PreviewSuccess() = PreviewScreen {
 @Composable
 private fun PreviewFailure() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Failed(reason = "Something broke! Here's some more rubbish too for preview"),
+    searchState = SearchState.Failed(reason = "Something broke! Here's some more rubbish too for preview"),
     onAction = {},
   )
 }
@@ -97,7 +110,7 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Searching,
+    searchState = SearchState.Searching,
     onAction = {},
   )
 }
@@ -106,7 +119,7 @@ private fun PreviewLoading() = PreviewScreen {
 @Composable
 private fun PreviewEmpty() = PreviewScreen {
   SearchScreenImpl(
-    state = SearchScreenState.Empty,
+    searchState = SearchState.Empty,
     onAction = {},
   )
 }

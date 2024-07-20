@@ -4,16 +4,16 @@ import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
-sealed interface SearchScreenState {
-  data object Empty : SearchScreenState
+sealed interface SearchState {
+  data object Empty : SearchState
 
-  data object Searching : SearchScreenState
+  data object Searching : SearchState
 
   data class Success(
     val results: ImmutableList<SearchResultItem>,
-  ) : SearchScreenState
+  ) : SearchState
 
   data class Failed(
     val reason: String,
-  ) : SearchScreenState
+  ) : SearchState
 }

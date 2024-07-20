@@ -2,5 +2,16 @@
   <string name="search_toolbar_back">Back</string>
   <string name="search_toolbar_title">Gallery Search</string>
 
+  <string name="search_input_hint">Enter search keywords</string>
+  <string name="search_input_submit">Search</string>
+  <string name="search_input_settings">More search options</string>
+
   <string name="search_empty_title">No results found</string>
+  <string name="search_searching">Searching…</string>
+
+  <string name="search_input_placeholder">Enter text</string>
+  <string name="search_input_apply">Apply</string>
+  <string name="search_input_cancel">Cancel</string>
+
+  <string name="search_label_center">NASA Center</string>
 </resources>
