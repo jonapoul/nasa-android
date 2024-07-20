@@ -3,12 +3,13 @@ package nasa.apod.data.repo
 import nasa.apod.data.api.ApodResponseModel
 import nasa.apod.data.db.ApodEntity
 import nasa.apod.model.ApodItem
+import nasa.apod.model.ApodMediaType
 
 internal fun ApodEntity.toItem(): ApodItem = ApodItem(
   date = date,
   title = title,
   explanation = explanation,
-  mediaType = mediaType,
+  mediaType = ApodMediaType.valueOf(mediaType),
   copyright = copyright,
   url = url.orEmpty(),
   hdUrl = hdUrl,

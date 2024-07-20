@@ -1,4 +1,4 @@
-package nasa.core.db
+package nasa.db
 
 import androidx.room.TypeConverter
 import kotlinx.datetime.LocalDate

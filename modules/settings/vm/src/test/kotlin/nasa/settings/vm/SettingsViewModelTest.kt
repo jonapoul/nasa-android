@@ -12,7 +12,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import nasa.apod.data.db.ApodDao
-import nasa.core.db.NasaDatabase
+import nasa.db.NasaDatabase
 import nasa.core.model.NASA_API_URL
 import nasa.core.url.UrlOpener
 import net.lachlanmckee.timberjunit.TimberTestRule

@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
-import nasa.core.db.NasaDatabase
+import nasa.db.NasaDatabase
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject

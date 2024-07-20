@@ -1,11 +1,10 @@
-package nasa.apod.data.db
+package nasa.db
 
 import alakazam.test.db.RoomDatabaseRule
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
-import nasa.apod.model.ApodMediaType
-import nasa.core.db.NasaDatabase
+import nasa.apod.data.db.ApodDao
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -72,22 +71,22 @@ class ApodDaoTest {
     assertEquals(expected = copy, actual = apodDao.get(DATE_2024))
   }
 
-  private fun imageEntity(date: LocalDate) = ApodEntity(
+  private fun imageEntity(date: LocalDate) = RoomApodEntity(
     date = date,
     title = "Foobar",
     explanation = "Here be dragons",
-    mediaType = ApodMediaType.Image,
+    mediaType = "Image",
     copyright = "Some person",
     url = "https://website.com/sd",
     hdUrl = "https://website.com/hd",
     thumbnailUrl = null,
   )
 
-  private fun videoEntity(date: LocalDate) = ApodEntity(
+  private fun videoEntity(date: LocalDate) = RoomApodEntity(
     date = date,
     title = "Video",
     explanation = "Something goes here",
-    mediaType = ApodMediaType.Video,
+    mediaType = "Video",
     copyright = "JQ Public",
     url = "https://website.com/video",
     hdUrl = null,

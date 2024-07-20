@@ -21,7 +21,7 @@ node ["style"="filled","shape"="box"]
 ":apod:nav" ["fillcolor"="#55FF55"]
 ":apod:screen-grid:vm" ["fillcolor"="#FCB103"]
 ":apod:data:repo" ["fillcolor"="#55FF55"]
-":apod:data:db" ["fillcolor"="#55FF55"]
+":apod:data:db" ["fillcolor"="#A17EFF"]
 ":apod:screen-single:nav" ["fillcolor"="#55FF55"]
 ":settings:nav" ["fillcolor"="#A17EFF"]
 ":apod:screen-single:ui" ["fillcolor"="#FFFF55"]
@@ -33,7 +33,7 @@ node ["style"="filled","shape"="box"]
 ":gallery:nav" ["fillcolor"="#A17EFF"]
 ":gallery:screen-search:vm" ["fillcolor"="#FCB103"]
 ":gallery:data:repo" ["fillcolor"="#55FF55"]
-":gallery:data:db" ["fillcolor"="#55FF55"]
+":gallery:data:db" ["fillcolor"="#A17EFF"]
 ":home:nav" ["fillcolor"="#A17EFF"]
 ":home:ui" ["fillcolor"="#FFFF55"]
 ":home:vm" ["fillcolor"="#FCB103"]
@@ -43,7 +43,6 @@ node ["style"="filled","shape"="box"]
 ":licenses:vm" ["fillcolor"="#FCB103"]
 ":settings:ui" ["fillcolor"="#FFFF55"]
 ":settings:vm" ["fillcolor"="#FCB103"]
-":core:db" ["fillcolor"="#55FF55"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
@@ -101,7 +100,6 @@ graph ["label"="Legend"]
 ":apod:screen-grid:vm" -> ":core:url"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":apod:data:db"
-":apod:data:db" -> ":apod:model"
 ":apod:screen-single:nav" -> ":apod:model"
 ":apod:screen-single:nav" -> ":apod:nav"
 ":apod:screen-single:ui" -> ":apod:screen-grid:nav"
@@ -137,9 +135,6 @@ graph ["label"="Legend"]
 ":licenses:vm" -> ":licenses:data"
 ":settings:ui" -> ":core:ui"
 ":settings:ui" -> ":settings:vm"
-":settings:vm" -> ":core:db"
 ":settings:vm" -> ":core:url"
 ":settings:vm" -> ":apod:data:repo"
-":core:db" -> ":apod:data:db"
-":core:db" -> ":gallery:data:db"
 }

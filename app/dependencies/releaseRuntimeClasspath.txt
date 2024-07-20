@@ -103,7 +103,6 @@ androidx.recyclerview:recyclerview:1.1.0
 androidx.resourceinspection:resourceinspection-annotation:1.0.1
 androidx.room:room-common-jvm:2.7.0-alpha03
 androidx.room:room-common:2.7.0-alpha03
-androidx.room:room-ktx:2.7.0-alpha03
 androidx.room:room-runtime-android:2.7.0-alpha03
 androidx.room:room-runtime:2.7.0-alpha03
 androidx.savedstate:savedstate-ktx:1.2.1

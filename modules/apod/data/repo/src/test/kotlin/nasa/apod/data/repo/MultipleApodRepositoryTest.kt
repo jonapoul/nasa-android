@@ -10,7 +10,7 @@ import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
 import nasa.apod.data.db.ApodDao
-import nasa.core.db.NasaDatabase
+import nasa.db.NasaDatabase
 import nasa.core.model.ApiKey
 import nasa.test.http.MockWebServerRule
 import net.lachlanmckee.timberjunit.TimberTestRule

@@ -21,4 +21,5 @@ dependencies {
   implementation(libs.androidx.sqlite)
   implementation(libs.kotlinx.datetime)
   ksp(libs.androidx.room.compiler)
+  testImplementation(libs.test.alakazam.db)
 }

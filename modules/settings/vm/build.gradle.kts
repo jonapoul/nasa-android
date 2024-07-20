@@ -7,7 +7,6 @@ android {
 }
 
 dependencies {
-  api(projects.modules.core.db)
   api(projects.modules.core.url)
   api(projects.modules.apod.data.repo)
   api(libs.alakazam.android.core)

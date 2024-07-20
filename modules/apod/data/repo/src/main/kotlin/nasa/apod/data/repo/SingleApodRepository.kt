@@ -6,6 +6,7 @@ import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodResponseModel
 import nasa.apod.data.db.ApodDao
+import nasa.apod.data.db.ApodEntity
 import nasa.apod.model.ApodItem
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
@@ -23,6 +24,7 @@ import javax.inject.Inject
 class SingleApodRepository @Inject internal constructor(
   private val io: IODispatcher,
   private val api: ApodApi,
+  private val entityFactory: ApodEntity.Factory,
   private val dao: ApodDao,
   private val calendar: Calendar,
   private val sharedRepository: SharedRepository,

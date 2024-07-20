@@ -1,4 +1,4 @@
-package nasa.apod.data.db
+package nasa.db
 
 import kotlinx.datetime.LocalDate
 
