@@ -1,7 +1,6 @@
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import org.gradle.accessors.dm.LibrariesForLibs
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
@@ -9,8 +8,6 @@ plugins {
   id("convention-android-base")
   id("org.jetbrains.kotlin.plugin.compose")
 }
-
-val libs = the<LibrariesForLibs>()
 
 val ext: CommonExtension<*, *, *, *, *, *> = extensions.findByType<BaseAppModuleExtension>()
   ?: extensions.findByType<LibraryExtension>()

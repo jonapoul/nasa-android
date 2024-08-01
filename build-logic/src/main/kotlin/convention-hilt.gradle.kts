@@ -1,10 +1,7 @@
-import org.gradle.accessors.dm.LibrariesForLibs
-
 plugins {
   id("com.google.devtools.ksp")
 }
 
-val libs = the<LibrariesForLibs>()
 val implementation by configurations
 val testImplementation by configurations
 val ksp by configurations

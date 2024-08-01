@@ -1,8 +1,11 @@
+import blueprint.core.rootLocalPropertiesOrNull
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
   alias(libs.plugins.agp.app) apply false
   alias(libs.plugins.agp.lib) apply false
+  alias(libs.plugins.androidCacheFix) apply false
+  alias(libs.plugins.blueprint.diagrams) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.hilt) apply false
   alias(libs.plugins.kotlin.android) apply false
@@ -22,6 +25,17 @@ plugins {
   alias(libs.plugins.doctor)
 
   id("convention-test")
+}
+
+// Place all local properties in the project-level gradle properties map
+listOf(
+  "local-api.properties",
+  "local-keystore.properties",
+  "local.properties",
+).forEach { filename ->
+  rootLocalPropertiesOrNull(filename)?.forEach { (key, value) ->
+    ext[key.toString()] = value.toString()
+  }
 }
 
 dependencyAnalysis {

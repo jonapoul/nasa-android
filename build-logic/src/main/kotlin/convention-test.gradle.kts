@@ -4,7 +4,6 @@ import blueprint.core.intProperty
 import com.android.build.gradle.api.AndroidBasePlugin
 import kotlinx.kover.gradle.plugin.dsl.AggregationType
 import kotlinx.kover.gradle.plugin.dsl.MetricType
-import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
@@ -62,7 +61,7 @@ koverReport {
       rule {
         isEnabled = isRootProject
         bound {
-          minValue = intProperty(key = "nasa.minTestCoverage")
+          minValue = intProperty(key = "blueprint.kover.minCoverage")
           metric = MetricType.INSTRUCTION
           aggregation = AggregationType.COVERED_PERCENTAGE
         }
@@ -77,7 +76,6 @@ koverReport {
   }
 }
 
-val libs = the<LibrariesForLibs>()
 val testImplementation = configurations.findByName("testImplementation")
 
 dependencies {

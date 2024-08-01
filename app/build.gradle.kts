@@ -1,9 +1,11 @@
-import blueprint.core.getStringOrThrow
 import blueprint.core.gitVersionCode
 import blueprint.core.intProperty
+import blueprint.core.javaVersionString
 import blueprint.core.rootLocalPropertiesOrNull
 import blueprint.core.runGitCommandOrNull
-import nasa.gradle.javaVersionString
+import blueprint.core.stringProperty
+import blueprint.core.stringPropertyOrNull
+import blueprint.diagrams.ModuleType
 
 plugins {
   alias(libs.plugins.kotlin.android)
@@ -13,15 +15,39 @@ plugins {
   id("convention-kotlin")
   id("convention-android-base")
   id("convention-compose")
-  id("convention-diagrams")
   id("convention-hilt")
   id("convention-style")
   id("convention-test")
+  alias(libs.plugins.blueprint.diagrams)
   alias(libs.plugins.dependencyGuard)
 }
 
 dependencyGuard {
   configuration("releaseRuntimeClasspath")
+}
+
+enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
+  AndroidApp(string = "Android App", color = "#5555FF"), // blue
+  AndroidHilt(string = "Android Hilt", color = "#FF5555"), // red
+  AndroidViewModel(string = "Android ViewModel", color = "#FCB103"), // orange
+  AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
+  AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
+  Kotlin(string = "Kotlin", color = "#A17EFF"), // purple
+}
+
+diagramsBlueprint {
+  moduleTypes = NasaModuleType.values().toSet()
+  moduleTypeFinder = ModuleType.Finder { project ->
+    when {
+      project.plugins.hasPlugin("com.android.application") -> NasaModuleType.AndroidApp
+      project.plugins.hasPlugin("module-hilt") -> NasaModuleType.AndroidHilt
+      project.plugins.hasPlugin("module-viewmodel") -> NasaModuleType.AndroidViewModel
+      project.plugins.hasPlugin("module-compose") -> NasaModuleType.AndroidCompose
+      project.plugins.hasPlugin("module-android") -> NasaModuleType.AndroidLibrary
+      project.plugins.hasPlugin("module-kotlin") -> NasaModuleType.Kotlin
+      else -> error("Unknown module type for ${project.path}")
+    }
+  }
 }
 
 fun gitTagOrCommit(): String = runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0"))
@@ -30,12 +56,12 @@ fun gitTagOrCommit(): String = runGitCommandOrNull(args = listOf("describe", "--
 
 android {
   namespace = "nasa.android"
-  compileSdk = intProperty(key = "nasa.compileSdk")
+  compileSdk = intProperty(key = "blueprint.android.compileSdk")
 
   defaultConfig {
     applicationId = "nasa.android"
-    minSdk = intProperty(key = "nasa.minSdk")
-    targetSdk = intProperty(key = "nasa.targetSdk")
+    minSdk = intProperty(key = "blueprint.android.minSdk")
+    targetSdk = intProperty(key = "blueprint.android.targetSdk")
     versionCode = gitVersionCode()
     versionName = gitTagOrCommit()
     setProperty("archivesBaseName", "$applicationId-$versionName")
@@ -43,7 +69,7 @@ android {
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"
     buildConfigField("kotlinx.datetime.Instant", "BUILD_TIME", kotlinTime)
     buildConfigField("String", "GIT_HASH", "\"${versionName}\"")
-    val apiKey = rootLocalPropertiesOrNull(filename = "local-api.properties")?.get(key = "nasaApiKey")?.toString()
+    val apiKey = stringPropertyOrNull(key = "nasaApiKey")
     buildConfigField("String", "API_KEY", if (apiKey == null) "null" else "\"${apiKey}\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -76,10 +102,10 @@ android {
     val localProps = rootLocalPropertiesOrNull(filename = "local-keystore.properties")
     if (localProps != null) {
       create("release") {
-        storeFile = rootProject.file(localProps.getStringOrThrow(key = "keyFile"))
-        storePassword = localProps.getStringOrThrow(key = "keyFilePassword")
-        keyAlias = localProps.getStringOrThrow(key = "keyAlias")
-        keyPassword = localProps.getStringOrThrow(key = "keyPassword")
+        storeFile = rootProject.file(stringProperty(key = "keyFile"))
+        storePassword = stringProperty(key = "keyFilePassword")
+        keyAlias = stringProperty(key = "keyAlias")
+        keyPassword = stringProperty(key = "keyPassword")
       }
     } else {
       logger.error("No local-keystore.properties found - skipping signing configs")

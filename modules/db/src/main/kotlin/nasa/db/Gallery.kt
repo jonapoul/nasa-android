@@ -39,7 +39,9 @@ class RoomGalleryDaoWrapper(private val delegate: RoomGalleryDao) : GalleryDao {
   override suspend fun get(date: LocalDate): GalleryEntity? = delegate.get(date)
   override suspend fun clear() = delegate.clear()
 
-  private fun GalleryEntity.toImpl(): RoomGalleryEntity = if (this is RoomGalleryEntity) this else RoomGalleryEntity(
-    date = date,
-  )
+  private fun GalleryEntity.toImpl(): RoomGalleryEntity = if (this is RoomGalleryEntity) {
+    this
+  } else {
+    RoomGalleryEntity(date)
+  }
 }

@@ -1,10 +1,11 @@
-import nasa.gradle.javaVersion
-import nasa.gradle.jvmTarget
+import blueprint.core.javaVersion
+import blueprint.core.javaVersionString
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 tasks.withType<KotlinCompile> {
   compilerOptions {
-    jvmTarget.set(project.jvmTarget())
+    jvmTarget.set(JvmTarget.fromTarget(javaVersionString()))
     freeCompilerArgs.addAll(
       "-Xjvm-default=all-compatibility",
       "-opt-in=kotlin.RequiresOptIn",

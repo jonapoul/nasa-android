@@ -1,4 +1,4 @@
-import nasa.gradle.javaVersionString
+import blueprint.core.javaVersionString
 
 plugins {
   kotlin("android")

@@ -69,14 +69,18 @@ class RoomApodDaoWrapper(private val delegate: RoomApodDao) : ApodDao {
   override fun itemCount(): Flow<Int> = delegate.itemCount()
   override suspend fun clear() = delegate.clear()
 
-  private fun ApodEntity.toImpl(): RoomApodEntity = if (this is RoomApodEntity) this else RoomApodEntity(
-    date = date,
-    title = title,
-    explanation = explanation,
-    mediaType = mediaType,
-    copyright = copyright,
-    url = url,
-    hdUrl = hdUrl,
-    thumbnailUrl = thumbnailUrl,
-  )
+  private fun ApodEntity.toImpl(): RoomApodEntity = if (this is RoomApodEntity) {
+    this
+  } else {
+    RoomApodEntity(
+      date = date,
+      title = title,
+      explanation = explanation,
+      mediaType = mediaType,
+      copyright = copyright,
+      url = url,
+      hdUrl = hdUrl,
+      thumbnailUrl = thumbnailUrl,
+    )
+  }
 }

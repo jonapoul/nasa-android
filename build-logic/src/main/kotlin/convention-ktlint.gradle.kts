@@ -1,15 +1,6 @@
-import org.gradle.accessors.dm.LibrariesForLibs
-import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import blueprint.recipes.ktlintBlueprint
 
-plugins {
-  id("org.jlleitschuh.gradle.ktlint")
-}
-
-val libs = the<LibrariesForLibs>()
-
-ktlint {
-  version.set(libs.versions.ktlint.cli.get())
-  reporters {
-    reporter(ReporterType.HTML)
-  }
-}
+ktlintBlueprint(
+  ktlintCliVersion = libs.versions.ktlint.cli,
+  ktlintComposeVersion = libs.versions.androidx.compose.lint.twitter,
+)
