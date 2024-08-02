@@ -21,13 +21,15 @@ node ["style"="filled"]
 ":apod:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":apod:screen-grid:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
-":apod:data:db" ["fillcolor"="#A17EFF","shape"="box"]
+":db:apod" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:screen-single:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":settings:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":apod:screen-single:vm" ["fillcolor"="#FCB103","shape"="box"]
-":db" ["fillcolor"="#55FF55","shape"="box"]
-":gallery:data:db" ["fillcolor"="#A17EFF","shape"="box"]
+":db:di" ["fillcolor"="#FF5555","shape"="box"]
+":db:impl" ["fillcolor"="#55FF55","shape"="box"]
+":db:api" ["fillcolor"="#A17EFF","shape"="box"]
+":db:gallery" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:di" ["fillcolor"="#FF5555","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
@@ -69,7 +71,7 @@ graph ["label"="Legend","fontsize"="20"]
 ":app" -> ":apod:di" ["style"="dotted"]
 ":app" -> ":apod:screen-grid:ui" ["style"="dotted"]
 ":app" -> ":apod:screen-single:ui" ["style"="dotted"]
-":app" -> ":db" ["style"="dotted"]
+":app" -> ":db:di" ["style"="dotted"]
 ":app" -> ":gallery:di" ["style"="dotted"]
 ":app" -> ":gallery:screen-search:ui" ["style"="dotted"]
 ":app" -> ":home:nav" ["style"="dotted"]
@@ -101,7 +103,7 @@ graph ["label"="Legend","fontsize"="20"]
 ":apod:screen-grid:vm" -> ":apod:nav"
 ":apod:screen-grid:vm" -> ":core:url"
 ":apod:data:repo" -> ":apod:data:api"
-":apod:data:repo" -> ":apod:data:db"
+":apod:data:repo" -> ":db:apod"
 ":apod:screen-single:nav" -> ":apod:model"
 ":apod:screen-single:nav" -> ":apod:nav"
 ":apod:screen-single:ui" -> ":apod:screen-grid:nav"
@@ -113,8 +115,10 @@ graph ["label"="Legend","fontsize"="20"]
 ":apod:screen-single:vm" -> ":apod:nav"
 ":apod:screen-single:vm" -> ":core:http"
 ":apod:screen-single:vm" -> ":core:url"
-":db" -> ":apod:data:db"
-":db" -> ":gallery:data:db"
+":db:di" -> ":db:impl"
+":db:impl" -> ":db:apod"
+":db:impl" -> ":db:api"
+":db:impl" -> ":db:gallery"
 ":gallery:di" -> ":gallery:data:api"
 ":gallery:di" -> ":core:http" ["style"="dotted"]
 ":gallery:di" -> ":core:model" ["style"="dotted"]
@@ -125,7 +129,7 @@ graph ["label"="Legend","fontsize"="20"]
 ":gallery:screen-search:vm" -> ":gallery:data:repo"
 ":gallery:screen-search:vm" -> ":core:url"
 ":gallery:data:repo" -> ":gallery:data:api"
-":gallery:data:repo" -> ":gallery:data:db"
+":gallery:data:repo" -> ":db:gallery"
 ":home:ui" -> ":apod:screen-single:nav"
 ":home:ui" -> ":about:nav" ["style"="dotted"]
 ":home:ui" -> ":core:ui" ["style"="dotted"]
@@ -141,4 +145,5 @@ graph ["label"="Legend","fontsize"="20"]
 ":settings:ui" -> ":settings:vm"
 ":settings:vm" -> ":core:url"
 ":settings:vm" -> ":apod:data:repo"
+":settings:vm" -> ":db:api"
 }

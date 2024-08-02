@@ -105,7 +105,7 @@ private fun SearchFilterModalContents(
         onClick = {
           val newConfig = FilterConfig(config.query, center)
           onConfirm(newConfig)
-        }
+        },
       )
 
       HorizontalSpacer(20.dp)

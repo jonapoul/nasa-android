@@ -3,6 +3,7 @@ package nasa.android.di
 import alakazam.kotlin.core.DefaultDispatcher
 import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.MainDispatcher
+import alakazam.kotlin.core.UnconfinedDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,13 +17,17 @@ import javax.inject.Singleton
 internal class DispatchersModule {
   @Provides
   @Singleton
-  fun ioDispatcher(): IODispatcher = IODispatcher(Dispatchers.IO)
+  fun ioDispatcher() = IODispatcher(Dispatchers.IO)
 
   @Provides
   @Singleton
-  fun defaultDispatcher(): DefaultDispatcher = DefaultDispatcher(Dispatchers.Default)
+  fun defaultDispatcher() = DefaultDispatcher(Dispatchers.Default)
 
   @Provides
   @Singleton
-  fun mainDispatcher(): MainDispatcher = MainDispatcher(Dispatchers.Main)
+  fun mainDispatcher() = MainDispatcher(Dispatchers.Main)
+
+  @Provides
+  @Singleton
+  fun unconfinedDispatcher() = UnconfinedDispatcher(Dispatchers.Unconfined)
 }

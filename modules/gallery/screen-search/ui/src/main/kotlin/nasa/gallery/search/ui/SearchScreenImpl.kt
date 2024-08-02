@@ -55,8 +55,8 @@ private fun SearchContent(
     )
 
     val contentsModifier = Modifier
-        .fillMaxWidth()
-        .weight(1f)
+      .fillMaxWidth()
+      .weight(1f)
 
     when (searchState) {
       SearchState.Empty -> SearchEmpty(

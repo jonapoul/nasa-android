@@ -69,7 +69,7 @@ android {
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"
     buildConfigField("kotlinx.datetime.Instant", "BUILD_TIME", kotlinTime)
     buildConfigField("String", "GIT_HASH", "\"${versionName}\"")
-    val apiKey = stringPropertyOrNull(key = "nasaApiKey")
+    val apiKey = stringPropertyOrNull(key = "nasa.apiKey")
     buildConfigField("String", "API_KEY", if (apiKey == null) "null" else "\"${apiKey}\"")
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -102,10 +102,10 @@ android {
     val localProps = rootLocalPropertiesOrNull(filename = "local-keystore.properties")
     if (localProps != null) {
       create("release") {
-        storeFile = rootProject.file(stringProperty(key = "keyFile"))
-        storePassword = stringProperty(key = "keyFilePassword")
-        keyAlias = stringProperty(key = "keyAlias")
-        keyPassword = stringProperty(key = "keyPassword")
+        storeFile = rootProject.file(stringProperty(key = "nasa.keyFile"))
+        storePassword = stringProperty(key = "nasa.keyFilePassword")
+        keyAlias = stringProperty(key = "nasa.keyAlias")
+        keyPassword = stringProperty(key = "nasa.keyPassword")
       }
     } else {
       logger.error("No local-keystore.properties found - skipping signing configs")
@@ -172,7 +172,7 @@ dependencies {
   implementation(projects.modules.apod.di)
   implementation(projects.modules.apod.screenGrid.ui)
   implementation(projects.modules.apod.screenSingle.ui)
-  implementation(projects.modules.db)
+  implementation(projects.modules.db.di)
   implementation(projects.modules.gallery.di)
   implementation(projects.modules.gallery.screenSearch.ui)
   implementation(projects.modules.home.nav)

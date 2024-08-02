@@ -6,20 +6,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
-import nasa.db.NasaDatabase
+import nasa.db.api.NasaDatabase
 import timber.log.Timber
-import java.io.File
 import javax.inject.Inject
 
 internal class DatabaseClearer @Inject constructor(
   private val database: NasaDatabase,
   private val io: IODispatcher,
 ) {
-  private val dbFile = database
-    .openHelper
-    .readableDatabase
-    .path
-    ?.let(::File) ?: error("Null file for $database")
+  private val dbFile = database.file()
 
   private val mutableFileSize = MutableStateFlow(0.bytes)
   val fileSize: StateFlow<FileSize> = mutableFileSize.asStateFlow()

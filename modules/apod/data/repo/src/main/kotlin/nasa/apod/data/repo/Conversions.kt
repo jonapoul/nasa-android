@@ -1,9 +1,9 @@
 package nasa.apod.data.repo
 
 import nasa.apod.data.api.ApodResponseModel
-import nasa.apod.data.db.ApodEntity
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
+import nasa.db.apod.ApodEntity
 
 internal fun ApodEntity.toItem(): ApodItem = ApodItem(
   date = date,
@@ -27,11 +27,11 @@ internal fun ApodResponseModel.toItem(): ApodItem = ApodItem(
   thumbnailUrl = thumbnailUrl,
 )
 
-internal fun ApodItem.toEntity(): ApodEntity = ApodEntity(
+internal fun ApodItem.toEntity(factory: ApodEntity.Factory): ApodEntity = factory.build(
   date = date,
   title = title,
   explanation = explanation,
-  mediaType = mediaType,
+  mediaType = mediaType.name,
   copyright = copyright,
   url = url,
   hdUrl = hdUrl,

@@ -9,9 +9,11 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
-import nasa.apod.data.db.ApodDao
-import nasa.db.NasaDatabase
 import nasa.core.model.ApiKey
+import nasa.db.DefaultApodEntityFactory
+import nasa.db.RoomNasaDatabase
+import nasa.db.RoomApodDaoWrapper
+import nasa.db.apod.ApodDao
 import nasa.test.http.MockWebServerRule
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
@@ -29,7 +31,7 @@ class MultipleApodRepositoryTest {
   val coroutineRule = CoroutineRule()
 
   @get:Rule
-  val databaseRule = RoomDatabaseRule(NasaDatabase::class)
+  val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
 
   @get:Rule
   val webServerRule = MockWebServerRule()
@@ -43,7 +45,7 @@ class MultipleApodRepositoryTest {
 
   @Before
   fun before() {
-    dao = databaseRule.database.apodDao()
+    dao = RoomApodDaoWrapper(databaseRule.database.apodDao())
     api = webServerRule.buildApi(json = ApodJson)
 
     repository = MultipleApodRepository(
@@ -51,6 +53,7 @@ class MultipleApodRepositoryTest {
       api = api,
       dao = dao,
       calendar = { TODAY },
+      factory = DefaultApodEntityFactory,
       sharedRepository = SharedRepository(),
     )
   }

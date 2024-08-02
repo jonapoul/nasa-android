@@ -54,11 +54,11 @@ Open https://api.nasa.gov/ in a web browser and register for an API key. Once yo
 
 ```properties
 # not a real key...
-nasaApiKey=yUJkwoyIRswfwR19MEVyfJ5JIwEjBEBoYOx2WqnC
+nasa.apiKey=yUJkwoyIRswfwR19MEVyfJ5JIwEjBEBoYOx2WqnC
 
 ## Alternatively, use the DEMO_KEY made available by NASA to test services. Be aware that it will be heavily
 ## restricted in how many requests the app will be able to make. See https://api.nasa.gov/#demo_key-rate-limits
-#nasaApiKey=DEMO_KEY
+#nasa.apiKey=DEMO_KEY
 ```
 
 If you like, you can omit this property entirely and just enter the API key at runtime - the app will prompt you do to this if none has been saved.
@@ -68,10 +68,10 @@ If you like, you can omit this property entirely and just enter the API key at r
 Optionally, if you want to sign the built APK with a custom keystore, add some extra properties in `local-keystore.properties` like below:
 
 ```properties
-keyFile=relative/path/to/keystore.jks
-keyFilePassword=password-of-keystore-file
-keyAlias=key-alias
-keyPassword=password-of-key
+nasa.keyFile=relative/path/to/keystore.jks
+nasa.keyFilePassword=password-of-keystore-file
+nasa.keyAlias=key-alias
+nasa.keyPassword=password-of-key
 ```
 
 The APK will still build (unsigned) if these properties are omitted.

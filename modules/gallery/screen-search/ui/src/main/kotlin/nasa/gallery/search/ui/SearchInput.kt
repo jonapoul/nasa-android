@@ -3,7 +3,6 @@ package nasa.gallery.search.ui
 import alakazam.android.ui.compose.HorizontalSpacer
 import alakazam.kotlin.core.fastIsBlank
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons

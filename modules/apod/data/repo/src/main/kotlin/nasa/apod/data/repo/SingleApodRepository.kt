@@ -5,11 +5,11 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodResponseModel
-import nasa.apod.data.db.ApodDao
-import nasa.apod.data.db.ApodEntity
 import nasa.apod.model.ApodItem
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
+import nasa.db.apod.ApodDao
+import nasa.db.apod.ApodEntity
 import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
@@ -105,7 +105,7 @@ class SingleApodRepository @Inject internal constructor(
   private suspend fun saveToDatabaseIfSuccessful(result: SingleLoadResult) {
     if (result is SingleLoadResult.Success) {
       val item = result.item
-      val entity = item.toEntity()
+      val entity = item.toEntity(entityFactory)
       withContext(io) { dao.insert(entity) }
       Timber.d("Stored $entity in database")
     }

@@ -8,11 +8,14 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
-import nasa.apod.data.db.ApodDao
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
-import nasa.db.NasaDatabase
 import nasa.core.model.ApiKey
+import nasa.db.DefaultApodEntityFactory
+import nasa.db.RoomNasaDatabase
+import nasa.db.RoomApodDaoWrapper
+import nasa.db.apod.ApodDao
+import nasa.db.apod.ApodEntity
 import nasa.test.http.MockWebServerRule
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
@@ -31,7 +34,7 @@ class SingleApodRepositoryTest {
   val coroutineRule = CoroutineRule()
 
   @get:Rule
-  val databaseRule = RoomDatabaseRule(NasaDatabase::class)
+  val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
 
   @get:Rule
   val webServerRule = MockWebServerRule()
@@ -42,17 +45,20 @@ class SingleApodRepositoryTest {
   private lateinit var repository: SingleApodRepository
   private lateinit var dao: ApodDao
   private lateinit var api: ApodApi
+  private lateinit var entityFactory: ApodEntity.Factory
 
   @Before
   fun before() {
-    dao = databaseRule.database.apodDao()
+    dao = RoomApodDaoWrapper(databaseRule.database.apodDao())
     api = webServerRule.buildApi(json = ApodJson)
+    entityFactory = DefaultApodEntityFactory
 
     repository = SingleApodRepository(
       io = IODispatcher(coroutineRule.dispatcher),
       api = api,
       dao = dao,
       calendar = { TODAY },
+      entityFactory = entityFactory,
       sharedRepository = SharedRepository(),
     )
   }
@@ -91,7 +97,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Don't query API if it's cached locally`() = runTest {
     // Given the database has an entry for the specified date
-    val entity = ITEM.toEntity()
+    val entity = ITEM.toEntity(entityFactory)
     dao.insert(entity)
 
     // When

@@ -11,10 +11,11 @@ import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
-import nasa.apod.data.db.ApodDao
-import nasa.db.NasaDatabase
 import nasa.core.model.NASA_API_URL
 import nasa.core.url.UrlOpener
+import nasa.db.RoomNasaDatabase
+import nasa.db.RoomApodDaoWrapper
+import nasa.db.apod.ApodDao
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule
@@ -26,7 +27,7 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class SettingsViewModelTest {
   @get:Rule
-  val databaseRule = RoomDatabaseRule(NasaDatabase::class, allowMainThread = true)
+  val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class, allowMainThread = true)
 
   @get:Rule
   val coroutineRule = CoroutineRule()
@@ -48,7 +49,7 @@ class SettingsViewModelTest {
   fun before() {
     urlOpener = mockk(relaxed = true)
     toaster = mockk(relaxed = true)
-    dao = databaseRule.database.apodDao()
+    dao = RoomApodDaoWrapper(databaseRule.database.apodDao())
     imageCache = ImageCache(ApplicationProvider.getApplicationContext())
     imageCache.cacheDir.mkdirs()
 

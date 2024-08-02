@@ -9,6 +9,7 @@ android {
 dependencies {
   api(projects.modules.core.url)
   api(projects.modules.apod.data.repo)
+  api(projects.modules.db.api)
   api(libs.alakazam.android.core)
   api(libs.alakazam.kotlin.core)
   api(libs.kotlinx.coroutines)
