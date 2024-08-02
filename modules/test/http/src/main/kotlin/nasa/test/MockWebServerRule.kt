@@ -1,4 +1,4 @@
-package nasa.test.http
+package nasa.test
 
 import kotlinx.serialization.json.Json
 import nasa.core.http.buildOkHttp

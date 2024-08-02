@@ -1,4 +1,4 @@
-package nasa.test.prefs
+package nasa.test
 
 import android.content.Context
 import android.content.SharedPreferences

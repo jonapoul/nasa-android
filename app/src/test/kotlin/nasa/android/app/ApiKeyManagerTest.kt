@@ -5,8 +5,8 @@ import app.cash.turbine.test
 import com.fredporciuncula.flow.preferences.FlowSharedPreferences
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.ApiKey
-import nasa.test.prefs.buildFlowSharedPreferences
-import nasa.test.prefs.buildSharedPreferences
+import nasa.test.buildFlowSharedPreferences
+import nasa.test.buildSharedPreferences
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule

@@ -1,10 +1,10 @@
 package nasa.gallery.data.api
 
-import alakazam.test.core.getResourceAsStream
 import kotlinx.datetime.Instant
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
+import nasa.test.getResourceAsText
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -73,5 +73,5 @@ class SearchResponseTest {
     )
   }
 
-  private fun getJson(filename: String): String = getResourceAsStream(filename).reader().readText()
+  private fun getJson(filename: String): String = getResourceAsText(filename)
 }

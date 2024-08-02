@@ -2,7 +2,6 @@ package nasa.apod.data.repo
 
 import alakazam.kotlin.core.IODispatcher
 import alakazam.test.core.CoroutineRule
-import alakazam.test.core.getResourceAsStream
 import alakazam.test.db.RoomDatabaseRule
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
@@ -14,7 +13,8 @@ import nasa.db.DefaultApodEntityFactory
 import nasa.db.RoomApodDaoWrapper
 import nasa.db.RoomNasaDatabase
 import nasa.db.apod.ApodDao
-import nasa.test.http.MockWebServerRule
+import nasa.test.MockWebServerRule
+import nasa.test.getResourceAsText
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule
@@ -136,7 +136,7 @@ class MultipleApodRepositoryTest {
     }
   }
 
-  private fun readJsonFromResource(name: String): String = getResourceAsStream(name).reader().readText()
+  private fun readJsonFromResource(name: String): String = getResourceAsText(name)
 
   private companion object {
     val API_KEY = ApiKey(value = "SOME_DUMMY_KEY")

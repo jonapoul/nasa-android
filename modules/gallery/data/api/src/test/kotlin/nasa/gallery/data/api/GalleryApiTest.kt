@@ -1,14 +1,14 @@
 package nasa.gallery.data.api
 
 import alakazam.test.core.CoroutineRule
-import alakazam.test.core.getResourceAsStream
 import kotlinx.coroutines.test.runTest
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.NasaId
 import nasa.gallery.model.Year
-import nasa.test.http.MockWebServerRule
+import nasa.test.MockWebServerRule
+import nasa.test.getResourceAsText
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -229,5 +229,5 @@ class GalleryApiTest {
     webServerRule.enqueue(errorJson, code = 404)
   }
 
-  private fun readJson(filename: String): String = getResourceAsStream(filename).reader().readText()
+  private fun readJson(filename: String): String = getResourceAsText(filename)
 }

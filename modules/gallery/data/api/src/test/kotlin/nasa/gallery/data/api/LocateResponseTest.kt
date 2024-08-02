@@ -1,6 +1,6 @@
 package nasa.gallery.data.api
 
-import alakazam.test.core.getResourceAsStream
+import nasa.test.getResourceAsText
 import org.junit.Test
 import kotlin.test.assertEquals
 
@@ -25,5 +25,5 @@ class LocateResponseTest {
     )
   }
 
-  private fun getJson(filename: String): String = getResourceAsStream(filename).reader().readText()
+  private fun getJson(filename: String): String = getResourceAsText(filename)
 }

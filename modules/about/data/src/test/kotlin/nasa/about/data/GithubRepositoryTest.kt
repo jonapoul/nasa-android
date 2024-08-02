@@ -2,12 +2,12 @@ package nasa.about.data
 
 import alakazam.kotlin.core.IODispatcher
 import alakazam.test.core.CoroutineRule
-import alakazam.test.core.getResourceAsStream
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
-import nasa.test.http.MockWebServerRule
+import nasa.test.MockWebServerRule
+import nasa.test.getResourceAsText
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -40,10 +40,7 @@ class GithubRepositoryTest {
   @Test
   fun `Update available from three returned`() = runTest {
     // Given
-    val threeReleasesJson = this@GithubRepositoryTest
-      .getResourceAsStream(filename = "new-release.json")
-      .reader()
-      .readText()
+    val threeReleasesJson = readJson(filename = "new-release.json")
     webServerRule.enqueue(threeReleasesJson)
 
     // When
@@ -66,10 +63,7 @@ class GithubRepositoryTest {
   @Test
   fun `No new updates`() = runTest {
     // Given
-    val threeReleasesJson = this@GithubRepositoryTest
-      .getResourceAsStream(filename = "no-new-update.json")
-      .reader()
-      .readText()
+    val threeReleasesJson = readJson(filename = "no-new-update.json")
     webServerRule.enqueue(threeReleasesJson)
 
     // When
@@ -96,10 +90,7 @@ class GithubRepositoryTest {
   @Test
   fun `Private repo`() = runTest {
     // Given
-    val privateRepoJson = this@GithubRepositoryTest
-      .getResourceAsStream(filename = "not-found.json")
-      .reader()
-      .readText()
+    val privateRepoJson = readJson(filename = "not-found.json")
     webServerRule.enqueue(privateRepoJson)
 
     // When
@@ -140,6 +131,8 @@ class GithubRepositoryTest {
     assertIs<LatestReleaseState.Failure>(state)
     assertTrue(state.errorMessage.contains("IO failure"), state.errorMessage)
   }
+
+  private fun readJson(filename: String): String = getResourceAsText(filename)
 
   private fun buildRepo() {
     githubRepository = GithubRepository(

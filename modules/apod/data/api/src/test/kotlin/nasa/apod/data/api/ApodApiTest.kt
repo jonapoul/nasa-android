@@ -1,12 +1,12 @@
 package nasa.apod.data.api
 
 import alakazam.test.core.CoroutineRule
-import alakazam.test.core.getResourceAsStream
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodMediaType
 import nasa.core.model.ApiKey
-import nasa.test.http.MockWebServerRule
+import nasa.test.MockWebServerRule
+import nasa.test.getResourceAsText
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -87,7 +87,7 @@ class ApodApiTest {
     assertEquals(actual = url.queryParameter(name = "date"), expected = date)
   }
 
-  private fun readJson(filename: String): String = getResourceAsStream(filename).reader().readText()
+  private fun readJson(filename: String): String = getResourceAsText(filename)
 
   private companion object {
     const val API_KEY = "SOME_DUMMY_API_KEY"
