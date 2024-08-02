@@ -1,7 +1,6 @@
 package nasa.settings.ui
 
 import alakazam.android.ui.compose.OnDispose
-import alakazam.kotlin.core.PrefPair
 import android.content.SharedPreferences
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -40,32 +39,6 @@ import nasa.core.ui.color.radioButton
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.settings.res.R
-
-@Composable
-internal fun ListPreference(
-  pair: PrefPair<String>,
-  title: String,
-  icon: ImageVector,
-  entries: ImmutableList<String>,
-  entryValues: ImmutableList<String>,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-  enabled: Boolean = true,
-  preferences: SharedPreferences = rememberSharedPreferences(),
-) {
-  ListPreference(
-    key = pair.key,
-    defaultValue = pair.default,
-    title = title,
-    icon = icon,
-    entries = entries,
-    entryValues = entryValues,
-    modifier = modifier,
-    theme = theme,
-    enabled = enabled,
-    preferences = preferences,
-  )
-}
 
 @Composable
 internal fun ListPreference(

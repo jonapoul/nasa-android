@@ -3,7 +3,8 @@ package nasa.test
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.test.core.app.ApplicationProvider
-import com.fredporciuncula.flow.preferences.FlowSharedPreferences
+import dev.jonpoulton.preferences.android.AndroidSharedPreferences
+import dev.jonpoulton.preferences.core.Preferences
 import kotlin.coroutines.CoroutineContext
 
 fun buildSharedPreferences(
@@ -11,7 +12,7 @@ fun buildSharedPreferences(
   name: String = "prefs",
 ): SharedPreferences = context.getSharedPreferences(name, Context.MODE_PRIVATE)
 
-fun buildFlowSharedPreferences(
+fun buildPreferences(
   coroutineContext: CoroutineContext,
-  prefs: SharedPreferences = buildSharedPreferences(),
-): FlowSharedPreferences = FlowSharedPreferences(prefs, coroutineContext)
+  sharedPreferences: SharedPreferences = buildSharedPreferences(),
+): Preferences = AndroidSharedPreferences(sharedPreferences, coroutineContext)

@@ -48,7 +48,7 @@ import kotlin.time.Duration.Companion.milliseconds
 @Composable
 internal fun ApiKeyPreference(
   modifier: Modifier = Modifier,
-  key: String = SettingsKeys.ApiKey.key,
+  key: String = SettingsKeys.API_KEY,
   theme: Theme = LocalTheme.current,
   preferences: SharedPreferences = rememberSharedPreferences(),
 ) {

@@ -1,8 +1,6 @@
 package nasa.core.model
 
-import alakazam.kotlin.core.PrefPair
-
 object SettingsKeys {
-  val AppTheme = PrefPair(key = "appTheme", default = ThemeType.System)
-  val ApiKey = PrefPair<ApiKey?>(key = "apiKey", default = null)
+  const val APP_THEME = "appTheme"
+  const val API_KEY = "apiKey"
 }

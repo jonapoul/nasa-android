@@ -7,6 +7,8 @@ android {
 }
 
 dependencies {
-  api(libs.flowpreferences)
+  api(libs.preferences.android)
+  api(libs.preferences.core)
+
   implementation(libs.test.androidx.coreKtx)
 }

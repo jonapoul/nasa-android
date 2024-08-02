@@ -1,5 +1,3 @@
-- Swap preferences libraries
-
 - Better testing
   - Integrated from VM
   - UI with kaspresso

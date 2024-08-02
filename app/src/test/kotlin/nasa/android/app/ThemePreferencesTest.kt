@@ -4,7 +4,7 @@ import alakazam.test.core.CoroutineRule
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.ThemeType
-import nasa.test.buildFlowSharedPreferences
+import nasa.test.buildPreferences
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -21,8 +21,8 @@ class ThemePreferencesTest {
 
   @Before
   fun before() {
-    val flowPrefs = buildFlowSharedPreferences(coroutineRule.dispatcher)
-    preferences = ThemePreferences(flowPrefs)
+    val prefs = buildPreferences(coroutineRule.dispatcher)
+    preferences = ThemePreferences(prefs)
   }
 
   @Test

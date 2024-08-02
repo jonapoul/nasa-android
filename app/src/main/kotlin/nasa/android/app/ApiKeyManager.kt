@@ -1,8 +1,7 @@
 package nasa.android.app
 
-import alakazam.android.prefs.core.getNullableObject
-import com.fredporciuncula.flow.preferences.FlowSharedPreferences
-import com.fredporciuncula.flow.preferences.NullableSerializer
+import dev.jonpoulton.preferences.core.Preferences
+import dev.jonpoulton.preferences.core.SimpleNullableStringSerializer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import nasa.core.model.ApiKey
@@ -10,13 +9,10 @@ import nasa.core.model.SettingsKeys
 import timber.log.Timber
 import javax.inject.Inject
 
-class ApiKeyManager @Inject constructor(flowPrefs: FlowSharedPreferences) : ApiKey.Provider {
-  private val preference = flowPrefs.getNullableObject(SettingsKeys.ApiKey, ApiKeySerializer)
+class ApiKeyManager @Inject constructor(preferences: Preferences) : ApiKey.Provider {
+  private val apiKeySerializer = SimpleNullableStringSerializer { value -> value?.let(::ApiKey) }
 
-  private object ApiKeySerializer : NullableSerializer<ApiKey> {
-    override fun deserialize(serialized: String?): ApiKey? = serialized?.let(::ApiKey)
-    override fun serialize(value: ApiKey?): String? = value?.toString()
-  }
+  private val preference = preferences.getNullableObject(SettingsKeys.API_KEY, apiKeySerializer, default = null)
 
   fun set(key: ApiKey?) {
     val existing = preference.get()

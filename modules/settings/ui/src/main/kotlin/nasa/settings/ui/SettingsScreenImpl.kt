@@ -2,7 +2,6 @@ package nasa.settings.ui
 
 import alakazam.android.ui.compose.HorizontalSpacer
 import alakazam.android.ui.compose.VerticalSpacer
-import alakazam.kotlin.core.PrefPair
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -94,7 +93,8 @@ private fun SettingsScreenContent(
     )
 
     ListPreference(
-      pair = AppThemePair,
+      key = SettingsKeys.APP_THEME,
+      defaultValue = ThemeType.System?.toString(),
       title = stringResource(id = R.string.settings_theme_title),
       icon = Icons.Filled.ColorLens,
       entryValues = ThemeType.entries.fastMap { it.name }.toPersistentList(),
@@ -191,10 +191,6 @@ private fun CachedImagesText(
     }
   }
 }
-
-private val AppThemePair = SettingsKeys.AppTheme.map { it.name }
-
-private fun <T, R> PrefPair<T>.map(transform: (T) -> R): PrefPair<R> = PrefPair(key, default = transform(default))
 
 @ScreenPreview
 @Composable

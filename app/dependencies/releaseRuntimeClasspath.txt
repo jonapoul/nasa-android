@@ -151,6 +151,9 @@ dev.jonpoulton.alakazam:android-prefs-core:4.5.6
 dev.jonpoulton.alakazam:android-ui-compose:4.5.6
 dev.jonpoulton.alakazam:kotlin-core:4.5.6
 dev.jonpoulton.alakazam:kotlin-time:4.5.6
+dev.jonpoulton.preferences:android:2.0.0
+dev.jonpoulton.preferences:core-jvm:2.0.0
+dev.jonpoulton.preferences:core:2.0.0
 io.coil-kt:coil-base:2.7.0
 io.coil-kt:coil-compose-base:2.7.0
 io.coil-kt:coil-compose:2.7.0

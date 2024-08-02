@@ -2,11 +2,10 @@ package nasa.android.app
 
 import alakazam.test.core.CoroutineRule
 import app.cash.turbine.test
-import com.fredporciuncula.flow.preferences.FlowSharedPreferences
+import dev.jonpoulton.preferences.core.Preferences
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.ApiKey
-import nasa.test.buildFlowSharedPreferences
-import nasa.test.buildSharedPreferences
+import nasa.test.buildPreferences
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule
@@ -25,13 +24,12 @@ class ApiKeyManagerTest {
   val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
   private lateinit var apiKeyManager: ApiKeyManager
-  private lateinit var flowPrefs: FlowSharedPreferences
+  private lateinit var prefs: Preferences
 
   @Before
   fun before() {
-    val sharedPrefs = buildSharedPreferences(name = "test-prefs")
-    flowPrefs = buildFlowSharedPreferences(coroutineRule.dispatcher, sharedPrefs)
-    apiKeyManager = ApiKeyManager(flowPrefs)
+    prefs = buildPreferences(coroutineRule.dispatcher)
+    apiKeyManager = ApiKeyManager(prefs)
   }
 
   @Test
