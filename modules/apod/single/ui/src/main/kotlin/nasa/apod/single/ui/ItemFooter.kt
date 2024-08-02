@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.apod.model.ApodItem
+import nasa.apod.res.R
 import nasa.core.ui.CardShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme

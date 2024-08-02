@@ -28,6 +28,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.licenses.data.LibraryModel
+import nasa.licenses.res.R
 
 @Composable
 internal fun LibraryItem(

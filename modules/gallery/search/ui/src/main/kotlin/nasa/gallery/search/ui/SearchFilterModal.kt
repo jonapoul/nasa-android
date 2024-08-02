@@ -30,6 +30,7 @@ import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.text.NasaTextField
+import nasa.gallery.res.R
 import nasa.gallery.search.vm.DefaultFilterConfig
 import nasa.gallery.search.vm.FilterConfig
 

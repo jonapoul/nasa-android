@@ -12,6 +12,7 @@ dependencies {
   api(libs.kotlinx.immutable)
   api(libs.voyager.core)
   api(projects.modules.core.model)
+  api(projects.modules.core.res)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.animation.core)

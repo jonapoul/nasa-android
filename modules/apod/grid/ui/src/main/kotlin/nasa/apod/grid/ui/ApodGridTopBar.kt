@@ -14,11 +14,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import nasa.apod.grid.vm.GridScreenState
 import nasa.apod.grid.vm.dateOrNull
+import nasa.apod.res.R
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
-import nasa.core.ui.R as CoreR
+import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ApodGridTopBar(

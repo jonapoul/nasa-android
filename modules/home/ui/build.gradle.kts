@@ -32,6 +32,7 @@ dependencies {
   implementation(projects.modules.about.nav)
   implementation(projects.modules.core.ui)
   implementation(projects.modules.gallery.nav)
+  implementation(projects.modules.home.res)
   implementation(projects.modules.home.vm)
   implementation(projects.modules.settings.nav)
 }

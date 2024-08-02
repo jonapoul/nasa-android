@@ -12,6 +12,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
+import nasa.settings.res.R
 import nasa.settings.vm.FileSize
 import nasa.settings.vm.megabytes
 

@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nasa.about.res.R
 import nasa.core.ui.CardShape
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme

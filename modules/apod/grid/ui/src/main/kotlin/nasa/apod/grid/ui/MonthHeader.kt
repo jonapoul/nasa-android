@@ -26,6 +26,7 @@ import kotlinx.datetime.Month
 import nasa.apod.grid.vm.GridScreenState
 import nasa.apod.grid.vm.dateOrNull
 import nasa.apod.model.ApodNavButtonsState
+import nasa.apod.res.R
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme

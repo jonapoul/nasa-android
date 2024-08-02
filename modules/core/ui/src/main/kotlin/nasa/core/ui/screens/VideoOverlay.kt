@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.stringResource
-import nasa.core.ui.R
+import nasa.core.res.R
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 

@@ -39,6 +39,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.color.radioButton
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
+import nasa.settings.res.R
 
 @Composable
 internal fun ListPreference(

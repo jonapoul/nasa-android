@@ -24,6 +24,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.text.NasaTextField
+import nasa.gallery.res.R
 
 @Composable
 internal fun SearchInput(

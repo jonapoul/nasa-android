@@ -21,10 +21,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.core.ui.R
+import nasa.core.res.R
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
+import nasa.core.ui.preview.MY_PHONE_HEIGHT_DP
+import nasa.core.ui.preview.MY_PHONE_WIDTH_DP
 import nasa.core.ui.preview.PreviewColumn
 
 @Composable
@@ -84,7 +86,10 @@ fun NoApiKey(
   }
 }
 
-@Preview
+@Preview(
+  widthDp = MY_PHONE_WIDTH_DP,
+  heightDp = (MY_PHONE_HEIGHT_DP * 1.2f).toInt(),
+)
 @Composable
 private fun PreviewNoApiKey() = PreviewColumn {
   NoApiKey(

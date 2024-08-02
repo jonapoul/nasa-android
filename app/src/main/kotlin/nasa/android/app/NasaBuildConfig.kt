@@ -5,8 +5,8 @@ import android.content.Context
 import android.os.Build
 import kotlinx.datetime.Instant
 import nasa.android.BuildConfig
+import nasa.core.res.R
 import javax.inject.Inject
-import nasa.core.ui.R as CoreR
 
 /**
  * Gives other modules access to the app module's build metadata.
@@ -21,7 +21,7 @@ internal class NasaBuildConfig @Inject constructor(context: Context) : IBuildCon
   override val manufacturer: String = Build.MANUFACTURER
   override val model: String = Build.MODEL
   override val os = Build.VERSION.SDK_INT
-  override val platform = context.getString(CoreR.string.app_name)
+  override val platform = context.getString(R.string.app_name)
   override val repoName = "jonapoul/nasa-android"
   override val repoUrl = "https://github.com/$repoName"
 }

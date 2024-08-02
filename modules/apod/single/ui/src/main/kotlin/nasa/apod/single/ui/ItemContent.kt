@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nasa.apod.model.ApodMediaType
+import nasa.apod.res.R
 import nasa.apod.single.vm.ScreenState
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
@@ -43,7 +44,7 @@ import nasa.core.ui.screens.LoadFailure
 import nasa.core.ui.screens.NoApiKey
 import nasa.core.ui.screens.VideoOverlay
 import nasa.core.ui.shimmer
-import nasa.core.ui.R as CoreR
+import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ItemContent(

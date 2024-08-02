@@ -37,6 +37,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
+  implementation(projects.modules.apod.res)
   implementation(projects.modules.apod.single.nav)
   implementation(projects.modules.settings.nav)
 }

@@ -37,6 +37,7 @@ import kotlinx.datetime.Month
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import nasa.apod.model.EARLIEST_APOD_DATE
+import nasa.apod.res.R
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.datePicker
@@ -120,8 +121,8 @@ private fun MonthYearPicker(
 
   Column(
     modifier = modifier
-      .background(theme.dialogBackground)
-      .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+        .background(theme.dialogBackground)
+        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
   ) {
     Text(
       text = stringResource(R.string.search_dialog_title),

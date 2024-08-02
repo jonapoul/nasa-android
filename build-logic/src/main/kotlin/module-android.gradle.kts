@@ -1,4 +1,7 @@
+import blueprint.core.javaVersionString
+
 plugins {
+  kotlin("android")
   id("convention-android-library")
   id("convention-style")
   id("convention-test")
@@ -8,4 +11,10 @@ plugins {
 
 dependencyGuard {
   configuration("releaseRuntimeClasspath")
+}
+
+android {
+  kotlinOptions {
+    jvmTarget = javaVersionString()
+  }
 }

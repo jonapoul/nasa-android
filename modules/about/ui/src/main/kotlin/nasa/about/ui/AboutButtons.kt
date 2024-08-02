@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nasa.about.res.R
 import nasa.core.ui.button.RegularTextButton
 import nasa.core.ui.preview.PreviewColumn
 

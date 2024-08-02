@@ -1,4 +1,5 @@
 plugins {
+  kotlin("android")
   id("convention-android-library")
   id("convention-hilt")
   id("convention-style")

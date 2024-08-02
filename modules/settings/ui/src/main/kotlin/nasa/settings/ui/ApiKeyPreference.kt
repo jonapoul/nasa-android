@@ -42,6 +42,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.text.NasaTextField
+import nasa.settings.res.R
 import kotlin.time.Duration.Companion.milliseconds
 
 @Composable

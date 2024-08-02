@@ -33,5 +33,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
+  implementation(projects.modules.about.res)
   implementation(projects.modules.licenses.nav)
 }

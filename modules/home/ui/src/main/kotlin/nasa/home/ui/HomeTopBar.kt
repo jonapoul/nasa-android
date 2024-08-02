@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
+import nasa.home.res.R
 
 @Composable
 internal fun HomeTopBar(

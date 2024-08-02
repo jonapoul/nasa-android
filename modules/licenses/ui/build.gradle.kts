@@ -34,4 +34,5 @@ dependencies {
   implementation(libs.kotlinx.immutable)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
+  implementation(projects.modules.licenses.res)
 }

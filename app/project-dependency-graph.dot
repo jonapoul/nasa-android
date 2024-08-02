@@ -12,6 +12,8 @@ node ["style"="filled"]
 ":core:url" ["fillcolor"="#55FF55","shape"="box"]
 ":core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":core:model" ["fillcolor"="#A17EFF","shape"="box"]
+":core:res" ["fillcolor"="#00FFFF","shape"="box"]
+":about:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":licenses:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:di" ["fillcolor"="#FF5555","shape"="box"]
 ":apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
@@ -23,6 +25,7 @@ node ["style"="filled"]
 ":apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":db:apod" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:single:nav" ["fillcolor"="#55FF55","shape"="box"]
+":apod:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":settings:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":apod:single:vm" ["fillcolor"="#FCB103","shape"="box"]
@@ -37,15 +40,19 @@ node ["style"="filled"]
 ":gallery:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:search:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
+":gallery:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":home:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":home:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":home:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":home:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":licenses:di" ["fillcolor"="#FF5555","shape"="box"]
 ":licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":licenses:vm" ["fillcolor"="#FCB103","shape"="box"]
+":licenses:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":settings:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":settings:vm" ["fillcolor"="#FCB103","shape"="box"]
+":settings:res" ["fillcolor"="#00FFFF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
@@ -61,6 +68,7 @@ graph ["label"="Legend","fontsize"="20"]
 <TR><TD>Android ViewModel</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
 <TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
+<TR><TD>Android Resources</TD><TD BGCOLOR="#00FFFF">module-name</TD></TR>
 <TR><TD>Kotlin</TD><TD BGCOLOR="#A17EFF">module-name</TD></TR>
 </TABLE>
 >]
@@ -85,10 +93,12 @@ graph ["label"="Legend","fontsize"="20"]
 ":about:di" -> ":core:http" ["style"="dotted"]
 ":about:ui" -> ":about:vm"
 ":about:ui" -> ":core:ui"
+":about:ui" -> ":about:res" ["style"="dotted"]
 ":about:ui" -> ":licenses:nav" ["style"="dotted"]
 ":about:vm" -> ":about:data"
 ":about:vm" -> ":core:url"
 ":core:ui" -> ":core:model"
+":core:ui" -> ":core:res"
 ":apod:di" -> ":apod:data:api"
 ":apod:di" -> ":core:http" ["style"="dotted"]
 ":apod:data:api" -> ":apod:model"
@@ -97,6 +107,7 @@ graph ["label"="Legend","fontsize"="20"]
 ":apod:grid:ui" -> ":apod:grid:vm"
 ":apod:grid:ui" -> ":apod:single:nav"
 ":apod:grid:ui" -> ":core:ui"
+":apod:grid:ui" -> ":apod:res" ["style"="dotted"]
 ":apod:grid:ui" -> ":settings:nav" ["style"="dotted"]
 ":apod:grid:nav" -> ":apod:nav"
 ":apod:grid:vm" -> ":apod:data:repo"
@@ -109,6 +120,7 @@ graph ["label"="Legend","fontsize"="20"]
 ":apod:single:ui" -> ":apod:grid:nav"
 ":apod:single:ui" -> ":apod:single:vm"
 ":apod:single:ui" -> ":core:ui"
+":apod:single:ui" -> ":apod:res" ["style"="dotted"]
 ":apod:single:ui" -> ":apod:single:nav" ["style"="dotted"]
 ":apod:single:ui" -> ":settings:nav" ["style"="dotted"]
 ":apod:single:vm" -> ":apod:data:repo"
@@ -116,34 +128,38 @@ graph ["label"="Legend","fontsize"="20"]
 ":apod:single:vm" -> ":core:http"
 ":apod:single:vm" -> ":core:url"
 ":db:di" -> ":db:impl"
-":db:impl" -> ":db:apod"
 ":db:impl" -> ":db:api"
+":db:impl" -> ":db:apod"
 ":db:impl" -> ":db:gallery"
 ":gallery:di" -> ":gallery:data:api"
 ":gallery:di" -> ":core:http" ["style"="dotted"]
 ":gallery:di" -> ":core:model" ["style"="dotted"]
 ":gallery:data:api" -> ":gallery:model"
+":gallery:search:ui" -> ":core:ui"
 ":gallery:search:ui" -> ":gallery:nav"
 ":gallery:search:ui" -> ":gallery:search:vm"
-":gallery:search:ui" -> ":core:ui"
-":gallery:search:vm" -> ":gallery:data:repo"
+":gallery:search:ui" -> ":gallery:res" ["style"="dotted"]
 ":gallery:search:vm" -> ":core:url"
-":gallery:data:repo" -> ":gallery:data:api"
+":gallery:search:vm" -> ":gallery:data:repo"
 ":gallery:data:repo" -> ":db:gallery"
+":gallery:data:repo" -> ":gallery:data:api"
 ":home:ui" -> ":apod:single:nav"
 ":home:ui" -> ":about:nav" ["style"="dotted"]
 ":home:ui" -> ":core:ui" ["style"="dotted"]
 ":home:ui" -> ":gallery:nav" ["style"="dotted"]
+":home:ui" -> ":home:res" ["style"="dotted"]
 ":home:ui" -> ":home:vm" ["style"="dotted"]
 ":home:ui" -> ":settings:nav" ["style"="dotted"]
 ":licenses:di" -> ":licenses:data"
 ":licenses:ui" -> ":core:ui"
 ":licenses:ui" -> ":licenses:vm"
+":licenses:ui" -> ":licenses:res" ["style"="dotted"]
 ":licenses:vm" -> ":core:url"
 ":licenses:vm" -> ":licenses:data"
 ":settings:ui" -> ":core:ui"
 ":settings:ui" -> ":settings:vm"
-":settings:vm" -> ":core:url"
+":settings:ui" -> ":settings:res" ["style"="dotted"]
 ":settings:vm" -> ":apod:data:repo"
+":settings:vm" -> ":core:url"
 ":settings:vm" -> ":db:api"
 }

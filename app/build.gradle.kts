@@ -32,6 +32,7 @@ enum class NasaModuleType(override val string: String, override val color: Strin
   AndroidViewModel(string = "Android ViewModel", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
+  AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
   Kotlin(string = "Kotlin", color = "#A17EFF"), // purple
 }
 
@@ -44,6 +45,7 @@ diagramsBlueprint {
       project.plugins.hasPlugin("module-viewmodel") -> NasaModuleType.AndroidViewModel
       project.plugins.hasPlugin("module-compose") -> NasaModuleType.AndroidCompose
       project.plugins.hasPlugin("module-android") -> NasaModuleType.AndroidLibrary
+      project.plugins.hasPlugin("module-resources") -> NasaModuleType.AndroidResources
       project.plugins.hasPlugin("module-kotlin") -> NasaModuleType.Kotlin
       else -> error("Unknown module type for ${project.path}")
     }
@@ -95,7 +97,6 @@ android {
 
   buildFeatures {
     buildConfig = true
-    resValues = true
   }
 
   signingConfigs {

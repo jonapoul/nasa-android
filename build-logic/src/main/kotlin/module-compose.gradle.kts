@@ -9,13 +9,6 @@ plugins {
   id("com.dropbox.dependency-guard")
 }
 
-android {
-  buildFeatures {
-    androidResources = true
-    resValues = true
-  }
-}
-
 dependencyGuard {
   configuration("releaseRuntimeClasspath")
 }
