@@ -1,6 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration name="app" activateToolWindowBeforeRun="false" default="false" factoryName="Android App"
-    type="AndroidRunConfigurationType">
+  <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
     <module name="android-client.app.main" />
     <option name="DEPLOY" value="true" />
     <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
@@ -15,7 +14,6 @@
     <option name="MODE" value="default_activity" />
     <option name="CLEAR_LOGCAT" value="false" />
     <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-    <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
     <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
     <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
     <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
@@ -67,9 +65,7 @@
       <option name="Android.Gradle.BeforeRunTask" enabled="true" />
     </method>
   </configuration>
-  <configuration name="app" activateToolWindowBeforeRun="false" default="false" factoryName="Android App"
-    type="AndroidRunConfigurationType">
-    <module name="nasa-android.app.main" />
+  <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
     <option name="DEPLOY" value="true" />
     <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
     <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -83,7 +79,6 @@
     <option name="MODE" value="default_activity" />
     <option name="CLEAR_LOGCAT" value="false" />
     <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-    <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
     <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
     <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
     <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />

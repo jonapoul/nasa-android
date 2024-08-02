@@ -6,6 +6,7 @@ import blueprint.core.runGitCommandOrNull
 import blueprint.core.stringProperty
 import blueprint.core.stringPropertyOrNull
 import blueprint.diagrams.ModuleType
+import guru.nidi.graphviz.attribute.Rank
 
 plugins {
   alias(libs.plugins.kotlin.android)
@@ -37,6 +38,7 @@ enum class NasaModuleType(override val string: String, override val color: Strin
 }
 
 diagramsBlueprint {
+  rankDir = Rank.RankDir.TOP_TO_BOTTOM
   moduleTypes = NasaModuleType.values().toSet()
   moduleTypeFinder = ModuleType.Finder { project ->
     when {

@@ -116,10 +116,10 @@ commons-codec:commons-codec:1.16.0
 commons-io:commons-io:2.13.0
 commons-logging:commons-logging:1.2
 dev.equo.ide:solstice:1.7.5
-dev.jonpoulton.blueprint.diagrams:dev.jonpoulton.blueprint.diagrams.gradle.plugin:0.7.0
-dev.jonpoulton.blueprint:core:0.7.0
-dev.jonpoulton.blueprint:diagrams-gradle-plugin:0.7.0
-dev.jonpoulton.blueprint:recipes:0.7.0
+dev.jonpoulton.blueprint.diagrams:dev.jonpoulton.blueprint.diagrams.gradle.plugin:0.8.0
+dev.jonpoulton.blueprint:core:0.8.0
+dev.jonpoulton.blueprint:diagrams-gradle-plugin:0.8.0
+dev.jonpoulton.blueprint:recipes:0.8.0
 dev.zacsweers.moshix:moshi-sealed-reflect:0.25.1
 dev.zacsweers.moshix:moshi-sealed-runtime:0.25.1
 gradle.plugin.org.gradle.android:android-cache-fix-gradle-plugin:3.0.1
