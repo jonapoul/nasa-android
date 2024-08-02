@@ -21,4 +21,5 @@ dependencies {
 
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)
+  testImplementation(projects.modules.db.impl)
 }

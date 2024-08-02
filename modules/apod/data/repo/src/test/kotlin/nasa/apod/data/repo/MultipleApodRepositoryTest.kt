@@ -11,8 +11,8 @@ import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
 import nasa.core.model.ApiKey
 import nasa.db.DefaultApodEntityFactory
-import nasa.db.RoomNasaDatabase
 import nasa.db.RoomApodDaoWrapper
+import nasa.db.RoomNasaDatabase
 import nasa.db.apod.ApodDao
 import nasa.test.http.MockWebServerRule
 import net.lachlanmckee.timberjunit.TimberTestRule

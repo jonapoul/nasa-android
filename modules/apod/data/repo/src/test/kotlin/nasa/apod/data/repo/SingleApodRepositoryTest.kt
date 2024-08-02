@@ -12,8 +12,8 @@ import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
 import nasa.core.model.ApiKey
 import nasa.db.DefaultApodEntityFactory
-import nasa.db.RoomNasaDatabase
 import nasa.db.RoomApodDaoWrapper
+import nasa.db.RoomNasaDatabase
 import nasa.db.apod.ApodDao
 import nasa.db.apod.ApodEntity
 import nasa.test.http.MockWebServerRule

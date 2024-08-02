@@ -24,7 +24,8 @@ internal class DatabaseClearer @Inject constructor(
   }
 
   fun updateFileSize() {
-    mutableFileSize.update { dbFile.length().bytes }
+    val bytes = dbFile.length().bytes
+    mutableFileSize.update { bytes }
   }
 
   suspend fun clear(): Boolean = try {
@@ -38,6 +39,6 @@ internal class DatabaseClearer @Inject constructor(
     false
   } finally {
     runCatching { dbFile.delete() }
-    mutableFileSize.update { dbFile.length().bytes }
+    updateFileSize()
   }
 }

@@ -13,8 +13,9 @@ import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.NASA_API_URL
 import nasa.core.url.UrlOpener
-import nasa.db.RoomNasaDatabase
+import nasa.db.NasaDatabaseDelegate
 import nasa.db.RoomApodDaoWrapper
+import nasa.db.RoomNasaDatabase
 import nasa.db.apod.ApodDao
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
@@ -55,7 +56,7 @@ class SettingsViewModelTest {
 
     databaseClearer = DatabaseClearer(
       io = IODispatcher(coroutineRule.dispatcher),
-      database = databaseRule.database,
+      database = NasaDatabaseDelegate(databaseRule.database),
     )
 
     viewModel = SettingsViewModel(
