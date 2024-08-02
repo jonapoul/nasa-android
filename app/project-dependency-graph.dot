@@ -16,16 +16,16 @@ node ["style"="filled"]
 ":apod:di" ["fillcolor"="#FF5555","shape"="box"]
 ":apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:model" ["fillcolor"="#A17EFF","shape"="box"]
-":apod:screen-grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":apod:screen-grid:nav" ["fillcolor"="#55FF55","shape"="box"]
+":apod:grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":apod:grid:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":apod:nav" ["fillcolor"="#55FF55","shape"="box"]
-":apod:screen-grid:vm" ["fillcolor"="#FCB103","shape"="box"]
+":apod:grid:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":db:apod" ["fillcolor"="#A17EFF","shape"="box"]
-":apod:screen-single:nav" ["fillcolor"="#55FF55","shape"="box"]
+":apod:single:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":settings:nav" ["fillcolor"="#A17EFF","shape"="box"]
-":apod:screen-single:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":apod:screen-single:vm" ["fillcolor"="#FCB103","shape"="box"]
+":apod:single:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":apod:single:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":db:di" ["fillcolor"="#FF5555","shape"="box"]
 ":db:impl" ["fillcolor"="#55FF55","shape"="box"]
 ":db:api" ["fillcolor"="#A17EFF","shape"="box"]
@@ -33,9 +33,9 @@ node ["style"="filled"]
 ":gallery:di" ["fillcolor"="#FF5555","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:screen-search:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":gallery:search:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":gallery:nav" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:screen-search:vm" ["fillcolor"="#FCB103","shape"="box"]
+":gallery:search:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":home:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":home:ui" ["fillcolor"="#FFFF55","shape"="box"]
@@ -69,11 +69,11 @@ graph ["label"="Legend","fontsize"="20"]
 ":app" -> ":about:nav" ["style"="dotted"]
 ":app" -> ":about:ui" ["style"="dotted"]
 ":app" -> ":apod:di" ["style"="dotted"]
-":app" -> ":apod:screen-grid:ui" ["style"="dotted"]
-":app" -> ":apod:screen-single:ui" ["style"="dotted"]
+":app" -> ":apod:grid:ui" ["style"="dotted"]
+":app" -> ":apod:single:ui" ["style"="dotted"]
 ":app" -> ":db:di" ["style"="dotted"]
 ":app" -> ":gallery:di" ["style"="dotted"]
-":app" -> ":gallery:screen-search:ui" ["style"="dotted"]
+":app" -> ":gallery:search:ui" ["style"="dotted"]
 ":app" -> ":home:nav" ["style"="dotted"]
 ":app" -> ":home:ui" ["style"="dotted"]
 ":app" -> ":licenses:di" ["style"="dotted"]
@@ -93,28 +93,28 @@ graph ["label"="Legend","fontsize"="20"]
 ":apod:di" -> ":core:http" ["style"="dotted"]
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
-":apod:screen-grid:ui" -> ":apod:screen-grid:nav"
-":apod:screen-grid:ui" -> ":apod:screen-grid:vm"
-":apod:screen-grid:ui" -> ":apod:screen-single:nav"
-":apod:screen-grid:ui" -> ":core:ui"
-":apod:screen-grid:ui" -> ":settings:nav" ["style"="dotted"]
-":apod:screen-grid:nav" -> ":apod:nav"
-":apod:screen-grid:vm" -> ":apod:data:repo"
-":apod:screen-grid:vm" -> ":apod:nav"
-":apod:screen-grid:vm" -> ":core:url"
+":apod:grid:ui" -> ":apod:grid:nav"
+":apod:grid:ui" -> ":apod:grid:vm"
+":apod:grid:ui" -> ":apod:single:nav"
+":apod:grid:ui" -> ":core:ui"
+":apod:grid:ui" -> ":settings:nav" ["style"="dotted"]
+":apod:grid:nav" -> ":apod:nav"
+":apod:grid:vm" -> ":apod:data:repo"
+":apod:grid:vm" -> ":apod:nav"
+":apod:grid:vm" -> ":core:url"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":db:apod"
-":apod:screen-single:nav" -> ":apod:model"
-":apod:screen-single:nav" -> ":apod:nav"
-":apod:screen-single:ui" -> ":apod:screen-grid:nav"
-":apod:screen-single:ui" -> ":apod:screen-single:vm"
-":apod:screen-single:ui" -> ":core:ui"
-":apod:screen-single:ui" -> ":apod:screen-single:nav" ["style"="dotted"]
-":apod:screen-single:ui" -> ":settings:nav" ["style"="dotted"]
-":apod:screen-single:vm" -> ":apod:data:repo"
-":apod:screen-single:vm" -> ":apod:nav"
-":apod:screen-single:vm" -> ":core:http"
-":apod:screen-single:vm" -> ":core:url"
+":apod:single:nav" -> ":apod:model"
+":apod:single:nav" -> ":apod:nav"
+":apod:single:ui" -> ":apod:grid:nav"
+":apod:single:ui" -> ":apod:single:vm"
+":apod:single:ui" -> ":core:ui"
+":apod:single:ui" -> ":apod:single:nav" ["style"="dotted"]
+":apod:single:ui" -> ":settings:nav" ["style"="dotted"]
+":apod:single:vm" -> ":apod:data:repo"
+":apod:single:vm" -> ":apod:nav"
+":apod:single:vm" -> ":core:http"
+":apod:single:vm" -> ":core:url"
 ":db:di" -> ":db:impl"
 ":db:impl" -> ":db:apod"
 ":db:impl" -> ":db:api"
@@ -123,14 +123,14 @@ graph ["label"="Legend","fontsize"="20"]
 ":gallery:di" -> ":core:http" ["style"="dotted"]
 ":gallery:di" -> ":core:model" ["style"="dotted"]
 ":gallery:data:api" -> ":gallery:model"
-":gallery:screen-search:ui" -> ":gallery:nav"
-":gallery:screen-search:ui" -> ":gallery:screen-search:vm"
-":gallery:screen-search:ui" -> ":core:ui"
-":gallery:screen-search:vm" -> ":gallery:data:repo"
-":gallery:screen-search:vm" -> ":core:url"
+":gallery:search:ui" -> ":gallery:nav"
+":gallery:search:ui" -> ":gallery:search:vm"
+":gallery:search:ui" -> ":core:ui"
+":gallery:search:vm" -> ":gallery:data:repo"
+":gallery:search:vm" -> ":core:url"
 ":gallery:data:repo" -> ":gallery:data:api"
 ":gallery:data:repo" -> ":db:gallery"
-":home:ui" -> ":apod:screen-single:nav"
+":home:ui" -> ":apod:single:nav"
 ":home:ui" -> ":about:nav" ["style"="dotted"]
 ":home:ui" -> ":core:ui" ["style"="dotted"]
 ":home:ui" -> ":gallery:nav" ["style"="dotted"]

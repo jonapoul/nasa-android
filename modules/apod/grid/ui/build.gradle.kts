@@ -7,9 +7,9 @@ android {
 }
 
 dependencies {
-  api(projects.modules.apod.screenGrid.nav)
-  api(projects.modules.apod.screenGrid.vm)
-  api(projects.modules.apod.screenSingle.nav)
+  api(projects.modules.apod.grid.nav)
+  api(projects.modules.apod.grid.vm)
+  api(projects.modules.apod.single.nav)
   api(projects.modules.core.ui)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)

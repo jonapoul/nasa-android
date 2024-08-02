@@ -8,7 +8,7 @@ android {
 
 dependencies {
   api(projects.modules.gallery.nav)
-  api(projects.modules.gallery.screenSearch.vm)
+  api(projects.modules.gallery.search.vm)
   api(projects.modules.core.ui)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)
