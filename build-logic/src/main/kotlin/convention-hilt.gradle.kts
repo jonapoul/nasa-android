@@ -8,6 +8,6 @@ val ksp by configurations
 
 dependencies {
   implementation(libs.hilt.core)
-  testImplementation(libs.test.hilt)
   ksp(libs.hilt.compiler)
+  testImplementation(libs.test.hilt)
 }

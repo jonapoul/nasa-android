@@ -21,6 +21,7 @@ plugins {
 
   alias(libs.plugins.dependencyAnalysis)
   alias(libs.plugins.dependencyGuard)
+  alias(libs.plugins.dependencySort)
   alias(libs.plugins.dependencyVersions)
   alias(libs.plugins.doctor)
 

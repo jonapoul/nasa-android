@@ -7,9 +7,10 @@ android {
 }
 
 dependencies {
+  api(libs.kotlinx.coroutines)
   api(projects.modules.apod.data.api)
   api(projects.modules.db.apod)
-  api(libs.kotlinx.coroutines)
+
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.javaxInject)
   implementation(libs.kotlinx.datetime)
@@ -18,9 +19,10 @@ dependencies {
   implementation(libs.okhttp.core)
   implementation(libs.retrofit.core)
   implementation(libs.timber)
-  testImplementation(projects.modules.test.http)
-  testImplementation(projects.modules.db.impl)
-  testImplementation(libs.test.alakazam.db)
+
   testImplementation(libs.androidx.room.runtime)
+  testImplementation(libs.test.alakazam.db)
   testImplementation(libs.test.okhttp)
+  testImplementation(projects.modules.db.impl)
+  testImplementation(projects.modules.test.http)
 }

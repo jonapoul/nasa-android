@@ -12,15 +12,18 @@ android {
 }
 
 dependencies {
-  api(projects.modules.db.apod)
-  api(projects.modules.db.api)
-  api(projects.modules.db.gallery)
+  ksp(libs.androidx.room.compiler)
+
   api(libs.androidx.room.runtime)
   api(libs.kotlinx.coroutines)
+  api(projects.modules.db.api)
+  api(projects.modules.db.apod)
+  api(projects.modules.db.gallery)
+
   implementation(libs.androidx.room.common)
   implementation(libs.androidx.room.ktx)
   implementation(libs.androidx.sqlite)
   implementation(libs.kotlinx.datetime)
-  ksp(libs.androidx.room.compiler)
+
   testImplementation(libs.test.alakazam.db)
 }

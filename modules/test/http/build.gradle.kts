@@ -5,9 +5,10 @@ plugins {
 dependencies {
   api(libs.test.junit)
   api(libs.test.okhttp)
-  implementation(projects.modules.core.http)
+
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)
   implementation(libs.retrofit.core)
   implementation(libs.test.kotlin.junit)
+  implementation(projects.modules.core.http)
 }

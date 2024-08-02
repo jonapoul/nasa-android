@@ -7,15 +7,18 @@ android {
 }
 
 dependencies {
-  api(projects.modules.core.url)
-  api(projects.modules.apod.data.repo)
-  api(projects.modules.db.api)
   api(libs.alakazam.android.core)
   api(libs.alakazam.kotlin.core)
   api(libs.kotlinx.coroutines)
+  api(projects.modules.apod.data.repo)
+  api(projects.modules.core.url)
+  api(projects.modules.db.api)
+
   implementation(libs.androidx.sqlite)
   implementation(libs.timber)
+
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)
 }

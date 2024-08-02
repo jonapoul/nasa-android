@@ -7,12 +7,14 @@ android {
 }
 
 dependencies {
-  api(projects.modules.about.data)
-  api(projects.modules.core.url)
   api(libs.alakazam.android.core)
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
+  api(projects.modules.about.data)
+  api(projects.modules.core.url)
+
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.timber)
+
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

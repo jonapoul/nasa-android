@@ -7,14 +7,10 @@ android {
 }
 
 dependencies {
-  api(projects.modules.apod.single.nav)
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
-  implementation(projects.modules.about.nav)
-  implementation(projects.modules.core.ui)
-  implementation(projects.modules.gallery.nav)
-  implementation(projects.modules.home.vm)
-  implementation(projects.modules.settings.nav)
+  api(projects.modules.apod.single.nav)
+
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.activity.core)
   implementation(libs.androidx.compose.animation.core)
@@ -33,4 +29,9 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
+  implementation(projects.modules.about.nav)
+  implementation(projects.modules.core.ui)
+  implementation(projects.modules.gallery.nav)
+  implementation(projects.modules.home.vm)
+  implementation(projects.modules.settings.nav)
 }

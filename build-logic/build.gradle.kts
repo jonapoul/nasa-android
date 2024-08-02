@@ -28,6 +28,7 @@ dependencies {
   implementation(libs.plugin.compose)
   implementation(libs.plugin.dependencyGraph)
   implementation(libs.plugin.dependencyGuard)
+  implementation(libs.plugin.dependencySort)
   implementation(libs.plugin.detekt)
   implementation(libs.plugin.hilt)
   implementation(libs.plugin.kotlin)

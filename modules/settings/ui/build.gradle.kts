@@ -7,10 +7,11 @@ android {
 }
 
 dependencies {
-  api(projects.modules.core.ui)
-  api(projects.modules.settings.vm)
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
+  api(projects.modules.core.ui)
+  api(projects.modules.settings.vm)
+
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.activity.core)

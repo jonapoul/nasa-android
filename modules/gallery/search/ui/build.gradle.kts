@@ -7,12 +7,13 @@ android {
 }
 
 dependencies {
-  api(projects.modules.gallery.nav)
-  api(projects.modules.gallery.search.vm)
-  api(projects.modules.core.ui)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
+  api(projects.modules.core.ui)
+  api(projects.modules.gallery.nav)
+  api(projects.modules.gallery.search.vm)
+
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

@@ -5,6 +5,7 @@ plugins {
   id("com.android.library")
   id("convention-compose")
   id("convention-style")
+  id("com.squareup.sort-dependencies")
   id("com.dropbox.dependency-guard")
 }
 

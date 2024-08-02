@@ -7,14 +7,15 @@ android {
 }
 
 dependencies {
-  api(projects.modules.apod.data.api)
   api(libs.alakazam.android.core)
   api(libs.javaxInject)
-  implementation(projects.modules.core.http)
+  api(projects.modules.apod.data.api)
+
   implementation(libs.androidx.room.runtime)
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)
   implementation(libs.retrofit.core)
   implementation(libs.timber)
+  implementation(projects.modules.core.http)
 }
