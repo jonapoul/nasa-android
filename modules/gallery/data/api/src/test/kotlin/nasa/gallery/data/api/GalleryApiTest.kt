@@ -1,11 +1,25 @@
 package nasa.gallery.data.api
 
 import alakazam.test.core.CoroutineRule
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.test.runTest
+import nasa.gallery.model.BooleanMetadata
+import nasa.gallery.model.DoubleMetadata
+import nasa.gallery.model.ImageUrl
+import nasa.gallery.model.IntMetadata
+import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
+import nasa.gallery.model.Metadata
 import nasa.gallery.model.NasaId
+import nasa.gallery.model.Object
+import nasa.gallery.model.ObjectListMetadata
+import nasa.gallery.model.ObjectMetadata
+import nasa.gallery.model.StringListMetadata
+import nasa.gallery.model.StringMetadata
 import nasa.gallery.model.Year
 import nasa.test.MockWebServerRule
 import nasa.test.getResourceAsText
@@ -13,6 +27,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import kotlin.test.fail
 
@@ -196,14 +211,14 @@ class GalleryApiTest {
     // Then
     assertTrue(response.isSuccessful)
     assertEquals(
-      expected = listOf(
-        "http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~orig.jpg",
-        "http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~orig.jpg",
-        "http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~large.jpg",
-        "http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~medium.jpg",
-        "http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~small.jpg",
-        "http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~thumb.jpg",
-        "http://images-assets.nasa.gov/image/NHQ202401260011/metadata.json",
+      expected = UrlCollection(
+        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~orig.jpg"),
+        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~orig.jpg"),
+        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~large.jpg"),
+        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~medium.jpg"),
+        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~small.jpg"),
+        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~thumb.jpg"),
+        JsonUrl("http://images-assets.nasa.gov/image/NHQ202401260011/metadata.json"),
       ),
       actual = response.body(),
     )
@@ -218,11 +233,70 @@ class GalleryApiTest {
     // When
     val response = galleryApi.getMetadata(url = "url.com")
 
-    // Then
+    // Then the response was parsed
     assertTrue(response.isSuccessful)
-    val body = response.body() ?: fail("Null body for $response")
-    assertEquals(expected = 349, actual = body.size)
+    val metadata = response.body() ?: fail("Null body for $response")
+    assertEquals(expected = 349, actual = metadata.size)
+
+    // Checking some specific cases:
+    with(metadata) {
+      assertElement<String, StringMetadata>(key = "APP14:APP14Flags1", value = "(none)")
+      assertElement<String, StringMetadata>(key = "AVAIL:Description508", value = "")
+      assertElement<Double, DoubleMetadata>(key = "Composite:LightValue", value = 6.9)
+      assertElement<Int, IntMetadata>(key = "EXIF:ISO", value = 3200)
+      assertElement<Boolean, BooleanMetadata>(key = "XMP:AlreadyApplied", value = true)
+      assertElement<ImmutableList<String>, StringListMetadata>(
+        key = "XMP:PersonInImage",
+        value = persistentListOf("Jim Free", "Nyam-Osor Uchral"),
+      )
+      assertElement<Object, ObjectMetadata>(
+        key = "XMP:CreatorContactInfo",
+        value = buildObject(
+          "CiAdrCity" to "Washington",
+          "CiAdrCtry" to "USA",
+          "CiAdrExtadr" to "NASA Headquarters\n300 E Street, SW",
+          "CiAdrPcode" to 20546,
+          "CiAdrRegion" to "DC",
+          "CiTelWork" to "202-358-1900",
+          "CiUrlWork" to "http://www.nasa.gov",
+        )
+      )
+      assertElement<ImmutableList<Object>, ObjectListMetadata>(
+        key = "XMP:History",
+        value = persistentListOf(
+          buildObject(
+            "Action" to "saved",
+            "Changed" to "/metadata",
+            "InstanceID" to "xmp.iid:282bd4d9-03f4-4030-9a1e-a572912363d8",
+            "SoftwareAgent" to "Adobe Photoshop Lightroom Classic 13.1 (Macintosh)",
+            "When" to "2024:01:26 10:50:32-05:00",
+          ),
+          buildObject(
+            "Action" to "derived",
+            "Parameters" to "converted from image/x-nikon-nef to image/jpeg, saved to new location",
+          ),
+          buildObject(
+            "Action" to "saved",
+            "Changed" to "/",
+            "InstanceID" to "xmp.iid:ce367407-eadb-4e50-841b-524c8ab8f0a7",
+            "SoftwareAgent" to "Adobe Photoshop Lightroom Classic 13.1 (Macintosh)",
+            "When" to "2024:01:26 12:21:52-05:00",
+          ),
+        )
+      )
+    }
   }
+
+  private inline fun <reified T, reified M> MetadataCollection.assertElement(
+    key: String,
+    value: T,
+  ) where M : Metadata<T>, M : Any {
+    val element = get(key)
+    assertIs<M>(element)
+    assertEquals(expected = value, actual = element.value)
+  }
+
+  private fun buildObject(vararg content: Pair<String, Any>): Object = content.toMap().toImmutableMap()
 
   private fun enqueueDefault() {
     val errorJson = readJson(filename = "search-failure.json")

@@ -84,13 +84,20 @@ interface GalleryApi {
     @Path("nasa_id") nasaId: NasaId,
   ): Response<LocateResponse.Success>
 
+  /**
+   * Fetches a list of URLs related to a given gallery item. Most likely a selection of image URLs at different
+   * sizes, but it will also have a JSON metadata link too. See [getMetadata].
+   */
   @GET
   suspend fun getCollection(
     @Url url: String,
-  ): Response<List<String>>
+  ): Response<UrlCollection>
 
+  /**
+   * A JSON map of detailed metadata about a given gallery item.
+   */
   @GET
   suspend fun getMetadata(
     @Url url: String,
-  ): Response<JsonObject>
+  ): Response<MetadataCollection>
 }
