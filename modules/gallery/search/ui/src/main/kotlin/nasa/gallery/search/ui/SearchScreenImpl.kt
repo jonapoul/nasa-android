@@ -61,6 +61,11 @@ private fun SearchContent(
       .wrapContentHeight()
 
     when (searchState) {
+      SearchState.NoAction -> SearchNoAction(
+        modifier = contentsModifier.padding(64.dp),
+        theme = theme,
+      )
+
       SearchState.Empty -> SearchEmpty(
         modifier = contentsModifier.padding(64.dp),
         theme = theme,
@@ -122,6 +127,15 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewEmpty() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Empty,
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewNoAction() = PreviewScreen {
+  SearchScreenImpl(
+    searchState = SearchState.NoAction,
     onAction = {},
   )
 }

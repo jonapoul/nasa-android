@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject internal constructor() : ViewModel() {
-  private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.Empty)
+  private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
   val searchState: StateFlow<SearchState> = mutableSearchState.asStateFlow()
 
   private val mutableFilterConfig = MutableStateFlow(FilterConfig.Default)

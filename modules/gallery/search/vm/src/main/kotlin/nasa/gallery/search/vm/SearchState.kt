@@ -5,6 +5,8 @@ import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
 sealed interface SearchState {
+  data object NoAction : SearchState
+
   data object Empty : SearchState
 
   data object Searching : SearchState
