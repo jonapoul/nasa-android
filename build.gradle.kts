@@ -35,6 +35,7 @@ listOf(
   "local.properties",
 ).forEach { filename ->
   rootLocalPropertiesOrNull(filename)?.forEach { (key, value) ->
+    println("Copied from $filename: '$key' = '$value'")
     ext[key.toString()] = value.toString()
   }
 }
@@ -58,6 +59,7 @@ dependencyAnalysis {
       onIncorrectConfiguration {
         exclude(
           ":modules:core:model",
+          ":modules:core:res",
           "javax.inject:javax.inject",
         )
       }
@@ -72,11 +74,14 @@ dependencyAnalysis {
           libs.test.hilt,
           libs.test.junit,
           libs.test.mockk.android,
+          libs.test.mockk.core,
           libs.test.mockk.dsl,
           libs.test.robolectric,
           libs.test.timber,
           libs.test.turbine,
+          libs.androidx.compose.ui.toolingPreview,
         )
+        exclude(":modules:test:resources")
       }
     }
   }

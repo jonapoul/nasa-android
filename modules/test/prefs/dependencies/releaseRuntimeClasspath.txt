@@ -8,9 +8,9 @@ androidx.test:core:1.6.1
 androidx.test:monitor:1.7.1
 androidx.tracing:tracing:1.1.0
 com.google.guava:listenablefuture:1.0
-dev.jonpoulton.preferences:android:2.0.0
-dev.jonpoulton.preferences:core-jvm:2.0.0
-dev.jonpoulton.preferences:core:2.0.0
+dev.jonpoulton.preferences:android:2.0.1
+dev.jonpoulton.preferences:core-jvm:2.0.1
+dev.jonpoulton.preferences:core:2.0.1
 org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22

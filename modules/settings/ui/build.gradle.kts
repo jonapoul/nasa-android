@@ -13,7 +13,6 @@ dependencies {
   api(projects.modules.settings.vm)
 
   implementation(libs.alakazam.android.compose)
-  implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.activity.core)
   implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)

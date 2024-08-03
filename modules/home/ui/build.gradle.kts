@@ -25,7 +25,6 @@ dependencies {
   implementation(libs.androidx.compose.ui.toolingPreview)
   implementation(libs.androidx.compose.ui.unit)
   implementation(libs.androidx.lifecycle.common)
-  implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)

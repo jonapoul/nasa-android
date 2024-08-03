@@ -103,7 +103,6 @@ androidx.recyclerview:recyclerview:1.1.0
 androidx.resourceinspection:resourceinspection-annotation:1.0.1
 androidx.room:room-common-jvm:2.7.0-alpha05
 androidx.room:room-common:2.7.0-alpha05
-androidx.room:room-ktx:2.7.0-alpha05
 androidx.room:room-runtime-android:2.7.0-alpha05
 androidx.room:room-runtime:2.7.0-alpha05
 androidx.savedstate:savedstate-ktx:1.2.1
@@ -129,7 +128,6 @@ cafe.adriel.voyager:voyager-navigator-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-navigator:1.1.0-beta02
 cafe.adriel.voyager:voyager-screenmodel-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-screenmodel:1.1.0-beta02
-com.fredporciuncula:flow-preferences:1.9.1
 com.google.accompanist:accompanist-drawablepainter:0.32.0
 com.google.android.material:material:1.12.0
 com.google.code.findbugs:jsr305:3.0.2
@@ -147,13 +145,12 @@ com.squareup.okio:okio:3.9.0
 com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0
 com.squareup.retrofit2:retrofit:2.11.0
 dev.jonpoulton.alakazam:android-core:4.5.6
-dev.jonpoulton.alakazam:android-prefs-core:4.5.6
 dev.jonpoulton.alakazam:android-ui-compose:4.5.6
 dev.jonpoulton.alakazam:kotlin-core:4.5.6
 dev.jonpoulton.alakazam:kotlin-time:4.5.6
-dev.jonpoulton.preferences:android:2.0.0
-dev.jonpoulton.preferences:core-jvm:2.0.0
-dev.jonpoulton.preferences:core:2.0.0
+dev.jonpoulton.preferences:android:2.0.1
+dev.jonpoulton.preferences:core-jvm:2.0.1
+dev.jonpoulton.preferences:core:2.0.1
 io.coil-kt:coil-base:2.7.0
 io.coil-kt:coil-compose-base:2.7.0
 io.coil-kt:coil-compose:2.7.0

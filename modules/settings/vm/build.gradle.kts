@@ -14,7 +14,6 @@ dependencies {
   api(projects.modules.core.url)
   api(projects.modules.db.api)
 
-  implementation(libs.androidx.sqlite)
   implementation(libs.timber)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)

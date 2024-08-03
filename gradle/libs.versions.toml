@@ -45,7 +45,7 @@ kotlinx-serialization = "1.7.1"
 material = "1.12.0"
 okhttp = "4.12.0"
 okio = "3.9.0"
-preferences = "2.0.0"
+preferences = "2.0.1"
 retrofit = "2.11.0"
 timber = "5.0.1"
 voyager = "1.1.0-beta02"
@@ -85,7 +85,6 @@ plugin-turtle = { module = "com.lordcodes.turtle:turtle", version.ref = "turtle"
 # Libraries
 alakazam-android-compose = { module = "dev.jonpoulton.alakazam:android-ui-compose", version.ref = "alakazam" }
 alakazam-android-core = { module = "dev.jonpoulton.alakazam:android-core", version.ref = "alakazam" }
-alakazam-android-prefs = { module = "dev.jonpoulton.alakazam:android-prefs-core", version.ref = "alakazam" }
 alakazam-kotlin-compose-annotations = { module = "dev.jonpoulton.alakazam:kotlin-compose-annotations", version.ref = "alakazam" }
 alakazam-kotlin-core = { module = "dev.jonpoulton.alakazam:kotlin-core", version.ref = "alakazam" }
 alakazam-kotlin-time = { module = "dev.jonpoulton.alakazam:kotlin-time", version.ref = "alakazam" }

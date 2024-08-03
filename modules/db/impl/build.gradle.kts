@@ -21,7 +21,6 @@ dependencies {
   api(projects.modules.db.gallery)
 
   implementation(libs.androidx.room.common)
-  implementation(libs.androidx.room.ktx)
   implementation(libs.androidx.sqlite)
   implementation(libs.kotlinx.datetime)
 

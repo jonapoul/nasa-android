@@ -3,5 +3,6 @@ plugins {
 }
 
 dependencies {
-  api(libs.test.alakazam.core)
+  implementation(libs.kotlin.stdlib)
+  implementation(libs.test.alakazam.core)
 }

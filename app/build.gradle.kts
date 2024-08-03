@@ -39,6 +39,7 @@ enum class NasaModuleType(override val string: String, override val color: Strin
 
 diagramsBlueprint {
   rankDir = Rank.RankDir.TOP_TO_BOTTOM
+  rankSeparation = 3.0
   moduleTypes = NasaModuleType.values().toSet()
   moduleTypeFinder = ModuleType.Finder { project ->
     when {
@@ -187,7 +188,6 @@ dependencies {
   implementation(projects.modules.settings.ui)
 
   implementation(libs.alakazam.android.core)
-  implementation(libs.alakazam.android.prefs)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.alakazam.kotlin.time)
   implementation(libs.androidx.activity.compose)

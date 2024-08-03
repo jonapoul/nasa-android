@@ -7,8 +7,8 @@ android {
 }
 
 dependencies {
-  api(libs.preferences.android)
   api(libs.preferences.core)
 
+  implementation(libs.preferences.android)
   implementation(libs.test.androidx.coreKtx)
 }
