@@ -55,6 +55,7 @@ internal class MidnightTheme : Theme {
   override val errorBorder = ColorPalette.red500
 
   override val formInputBackground = ColorPalette.grey800
+  override val formInputBackgroundDialog = ColorPalette.grey800
   override val formInputShadow = ColorPalette.blue400
   override val formInputText = ColorPalette.grey50
   override val formInputTextPlaceholder = ColorPalette.grey400

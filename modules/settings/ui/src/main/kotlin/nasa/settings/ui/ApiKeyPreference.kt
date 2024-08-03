@@ -36,6 +36,7 @@ import androidx.core.content.edit
 import nasa.core.model.SettingsKeys
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
+import nasa.core.ui.color.textFieldDialog
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.text.NasaTextField
@@ -161,6 +162,8 @@ private fun ApiKeyPreferenceDialogContent(
         value = mutableValue,
         onValueChange = { mutableValue = it },
         placeholderText = stringResource(id = R.string.settings_key_hint),
+        theme = theme,
+        colors = theme.textFieldDialog(),
         keyboardOptions = KeyboardOptions(
           keyboardType = KeyboardType.Text,
           capitalization = KeyboardCapitalization.None,

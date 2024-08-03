@@ -79,6 +79,10 @@ fun Theme.textField(
 
 @Stable
 @Composable
+fun Theme.textFieldDialog(): TextFieldColors = textField(focusedContainer = formInputBackgroundDialog)
+
+@Stable
+@Composable
 fun Theme.exposedDropDownMenu(): TextFieldColors = textField().copy(
   focusedTrailingIconColor = formInputText,
   unfocusedTrailingIconColor = formInputText,

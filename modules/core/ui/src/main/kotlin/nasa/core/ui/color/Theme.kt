@@ -60,6 +60,7 @@ sealed interface Theme {
   val errorBorder: Color
 
   val formInputBackground: Color
+  val formInputBackgroundDialog: Color
   val formInputShadow: Color
   val formInputText: Color
   val formInputTextPlaceholder: Color
