@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
 import nasa.core.model.FileSize
 import nasa.core.model.bytes
-import nasa.db.api.NasaDatabase
+import nasa.db.NasaDatabase
 import timber.log.Timber
 import javax.inject.Inject
 

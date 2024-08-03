@@ -1,4 +1,4 @@
-package nasa.db.di
+package nasa.android.di
 
 import alakazam.kotlin.core.IODispatcher
 import android.content.Context
@@ -8,11 +8,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import nasa.db.DefaultApodEntityFactory
+import nasa.db.NasaDatabase
 import nasa.db.NasaDatabaseDelegate
 import nasa.db.RoomApodDaoWrapper
 import nasa.db.RoomGalleryDaoWrapper
 import nasa.db.RoomNasaDatabase
-import nasa.db.api.NasaDatabase
 import nasa.db.apod.ApodDao
 import nasa.db.apod.ApodEntity
 import nasa.db.gallery.GalleryDao

@@ -1,6 +1,5 @@
 package nasa.db
 
-import nasa.db.api.NasaDatabase
 import java.io.File
 
 class NasaDatabaseDelegate(private val impl: RoomNasaDatabase) : NasaDatabase {

@@ -1,4 +1,4 @@
-package nasa.licenses.di
+package nasa.android.di
 
 import android.content.Context
 import dagger.Module

@@ -31,8 +31,11 @@ import androidx.compose.ui.util.fastMap
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.persistentMapOf
 import kotlinx.collections.immutable.toPersistentList
+import nasa.core.model.FileSize
 import nasa.core.model.SettingsKeys
 import nasa.core.model.ThemeType
+import nasa.core.model.kilobytes
+import nasa.core.model.megabytes
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
@@ -40,15 +43,12 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.settings.res.R
-import nasa.core.model.FileSize
-import nasa.core.model.kilobytes
-import nasa.core.model.megabytes
 
 @Composable
 internal fun SettingsScreenImpl(
-    imagesSize: FileSize,
-    databaseSize: FileSize,
-    onAction: (SettingsAction) -> Unit,
+  imagesSize: FileSize,
+  databaseSize: FileSize,
+  onAction: (SettingsAction) -> Unit,
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
   val theme = LocalTheme.current
@@ -70,11 +70,11 @@ internal fun SettingsScreenImpl(
 
 @Composable
 private fun SettingsScreenContent(
-    imagesSize: FileSize,
-    databaseSize: FileSize,
-    onAction: (SettingsAction) -> Unit,
-    modifier: Modifier = Modifier,
-    theme: Theme = LocalTheme.current,
+  imagesSize: FileSize,
+  databaseSize: FileSize,
+  onAction: (SettingsAction) -> Unit,
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
 ) {
   val preferences = rememberSharedPreferences()
 
@@ -158,10 +158,10 @@ private fun themeEntries() = persistentListOf(
 
 @Composable
 private fun CachedImagesText(
-    images: FileSize,
-    database: FileSize,
-    modifier: Modifier = Modifier,
-    theme: Theme = LocalTheme.current,
+  images: FileSize,
+  database: FileSize,
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
 ) {
   Column(
     modifier = modifier,

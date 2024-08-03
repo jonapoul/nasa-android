@@ -1,4 +1,4 @@
-package nasa.about.di
+package nasa.android.di
 
 import alakazam.android.core.IBuildConfig
 import dagger.Module
@@ -16,7 +16,7 @@ import timber.log.Timber
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class AboutDataModule {
+internal class AboutModule {
   @Provides
   fun api(buildConfig: IBuildConfig): GithubApi = buildRetrofit(
     client = buildOkHttp(buildConfig.debug) { Timber.tag("GITHUB").v(it) },

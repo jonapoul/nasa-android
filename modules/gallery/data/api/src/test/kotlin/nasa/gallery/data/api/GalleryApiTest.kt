@@ -259,7 +259,7 @@ class GalleryApiTest {
           "CiAdrRegion" to "DC",
           "CiTelWork" to "202-358-1900",
           "CiUrlWork" to "http://www.nasa.gov",
-        )
+        ),
       )
       assertElement<ImmutableList<Object>, ObjectListMetadata>(
         key = "XMP:History",
@@ -282,7 +282,7 @@ class GalleryApiTest {
             "SoftwareAgent" to "Adobe Photoshop Lightroom Classic 13.1 (Macintosh)",
             "When" to "2024:01:26 12:21:52-05:00",
           ),
-        )
+        ),
       )
     }
   }

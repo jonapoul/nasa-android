@@ -20,6 +20,7 @@ dependencies {
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 
+  testImplementation(libs.kotlinx.immutable)
   testImplementation(libs.okhttp.core)
   testImplementation(libs.test.okhttp)
   testImplementation(projects.modules.core.http)

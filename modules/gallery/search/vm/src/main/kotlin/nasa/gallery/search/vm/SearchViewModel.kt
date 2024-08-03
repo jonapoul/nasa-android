@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
+@Suppress("UNUSED_PARAMETER")
 @HiltViewModel
 class SearchViewModel @Inject internal constructor() : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.Empty)

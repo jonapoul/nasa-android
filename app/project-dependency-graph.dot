@@ -1,54 +1,49 @@
 digraph {
 edge ["dir"="forward"]
-graph ["dpi"="100","label"="app","labelloc"="t","fontsize"="30","ranksep"="3.0","rankdir"="TB"]
+graph ["dpi"="100","label"="app","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
-":app" ["shape"="box","fillcolor"="#5555FF"]
-":about:di" ["fillcolor"="#FF5555","shape"="box"]
-":about:data" ["fillcolor"="#A17EFF","shape"="box"]
-":core:http" ["fillcolor"="#A17EFF","shape"="box"]
-":core:model" ["fillcolor"="#A17EFF","shape"="box"]
+":app" ["shape"="box","fillcolor"="#FF5555"]
 ":about:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":about:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":about:vm" ["fillcolor"="#FCB103","shape"="box"]
+":about:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":core:url" ["fillcolor"="#55FF55","shape"="box"]
 ":core:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":core:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":core:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":about:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":licenses:nav" ["fillcolor"="#A17EFF","shape"="box"]
-":apod:di" ["fillcolor"="#FF5555","shape"="box"]
-":apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
-":apod:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:grid:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":apod:grid:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":apod:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":apod:grid:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
+":apod:data:api" ["fillcolor"="#A17EFF","shape"="box"]
+":apod:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":db:apod" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:single:nav" ["fillcolor"="#55FF55","shape"="box"]
 ":apod:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":settings:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":apod:single:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":apod:single:vm" ["fillcolor"="#FCB103","shape"="box"]
-":db:di" ["fillcolor"="#FF5555","shape"="box"]
+":core:http" ["fillcolor"="#A17EFF","shape"="box"]
 ":db:impl" ["fillcolor"="#55FF55","shape"="box"]
 ":db:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":db:gallery" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:di" ["fillcolor"="#FF5555","shape"="box"]
-":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:search:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":gallery:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:search:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
+":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
+":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":home:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":home:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":home:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":home:vm" ["fillcolor"="#FCB103","shape"="box"]
-":licenses:di" ["fillcolor"="#FF5555","shape"="box"]
-":licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":licenses:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":licenses:vm" ["fillcolor"="#FCB103","shape"="box"]
+":licenses:data" ["fillcolor"="#A17EFF","shape"="box"]
 ":licenses:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":settings:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":settings:vm" ["fillcolor"="#FCB103","shape"="box"]
@@ -58,25 +53,18 @@ edge ["dir"="none"]
 graph ["rank"="same"]
 ":app"
 }
-":app" -> ":about:di" ["style"="dotted"]
 ":app" -> ":about:nav" ["style"="dotted"]
 ":app" -> ":about:ui" ["style"="dotted"]
-":app" -> ":apod:di" ["style"="dotted"]
 ":app" -> ":apod:grid:ui" ["style"="dotted"]
 ":app" -> ":apod:single:ui" ["style"="dotted"]
-":app" -> ":db:di" ["style"="dotted"]
-":app" -> ":gallery:di" ["style"="dotted"]
+":app" -> ":db:impl" ["style"="dotted"]
 ":app" -> ":gallery:search:ui" ["style"="dotted"]
 ":app" -> ":home:nav" ["style"="dotted"]
 ":app" -> ":home:ui" ["style"="dotted"]
-":app" -> ":licenses:di" ["style"="dotted"]
 ":app" -> ":licenses:nav" ["style"="dotted"]
 ":app" -> ":licenses:ui" ["style"="dotted"]
 ":app" -> ":settings:nav" ["style"="dotted"]
 ":app" -> ":settings:ui" ["style"="dotted"]
-":about:di" -> ":about:data"
-":about:di" -> ":core:http" ["style"="dotted"]
-":core:http" -> ":core:model"
 ":about:ui" -> ":about:vm"
 ":about:ui" -> ":core:ui"
 ":about:ui" -> ":about:res" ["style"="dotted"]
@@ -85,10 +73,6 @@ graph ["rank"="same"]
 ":about:vm" -> ":core:url"
 ":core:ui" -> ":core:model"
 ":core:ui" -> ":core:res"
-":apod:di" -> ":apod:data:api"
-":apod:di" -> ":core:http" ["style"="dotted"]
-":apod:data:api" -> ":apod:model"
-":apod:data:api" -> ":core:model"
 ":apod:grid:ui" -> ":apod:grid:nav"
 ":apod:grid:ui" -> ":apod:grid:vm"
 ":apod:grid:ui" -> ":apod:single:nav"
@@ -101,6 +85,8 @@ graph ["rank"="same"]
 ":apod:grid:vm" -> ":core:url"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":db:apod" ["style"="dotted"]
+":apod:data:api" -> ":apod:model"
+":apod:data:api" -> ":core:model"
 ":apod:single:nav" -> ":apod:model"
 ":apod:single:nav" -> ":apod:nav"
 ":apod:single:ui" -> ":apod:grid:nav"
@@ -113,14 +99,10 @@ graph ["rank"="same"]
 ":apod:single:vm" -> ":apod:nav"
 ":apod:single:vm" -> ":core:http"
 ":apod:single:vm" -> ":core:url"
-":db:di" -> ":db:impl"
+":core:http" -> ":core:model"
 ":db:impl" -> ":db:api"
 ":db:impl" -> ":db:apod"
 ":db:impl" -> ":db:gallery"
-":gallery:di" -> ":gallery:data:api"
-":gallery:di" -> ":core:http" ["style"="dotted"]
-":gallery:di" -> ":core:model" ["style"="dotted"]
-":gallery:data:api" -> ":gallery:model"
 ":gallery:search:ui" -> ":core:ui"
 ":gallery:search:ui" -> ":gallery:nav"
 ":gallery:search:ui" -> ":gallery:search:vm"
@@ -129,6 +111,7 @@ graph ["rank"="same"]
 ":gallery:search:vm" -> ":gallery:data:repo"
 ":gallery:data:repo" -> ":db:gallery"
 ":gallery:data:repo" -> ":gallery:data:api"
+":gallery:data:api" -> ":gallery:model"
 ":home:ui" -> ":apod:single:nav"
 ":home:ui" -> ":about:nav" ["style"="dotted"]
 ":home:ui" -> ":core:ui" ["style"="dotted"]
@@ -136,7 +119,6 @@ graph ["rank"="same"]
 ":home:ui" -> ":home:res" ["style"="dotted"]
 ":home:ui" -> ":home:vm" ["style"="dotted"]
 ":home:ui" -> ":settings:nav" ["style"="dotted"]
-":licenses:di" -> ":licenses:data"
 ":licenses:ui" -> ":core:ui"
 ":licenses:ui" -> ":licenses:vm"
 ":licenses:ui" -> ":licenses:res" ["style"="dotted"]
@@ -153,8 +135,7 @@ edge ["dir"="none"]
 graph ["label"="Legend","fontsize"="20"]
 "Legend" ["style"="filled","fillcolor"="#bbbbbb","shape"="none","margin"="0","fontsize"="15","label"=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
-<TR><TD>Android App</TD><TD BGCOLOR="#5555FF">module-name</TD></TR>
-<TR><TD>Android Hilt</TD><TD BGCOLOR="#FF5555">module-name</TD></TR>
+<TR><TD>Android App</TD><TD BGCOLOR="#FF5555">module-name</TD></TR>
 <TR><TD>Android ViewModel</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
 <TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>

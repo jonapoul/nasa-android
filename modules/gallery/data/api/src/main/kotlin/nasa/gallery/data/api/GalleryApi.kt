@@ -1,6 +1,5 @@
 package nasa.gallery.data.api
 
-import kotlinx.serialization.json.JsonObject
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.NasaId

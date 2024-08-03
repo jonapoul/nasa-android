@@ -24,6 +24,7 @@ import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.buildOkHttp
 import nasa.core.model.ApiKey
 import nasa.core.model.IMAGE_CACHE_DIR
+import nasa.core.model.megabytes
 import nasa.gallery.nav.GalleryNavScreen
 import nasa.gallery.search.ui.GallerySearchScreen
 import nasa.home.nav.HomeNavScreen
@@ -32,7 +33,6 @@ import nasa.licenses.nav.LicensesNavScreen
 import nasa.licenses.ui.LicensesScreen
 import nasa.settings.nav.SettingsNavScreen
 import nasa.settings.ui.SettingsScreen
-import nasa.core.model.megabytes
 import timber.log.Timber
 import javax.inject.Inject
 

@@ -73,9 +73,7 @@ fun ListMetadata(key: String, array: JsonArray): ListMetadata<*> {
   throw SerializationException("Unsupported array $array")
 }
 
-fun ObjectMetadata(key: String, jsonObject: JsonObject): ObjectMetadata {
-  return ObjectMetadata(key, toObject(jsonObject))
-}
+fun ObjectMetadata(key: String, jsonObject: JsonObject): ObjectMetadata = ObjectMetadata(key, toObject(jsonObject))
 
 private fun toObject(jsonObject: JsonObject): Object = jsonObject
   .map { (key, element) -> key to element.toPrimitiveOrThrow() }

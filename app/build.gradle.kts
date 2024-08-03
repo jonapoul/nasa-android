@@ -21,6 +21,7 @@ plugins {
   id("convention-test")
   alias(libs.plugins.blueprint.diagrams)
   alias(libs.plugins.dependencyGuard)
+  alias(libs.plugins.dependencySort)
 }
 
 dependencyGuard {
@@ -28,8 +29,7 @@ dependencyGuard {
 }
 
 enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
-  AndroidApp(string = "Android App", color = "#5555FF"), // blue
-  AndroidHilt(string = "Android Hilt", color = "#FF5555"), // red
+  AndroidApp(string = "Android App", color = "#FF5555"), // red
   AndroidViewModel(string = "Android ViewModel", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
@@ -39,12 +39,11 @@ enum class NasaModuleType(override val string: String, override val color: Strin
 
 diagramsBlueprint {
   rankDir = Rank.RankDir.TOP_TO_BOTTOM
-  rankSeparation = 3.0
+  rankSeparation = 2.5
   moduleTypes = NasaModuleType.values().toSet()
   moduleTypeFinder = ModuleType.Finder { project ->
     when {
       project.plugins.hasPlugin("com.android.application") -> NasaModuleType.AndroidApp
-      project.plugins.hasPlugin("module-hilt") -> NasaModuleType.AndroidHilt
       project.plugins.hasPlugin("module-viewmodel") -> NasaModuleType.AndroidViewModel
       project.plugins.hasPlugin("module-compose") -> NasaModuleType.AndroidCompose
       project.plugins.hasPlugin("module-android") -> NasaModuleType.AndroidLibrary
@@ -170,23 +169,6 @@ afterEvaluate {
 }
 
 dependencies {
-  implementation(projects.modules.about.di)
-  implementation(projects.modules.about.nav)
-  implementation(projects.modules.about.ui)
-  implementation(projects.modules.apod.di)
-  implementation(projects.modules.apod.grid.ui)
-  implementation(projects.modules.apod.single.ui)
-  implementation(projects.modules.db.di)
-  implementation(projects.modules.gallery.di)
-  implementation(projects.modules.gallery.search.ui)
-  implementation(projects.modules.home.nav)
-  implementation(projects.modules.home.ui)
-  implementation(projects.modules.licenses.di)
-  implementation(projects.modules.licenses.nav)
-  implementation(projects.modules.licenses.ui)
-  implementation(projects.modules.settings.nav)
-  implementation(projects.modules.settings.ui)
-
   implementation(libs.alakazam.android.core)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.alakazam.kotlin.time)
@@ -211,13 +193,27 @@ dependencies {
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.serialization.json)
   implementation(libs.material)
   implementation(libs.okhttp.core)
   implementation(libs.preferences.android)
   implementation(libs.preferences.core)
+  implementation(libs.retrofit.core)
   implementation(libs.timber)
   implementation(libs.voyager.core)
   implementation(libs.voyager.navigator)
+  implementation(projects.modules.about.nav)
+  implementation(projects.modules.about.ui)
+  implementation(projects.modules.apod.grid.ui)
+  implementation(projects.modules.apod.single.ui)
+  implementation(projects.modules.db.impl)
+  implementation(projects.modules.gallery.search.ui)
+  implementation(projects.modules.home.nav)
+  implementation(projects.modules.home.ui)
+  implementation(projects.modules.licenses.nav)
+  implementation(projects.modules.licenses.ui)
+  implementation(projects.modules.settings.nav)
+  implementation(projects.modules.settings.ui)
 
   testImplementation(projects.modules.test.prefs)
 }

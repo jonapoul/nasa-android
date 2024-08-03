@@ -25,8 +25,6 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import nasa.gallery.model.GalleryUrl
 import nasa.gallery.model.ImageUrl
-import nasa.gallery.model.IntMetadata
-import nasa.gallery.model.Metadata
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keyword
 import nasa.gallery.model.Keywords
