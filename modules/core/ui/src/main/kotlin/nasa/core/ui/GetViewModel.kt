@@ -52,7 +52,7 @@ inline fun <reified T : ViewModel> Screen.getViewModel(
       defaultCreationExtras = hasDefaultViewModelProviderFactory.defaultViewModelCreationExtras,
     )
     provider.get(
-      key = "${T::class.simpleName}-$hash",
+      key = "${T::class.qualifiedName}-$hash",
       modelClass = T::class.java,
     )
   }

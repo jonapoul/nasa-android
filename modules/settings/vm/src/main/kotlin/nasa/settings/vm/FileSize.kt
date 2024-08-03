@@ -20,6 +20,8 @@ value class FileSize private constructor(private val bytes: Long) : Comparable<F
     else -> "%.1f GB".format(bytes.toDouble() / GB.bytes)
   }
 
+  fun toBytes(): Long = bytes
+
   companion object {
     val KB = FileSize(1_000)
     val MB = KB * 1e3

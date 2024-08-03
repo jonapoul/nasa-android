@@ -6,7 +6,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
@@ -16,6 +15,7 @@ import nasa.about.vm.AboutViewModel
 import nasa.about.vm.CheckUpdatesState
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
+import nasa.core.ui.set
 import nasa.licenses.nav.LicensesNavScreen
 
 class AboutScreen : Screen {
@@ -27,22 +27,22 @@ class AboutScreen : Screen {
     val viewModel = getViewModel<AboutViewModel>()
     val buildState by viewModel.buildState.collectAsStateWithLifecycle()
 
-    var clickedBack by remember { mutableStateOf(false) }
-    if (clickedBack) {
+    val clickedBack = remember { mutableStateOf(false) }
+    if (clickedBack.value) {
       navigator.popAll()
-      clickedBack = false
+      clickedBack.set(false)
     }
 
     val licensesScreen = rememberScreen(LicensesNavScreen)
-    var clickedLicenses by remember { mutableStateOf(false) }
-    if (clickedLicenses) {
+    val clickedLicenses = remember { mutableStateOf(false) }
+    if (clickedLicenses.value) {
       navigator.push(licensesScreen)
-      clickedLicenses = false
+      clickedLicenses.set(false)
     }
 
-    var checkUpdates by remember { mutableStateOf(false) }
+    val checkUpdates = remember { mutableStateOf(false) }
     val onCancel = {
-      checkUpdates = false
+      checkUpdates.set(false)
       viewModel.cancelUpdateCheck()
     }
 
@@ -63,33 +63,19 @@ class AboutScreen : Screen {
       )
     }
 
-    if (checkUpdates) {
+    if (checkUpdates.value) {
       LaunchedEffect(Unit) { viewModel.fetchLatestRelease() }
     }
 
     AboutScreenImpl(
       buildState = buildState,
-      onAction = {
-        when (it) {
-          AboutAction.OpenSourceCode -> {
-            viewModel.openRepo()
-          }
-
-          AboutAction.ReportIssue -> {
-            viewModel.reportIssues()
-          }
-
-          AboutAction.CheckUpdates -> {
-            checkUpdates = true
-          }
-
-          AboutAction.NavBack -> {
-            clickedBack = true
-          }
-
-          AboutAction.ViewLicenses -> {
-            clickedLicenses = true
-          }
+      onAction = { action ->
+        when (action) {
+          AboutAction.OpenSourceCode -> viewModel.openRepo()
+          AboutAction.ReportIssue -> viewModel.reportIssues()
+          AboutAction.CheckUpdates -> checkUpdates.set(true)
+          AboutAction.NavBack -> clickedBack.set(true)
+          AboutAction.ViewLicenses -> clickedLicenses.set(true)
         }
       },
     )

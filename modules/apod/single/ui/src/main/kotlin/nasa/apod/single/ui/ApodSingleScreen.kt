@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
@@ -23,6 +22,7 @@ import nasa.apod.single.nav.ApodFullScreenNavScreen
 import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.apod.single.vm.ApodSingleViewModel
 import nasa.core.ui.getViewModel
+import nasa.core.ui.set
 import nasa.settings.nav.SettingsNavScreen
 
 data class ApodSingleScreen(
@@ -38,66 +38,66 @@ data class ApodSingleScreen(
     val navButtons by viewModel.navButtonsState.collectAsStateWithLifecycle()
 
     // Load counter increments if the API call failed and the user presses "reload"
-    var loadCounter by remember { mutableIntStateOf(0) }
+    val loadCounter = remember { mutableIntStateOf(0) }
     apiKey?.let { key ->
-      LaunchedEffect(config, loadCounter) { viewModel.load(key, config) }
+      LaunchedEffect(config, loadCounter.intValue) { viewModel.load(key, config) }
     }
 
     val settingsScreen = rememberScreen(SettingsNavScreen)
 
-    var displayItem by remember { mutableStateOf<ApodItem?>(null) }
-    val immutableDisplayItem = displayItem
+    val displayItem = remember { mutableStateOf<ApodItem?>(null) }
+    val immutableDisplayItem = displayItem.value
     if (immutableDisplayItem != null) {
       val displayScreen = rememberScreen(ApodFullScreenNavScreen(immutableDisplayItem))
       navigator.push(displayScreen)
-      displayItem = null
+      displayItem.set(null)
     }
 
-    var showDescriptionItem by remember { mutableStateOf<ApodItem?>(null) }
-    val immutableDescItem = showDescriptionItem
+    val showDescriptionItem = remember { mutableStateOf<ApodItem?>(null) }
+    val immutableDescItem = showDescriptionItem.value
     if (immutableDescItem != null) {
       DescriptionDialog(
         item = immutableDescItem,
-        onCancel = { showDescriptionItem = null },
+        onCancel = { showDescriptionItem.set(null) },
       )
     }
 
-    var loadSpecificDate by remember { mutableStateOf<LocalDate?>(null) }
-    val immutableSpecificDate = loadSpecificDate
+    val loadSpecificDate = remember { mutableStateOf<LocalDate?>(null) }
+    val immutableSpecificDate = loadSpecificDate.value
     if (immutableSpecificDate != null) {
       val specific = ApodScreenConfig.Specific(immutableSpecificDate)
       val screen = rememberScreen(ApodSingleNavScreen(specific))
       navigator.replace(screen)
-      loadSpecificDate = null
+      loadSpecificDate.set(null)
     }
 
-    var gridDate by remember { mutableStateOf<LocalDate?>(null) }
-    val immutableGridDate = gridDate
+    val gridDate = remember { mutableStateOf<LocalDate?>(null) }
+    val immutableGridDate = gridDate.value
     if (immutableGridDate != null) {
       val specific = ApodScreenConfig.Specific(immutableGridDate)
       val screen = rememberScreen(ApodGridNavScreen(specific))
       navigator.push(screen)
-      gridDate = null
+      gridDate.set(null)
     }
 
-    var searchDate by remember { mutableStateOf<LocalDate?>(null) }
-    val immutableSearchDate = searchDate
+    val searchDate = remember { mutableStateOf<LocalDate?>(null) }
+    val immutableSearchDate = searchDate.value
     if (immutableSearchDate != null) {
       SearchDayDialog(
         initialDate = immutableSearchDate,
-        onConfirm = {
-          loadSpecificDate = it
-          searchDate = null
+        onConfirm = { newDate ->
+          loadSpecificDate.set(newDate)
+          searchDate.set(null)
         },
-        onCancel = { searchDate = null },
+        onCancel = { searchDate.set(null) },
       )
     }
 
-    var loadRandom by remember { mutableStateOf(false) }
-    if (loadRandom) {
+    val loadRandom = remember { mutableStateOf(false) }
+    if (loadRandom.value) {
       val screen = rememberScreen(ApodSingleNavScreen(ApodScreenConfig.Random()))
       navigator.replace(screen)
-      loadRandom = false
+      loadRandom.set(false)
     }
 
     ApodSingleScreenImpl(
@@ -108,37 +108,16 @@ data class ApodSingleScreen(
         when (action) {
           is ApodSingleAction.NavBack -> navigator.pop()
           is ApodSingleAction.NavSettings -> navigator.push(settingsScreen)
-          is ApodSingleAction.RetryLoad -> loadCounter++
+          is ApodSingleAction.RetryLoad -> loadCounter.intValue++
           is ApodSingleAction.OpenVideo -> viewModel.openVideo(action.url)
           ApodSingleAction.RegisterForApiKey -> viewModel.registerForApiKey()
-
-          is ApodSingleAction.ShowDescriptionDialog -> {
-            showDescriptionItem = action.item
-          }
-
-          is ApodSingleAction.ShowImageFullscreen -> {
-            displayItem = action.item
-          }
-
-          is ApodSingleAction.LoadNext -> {
-            loadSpecificDate = action.current + ONE_DAY
-          }
-
-          is ApodSingleAction.LoadPrevious -> {
-            loadSpecificDate = action.current - ONE_DAY
-          }
-
-          is ApodSingleAction.NavGrid -> {
-            gridDate = action.current
-          }
-
-          is ApodSingleAction.LoadRandom -> {
-            loadRandom = true
-          }
-
-          is ApodSingleAction.SearchDate -> {
-            searchDate = action.current
-          }
+          is ApodSingleAction.ShowDescriptionDialog -> showDescriptionItem.set(action.item)
+          is ApodSingleAction.ShowImageFullscreen -> displayItem.set(action.item)
+          is ApodSingleAction.LoadNext -> loadSpecificDate.set(action.current + ONE_DAY)
+          is ApodSingleAction.LoadPrevious -> loadSpecificDate.set(action.current - ONE_DAY)
+          is ApodSingleAction.NavGrid -> gridDate.set(action.current)
+          is ApodSingleAction.LoadRandom -> loadRandom.set(true)
+          is ApodSingleAction.SearchDate -> searchDate.set(action.current)
         }
       },
     )

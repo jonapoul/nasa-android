@@ -78,7 +78,7 @@ private fun ApodFullScreenContent(
     modifier = modifier,
     contentAlignment = Alignment.Center,
   ) {
-    val state = rememberTransformableState { zoomChange, panChange, _ ->
+    val loadingSliderState = rememberTransformableState { zoomChange, panChange, _ ->
       scale = (scale * zoomChange).coerceIn(MIN_ZOOM, MAX_ZOOM)
 
       val extraWidth = (scale - 1) * constraints.maxWidth
@@ -120,8 +120,6 @@ private fun ApodFullScreenContent(
       }
     }
 
-    val fallback = rememberVectorPainter(Icons.Filled.Warning)
-
     var imageModifier = Modifier.fillMaxSize()
     if (!isLoading) {
       imageModifier = imageModifier
@@ -130,7 +128,7 @@ private fun ApodFullScreenContent(
           scaleY = scale
           translationX = offset.x
           translationY = offset.y
-        }.transformable(state)
+        }.transformable(loadingSliderState)
     }
 
     // Adding a custom header to the request, so our DownloadProgressInterceptor can identify it and track progress
@@ -145,7 +143,7 @@ private fun ApodFullScreenContent(
       contentDescription = item.title,
       contentScale = ContentScale.Fit,
       alignment = Alignment.Center,
-      fallback = fallback,
+      fallback = rememberVectorPainter(Icons.Filled.Warning),
       onLoading = { isLoading = true },
       onSuccess = { isLoading = false },
       onError = { isLoading = false },

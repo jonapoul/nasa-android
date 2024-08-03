@@ -4,12 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.core.ui.getViewModel
+import nasa.core.ui.set
 import nasa.settings.vm.SettingsViewModel
 
 class SettingsScreen : Screen {
@@ -20,22 +20,22 @@ class SettingsScreen : Screen {
     val cacheSize by viewModel.cacheSize.collectAsStateWithLifecycle()
     val databaseSize by viewModel.databaseSize.collectAsStateWithLifecycle()
 
-    var clickedBack by remember { mutableStateOf(false) }
-    if (clickedBack) {
+    val clickedBack = remember { mutableStateOf(false) }
+    if (clickedBack.value) {
       navigator.popAll()
-      clickedBack = false
+      clickedBack.set(false)
     }
 
-    var showClearCacheDialog by remember { mutableStateOf(false) }
-    val immutableShowDialog = showClearCacheDialog
+    val showClearCacheDialog = remember { mutableStateOf(false) }
+    val immutableShowDialog = showClearCacheDialog.value
     if (immutableShowDialog) {
       ConfirmClearCacheDialog(
         totalSize = cacheSize + databaseSize,
         onConfirm = {
           viewModel.clearCache()
-          showClearCacheDialog = false
+          showClearCacheDialog.set(false)
         },
-        onCancel = { showClearCacheDialog = false },
+        onCancel = { showClearCacheDialog.set(false) },
       )
     }
 
@@ -44,17 +44,9 @@ class SettingsScreen : Screen {
       databaseSize = databaseSize,
       onAction = { action ->
         when (action) {
-          SettingsAction.NavBack -> {
-            clickedBack = true
-          }
-
-          SettingsAction.ClearCache -> {
-            showClearCacheDialog = true
-          }
-
-          SettingsAction.RegisterForKey -> {
-            viewModel.registerForApiKey()
-          }
+          SettingsAction.NavBack -> clickedBack.set(true)
+          SettingsAction.ClearCache -> showClearCacheDialog.set(true)
+          SettingsAction.RegisterForKey -> viewModel.registerForApiKey()
         }
       },
     )

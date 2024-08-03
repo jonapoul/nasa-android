@@ -6,7 +6,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
@@ -21,6 +20,7 @@ import nasa.apod.grid.vm.ApodGridViewModel
 import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.core.ui.getViewModel
+import nasa.core.ui.set
 import nasa.settings.nav.SettingsNavScreen
 
 data class ApodGridScreen(
@@ -36,47 +36,47 @@ data class ApodGridScreen(
     val navButtons by viewModel.navButtonsState.collectAsStateWithLifecycle()
 
     // Load counter increments if the API call failed and the user presses "reload"
-    var loadCounter by remember { mutableIntStateOf(0) }
+    val loadCounter = remember { mutableIntStateOf(0) }
     apiKey?.let { key ->
-      LaunchedEffect(config, loadCounter) { viewModel.load(key, config) }
+      LaunchedEffect(config, loadCounter.intValue) { viewModel.load(key, config) }
     }
 
-    var loadSpecificDate by remember { mutableStateOf<LocalDate?>(null) }
-    val immutableSpecificDate = loadSpecificDate
+    val loadSpecificDate = remember { mutableStateOf<LocalDate?>(null) }
+    val immutableSpecificDate = loadSpecificDate.value
     if (immutableSpecificDate != null) {
       val config = ApodScreenConfig.Specific(immutableSpecificDate)
       val screen = rememberScreen(ApodGridNavScreen(config))
       navigator.replace(screen)
-      loadSpecificDate = null
+      loadSpecificDate.set(null)
     }
 
-    var searchDate by remember { mutableStateOf<LocalDate?>(null) }
-    val immutableSearchDate = searchDate
+    val searchDate = remember { mutableStateOf<LocalDate?>(null) }
+    val immutableSearchDate = searchDate.value
     if (immutableSearchDate != null) {
       SearchMonthDialog(
         initialDate = immutableSearchDate,
-        onConfirm = {
-          searchDate = null
-          loadSpecificDate = it
+        onConfirm = { newDate ->
+          searchDate.set(null)
+          loadSpecificDate.set(newDate)
         },
-        onCancel = { searchDate = null },
+        onCancel = { searchDate.set(null) },
       )
     }
 
-    var loadItemDate by remember { mutableStateOf<LocalDate?>(null) }
-    val immutableItemDate = loadItemDate
+    val loadItemDate = remember { mutableStateOf<LocalDate?>(null) }
+    val immutableItemDate = loadItemDate.value
     if (immutableItemDate != null) {
       val config = ApodScreenConfig.Specific(immutableItemDate)
       val screen = rememberScreen(ApodSingleNavScreen(config))
       navigator.push(screen)
-      loadItemDate = null
+      loadItemDate.set(null)
     }
 
-    var loadRandom by remember { mutableStateOf(false) }
-    if (loadRandom) {
+    val loadRandom = remember { mutableStateOf(false) }
+    if (loadRandom.value) {
       val screen = rememberScreen(ApodGridNavScreen(ApodScreenConfig.Random()))
       navigator.replace(screen)
-      loadRandom = false
+      loadRandom.set(false)
     }
 
     val settingsScreen = rememberScreen(SettingsNavScreen)
@@ -87,32 +87,14 @@ data class ApodGridScreen(
       showBackButton = navigator.size > 1,
       onAction = { action ->
         when (action) {
-          is ApodGridAction.NavToItem -> {
-            loadItemDate = action.item.date
-          }
-
-          is ApodGridAction.SearchMonth -> {
-            searchDate = action.current
-          }
-
-          is ApodGridAction.RetryLoad -> loadCounter++
-
-          is ApodGridAction.LoadNext -> {
-            loadSpecificDate = action.date + ONE_MONTH
-          }
-
-          is ApodGridAction.LoadPrevious -> {
-            loadSpecificDate = action.date - ONE_MONTH
-          }
-
-          is ApodGridAction.LoadRandom -> {
-            loadRandom = true
-          }
-
+          is ApodGridAction.NavToItem -> loadItemDate.set(action.item.date)
+          is ApodGridAction.SearchMonth -> searchDate.set(action.current)
+          is ApodGridAction.RetryLoad -> loadCounter.intValue++
+          is ApodGridAction.LoadNext -> loadSpecificDate.set(action.date + ONE_MONTH)
+          is ApodGridAction.LoadPrevious -> loadSpecificDate.set(action.date - ONE_MONTH)
+          is ApodGridAction.LoadRandom -> loadRandom.set(true)
           ApodGridAction.NavBack -> navigator.pop()
-
           ApodGridAction.NavSettings -> navigator.push(settingsScreen)
-
           ApodGridAction.RegisterForApiKey -> viewModel.registerForApiKey()
         }
       },

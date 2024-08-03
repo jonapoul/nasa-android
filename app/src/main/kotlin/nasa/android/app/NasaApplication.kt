@@ -32,6 +32,7 @@ import nasa.licenses.nav.LicensesNavScreen
 import nasa.licenses.ui.LicensesScreen
 import nasa.settings.nav.SettingsNavScreen
 import nasa.settings.ui.SettingsScreen
+import nasa.settings.vm.megabytes
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -91,7 +92,7 @@ class NasaApplication : Application(), ImageLoaderFactory {
         DiskCache
           .Builder()
           .directory(cacheDir.resolve(IMAGE_CACHE_DIR))
-          .maxSizeBytes(size = 100 * 1024 * 1024) // 100MB
+          .maxSizeBytes(size = 100.megabytes.toBytes())
           .build()
       }.respectCacheHeaders(true)
       .networkObserverEnabled(true)

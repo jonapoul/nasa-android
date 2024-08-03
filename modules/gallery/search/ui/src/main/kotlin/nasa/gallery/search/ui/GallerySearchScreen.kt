@@ -12,6 +12,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
+import nasa.core.ui.set
 import nasa.gallery.search.vm.SearchViewModel
 
 class GallerySearchScreen : Screen {
@@ -29,7 +30,7 @@ class GallerySearchScreen : Screen {
         modifier = Modifier.fillMaxWidth(),
         config = filterConfig,
         onConfirm = viewModel::setFilterConfig,
-        onClose = { showFilterModal.value = false },
+        onClose = { showFilterModal.set(false) },
         theme = theme,
       )
     }
@@ -43,7 +44,7 @@ class GallerySearchScreen : Screen {
           SearchAction.RetrySearch -> viewModel.retrySearch()
           is SearchAction.EnterSearchTerm -> viewModel.enterSearchTerm(action.text)
           SearchAction.PerformSearch -> viewModel.performSearch()
-          SearchAction.ConfigureSearch -> showFilterModal.value = true
+          SearchAction.ConfigureSearch -> showFilterModal.set(true)
         }
       },
     )
