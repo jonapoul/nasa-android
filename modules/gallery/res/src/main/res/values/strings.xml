@@ -5,13 +5,17 @@
   <string name="search_input_hint">Enter search keywords</string>
   <string name="search_input_submit">Search</string>
   <string name="search_input_settings">More search options</string>
+  <string name="search_input_placeholder">Enter text</string>
+  <string name="search_input_apply">Apply</string>
+  <string name="search_input_cancel">Cancel</string>
 
   <string name="search_empty_title">No results found</string>
   <string name="search_searching">Searching…</string>
 
-  <string name="search_input_placeholder">Enter text</string>
-  <string name="search_input_apply">Apply</string>
-  <string name="search_input_cancel">Cancel</string>
+  <plurals name="search_results_header">
+    <item quantity="one">Found %1$d result:</item>
+    <item quantity="other">Found %1$d results:</item>
+  </plurals>
 
   <string name="search_label_center">NASA Center</string>
 </resources>

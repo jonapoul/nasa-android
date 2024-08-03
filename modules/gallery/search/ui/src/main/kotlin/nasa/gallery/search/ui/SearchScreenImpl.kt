@@ -4,10 +4,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
@@ -56,28 +58,28 @@ private fun SearchContent(
 
     val contentsModifier = Modifier
       .fillMaxWidth()
-      .weight(1f)
+      .wrapContentHeight()
 
     when (searchState) {
       SearchState.Empty -> SearchEmpty(
-        modifier = contentsModifier,
+        modifier = contentsModifier.padding(64.dp),
         theme = theme,
       )
 
       SearchState.Searching -> SearchSearching(
-        modifier = contentsModifier,
+        modifier = contentsModifier.padding(64.dp),
         theme = theme,
       )
 
       is SearchState.Failed -> LoadFailure(
-        modifier = contentsModifier,
+        modifier = contentsModifier.padding(32.dp),
         message = searchState.reason,
         onRetryLoad = { onAction(SearchAction.RetrySearch) },
         theme = theme,
       )
 
       is SearchState.Success -> SearchSuccess(
-        modifier = contentsModifier,
+        modifier = contentsModifier.weight(1f),
         items = searchState.results,
         onAction = onAction,
         theme = theme,
@@ -91,7 +93,7 @@ private fun SearchContent(
 private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Success(
-      persistentListOf(EXAMPLE_ITEM_1),
+      persistentListOf(EXAMPLE_ITEM_1, EXAMPLE_ITEM_2),
     ),
     onAction = {},
   )

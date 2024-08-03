@@ -23,6 +23,8 @@ data class FilterConfig(
   val title: String? = null,
   val yearStart: Year? = null,
   val yearEnd: Year? = null,
-)
-
-val DefaultFilterConfig = FilterConfig()
+) {
+  companion object {
+    val Default = FilterConfig()
+  }
+}

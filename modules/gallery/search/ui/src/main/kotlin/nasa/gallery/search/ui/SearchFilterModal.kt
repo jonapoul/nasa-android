@@ -31,7 +31,6 @@ import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.text.NasaTextField
 import nasa.gallery.res.R
-import nasa.gallery.search.vm.DefaultFilterConfig
 import nasa.gallery.search.vm.FilterConfig
 
 @Composable
@@ -162,7 +161,7 @@ private fun PreviewTextFieldEmpty() = PreviewColumn {
 @Composable
 private fun PreviewContents() = PreviewScreen {
   SearchFilterModalContents(
-    config = DefaultFilterConfig,
+    config = FilterConfig.Default,
     onConfirm = {},
     onCancel = {},
   )
