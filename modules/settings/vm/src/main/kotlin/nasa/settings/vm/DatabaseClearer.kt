@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.withContext
+import nasa.core.model.FileSize
+import nasa.core.model.bytes
 import nasa.db.api.NasaDatabase
 import timber.log.Timber
 import javax.inject.Inject

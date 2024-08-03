@@ -21,7 +21,7 @@ sealed interface ApodScreenConfig : Serializable {
   // The seed value is only used to ensure equals() and hashCode() return pseudo-unique values every time we create
   // a new screen - it's not referenced anywhere. There's probably a better way of doing this...
   data class Random(
-    val seed: Long = System.currentTimeMillis(),
+    private val seed: Long = System.currentTimeMillis(),
   ) : ApodScreenConfig
 
   // Needs custom serialization of [LocalDate] because it's not [Serializable]. Annoyingly I can't get serialization

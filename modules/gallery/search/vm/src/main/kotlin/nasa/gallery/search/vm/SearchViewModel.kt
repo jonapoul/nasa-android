@@ -23,12 +23,10 @@ class SearchViewModel @Inject internal constructor() : ViewModel() {
     // TBC
   }
 
-  @Suppress("UNUSED_PARAMETER")
   fun enterSearchTerm(text: String) {
     // TBC
   }
 
-  @Suppress("UNUSED_PARAMETER")
   fun setFilterConfig(config: FilterConfig) {
     // TBC
   }

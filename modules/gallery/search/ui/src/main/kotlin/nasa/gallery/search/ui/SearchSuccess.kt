@@ -24,7 +24,6 @@ import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.gallery.search.vm.SearchResultItem
 
-@Suppress("UNUSED_PARAMETER")
 @Composable
 internal fun SearchSuccess(
   items: ImmutableList<SearchResultItem>,

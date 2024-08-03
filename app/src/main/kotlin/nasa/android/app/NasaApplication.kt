@@ -32,7 +32,7 @@ import nasa.licenses.nav.LicensesNavScreen
 import nasa.licenses.ui.LicensesScreen
 import nasa.settings.nav.SettingsNavScreen
 import nasa.settings.ui.SettingsScreen
-import nasa.settings.vm.megabytes
+import nasa.core.model.megabytes
 import timber.log.Timber
 import javax.inject.Inject
 

@@ -1,5 +1,6 @@
 package nasa.core.http
 
+import nasa.core.model.bytes
 import okhttp3.ResponseBody
 import okio.Buffer
 import okio.BufferedSource
@@ -30,7 +31,11 @@ internal class DownloadProgressResponseBody(
       // read() returns the number of bytes read, or -1 if this source is exhausted.
       val bytesRead = super.read(sink, byteCount)
       totalBytesRead += if (bytesRead != -1L) bytesRead else 0
-      val state = DownloadState(url, totalBytesRead, responseBody.contentLength(), done = bytesRead == -1L)
+      val state = if (bytesRead == -1L) {
+        DownloadState.Done(url, totalBytesRead.bytes)
+      } else {
+        DownloadState.InProgress(url, totalBytesRead.bytes, contentLength().bytes)
+      }
       stateHolder.set(state)
       return bytesRead
     }

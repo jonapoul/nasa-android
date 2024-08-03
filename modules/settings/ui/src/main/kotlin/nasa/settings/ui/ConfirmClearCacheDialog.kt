@@ -13,16 +13,16 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.settings.res.R
-import nasa.settings.vm.FileSize
-import nasa.settings.vm.megabytes
+import nasa.core.model.FileSize
+import nasa.core.model.megabytes
 
 @Composable
 internal fun ConfirmClearCacheDialog(
-  totalSize: FileSize,
-  onConfirm: () -> Unit,
-  onCancel: () -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
+    totalSize: FileSize,
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier,
+    theme: Theme = LocalTheme.current,
 ) {
   BasicAlertDialog(
     modifier = modifier,
@@ -40,11 +40,11 @@ internal fun ConfirmClearCacheDialog(
 
 @Composable
 private fun ConfirmClearCacheDialogContent(
-  totalSize: FileSize,
-  onConfirm: () -> Unit,
-  onCancel: () -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
+    totalSize: FileSize,
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier,
+    theme: Theme = LocalTheme.current,
 ) {
   DialogContent(
     modifier = modifier,

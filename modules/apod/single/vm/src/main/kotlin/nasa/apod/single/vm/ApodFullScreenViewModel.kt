@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import nasa.core.http.DownloadProgressStateHolder
+import nasa.core.http.DownloadState
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -17,16 +18,17 @@ class ApodFullScreenViewModel @Inject internal constructor(
 ) : ViewModel() {
   val downloadProgress: StateFlow<Float> = stateHolder
     .state
-    .map { state ->
-      when {
-        state == null -> 0f
-        state.done -> 1f
-        else -> state.bytesRead.toFloat() / state.contentLength.toFloat()
-      }
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0f)
+    .map { it.toProgress() }
+    .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0f)
 
   override fun onCleared() {
     Timber.v("onCleared")
     stateHolder.reset()
+  }
+
+  private fun DownloadState?.toProgress(): Float = when (this) {
+    is DownloadState.Done -> 1f
+    is DownloadState.InProgress -> read.toBytes().toFloat() / total.toBytes().toFloat()
+    null -> 0f
   }
 }

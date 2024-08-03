@@ -40,15 +40,15 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.settings.res.R
-import nasa.settings.vm.FileSize
-import nasa.settings.vm.kilobytes
-import nasa.settings.vm.megabytes
+import nasa.core.model.FileSize
+import nasa.core.model.kilobytes
+import nasa.core.model.megabytes
 
 @Composable
 internal fun SettingsScreenImpl(
-  imagesSize: FileSize,
-  databaseSize: FileSize,
-  onAction: (SettingsAction) -> Unit,
+    imagesSize: FileSize,
+    databaseSize: FileSize,
+    onAction: (SettingsAction) -> Unit,
 ) {
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
   val theme = LocalTheme.current
@@ -70,11 +70,11 @@ internal fun SettingsScreenImpl(
 
 @Composable
 private fun SettingsScreenContent(
-  imagesSize: FileSize,
-  databaseSize: FileSize,
-  onAction: (SettingsAction) -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
+    imagesSize: FileSize,
+    databaseSize: FileSize,
+    onAction: (SettingsAction) -> Unit,
+    modifier: Modifier = Modifier,
+    theme: Theme = LocalTheme.current,
 ) {
   val preferences = rememberSharedPreferences()
 
@@ -158,10 +158,10 @@ private fun themeEntries() = persistentListOf(
 
 @Composable
 private fun CachedImagesText(
-  images: FileSize,
-  database: FileSize,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
+    images: FileSize,
+    database: FileSize,
+    modifier: Modifier = Modifier,
+    theme: Theme = LocalTheme.current,
 ) {
   Column(
     modifier = modifier,

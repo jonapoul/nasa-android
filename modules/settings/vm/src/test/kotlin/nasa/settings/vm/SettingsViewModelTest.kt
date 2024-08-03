@@ -12,6 +12,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.NASA_API_URL
+import nasa.core.model.bytes
 import nasa.core.url.UrlOpener
 import nasa.db.NasaDatabaseDelegate
 import nasa.db.RoomApodDaoWrapper

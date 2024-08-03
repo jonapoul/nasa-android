@@ -5,6 +5,8 @@ import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.DownloadState
+import nasa.core.model.FileSize
+import nasa.core.model.bytes
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,23 +29,23 @@ class ApodFullScreenViewModelTest {
   @Test
   fun `Monitor download progress`() = runTest {
     viewModel.downloadProgress.test {
-      setDownloadState(read = 0L, total = 100L)
-      assertDownloadProgress(0f)
+      setInProgress(read = 0.bytes)
+      assertDownloadProgress(expected = 0f)
 
-      setDownloadState(read = 20L, total = 100L)
-      assertDownloadProgress(0.2f)
+      setInProgress(read = 20.bytes)
+      assertDownloadProgress(expected = 0.2f)
 
-      setDownloadState(read = 50L, total = 100L)
-      assertDownloadProgress(0.5f)
+      setInProgress(read = 50.bytes)
+      assertDownloadProgress(expected = 0.5f)
 
-      setDownloadState(read = 90L, total = 100L)
-      assertDownloadProgress(0.9f)
+      setInProgress(read = 90.bytes)
+      assertDownloadProgress(expected = 0.9f)
 
-      setDownloadState(read = 99L, total = 100L)
-      assertDownloadProgress(0.99f)
+      setInProgress(read = 99.bytes)
+      assertDownloadProgress(expected = 0.99f)
 
-      setDownloadState(read = 100L, total = 100L, done = true)
-      assertDownloadProgress(1f)
+      setDone()
+      assertDownloadProgress(expected = 1f)
       cancelAndIgnoreRemainingEvents()
     }
   }
@@ -52,14 +54,26 @@ class ApodFullScreenViewModelTest {
     assertEquals(expected, awaitItem())
   }
 
-  private fun setDownloadState(read: Long, total: Long, done: Boolean = false) {
+  private fun setInProgress(read: FileSize) {
     stateHolder.set(
-      DownloadState(
+      DownloadState.InProgress(
         url = "some.url.com/whocares",
-        bytesRead = read,
-        contentLength = total,
-        done = done,
+        read = read,
+        total = DOWNLOAD_SIZE,
       ),
     )
+  }
+
+  private fun setDone() {
+    stateHolder.set(
+      DownloadState.Done(
+        url = "some.url.com/whocares",
+        total = DOWNLOAD_SIZE,
+      ),
+    )
+  }
+
+  private companion object {
+    val DOWNLOAD_SIZE = 100.bytes
   }
 }

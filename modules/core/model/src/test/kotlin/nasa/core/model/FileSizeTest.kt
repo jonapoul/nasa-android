@@ -1,4 +1,4 @@
-package nasa.settings.vm
+package nasa.core.model
 
 import org.junit.Test
 import kotlin.test.assertEquals

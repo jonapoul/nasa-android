@@ -1,7 +1,9 @@
 package nasa.settings.vm
 
 import android.content.Context
+import nasa.core.model.FileSize
 import nasa.core.model.IMAGE_CACHE_DIR
+import nasa.core.model.bytes
 import timber.log.Timber
 import javax.inject.Inject
 

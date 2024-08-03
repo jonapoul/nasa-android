@@ -3,6 +3,7 @@ package nasa.settings.vm
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.test.runTest
+import nasa.core.model.bytes
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
