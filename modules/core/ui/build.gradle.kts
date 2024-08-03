@@ -15,6 +15,7 @@ dependencies {
   api(projects.modules.core.res)
 
   implementation(libs.alakazam.android.compose)
+  implementation(libs.androidx.annotation)
   implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
@@ -33,5 +34,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
 }

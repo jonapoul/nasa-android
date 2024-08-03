@@ -3,8 +3,6 @@ package nasa.gallery.data.api
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.descriptors.element
 import kotlinx.serialization.descriptors.listSerialDescriptor
@@ -29,8 +27,6 @@ import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keyword
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.ListMetadata
-import nasa.gallery.model.MediaType
-import nasa.gallery.model.NasaId
 import nasa.gallery.model.NullMetadata
 import nasa.gallery.model.ObjectMetadata
 import nasa.gallery.model.PrimitiveMetadata
@@ -73,18 +69,6 @@ internal abstract class CollectionSerializer<B : Any, S : B, F : B>(
       else -> throw SerializationException("Unknown keys: ${jsonObject.keys}")
     }
   }
-}
-
-internal object MediaTypeSerializer : KSerializer<MediaType> {
-  override val descriptor = PrimitiveSerialDescriptor(serialName = "MediaType", PrimitiveKind.STRING)
-  override fun deserialize(decoder: Decoder): MediaType = decoder.decodeString().let(MediaType::parse)
-  override fun serialize(encoder: Encoder, value: MediaType) = encoder.encodeString(value.toString())
-}
-
-internal object NasaIdSerializer : KSerializer<NasaId> {
-  override val descriptor = PrimitiveSerialDescriptor(serialName = "NasaId", PrimitiveKind.STRING)
-  override fun deserialize(decoder: Decoder): NasaId = decoder.decodeString().let(::NasaId)
-  override fun serialize(encoder: Encoder, value: NasaId) = encoder.encodeString(value.toString())
 }
 
 internal object KeywordsSerializer : KSerializer<Keywords> {

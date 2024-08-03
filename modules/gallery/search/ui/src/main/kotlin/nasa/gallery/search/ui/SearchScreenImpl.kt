@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import kotlinx.collections.immutable.persistentListOf
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -61,7 +60,7 @@ private fun SearchContent(
       .wrapContentHeight()
 
     when (searchState) {
-      SearchState.NoAction -> SearchNoAction(
+      SearchState.NoAction, SearchState.NoFilterConfig -> SearchNoAction(
         modifier = contentsModifier.padding(64.dp),
         theme = theme,
       )
@@ -85,7 +84,7 @@ private fun SearchContent(
 
       is SearchState.Success -> SearchSuccess(
         modifier = contentsModifier.weight(1f),
-        items = searchState.results,
+        state = searchState,
         onAction = onAction,
         theme = theme,
       )
@@ -97,9 +96,7 @@ private fun SearchContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
-    searchState = SearchState.Success(
-      persistentListOf(EXAMPLE_ITEM_1, EXAMPLE_ITEM_2),
-    ),
+    searchState = PreviewSuccessState,
     onAction = {},
   )
 }

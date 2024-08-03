@@ -1,8 +1,4 @@
-@file:UseSerializers(
-  KeywordsSerializer::class,
-  NasaIdSerializer::class,
-  MediaTypeSerializer::class,
-)
+@file:UseSerializers(KeywordsSerializer::class)
 
 package nasa.gallery.data.api
 
@@ -10,6 +6,8 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import nasa.gallery.model.ImageUrl
+import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
@@ -33,12 +31,12 @@ data class SearchCollection(
   @SerialName("href") val url: String,
   @SerialName("items") val items: List<SearchItem>,
   @SerialName("metadata") val metadata: SearchMetadata,
-  @SerialName("links") val links: List<SearchLink>,
+  @SerialName("links") val links: List<SearchLink>?,
 )
 
 @Serializable
 data class SearchItem(
-  @SerialName("href") val collectionUrl: String,
+  @SerialName("href") val collectionUrl: JsonUrl,
   @SerialName("data") val data: List<SearchItemData>,
   @SerialName("links") val links: List<SearchItemLink>,
 )
@@ -47,20 +45,28 @@ data class SearchItem(
 data class SearchItemData(
   @SerialName("center") val center: String,
   @SerialName("title") val title: String,
-  @SerialName("keywords") val keywords: Keywords,
+  @SerialName("keywords") val keywords: Keywords?,
+  @SerialName("location") val location: String?,
+  @SerialName("photographer") val photographer: String?,
   @SerialName("nasa_id") val nasaId: NasaId,
   @SerialName("date_created") val dateCreated: Instant,
   @SerialName("media_type") val mediaType: MediaType,
   @SerialName("description") val description: String,
-  @SerialName("description_508") val description508: String,
+  @SerialName("description_508") val description508: String?,
 )
 
 @Serializable
 data class SearchItemLink(
-  @SerialName("href") val url: String,
-  @SerialName("rel") val rel: String,
+  @SerialName("href") val url: ImageUrl,
+  @SerialName("rel") val rel: Relation,
   @SerialName("render") val render: String? = null,
-)
+) {
+  @Serializable
+  enum class Relation {
+    @SerialName("preview") Preview,
+    @SerialName("captions") Captions,
+  }
+}
 
 @Serializable
 data class SearchMetadata(
@@ -69,7 +75,13 @@ data class SearchMetadata(
 
 @Serializable
 data class SearchLink(
-  @SerialName("rel") val rel: String,
+  @SerialName("rel") val rel: Relation,
   @SerialName("prompt") val prompt: String,
   @SerialName("href") val url: String,
-)
+) {
+  @Serializable
+  enum class Relation {
+    @SerialName("next") Next,
+    @SerialName("prev") Previous,
+  }
+}

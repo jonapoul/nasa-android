@@ -45,6 +45,7 @@ class GallerySearchScreen : Screen {
           is SearchAction.EnterSearchTerm -> viewModel.enterSearchTerm(action.text)
           SearchAction.PerformSearch -> viewModel.performSearch()
           SearchAction.ConfigureSearch -> showFilterModal.set(true)
+          is SearchAction.SelectPage -> viewModel.performSearch(action.pageNumber)
         }
       },
     )

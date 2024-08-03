@@ -107,7 +107,6 @@ graph ["rank"="same"]
 ":gallery:search:ui" -> ":gallery:nav"
 ":gallery:search:ui" -> ":gallery:search:vm"
 ":gallery:search:ui" -> ":gallery:res" ["style"="dotted"]
-":gallery:search:vm" -> ":core:url"
 ":gallery:search:vm" -> ":gallery:data:repo"
 ":gallery:data:repo" -> ":db:gallery"
 ":gallery:data:repo" -> ":gallery:data:api"

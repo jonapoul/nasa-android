@@ -63,25 +63,22 @@ interface GalleryApi {
 
     // The end year for results. Format: YYYY.
     @Query("year_end") yearEnd: Year? = null,
-  ): Response<SearchResponse.Success>
+  ): Response<SearchResponse>
 
   @GET("asset/{nasa_id}")
   suspend fun getAssetManifest(
-    // The media asset’s NASA ID.
     @Path("nasa_id") nasaId: NasaId,
-  ): Response<ManifestResponse.Success>
+  ): Response<ManifestResponse>
 
   @GET("metadata/{nasa_id}")
   suspend fun locateMetadata(
-    // The media asset’s NASA ID.
     @Path("nasa_id") nasaId: NasaId,
-  ): Response<LocateResponse.Success>
+  ): Response<LocateResponse>
 
   @GET("captions/{nasa_id}")
   suspend fun locateCaptions(
-    // The video asset’s NASA ID.
     @Path("nasa_id") nasaId: NasaId,
-  ): Response<LocateResponse.Success>
+  ): Response<LocateResponse>
 
   /**
    * Fetches a list of URLs related to a given gallery item. Most likely a selection of image URLs at different

@@ -25,8 +25,8 @@ class MockWebServerRule : TestWatcher() {
 
   fun enqueue(body: String, code: Int = 200) {
     enqueue {
-      setBody(body)
       setResponseCode(code)
+      setBody(body)
     }
   }
 

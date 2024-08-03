@@ -5,6 +5,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.test.runTest
+import kotlinx.datetime.Instant
 import nasa.gallery.model.BooleanMetadata
 import nasa.gallery.model.DoubleMetadata
 import nasa.gallery.model.ImageUrl
@@ -148,6 +149,134 @@ class GalleryApiTest {
     assertEquals(
       expected = "abc,def,xyz",
       actual = request.requestUrl?.queryParameter(name = "keywords"),
+    )
+  }
+
+  @Test
+  fun `Deserialize search response failure`() = runTest {
+    // Given
+    val json = readJson(filename = "search-failure.json")
+    webServerRule.enqueue(json)
+
+    // When we search with no parameters
+    val response = galleryApi.search()
+
+    // Then
+    assertEquals(
+      actual = response.body(),
+      expected = SearchResponse.Failure(reason = "Expected 'q' text search parameter or other keywords."),
+    )
+  }
+
+  @Suppress("LongMethod")
+  @Test
+  fun `Deserialize search response success`() = runTest {
+    // Given
+    val json = readJson(filename = "search-success-no-links.json")
+    webServerRule.enqueue(json)
+
+    // When we search
+    val response = galleryApi.search(
+      description = "Chiaki",
+      keywords = Keywords("SPACELAB", "CREWS"),
+    )
+
+    // Then
+    val item1 = SearchItem(
+      collectionUrl = JsonUrl("https://images-assets.nasa.gov/image/sts065-05-037/collection.json"),
+      data = listOf(
+        SearchItemData(
+          center = "JSC",
+          title = "STS-65 crew works inside the IML-2 spacelab module aboard Columbia, OV-102",
+          keywords = Keywords(
+            "STS-65",
+            "COLUMBIA (ORBITER)",
+            "SPACELAB",
+            "CREWS",
+            "ASTRONAUTS",
+            "ONBOARD ACTIVITIES",
+            "CREW PROCEDURES (INFLIGHT)",
+            "SPACEBORNE EXPERIMENTS",
+            "RACKS",
+            "JAPAN PAYLOAD SPECIALISTS",
+            "INTERNATIONAL COOPERATION",
+          ),
+          nasaId = NasaId("sts065-05-037"),
+          dateCreated = Instant.parse("1994-07-23T00:00:00Z"),
+          mediaType = MediaType.Image,
+          description = "STS065-05-037 (8-23 July 1994) --- In the science module aboard the Space Shuttle " +
+            "Columbia, four members of the crew busy themselves with experiments in support of the second " +
+            "International Microgravity Laboratory (IML-2) mission.  Left to right are Donald A. Thomas and " +
+            "Leroy Chiao, both mission specialists; Richard J. Hieb, payload commander, and Dr. Chiaki Mukai " +
+            "of NASDA, payload specialist.",
+          description508 = null,
+          location = null,
+          photographer = null,
+        ),
+      ),
+      links = listOf(
+        SearchItemLink(
+          url = ImageUrl("https://images-assets.nasa.gov/image/sts065-05-037/sts065-05-037~thumb.jpg"),
+          rel = SearchItemLink.Relation.Preview,
+          render = "image",
+        ),
+      ),
+    )
+    val item2 = SearchItem(
+      collectionUrl = JsonUrl("https://images-assets.nasa.gov/image/sts065-214-010/collection.json"),
+      data = listOf(
+        SearchItemData(
+          center = "JSC",
+          title = "STS-65 crew onboard portrait in IML-2 spacelab module with mission flag",
+          keywords = Keywords(
+            "STS-65",
+            "COLUMBIA (ORBITER)",
+            "SPACELAB",
+            "CREWS",
+            "ASTRONAUTS",
+            "PAYLOAD SPECIALISTS",
+            "PORTRAIT",
+            "ONBOARD ACTIVITIES",
+            "INTERNATIONAL COOPERATION",
+            "JAPAN",
+            "INSIGNIAS CREW PROCEDURES (INFLIGHT)",
+          ),
+          nasaId = NasaId("sts065-214-010"),
+          dateCreated = Instant.parse("1994-07-23T00:00:00Z"),
+          mediaType = MediaType.Image,
+          description = "In the spacelab science module aboard the Space Shuttle Columbia, Orbiter Vehicle (OV) 102," +
+            " the seven crewmembers pose for the traditional onboard (inflight) crew portrait. Displayed in the " +
+            "background is a flag with the International Microgravity Laboratory 2 (IML-2) insignia and Columbia " +
+            "inscribed along the edge. In the front row (left to right) are Mission Specialist (MS) Carl E. Walz " +
+            "and MS Donald A. Thomas. Behind them (left to right) are Payload Commander (PLC) Richard J. Hieb, " +
+            "Payload Specialist Chiaki Mukai, Commander Robert D. Cabana, MS Leroy Chiao, and Pilot James D. " +
+            "Halsell, Jr. Mukai represents the National Space Development Agency (NASDA) of Japan. Crewmembers are " +
+            "wearing their mission polo shirts for the portrait. Inside this module, the crew conducted experiments" +
+            " in support of the IML-2 mission.",
+          description508 = null,
+          location = null,
+          photographer = null,
+        ),
+      ),
+      links = listOf(
+        SearchItemLink(
+          url = ImageUrl("https://images-assets.nasa.gov/image/sts065-214-010/sts065-214-010~thumb.jpg"),
+          rel = SearchItemLink.Relation.Preview,
+          render = "image",
+        ),
+      ),
+    )
+    assertEquals(
+      actual = response.body(),
+      expected = SearchResponse.Success(
+        collection = SearchCollection(
+          version = "1.0",
+          url = "http://images-api.nasa.gov/search?description=Chiaki&keywords=CREWS,SPACELAB",
+          metadata = SearchMetadata(totalHits = 2),
+          links = null,
+          items = listOf(item1, item2),
+        ),
+      ),
     )
   }
 

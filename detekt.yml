@@ -20,6 +20,8 @@ naming:
   FunctionNaming:
     functionPattern: "[a-zA-Z][a-zA-Z0-9]*"
 style:
+  DestructuringDeclarationWithTooManyEntries:
+    maxDestructuringEntries: 4
   MaxLineLength:
     maxLineLength: 120
   MagicNumber:

@@ -3,6 +3,7 @@
 ## Gallery
 - Search screen
   - Filtering panel
+  - Insert SearchItems in database
 
 # Mid Priority
 
@@ -13,6 +14,13 @@
 
 ## APOD
 - zoom/pan buttons on fullscreen images? Or some other way of making it more obvious that you can do it
+
+## Gallery
+- Insert received keywords, photographers, etc in DB, populate dropdown with them
+- Associate gallery collections together in database
+
+## Settings
+- Add search page size option
 
 # Low Priority
 

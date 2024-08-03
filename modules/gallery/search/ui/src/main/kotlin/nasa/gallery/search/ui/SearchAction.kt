@@ -9,4 +9,5 @@ internal sealed interface SearchAction {
   data object PerformSearch : SearchAction
   data object ConfigureSearch : SearchAction
   data object RetrySearch : SearchAction
+  data class SelectPage(val pageNumber: Int) : SearchAction
 }

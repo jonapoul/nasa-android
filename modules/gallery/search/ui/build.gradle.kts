@@ -15,6 +15,8 @@ dependencies {
   api(projects.modules.gallery.search.vm)
 
   implementation(libs.alakazam.android.compose)
+  implementation(libs.alakazam.kotlin.core)
+  implementation(libs.androidx.activity.core)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
   implementation(libs.androidx.compose.material.icons.core)

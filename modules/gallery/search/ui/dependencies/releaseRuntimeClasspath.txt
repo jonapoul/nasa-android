@@ -2,8 +2,8 @@ androidx.activity:activity-compose:1.9.1
 androidx.activity:activity-ktx:1.9.1
 androidx.activity:activity:1.9.1
 androidx.annotation:annotation-experimental:1.4.0
-androidx.annotation:annotation-jvm:1.8.0
-androidx.annotation:annotation:1.8.0
+androidx.annotation:annotation-jvm:1.8.1
+androidx.annotation:annotation:1.8.1
 androidx.appcompat:appcompat-resources:1.6.1
 androidx.arch.core:core-common:2.2.0
 androidx.arch.core:core-runtime:2.2.0
@@ -112,6 +112,8 @@ com.squareup.okio:okio:3.9.0
 com.squareup.retrofit2:retrofit:2.11.0
 dev.jonpoulton.alakazam:android-ui-compose:4.5.6
 dev.jonpoulton.alakazam:kotlin-core:4.5.6
+dev.jonpoulton.preferences:core-jvm:2.0.1
+dev.jonpoulton.preferences:core:2.0.1
 io.coil-kt:coil-base:2.7.0
 io.coil-kt:coil-compose-base:2.7.0
 io.coil-kt:coil-compose:2.7.0

@@ -1,6 +1,8 @@
 package nasa.gallery.data.api
 
 import kotlinx.datetime.Instant
+import nasa.gallery.model.ImageUrl
+import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
@@ -30,8 +32,10 @@ class SearchResponseTest {
           url = "http://images-api.nasa.gov/search?q=apollo&page_size=1",
           items = listOf(
             SearchItem(
-              collectionUrl = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
-                "-ENROUTE-TO-PAD-39A/collection.json",
+              collectionUrl = JsonUrl(
+                "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-" +
+                  "TO-PAD-39A/collection.json",
+              ),
               data = listOf(
                 SearchItemData(
                   center = "JSC",
@@ -42,19 +46,25 @@ class SearchResponseTest {
                   mediaType = MediaType.Video,
                   description508 = "Apollo, Apollo 8, NASA, Film, Film Transfers",
                   description = "T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A",
+                  location = null,
+                  photographer = null,
                 ),
               ),
               links = listOf(
                 SearchItemLink(
-                  url = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
-                    "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg",
-                  rel = "preview",
+                  url = ImageUrl(
+                    "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
+                      "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg",
+                  ),
+                  rel = SearchItemLink.Relation.Preview,
                   render = "image",
                 ),
                 SearchItemLink(
-                  url = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
-                    "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
-                  rel = "captions",
+                  url = ImageUrl(
+                    "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
+                      "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
+                  ),
+                  rel = SearchItemLink.Relation.Captions,
                 ),
               ),
             ),
@@ -62,7 +72,7 @@ class SearchResponseTest {
           metadata = SearchMetadata(totalHits = 6324),
           links = listOf(
             SearchLink(
-              rel = "next",
+              rel = SearchLink.Relation.Next,
               prompt = "Next",
               url = "http://images-api.nasa.gov/search?q=apollo&page_size=1&page=2",
             ),

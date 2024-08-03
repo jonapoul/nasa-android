@@ -1,10 +1,6 @@
-package nasa.gallery.search.vm
+package nasa.gallery.model
 
 import androidx.compose.runtime.Immutable
-import nasa.gallery.model.Keywords
-import nasa.gallery.model.MediaTypes
-import nasa.gallery.model.NasaId
-import nasa.gallery.model.Year
 
 @Immutable
 data class FilterConfig(
@@ -16,8 +12,6 @@ data class FilterConfig(
   val location: String? = null,
   val mediaTypes: MediaTypes? = null,
   val nasaId: NasaId? = null,
-  val page: Int? = null,
-  val pageSize: Int? = null,
   val photographer: String? = null,
   val secondaryCreator: String? = null,
   val title: String? = null,
@@ -25,6 +19,6 @@ data class FilterConfig(
   val yearEnd: Year? = null,
 ) {
   companion object {
-    val Default = FilterConfig()
+    val Empty = FilterConfig()
   }
 }

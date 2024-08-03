@@ -9,10 +9,17 @@ sealed interface SearchState {
 
   data object Empty : SearchState
 
+  data object NoFilterConfig : SearchState
+
   data object Searching : SearchState
 
   data class Success(
     val results: ImmutableList<SearchResultItem>,
+    val totalResults: Int,
+    val resultsPerPage: Int,
+    val prevPageNumber: Int?,
+    val pageNumber: Int,
+    val nextPageNumber: Int?,
   ) : SearchState
 
   data class Failed(
