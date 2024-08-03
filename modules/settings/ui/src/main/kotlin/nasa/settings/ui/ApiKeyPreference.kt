@@ -24,9 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -35,15 +33,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
-import kotlinx.coroutines.delay
 import nasa.core.model.SettingsKeys
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.text.NasaTextField
+import nasa.core.ui.text.keyboardFocusRequester
 import nasa.settings.res.R
-import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 internal fun ApiKeyPreference(
@@ -153,14 +150,6 @@ private fun ApiKeyPreferenceDialogContent(
   preferences: SharedPreferences = rememberSharedPreferences(),
 ) {
   var mutableValue by remember { mutableStateOf(currentValue.orEmpty()) }
-  val focusRequester = remember { FocusRequester() }
-  val keyboard = LocalSoftwareKeyboardController.current
-
-  LaunchedEffect(focusRequester) {
-    focusRequester.requestFocus()
-    delay(100.milliseconds)
-    keyboard?.show()
-  }
 
   DialogContent(
     modifier = modifier,
@@ -168,7 +157,7 @@ private fun ApiKeyPreferenceDialogContent(
     title = title,
     content = {
       NasaTextField(
-        modifier = Modifier.focusRequester(focusRequester),
+        modifier = Modifier.focusRequester(keyboardFocusRequester()),
         value = mutableValue,
         onValueChange = { mutableValue = it },
         placeholderText = stringResource(id = R.string.settings_key_hint),

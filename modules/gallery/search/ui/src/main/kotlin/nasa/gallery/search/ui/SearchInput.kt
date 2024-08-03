@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.text.NasaTextField
+import nasa.core.ui.text.keyboardFocusRequester
 import nasa.gallery.res.R
 
 @Composable
@@ -41,7 +43,9 @@ internal fun SearchInput(
     verticalAlignment = Alignment.CenterVertically,
   ) {
     NasaTextField(
-      modifier = Modifier.weight(1f),
+      modifier = Modifier
+        .weight(1f)
+        .focusRequester(keyboardFocusRequester()),
       value = text,
       onValueChange = {
         text = it
