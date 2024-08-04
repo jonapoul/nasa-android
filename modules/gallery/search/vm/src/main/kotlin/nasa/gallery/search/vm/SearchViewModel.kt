@@ -35,7 +35,8 @@ class SearchViewModel @Inject internal constructor(
   fun performSearch(pageNumber: Int? = null) {
     val config = mutableFilterConfig.value
     Timber.v("performSearch %d %s", pageNumber, config)
-    mutableSearchState.update { SearchState.Searching }
+    val loadingState = if (pageNumber == null) SearchState.Searching else SearchState.LoadingPage(pageNumber)
+    mutableSearchState.update { loadingState }
 
     viewModelScope.launch(main) {
       val searchResult = repository.search(config, pageNumber)

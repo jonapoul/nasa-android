@@ -75,6 +75,12 @@ private fun SearchContent(
         theme = theme,
       )
 
+      is SearchState.LoadingPage -> SearchLoadingPage(
+        modifier = contentsModifier.padding(64.dp),
+        theme = theme,
+        pageNumber = searchState.pageNumber,
+      )
+
       is SearchState.Failed -> LoadFailure(
         modifier = contentsModifier.padding(32.dp),
         message = searchState.reason,

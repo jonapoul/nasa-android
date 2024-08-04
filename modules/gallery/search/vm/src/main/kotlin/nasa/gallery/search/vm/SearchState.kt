@@ -13,6 +13,8 @@ sealed interface SearchState {
 
   data object Searching : SearchState
 
+  data class LoadingPage(val pageNumber: Int) : SearchState
+
   data class Success(
     val results: ImmutableList<SearchResultItem>,
     val totalResults: Int,

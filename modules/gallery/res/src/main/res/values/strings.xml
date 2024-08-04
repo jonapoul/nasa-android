@@ -12,6 +12,7 @@
   <string name="search_no_action">Enter search keywords in the box above and click the search button to begin!</string>
   <string name="search_empty_title">No results found</string>
   <string name="search_searching">Searching…</string>
+  <string name="search_loading_page">Loading page %1$d…</string>
 
   <string name="search_results_header">Found %1$d results:</string>
   <string name="search_results_page">Page %1$d/%2$d</string>

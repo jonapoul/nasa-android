@@ -22,6 +22,32 @@ internal fun SearchSearching(
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
+  LoadingImpl(
+    modifier = modifier,
+    text = stringResource(id = R.string.search_searching),
+    theme = theme,
+  )
+}
+
+@Composable
+internal fun SearchLoadingPage(
+  pageNumber: Int,
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
+) {
+  LoadingImpl(
+    modifier = modifier,
+    text = stringResource(id = R.string.search_loading_page, pageNumber),
+    theme = theme,
+  )
+}
+
+@Composable
+private fun LoadingImpl(
+  text: String,
+  theme: Theme,
+  modifier: Modifier = Modifier,
+) {
   Column(
     modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -35,7 +61,7 @@ internal fun SearchSearching(
     VerticalSpacer(20.dp)
 
     Text(
-      text = stringResource(id = R.string.search_searching),
+      text = text,
       fontSize = 18.sp,
       color = theme.pageText,
     )
@@ -47,5 +73,13 @@ internal fun SearchSearching(
 private fun PreviewSearching() = PreviewScreen {
   SearchSearching(
     // TBC
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewLoadingPage() = PreviewScreen {
+  SearchLoadingPage(
+    pageNumber = 2,
   )
 }
