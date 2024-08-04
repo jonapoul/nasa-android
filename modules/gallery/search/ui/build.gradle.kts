@@ -35,6 +35,7 @@ dependencies {
   implementation(libs.coil.composeBase)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
+  implementation(libs.lazycolumn.scrollbar)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
   implementation(projects.modules.gallery.res)

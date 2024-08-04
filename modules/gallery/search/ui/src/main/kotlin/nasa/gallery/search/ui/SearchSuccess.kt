@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material.icons.filled.ArrowBackIosNew
@@ -24,10 +25,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import my.nanihadesuka.compose.LazyColumnScrollbar
 import nasa.core.ui.CardShape
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
+import nasa.core.ui.color.scrollbarSettings
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
@@ -64,16 +67,23 @@ internal fun SearchSuccess(
       text = stringResource(R.string.search_results_header, state.totalResults),
     )
 
-    LazyColumn(
+    val listState = rememberLazyListState()
+    LazyColumnScrollbar(
       modifier = Modifier.weight(1f),
-      verticalArrangement = Arrangement.Top,
+      state = listState,
+      settings = theme.scrollbarSettings(),
     ) {
-      items(state.results) { item ->
-        SearchSuccessItem(
-          modifier = Modifier.fillMaxWidth(),
-          item = item,
-          theme = theme,
-        )
+      LazyColumn(
+        state = listState,
+        verticalArrangement = Arrangement.Top,
+      ) {
+        items(state.results) { item ->
+          SearchSuccessItem(
+            modifier = Modifier.fillMaxWidth(),
+            item = item,
+            theme = theme,
+          )
+        }
       }
     }
 

@@ -32,6 +32,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
+  implementation(libs.lazycolumn.scrollbar)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
   implementation(projects.modules.licenses.res)

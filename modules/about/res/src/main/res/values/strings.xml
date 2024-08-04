@@ -18,7 +18,7 @@
   <string name="about_checking_updates_loading">Checking for updates…</string>
 
   <string name="about_no_update_title">No New Updates</string>
-  <string name="about_no_update_message">You currently have the latest version of APOD Android installed.</string>
+  <string name="about_no_update_message">You currently have the latest version of NASA Android installed.</string>
   <string name="about_no_update_ok">OK</string>
 
   <string name="about_check_failed_title">Update Check Failed</string>

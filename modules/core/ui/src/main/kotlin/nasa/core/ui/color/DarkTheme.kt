@@ -74,4 +74,7 @@ internal class DarkTheme : Theme {
 
   override val progressBarBackground = ColorPalette.grey500
   override val progressBarForeground = pageTextPrimary
+
+  override val scrollbar = ColorPalette.blue400
+  override val scrollbarSelected = ColorPalette.blue100
 }

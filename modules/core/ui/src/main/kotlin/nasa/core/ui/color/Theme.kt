@@ -79,4 +79,7 @@ sealed interface Theme {
 
   val progressBarBackground: Color
   val progressBarForeground: Color
+
+  val scrollbar: Color
+  val scrollbarSelected: Color
 }

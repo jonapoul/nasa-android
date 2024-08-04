@@ -91,6 +91,7 @@ cafe.adriel.voyager:voyager-navigator-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-navigator:1.1.0-beta02
 cafe.adriel.voyager:voyager-screenmodel-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-screenmodel:1.1.0-beta02
+com.github.nanihadesuka:LazyColumnScrollbar:2.2.0
 com.google.code.findbugs:jsr305:3.0.2
 com.google.dagger:dagger-lint-aar:2.51.1
 com.google.dagger:dagger:2.51.1

@@ -10,6 +10,7 @@ dependencies {
   api(libs.androidx.activity.core)
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.immutable)
+  api(libs.lazycolumn.scrollbar)
   api(libs.voyager.core)
   api(projects.modules.core.model)
   api(projects.modules.core.res)

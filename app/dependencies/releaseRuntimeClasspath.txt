@@ -128,6 +128,7 @@ cafe.adriel.voyager:voyager-navigator-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-navigator:1.1.0-beta02
 cafe.adriel.voyager:voyager-screenmodel-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-screenmodel:1.1.0-beta02
+com.github.nanihadesuka:LazyColumnScrollbar:2.2.0
 com.google.accompanist:accompanist-drawablepainter:0.32.0
 com.google.android.material:material:1.12.0
 com.google.code.findbugs:jsr305:3.0.2

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Warning
@@ -26,10 +27,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import my.nanihadesuka.compose.LazyColumnScrollbar
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
+import nasa.core.ui.color.scrollbarSettings
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.licenses.data.LibraryModel
@@ -122,17 +125,24 @@ private fun LoadedContent(
   onAction: (LicensesAction) -> Unit,
   modifier: Modifier = Modifier,
 ) {
-  LazyColumn(
+  val listState = rememberLazyListState()
+  LazyColumnScrollbar(
     modifier = modifier
       .fillMaxSize()
       .padding(8.dp),
+    state = listState,
+    settings = theme.scrollbarSettings(),
   ) {
-    items(libraries) { library ->
-      LibraryItem(
-        library = library,
-        onLaunchUrl = { onAction(LicensesAction.LaunchUrl(it)) },
-        theme = theme,
-      )
+    LazyColumn(
+      state = listState,
+    ) {
+      items(libraries) { library ->
+        LibraryItem(
+          library = library,
+          onLaunchUrl = { onAction(LicensesAction.LaunchUrl(it)) },
+          theme = theme,
+        )
+      }
     }
   }
 }

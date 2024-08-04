@@ -74,4 +74,7 @@ internal class LightTheme : Theme {
 
   override val progressBarBackground = ColorPalette.grey200
   override val progressBarForeground = pageTextPrimary
+
+  override val scrollbar = ColorPalette.blue900
+  override val scrollbarSelected = ColorPalette.blue400
 }
