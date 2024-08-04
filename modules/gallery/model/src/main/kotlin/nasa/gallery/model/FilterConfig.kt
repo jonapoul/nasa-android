@@ -12,7 +12,7 @@ data class FilterConfig(
   val location: String? = null,
   val mediaTypes: MediaTypes? = null,
   val nasaId: NasaId? = null,
-  val photographer: String? = null,
+  val photographer: Photographer? = null,
   val secondaryCreator: String? = null,
   val title: String? = null,
   val yearStart: Year? = null,

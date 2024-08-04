@@ -17,6 +17,9 @@
 
 ## Gallery
 - Insert received keywords, photographers, etc in DB, populate dropdown with them
+  - keyword
+  - photographer
+  - center
 - Associate gallery collections together in database
 
 ## Settings

@@ -2,7 +2,6 @@ package nasa.android.di
 
 import alakazam.kotlin.core.IODispatcher
 import android.content.Context
-import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,11 +10,17 @@ import nasa.db.DefaultApodEntityFactory
 import nasa.db.NasaDatabase
 import nasa.db.NasaDatabaseDelegate
 import nasa.db.RoomApodDaoWrapper
+import nasa.db.RoomCenterDaoWrapper
 import nasa.db.RoomGalleryDaoWrapper
+import nasa.db.RoomKeywordDaoWrapper
 import nasa.db.RoomNasaDatabase
+import nasa.db.RoomPhotographerDaoWrapper
 import nasa.db.apod.ApodDao
 import nasa.db.apod.ApodEntity
+import nasa.db.gallery.CenterDao
 import nasa.db.gallery.GalleryDao
+import nasa.db.gallery.KeywordDao
+import nasa.db.gallery.PhotographerDao
 import javax.inject.Singleton
 
 @Module
@@ -27,11 +32,7 @@ internal class DatabaseModule {
 
   @Provides
   @Singleton
-  fun impl(context: Context, io: IODispatcher): RoomNasaDatabase = Room
-    .databaseBuilder(context, RoomNasaDatabase::class.java, "nasa.db")
-    .fallbackToDestructiveMigrationOnDowngrade(dropAllTables = true)
-    .setQueryCoroutineContext(io)
-    .build()
+  fun impl(context: Context, io: IODispatcher): RoomNasaDatabase = RoomNasaDatabase.build(context, io)
 
   @Provides
   @Singleton
@@ -40,6 +41,18 @@ internal class DatabaseModule {
   @Provides
   @Singleton
   fun galleryDao(db: RoomNasaDatabase): GalleryDao = RoomGalleryDaoWrapper(db.galleryDao())
+
+  @Provides
+  @Singleton
+  fun center(db: RoomNasaDatabase): CenterDao = RoomCenterDaoWrapper(db.centreDao())
+
+  @Provides
+  @Singleton
+  fun keyword(db: RoomNasaDatabase): KeywordDao = RoomKeywordDaoWrapper(db.keywordDao())
+
+  @Provides
+  @Singleton
+  fun photographer(db: RoomNasaDatabase): PhotographerDao = RoomPhotographerDaoWrapper(db.photographerDao())
 
   @Provides
   @Singleton

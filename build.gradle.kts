@@ -4,6 +4,7 @@ import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 plugins {
   alias(libs.plugins.agp.app) apply false
   alias(libs.plugins.agp.lib) apply false
+  alias(libs.plugins.androidx.room) apply false
   alias(libs.plugins.androidCacheFix) apply false
   alias(libs.plugins.blueprint.diagrams) apply false
   alias(libs.plugins.detekt) apply false

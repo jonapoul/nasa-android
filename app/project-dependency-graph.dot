@@ -30,12 +30,12 @@ node ["style"="filled"]
 ":db:impl" ["fillcolor"="#55FF55","shape"="box"]
 ":db:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":db:gallery" ["fillcolor"="#A17EFF","shape"="box"]
+":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:search:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":gallery:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:search:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":home:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":home:ui" ["fillcolor"="#FFFF55","shape"="box"]
@@ -103,6 +103,7 @@ graph ["rank"="same"]
 ":db:impl" -> ":db:api"
 ":db:impl" -> ":db:apod"
 ":db:impl" -> ":db:gallery"
+":db:gallery" -> ":gallery:model"
 ":gallery:search:ui" -> ":core:ui"
 ":gallery:search:ui" -> ":gallery:nav"
 ":gallery:search:ui" -> ":gallery:search:vm"

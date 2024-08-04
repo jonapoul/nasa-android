@@ -1,19 +1,28 @@
 plugins {
   id("module-android")
   alias(libs.plugins.ksp)
+  alias(libs.plugins.androidx.room)
 }
+
+val schemaDir = "$projectDir/schemas"
 
 android {
   namespace = "nasa.db.impl"
 
-  ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
+  sourceSets {
+    getByName("test").assets.srcDirs(schemaDir)
   }
+}
+
+room {
+  generateKotlin = true
+  schemaDirectory(schemaDir)
 }
 
 dependencies {
   ksp(libs.androidx.room.compiler)
 
+  api(libs.alakazam.kotlin.core)
   api(libs.androidx.room.runtime)
   api(libs.kotlinx.coroutines)
   api(projects.modules.db.api)
@@ -25,4 +34,5 @@ dependencies {
   implementation(libs.kotlinx.datetime)
 
   testImplementation(libs.test.alakazam.db)
+  testImplementation(libs.test.androidx.room)
 }

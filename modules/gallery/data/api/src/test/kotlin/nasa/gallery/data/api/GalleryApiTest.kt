@@ -7,6 +7,7 @@ import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import nasa.gallery.model.BooleanMetadata
+import nasa.gallery.model.Center
 import nasa.gallery.model.DoubleMetadata
 import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.IntMetadata
@@ -186,7 +187,7 @@ class GalleryApiTest {
       collectionUrl = JsonUrl("https://images-assets.nasa.gov/image/sts065-05-037/collection.json"),
       data = listOf(
         SearchItemData(
-          center = "JSC",
+          center = Center("JSC"),
           title = "STS-65 crew works inside the IML-2 spacelab module aboard Columbia, OV-102",
           keywords = Keywords(
             "STS-65",
@@ -226,7 +227,7 @@ class GalleryApiTest {
       collectionUrl = JsonUrl("https://images-assets.nasa.gov/image/sts065-214-010/collection.json"),
       data = listOf(
         SearchItemData(
-          center = "JSC",
+          center = Center("JSC"),
           title = "STS-65 crew onboard portrait in IML-2 spacelab module with mission flag",
           keywords = Keywords(
             "STS-65",

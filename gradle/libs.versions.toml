@@ -161,6 +161,7 @@ test-alakazam-db = { module = "dev.jonpoulton.alakazam:testing-db", version.ref 
 test-androidx-arch = { module = "androidx.arch.core:core-testing", version.ref = "test-androidx-arch" }
 test-androidx-coreKtx = { module = "androidx.test:core-ktx", version.ref = "test-androidx-coreKtx" }
 test-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "test-androidx-junit" }
+test-androidx-room = { module = "androidx.room:room-testing", version.ref = "androidx-room" }
 test-androidx-rules = { module = "androidx.test:rules", version.ref = "test-androidx-rules" }
 test-androidx-runner = { module = "androidx.test:runner", version.ref = "test-androidx-runner" }
 test-hilt = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
@@ -179,6 +180,7 @@ test-turbine = { module = "app.cash.turbine:turbine", version.ref = "test-turbin
 [plugins]
 agp-app = { id = "com.android.application", version.ref = "agp" }
 agp-lib = { id = "com.android.library", version.ref = "agp" }
+androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 androidCacheFix = { id = "org.gradle.android.cache-fix", version.ref = "androidCacheFix" }
 blueprint-diagrams = { id = "dev.jonpoulton.blueprint.diagrams", version.ref = "blueprint" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }

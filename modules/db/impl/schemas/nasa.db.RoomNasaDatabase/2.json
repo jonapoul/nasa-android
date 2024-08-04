@@ -1,0 +1,141 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 2,
+    "identityHash": "2143090a546c496631abd84fc9a21578",
+    "entities": [
+      {
+        "tableName": "apod",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, `title` TEXT NOT NULL, `explanation` TEXT NOT NULL, `media_type` TEXT NOT NULL, `copyright` TEXT, `url` TEXT, `hdurl` TEXT, `thumbnail_url` TEXT, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "explanation",
+            "columnName": "explanation",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mediaType",
+            "columnName": "media_type",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "copyright",
+            "columnName": "copyright",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "hdUrl",
+            "columnName": "hdurl",
+            "affinity": "TEXT"
+          },
+          {
+            "fieldPath": "thumbnailUrl",
+            "columnName": "thumbnail_url",
+            "affinity": "TEXT"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        }
+      },
+      {
+        "tableName": "center",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`center` TEXT NOT NULL, PRIMARY KEY(`center`))",
+        "fields": [
+          {
+            "fieldPath": "center",
+            "columnName": "center",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "center"
+          ]
+        }
+      },
+      {
+        "tableName": "gallery",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`date` TEXT NOT NULL, PRIMARY KEY(`date`))",
+        "fields": [
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "date"
+          ]
+        }
+      },
+      {
+        "tableName": "keyword",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`keyword` TEXT NOT NULL, PRIMARY KEY(`keyword`))",
+        "fields": [
+          {
+            "fieldPath": "keyword",
+            "columnName": "keyword",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "keyword"
+          ]
+        }
+      },
+      {
+        "tableName": "photographer",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`photographer` TEXT NOT NULL, PRIMARY KEY(`photographer`))",
+        "fields": [
+          {
+            "fieldPath": "photographer",
+            "columnName": "photographer",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "photographer"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2143090a546c496631abd84fc9a21578')"
+    ]
+  }
+}

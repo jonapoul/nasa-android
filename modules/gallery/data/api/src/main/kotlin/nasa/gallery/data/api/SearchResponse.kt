@@ -6,11 +6,13 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import nasa.gallery.model.Center
 import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
+import nasa.gallery.model.Photographer
 
 @Serializable(SearchResponseSerializer::class)
 sealed interface SearchResponse {
@@ -43,11 +45,11 @@ data class SearchItem(
 
 @Serializable
 data class SearchItemData(
-  @SerialName("center") val center: String,
+  @SerialName("center") val center: Center,
   @SerialName("title") val title: String,
   @SerialName("keywords") val keywords: Keywords?,
   @SerialName("location") val location: String?,
-  @SerialName("photographer") val photographer: String?,
+  @SerialName("photographer") val photographer: Photographer?,
   @SerialName("nasa_id") val nasaId: NasaId,
   @SerialName("date_created") val dateCreated: Instant,
   @SerialName("media_type") val mediaType: MediaType,

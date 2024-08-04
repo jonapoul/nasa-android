@@ -2,11 +2,17 @@ package nasa.gallery.data.repo
 
 import alakazam.kotlin.core.IODispatcher
 import kotlinx.coroutines.withContext
+import nasa.db.gallery.CenterDao
+import nasa.db.gallery.KeywordDao
+import nasa.db.gallery.PhotographerDao
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.SearchCollection
 import nasa.gallery.data.api.SearchLink
 import nasa.gallery.data.api.SearchResponse
+import nasa.gallery.model.Center
 import nasa.gallery.model.FilterConfig
+import nasa.gallery.model.Keyword
+import nasa.gallery.model.Photographer
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import timber.log.Timber
 import javax.inject.Inject
@@ -15,6 +21,9 @@ class GallerySearchRepository @Inject internal constructor(
   private val io: IODispatcher,
   private val galleryApi: GalleryApi,
   private val searchPreferences: SearchPreferences,
+  private val centerDao: CenterDao,
+  private val keywordDao: KeywordDao,
+  private val photographerDao: PhotographerDao,
 ) {
   suspend fun search(config: FilterConfig, pageNumber: Int?): SearchResult {
     Timber.v("search %s", config)
@@ -48,11 +57,13 @@ class GallerySearchRepository @Inject internal constructor(
     yearEnd = config.yearEnd,
   )
 
-  private fun handleSuccess(pageNumber: Int?, pageSize: Int, collection: SearchCollection): SearchResult {
+  private suspend fun handleSuccess(pageNumber: Int?, pageSize: Int, collection: SearchCollection): SearchResult {
     if (collection.metadata.totalHits == 0) {
       Timber.w("Received empty response collection: %s", collection)
       return SearchResult.Empty
     }
+
+    saveMetadata(collection)
 
     return SearchResult.Success(
       pagedResults = collection.items,
@@ -62,6 +73,23 @@ class GallerySearchRepository @Inject internal constructor(
       prevPage = collection.pageNumberWithRelation(SearchLink.Relation.Previous),
       nextPage = collection.pageNumberWithRelation(SearchLink.Relation.Next),
     )
+  }
+
+  private suspend fun saveMetadata(collection: SearchCollection) {
+    val centers = hashSetOf<Center>()
+    val keywords = hashSetOf<Keyword>()
+    val photographers = hashSetOf<Photographer>()
+    for (item in collection.items) {
+      for (data in item.data) {
+        centers.add(data.center)
+        data.keywords?.let(keywords::addAll)
+        data.photographer?.let(photographers::add)
+      }
+    }
+    centerDao.insertAll(centers.toList())
+    keywordDao.insertAll(keywords.toList())
+    photographerDao.insertAll(photographers.toList())
+    Timber.v("saveMetadata %s %s %s", centers, keywords, photographers)
   }
 
   private fun SearchCollection.pageNumberWithRelation(relation: SearchLink.Relation) =

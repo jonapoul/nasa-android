@@ -3,5 +3,7 @@ plugins {
 }
 
 dependencies {
+  api(projects.modules.gallery.model)
+
   implementation(libs.kotlinx.datetime)
 }

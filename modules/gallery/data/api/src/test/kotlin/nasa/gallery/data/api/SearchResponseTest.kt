@@ -1,6 +1,7 @@
 package nasa.gallery.data.api
 
 import kotlinx.datetime.Instant
+import nasa.gallery.model.Center
 import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
@@ -38,7 +39,7 @@ class SearchResponseTest {
               ),
               data = listOf(
                 SearchItemData(
-                  center = "JSC",
+                  center = Center("JSC"),
                   title = "T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A",
                   keywords = Keywords.from("Apollo", "Apollo 8", "NASA", "Film", "Film Transfers"),
                   nasaId = NasaId("T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A"),

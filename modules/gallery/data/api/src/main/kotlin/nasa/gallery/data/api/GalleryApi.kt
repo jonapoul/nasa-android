@@ -3,6 +3,7 @@ package nasa.gallery.data.api
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.NasaId
+import nasa.gallery.model.Photographer
 import nasa.gallery.model.Year
 import retrofit2.Response
 import retrofit2.http.GET
@@ -50,7 +51,7 @@ interface GalleryApi {
     @Query("page_size") pageSize: Int? = null,
 
     // The primary photographer’s name.
-    @Query("photographer") photographer: String? = null,
+    @Query("photographer") photographer: Photographer? = null,
 
     // A secondary photographer/videographer’s name.
     @Query("secondary_creator") secondaryCreator: String? = null,
