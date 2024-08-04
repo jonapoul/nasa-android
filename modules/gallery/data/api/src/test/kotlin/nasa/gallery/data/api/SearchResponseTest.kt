@@ -49,6 +49,8 @@ class SearchResponseTest {
                   description = "T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A",
                   location = null,
                   photographer = null,
+                  secondaryCreator = null,
+                  album = null,
                 ),
               ),
               links = listOf(

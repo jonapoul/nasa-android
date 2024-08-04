@@ -40,11 +40,12 @@ data class SearchCollection(
 data class SearchItem(
   @SerialName("href") val collectionUrl: JsonUrl,
   @SerialName("data") val data: List<SearchItemData>,
-  @SerialName("links") val links: List<SearchItemLink>,
+  @SerialName("links") val links: List<SearchItemLink>?,
 )
 
 @Serializable
 data class SearchItemData(
+  @SerialName("album") val album: List<String>?,
   @SerialName("center") val center: Center,
   @SerialName("title") val title: String,
   @SerialName("keywords") val keywords: Keywords?,
@@ -53,6 +54,7 @@ data class SearchItemData(
   @SerialName("nasa_id") val nasaId: NasaId,
   @SerialName("date_created") val dateCreated: Instant,
   @SerialName("media_type") val mediaType: MediaType,
+  @SerialName("secondary_creator") val secondaryCreator: String?,
   @SerialName("description") val description: String,
   @SerialName("description_508") val description508: String?,
 )

@@ -213,6 +213,8 @@ class GalleryApiTest {
           description508 = null,
           location = null,
           photographer = null,
+          secondaryCreator = null,
+          album = null,
         ),
       ),
       links = listOf(
@@ -257,6 +259,8 @@ class GalleryApiTest {
           description508 = null,
           location = null,
           photographer = null,
+          secondaryCreator = null,
+          album = null,
         ),
       ),
       links = listOf(
