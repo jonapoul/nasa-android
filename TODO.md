@@ -21,6 +21,8 @@
   - photographer
   - center
 - Associate gallery collections together in database
+  - foreign key constraint to individual entities and to metadata
+- Add screen to list recently-viewed - pulled from database
 
 ## Settings
 - Add search page size option
