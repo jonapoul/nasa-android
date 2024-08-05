@@ -119,6 +119,8 @@ graph ["rank"="same"]
 ":home:ui" -> ":home:res" ["style"="dotted"]
 ":home:ui" -> ":home:vm" ["style"="dotted"]
 ":home:ui" -> ":settings:nav" ["style"="dotted"]
+":home:vm" -> ":core:http"
+":home:vm" -> ":core:url" ["style"="dotted"]
 ":licenses:ui" -> ":core:ui"
 ":licenses:ui" -> ":licenses:vm"
 ":licenses:ui" -> ":licenses:res" ["style"="dotted"]

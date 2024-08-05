@@ -98,10 +98,20 @@ com.google.dagger:dagger:2.52
 com.google.dagger:hilt-android:2.52
 com.google.dagger:hilt-core:2.52
 com.google.guava:listenablefuture:1.0
+com.jakewharton.timber:timber:5.0.1
+com.squareup.okhttp3:logging-interceptor:4.12.0
+com.squareup.okhttp3:okhttp:4.12.0
+com.squareup.okio:okio-jvm:3.9.0
+com.squareup.okio:okio:3.9.0
+com.squareup.retrofit2:converter-kotlinx-serialization:2.11.0
+com.squareup.retrofit2:retrofit:2.11.0
 dev.jonpoulton.alakazam:android-ui-compose:4.5.6
+dev.jonpoulton.alakazam:kotlin-core:4.5.6
 jakarta.inject:jakarta.inject-api:2.0.1
 javax.inject:javax.inject:1
 org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21
+org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21
 org.jetbrains.kotlin:kotlin-stdlib:2.0.0
 org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.7
 org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7
@@ -114,4 +124,6 @@ org.jetbrains.kotlinx:kotlinx-datetime:0.6.0
 org.jetbrains.kotlinx:kotlinx-serialization-bom:1.7.1
 org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.1
 org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1
 org.jetbrains:annotations:23.0.0

@@ -1,6 +1,8 @@
 package nasa.home.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import cafe.adriel.voyager.core.registry.rememberScreen
@@ -10,6 +12,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.about.nav.AboutNavScreen
 import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.single.nav.ApodSingleNavScreen
+import nasa.core.http.ApiUsageState
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
 import nasa.core.ui.set
@@ -23,7 +26,6 @@ class HomeScreen : Screen {
     val navigator = LocalNavigator.currentOrThrow
     val theme = LocalTheme.current
 
-    @Suppress("UNUSED_VARIABLE")
     val viewModel = getViewModel<HomeViewModel>()
 
     val aboutScreen = rememberScreen(AboutNavScreen)
@@ -54,6 +56,17 @@ class HomeScreen : Screen {
       clickedGallery.set(false)
     }
 
+    val showApiUsageDialog = remember { mutableStateOf(false) }
+    if (showApiUsageDialog.value) {
+      val state by viewModel.apiUsage().collectAsState(initial = ApiUsageState.RealKeyNoUsage)
+      ApiUsageDialog(
+        state = state,
+        theme = theme,
+        onDismiss = { showApiUsageDialog.set(false) },
+        onClickRegister = { viewModel.registerForApiKey() },
+      )
+    }
+
     HomeScreenImpl(
       theme = theme,
       onAction = { action ->
@@ -62,6 +75,7 @@ class HomeScreen : Screen {
           HomeAction.NavSettings -> clickedSettings.set(true)
           HomeAction.NavApodToday -> clickedApodToday.set(true)
           HomeAction.NavGallery -> clickedGallery.set(true)
+          HomeAction.ShowApiUsage -> showApiUsageDialog.set(true)
         }
       },
     )

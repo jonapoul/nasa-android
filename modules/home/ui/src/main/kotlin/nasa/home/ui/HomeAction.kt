@@ -8,4 +8,5 @@ internal sealed interface HomeAction {
   data object NavSettings : HomeAction
   data object NavApodToday : HomeAction
   data object NavGallery : HomeAction
+  data object ShowApiUsage : HomeAction
 }

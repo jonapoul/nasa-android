@@ -1,6 +1,7 @@
 package nasa.home.ui
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Api
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
@@ -63,6 +64,15 @@ internal fun HomeTopBar(
           onClick = { onAction(HomeAction.NavAbout) },
           text = { Text(aboutText) },
           leadingIcon = { Icon(imageVector = Icons.Filled.Info, contentDescription = aboutText) },
+        )
+        val apiUsageText = stringResource(id = R.string.home_menu_api_usage)
+        DropdownMenuItem(
+          onClick = {
+            onAction(HomeAction.ShowApiUsage)
+            showMenu = false
+          },
+          text = { Text(apiUsageText) },
+          leadingIcon = { Icon(imageVector = Icons.Filled.Api, contentDescription = apiUsageText) },
         )
       }
     },

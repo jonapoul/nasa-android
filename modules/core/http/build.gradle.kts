@@ -14,4 +14,6 @@ dependencies {
   implementation(libs.okhttp.logging)
   implementation(libs.okio)
   implementation(libs.retrofit.serialization)
+
+  compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

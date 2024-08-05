@@ -8,8 +8,7 @@
 # Mid Priority
 
 ## General
-- display API rate limits somewhere
-  - error dialog when it runs out
+- error dialog when API usage runs out
 - Navigation animations
 
 ## APOD

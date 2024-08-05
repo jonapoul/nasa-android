@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import nasa.core.http.ApiUsageInterceptor
 import nasa.core.http.buildOkHttp
 import nasa.core.http.buildRetrofit
 import nasa.gallery.data.api.GalleryApi
@@ -16,8 +17,11 @@ import timber.log.Timber
 @InstallIn(SingletonComponent::class)
 internal class GalleryModule {
   @Provides
-  fun api(buildConfig: IBuildConfig): GalleryApi = buildRetrofit(
-    client = buildOkHttp(buildConfig.debug) { Timber.tag("GALLERY").v(it) },
+  fun api(
+    buildConfig: IBuildConfig,
+    interceptor: ApiUsageInterceptor,
+  ): GalleryApi = buildRetrofit(
+    client = buildOkHttp(buildConfig.debug, interceptor) { Timber.tag("GALLERY").v(it) },
     json = GalleryJson,
     url = GALLERY_API_URL,
   ).create()

@@ -12,4 +12,8 @@ value class ApiKey(private val value: String) {
   fun interface Provider {
     fun observe(): Flow<ApiKey?>
   }
+
+  companion object {
+    val DEMO = ApiKey(value = "DEMO_KEY")
+  }
 }
