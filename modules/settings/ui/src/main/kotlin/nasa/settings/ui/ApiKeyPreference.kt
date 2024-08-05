@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -151,6 +152,7 @@ private fun ApiKeyPreferenceDialogContent(
   preferences: SharedPreferences = rememberSharedPreferences(),
 ) {
   var mutableValue by remember { mutableStateOf(currentValue.orEmpty()) }
+  val keyboard = LocalSoftwareKeyboardController.current
 
   DialogContent(
     modifier = modifier,
@@ -158,7 +160,7 @@ private fun ApiKeyPreferenceDialogContent(
     title = title,
     content = {
       NasaTextField(
-        modifier = Modifier.focusRequester(keyboardFocusRequester()),
+        modifier = Modifier.focusRequester(keyboardFocusRequester(keyboard)),
         value = mutableValue,
         onValueChange = { mutableValue = it },
         placeholderText = stringResource(id = R.string.settings_key_hint),
@@ -173,6 +175,7 @@ private fun ApiKeyPreferenceDialogContent(
         keyboardActions = KeyboardActions(
           onDone = {
             preferences.edit { putString(key, mutableValue) }
+            keyboard?.hide()
             onDismiss()
           },
         ),

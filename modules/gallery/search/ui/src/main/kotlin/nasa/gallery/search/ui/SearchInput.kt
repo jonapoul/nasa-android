@@ -5,6 +5,8 @@ import alakazam.kotlin.core.fastIsBlank
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Tune
@@ -16,7 +18,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nasa.core.ui.button.PrimaryIconButton
@@ -42,10 +46,12 @@ internal fun SearchInput(
       .padding(8.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {
+    val keyboard = LocalSoftwareKeyboardController.current
+
     NasaTextField(
       modifier = Modifier
         .weight(1f)
-        .focusRequester(keyboardFocusRequester()),
+        .focusRequester(keyboardFocusRequester(keyboard)),
       value = text,
       onValueChange = {
         text = it
@@ -53,6 +59,13 @@ internal fun SearchInput(
       },
       placeholderText = stringResource(id = R.string.search_input_hint),
       theme = theme,
+      keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+      keyboardActions = KeyboardActions(
+        onSearch = {
+          onAction(SearchAction.PerformSearch)
+          keyboard?.hide()
+        },
+      ),
     )
 
     HorizontalSpacer(8.dp)
@@ -60,7 +73,10 @@ internal fun SearchInput(
     PrimaryIconButton(
       imageVector = Icons.Filled.Search,
       contentDescription = stringResource(id = R.string.search_input_submit),
-      onClick = { onAction(SearchAction.PerformSearch) },
+      onClick = {
+        onAction(SearchAction.PerformSearch)
+        keyboard?.hide()
+      },
       enabled = !text.fastIsBlank(),
       theme = theme,
     )
@@ -70,7 +86,10 @@ internal fun SearchInput(
     RegularIconButton(
       imageVector = Icons.Filled.Tune,
       contentDescription = stringResource(id = R.string.search_input_settings),
-      onClick = { onAction(SearchAction.ConfigureSearch) },
+      onClick = {
+        onAction(SearchAction.ConfigureSearch)
+        keyboard?.hide()
+      },
       enabled = true,
       theme = theme,
     )

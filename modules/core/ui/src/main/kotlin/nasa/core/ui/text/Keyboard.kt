@@ -5,6 +5,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import kotlinx.coroutines.delay
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
@@ -14,9 +15,11 @@ import kotlin.time.Duration.Companion.milliseconds
  * pass this into the [androidx.compose.ui.focus.focusRequester] modifier on the TextField in question.
  */
 @Composable
-fun keyboardFocusRequester(keyboardDelay: Duration = KEYBOARD_SHOW_DELAY): FocusRequester {
+fun keyboardFocusRequester(
+  keyboard: SoftwareKeyboardController? = LocalSoftwareKeyboardController.current,
+  keyboardDelay: Duration = KEYBOARD_SHOW_DELAY,
+): FocusRequester {
   val focusRequester = remember { FocusRequester() }
-  val keyboard = LocalSoftwareKeyboardController.current
 
   LaunchedEffect(focusRequester) {
     focusRequester.requestFocus()
