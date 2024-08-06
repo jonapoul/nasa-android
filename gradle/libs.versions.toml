@@ -35,7 +35,7 @@ androidx-lifecycle = "2.8.4"
 androidx-preference = "1.2.1"
 androidx-room = "2.7.0-alpha05"
 androidx-splash = "1.0.1"
-androidx-sqlite = "2.4.0"
+androidx-sqlite = "2.5.0-alpha05"
 coil = "2.7.0"
 javaxInject = "1"
 kotlinx-coroutines = "1.9.0-RC"
@@ -55,6 +55,7 @@ voyager = "1.1.0-beta02"
 test-androidx-arch = "2.2.0"
 test-androidx-coreKtx = "1.6.1"
 test-androidx-junit = "1.2.1"
+test-androidx-monitor = "1.7.1"
 test-androidx-rules = "1.6.1"
 test-androidx-runner = "1.6.1"
 test-junit = "4.13.2"
@@ -122,10 +123,10 @@ androidx-lifecycle-viewmodel-savedstate = { module = "androidx.lifecycle:lifecyc
 androidx-preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidx-preference" }
 androidx-room-common = { module = "androidx.room:room-common", version.ref = "androidx-room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
-androidx-sqlite = { module = "androidx.sqlite:sqlite", version.ref = "androidx-sqlite" }
+androidx-sqlite-core = { module = "androidx.sqlite:sqlite", version.ref = "androidx-sqlite" }
+androidx-sqlite-framework = { module = "androidx.sqlite:sqlite-framework", version.ref = "androidx-sqlite" }
 coil-base = { module = "io.coil-kt:coil-base", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-composeBase = { module = "io.coil-kt:coil-compose-base", version.ref = "coil" }
@@ -161,6 +162,7 @@ test-alakazam-db = { module = "dev.jonpoulton.alakazam:testing-db", version.ref 
 test-androidx-arch = { module = "androidx.arch.core:core-testing", version.ref = "test-androidx-arch" }
 test-androidx-coreKtx = { module = "androidx.test:core-ktx", version.ref = "test-androidx-coreKtx" }
 test-androidx-junit = { module = "androidx.test.ext:junit", version.ref = "test-androidx-junit" }
+test-androidx-monitor = { module = "androidx.test:monitor", version.ref = "test-androidx-monitor" }
 test-androidx-room = { module = "androidx.room:room-testing", version.ref = "androidx-room" }
 test-androidx-rules = { module = "androidx.test:rules", version.ref = "test-androidx-rules" }
 test-androidx-runner = { module = "androidx.test:runner", version.ref = "test-androidx-runner" }

@@ -30,9 +30,11 @@ dependencies {
   api(projects.modules.db.gallery)
 
   implementation(libs.androidx.room.common)
-  implementation(libs.androidx.sqlite)
+  implementation(libs.androidx.sqlite.core)
   implementation(libs.kotlinx.datetime)
 
+  testImplementation(libs.androidx.sqlite.framework)
   testImplementation(libs.test.alakazam.db)
+  testImplementation(libs.test.androidx.monitor)
   testImplementation(libs.test.androidx.room)
 }

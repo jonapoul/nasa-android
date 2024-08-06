@@ -12,6 +12,7 @@ dependencies {
   api(projects.modules.apod.single.nav)
 
   implementation(libs.alakazam.android.compose)
+  implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.activity.core)
   implementation(libs.androidx.compose.animation.core)
   implementation(libs.androidx.compose.foundation.core)
@@ -27,6 +28,7 @@ dependencies {
   implementation(libs.androidx.compose.ui.unit)
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
   implementation(projects.modules.about.nav)
