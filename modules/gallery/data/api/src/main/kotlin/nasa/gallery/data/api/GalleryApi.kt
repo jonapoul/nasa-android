@@ -1,5 +1,6 @@
 package nasa.gallery.data.api
 
+import nasa.gallery.model.Album
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.NasaId
@@ -97,4 +98,13 @@ interface GalleryApi {
   suspend fun getMetadata(
     @Url url: String,
   ): Response<MetadataCollection>
+
+  @GET("album/{name}")
+  suspend fun getAlbumContents(
+    // The media album’s name (case-sensitive)
+    @Path("name") album: Album,
+
+    // Page number, starting at 1, of results to get
+    @Query("page") page: Int? = null,
+  ): Response<SearchResponse>
 }

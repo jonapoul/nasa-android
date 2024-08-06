@@ -1,0 +1,48 @@
+{
+  "collection": {
+    "version": "1.0",
+    "href": "http://images-api.nasa.gov/album/NICER",
+    "items": [
+      {
+        "href": "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/collection.json",
+        "data": [
+          {
+            "album": [
+              "NICER",
+              "ISS_Research_Videos"
+            ],
+            "description": "Foobar",
+            "title": "NICER Charts the Area Around a New Black Hole",
+            "location": "Goddard Space Flight Center",
+            "nasa_id": "GSFC_20190130_NICER_m12854_BlkHole",
+            "media_type": "video",
+            "keywords": [
+              "Neutron Star",
+              "Black Hole",
+              "X-Ray",
+              "Astrophysics"
+            ],
+            "date_created": "2019-01-30T00:00:00Z",
+            "description_508": "Watch how X-ray echoes, mapped by NASA’s Neutron star Interior Composition Explorer (NICER) revealed changes to the corona of black hole MAXI J1820+070.",
+            "secondary_creator": "Scott Wiessinger",
+            "center": "GSFC"
+          }
+        ],
+        "links": [
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/GSFC_20190130_NICER_m12854_BlkHole~thumb.jpg",
+            "rel": "preview",
+            "render": "image"
+          },
+          {
+            "href": "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/GSFC_20190130_NICER_m12854_BlkHole.srt",
+            "rel": "captions"
+          }
+        ]
+      }
+    ],
+    "metadata": {
+      "total_hits": 1
+    }
+  }
+}

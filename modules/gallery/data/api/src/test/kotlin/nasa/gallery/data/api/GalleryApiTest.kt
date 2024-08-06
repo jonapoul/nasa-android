@@ -6,6 +6,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableMap
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
+import nasa.gallery.model.Album
 import nasa.gallery.model.BooleanMetadata
 import nasa.gallery.model.Center
 import nasa.gallery.model.DoubleMetadata
@@ -419,6 +420,91 @@ class GalleryApiTest {
         ),
       )
     }
+  }
+
+  @Test
+  fun `Get album contents`() = runTest {
+    // Given
+    val json = readJson(filename = "albums-success.json")
+    webServerRule.enqueue(json)
+
+    // When
+    val response = galleryApi.getAlbumContents(album = Album("NICER"))
+
+    // Then
+    assertTrue(response.isSuccessful)
+    val body = response.body() ?: fail("Null body for $response")
+    assertEquals(
+      actual = body,
+      expected = SearchResponse.Success(
+        collection = SearchCollection(
+          version = "1.0",
+          url = "http://images-api.nasa.gov/album/NICER",
+          metadata = SearchMetadata(totalHits = 1),
+          links = null,
+          items = listOf(
+            SearchItem(
+              collectionUrl = JsonUrl(
+                "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/collection.json",
+              ),
+              links = listOf(
+                SearchItemLink(
+                  url = ImageUrl(
+                    "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
+                      "GSFC_20190130_NICER_m12854_BlkHole~thumb.jpg",
+                  ),
+                  rel = SearchItemLink.Relation.Preview,
+                  render = "image",
+                ),
+                SearchItemLink(
+                  url = ImageUrl(
+                    "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
+                      "GSFC_20190130_NICER_m12854_BlkHole.srt",
+                  ),
+                  rel = SearchItemLink.Relation.Captions,
+                ),
+              ),
+              data = listOf(
+                SearchItemData(
+                  album = listOf(
+                    Album("NICER"),
+                    Album("ISS_Research_Videos"),
+                  ),
+                  center = Center(value = "GSFC"),
+                  title = "NICER Charts the Area Around a New Black Hole",
+                  keywords = Keywords("Neutron Star", "Black Hole", "X-Ray", "Astrophysics"),
+                  location = "Goddard Space Flight Center",
+                  photographer = null,
+                  nasaId = NasaId("GSFC_20190130_NICER_m12854_BlkHole"),
+                  dateCreated = Instant.parse("2019-01-30T00:00:00Z"),
+                  mediaType = MediaType.Video,
+                  secondaryCreator = "Scott Wiessinger",
+                  description = "Foobar",
+                  description508 = "Watch how X-ray echoes, mapped by NASA’s Neutron star Interior Composition " +
+                    "Explorer (NICER) revealed changes to the corona of black hole MAXI J1820+070.",
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    )
+  }
+
+  @Test
+  fun `Get albums failure`() = runTest {
+    // Given
+    val json = readJson(filename = "albums-failure.json")
+    webServerRule.enqueue(json)
+
+    // When we search with no parameters
+    val response = galleryApi.search()
+
+    // Then
+    assertEquals(
+      actual = response.body(),
+      expected = SearchResponse.Failure(reason = "No assets found for album=\"NICERs\" page=1"),
+    )
   }
 
   private inline fun <reified T, reified M> MetadataCollection.assertElement(
