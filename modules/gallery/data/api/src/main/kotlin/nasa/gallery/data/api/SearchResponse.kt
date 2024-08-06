@@ -6,6 +6,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
+import nasa.gallery.model.Album
 import nasa.gallery.model.Center
 import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
@@ -45,7 +46,7 @@ data class SearchItem(
 
 @Serializable
 data class SearchItemData(
-  @SerialName("album") val album: List<String>?,
+  @SerialName("album") val album: List<Album>?,
   @SerialName("center") val center: Center,
   @SerialName("title") val title: String,
   @SerialName("keywords") val keywords: Keywords?,

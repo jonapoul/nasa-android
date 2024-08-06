@@ -13,13 +13,15 @@ import androidx.room.TypeConverters
   exportSchema = true,
   entities = [
     RoomApodEntity::class,
+    RoomAlbumEntity::class,
     RoomCenterEntity::class,
     RoomGalleryEntity::class,
     RoomKeywordEntity::class,
     RoomPhotographerEntity::class,
   ],
   autoMigrations = [
-    AutoMigration(from = 1, to = 2), // added keyword and photographer tables
+    AutoMigration(from = 1, to = 2), // added keyword, photographer and center tables
+    AutoMigration(from = 2, to = 3), // added album table
   ],
 )
 @TypeConverters(
@@ -31,9 +33,10 @@ abstract class RoomNasaDatabase : RoomDatabase() {
   abstract fun galleryDao(): RoomGalleryDao
   abstract fun keywordDao(): RoomKeywordDao
   abstract fun photographerDao(): RoomPhotographerDao
+  abstract fun albumDao(): RoomAlbumDao
 
   companion object {
-    const val VERSION = 2
+    const val VERSION = 3
 
     private const val FILENAME = "nasa.db"
 

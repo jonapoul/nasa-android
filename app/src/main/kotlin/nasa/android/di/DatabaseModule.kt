@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import nasa.db.DefaultApodEntityFactory
 import nasa.db.NasaDatabase
 import nasa.db.NasaDatabaseDelegate
+import nasa.db.RoomAlbumDaoWrapper
 import nasa.db.RoomApodDaoWrapper
 import nasa.db.RoomCenterDaoWrapper
 import nasa.db.RoomGalleryDaoWrapper
@@ -17,6 +18,7 @@ import nasa.db.RoomNasaDatabase
 import nasa.db.RoomPhotographerDaoWrapper
 import nasa.db.apod.ApodDao
 import nasa.db.apod.ApodEntity
+import nasa.db.gallery.AlbumDao
 import nasa.db.gallery.CenterDao
 import nasa.db.gallery.GalleryDao
 import nasa.db.gallery.KeywordDao
@@ -53,6 +55,10 @@ internal class DatabaseModule {
   @Provides
   @Singleton
   fun photographer(db: RoomNasaDatabase): PhotographerDao = RoomPhotographerDaoWrapper(db.photographerDao())
+
+  @Provides
+  @Singleton
+  fun album(db: RoomNasaDatabase): AlbumDao = RoomAlbumDaoWrapper(db.albumDao())
 
   @Provides
   @Singleton

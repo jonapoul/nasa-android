@@ -7,7 +7,6 @@ data class FilterConfig(
   val query: String? = null,
   val center: String? = null,
   val description: String? = null,
-  val description508: String? = null,
   val keywords: Keywords? = null,
   val location: String? = null,
   val mediaTypes: MediaTypes? = null,

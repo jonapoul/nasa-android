@@ -2,6 +2,7 @@ package nasa.gallery.data.repo
 
 import alakazam.kotlin.core.IODispatcher
 import kotlinx.coroutines.withContext
+import nasa.db.gallery.AlbumDao
 import nasa.db.gallery.CenterDao
 import nasa.db.gallery.KeywordDao
 import nasa.db.gallery.PhotographerDao
@@ -9,6 +10,7 @@ import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.SearchCollection
 import nasa.gallery.data.api.SearchLink
 import nasa.gallery.data.api.SearchResponse
+import nasa.gallery.model.Album
 import nasa.gallery.model.Center
 import nasa.gallery.model.FilterConfig
 import nasa.gallery.model.Keyword
@@ -24,6 +26,7 @@ class GallerySearchRepository @Inject internal constructor(
   private val centerDao: CenterDao,
   private val keywordDao: KeywordDao,
   private val photographerDao: PhotographerDao,
+  private val albumDao: AlbumDao,
 ) {
   suspend fun search(config: FilterConfig, pageNumber: Int?): SearchResult {
     Timber.v("search %s", config)
@@ -43,7 +46,7 @@ class GallerySearchRepository @Inject internal constructor(
     query = config.query,
     center = config.center,
     description = config.description,
-    description508 = config.description508,
+    description508 = null,
     keywords = config.keywords,
     location = config.location,
     mediaTypes = config.mediaTypes,
@@ -79,17 +82,24 @@ class GallerySearchRepository @Inject internal constructor(
     val centers = hashSetOf<Center>()
     val keywords = hashSetOf<Keyword>()
     val photographers = hashSetOf<Photographer>()
+    val albums = hashSetOf<Album>()
     for (item in collection.items) {
       for (data in item.data) {
         centers.add(data.center)
         data.keywords?.let(keywords::addAll)
         data.photographer?.let(photographers::add)
+        data.album?.let(albums::addAll)
       }
     }
-    centerDao.insertAll(centers.toList())
-    keywordDao.insertAll(keywords.toList())
-    photographerDao.insertAll(photographers.toList())
-    Timber.v("saveMetadata %s %s %s", centers, keywords, photographers)
+    centers.ifIsNotEmpty(centerDao::insertAll)
+    keywords.ifIsNotEmpty(keywordDao::insertAll)
+    photographers.ifIsNotEmpty(photographerDao::insertAll)
+    albums.ifIsNotEmpty(albumDao::insertAll)
+    Timber.v("saveMetadata %s %s %s %s", centers, keywords, photographers, albums)
+  }
+
+  private suspend fun <T> Set<T>.ifIsNotEmpty(function: suspend (List<T>) -> Unit) {
+    if (isNotEmpty()) function(toList())
   }
 
   private fun SearchCollection.pageNumberWithRelation(relation: SearchLink.Relation) =
