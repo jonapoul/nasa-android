@@ -25,7 +25,7 @@ interface RoomPhotographerDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend fun insertAll(entities: List<RoomPhotographerEntity>)
 
-  @Query("SELECT * FROM photographer ORDER BY photographer DESC")
+  @Query("SELECT * FROM photographer ORDER BY photographer ASC")
   suspend fun getAll(): List<RoomPhotographerEntity>
 
   @Query("DELETE FROM photographer")

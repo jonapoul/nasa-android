@@ -25,7 +25,7 @@ interface RoomCenterDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend fun insertAll(entities: List<RoomCenterEntity>)
 
-  @Query("SELECT * FROM center ORDER BY center DESC")
+  @Query("SELECT * FROM center ORDER BY center ASC")
   suspend fun getAll(): List<RoomCenterEntity>
 
   @Query("DELETE FROM center")

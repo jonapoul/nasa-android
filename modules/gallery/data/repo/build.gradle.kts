@@ -25,5 +25,7 @@ dependencies {
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)
   testImplementation(libs.test.okhttp)
+  testImplementation(projects.modules.db.impl)
   testImplementation(projects.modules.test.http)
+  testImplementation(projects.modules.test.prefs)
 }

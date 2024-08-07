@@ -25,7 +25,7 @@ interface RoomAlbumDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insertAll(items: List<RoomAlbumEntity>)
 
-  @Query("SELECT * FROM album ORDER BY album DESC")
+  @Query("SELECT * FROM album ORDER BY album ASC")
   suspend fun getAll(): List<RoomAlbumEntity>
 
   @Query("DELETE FROM album")

@@ -25,7 +25,7 @@ interface RoomKeywordDao {
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend fun insertAll(entities: List<RoomKeywordEntity>)
 
-  @Query("SELECT * FROM keyword ORDER BY keyword DESC")
+  @Query("SELECT * FROM keyword ORDER BY keyword ASC")
   suspend fun getAll(): List<RoomKeywordEntity>
 
   @Query("DELETE FROM keyword")
