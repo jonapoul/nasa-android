@@ -29,7 +29,9 @@ import nasa.test.getResourceAsText
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.net.HttpURLConnection.HTTP_BAD_REQUEST
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertTrue
 import kotlin.test.fail
@@ -158,14 +160,17 @@ class GalleryApiTest {
   fun `Deserialize search response failure`() = runTest {
     // Given
     val json = readJson(filename = "search-failure.json")
-    webServerRule.enqueue(json)
+    webServerRule.enqueueError(json, code = HTTP_BAD_REQUEST)
 
     // When we search with no parameters
     val response = galleryApi.search()
 
     // Then
+    assertFalse(response.isSuccessful)
+    val errorBody = requireNotNull(response.errorBody())
+    val error = GalleryJson.decodeFromString(SearchResponse.Failure.serializer(), errorBody.string())
     assertEquals(
-      actual = response.body(),
+      actual = error,
       expected = SearchResponse.Failure(reason = "Expected 'q' text search parameter or other keywords."),
     )
   }
@@ -495,14 +500,17 @@ class GalleryApiTest {
   fun `Get albums failure`() = runTest {
     // Given
     val json = readJson(filename = "albums-failure.json")
-    webServerRule.enqueue(json)
+    webServerRule.enqueueError(json)
 
     // When we search with no parameters
     val response = galleryApi.search()
 
     // Then
+    assertFalse(response.isSuccessful)
+    val errorBody = requireNotNull(response.errorBody())
+    val error = GalleryJson.decodeFromString<SearchResponse.Failure>(errorBody.string())
     assertEquals(
-      actual = response.body(),
+      actual = error,
       expected = SearchResponse.Failure(reason = "No assets found for album=\"NICERs\" page=1"),
     )
   }

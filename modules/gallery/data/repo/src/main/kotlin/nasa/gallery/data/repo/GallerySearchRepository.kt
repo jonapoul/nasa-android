@@ -7,6 +7,7 @@ import nasa.db.gallery.CenterDao
 import nasa.db.gallery.KeywordDao
 import nasa.db.gallery.PhotographerDao
 import nasa.gallery.data.api.GalleryApi
+import nasa.gallery.data.api.GalleryJson
 import nasa.gallery.data.api.SearchCollection
 import nasa.gallery.data.api.SearchLink
 import nasa.gallery.data.api.SearchResponse
@@ -34,10 +35,19 @@ class GallerySearchRepository @Inject internal constructor(
 
     val pageSize = searchPreferences.pageSize.get()
     val response = withContext(io) { performSearch(config, pageSize, pageNumber) }
+
+    val searchResponse = if (response.isSuccessful) {
+      response.body()
+    } else {
+      response.errorBody()?.let {
+        GalleryJson.decodeFromString(SearchResponse.Failure.serializer(), it.string())
+      }
+    }
+
     Timber.v("response = %s", response)
-    return when (val body = response.body()) {
-      is SearchResponse.Failure -> SearchResult.Failure(body.reason, config)
-      is SearchResponse.Success -> handleSuccess(pageNumber, pageSize, body.collection)
+    return when (searchResponse) {
+      is SearchResponse.Failure -> SearchResult.Failure(searchResponse.reason, config)
+      is SearchResponse.Success -> handleSuccess(pageNumber, pageSize, searchResponse.collection)
       null -> SearchResult.Failure(reason = "Null body", config)
     }
   }
