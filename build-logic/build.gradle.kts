@@ -42,3 +42,29 @@ dependencies {
   // https://stackoverflow.com/a/70878181/15634757
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
+
+gradlePlugin {
+  plugins {
+    create(id = "nasa.convention.android.base", impl = "nasa.gradle.ConventionAndroidBase")
+    create(id = "nasa.convention.android.library", impl = "nasa.gradle.ConventionAndroidLibrary")
+    create(id = "nasa.convention.compose", impl = "nasa.gradle.ConventionCompose")
+    create(id = "nasa.convention.detekt", impl = "nasa.gradle.ConventionDetekt")
+    create(id = "nasa.convention.hilt", impl = "nasa.gradle.ConventionHilt")
+    create(id = "nasa.convention.kotlin", impl = "nasa.gradle.ConventionKotlin")
+    create(id = "nasa.convention.ktlint", impl = "nasa.gradle.ConventionKtlint")
+    create(id = "nasa.convention.licensee", impl = "nasa.gradle.ConventionLicensee")
+    create(id = "nasa.convention.spotless", impl = "nasa.gradle.ConventionSpotless")
+    create(id = "nasa.convention.style", impl = "nasa.gradle.ConventionStyle")
+    create(id = "nasa.convention.test", impl = "nasa.gradle.ConventionTest")
+    create(id = "nasa.module.android", impl = "nasa.gradle.ModuleAndroid")
+    create(id = "nasa.module.compose", impl = "nasa.gradle.ModuleCompose")
+    create(id = "nasa.module.kotlin", impl = "nasa.gradle.ModuleKotlin")
+    create(id = "nasa.module.resources", impl = "nasa.gradle.ModuleResources")
+    create(id = "nasa.module.viewmodel", impl = "nasa.gradle.ModuleViewModel")
+  }
+}
+
+fun NamedDomainObjectContainer<PluginDeclaration>.create(id: String, impl: String) = create(id) {
+  this.id = id
+  implementationClass = impl
+}

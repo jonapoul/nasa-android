@@ -1,3 +1,3 @@
 plugins {
-  id("module-kotlin")
+  id("nasa.module.kotlin")
 }

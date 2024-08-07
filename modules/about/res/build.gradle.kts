@@ -1,5 +1,5 @@
 plugins {
-  id("module-resources")
+  id("nasa.module.resources")
 }
 
 android {

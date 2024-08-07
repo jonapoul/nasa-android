@@ -1,5 +1,5 @@
 plugins {
-  id("module-viewmodel")
+  id("nasa.module.viewmodel")
 }
 
 android {

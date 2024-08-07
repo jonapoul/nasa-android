@@ -1,5 +1,5 @@
 plugins {
-  id("module-android")
+  id("nasa.module.android")
   alias(libs.plugins.ksp)
   alias(libs.plugins.androidx.room)
 }

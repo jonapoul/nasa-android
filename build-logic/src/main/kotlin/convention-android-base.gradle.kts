@@ -1,5 +1,0 @@
-import blueprint.recipes.androidBaseBlueprint
-import blueprint.recipes.androidDesugaringBlueprint
-
-androidBaseBlueprint()
-androidDesugaringBlueprint(libs.versions.android.desugaring)

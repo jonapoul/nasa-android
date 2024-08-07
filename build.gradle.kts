@@ -26,7 +26,7 @@ plugins {
   alias(libs.plugins.dependencyVersions)
   alias(libs.plugins.doctor)
 
-  id("convention-test")
+  id("nasa.convention.test")
 }
 
 // Place all local properties in the project-level gradle properties map

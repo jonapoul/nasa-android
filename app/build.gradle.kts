@@ -13,12 +13,12 @@ plugins {
   alias(libs.plugins.agp.app)
   alias(libs.plugins.hilt)
   alias(libs.plugins.licenses)
-  id("convention-kotlin")
-  id("convention-android-base")
-  id("convention-compose")
-  id("convention-hilt")
-  id("convention-style")
-  id("convention-test")
+  id("nasa.convention.kotlin")
+  id("nasa.convention.android.base")
+  id("nasa.convention.compose")
+  id("nasa.convention.hilt")
+  id("nasa.convention.style")
+  id("nasa.convention.test")
   alias(libs.plugins.blueprint.diagrams)
   alias(libs.plugins.dependencyGuard)
   alias(libs.plugins.dependencySort)
@@ -44,11 +44,11 @@ diagramsBlueprint {
   moduleTypeFinder = ModuleType.Finder { project ->
     when {
       project.plugins.hasPlugin("com.android.application") -> NasaModuleType.AndroidApp
-      project.plugins.hasPlugin("module-viewmodel") -> NasaModuleType.AndroidViewModel
-      project.plugins.hasPlugin("module-compose") -> NasaModuleType.AndroidCompose
-      project.plugins.hasPlugin("module-android") -> NasaModuleType.AndroidLibrary
-      project.plugins.hasPlugin("module-resources") -> NasaModuleType.AndroidResources
-      project.plugins.hasPlugin("module-kotlin") -> NasaModuleType.Kotlin
+      project.plugins.hasPlugin("nasa.module.viewmodel") -> NasaModuleType.AndroidViewModel
+      project.plugins.hasPlugin("nasa.module.compose") -> NasaModuleType.AndroidCompose
+      project.plugins.hasPlugin("nasa.module.android") -> NasaModuleType.AndroidLibrary
+      project.plugins.hasPlugin("nasa.module.resources") -> NasaModuleType.AndroidResources
+      project.plugins.hasPlugin("nasa.module.kotlin") -> NasaModuleType.Kotlin
       else -> error("Unknown module type for ${project.path}")
     }
   }
