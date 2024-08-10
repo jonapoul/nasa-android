@@ -1,13 +1,11 @@
 package nasa.gallery.search.ui
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -23,19 +21,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import my.nanihadesuka.compose.LazyColumnScrollbar
-import nasa.core.ui.CardShape
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.scrollbarSettings
-import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.gallery.res.R
-import nasa.gallery.search.vm.SearchResultItem
 import nasa.gallery.search.vm.SearchState
 
 @Composable
@@ -54,7 +48,7 @@ internal fun SearchSuccess(
   Column(
     modifier = modifier
       .fillMaxSize()
-      .padding(8.dp),
+      .padding(horizontal = PADDING),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
@@ -88,7 +82,9 @@ internal fun SearchSuccess(
     }
 
     Row(
-      modifier = Modifier.fillMaxWidth(),
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(PADDING),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       val previousPage = state.prevPageNumber
@@ -117,35 +113,7 @@ internal fun SearchSuccess(
   }
 }
 
-@Composable
-private fun SearchSuccessItem(
-  item: SearchResultItem,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-) {
-  Row(
-    modifier = modifier
-      .fillMaxWidth()
-      .wrapContentHeight()
-      .padding(4.dp)
-      .background(theme.cardBackground, CardShape)
-      .padding(8.dp),
-    horizontalArrangement = Arrangement.Start,
-    verticalAlignment = Alignment.CenterVertically,
-  ) {
-    Text(
-      text = item.nasaId.toString(),
-    )
-  }
-}
-
-@Preview
-@Composable
-private fun PreviewItem() = PreviewColumn {
-  SearchSuccessItem(
-    item = EXAMPLE_ITEM_1,
-  )
-}
+private val PADDING = 4.dp
 
 @ScreenPreview
 @Composable

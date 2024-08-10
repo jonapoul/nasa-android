@@ -2,6 +2,10 @@
   <string name="search_toolbar_back">Back</string>
   <string name="search_toolbar_title">Gallery Search</string>
 
+  <string name="media_type_audio">Audio</string>
+  <string name="media_type_image">Image</string>
+  <string name="media_type_video">Video</string>
+
   <string name="search_input_hint">Enter search keywords</string>
   <string name="search_input_submit">Search</string>
   <string name="search_input_settings">More search options</string>
@@ -20,4 +24,12 @@
   <string name="search_page_next">Next page</string>
 
   <string name="search_label_center">NASA Center</string>
+
+  <string name="search_item_center">Center:</string>
+  <string name="search_item_keywords">Keywords:</string>
+  <string name="search_item_location">Location:</string>
+  <string name="search_item_photographer">Photographer:</string>
+  <string name="search_item_date">Date:</string>
+  <string name="search_item_type">Type:</string>
+  <string name="search_item_description">Description:</string>
 </resources>

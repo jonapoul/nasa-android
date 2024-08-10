@@ -4,6 +4,7 @@ import alakazam.kotlin.core.MainDispatcher
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nasa.gallery.data.api.SearchItem
+import nasa.gallery.data.api.SearchItemLink
 import nasa.gallery.data.repo.GallerySearchRepository
 import nasa.gallery.data.repo.SearchResult
 import nasa.gallery.model.FilterConfig
@@ -41,7 +43,6 @@ class SearchViewModel @Inject internal constructor(
     viewModelScope.launch(main) {
       val searchResult = repository.search(config, pageNumber)
       val searchState = searchResult.toState()
-      Timber.v("result=%s, state=%s", searchResult, searchState)
       mutableSearchState.update { searchState }
     }
   }
@@ -72,7 +73,30 @@ class SearchViewModel @Inject internal constructor(
   }
 
   private fun SearchItem.toSearchResultItem(): SearchResultItem {
-    val nasaId = data.firstOrNull()?.nasaId ?: error("No data in $this")
-    return SearchResultItem(nasaId = nasaId)
+    val item = when (data.size) {
+      0 -> error("No data in $this")
+      1 -> data.first()
+      else -> {
+        Timber.w("More than one data, grabbing first")
+        data.first()
+      }
+    }
+    return SearchResultItem(
+      nasaId = item.nasaId,
+      collectionUrl = collectionUrl,
+      previewUrl = links?.firstOrNull { it.rel == SearchItemLink.Relation.Preview }?.url,
+      captionsUrl = links?.firstOrNull { it.rel == SearchItemLink.Relation.Captions }?.url,
+      albums = item.album?.toImmutableList()?.ifEmpty { null },
+      center = item.center,
+      title = item.title,
+      keywords = item.keywords,
+      location = item.location,
+      photographer = item.photographer,
+      dateCreated = item.dateCreated,
+      mediaType = item.mediaType,
+      secondaryCreator = item.secondaryCreator,
+      description = item.description,
+      description508 = item.description508,
+    )
   }
 }

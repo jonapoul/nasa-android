@@ -16,7 +16,7 @@ import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.longOrNull
 
-sealed interface Metadata<T> {
+sealed interface Metadata<out T> {
   val key: String
   val value: T
 }

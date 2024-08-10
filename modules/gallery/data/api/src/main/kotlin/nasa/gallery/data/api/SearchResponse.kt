@@ -56,7 +56,7 @@ data class SearchItemData(
   @SerialName("date_created") val dateCreated: Instant,
   @SerialName("media_type") val mediaType: MediaType,
   @SerialName("secondary_creator") val secondaryCreator: String?,
-  @SerialName("description") val description: String,
+  @SerialName("description") val description: String?,
   @SerialName("description_508") val description508: String?,
 )
 
