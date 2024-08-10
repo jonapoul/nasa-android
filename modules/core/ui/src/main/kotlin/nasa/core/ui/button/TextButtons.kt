@@ -46,8 +46,9 @@ fun PrimaryTextButton(
   style: TextStyle = ButtonPrimaryTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.primaryButton(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { t, pressed -> t.primaryButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
+  theme: Theme = LocalTheme.current,
   onClick: () -> Unit,
 ) {
   BasicTextButton(
@@ -62,6 +63,7 @@ fun PrimaryTextButton(
     prefix = prefix,
     onClick = onClick,
     colors = colors,
+    theme = theme,
     content = content,
   )
 }
@@ -78,8 +80,9 @@ fun RegularTextButton(
   style: TextStyle = ButtonRegularTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.regularButton(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { t, pressed -> t.regularButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
+  theme: Theme = LocalTheme.current,
   onClick: () -> Unit,
 ) {
   BasicTextButton(
@@ -94,6 +97,7 @@ fun RegularTextButton(
     prefix = prefix,
     onClick = onClick,
     colors = colors,
+    theme = theme,
     content = content,
   )
 }
@@ -111,7 +115,8 @@ fun PrimaryTextButtonWithLoading(
   style: TextStyle = ButtonPrimaryTextStyle,
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
-  colors: @Composable (Theme, Boolean) -> ButtonColors = { theme, pressed -> theme.primaryButton(pressed) },
+  colors: @Composable (Theme, Boolean) -> ButtonColors = { t, pressed -> t.primaryButton(pressed) },
+  theme: Theme = LocalTheme.current,
   onClick: () -> Unit,
 ) {
   PrimaryTextButton(
@@ -126,6 +131,7 @@ fun PrimaryTextButtonWithLoading(
     prefix = prefix,
     colors = colors,
     onClick = onClick,
+    theme = theme,
     content = {
       // Using opacity here so we don't adjust the size bounds of the containing box
       Box(contentAlignment = Alignment.Center) {
@@ -163,9 +169,9 @@ fun BasicTextButton(
   fontSize: TextUnit = TextUnit.Unspecified,
   prefix: (@Composable () -> Unit)? = null,
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
+  theme: Theme = LocalTheme.current,
   onClick: () -> Unit,
 ) {
-  val theme = LocalTheme.current
   val isPressed by interactionSource.collectIsPressedAsState()
 
   TextButton(
@@ -182,11 +188,11 @@ fun BasicTextButton(
 
 @Stable
 @Composable
-private fun RowScope.DefaultTextButtonContent(
+private fun DefaultTextButtonContent(
   text: String,
   style: TextStyle,
   fontSize: TextUnit,
-  prefix: (@Composable () -> Unit)?,
+  prefix: @Composable (() -> Unit)?,
 ) {
   prefix?.invoke()
 

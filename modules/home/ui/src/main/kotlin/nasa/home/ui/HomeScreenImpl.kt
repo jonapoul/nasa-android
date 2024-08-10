@@ -61,6 +61,7 @@ private fun HomeScreenContent(
     PrimaryTextButton(
       modifier = Modifier.fillMaxWidth(),
       text = stringResource(R.string.home_nav_apod),
+      theme = theme,
       onClick = { onAction(HomeAction.NavApodToday) },
     )
 
@@ -69,6 +70,7 @@ private fun HomeScreenContent(
     PrimaryTextButton(
       modifier = Modifier.fillMaxWidth(),
       text = stringResource(R.string.home_nav_gallery),
+      theme = theme,
       onClick = { onAction(HomeAction.NavGallery) },
     )
   }

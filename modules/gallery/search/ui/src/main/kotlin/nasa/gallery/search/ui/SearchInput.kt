@@ -66,6 +66,7 @@ internal fun SearchInput(
           keyboard?.hide()
         },
       ),
+      clearable = true,
     )
 
     HorizontalSpacer(8.dp)

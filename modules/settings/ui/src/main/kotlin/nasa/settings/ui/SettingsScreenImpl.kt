@@ -119,6 +119,7 @@ private fun SettingsScreenContent(
     PrimaryTextButton(
       modifier = Modifier.wrapContentWidth(),
       text = stringResource(id = R.string.settings_key_button),
+      theme = theme,
       onClick = { onAction(SettingsAction.RegisterForKey) },
     )
 
@@ -142,6 +143,7 @@ private fun SettingsScreenContent(
     PrimaryTextButton(
       modifier = Modifier.wrapContentWidth(),
       text = stringResource(id = R.string.settings_clear_cache_button),
+      theme = theme,
       onClick = { onAction(SettingsAction.ClearCache) },
     )
   }

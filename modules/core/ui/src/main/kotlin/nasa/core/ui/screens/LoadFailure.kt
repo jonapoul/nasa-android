@@ -68,6 +68,7 @@ fun LoadFailure(
     PrimaryTextButton(
       text = stringResource(id = R.string.failed_retry),
       onClick = onRetryLoad,
+      theme = theme,
     )
   }
 }

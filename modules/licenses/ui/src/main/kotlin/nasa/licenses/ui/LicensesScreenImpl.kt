@@ -181,6 +181,7 @@ private fun ErrorContent(
 
     PrimaryTextButton(
       text = stringResource(id = R.string.licenses_failed_retry),
+      theme = theme,
       onClick = { onAction(LicensesAction.Reload) },
     )
   }

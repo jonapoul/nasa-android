@@ -74,6 +74,7 @@ fun NoApiKey(
       PrimaryTextButton(
         text = stringResource(id = R.string.no_key_register),
         onClick = onClickRegister,
+        theme = theme,
       )
 
       HorizontalSpacer(20.dp)
@@ -81,6 +82,7 @@ fun NoApiKey(
       PrimaryTextButton(
         text = stringResource(id = R.string.no_key_settings),
         onClick = onClickSettings,
+        theme = theme,
       )
     }
   }
