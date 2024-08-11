@@ -5,7 +5,7 @@ import androidx.compose.runtime.Immutable
 @Immutable
 data class FilterConfig(
   val query: String? = null,
-  val center: String? = null,
+  val center: Center? = null,
   val description: String? = null,
   val keywords: Keywords? = null,
   val location: String? = null,

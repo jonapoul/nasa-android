@@ -111,7 +111,7 @@ internal object UrlCollectionSerializer : JsonDeserializer<UrlCollection> {
         else -> ImageUrl(url)
       }
     }
-    return UrlCollection(urls)
+    return UrlCollection(urls.toSet())
   }
 }
 

@@ -1,6 +1,7 @@
 package nasa.gallery.data.api
 
 import nasa.gallery.model.Album
+import nasa.gallery.model.Center
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.NasaId
@@ -25,7 +26,7 @@ interface GalleryApi {
     @Query("q") query: String? = null,
 
     // NASA center which published the media.
-    @Query("center") center: String? = null,
+    @Query("center") center: Center? = null,
 
     // Terms to search for in "Description" fields.
     @Query("description") description: String? = null,

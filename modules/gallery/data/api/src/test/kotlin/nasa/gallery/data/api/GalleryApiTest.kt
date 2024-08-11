@@ -350,9 +350,10 @@ class GalleryApiTest {
 
     // Then
     assertTrue(response.isSuccessful)
+    val collection = response.body()
     assertEquals(
+      actual = collection,
       expected = UrlCollection(
-        ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~orig.jpg"),
         ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~orig.jpg"),
         ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~large.jpg"),
         ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~medium.jpg"),
@@ -360,8 +361,8 @@ class GalleryApiTest {
         ImageUrl("http://images-assets.nasa.gov/image/NHQ202401260011/NHQ202401260011~thumb.jpg"),
         JsonUrl("http://images-assets.nasa.gov/image/NHQ202401260011/metadata.json"),
       ),
-      actual = response.body(),
     )
+    assertEquals(expected = 6, actual = collection?.size)
   }
 
   @Test
