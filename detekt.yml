@@ -8,6 +8,7 @@ complexity:
     thresholdInObjects: 20
     thresholdInClasses: 20
     thresholdInInterfaces: 20
+    thresholdInFiles: 20
     ignorePrivate: true
   LongMethod:
     threshold: 100

@@ -77,4 +77,10 @@ internal class LightTheme : Theme {
 
   override val scrollbar = ColorPalette.blue900
   override val scrollbarSelected = ColorPalette.blue400
+
+  override val sliderThumb = ColorPalette.blue500
+  override val sliderActiveTrack = ColorPalette.blue200
+  override val sliderActiveTick = ColorPalette.blue400
+  override val sliderInactiveTrack = ColorPalette.grey200
+  override val sliderInactiveTick = ColorPalette.grey400
 }

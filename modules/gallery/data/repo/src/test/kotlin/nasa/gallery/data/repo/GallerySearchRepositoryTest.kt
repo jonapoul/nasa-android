@@ -14,11 +14,11 @@ import nasa.db.RoomKeywordDaoWrapper
 import nasa.db.RoomNasaDatabase
 import nasa.db.RoomPhotographerDao
 import nasa.db.RoomPhotographerDaoWrapper
+import nasa.gallery.data.api.CollectionItem
+import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.GalleryJson
 import nasa.gallery.data.api.SearchItem
-import nasa.gallery.data.api.SearchItemData
-import nasa.gallery.data.api.SearchItemLink
 import nasa.gallery.model.Center
 import nasa.gallery.model.FilterConfig
 import nasa.gallery.model.ImageUrl
@@ -129,12 +129,12 @@ class GallerySearchRepositoryTest {
       actual = result,
       expected = SearchResult.Success(
         pagedResults = listOf(
-          SearchItem(
+          CollectionItem(
             collectionUrl = COLLECTION_URL,
             data = listOf(SEARCH_ITEM_DATA),
             links = listOf(
-              SearchItemLink(url = IMAGE_URL, rel = SearchItemLink.Relation.Preview, render = "image"),
-              SearchItemLink(url = CAPTIONS_URL, rel = SearchItemLink.Relation.Captions),
+              CollectionItemLink(url = IMAGE_URL, rel = CollectionItemLink.Relation.Preview, render = "image"),
+              CollectionItemLink(url = CAPTIONS_URL, rel = CollectionItemLink.Relation.Captions),
             ),
           ),
         ),
@@ -175,7 +175,7 @@ class GallerySearchRepositoryTest {
         "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
     )
 
-    val SEARCH_ITEM_DATA = SearchItemData(
+    val SEARCH_ITEM_DATA = SearchItem(
       center = Center("JSC"),
       title = "T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A",
       keywords = Keywords.from("Apollo", "Apollo 8", "NASA", "Film", "Film Transfers"),

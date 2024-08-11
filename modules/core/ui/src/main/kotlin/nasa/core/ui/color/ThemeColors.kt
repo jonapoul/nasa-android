@@ -6,6 +6,8 @@ import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.MenuDefaults
 import androidx.compose.material3.MenuItemColors
 import androidx.compose.material3.RadioButtonColors
+import androidx.compose.material3.SliderColors
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarColors
@@ -114,4 +116,14 @@ fun Theme.scrollbarSettings(): ScrollbarSettings = ScrollbarSettings(
   side = ScrollbarLayoutSide.End,
   thumbUnselectedColor = scrollbar,
   thumbSelectedColor = scrollbarSelected,
+)
+
+@Stable
+@Composable
+fun Theme.slider(): SliderColors = SliderDefaults.colors(
+  thumbColor = sliderThumb,
+  activeTrackColor = sliderActiveTrack,
+  activeTickColor = sliderActiveTick,
+  inactiveTrackColor = sliderInactiveTrack,
+  inactiveTickColor = sliderInactiveTick,
 )

@@ -1,6 +1,6 @@
 package nasa.gallery.data.repo
 
-import nasa.gallery.data.api.SearchItem
+import nasa.gallery.data.api.CollectionItem
 import nasa.gallery.model.FilterConfig
 
 sealed interface SearchResult {
@@ -14,7 +14,7 @@ sealed interface SearchResult {
   ) : SearchResult
 
   data class Success(
-    val pagedResults: List<SearchItem>,
+    val pagedResults: List<CollectionItem>,
     val totalResults: Int,
     val maxPerPage: Int,
     val pageNumber: Int,

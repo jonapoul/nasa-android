@@ -82,4 +82,10 @@ sealed interface Theme {
 
   val scrollbar: Color
   val scrollbarSelected: Color
+
+  val sliderThumb: Color
+  val sliderActiveTrack: Color
+  val sliderActiveTick: Color
+  val sliderInactiveTrack: Color
+  val sliderInactiveTick: Color
 }

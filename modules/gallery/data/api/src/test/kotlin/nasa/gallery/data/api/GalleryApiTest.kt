@@ -189,10 +189,10 @@ class GalleryApiTest {
     )
 
     // Then
-    val item1 = SearchItem(
+    val item1 = CollectionItem(
       collectionUrl = JsonUrl("https://images-assets.nasa.gov/image/sts065-05-037/collection.json"),
       data = listOf(
-        SearchItemData(
+        SearchItem(
           center = Center("JSC"),
           title = "STS-65 crew works inside the IML-2 spacelab module aboard Columbia, OV-102",
           keywords = Keywords(
@@ -224,17 +224,17 @@ class GalleryApiTest {
         ),
       ),
       links = listOf(
-        SearchItemLink(
+        CollectionItemLink(
           url = ImageUrl("https://images-assets.nasa.gov/image/sts065-05-037/sts065-05-037~thumb.jpg"),
-          rel = SearchItemLink.Relation.Preview,
+          rel = CollectionItemLink.Relation.Preview,
           render = "image",
         ),
       ),
     )
-    val item2 = SearchItem(
+    val item2 = CollectionItem(
       collectionUrl = JsonUrl("https://images-assets.nasa.gov/image/sts065-214-010/collection.json"),
       data = listOf(
-        SearchItemData(
+        SearchItem(
           center = Center("JSC"),
           title = "STS-65 crew onboard portrait in IML-2 spacelab module with mission flag",
           keywords = Keywords(
@@ -270,9 +270,9 @@ class GalleryApiTest {
         ),
       ),
       links = listOf(
-        SearchItemLink(
+        CollectionItemLink(
           url = ImageUrl("https://images-assets.nasa.gov/image/sts065-214-010/sts065-214-010~thumb.jpg"),
-          rel = SearchItemLink.Relation.Preview,
+          rel = CollectionItemLink.Relation.Preview,
           render = "image",
         ),
       ),
@@ -280,10 +280,10 @@ class GalleryApiTest {
     assertEquals(
       actual = response.body(),
       expected = SearchResponse.Success(
-        collection = SearchCollection(
+        collection = Collection(
           version = "1.0",
           url = "http://images-api.nasa.gov/search?description=Chiaki&keywords=CREWS,SPACELAB",
-          metadata = SearchMetadata(totalHits = 2),
+          metadata = CollectionMetadata(totalHits = 2),
           links = null,
           items = listOf(item1, item2),
         ),
@@ -443,35 +443,35 @@ class GalleryApiTest {
     assertEquals(
       actual = body,
       expected = SearchResponse.Success(
-        collection = SearchCollection(
+        collection = Collection(
           version = "1.0",
           url = "http://images-api.nasa.gov/album/NICER",
-          metadata = SearchMetadata(totalHits = 1),
+          metadata = CollectionMetadata(totalHits = 1),
           links = null,
           items = listOf(
-            SearchItem(
+            CollectionItem(
               collectionUrl = JsonUrl(
                 "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/collection.json",
               ),
               links = listOf(
-                SearchItemLink(
+                CollectionItemLink(
                   url = ImageUrl(
                     "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
                       "GSFC_20190130_NICER_m12854_BlkHole~thumb.jpg",
                   ),
-                  rel = SearchItemLink.Relation.Preview,
+                  rel = CollectionItemLink.Relation.Preview,
                   render = "image",
                 ),
-                SearchItemLink(
+                CollectionItemLink(
                   url = ImageUrl(
                     "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
                       "GSFC_20190130_NICER_m12854_BlkHole.srt",
                   ),
-                  rel = SearchItemLink.Relation.Captions,
+                  rel = CollectionItemLink.Relation.Captions,
                 ),
               ),
               data = listOf(
-                SearchItemData(
+                SearchItem(
                   album = listOf(
                     Album("NICER"),
                     Album("ISS_Research_Videos"),

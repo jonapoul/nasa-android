@@ -67,7 +67,7 @@ internal fun SearchSuccessItem(
       .background(theme.cardBackground, CardShape)
       .padding(8.dp),
     horizontalArrangement = Arrangement.Start,
-    verticalAlignment = Alignment.CenterVertically,
+    verticalAlignment = Alignment.Top,
   ) {
     ItemPreview(
       item = item,
@@ -129,7 +129,7 @@ internal fun SearchSuccessItem(
 
       TitleAndValue(
         title = stringResource(id = R.string.search_item_description),
-        value = item.description508 ?: item.description,
+        value = item.description508,
         theme = theme,
         maxLines = 5,
       )
@@ -184,9 +184,7 @@ private fun ItemPreview(
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  val type = item.mediaType
   val previewUrl = item.previewUrl
-
   if (previewUrl == null) {
     PlaceholderImage(
       item = item,
@@ -249,7 +247,7 @@ private fun MediaType.string() = stringResource(
     MediaType.Audio -> R.string.media_type_audio
     MediaType.Image -> R.string.media_type_image
     MediaType.Video -> R.string.media_type_video
-  }
+  },
 )
 
 @Stable

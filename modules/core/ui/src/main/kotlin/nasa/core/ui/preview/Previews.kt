@@ -64,14 +64,15 @@ annotation class ScreenPreview
 @Composable
 fun PreviewScreen(
   modifier: Modifier = Modifier,
+  previewModifier: Modifier = Modifier
+    .width(MY_PHONE_WIDTH_DP.dp)
+    .height(MY_PHONE_HEIGHT_DP.dp),
   content: @Composable () -> Unit,
 ) {
   Row(modifier = modifier) {
     ThemesToPreview.fastForEach { theme ->
       PreviewWithTheme(
-        modifier = Modifier
-          .width(MY_PHONE_WIDTH_DP.dp)
-          .height(MY_PHONE_HEIGHT_DP.dp),
+        modifier = previewModifier,
         theme = theme,
         content = content,
       )

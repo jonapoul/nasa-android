@@ -1,3 +1,5 @@
+@file:Suppress("UnusedPrivateMember")
+
 package nasa.gallery.search.ui
 
 import androidx.compose.foundation.layout.Column

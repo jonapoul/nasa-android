@@ -19,7 +19,7 @@ import nasa.gallery.model.Photographer
 sealed interface SearchResponse {
   @Serializable
   data class Success(
-    @SerialName("collection") val collection: SearchCollection,
+    @SerialName("collection") val collection: Collection,
   ) : SearchResponse
 
   @Serializable
@@ -29,23 +29,23 @@ sealed interface SearchResponse {
 }
 
 @Serializable
-data class SearchCollection(
+data class Collection(
   @SerialName("version") val version: String,
   @SerialName("href") val url: String,
-  @SerialName("items") val items: List<SearchItem>,
-  @SerialName("metadata") val metadata: SearchMetadata,
-  @SerialName("links") val links: List<SearchLink>?,
+  @SerialName("items") val items: List<CollectionItem>,
+  @SerialName("metadata") val metadata: CollectionMetadata,
+  @SerialName("links") val links: List<CollectionLink>?,
+) : Iterable<CollectionItem> by items
+
+@Serializable
+data class CollectionItem(
+  @SerialName("href") val collectionUrl: JsonUrl,
+  @SerialName("data") val data: List<SearchItem>,
+  @SerialName("links") val links: List<CollectionItemLink>?,
 )
 
 @Serializable
 data class SearchItem(
-  @SerialName("href") val collectionUrl: JsonUrl,
-  @SerialName("data") val data: List<SearchItemData>,
-  @SerialName("links") val links: List<SearchItemLink>?,
-)
-
-@Serializable
-data class SearchItemData(
   @SerialName("album") val album: List<Album>?,
   @SerialName("center") val center: Center,
   @SerialName("title") val title: String,
@@ -61,32 +61,36 @@ data class SearchItemData(
 )
 
 @Serializable
-data class SearchItemLink(
+data class CollectionItemLink(
   @SerialName("href") val url: ImageUrl,
   @SerialName("rel") val rel: Relation,
   @SerialName("render") val render: String? = null,
 ) {
   @Serializable
   enum class Relation {
-    @SerialName("preview") Preview,
-    @SerialName("captions") Captions,
+    @SerialName("preview")
+    Preview,
+    @SerialName("captions")
+    Captions,
   }
 }
 
 @Serializable
-data class SearchMetadata(
+data class CollectionMetadata(
   @SerialName("total_hits") val totalHits: Int,
 )
 
 @Serializable
-data class SearchLink(
+data class CollectionLink(
   @SerialName("rel") val rel: Relation,
   @SerialName("prompt") val prompt: String,
   @SerialName("href") val url: String,
 ) {
   @Serializable
   enum class Relation {
-    @SerialName("next") Next,
-    @SerialName("prev") Previous,
+    @SerialName("next")
+    Next,
+    @SerialName("prev")
+    Previous,
   }
 }

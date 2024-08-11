@@ -6,10 +6,10 @@ import nasa.db.gallery.AlbumDao
 import nasa.db.gallery.CenterDao
 import nasa.db.gallery.KeywordDao
 import nasa.db.gallery.PhotographerDao
+import nasa.gallery.data.api.Collection
+import nasa.gallery.data.api.CollectionLink
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.GalleryJson
-import nasa.gallery.data.api.SearchCollection
-import nasa.gallery.data.api.SearchLink
 import nasa.gallery.data.api.SearchResponse
 import nasa.gallery.model.Album
 import nasa.gallery.model.Center
@@ -70,7 +70,7 @@ class GallerySearchRepository @Inject internal constructor(
     yearEnd = config.yearEnd,
   )
 
-  private suspend fun handleSuccess(pageNumber: Int?, pageSize: Int, collection: SearchCollection): SearchResult {
+  private suspend fun handleSuccess(pageNumber: Int?, pageSize: Int, collection: Collection): SearchResult {
     if (collection.metadata.totalHits == 0) {
       Timber.w("Received empty response collection: %s", collection)
       return SearchResult.Empty
@@ -83,12 +83,12 @@ class GallerySearchRepository @Inject internal constructor(
       totalResults = collection.metadata.totalHits,
       maxPerPage = pageSize,
       pageNumber = pageNumber ?: 1,
-      prevPage = collection.pageNumberWithRelation(SearchLink.Relation.Previous),
-      nextPage = collection.pageNumberWithRelation(SearchLink.Relation.Next),
+      prevPage = collection.pageNumberWithRelation(CollectionLink.Relation.Previous),
+      nextPage = collection.pageNumberWithRelation(CollectionLink.Relation.Next),
     )
   }
 
-  private suspend fun saveMetadata(collection: SearchCollection) {
+  private suspend fun saveMetadata(collection: Collection) {
     val centers = hashSetOf<Center>()
     val keywords = hashSetOf<Keyword>()
     val photographers = hashSetOf<Photographer>()
@@ -112,7 +112,7 @@ class GallerySearchRepository @Inject internal constructor(
     if (isNotEmpty()) function(toList())
   }
 
-  private fun SearchCollection.pageNumberWithRelation(relation: SearchLink.Relation) =
+  private fun Collection.pageNumberWithRelation(relation: CollectionLink.Relation) =
     links?.firstOrNull { it.rel == relation }?.url?.parsePageNumber()
 
   private fun String.parsePageNumber(): Int {

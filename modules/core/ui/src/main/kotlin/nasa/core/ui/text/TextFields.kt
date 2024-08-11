@@ -67,7 +67,9 @@ fun NasaTextField(
 
   val clearButton: (@Composable () -> Unit)? = if (clearable && value.isNotEmpty()) {
     { ClearButton(theme, onClick = { onValueChange("") }) }
-  } else null
+  } else {
+    null
+  }
 
   TextField(
     modifier = fieldModifier,

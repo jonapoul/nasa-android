@@ -28,17 +28,17 @@ class SearchResponseTest {
     val response = GalleryJson.decodeFromString<SearchResponse>(json)
     assertEquals(
       expected = SearchResponse.Success(
-        collection = SearchCollection(
+        collection = Collection(
           version = "1.0",
           url = "http://images-api.nasa.gov/search?q=apollo&page_size=1",
           items = listOf(
-            SearchItem(
+            CollectionItem(
               collectionUrl = JsonUrl(
                 "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-" +
                   "TO-PAD-39A/collection.json",
               ),
               data = listOf(
-                SearchItemData(
+                SearchItem(
                   center = Center("JSC"),
                   title = "T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A",
                   keywords = Keywords.from("Apollo", "Apollo 8", "NASA", "Film", "Film Transfers"),
@@ -54,28 +54,28 @@ class SearchResponseTest {
                 ),
               ),
               links = listOf(
-                SearchItemLink(
+                CollectionItemLink(
                   url = ImageUrl(
                     "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
                       "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg",
                   ),
-                  rel = SearchItemLink.Relation.Preview,
+                  rel = CollectionItemLink.Relation.Preview,
                   render = "image",
                 ),
-                SearchItemLink(
+                CollectionItemLink(
                   url = ImageUrl(
                     "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
                       "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
                   ),
-                  rel = SearchItemLink.Relation.Captions,
+                  rel = CollectionItemLink.Relation.Captions,
                 ),
               ),
             ),
           ),
-          metadata = SearchMetadata(totalHits = 6324),
+          metadata = CollectionMetadata(totalHits = 6324),
           links = listOf(
-            SearchLink(
-              rel = SearchLink.Relation.Next,
+            CollectionLink(
+              rel = CollectionLink.Relation.Next,
               prompt = "Next",
               url = "http://images-api.nasa.gov/search?q=apollo&page_size=1&page=2",
             ),

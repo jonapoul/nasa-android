@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import nasa.gallery.data.api.SearchItem
-import nasa.gallery.data.api.SearchItemLink
+import nasa.gallery.data.api.CollectionItem
+import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.repo.GallerySearchRepository
 import nasa.gallery.data.repo.SearchResult
 import nasa.gallery.model.FilterConfig
@@ -56,6 +56,7 @@ class SearchViewModel @Inject internal constructor(
   fun setFilterConfig(config: FilterConfig) {
     Timber.v("setFilterConfig %s", config)
     mutableFilterConfig.update { config }
+    performSearch(pageNumber = null)
   }
 
   private fun SearchResult.toState() = when (this) {
@@ -72,7 +73,7 @@ class SearchViewModel @Inject internal constructor(
     )
   }
 
-  private fun SearchItem.toSearchResultItem(): SearchResultItem {
+  private fun CollectionItem.toSearchResultItem(): SearchResultItem {
     val item = when (data.size) {
       0 -> error("No data in $this")
       1 -> data.first()
@@ -84,8 +85,8 @@ class SearchViewModel @Inject internal constructor(
     return SearchResultItem(
       nasaId = item.nasaId,
       collectionUrl = collectionUrl,
-      previewUrl = links?.firstOrNull { it.rel == SearchItemLink.Relation.Preview }?.url,
-      captionsUrl = links?.firstOrNull { it.rel == SearchItemLink.Relation.Captions }?.url,
+      previewUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Preview }?.url,
+      captionsUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Captions }?.url,
       albums = item.album?.toImmutableList()?.ifEmpty { null },
       center = item.center,
       title = item.title,

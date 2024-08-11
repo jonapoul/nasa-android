@@ -107,5 +107,5 @@ interface GalleryApi {
 
     // Page number, starting at 1, of results to get
     @Query("page") page: Int? = null,
-  ): Response<SearchResponse>
+  ): Response<SearchResponse.Success>
 }

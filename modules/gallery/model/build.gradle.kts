@@ -4,6 +4,7 @@ plugins {
 }
 
 dependencies {
+  api(libs.kotlinx.datetime)
   api(libs.kotlinx.immutable)
   api(libs.kotlinx.serialization.core)
   api(libs.kotlinx.serialization.json)

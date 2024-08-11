@@ -23,7 +23,11 @@
   <string name="search_page_previous">Previous page</string>
   <string name="search_page_next">Next page</string>
 
+  <string name="search_label_title">Title</string>
   <string name="search_label_center">NASA Center</string>
+  <string name="search_label_location">Location</string>
+  <string name="search_label_photographer">Photographer</string>
+  <string name="search_label_date">Year Range: %1$d to %2$d inclusive</string>
 
   <string name="search_item_center">Center:</string>
   <string name="search_item_keywords">Keywords:</string>
