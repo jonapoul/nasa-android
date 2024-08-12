@@ -43,10 +43,10 @@ dev.jonpoulton.alakazam:android-core:4.5.6
 dev.jonpoulton.alakazam:kotlin-core:4.5.6
 jakarta.inject:jakarta.inject-api:2.0.1
 javax.inject:javax.inject:1
-org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.10
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10
-org.jetbrains.kotlin:kotlin-stdlib:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib:2.0.10
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0-RC
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.9.0-RC
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0-RC

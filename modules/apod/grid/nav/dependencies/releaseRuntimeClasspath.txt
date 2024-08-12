@@ -55,7 +55,7 @@ androidx.versionedparcelable:versionedparcelable:1.1.1
 cafe.adriel.voyager:voyager-core-android:1.1.0-beta02
 cafe.adriel.voyager:voyager-core:1.1.0-beta02
 com.google.guava:listenablefuture:1.0
-org.jetbrains.kotlin:kotlin-stdlib:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib:2.0.10
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0-RC2
