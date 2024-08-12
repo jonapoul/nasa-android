@@ -2,8 +2,8 @@ androidx.activity:activity-compose:1.9.1
 androidx.activity:activity-ktx:1.9.1
 androidx.activity:activity:1.9.1
 androidx.annotation:annotation-experimental:1.4.0
-androidx.annotation:annotation-jvm:1.8.1
-androidx.annotation:annotation:1.8.1
+androidx.annotation:annotation-jvm:1.8.2
+androidx.annotation:annotation:1.8.2
 androidx.appcompat:appcompat-resources:1.6.1
 androidx.arch.core:core-common:2.2.0
 androidx.arch.core:core-runtime:2.2.0
@@ -84,8 +84,8 @@ androidx.loader:loader:1.0.0
 androidx.profileinstaller:profileinstaller:1.3.1
 androidx.savedstate:savedstate-ktx:1.2.1
 androidx.savedstate:savedstate:1.2.1
-androidx.sqlite:sqlite-android:2.5.0-alpha05
-androidx.sqlite:sqlite:2.5.0-alpha05
+androidx.sqlite:sqlite-android:2.5.0-alpha06
+androidx.sqlite:sqlite:2.5.0-alpha06
 androidx.startup:startup-runtime:1.1.1
 androidx.tracing:tracing:1.0.0
 androidx.vectordrawable:vectordrawable-animated:1.1.0
@@ -122,10 +122,10 @@ io.coil-kt:coil-compose:2.7.0
 io.coil-kt:coil:2.7.0
 jakarta.inject:jakarta.inject-api:2.0.1
 javax.inject:javax.inject:1
-org.jetbrains.kotlin:kotlin-stdlib-common:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.10
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.0
 org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0
-org.jetbrains.kotlin:kotlin-stdlib:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib:2.0.10
 org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.7
 org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7
 org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0-RC

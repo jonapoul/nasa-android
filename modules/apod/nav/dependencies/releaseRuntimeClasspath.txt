@@ -1,4 +1,4 @@
-org.jetbrains.kotlin:kotlin-stdlib:2.0.0
+org.jetbrains.kotlin:kotlin-stdlib:2.0.10
 org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.6.0
 org.jetbrains.kotlinx:kotlinx-datetime:0.6.0
 org.jetbrains:annotations:13.0
