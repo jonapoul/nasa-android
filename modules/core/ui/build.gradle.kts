@@ -9,6 +9,7 @@ android {
 dependencies {
   api(libs.androidx.activity.core)
   api(libs.androidx.compose.runtime)
+  api(libs.coil.base)
   api(libs.kotlinx.immutable)
   api(libs.lazycolumn.scrollbar)
   api(libs.voyager.core)
@@ -35,6 +36,8 @@ dependencies {
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.coil.compose)
+  implementation(libs.coil.composeBase)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
 }

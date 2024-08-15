@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.DownloadState
+import nasa.core.model.Percent
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -16,19 +17,19 @@ import javax.inject.Inject
 class ApodFullScreenViewModel @Inject internal constructor(
   private val stateHolder: DownloadProgressStateHolder,
 ) : ViewModel() {
-  val downloadProgress: StateFlow<Float> = stateHolder
+  val downloadProgress: StateFlow<Percent> = stateHolder
     .state
     .map { it.toProgress() }
-    .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0f)
+    .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = Percent.Zero)
 
   override fun onCleared() {
     Timber.v("onCleared")
     stateHolder.reset()
   }
 
-  private fun DownloadState?.toProgress(): Float = when (this) {
-    is DownloadState.Done -> 1f
-    is DownloadState.InProgress -> read.toBytes().toFloat() / total.toBytes().toFloat()
-    null -> 0f
+  private fun DownloadState?.toProgress(): Percent = when (this) {
+    is DownloadState.Done -> Percent.OneHundred
+    is DownloadState.InProgress -> Percent(numerator = read.toBytes(), denominator = total.toBytes())
+    null -> Percent.Zero
   }
 }

@@ -6,7 +6,9 @@ import kotlinx.coroutines.test.runTest
 import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.DownloadState
 import nasa.core.model.FileSize
+import nasa.core.model.Percent
 import nasa.core.model.bytes
+import nasa.core.model.percent
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,27 +32,27 @@ class ApodFullScreenViewModelTest {
   fun `Monitor download progress`() = runTest {
     viewModel.downloadProgress.test {
       setInProgress(read = 0.bytes)
-      assertDownloadProgress(expected = 0f)
+      assertDownloadProgress(expected = 0.percent)
 
       setInProgress(read = 20.bytes)
-      assertDownloadProgress(expected = 0.2f)
+      assertDownloadProgress(expected = 20.percent)
 
       setInProgress(read = 50.bytes)
-      assertDownloadProgress(expected = 0.5f)
+      assertDownloadProgress(expected = 50.percent)
 
       setInProgress(read = 90.bytes)
-      assertDownloadProgress(expected = 0.9f)
+      assertDownloadProgress(expected = 90.percent)
 
       setInProgress(read = 99.bytes)
-      assertDownloadProgress(expected = 0.99f)
+      assertDownloadProgress(expected = 99.percent)
 
       setDone()
-      assertDownloadProgress(expected = 1f)
+      assertDownloadProgress(expected = 100.percent)
       cancelAndIgnoreRemainingEvents()
     }
   }
 
-  private suspend fun TurbineTestContext<Float>.assertDownloadProgress(expected: Float) {
+  private suspend fun TurbineTestContext<Percent>.assertDownloadProgress(expected: Percent) {
     assertEquals(expected, awaitItem())
   }
 
