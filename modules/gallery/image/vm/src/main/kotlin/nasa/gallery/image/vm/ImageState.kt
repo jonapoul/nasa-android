@@ -1,0 +1,17 @@
+package nasa.gallery.image.vm
+
+import androidx.compose.runtime.Immutable
+
+@Immutable
+sealed interface ImageState {
+  data object Loading : ImageState
+
+  data class FoundUrl(
+    val imageUrl: String,
+    val contentDescription: String,
+  ) : ImageState
+
+  data class Failed(
+    val reason: String,
+  ) : ImageState
+}

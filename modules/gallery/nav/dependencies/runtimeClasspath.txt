@@ -1,7 +1,17 @@
 cafe.adriel.voyager:voyager-core-desktop:1.1.0-beta02
 cafe.adriel.voyager:voyager-core:1.1.0-beta02
+org.jetbrains.kotlin:kotlin-stdlib-common:2.0.10
 org.jetbrains.kotlin:kotlin-stdlib:2.0.10
+org.jetbrains.kotlinx:kotlinx-collections-immutable-jvm:0.3.7
+org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7
 org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0-RC2
 org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2
+org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.6.0
+org.jetbrains.kotlinx:kotlinx-datetime:0.6.0
+org.jetbrains.kotlinx:kotlinx-serialization-bom:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-json-jvm:1.7.1
+org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1
 org.jetbrains:annotations:23.0.0

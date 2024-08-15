@@ -25,7 +25,9 @@ import nasa.core.http.buildOkHttp
 import nasa.core.model.ApiKey
 import nasa.core.model.IMAGE_CACHE_DIR
 import nasa.core.model.megabytes
-import nasa.gallery.nav.GalleryNavScreen
+import nasa.gallery.image.ui.GalleryImageScreen
+import nasa.gallery.nav.GalleryImageNavScreen
+import nasa.gallery.nav.GallerySearchNavScreen
 import nasa.gallery.search.ui.GallerySearchScreen
 import nasa.home.nav.HomeNavScreen
 import nasa.home.ui.HomeScreen
@@ -67,7 +69,8 @@ class NasaApplication : Application(), ImageLoaderFactory {
       register<ApodSingleNavScreen> { ApodSingleScreen(it.config) }
       register<ApodGridNavScreen> { ApodGridScreen(it.config) }
       register<ApodFullScreenNavScreen> { ApodFullScreen(it.item) }
-      register<GalleryNavScreen> { GallerySearchScreen() }
+      register<GallerySearchNavScreen> { GallerySearchScreen() }
+      register<GalleryImageNavScreen> { GalleryImageScreen(it.id, it.title) }
       register<AboutNavScreen> { AboutScreen() }
       register<LicensesNavScreen> { LicensesScreen() }
       register<SettingsNavScreen> { SettingsScreen() }

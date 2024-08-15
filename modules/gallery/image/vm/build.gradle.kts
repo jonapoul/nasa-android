@@ -3,18 +3,18 @@ plugins {
 }
 
 android {
-  namespace = "nasa.gallery.search.vm"
+  namespace = "nasa.gallery.image.vm"
 }
 
 dependencies {
   api(libs.alakazam.kotlin.core)
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.kotlinx.coroutines)
-  api(libs.kotlinx.datetime)
-  api(libs.kotlinx.immutable)
+  api(projects.modules.core.model)
   api(projects.modules.gallery.data.repo)
 
   implementation(libs.timber)
+  implementation(projects.modules.core.http)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

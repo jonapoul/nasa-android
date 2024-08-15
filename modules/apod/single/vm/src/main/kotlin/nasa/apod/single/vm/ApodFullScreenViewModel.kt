@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import nasa.core.http.DownloadProgressStateHolder
-import nasa.core.http.DownloadState
+import nasa.core.http.toProgress
 import nasa.core.model.Percent
 import timber.log.Timber
 import javax.inject.Inject
@@ -25,11 +25,5 @@ class ApodFullScreenViewModel @Inject internal constructor(
   override fun onCleared() {
     Timber.v("onCleared")
     stateHolder.reset()
-  }
-
-  private fun DownloadState?.toProgress(): Percent = when (this) {
-    is DownloadState.Done -> Percent.OneHundred
-    is DownloadState.InProgress -> Percent(numerator = read.toBytes(), denominator = total.toBytes())
-    null -> Percent.Zero
   }
 }

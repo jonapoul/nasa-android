@@ -4,4 +4,6 @@ plugins {
 
 dependencies {
   api(libs.voyager.core)
+
+  implementation(projects.modules.gallery.model)
 }

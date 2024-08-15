@@ -36,4 +36,6 @@
   <string name="search_item_date">Date:</string>
   <string name="search_item_type">Type:</string>
   <string name="search_item_description">Description:</string>
+
+  <string name="image_loading">Loading…</string>
 </resources>

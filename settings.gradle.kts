@@ -56,6 +56,8 @@ include(":modules:db:impl")
 
 include(":modules:gallery:data:api")
 include(":modules:gallery:data:repo")
+include(":modules:gallery:image:ui")
+include(":modules:gallery:image:vm")
 include(":modules:gallery:model")
 include(":modules:gallery:nav")
 include(":modules:gallery:res")

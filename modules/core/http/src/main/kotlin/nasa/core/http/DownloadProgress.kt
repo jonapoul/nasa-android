@@ -2,6 +2,7 @@ package nasa.core.http
 
 import alakazam.kotlin.core.StateHolder
 import nasa.core.model.FileSize
+import nasa.core.model.Percent
 import nasa.core.model.bytes
 import okhttp3.Interceptor
 import okhttp3.Response
@@ -53,6 +54,12 @@ sealed interface DownloadState {
     override val url: String,
     override val total: FileSize,
   ) : DownloadState
+}
+
+fun DownloadState?.toProgress(): Percent = when (this) {
+  is DownloadState.Done -> Percent.OneHundred
+  is DownloadState.InProgress -> Percent(numerator = read.toBytes(), denominator = total.toBytes())
+  null -> Percent.Zero
 }
 
 private class DownloadProgressResponseBody(

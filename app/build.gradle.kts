@@ -207,6 +207,7 @@ dependencies {
   implementation(projects.modules.apod.grid.ui)
   implementation(projects.modules.apod.single.ui)
   implementation(projects.modules.db.impl)
+  implementation(projects.modules.gallery.image.ui)
   implementation(projects.modules.gallery.search.ui)
   implementation(projects.modules.home.nav)
   implementation(projects.modules.home.ui)
