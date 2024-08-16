@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 internal class DarkTheme : Theme {
   override val pageBackground = ColorPalette.grey700
+  override val pageBackgroundAlt = ColorPalette.grey800
   override val pageText = ColorPalette.navy150
   override val pageTextSubdued = ColorPalette.grey400
   override val pageTextPrimary = ColorPalette.blue200

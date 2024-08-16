@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 internal class LightTheme : Theme {
   override val pageBackground = ColorPalette.navy100
+  override val pageBackgroundAlt = ColorPalette.navy150
   override val pageText = Color(color = 0xFF272630)
   override val pageTextSubdued = ColorPalette.grey400
   override val pageTextPrimary = ColorPalette.blue600

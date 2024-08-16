@@ -11,6 +11,7 @@ val LocalTheme = compositionLocalOf<Theme> { error("CompositionLocal LocalTheme 
 @Immutable
 sealed interface Theme {
   val pageBackground: Color
+  val pageBackgroundAlt: Color
   val pageText: Color
   val pageTextSubdued: Color
   val pageTextPrimary: Color
