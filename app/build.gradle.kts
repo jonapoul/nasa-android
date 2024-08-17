@@ -7,6 +7,7 @@ import blueprint.core.stringProperty
 import blueprint.core.stringPropertyOrNull
 import blueprint.diagrams.ModuleType
 import guru.nidi.graphviz.attribute.Rank
+import org.gradle.internal.extensions.stdlib.capitalized
 
 plugins {
   alias(libs.plugins.kotlin.android)
@@ -150,22 +151,20 @@ licenseReport {
   generateTextReport = false
 }
 
-afterEvaluate {
-  // Make sure the licenses JSON is generated whenever we rebuild the app
-  val licenseReleaseReport by tasks
-  val preBuild by tasks
-  val assembleDebug by tasks
-  val assembleRelease by tasks
-  preBuild.dependsOn(licenseReleaseReport)
-  assembleDebug.dependsOn(licenseReleaseReport)
-  assembleRelease.dependsOn(licenseReleaseReport)
-
-  // Delete the existing JSON file before we regenerate it. If we don't do this, the plugin
-  // doesn't overwrite the existing one, so any dependency changes won't be reflected
-  licenseReleaseReport.doFirst {
+fun registerLicenseTask(suffix: String) {
+  val capitalized = suffix.capitalized()
+  val assemble = tasks.getByName("assemble$capitalized")
+  val license = tasks.getByName("license${capitalized}Report")
+  assemble.dependsOn(license)
+  license.doFirst {
     val file = project.file("src/main/assets/open_source_licenses.json")
     file.delete()
   }
+}
+
+afterEvaluate {
+  registerLicenseTask(suffix = "debug")
+  registerLicenseTask(suffix = "release")
 }
 
 dependencies {
