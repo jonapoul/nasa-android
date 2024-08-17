@@ -12,11 +12,11 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.about.nav.AboutNavScreen
 import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.single.nav.ApodSingleNavScreen
-import nasa.core.http.ApiUsageState
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
 import nasa.core.ui.set
 import nasa.gallery.nav.GallerySearchNavScreen
+import nasa.home.vm.ApiUsageState
 import nasa.home.vm.HomeViewModel
 import nasa.settings.nav.SettingsNavScreen
 
