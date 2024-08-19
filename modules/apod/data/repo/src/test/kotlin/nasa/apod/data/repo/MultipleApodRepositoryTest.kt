@@ -45,7 +45,7 @@ class MultipleApodRepositoryTest {
 
   @Before
   fun before() {
-    dao = RoomApodDaoWrapper(databaseRule.database.apodDao())
+    dao = RoomApodDaoWrapper(databaseRule.database)
     api = webServerRule.buildApi(json = ApodJson)
 
     repository = MultipleApodRepository(

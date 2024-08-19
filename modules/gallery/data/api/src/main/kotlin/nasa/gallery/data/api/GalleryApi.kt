@@ -2,10 +2,12 @@ package nasa.gallery.data.api
 
 import nasa.gallery.model.Album
 import nasa.gallery.model.Center
+import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.NasaId
 import nasa.gallery.model.Photographer
+import nasa.gallery.model.UrlCollection
 import nasa.gallery.model.Year
 import retrofit2.Response
 import retrofit2.http.GET
@@ -89,7 +91,7 @@ interface GalleryApi {
    */
   @GET
   suspend fun getCollection(
-    @Url url: String,
+    @Url url: JsonUrl,
   ): Response<UrlCollection>
 
   /**
@@ -97,7 +99,7 @@ interface GalleryApi {
    */
   @GET
   suspend fun getMetadata(
-    @Url url: String,
+    @Url url: JsonUrl,
   ): Response<MetadataCollection>
 
   @GET("album/{name}")

@@ -14,7 +14,6 @@ import nasa.gallery.model.NasaId
 
 class GalleryImageScreen(
   private val id: NasaId,
-  private val title: String,
 ) : Screen {
   @Composable
   override fun Content() {
@@ -31,7 +30,6 @@ class GalleryImageScreen(
       imageState = imageState,
       progress = progress,
       theme = theme,
-      title = title,
       onAction = { action ->
         when (action) {
           ImageAction.NavBack -> navigator.pop()

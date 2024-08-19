@@ -75,6 +75,7 @@ internal fun SearchSuccess(
           SearchSuccessItem(
             modifier = Modifier.fillMaxWidth(),
             item = item,
+            onAction = onAction,
             theme = theme,
           )
         }

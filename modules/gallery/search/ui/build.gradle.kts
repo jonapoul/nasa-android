@@ -11,7 +11,6 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
   api(projects.modules.core.ui)
-  api(projects.modules.gallery.nav)
   api(projects.modules.gallery.search.vm)
 
   implementation(libs.alakazam.android.compose)
@@ -39,5 +38,6 @@ dependencies {
   implementation(libs.lazycolumn.scrollbar)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
+  implementation(projects.modules.gallery.nav)
   implementation(projects.modules.gallery.res)
 }

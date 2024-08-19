@@ -13,7 +13,6 @@ dependencies {
   api(projects.modules.gallery.data.api)
 
   implementation(libs.alakazam.kotlin.core)
-  implementation(libs.androidx.sqlite.core)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.kotlinx.serialization.json)

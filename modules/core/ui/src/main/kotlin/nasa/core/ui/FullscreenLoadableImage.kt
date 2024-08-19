@@ -102,8 +102,7 @@ fun FullscreenLoadableImage(
           scaleY = scale
           translationX = offset.x
           translationY = offset.y
-        }
-        .transformable(loadingSliderState)
+        }.transformable(loadingSliderState)
     }
 
     // Adding a custom header to the request, so our DownloadProgressInterceptor can identify it and track progress

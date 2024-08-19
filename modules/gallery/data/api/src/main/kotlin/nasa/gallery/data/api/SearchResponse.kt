@@ -47,7 +47,7 @@ data class CollectionItem(
 @Serializable
 data class SearchItem(
   @SerialName("album") val album: List<Album>?,
-  @SerialName("center") val center: Center,
+  @SerialName("center") val center: Center?,
   @SerialName("title") val title: String,
   @SerialName("keywords") val keywords: Keywords?,
   @SerialName("location") val location: String?,
@@ -68,10 +68,8 @@ data class CollectionItemLink(
 ) {
   @Serializable
   enum class Relation {
-    @SerialName("preview")
-    Preview,
-    @SerialName("captions")
-    Captions,
+    @SerialName("preview") Preview,
+    @SerialName("captions") Captions,
   }
 }
 
@@ -88,9 +86,7 @@ data class CollectionLink(
 ) {
   @Serializable
   enum class Relation {
-    @SerialName("next")
-    Next,
-    @SerialName("prev")
-    Previous,
+    @SerialName("next") Next,
+    @SerialName("prev") Previous,
   }
 }

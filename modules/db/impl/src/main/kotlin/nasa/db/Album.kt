@@ -6,9 +6,9 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
-import androidx.room.Query
 import nasa.db.gallery.AlbumDao
 import nasa.gallery.model.Album
+import javax.inject.Inject
 
 @Entity(tableName = "album")
 data class RoomAlbumEntity(
@@ -22,19 +22,12 @@ interface RoomAlbumDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend fun insert(item: RoomAlbumEntity)
 
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
-  suspend fun insertAll(items: List<RoomAlbumEntity>)
-
-  @Query("SELECT * FROM album ORDER BY album ASC")
-  suspend fun getAll(): List<RoomAlbumEntity>
-
-  @Query("DELETE FROM album")
-  suspend fun clear()
+  @Insert(onConflict = OnConflictStrategy.IGNORE)
+  suspend fun insert(entities: List<RoomAlbumEntity>)
 }
 
-class RoomAlbumDaoWrapper(private val delegate: RoomAlbumDao) : AlbumDao {
+class RoomAlbumDaoWrapper @Inject constructor(db: RoomNasaDatabase) : AlbumDao {
+  private val delegate = db.albumDao()
   override suspend fun insert(album: Album) = delegate.insert(RoomAlbumEntity(album))
-  override suspend fun insertAll(albums: List<Album>) = delegate.insertAll(albums.map(::RoomAlbumEntity))
-  override suspend fun getAll() = delegate.getAll().map { it.album }
-  override suspend fun clear() = delegate.clear()
+  override suspend fun insert(albums: List<Album>) = delegate.insert(albums.map(::RoomAlbumEntity))
 }

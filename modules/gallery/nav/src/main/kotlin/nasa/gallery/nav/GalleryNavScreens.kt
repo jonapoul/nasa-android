@@ -5,7 +5,4 @@ import nasa.gallery.model.NasaId
 
 data object GallerySearchNavScreen : ScreenProvider
 
-data class GalleryImageNavScreen(
-  val id: NasaId,
-  val title: String,
-) : ScreenProvider
+data class GalleryImageNavScreen(val id: NasaId) : ScreenProvider

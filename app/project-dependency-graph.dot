@@ -31,12 +31,14 @@ node ["style"="filled"]
 ":db:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":db:gallery" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:search:ui" ["fillcolor"="#FFFF55","shape"="box"]
-":gallery:nav" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:search:vm" ["fillcolor"="#FCB103","shape"="box"]
+":gallery:image:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":gallery:image:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
 ":gallery:res" ["fillcolor"="#00FFFF","shape"="box"]
+":gallery:nav" ["fillcolor"="#A17EFF","shape"="box"]
+":gallery:search:ui" ["fillcolor"="#FFFF55","shape"="box"]
+":gallery:search:vm" ["fillcolor"="#FCB103","shape"="box"]
 ":home:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":home:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":home:res" ["fillcolor"="#00FFFF","shape"="box"]
@@ -58,6 +60,8 @@ graph ["rank"="same"]
 ":app" -> ":apod:grid:ui" ["style"="dotted"]
 ":app" -> ":apod:single:ui" ["style"="dotted"]
 ":app" -> ":db:impl" ["style"="dotted"]
+":app" -> ":gallery:image:ui" ["style"="dotted"]
+":app" -> ":gallery:nav" ["style"="dotted"]
 ":app" -> ":gallery:search:ui" ["style"="dotted"]
 ":app" -> ":home:nav" ["style"="dotted"]
 ":app" -> ":home:ui" ["style"="dotted"]
@@ -104,14 +108,22 @@ graph ["rank"="same"]
 ":db:impl" -> ":db:apod"
 ":db:impl" -> ":db:gallery"
 ":db:gallery" -> ":gallery:model"
-":gallery:search:ui" -> ":core:ui"
-":gallery:search:ui" -> ":gallery:nav"
-":gallery:search:ui" -> ":gallery:search:vm"
-":gallery:search:ui" -> ":gallery:res" ["style"="dotted"]
-":gallery:search:vm" -> ":gallery:data:repo"
+":gallery:image:ui" -> ":core:ui"
+":gallery:image:ui" -> ":gallery:image:vm"
+":gallery:image:ui" -> ":core:http" ["style"="dotted"]
+":gallery:image:ui" -> ":gallery:res" ["style"="dotted"]
+":gallery:image:vm" -> ":core:model"
+":gallery:image:vm" -> ":gallery:data:repo"
+":gallery:image:vm" -> ":core:http" ["style"="dotted"]
 ":gallery:data:repo" -> ":db:gallery"
 ":gallery:data:repo" -> ":gallery:data:api"
 ":gallery:data:api" -> ":gallery:model"
+":gallery:nav" -> ":gallery:model" ["style"="dotted"]
+":gallery:search:ui" -> ":core:ui"
+":gallery:search:ui" -> ":gallery:search:vm"
+":gallery:search:ui" -> ":gallery:nav" ["style"="dotted"]
+":gallery:search:ui" -> ":gallery:res" ["style"="dotted"]
+":gallery:search:vm" -> ":gallery:data:repo"
 ":home:ui" -> ":apod:single:nav"
 ":home:ui" -> ":about:nav" ["style"="dotted"]
 ":home:ui" -> ":core:ui" ["style"="dotted"]

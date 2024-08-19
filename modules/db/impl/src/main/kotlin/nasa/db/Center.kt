@@ -6,9 +6,9 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
-import androidx.room.Query
 import nasa.db.gallery.CenterDao
 import nasa.gallery.model.Center
+import javax.inject.Inject
 
 @Entity(tableName = "center")
 data class RoomCenterEntity(
@@ -23,23 +23,11 @@ interface RoomCenterDao {
   suspend fun insert(entity: RoomCenterEntity)
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
-  suspend fun insertAll(entities: List<RoomCenterEntity>)
-
-  @Query("SELECT * FROM center ORDER BY center ASC")
-  suspend fun getAll(): List<RoomCenterEntity>
-
-  @Query("DELETE FROM center")
-  suspend fun clear()
+  suspend fun insert(entities: List<RoomCenterEntity>)
 }
 
-class RoomCenterDaoWrapper(private val delegate: RoomCenterDao) : CenterDao {
-  override suspend fun insert(center: Center) =
-    delegate.insert(RoomCenterEntity(center))
-
-  override suspend fun insertAll(centers: List<Center>) =
-    delegate.insertAll(centers.map(::RoomCenterEntity))
-
-  override suspend fun getAll() = delegate.getAll().map { it.center }
-
-  override suspend fun clear() = delegate.clear()
+class RoomCenterDaoWrapper @Inject constructor(db: RoomNasaDatabase) : CenterDao {
+  private val delegate = db.centreDao()
+  override suspend fun insert(center: Center) = delegate.insert(RoomCenterEntity(center))
+  override suspend fun insert(centers: List<Center>) = delegate.insert(centers.map(::RoomCenterEntity))
 }

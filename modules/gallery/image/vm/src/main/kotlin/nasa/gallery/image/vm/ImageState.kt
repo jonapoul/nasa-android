@@ -7,6 +7,7 @@ sealed interface ImageState {
   data object Loading : ImageState
 
   data class FoundUrl(
+    val title: String,
     val imageUrl: String,
     val contentDescription: String,
   ) : ImageState

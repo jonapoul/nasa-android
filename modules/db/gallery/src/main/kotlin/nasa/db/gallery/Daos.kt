@@ -1,42 +1,42 @@
 package nasa.db.gallery
 
-import kotlinx.datetime.LocalDate
+import kotlinx.coroutines.flow.Flow
 import nasa.gallery.model.Album
 import nasa.gallery.model.Center
 import nasa.gallery.model.Keyword
+import nasa.gallery.model.NasaId
 import nasa.gallery.model.Photographer
+import nasa.gallery.model.UrlCollection
 
 interface GalleryDao {
   suspend fun insert(entity: GalleryEntity)
-  suspend fun insertAll(entities: List<GalleryEntity>)
-  suspend fun get(date: LocalDate): GalleryEntity?
-  suspend fun clear()
+  suspend fun insert(entities: List<GalleryEntity>)
+  suspend fun get(id: NasaId): GalleryEntity?
+  suspend fun delete(id: NasaId)
 }
 
 interface KeywordDao {
   suspend fun insert(keyword: Keyword)
-  suspend fun insertAll(keywords: List<Keyword>)
-  suspend fun getAll(): List<Keyword>
-  suspend fun clear()
+  suspend fun insert(keywords: List<Keyword>)
 }
 
 interface PhotographerDao {
   suspend fun insert(photographer: Photographer)
-  suspend fun insertAll(photographers: List<Photographer>)
-  suspend fun getAll(): List<Photographer>
-  suspend fun clear()
+  suspend fun insert(photographers: List<Photographer>)
 }
 
 interface CenterDao {
   suspend fun insert(center: Center)
-  suspend fun insertAll(centers: List<Center>)
-  suspend fun getAll(): List<Center>
-  suspend fun clear()
+  suspend fun insert(centers: List<Center>)
 }
 
 interface AlbumDao {
   suspend fun insert(album: Album)
-  suspend fun insertAll(albums: List<Album>)
-  suspend fun getAll(): List<Album>
-  suspend fun clear()
+  suspend fun insert(albums: List<Album>)
+}
+
+interface UrlDao {
+  suspend fun insert(id: NasaId, urls: UrlCollection)
+  suspend fun get(id: NasaId): UrlCollection?
+  fun observe(): Flow<List<UrlCollection>>
 }

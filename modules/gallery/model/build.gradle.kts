@@ -1,6 +1,14 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   id("nasa.module.kotlin")
   alias(libs.plugins.kotlin.serialization)
+}
+
+tasks.withType<KotlinCompile> {
+  compilerOptions {
+    freeCompilerArgs.add("-opt-in=kotlinx.serialization.ExperimentalSerializationApi")
+  }
 }
 
 dependencies {

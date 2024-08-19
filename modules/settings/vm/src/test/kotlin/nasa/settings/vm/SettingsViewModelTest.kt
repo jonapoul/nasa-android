@@ -15,9 +15,7 @@ import nasa.core.model.NASA_API_URL
 import nasa.core.model.bytes
 import nasa.core.url.UrlOpener
 import nasa.db.NasaDatabaseDelegate
-import nasa.db.RoomApodDaoWrapper
 import nasa.db.RoomNasaDatabase
-import nasa.db.apod.ApodDao
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule
@@ -41,7 +39,6 @@ class SettingsViewModelTest {
   private lateinit var viewModel: SettingsViewModel
   private lateinit var imageCache: ImageCache
   private lateinit var databaseClearer: DatabaseClearer
-  private lateinit var dao: ApodDao
 
   // mock
   private lateinit var urlOpener: UrlOpener
@@ -51,7 +48,6 @@ class SettingsViewModelTest {
   fun before() {
     urlOpener = mockk(relaxed = true)
     toaster = mockk(relaxed = true)
-    dao = RoomApodDaoWrapper(databaseRule.database.apodDao())
     imageCache = ImageCache(ApplicationProvider.getApplicationContext())
     imageCache.cacheDir.mkdirs()
 

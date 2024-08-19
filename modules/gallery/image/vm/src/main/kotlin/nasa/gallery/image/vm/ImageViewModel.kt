@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.toProgress
 import nasa.core.model.Percent
-import nasa.gallery.data.repo.GalleryImageRepository
+import nasa.gallery.data.repo.GalleryImageUrlsRepository
 import nasa.gallery.model.NasaId
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ImageViewModel @Inject internal constructor(
   private val main: MainDispatcher,
-  private val repository: GalleryImageRepository,
+  private val repository: GalleryImageUrlsRepository,
   progressStateHolder: DownloadProgressStateHolder,
 ) : ViewModel() {
   private val mutableImageState = MutableStateFlow<ImageState>(ImageState.Loading)
@@ -33,11 +33,12 @@ class ImageViewModel @Inject internal constructor(
     .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = Percent.Zero)
 
   suspend fun load(id: NasaId) {
-    Timber.v("load $id")
+    val fetchResult = repository.fetchUrls(id)
+    Timber.i("fetchResult=$fetchResult")
   }
 
   fun reload(id: NasaId) {
-    viewModelScope.launch { load(id) }
+    viewModelScope.launch(main) { load(id) }
   }
 
   fun loadMetadata(id: NasaId) {

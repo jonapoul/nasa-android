@@ -13,7 +13,7 @@ interface ApodEntity {
   val thumbnailUrl: String?
 
   fun interface Factory {
-    fun build(
+    operator fun invoke(
       date: LocalDate,
       title: String,
       explanation: String,

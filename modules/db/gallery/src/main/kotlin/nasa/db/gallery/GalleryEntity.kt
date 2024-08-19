@@ -1,7 +1,19 @@
 package nasa.db.gallery
 
-import kotlinx.datetime.LocalDate
+import nasa.gallery.model.JsonUrl
+import nasa.gallery.model.MediaType
+import nasa.gallery.model.NasaId
 
 interface GalleryEntity {
-  val date: LocalDate
+  val id: NasaId
+  val collectionUrl: JsonUrl
+  val mediaType: MediaType
+
+  fun interface Factory {
+    operator fun invoke(
+      id: NasaId,
+      collectionUrl: JsonUrl,
+      type: MediaType,
+    ): GalleryEntity
+  }
 }

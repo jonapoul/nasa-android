@@ -21,12 +21,11 @@ import nasa.gallery.image.vm.ImageState
 internal fun ImageScreenImpl(
   imageState: ImageState,
   progress: Percent,
-  title: String,
   onAction: (ImageAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
   Scaffold(
-    topBar = { ImageTopBar(title, onAction, theme) },
+    topBar = { ImageTopBar(imageState, onAction, theme) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       ImageContent(
@@ -81,7 +80,6 @@ private fun PreviewLoading() = PreviewScreen {
   ImageScreenImpl(
     imageState = ImageState.Loading,
     progress = 0.percent,
-    title = "Hello world",
     onAction = {},
   )
 }
@@ -92,7 +90,6 @@ private fun PreviewFailed() = PreviewScreen {
   ImageScreenImpl(
     imageState = ImageState.Failed(reason = "Something broke lol"),
     progress = 0.percent,
-    title = "Hello world",
     onAction = {},
   )
 }
@@ -103,10 +100,10 @@ private fun PreviewSuccess() = PreviewScreen {
   ImageScreenImpl(
     imageState = ImageState.FoundUrl(
       imageUrl = PREVIEW_URL,
+      title = "Hello world",
       contentDescription = "whatever",
     ),
     progress = 69.percent,
-    title = "Hello world",
     onAction = {},
   )
 }

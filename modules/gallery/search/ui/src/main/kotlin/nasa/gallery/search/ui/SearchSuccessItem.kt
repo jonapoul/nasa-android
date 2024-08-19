@@ -3,6 +3,7 @@ package nasa.gallery.search.ui
 import alakazam.android.ui.compose.HorizontalSpacer
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -56,6 +57,7 @@ import nasa.gallery.search.vm.SearchResultItem
 @Composable
 internal fun SearchSuccessItem(
   item: SearchResultItem,
+  onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -65,7 +67,8 @@ internal fun SearchSuccessItem(
       .wrapContentHeight()
       .padding(4.dp)
       .background(theme.cardBackground, CardShape)
-      .padding(8.dp),
+      .padding(8.dp)
+      .clickable { onAction(SearchAction.NavToImage(item.nasaId)) },
     horizontalArrangement = Arrangement.Start,
     verticalAlignment = Alignment.Top,
   ) {
@@ -267,5 +270,6 @@ private val LARGER_TEXT_SIZE = 14.sp
 private fun PreviewItem() = PreviewColumn {
   SearchSuccessItem(
     item = PreviewItem1,
+    onAction = {},
   )
 }

@@ -49,7 +49,7 @@ class SingleApodRepositoryTest {
 
   @Before
   fun before() {
-    dao = RoomApodDaoWrapper(databaseRule.database.apodDao())
+    dao = RoomApodDaoWrapper(databaseRule.database)
     api = webServerRule.buildApi(json = ApodJson)
     entityFactory = DefaultApodEntityFactory
 

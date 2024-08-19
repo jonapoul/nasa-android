@@ -19,7 +19,7 @@ data class SearchResultItem(
   val previewUrl: ImageUrl?,
   val captionsUrl: ImageUrl?,
   val albums: ImmutableList<Album>?,
-  val center: Center,
+  val center: Center?,
   val title: String,
   val keywords: Keywords?,
   val location: String?,

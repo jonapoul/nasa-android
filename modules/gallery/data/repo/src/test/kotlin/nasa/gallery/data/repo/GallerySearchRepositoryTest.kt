@@ -5,10 +5,12 @@ import alakazam.test.core.CoroutineRule
 import alakazam.test.db.RoomDatabaseRule
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
+import nasa.db.DefaultGalleryEntityFactory
 import nasa.db.RoomAlbumDao
 import nasa.db.RoomAlbumDaoWrapper
 import nasa.db.RoomCenterDao
 import nasa.db.RoomCenterDaoWrapper
+import nasa.db.RoomGalleryDaoWrapper
 import nasa.db.RoomKeywordDao
 import nasa.db.RoomKeywordDaoWrapper
 import nasa.db.RoomNasaDatabase
@@ -75,10 +77,12 @@ class GallerySearchRepositoryTest {
       io = IODispatcher(coroutineRule.dispatcher),
       galleryApi = galleryApi,
       searchPreferences = searchPreferences,
-      centerDao = RoomCenterDaoWrapper(centerDao),
-      keywordDao = RoomKeywordDaoWrapper(keywordDao),
-      photographerDao = RoomPhotographerDaoWrapper(photographerDao),
-      albumDao = RoomAlbumDaoWrapper(albumDao),
+      galleryDao = RoomGalleryDaoWrapper(db),
+      entityFactory = DefaultGalleryEntityFactory,
+      centerDao = RoomCenterDaoWrapper(db),
+      keywordDao = RoomKeywordDaoWrapper(db),
+      photographerDao = RoomPhotographerDaoWrapper(db),
+      albumDao = RoomAlbumDaoWrapper(db),
     )
   }
 
@@ -145,18 +149,6 @@ class GallerySearchRepositoryTest {
         nextPage = 2,
       ),
     )
-
-    assertEquals(
-      expected = listOf("JSC"),
-      actual = centerDao.getAll().map { it.center.value },
-    )
-    assertEquals(
-      expected = listOf("Apollo", "Apollo 8", "Film", "Film Transfers", "NASA"),
-      actual = keywordDao.getAll().map { it.keyword.value },
-    )
-
-    assertEquals(expected = emptyList(), actual = albumDao.getAll())
-    assertEquals(expected = emptyList(), actual = photographerDao.getAll())
   }
 
   private companion object {

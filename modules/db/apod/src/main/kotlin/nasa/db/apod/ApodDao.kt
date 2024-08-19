@@ -8,6 +8,4 @@ interface ApodDao {
   suspend fun insertAll(entities: List<ApodEntity>)
   suspend fun get(date: LocalDate): ApodEntity?
   fun observeDates(): Flow<List<LocalDate>>
-  fun itemCount(): Flow<Int>
-  suspend fun clear()
 }

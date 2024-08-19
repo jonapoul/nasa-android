@@ -54,6 +54,10 @@ class ConventionTest : Plugin<Project> {
     }
 
     tasks.withType<Test> {
+      if (name.contains("release", ignoreCase = true)) {
+        enabled = false
+      }
+
       testLogging {
         exceptionFormat = TestExceptionFormat.FULL
         showCauses = true

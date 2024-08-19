@@ -70,7 +70,7 @@ class NasaApplication : Application(), ImageLoaderFactory {
       register<ApodGridNavScreen> { ApodGridScreen(it.config) }
       register<ApodFullScreenNavScreen> { ApodFullScreen(it.item) }
       register<GallerySearchNavScreen> { GallerySearchScreen() }
-      register<GalleryImageNavScreen> { GalleryImageScreen(it.id, it.title) }
+      register<GalleryImageNavScreen> { GalleryImageScreen(it.id) }
       register<AboutNavScreen> { AboutScreen() }
       register<LicensesNavScreen> { LicensesScreen() }
       register<SettingsNavScreen> { SettingsScreen() }

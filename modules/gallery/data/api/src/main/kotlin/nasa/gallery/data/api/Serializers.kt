@@ -22,8 +22,6 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import nasa.gallery.model.GalleryUrl
-import nasa.gallery.model.ImageUrl
-import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keyword
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.ListMetadata
@@ -97,21 +95,6 @@ internal object KeywordsSerializer : KSerializer<Keywords> {
           .map { Keyword(it.trim()) }
       }
     return Keywords(keywords)
-  }
-}
-
-internal object UrlCollectionSerializer : JsonDeserializer<UrlCollection> {
-  override val descriptor = listSerialDescriptor<GalleryUrl>()
-
-  override fun deserialize(root: JsonElement): UrlCollection {
-    val urls = root.jsonArray.map { item ->
-      val url = item.jsonPrimitive.content
-      when {
-        url.endsWith(suffix = "json", ignoreCase = true) -> JsonUrl(url)
-        else -> ImageUrl(url)
-      }
-    }
-    return UrlCollection(urls.toSet())
   }
 }
 

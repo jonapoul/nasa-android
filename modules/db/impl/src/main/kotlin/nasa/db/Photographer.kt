@@ -6,9 +6,9 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
-import androidx.room.Query
 import nasa.db.gallery.PhotographerDao
 import nasa.gallery.model.Photographer
+import javax.inject.Inject
 
 @Entity(tableName = "photographer")
 data class RoomPhotographerEntity(
@@ -24,22 +24,14 @@ interface RoomPhotographerDao {
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend fun insertAll(entities: List<RoomPhotographerEntity>)
-
-  @Query("SELECT * FROM photographer ORDER BY photographer ASC")
-  suspend fun getAll(): List<RoomPhotographerEntity>
-
-  @Query("DELETE FROM photographer")
-  suspend fun clear()
 }
 
-class RoomPhotographerDaoWrapper(private val delegate: RoomPhotographerDao) : PhotographerDao {
+class RoomPhotographerDaoWrapper @Inject constructor(db: RoomNasaDatabase) : PhotographerDao {
+  private val delegate = db.photographerDao()
+
   override suspend fun insert(photographer: Photographer) =
     delegate.insert(RoomPhotographerEntity(photographer))
 
-  override suspend fun insertAll(photographers: List<Photographer>) =
+  override suspend fun insert(photographers: List<Photographer>) =
     delegate.insertAll(photographers.map(::RoomPhotographerEntity))
-
-  override suspend fun getAll() = delegate.getAll().map { it.photographer }
-
-  override suspend fun clear() = delegate.clear()
 }

@@ -6,9 +6,9 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
-import androidx.room.Query
 import nasa.db.gallery.KeywordDao
 import nasa.gallery.model.Keyword
+import javax.inject.Inject
 
 @Entity(tableName = "keyword")
 data class RoomKeywordEntity(
@@ -23,21 +23,11 @@ interface RoomKeywordDao {
   suspend fun insert(entity: RoomKeywordEntity)
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
-  suspend fun insertAll(entities: List<RoomKeywordEntity>)
-
-  @Query("SELECT * FROM keyword ORDER BY keyword ASC")
-  suspend fun getAll(): List<RoomKeywordEntity>
-
-  @Query("DELETE FROM keyword")
-  suspend fun clear()
+  suspend fun insert(entities: List<RoomKeywordEntity>)
 }
 
-class RoomKeywordDaoWrapper(private val delegate: RoomKeywordDao) : KeywordDao {
+class RoomKeywordDaoWrapper @Inject constructor(db: RoomNasaDatabase) : KeywordDao {
+  private val delegate = db.keywordDao()
   override suspend fun insert(keyword: Keyword) = delegate.insert(RoomKeywordEntity(keyword))
-
-  override suspend fun insertAll(keywords: List<Keyword>) = delegate.insertAll(keywords.map(::RoomKeywordEntity))
-
-  override suspend fun getAll() = delegate.getAll().map { it.keyword }
-
-  override suspend fun clear() = delegate.clear()
+  override suspend fun insert(keywords: List<Keyword>) = delegate.insert(keywords.map(::RoomKeywordEntity))
 }

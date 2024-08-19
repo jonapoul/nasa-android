@@ -3,7 +3,6 @@ plugins {
 }
 
 dependencies {
+  api(libs.kotlinx.coroutines)
   api(projects.modules.gallery.model)
-
-  implementation(libs.kotlinx.datetime)
 }

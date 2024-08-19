@@ -23,6 +23,7 @@ import nasa.gallery.model.ObjectListMetadata
 import nasa.gallery.model.ObjectMetadata
 import nasa.gallery.model.StringListMetadata
 import nasa.gallery.model.StringMetadata
+import nasa.gallery.model.UrlCollection
 import nasa.gallery.model.Year
 import nasa.test.MockWebServerRule
 import nasa.test.getResourceAsText
@@ -346,7 +347,7 @@ class GalleryApiTest {
     webServerRule.enqueue(collectionJson)
 
     // When
-    val response = galleryApi.getCollection(url = "url.com")
+    val response = galleryApi.getCollection(url = JsonUrl("url.com"))
 
     // Then
     assertTrue(response.isSuccessful)
@@ -372,7 +373,7 @@ class GalleryApiTest {
     webServerRule.enqueue(collectionJson)
 
     // When
-    val response = galleryApi.getMetadata(url = "url.com")
+    val response = galleryApi.getMetadata(url = JsonUrl("url.com"))
 
     // Then the response was parsed
     assertTrue(response.isSuccessful)

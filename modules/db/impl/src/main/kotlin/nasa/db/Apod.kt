@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.LocalDate
 import nasa.db.apod.ApodDao
 import nasa.db.apod.ApodEntity
+import javax.inject.Inject
 
 @Entity(tableName = "apod")
 data class RoomApodEntity(
@@ -53,21 +54,14 @@ interface RoomApodDao {
 
   @Query("SELECT date FROM apod")
   fun observeDates(): Flow<List<LocalDate>>
-
-  @Query("SELECT COUNT(*) FROM apod")
-  fun itemCount(): Flow<Int>
-
-  @Query("DELETE FROM apod")
-  suspend fun clear()
 }
 
-class RoomApodDaoWrapper(private val delegate: RoomApodDao) : ApodDao {
+class RoomApodDaoWrapper @Inject constructor(db: RoomNasaDatabase) : ApodDao {
+  private val delegate = db.apodDao()
   override suspend fun insert(entity: ApodEntity) = delegate.insert(entity.toImpl())
   override suspend fun insertAll(entities: List<ApodEntity>) = delegate.insertAll(entities.map { it.toImpl() })
   override suspend fun get(date: LocalDate): ApodEntity? = delegate.get(date)
   override fun observeDates(): Flow<List<LocalDate>> = delegate.observeDates()
-  override fun itemCount(): Flow<Int> = delegate.itemCount()
-  override suspend fun clear() = delegate.clear()
 
   private fun ApodEntity.toImpl(): RoomApodEntity = if (this is RoomApodEntity) {
     this
