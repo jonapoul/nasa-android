@@ -16,7 +16,6 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
 import nasa.apod.grid.nav.ApodGridNavScreen
-import nasa.apod.grid.vm.ApodGridViewModel
 import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.single.nav.ApodSingleNavScreen
 import nasa.core.ui.getViewModel

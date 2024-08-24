@@ -10,7 +10,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.apod.model.ApodItem
-import nasa.apod.single.vm.ApodFullScreenViewModel
 import nasa.core.ui.getViewModel
 
 data class ApodFullScreen(

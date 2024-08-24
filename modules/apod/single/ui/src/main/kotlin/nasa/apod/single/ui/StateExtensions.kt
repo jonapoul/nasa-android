@@ -2,8 +2,6 @@ package nasa.apod.single.ui
 
 import androidx.compose.runtime.Stable
 import kotlinx.datetime.LocalDate
-import nasa.apod.single.vm.ScreenState
-import nasa.apod.single.vm.dateOrNull
 import nasa.core.model.ApiKey
 
 @Stable

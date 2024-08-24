@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import nasa.apod.grid.vm.GridScreenState
 import nasa.apod.model.ApodNavButtonsState
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
@@ -29,10 +28,10 @@ import nasa.core.ui.screens.NoApiKey
 
 @Composable
 internal fun ApodGridScreenImpl(
-  state: GridScreenState,
-  navButtons: ApodNavButtonsState,
-  showBackButton: Boolean,
-  onAction: (ApodGridAction) -> Unit,
+    state: GridScreenState,
+    navButtons: ApodNavButtonsState,
+    showBackButton: Boolean,
+    onAction: (ApodGridAction) -> Unit,
 ) {
   val theme = LocalTheme.current
   Scaffold(
@@ -52,11 +51,11 @@ internal fun ApodGridScreenImpl(
 
 @Composable
 private fun ApodGridContent(
-  state: GridScreenState,
-  navButtons: ApodNavButtonsState,
-  onAction: (ApodGridAction) -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
+    state: GridScreenState,
+    navButtons: ApodNavButtonsState,
+    onAction: (ApodGridAction) -> Unit,
+    modifier: Modifier = Modifier,
+    theme: Theme = LocalTheme.current,
 ) {
   Column(
     modifier = modifier
@@ -83,10 +82,10 @@ private fun ApodGridContent(
 
 @Composable
 private fun GridContent(
-  state: GridScreenState,
-  onAction: (ApodGridAction) -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
+    state: GridScreenState,
+    onAction: (ApodGridAction) -> Unit,
+    modifier: Modifier = Modifier,
+    theme: Theme = LocalTheme.current,
 ) {
   Box(
     modifier = modifier

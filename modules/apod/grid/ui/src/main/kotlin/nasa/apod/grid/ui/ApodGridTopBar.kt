@@ -12,8 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import nasa.apod.grid.vm.GridScreenState
-import nasa.apod.grid.vm.dateOrNull
 import nasa.apod.res.R
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -23,10 +21,10 @@ import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ApodGridTopBar(
-  state: GridScreenState,
-  showBackButton: Boolean,
-  onAction: (ApodGridAction) -> Unit,
-  theme: Theme = LocalTheme.current,
+    state: GridScreenState,
+    showBackButton: Boolean,
+    onAction: (ApodGridAction) -> Unit,
+    theme: Theme = LocalTheme.current,
 ) {
   TopAppBar(
     colors = theme.topAppBarColors(),

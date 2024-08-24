@@ -7,11 +7,17 @@ android {
 }
 
 dependencies {
+  api(libs.alakazam.android.core)
   api(libs.androidx.compose.runtime)
+  api(libs.androidx.lifecycle.viewmodel.core)
+  api(libs.dagger.core)
+  api(libs.javaxInject)
   api(libs.kotlinx.coroutines)
+  api(libs.kotlinx.datetime)
   api(libs.voyager.core)
-  api(projects.about.vm)
+  api(projects.about.data)
   api(projects.core.ui)
+  api(projects.core.url)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -31,6 +37,8 @@ dependencies {
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.hilt.android)
+  implementation(libs.hilt.core)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
   implementation(projects.about.res)

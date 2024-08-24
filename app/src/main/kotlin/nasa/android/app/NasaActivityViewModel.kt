@@ -13,7 +13,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-internal class NasaActivityViewModel @Inject internal constructor(
+internal class NasaActivityViewModel @Inject constructor(
   private val scope: CoroutineScope,
   themePreferences: ThemePreferences,
 ) : ViewModel() {

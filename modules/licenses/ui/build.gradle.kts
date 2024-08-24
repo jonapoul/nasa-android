@@ -8,9 +8,13 @@ android {
 
 dependencies {
   api(libs.androidx.compose.runtime)
+  api(libs.androidx.lifecycle.viewmodel.core)
+  api(libs.dagger.core)
+  api(libs.javaxInject)
   api(libs.voyager.core)
   api(projects.core.ui)
-  api(projects.licenses.vm)
+  api(projects.core.url)
+  api(projects.licenses.data)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -30,6 +34,8 @@ dependencies {
   implementation(libs.androidx.lifecycle.common)
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.hilt.android)
+  implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
   implementation(libs.lazycolumn.scrollbar)

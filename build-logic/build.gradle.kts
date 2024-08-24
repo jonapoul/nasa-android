@@ -59,7 +59,6 @@ gradlePlugin {
     create(id = "nasa.module.compose", impl = "nasa.gradle.ModuleCompose")
     create(id = "nasa.module.kotlin", impl = "nasa.gradle.ModuleKotlin")
     create(id = "nasa.module.resources", impl = "nasa.gradle.ModuleResources")
-    create(id = "nasa.module.viewmodel", impl = "nasa.gradle.ModuleViewModel")
   }
 }
 

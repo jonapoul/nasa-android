@@ -26,7 +26,6 @@ plugins {
 
 enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
   AndroidApp(string = "Android App", color = "#FF5555"), // red
-  AndroidViewModel(string = "Android ViewModel", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
   AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
@@ -40,7 +39,6 @@ diagramsBlueprint {
   moduleTypeFinder = ModuleType.Finder { project ->
     when {
       project.plugins.hasPlugin("com.android.application") -> NasaModuleType.AndroidApp
-      project.plugins.hasPlugin("nasa.module.viewmodel") -> NasaModuleType.AndroidViewModel
       project.plugins.hasPlugin("nasa.module.compose") -> NasaModuleType.AndroidCompose
       project.plugins.hasPlugin("nasa.module.android") -> NasaModuleType.AndroidLibrary
       project.plugins.hasPlugin("nasa.module.resources") -> NasaModuleType.AndroidResources
@@ -183,6 +181,7 @@ dependencies {
   implementation(libs.coil.core)
   implementation(libs.dagger.core)
   implementation(libs.hilt.android)
+  implementation(libs.hilt.core)
   implementation(libs.javaxInject)
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.coroutines)
@@ -200,9 +199,9 @@ dependencies {
   implementation(projects.apod.grid.ui)
   implementation(projects.apod.single.ui)
   implementation(projects.db.impl)
-  implementation(projects.gallery.image.ui)
   implementation(projects.gallery.nav)
-  implementation(projects.gallery.search.ui)
+  implementation(projects.gallery.ui.image)
+  implementation(projects.gallery.ui.search)
   implementation(projects.home.nav)
   implementation(projects.home.ui)
   implementation(projects.licenses.nav)

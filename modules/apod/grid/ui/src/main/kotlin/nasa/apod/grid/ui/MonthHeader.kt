@@ -23,8 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.datetime.Month
-import nasa.apod.grid.vm.GridScreenState
-import nasa.apod.grid.vm.dateOrNull
 import nasa.apod.model.ApodNavButtonsState
 import nasa.apod.res.R
 import nasa.core.ui.ShimmeringBlock

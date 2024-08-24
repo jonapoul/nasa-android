@@ -10,7 +10,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.core.ui.getViewModel
 import nasa.core.ui.set
-import nasa.settings.vm.SettingsViewModel
 
 class SettingsScreen : Screen {
   @Composable

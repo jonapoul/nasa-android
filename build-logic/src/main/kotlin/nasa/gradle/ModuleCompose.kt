@@ -1,6 +1,5 @@
 package nasa.gradle
 
-import com.android.build.gradle.LibraryPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,9 +11,11 @@ class ModuleCompose : Plugin<Project> {
   override fun apply(target: Project): Unit = with(target) {
     with(pluginManager) {
       apply(KotlinAndroidPluginWrapper::class.java)
-      apply(LibraryPlugin::class.java)
+      apply(ConventionAndroidLibrary::class.java)
       apply(ConventionCompose::class.java)
+      apply(ConventionHilt::class.java)
       apply(ConventionStyle::class.java)
+      apply(ConventionTest::class.java)
       apply(SortDependenciesPlugin::class.java)
     }
 

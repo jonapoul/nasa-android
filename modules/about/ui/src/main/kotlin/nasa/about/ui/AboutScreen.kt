@@ -11,8 +11,6 @@ import cafe.adriel.voyager.core.registry.rememberScreen
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import nasa.about.vm.AboutViewModel
-import nasa.about.vm.CheckUpdatesState
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
 import nasa.core.ui.set

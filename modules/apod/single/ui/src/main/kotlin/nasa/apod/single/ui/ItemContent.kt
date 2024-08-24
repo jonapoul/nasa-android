@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nasa.apod.model.ApodMediaType
 import nasa.apod.res.R
-import nasa.apod.single.vm.ScreenState
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme

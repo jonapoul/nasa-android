@@ -37,7 +37,6 @@ import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.licenses.data.LibraryModel
 import nasa.licenses.res.R
-import nasa.licenses.vm.LicensesState
 
 @Composable
 internal fun LicensesScreenImpl(

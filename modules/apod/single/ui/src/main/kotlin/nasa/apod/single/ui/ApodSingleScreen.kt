@@ -20,7 +20,6 @@ import nasa.apod.model.ApodItem
 import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.single.nav.ApodFullScreenNavScreen
 import nasa.apod.single.nav.ApodSingleNavScreen
-import nasa.apod.single.vm.ApodSingleViewModel
 import nasa.core.ui.getViewModel
 import nasa.core.ui.set
 import nasa.settings.nav.SettingsNavScreen

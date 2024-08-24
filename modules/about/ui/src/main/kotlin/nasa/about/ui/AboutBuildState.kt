@@ -14,7 +14,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import nasa.about.res.R
-import nasa.about.vm.BuildState
 import nasa.core.ui.preview.PreviewColumn
 
 @Composable

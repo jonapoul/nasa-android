@@ -25,10 +25,10 @@ import nasa.core.http.buildOkHttp
 import nasa.core.model.ApiKey
 import nasa.core.model.IMAGE_CACHE_DIR
 import nasa.core.model.megabytes
-import nasa.gallery.image.ui.GalleryImageScreen
 import nasa.gallery.nav.GalleryImageNavScreen
 import nasa.gallery.nav.GallerySearchNavScreen
-import nasa.gallery.search.ui.GallerySearchScreen
+import nasa.gallery.ui.image.GalleryImageScreen
+import nasa.gallery.ui.search.GallerySearchScreen
 import nasa.home.nav.HomeNavScreen
 import nasa.home.ui.HomeScreen
 import nasa.licenses.nav.LicensesNavScreen

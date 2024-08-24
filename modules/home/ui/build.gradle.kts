@@ -8,8 +8,13 @@ android {
 
 dependencies {
   api(libs.androidx.compose.runtime)
+  api(libs.androidx.lifecycle.viewmodel.core)
+  api(libs.dagger.core)
+  api(libs.javaxInject)
   api(libs.voyager.core)
   api(projects.apod.single.nav)
+  api(projects.core.http)
+  api(projects.core.url)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -31,14 +36,18 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.coil.compose)
   implementation(libs.coil.composeBase)
+  implementation(libs.hilt.android)
+  implementation(libs.hilt.core)
+  implementation(libs.javaxInject)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.lazycolumn.scrollbar)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
   implementation(projects.about.nav)
+  implementation(projects.apod.data.repo)
   implementation(projects.core.ui)
+  implementation(projects.gallery.data.repo)
   implementation(projects.gallery.nav)
   implementation(projects.home.res)
-  implementation(projects.home.vm)
   implementation(projects.settings.nav)
 }
