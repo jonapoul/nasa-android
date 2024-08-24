@@ -13,7 +13,6 @@ dependencies {
   api(projects.core.model)
   api(projects.gallery.data.repo)
 
-  implementation(libs.timber)
   implementation(projects.core.http)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)

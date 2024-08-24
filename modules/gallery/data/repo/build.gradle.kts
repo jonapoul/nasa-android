@@ -19,7 +19,6 @@ dependencies {
   implementation(libs.okhttp.core)
   implementation(libs.preferences.core)
   implementation(libs.retrofit.core)
-  implementation(libs.timber)
 
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)

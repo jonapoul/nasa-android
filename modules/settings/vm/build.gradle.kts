@@ -14,8 +14,6 @@ dependencies {
   api(projects.core.url)
   api(projects.db.api)
 
-  implementation(libs.timber)
-
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 
   testImplementation(libs.androidx.room.runtime)

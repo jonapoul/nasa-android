@@ -13,7 +13,6 @@ dependencies {
   api(projects.licenses.data)
 
   implementation(libs.alakazam.kotlin.core)
-  implementation(libs.timber)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

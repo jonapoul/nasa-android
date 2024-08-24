@@ -15,7 +15,5 @@ dependencies {
   api(projects.core.http)
   api(projects.core.url)
 
-  implementation(libs.timber)
-
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

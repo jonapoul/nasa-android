@@ -14,7 +14,5 @@ dependencies {
   api(libs.kotlinx.immutable)
   api(projects.gallery.data.repo)
 
-  implementation(libs.timber)
-
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

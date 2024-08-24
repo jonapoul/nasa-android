@@ -193,7 +193,6 @@ dependencies {
   implementation(libs.preferences.android)
   implementation(libs.preferences.core)
   implementation(libs.retrofit.core)
-  implementation(libs.timber)
   implementation(libs.voyager.core)
   implementation(libs.voyager.navigator)
   implementation(projects.about.nav)

@@ -80,6 +80,7 @@ dependencyAnalysis {
           libs.test.timber,
           libs.test.turbine,
           libs.androidx.compose.ui.toolingPreview,
+          libs.timber,
         )
         exclude(":test:resources")
       }
