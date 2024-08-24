@@ -10,18 +10,24 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.kotlin.dsl.assign
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.project
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
+import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradlePlugin
 
 class ConventionTest : Plugin<Project> {
   override fun apply(target: Project) = with(target) {
     with(pluginManager) {
       apply(KoverGradlePlugin::class.java)
+      apply(PowerAssertGradlePlugin::class.java)
     }
     val isAndroid = project.plugins.any { it is AndroidBasePlugin }
     configureTesting(isAndroid)
+    configurePowerAssert()
     configureKover(isAndroid)
   }
 
@@ -65,6 +71,21 @@ class ConventionTest : Plugin<Project> {
         showStackTraces = true
         showStandardStreams = true
       }
+    }
+  }
+
+  @OptIn(ExperimentalKotlinGradlePluginApi::class)
+  private fun Project.configurePowerAssert() {
+    extensions.configure<PowerAssertGradleExtension> {
+      functions = listOf(
+        "kotlin.assert",
+        "kotlin.test.assertEquals",
+        "kotlin.test.assertFalse",
+        "kotlin.test.assertIs",
+        "kotlin.test.assertNotNull",
+        "kotlin.test.assertNull",
+        "kotlin.test.assertTrue",
+      )
     }
   }
 
