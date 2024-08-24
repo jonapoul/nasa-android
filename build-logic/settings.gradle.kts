@@ -4,9 +4,14 @@ rootProject.name = "build-logic"
 
 dependencyResolutionManagement {
   repositories {
+    google {
+      mavenContent {
+        includeGroupByRegex(".*android.*")
+        includeGroupByRegex(".*google.*")
+      }
+    }
     gradlePluginPortal()
     mavenCentral()
-    google()
   }
 
   versionCatalogs {

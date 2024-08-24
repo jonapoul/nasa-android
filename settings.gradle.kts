@@ -4,17 +4,27 @@ rootProject.name = "nasa-android"
 
 pluginManagement {
   repositories {
+    google {
+      mavenContent {
+        includeGroupByRegex(".*android.*")
+        includeGroupByRegex(".*google.*")
+      }
+    }
     mavenCentral()
-    google()
     gradlePluginPortal()
   }
 }
 
 dependencyResolutionManagement {
   repositories {
-    google()
+    google {
+      mavenContent {
+        includeGroupByRegex(".*android.*")
+        includeGroupByRegex(".*google.*")
+      }
+    }
     mavenCentral()
-    maven { url = uri("https://jitpack.io") }
+    maven("https://jitpack.io")
   }
 }
 
