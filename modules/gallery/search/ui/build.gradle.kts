@@ -10,8 +10,8 @@ dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
-  api(projects.modules.core.ui)
-  api(projects.modules.gallery.search.vm)
+  api(projects.core.ui)
+  api(projects.gallery.search.vm)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -38,6 +38,6 @@ dependencies {
   implementation(libs.lazycolumn.scrollbar)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
-  implementation(projects.modules.gallery.nav)
-  implementation(projects.modules.gallery.res)
+  implementation(projects.gallery.nav)
+  implementation(projects.gallery.res)
 }

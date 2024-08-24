@@ -14,6 +14,6 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
 
   testImplementation(libs.test.okhttp)
-  testImplementation(projects.modules.core.http)
-  testImplementation(projects.modules.test.http)
+  testImplementation(projects.core.http)
+  testImplementation(projects.test.http)
 }

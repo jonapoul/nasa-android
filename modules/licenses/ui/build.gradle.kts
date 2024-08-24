@@ -9,8 +9,8 @@ android {
 dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
-  api(projects.modules.core.ui)
-  api(projects.modules.licenses.vm)
+  api(projects.core.ui)
+  api(projects.licenses.vm)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -35,5 +35,5 @@ dependencies {
   implementation(libs.lazycolumn.scrollbar)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
-  implementation(projects.modules.licenses.res)
+  implementation(projects.licenses.res)
 }

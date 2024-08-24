@@ -10,9 +10,9 @@ dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
-  api(projects.modules.apod.grid.nav)
-  api(projects.modules.apod.single.vm)
-  api(projects.modules.core.ui)
+  api(projects.apod.grid.nav)
+  api(projects.apod.single.vm)
+  api(projects.core.ui)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.activity.core)
@@ -36,7 +36,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
-  implementation(projects.modules.apod.res)
-  implementation(projects.modules.apod.single.nav)
-  implementation(projects.modules.settings.nav)
+  implementation(projects.apod.res)
+  implementation(projects.apod.single.nav)
+  implementation(projects.settings.nav)
 }

@@ -25,9 +25,9 @@ dependencies {
   api(libs.alakazam.kotlin.core)
   api(libs.androidx.room.runtime)
   api(libs.kotlinx.coroutines)
-  api(projects.modules.db.api)
-  api(projects.modules.db.apod)
-  api(projects.modules.db.gallery)
+  api(projects.db.api)
+  api(projects.db.apod)
+  api(projects.db.gallery)
 
   implementation(libs.androidx.room.common)
   implementation(libs.androidx.sqlite.core)

@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
   api(libs.kotlinx.coroutines)
-  api(projects.modules.gallery.model)
+  api(projects.gallery.model)
 }

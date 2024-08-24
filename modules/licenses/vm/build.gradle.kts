@@ -9,8 +9,8 @@ android {
 dependencies {
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.immutable)
-  api(projects.modules.core.url)
-  api(projects.modules.licenses.data)
+  api(projects.core.url)
+  api(projects.licenses.data)
 
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.timber)

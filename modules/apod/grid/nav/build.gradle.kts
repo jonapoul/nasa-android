@@ -8,5 +8,5 @@ android {
 
 dependencies {
   api(libs.voyager.core)
-  api(projects.modules.apod.nav)
+  api(projects.apod.nav)
 }

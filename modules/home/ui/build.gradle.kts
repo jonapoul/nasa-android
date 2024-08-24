@@ -9,7 +9,7 @@ android {
 dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
-  api(projects.modules.apod.single.nav)
+  api(projects.apod.single.nav)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -32,10 +32,10 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
-  implementation(projects.modules.about.nav)
-  implementation(projects.modules.core.ui)
-  implementation(projects.modules.gallery.nav)
-  implementation(projects.modules.home.res)
-  implementation(projects.modules.home.vm)
-  implementation(projects.modules.settings.nav)
+  implementation(projects.about.nav)
+  implementation(projects.core.ui)
+  implementation(projects.gallery.nav)
+  implementation(projects.home.res)
+  implementation(projects.home.vm)
+  implementation(projects.settings.nav)
 }

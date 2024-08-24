@@ -12,7 +12,7 @@ dependencies {
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
   api(libs.kotlinx.immutable)
-  api(projects.modules.gallery.data.repo)
+  api(projects.gallery.data.repo)
 
   implementation(libs.timber)
 

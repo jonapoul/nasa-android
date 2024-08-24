@@ -10,11 +10,11 @@ dependencies {
   api(libs.alakazam.kotlin.core)
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.kotlinx.coroutines)
-  api(projects.modules.core.model)
-  api(projects.modules.gallery.data.repo)
+  api(projects.core.model)
+  api(projects.gallery.data.repo)
 
   implementation(libs.timber)
-  implementation(projects.modules.core.http)
+  implementation(projects.core.http)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

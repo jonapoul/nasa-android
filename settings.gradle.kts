@@ -1,8 +1,9 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "HasPlatformType")
 
 rootProject.name = "nasa-android"
 
 pluginManagement {
+  includeBuild("build-logic")
   repositories {
     google {
       mavenContent {
@@ -33,65 +34,28 @@ dependencyResolutionManagement {
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-includeBuild("build-logic")
-
 include(":app")
 
-include(":modules:about:data")
-include(":modules:about:nav")
-include(":modules:about:res")
-include(":modules:about:ui")
-include(":modules:about:vm")
+private val File.gradleModuleDescendants: Sequence<File>
+  get() = listFiles()
+    ?.asSequence()
+    ?.filter { it.isDirectory }
+    ?.flatMap { dir -> dir.subDescendants }
+    ?: emptySequence()
 
-include(":modules:apod:data:api")
-include(":modules:apod:data:repo")
-include(":modules:apod:grid:nav")
-include(":modules:apod:grid:ui")
-include(":modules:apod:grid:vm")
-include(":modules:apod:model")
-include(":modules:apod:nav")
-include(":modules:apod:res")
-include(":modules:apod:single:nav")
-include(":modules:apod:single:ui")
-include(":modules:apod:single:vm")
+private val File.subDescendants: Sequence<File>
+  get() = if (File(this, "build.gradle.kts").exists()) {
+    sequenceOf(this)
+  } else {
+    gradleModuleDescendants
+  }
 
-include(":modules:core:http")
-include(":modules:core:model")
-include(":modules:core:res")
-include(":modules:core:ui")
-include(":modules:core:url")
+val modulesDir = rootProject.projectDir.resolve("modules")
+val modulesPath = modulesDir.toPath()
 
-include(":modules:db:api")
-include(":modules:db:apod")
-include(":modules:db:gallery")
-include(":modules:db:impl")
-
-include(":modules:gallery:data:api")
-include(":modules:gallery:data:repo")
-include(":modules:gallery:image:ui")
-include(":modules:gallery:image:vm")
-include(":modules:gallery:model")
-include(":modules:gallery:nav")
-include(":modules:gallery:res")
-include(":modules:gallery:search:ui")
-include(":modules:gallery:search:vm")
-
-include(":modules:home:nav")
-include(":modules:home:res")
-include(":modules:home:ui")
-include(":modules:home:vm")
-
-include(":modules:licenses:data")
-include(":modules:licenses:nav")
-include(":modules:licenses:res")
-include(":modules:licenses:ui")
-include(":modules:licenses:vm")
-
-include(":modules:settings:nav")
-include(":modules:settings:res")
-include(":modules:settings:ui")
-include(":modules:settings:vm")
-
-include(":modules:test:http")
-include(":modules:test:prefs")
-include(":modules:test:resources")
+modulesDir.gradleModuleDescendants.forEach { dir ->
+  val path = dir.toPath()
+  val relative = modulesPath.relativize(path).toString().replace(File.separator, ":")
+  include(relative)
+  project(":$relative").projectDir = dir
+}

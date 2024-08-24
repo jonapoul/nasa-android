@@ -58,8 +58,8 @@ dependencyAnalysis {
 
       onIncorrectConfiguration {
         exclude(
-          ":modules:core:model",
-          ":modules:core:res",
+          ":core:model",
+          ":core:res",
           "javax.inject:javax.inject",
         )
       }
@@ -81,7 +81,7 @@ dependencyAnalysis {
           libs.test.turbine,
           libs.androidx.compose.ui.toolingPreview,
         )
-        exclude(":modules:test:resources")
+        exclude(":test:resources")
       }
     }
   }

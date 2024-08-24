@@ -9,8 +9,8 @@ android {
 dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.voyager.core)
-  api(projects.modules.core.ui)
-  api(projects.modules.gallery.image.vm)
+  api(projects.core.ui)
+  api(projects.gallery.image.vm)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -32,6 +32,6 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
-  implementation(projects.modules.core.http)
-  implementation(projects.modules.gallery.res)
+  implementation(projects.core.http)
+  implementation(projects.gallery.res)
 }

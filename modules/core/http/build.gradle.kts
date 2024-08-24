@@ -8,7 +8,7 @@ dependencies {
   api(libs.kotlinx.serialization.json)
   api(libs.okhttp.core)
   api(libs.retrofit.core)
-  api(projects.modules.core.model)
+  api(projects.core.model)
 
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.okhttp.logging)

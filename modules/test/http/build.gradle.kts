@@ -10,5 +10,5 @@ dependencies {
   implementation(libs.okhttp.core)
   implementation(libs.retrofit.core)
   implementation(libs.test.kotlin.junit)
-  implementation(projects.modules.core.http)
+  implementation(projects.core.http)
 }

@@ -10,10 +10,10 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
-  api(projects.modules.apod.data.repo)
-  api(projects.modules.apod.nav)
-  api(projects.modules.core.http)
-  api(projects.modules.core.url)
+  api(projects.apod.data.repo)
+  api(projects.apod.nav)
+  api(projects.core.http)
+  api(projects.core.url)
 
   implementation(libs.timber)
 

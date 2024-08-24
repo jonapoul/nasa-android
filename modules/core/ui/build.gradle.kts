@@ -13,8 +13,8 @@ dependencies {
   api(libs.kotlinx.immutable)
   api(libs.lazycolumn.scrollbar)
   api(libs.voyager.core)
-  api(projects.modules.core.model)
-  api(projects.modules.core.res)
+  api(projects.core.model)
+  api(projects.core.res)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.annotation)

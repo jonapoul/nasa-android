@@ -10,8 +10,8 @@ dependencies {
   api(libs.alakazam.android.core)
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
-  api(projects.modules.about.data)
-  api(projects.modules.core.url)
+  api(projects.about.data)
+  api(projects.core.url)
 
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.timber)

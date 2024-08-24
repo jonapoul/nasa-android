@@ -10,8 +10,8 @@ dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.kotlinx.coroutines)
   api(libs.voyager.core)
-  api(projects.modules.about.vm)
-  api(projects.modules.core.ui)
+  api(projects.about.vm)
+  api(projects.core.ui)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -33,6 +33,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.voyager.hilt)
   implementation(libs.voyager.navigator)
-  implementation(projects.modules.about.res)
-  implementation(projects.modules.licenses.nav)
+  implementation(projects.about.res)
+  implementation(projects.licenses.nav)
 }

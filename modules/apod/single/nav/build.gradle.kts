@@ -8,6 +8,6 @@ android {
 
 dependencies {
   api(libs.voyager.core)
-  api(projects.modules.apod.model)
-  api(projects.modules.apod.nav)
+  api(projects.apod.model)
+  api(projects.apod.nav)
 }

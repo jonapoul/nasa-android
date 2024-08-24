@@ -8,8 +8,8 @@ android {
 
 dependencies {
   api(libs.kotlinx.coroutines)
-  api(projects.modules.core.http)
-  api(projects.modules.core.url)
+  api(projects.core.http)
+  api(projects.core.url)
 
   implementation(libs.javaxInject)
 

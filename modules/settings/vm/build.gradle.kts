@@ -10,9 +10,9 @@ dependencies {
   api(libs.alakazam.android.core)
   api(libs.alakazam.kotlin.core)
   api(libs.kotlinx.coroutines)
-  api(projects.modules.apod.data.repo)
-  api(projects.modules.core.url)
-  api(projects.modules.db.api)
+  api(projects.apod.data.repo)
+  api(projects.core.url)
+  api(projects.db.api)
 
   implementation(libs.timber)
 
@@ -20,5 +20,5 @@ dependencies {
 
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)
-  testImplementation(projects.modules.db.impl)
+  testImplementation(projects.db.impl)
 }

@@ -9,8 +9,8 @@ android {
 dependencies {
   api(libs.javaxInject)
   api(libs.kotlinx.coroutines)
-  api(projects.modules.db.gallery)
-  api(projects.modules.gallery.data.api)
+  api(projects.db.gallery)
+  api(projects.gallery.data.api)
 
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.kotlinx.datetime)
@@ -24,7 +24,7 @@ dependencies {
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)
   testImplementation(libs.test.okhttp)
-  testImplementation(projects.modules.db.impl)
-  testImplementation(projects.modules.test.http)
-  testImplementation(projects.modules.test.prefs)
+  testImplementation(projects.db.impl)
+  testImplementation(projects.test.http)
+  testImplementation(projects.test.prefs)
 }

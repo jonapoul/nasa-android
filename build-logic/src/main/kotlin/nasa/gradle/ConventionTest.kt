@@ -38,7 +38,7 @@ class ConventionTest : Plugin<Project> {
         testImplementation(libs.test.mockk.core)
         testImplementation(libs.test.mockk.dsl)
         testImplementation(libs.test.turbine)
-        testImplementation(project(":modules:test:resources"))
+        testImplementation(project(":test:resources"))
 
         if (isAndroid) {
           testImplementation(libs.test.androidx.arch)
