@@ -86,7 +86,7 @@ private fun SearchContent(
       is SearchState.Failed -> LoadFailure(
         modifier = contentsModifier.padding(32.dp),
         message = searchState.reason,
-        onRetryLoad = { onAction(SearchAction.RetrySearch) },
+        onRetryLoad = { onAction(SearchAction.PerformSearch) },
         theme = theme,
       )
 

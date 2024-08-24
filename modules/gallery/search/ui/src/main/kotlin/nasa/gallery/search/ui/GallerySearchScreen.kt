@@ -53,7 +53,6 @@ class GallerySearchScreen : Screen {
         when (action) {
           SearchAction.NavBack -> navigator.pop()
           is SearchAction.NavToImage -> clickedImageId.set(action.id)
-          SearchAction.RetrySearch -> viewModel.retrySearch()
           is SearchAction.EnterSearchTerm -> viewModel.enterSearchTerm(action.text)
           SearchAction.PerformSearch -> viewModel.performSearch()
           SearchAction.ConfigureSearch -> showFilterModal.set(true)

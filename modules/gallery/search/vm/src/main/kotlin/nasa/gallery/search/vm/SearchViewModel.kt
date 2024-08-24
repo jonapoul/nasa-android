@@ -30,10 +30,6 @@ class SearchViewModel @Inject internal constructor(
   private val mutableFilterConfig = MutableStateFlow(FilterConfig.Empty)
   val filterConfig: StateFlow<FilterConfig> = mutableFilterConfig.asStateFlow()
 
-  fun retrySearch() {
-    performSearch()
-  }
-
   fun performSearch(pageNumber: Int? = null) {
     val config = mutableFilterConfig.value
     Timber.v("performSearch %d %s", pageNumber, config)
