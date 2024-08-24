@@ -11,7 +11,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import nasa.about.nav.AboutNavScreen
 import nasa.apod.nav.ApodScreenConfig
-import nasa.apod.single.nav.ApodSingleNavScreen
+import nasa.apod.nav.ApodSingleNavScreen
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.getViewModel
 import nasa.core.ui.set
