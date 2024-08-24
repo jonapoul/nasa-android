@@ -21,7 +21,6 @@ plugins {
   alias(libs.plugins.spotless) apply false
 
   alias(libs.plugins.dependencyAnalysis)
-  alias(libs.plugins.dependencyGuard)
   alias(libs.plugins.dependencySort)
   alias(libs.plugins.dependencyVersions)
   alias(libs.plugins.doctor)
@@ -94,10 +93,6 @@ doctor {
     ensureJavaHomeIsSet = true
     failOnError = true
   }
-}
-
-dependencyGuard {
-  configuration("classpath")
 }
 
 tasks.withType<DependencyUpdatesTask> {

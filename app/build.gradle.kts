@@ -21,12 +21,7 @@ plugins {
   id("nasa.convention.style")
   id("nasa.convention.test")
   alias(libs.plugins.blueprint.diagrams)
-  alias(libs.plugins.dependencyGuard)
   alias(libs.plugins.dependencySort)
-}
-
-dependencyGuard {
-  configuration("releaseRuntimeClasspath")
 }
 
 enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {

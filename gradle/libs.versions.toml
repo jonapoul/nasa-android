@@ -5,7 +5,6 @@ androidCacheFix = "3.0.1"
 blueprint = "0.8.2"
 dependencyAnalysis = "1.33.0"
 dependencyGraph = "0.9.0-SNAPSHOT"
-dependencyGuard = "0.5.0"
 dependencySort = "0.8"
 dependencyVersions = "0.51.0"
 detekt = "1.23.6"
@@ -72,7 +71,6 @@ plugin-blueprint-core = { module = "dev.jonpoulton.blueprint:core", version.ref 
 plugin-blueprint-recipes = { module = "dev.jonpoulton.blueprint:recipes", version.ref = "blueprint" }
 plugin-compose = { module = "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "kotlin" }
 plugin-dependencyGraph = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraph" }
-plugin-dependencyGuard = { module = "com.dropbox.dependency-guard:com.dropbox.dependency-guard.gradle.plugin", version.ref = "dependencyGuard" }
 plugin-dependencySort = { module = "com.squareup.sort-dependencies:com.squareup.sort-dependencies.gradle.plugin", version.ref = "dependencySort" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
@@ -186,7 +184,6 @@ androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 androidCacheFix = { id = "org.gradle.android.cache-fix", version.ref = "androidCacheFix" }
 blueprint-diagrams = { id = "dev.jonpoulton.blueprint.diagrams", version.ref = "blueprint" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
-dependencyGuard = { id = "com.dropbox.dependency-guard", version.ref = "dependencyGuard" }
 dependencySort = { id = "com.squareup.sort-dependencies", version.ref = "dependencySort" }
 dependencyVersions = { id = "com.github.ben-manes.versions", version.ref = "dependencyVersions" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

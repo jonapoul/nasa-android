@@ -27,7 +27,6 @@ dependencies {
   implementation(libs.plugin.blueprint.recipes)
   implementation(libs.plugin.compose)
   implementation(libs.plugin.dependencyGraph)
-  implementation(libs.plugin.dependencyGuard)
   implementation(libs.plugin.dependencySort)
   implementation(libs.plugin.detekt)
   implementation(libs.plugin.hilt)

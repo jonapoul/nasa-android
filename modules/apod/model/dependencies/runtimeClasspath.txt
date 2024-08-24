@@ -1,8 +1,0 @@
-org.jetbrains.kotlin:kotlin-stdlib-common:2.0.10
-org.jetbrains.kotlin:kotlin-stdlib:2.0.10
-org.jetbrains.kotlinx:kotlinx-datetime-jvm:0.6.0
-org.jetbrains.kotlinx:kotlinx-datetime:0.6.0
-org.jetbrains.kotlinx:kotlinx-serialization-bom:1.7.1
-org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.7.1
-org.jetbrains.kotlinx:kotlinx-serialization-core:1.7.1
-org.jetbrains:annotations:13.0
