@@ -133,6 +133,8 @@ graph ["rank"="same"]
 ":home:ui" -> ":settings:nav" ["style"="dotted"]
 ":home:vm" -> ":core:http"
 ":home:vm" -> ":core:url"
+":home:vm" -> ":apod:data:repo" ["style"="dotted"]
+":home:vm" -> ":gallery:data:repo" ["style"="dotted"]
 ":licenses:ui" -> ":core:ui"
 ":licenses:ui" -> ":licenses:vm"
 ":licenses:ui" -> ":licenses:res" ["style"="dotted"]

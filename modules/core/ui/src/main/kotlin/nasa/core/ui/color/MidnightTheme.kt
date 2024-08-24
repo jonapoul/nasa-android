@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 internal class MidnightTheme : Theme {
   override val pageBackground = ColorPalette.grey900
-  override val pageBackgroundAlt = ColorPalette.grey700
+  override val pageBackgroundAlt = ColorPalette.grey800
   override val pageText = ColorPalette.grey100
   override val pageTextSubdued = ColorPalette.grey400
   override val pageTextPrimary = ColorPalette.blue200

@@ -37,10 +37,14 @@ class GallerySearchRepository @Inject internal constructor(
   private val albumDao: AlbumDao,
 ) {
   suspend fun search(config: FilterConfig, pageNumber: Int?): SearchResult {
-    Timber.v("search %s", config)
+    val pageSize = searchPreferences.pageSize.get()
+    return search(config, pageNumber, pageSize)
+  }
+
+  suspend fun search(config: FilterConfig, pageNumber: Int?, pageSize: Int): SearchResult {
+    Timber.v("search pageNumber=$pageNumber pageSize=$pageSize config=%s", config)
     if (config == FilterConfig.Empty) return SearchResult.NoFilterSupplied
 
-    val pageSize = searchPreferences.pageSize.get()
     val response = withContext(io) { performSearch(config, pageSize, pageNumber) }
     val searchResponse = if (response.isSuccessful) response.body() else parseFailure(response.errorBody())
 

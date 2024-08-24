@@ -28,6 +28,12 @@ class HomeScreen : Screen {
 
     val viewModel = getViewModel<HomeViewModel>()
 
+    val apodThumbnailUrl by viewModel.apodThumbnailUrl.collectAsState(initial = null)
+    val galleryThumbnailUrl by viewModel.galleryThumbnailUrl.collectAsState(initial = null)
+    val thumbnailUrls = remember(apodThumbnailUrl, galleryThumbnailUrl) {
+      ThumbnailUrls(apodThumbnailUrl, galleryThumbnailUrl)
+    }
+
     val aboutScreen = rememberScreen(AboutNavScreen)
     val clickedAbout = remember { mutableStateOf(false) }
     if (clickedAbout.value) {
@@ -68,6 +74,7 @@ class HomeScreen : Screen {
     }
 
     HomeScreenImpl(
+      thumbnailUrls = thumbnailUrls,
       theme = theme,
       onAction = { action ->
         when (action) {

@@ -1,6 +1,6 @@
 package nasa.home.ui
 
-import alakazam.android.ui.compose.VerticalSpacer
+import alakazam.kotlin.core.exhaustive
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
@@ -9,16 +9,17 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.drawWithCache
@@ -27,17 +28,17 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import nasa.core.ui.button.PrimaryTextButton
+import my.nanihadesuka.compose.LazyColumnScrollbar
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
+import nasa.core.ui.color.scrollbarSettings
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
-import nasa.home.res.R
 
 @Composable
 internal fun HomeScreenImpl(
+  thumbnailUrls: ThumbnailUrls,
   onAction: (HomeAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
@@ -78,7 +79,7 @@ internal fun HomeScreenImpl(
       )
 
       HomeScreenContent(
-        modifier = Modifier.padding(innerPadding),
+        thumbnailUrls = thumbnailUrls,
         onAction = onAction,
         theme = theme,
       )
@@ -86,36 +87,51 @@ internal fun HomeScreenImpl(
   }
 }
 
+private enum class GridItem {
+  Apod,
+  Gallery,
+}
+
 @Composable
 private fun HomeScreenContent(
+  thumbnailUrls: ThumbnailUrls,
   onAction: (HomeAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  Column(
+  val state = rememberLazyListState()
+  LazyColumnScrollbar(
     modifier = modifier
       .fillMaxSize()
-      .padding(15.dp),
-    horizontalAlignment = Alignment.CenterHorizontally,
-    verticalArrangement = Arrangement.Center,
+      .padding(4.dp),
+    state = state,
+    settings = theme.scrollbarSettings(),
   ) {
-    PrimaryTextButton(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource(R.string.home_nav_apod),
-      theme = theme,
-      onClick = { onAction(HomeAction.NavApodToday) },
-    )
+    LazyColumn(
+      state = state,
+      verticalArrangement = Arrangement.Top,
+      contentPadding = PaddingValues(GRID_CONTENT_PADDING),
+    ) {
+      items(GridItem.entries) { item ->
+        when (item) {
+          GridItem.Apod -> ApodGridItem(
+            thumbnailUrl = thumbnailUrls.apod,
+            onAction = onAction,
+            theme = theme,
+          )
 
-    VerticalSpacer(20.dp)
-
-    PrimaryTextButton(
-      modifier = Modifier.fillMaxWidth(),
-      text = stringResource(R.string.home_nav_gallery),
-      theme = theme,
-      onClick = { onAction(HomeAction.NavGallery) },
-    )
+          GridItem.Gallery -> GalleryGridItem(
+            thumbnailUrl = thumbnailUrls.gallery,
+            onAction = onAction,
+            theme = theme,
+          )
+        }.exhaustive
+      }
+    }
   }
 }
+
+private val GRID_CONTENT_PADDING = 0.dp
 
 private val TARGET_OFFSET = 1000.dp
 private val BLUR_SIZE = 40.dp
@@ -126,6 +142,7 @@ private const val ANIMATION_PERIOD_MS = 30_000
 @Composable
 private fun PreviewHome() = PreviewScreen {
   HomeScreenImpl(
+    thumbnailUrls = PREVIEW_URLS,
     onAction = {},
   )
 }
