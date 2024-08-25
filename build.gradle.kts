@@ -36,7 +36,6 @@ listOf(
   "local.properties",
 ).forEach { filename ->
   rootLocalPropertiesOrNull(filename)?.forEach { (key, value) ->
-    println("Copied from $filename: '$key' = '$value'")
     ext[key.toString()] = value.toString()
   }
 }
