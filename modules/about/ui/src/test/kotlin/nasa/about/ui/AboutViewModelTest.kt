@@ -9,7 +9,7 @@ import kotlinx.coroutines.test.runTest
 import nasa.about.data.GithubReleaseModel
 import nasa.about.data.GithubRepository
 import nasa.about.data.LatestReleaseState
-import nasa.core.url.UrlOpener
+import nasa.core.android.UrlOpener
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

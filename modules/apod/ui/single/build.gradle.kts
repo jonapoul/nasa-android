@@ -16,9 +16,9 @@ dependencies {
   api(libs.voyager.core)
   api(projects.apod.data.repo)
   api(projects.apod.nav)
+  api(projects.core.android)
   api(projects.core.http)
   api(projects.core.ui)
-  api(projects.core.url)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.activity.core)

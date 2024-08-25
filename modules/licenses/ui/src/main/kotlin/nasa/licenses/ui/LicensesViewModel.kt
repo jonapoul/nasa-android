@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import nasa.core.url.UrlOpener
+import nasa.core.android.UrlOpener
 import nasa.licenses.data.LicensesLoadState
 import nasa.licenses.data.LicensesRepository
 import timber.log.Timber

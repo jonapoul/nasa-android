@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import nasa.apod.data.repo.SingleApodRepository
 import nasa.apod.data.repo.SingleLoadResult
+import nasa.core.android.UrlOpener
 import nasa.core.http.ApiUsage
 import nasa.core.http.ApiUsageStateHolder
 import nasa.core.model.ApiKey
 import nasa.core.model.NASA_API_URL
-import nasa.core.url.UrlOpener
 import nasa.gallery.data.api.CollectionItemLink.Relation.Preview
 import nasa.gallery.data.repo.GallerySearchRepository
 import nasa.gallery.data.repo.SearchResult

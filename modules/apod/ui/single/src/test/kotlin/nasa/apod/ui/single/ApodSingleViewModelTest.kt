@@ -13,10 +13,10 @@ import nasa.apod.data.repo.SingleLoadResult
 import nasa.apod.model.ApodNavButtonsState
 import nasa.apod.model.EARLIEST_APOD_DATE
 import nasa.apod.nav.ApodScreenConfig
+import nasa.core.android.UrlOpener
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
 import nasa.core.model.test.InMemoryApiKeyProvider
-import nasa.core.url.UrlOpener
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

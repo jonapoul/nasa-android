@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.toJavaInstant
 import nasa.about.data.GithubRepository
 import nasa.about.data.LatestReleaseState
-import nasa.core.url.UrlOpener
+import nasa.core.android.UrlOpener
 import timber.log.Timber
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

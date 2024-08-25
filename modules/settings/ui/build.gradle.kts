@@ -15,8 +15,8 @@ dependencies {
   api(libs.javaxInject)
   api(libs.voyager.core)
   api(projects.apod.data.repo)
+  api(projects.core.android)
   api(projects.core.ui)
-  api(projects.core.url)
   api(projects.db.api)
 
   implementation(libs.alakazam.android.compose)

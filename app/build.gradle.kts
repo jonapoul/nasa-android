@@ -26,6 +26,7 @@ plugins {
 
 enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
   AndroidApp(string = "Android App", color = "#FF5555"), // red
+  AndroidHilt(string = "Android Hilt", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
   AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
@@ -39,6 +40,7 @@ diagramsBlueprint {
   moduleTypeFinder = ModuleType.Finder { project ->
     when {
       project.plugins.hasPlugin("com.android.application") -> NasaModuleType.AndroidApp
+      project.plugins.hasPlugin("nasa.module.hilt") -> NasaModuleType.AndroidHilt
       project.plugins.hasPlugin("nasa.module.compose") -> NasaModuleType.AndroidCompose
       project.plugins.hasPlugin("nasa.module.android") -> NasaModuleType.AndroidLibrary
       project.plugins.hasPlugin("nasa.module.resources") -> NasaModuleType.AndroidResources
@@ -48,9 +50,10 @@ diagramsBlueprint {
   }
 }
 
-fun gitTagOrCommit(): String = runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0"))
-  ?: runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))
+val gitCommitHash = runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))
   ?: error("Failed getting git version from ${project.path}")
+
+val gitTagOrCommit = runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0")) ?: gitCommitHash
 
 android {
   namespace = "nasa.android"
@@ -61,12 +64,12 @@ android {
     minSdk = intProperty(key = "blueprint.android.minSdk")
     targetSdk = intProperty(key = "blueprint.android.targetSdk")
     versionCode = gitVersionCode()
-    versionName = gitTagOrCommit()
+    versionName = gitTagOrCommit
     setProperty("archivesBaseName", "$applicationId-$versionName")
 
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"
     buildConfigField("kotlinx.datetime.Instant", "BUILD_TIME", kotlinTime)
-    buildConfigField("String", "GIT_HASH", "\"${versionName}\"")
+    buildConfigField("String", "GIT_HASH", "\"${gitCommitHash}\"")
     val apiKey = stringPropertyOrNull(key = "nasa.apiKey")
     buildConfigField("String", "API_KEY", if (apiKey == null) "null" else "\"${apiKey}\"")
 
@@ -174,7 +177,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.ktx)
   implementation(libs.androidx.lifecycle.viewmodel.savedstate)
-  implementation(libs.androidx.preference.ktx)
   implementation(libs.androidx.room.runtime)
   implementation(libs.androidx.splash)
   implementation(libs.coil.base)
@@ -186,24 +188,27 @@ dependencies {
   implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.datetime)
-  implementation(libs.kotlinx.serialization.json)
   implementation(libs.material)
   implementation(libs.okhttp.core)
-  implementation(libs.preferences.android)
   implementation(libs.preferences.core)
-  implementation(libs.retrofit.core)
   implementation(libs.voyager.core)
   implementation(libs.voyager.navigator)
+  implementation(projects.about.di)
   implementation(projects.about.nav)
   implementation(projects.about.ui)
+  implementation(projects.apod.di)
+  implementation(projects.apod.nav)
   implementation(projects.apod.ui.grid)
   implementation(projects.apod.ui.single)
-  implementation(projects.db.impl)
+  implementation(projects.core.di)
+  implementation(projects.db.di)
+  implementation(projects.gallery.di)
   implementation(projects.gallery.nav)
   implementation(projects.gallery.ui.image)
   implementation(projects.gallery.ui.search)
   implementation(projects.home.nav)
   implementation(projects.home.ui)
+  implementation(projects.licenses.di)
   implementation(projects.licenses.nav)
   implementation(projects.licenses.ui)
   implementation(projects.settings.nav)

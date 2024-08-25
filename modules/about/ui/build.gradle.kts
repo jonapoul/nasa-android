@@ -16,8 +16,8 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(libs.voyager.core)
   api(projects.about.data)
+  api(projects.core.android)
   api(projects.core.ui)
-  api(projects.core.url)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)

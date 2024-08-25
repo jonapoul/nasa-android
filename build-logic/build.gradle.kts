@@ -58,6 +58,7 @@ gradlePlugin {
     create(id = "nasa.convention.test", impl = "nasa.gradle.ConventionTest")
     create(id = "nasa.module.android", impl = "nasa.gradle.ModuleAndroid")
     create(id = "nasa.module.compose", impl = "nasa.gradle.ModuleCompose")
+    create(id = "nasa.module.hilt", impl = "nasa.gradle.ModuleHilt")
     create(id = "nasa.module.kotlin", impl = "nasa.gradle.ModuleKotlin")
     create(id = "nasa.module.resources", impl = "nasa.gradle.ModuleResources")
   }

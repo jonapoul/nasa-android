@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import nasa.core.android.UrlOpener
 import nasa.core.model.FileSize
 import nasa.core.model.NASA_API_URL
 import nasa.core.model.bytes
-import nasa.core.url.UrlOpener
 import javax.inject.Inject
 
 @HiltViewModel

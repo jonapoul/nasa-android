@@ -7,7 +7,7 @@ import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.test.runTest
-import nasa.core.url.UrlOpener
+import nasa.core.android.UrlOpener
 import nasa.licenses.data.LibraryModel
 import nasa.licenses.data.LicenseModel
 import nasa.licenses.data.LicensesLoadState

@@ -12,8 +12,8 @@ dependencies {
   api(libs.dagger.core)
   api(libs.javaxInject)
   api(libs.voyager.core)
+  api(projects.core.android)
   api(projects.core.http)
-  api(projects.core.url)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
