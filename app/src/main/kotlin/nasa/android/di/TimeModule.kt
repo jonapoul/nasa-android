@@ -11,7 +11,7 @@ import nasa.core.model.Calendar
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class TimeModule {
+class TimeModule {
   @Provides
   fun clock(): Clock = Clock.System
 

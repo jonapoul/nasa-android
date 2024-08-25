@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class DatabaseModule {
+class DatabaseModule {
   @Provides
   @Singleton
   fun api(impl: RoomNasaDatabase): NasaDatabase = NasaDatabaseDelegate(impl)

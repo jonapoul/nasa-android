@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal interface BuildConfigModule {
+interface BuildConfigModule {
   @Binds
   @Singleton
   fun buildConfig(impl: NasaBuildConfig): IBuildConfig

@@ -16,7 +16,7 @@ import timber.log.Timber
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class ApodModule {
+class ApodModule {
   @Provides
   fun api(
     buildConfig: IBuildConfig,

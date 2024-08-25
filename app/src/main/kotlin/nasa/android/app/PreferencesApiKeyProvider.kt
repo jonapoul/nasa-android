@@ -9,7 +9,7 @@ import nasa.core.model.SettingsKeys
 import timber.log.Timber
 import javax.inject.Inject
 
-class ApiKeyManager @Inject constructor(preferences: Preferences) : ApiKey.Provider {
+class PreferencesApiKeyProvider @Inject constructor(preferences: Preferences) : ApiKey.Provider {
   private val apiKeySerializer = SimpleNullableStringSerializer { value -> value?.let(::ApiKey) }
 
   private val preference = preferences.getNullableObject(SettingsKeys.API_KEY, apiKeySerializer, default = null)

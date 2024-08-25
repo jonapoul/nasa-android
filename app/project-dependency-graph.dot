@@ -2,7 +2,7 @@ digraph {
 edge ["dir"="forward"]
 graph ["dpi"="100","label"="app","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
-":app" ["shape"="box","fillcolor"="#FF5555"]
+":app" ["fillcolor"="#FF5555","shape"="box"]
 ":about:nav" ["fillcolor"="#A17EFF","shape"="box"]
 ":about:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":about:data" ["fillcolor"="#A17EFF","shape"="box"]
@@ -43,7 +43,6 @@ node ["style"="filled"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
-":app"
 }
 ":app" -> ":about:nav" ["style"="dotted"]
 ":app" -> ":about:ui" ["style"="dotted"]

@@ -14,7 +14,7 @@ import javax.inject.Singleton
 @Module
 @Suppress("InjectDispatcher")
 @InstallIn(SingletonComponent::class)
-internal class DispatchersModule {
+class DispatchersModule {
   @Provides
   @Singleton
   fun ioDispatcher() = IODispatcher(Dispatchers.IO)

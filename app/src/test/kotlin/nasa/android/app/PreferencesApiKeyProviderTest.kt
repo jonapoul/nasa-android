@@ -16,25 +16,25 @@ import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
 @RunWith(RobolectricTestRunner::class)
-class ApiKeyManagerTest {
+class PreferencesApiKeyProviderTest {
   @get:Rule
   val coroutineRule = CoroutineRule()
 
   @get:Rule
   val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
-  private lateinit var apiKeyManager: ApiKeyManager
+  private lateinit var provider: PreferencesApiKeyProvider
   private lateinit var prefs: Preferences
 
   @Before
   fun before() {
     prefs = buildPreferences(coroutineRule.dispatcher)
-    apiKeyManager = ApiKeyManager(prefs)
+    provider = PreferencesApiKeyProvider(prefs)
   }
 
   @Test
   fun `Empty prefs means key is not set`() = runTest {
-    apiKeyManager.observe().test {
+    provider.observe().test {
       assertNull(awaitItem())
       cancelAndIgnoreRemainingEvents()
     }
@@ -42,12 +42,12 @@ class ApiKeyManagerTest {
 
   @Test
   fun `Setting null means key is still not set`() = runTest {
-    apiKeyManager.observe().test {
+    provider.observe().test {
       // Given
       assertNull(awaitItem())
 
       // When
-      apiKeyManager.set(null)
+      provider.set(null)
       testScheduler.advanceUntilIdle()
 
       // Then
@@ -58,12 +58,12 @@ class ApiKeyManagerTest {
 
   @Test
   fun `Setting to non-null means key is set`() = runTest {
-    apiKeyManager.observe().test {
+    provider.observe().test {
       // Given
       assertNull(awaitItem())
 
       // When
-      apiKeyManager.set(KEY_1)
+      provider.set(KEY_1)
 
       // Then
       assertEquals(KEY_1, awaitItem())
@@ -73,16 +73,16 @@ class ApiKeyManagerTest {
 
   @Test
   fun `Setting when already set does nothing`() = runTest {
-    apiKeyManager.observe().test {
+    provider.observe().test {
       // Given it's initially empty
       assertNull(awaitItem())
 
       // When a first key is set
-      apiKeyManager.set(KEY_1)
+      provider.set(KEY_1)
       assertEquals(KEY_1, awaitItem())
 
       // and a second key is set
-      apiKeyManager.set(KEY_2)
+      provider.set(KEY_2)
       testScheduler.advanceUntilIdle()
 
       // Then the first key is still set - no more keys have been emitted

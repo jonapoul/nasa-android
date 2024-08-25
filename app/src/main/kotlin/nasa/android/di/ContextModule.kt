@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 // Lets us inject an application context without needing to add the hilt dependency to that module
 @Module
 @InstallIn(SingletonComponent::class)
-internal class ContextModule {
+class ContextModule {
   @Provides
   fun context(
     @ApplicationContext app: Context,

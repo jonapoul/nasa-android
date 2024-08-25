@@ -16,7 +16,7 @@ import timber.log.Timber
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class AboutModule {
+class AboutModule {
   @Provides
   fun api(buildConfig: IBuildConfig): GithubApi = buildRetrofit(
     client = buildOkHttp(buildConfig.debug) { Timber.tag("GITHUB").v(it) },

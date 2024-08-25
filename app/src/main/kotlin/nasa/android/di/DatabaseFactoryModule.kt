@@ -11,7 +11,7 @@ import nasa.db.gallery.GalleryEntity
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class DatabaseFactoryModule {
+class DatabaseFactoryModule {
   @Provides
   fun apod(): ApodEntity.Factory = DefaultApodEntityFactory
 

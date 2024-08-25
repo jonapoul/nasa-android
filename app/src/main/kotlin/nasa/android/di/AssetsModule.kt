@@ -9,7 +9,7 @@ import nasa.licenses.data.AssetsProvider
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class AssetsModule {
+class AssetsModule {
   @Provides
   fun assetsProvider(context: Context): AssetsProvider = AssetsProvider {
     context.assets.open("open_source_licenses.json")

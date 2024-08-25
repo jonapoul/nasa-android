@@ -2,52 +2,23 @@ package nasa.android.app
 
 import alakazam.android.core.IBuildConfig
 import android.app.Application
-import cafe.adriel.voyager.core.registry.ScreenRegistry
 import coil.Coil
-import coil.ImageLoader
-import coil.ImageLoaderFactory
-import coil.disk.DiskCache
-import coil.memory.MemoryCache
-import coil.util.DebugLogger
 import dagger.hilt.android.HiltAndroidApp
-import nasa.about.nav.AboutNavScreen
-import nasa.about.ui.AboutScreen
 import nasa.android.BuildConfig
-import nasa.apod.nav.ApodFullScreenNavScreen
-import nasa.apod.nav.ApodGridNavScreen
-import nasa.apod.nav.ApodSingleNavScreen
-import nasa.apod.ui.grid.ApodGridScreen
-import nasa.apod.ui.single.ApodFullScreen
-import nasa.apod.ui.single.ApodSingleScreen
-import nasa.core.http.DownloadProgressInterceptor
-import nasa.core.http.DownloadProgressStateHolder
-import nasa.core.http.buildOkHttp
 import nasa.core.model.ApiKey
-import nasa.core.model.IMAGE_CACHE_DIR
-import nasa.core.model.megabytes
-import nasa.gallery.nav.GalleryImageNavScreen
-import nasa.gallery.nav.GallerySearchNavScreen
-import nasa.gallery.ui.image.GalleryImageScreen
-import nasa.gallery.ui.search.GallerySearchScreen
-import nasa.home.nav.HomeNavScreen
-import nasa.home.ui.HomeScreen
-import nasa.licenses.nav.LicensesNavScreen
-import nasa.licenses.ui.LicensesScreen
-import nasa.settings.nav.SettingsNavScreen
-import nasa.settings.ui.SettingsScreen
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltAndroidApp
-class NasaApplication : Application(), ImageLoaderFactory {
+class NasaApplication : Application() {
   @Inject
   lateinit var bc: IBuildConfig
 
   @Inject
-  lateinit var apiKeyManager: ApiKeyManager
+  lateinit var apiKeyProvider: PreferencesApiKeyProvider
 
   @Inject
-  lateinit var downloadProgressStateHolder: DownloadProgressStateHolder
+  lateinit var imageLoader: NasaImageLoader
 
   override fun onCreate() {
     super.onCreate()
@@ -61,46 +32,13 @@ class NasaApplication : Application(), ImageLoaderFactory {
     // API_KEY can be null, based on gradle script logic
     @Suppress("UNNECESSARY_SAFE_CALL")
     val buildKey = BuildConfig.API_KEY?.let(::ApiKey)
-    apiKeyManager.set(buildKey)
+    apiKeyProvider.set(buildKey)
 
     Timber.v("Registering screens...")
-    ScreenRegistry {
-      register<HomeNavScreen> { HomeScreen() }
-      register<ApodSingleNavScreen> { ApodSingleScreen(it.config) }
-      register<ApodGridNavScreen> { ApodGridScreen(it.config) }
-      register<ApodFullScreenNavScreen> { ApodFullScreen(it.item) }
-      register<GallerySearchNavScreen> { GallerySearchScreen() }
-      register<GalleryImageNavScreen> { GalleryImageScreen(it.id) }
-      register<AboutNavScreen> { AboutScreen() }
-      register<LicensesNavScreen> { LicensesScreen() }
-      register<SettingsNavScreen> { SettingsScreen() }
-    }
+    NasaScreenRegistry()
 
     Timber.v("Building ImageLoader...")
-    Coil.setImageLoader(this)
+    Coil.setImageLoader(imageLoader)
     Timber.v("Done!")
-  }
-
-  override fun newImageLoader(): ImageLoader {
-    val progressInterceptor = DownloadProgressInterceptor(downloadProgressStateHolder)
-    val client = buildOkHttp(bc.debug, progressInterceptor) { Timber.tag("COIL").v(it) }
-    return ImageLoader
-      .Builder(this)
-      .memoryCache {
-        MemoryCache
-          .Builder(this)
-          .maxSizePercent(percent = 0.2) // 20%, not 0.2%
-          .build()
-      }.diskCache {
-        DiskCache
-          .Builder()
-          .directory(cacheDir.resolve(IMAGE_CACHE_DIR))
-          .maxSizeBytes(size = 100.megabytes.toBytes())
-          .build()
-      }.respectCacheHeaders(true)
-      .networkObserverEnabled(true)
-      .okHttpClient(client)
-      .apply { if (bc.debug) logger(DebugLogger()) }
-      .build()
   }
 }

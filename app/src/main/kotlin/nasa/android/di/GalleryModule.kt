@@ -16,7 +16,7 @@ import timber.log.Timber
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class GalleryModule {
+class GalleryModule {
   @Provides
   fun api(
     buildConfig: IBuildConfig,

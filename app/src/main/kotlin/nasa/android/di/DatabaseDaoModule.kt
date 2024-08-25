@@ -21,7 +21,7 @@ import nasa.db.gallery.UrlDao
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal interface DatabaseDaoModule {
+interface DatabaseDaoModule {
   @Binds
   fun apodDao(impl: RoomApodDaoWrapper): ApodDao
 

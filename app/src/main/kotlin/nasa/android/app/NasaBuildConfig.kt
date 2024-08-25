@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * Gives other modules access to the app module's build metadata.
  */
-internal class NasaBuildConfig @Inject constructor(context: Context) : IBuildConfig {
+class NasaBuildConfig @Inject constructor(context: Context) : IBuildConfig {
   override val debug = BuildConfig.DEBUG
   override val applicationId = BuildConfig.APPLICATION_ID
   override val versionCode = BuildConfig.VERSION_CODE

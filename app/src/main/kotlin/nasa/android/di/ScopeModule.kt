@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal class ScopeModule {
+class ScopeModule {
   @Provides
   @Singleton
   fun scope(): CoroutineScope = CoroutineScope(SupervisorJob())
