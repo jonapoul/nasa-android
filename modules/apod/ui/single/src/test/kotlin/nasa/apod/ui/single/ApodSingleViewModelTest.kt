@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
@@ -16,6 +15,7 @@ import nasa.apod.model.EARLIEST_APOD_DATE
 import nasa.apod.nav.ApodScreenConfig
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
+import nasa.core.model.test.InMemoryApiKeyProvider
 import nasa.core.url.UrlOpener
 import org.junit.Before
 import org.junit.Test
@@ -30,7 +30,7 @@ import kotlin.test.assertTrue
 class ApodSingleViewModelTest {
   // real
   private lateinit var viewModel: ApodSingleViewModel
-  private lateinit var apiKeyProvider: ApiKey.Provider
+  private lateinit var apiKeyProvider: InMemoryApiKeyProvider
   private lateinit var calendar: Calendar
   private lateinit var savedStateHandle: SavedStateHandle
 
@@ -40,7 +40,7 @@ class ApodSingleViewModelTest {
 
   @Before
   fun before() {
-    apiKeyProvider = ApiKey.Provider { flowOf(API_KEY) }
+    apiKeyProvider = InMemoryApiKeyProvider(API_KEY)
     calendar = Calendar { TODAY }
     savedStateHandle = SavedStateHandle()
     repository = mockk()
@@ -168,7 +168,7 @@ class ApodSingleViewModelTest {
   @Test
   fun `Handle null API key`() = runTest {
     // Given we have no API key saved
-    apiKeyProvider = ApiKey.Provider { flowOf(null) }
+    apiKeyProvider.set(null)
     buildViewModel()
     testScheduler.advanceUntilIdle()
 

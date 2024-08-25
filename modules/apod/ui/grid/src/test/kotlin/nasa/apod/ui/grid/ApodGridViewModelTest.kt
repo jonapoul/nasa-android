@@ -5,7 +5,6 @@ import app.cash.turbine.test
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.collections.immutable.persistentListOf
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
@@ -17,6 +16,7 @@ import nasa.apod.model.EARLIEST_APOD_DATE
 import nasa.apod.nav.ApodScreenConfig
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
+import nasa.core.model.test.InMemoryApiKeyProvider
 import nasa.core.url.UrlOpener
 import org.junit.Before
 import org.junit.Test
@@ -31,7 +31,7 @@ import kotlin.test.assertTrue
 class ApodGridViewModelTest {
   // real
   private lateinit var viewModel: ApodGridViewModel
-  private lateinit var apiKeyProvider: ApiKey.Provider
+  private lateinit var apiKeyProvider: InMemoryApiKeyProvider
   private lateinit var savedStateHandle: SavedStateHandle
   private lateinit var calendar: Calendar
 
@@ -42,7 +42,7 @@ class ApodGridViewModelTest {
   @Before
   fun before() {
     savedStateHandle = SavedStateHandle(initialState = emptyMap())
-    apiKeyProvider = ApiKey.Provider { flowOf(API_KEY) }
+    apiKeyProvider = InMemoryApiKeyProvider(API_KEY)
     calendar = Calendar { TODAY }
     repository = mockk()
     urlOpener = mockk(relaxed = true)
@@ -169,7 +169,7 @@ class ApodGridViewModelTest {
   @Test
   fun `Handle null API key`() = runTest {
     // Given we have no API key saved
-    apiKeyProvider = ApiKey.Provider { flowOf(null) }
+    apiKeyProvider.set(null)
     buildViewModel()
     testScheduler.advanceUntilIdle()
 

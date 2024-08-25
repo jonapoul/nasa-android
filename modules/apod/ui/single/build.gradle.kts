@@ -46,4 +46,6 @@ dependencies {
   implementation(libs.voyager.navigator)
   implementation(projects.apod.res)
   implementation(projects.settings.nav)
+
+  testImplementation(testFixtures(projects.core.model))
 }

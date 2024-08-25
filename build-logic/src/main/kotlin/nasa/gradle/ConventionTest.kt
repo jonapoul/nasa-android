@@ -25,6 +25,7 @@ class ConventionTest : Plugin<Project> {
     with(pluginManager) {
       apply(KoverGradlePlugin::class.java)
       apply(PowerAssertGradlePlugin::class.java)
+      apply("java-test-fixtures")
     }
     configureTesting()
     configurePowerAssert()

@@ -75,6 +75,7 @@ dependencyAnalysis {
           libs.test.turbine,
           libs.androidx.compose.ui.toolingPreview,
           libs.timber,
+          libs.kotlin.stdlib,
         )
         exclude(":test:resources")
       }
