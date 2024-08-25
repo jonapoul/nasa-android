@@ -1,4 +1,4 @@
-import blueprint.core.rootLocalPropertiesOrNull
+import blueprint.core.rootLocalProperties
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
@@ -30,14 +30,8 @@ plugins {
 }
 
 // Place all local properties in the project-level gradle properties map
-listOf(
-  "local-api.properties",
-  "local-keystore.properties",
-  "local.properties",
-).forEach { filename ->
-  rootLocalPropertiesOrNull(filename)?.forEach { (key, value) ->
-    ext[key.toString()] = value.toString()
-  }
+rootLocalProperties().forEach { (key, value) ->
+  ext[key.toString()] = value.toString()
 }
 
 dependencyAnalysis {

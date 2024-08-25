@@ -96,7 +96,7 @@ android {
   }
 
   signingConfigs {
-    val localProps = rootLocalPropertiesOrNull(filename = "local-keystore.properties")
+    val localProps = rootLocalPropertiesOrNull()
     if (localProps != null) {
       create("release") {
         storeFile = rootProject.file(stringProperty(key = "nasa.keyFile"))
@@ -105,7 +105,7 @@ android {
         keyPassword = stringProperty(key = "nasa.keyPassword")
       }
     } else {
-      logger.error("No local-keystore.properties found - skipping signing configs")
+      logger.error("No local.properties found - skipping signing configs")
     }
   }
 

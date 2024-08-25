@@ -50,7 +50,7 @@ Open in Android Studio and run:
 The APK will be dumped in `app/build/outputs/apk/release`, relative to the project root.
 
 ## API Key
-Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local-api.properties` file in the root of the project directory like:
+Open https://api.nasa.gov/ in a web browser and register for an API key. Once you've got one, place it in a `local.properties` file in the root of the project directory like:
 
 ```properties
 # not a real key...
@@ -65,7 +65,7 @@ If you like, you can omit this property entirely and just enter the API key at r
 
 ## Keystore
 
-Optionally, if you want to sign the built APK with a custom keystore, add some extra properties in `local-keystore.properties` like below:
+Optionally, if you want to sign the built APK with a custom keystore, add some extra properties in `local.properties` like below:
 
 ```properties
 nasa.keyFile=relative/path/to/keystore.jks
