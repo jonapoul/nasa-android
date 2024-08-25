@@ -4,8 +4,9 @@ import blueprint.core.intProperty
 import com.android.build.gradle.api.AndroidBasePlugin
 import kotlinx.kover.gradle.plugin.KoverGradlePlugin
 import kotlinx.kover.gradle.plugin.dsl.AggregationType
-import kotlinx.kover.gradle.plugin.dsl.KoverReportExtension
-import kotlinx.kover.gradle.plugin.dsl.MetricType
+import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
+import kotlinx.kover.gradle.plugin.dsl.KoverProjectExtension
+import kotlinx.kover.gradle.plugin.dsl.KoverReportsConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
@@ -25,14 +26,14 @@ class ConventionTest : Plugin<Project> {
       apply(KoverGradlePlugin::class.java)
       apply(PowerAssertGradlePlugin::class.java)
     }
-    val isAndroid = project.plugins.any { it is AndroidBasePlugin }
-    configureTesting(isAndroid)
+    configureTesting()
     configurePowerAssert()
-    configureKover(isAndroid)
+    configureKover()
   }
 
-  private fun Project.configureTesting(isAndroid: Boolean) {
+  private fun Project.configureTesting() {
     val testImplementation = configurations.findByName("testImplementation")
+    val isAndroid = project.plugins.any { it is AndroidBasePlugin }
 
     dependencies {
       testImplementation?.let { testImplementation ->
@@ -89,16 +90,11 @@ class ConventionTest : Plugin<Project> {
     }
   }
 
-  private fun Project.configureKover(isAndroid: Boolean) {
-    val isRootProject = project == rootProject
-    val minCoverage = intProperty(key = "blueprint.kover.minCoverage")
-
-    val androidVariant = when {
-      isAndroid -> "debug"
-      else -> null // kotlin JVM, no variant to merge with
+  private fun Project.configureKover() {
+    extensions.configure<KoverProjectExtension> {
+      useJacoco = false
+      reports { configureKoverReports(project) }
     }
-
-    extensions.configure<KoverReportExtension> { configure(isRootProject, androidVariant, minCoverage) }
 
     rootProject.dependencies {
       // Include this module in test coverage
@@ -106,61 +102,47 @@ class ConventionTest : Plugin<Project> {
       kover(project)
     }
   }
+}
 
-  private fun KoverReportExtension.configure(isRootProject: Boolean, androidVariant: String?, minCoverage: Int) {
-    defaults {
-      if (androidVariant != null) {
-        mergeWith(androidVariant)
-      }
+private fun KoverReportsConfig.configureKoverReports(project: Project) {
+  total {
+    filters {
+      excludes {
+        classes(
+          "*Activity*",
+          "*Application*",
+          "*BuildConfig*",
+          "*_Factory*",
+          "*_HiltModules*",
+          "*_Impl*",
+          "*Module_*",
+          "hilt_aggregated_deps*",
+        )
 
-      filters {
-        excludes {
-          classes(
-            "*Activity*",
-            "*Application*",
-            "*BuildConfig*",
-            "*ComposableSingletons*",
-            "*_Factory*",
-            "*_HiltModules*",
-            "*_Impl*",
-            "*Module_*",
-            "hilt_aggregated_deps*",
-          )
-
-          annotatedBy(
-            "androidx.compose.runtime.Composable",
-            "dagger.Generated",
-            "dagger.Module",
-            "javax.annotation.processing.Generated",
-          )
-        }
-      }
-
-      html { onCheck = true }
-      xml { onCheck = true }
-
-      log {
-        onCheck = true
-        coverageUnits = MetricType.INSTRUCTION
-        aggregationForGroup = AggregationType.COVERED_PERCENTAGE
-      }
-
-      verify {
-        onCheck = true
-        rule {
-          isEnabled = isRootProject
-          bound {
-            minValue = minCoverage
-            metric = MetricType.INSTRUCTION
-            aggregation = AggregationType.COVERED_PERCENTAGE
-          }
-        }
+        annotatedBy(
+          "androidx.compose.runtime.Composable",
+          "dagger.Generated",
+          "dagger.Module",
+          "dagger.Provides",
+          "javax.annotation.processing.Generated",
+        )
       }
     }
 
-    if (androidVariant != null) {
-      androidReports(androidVariant) {
-        // No-op, all same config as default
+    log {
+      onCheck = true
+      coverageUnits = CoverageUnit.INSTRUCTION
+      aggregationForGroup = AggregationType.COVERED_PERCENTAGE
+    }
+  }
+
+  verify {
+    rule {
+      disabled = project != project.rootProject
+      bound {
+        minValue = project.intProperty(key = "blueprint.kover.minCoverage")
+        coverageUnits = CoverageUnit.INSTRUCTION
+        aggregationForGroup = AggregationType.COVERED_PERCENTAGE
       }
     }
   }

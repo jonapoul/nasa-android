@@ -14,7 +14,6 @@ plugins {
   alias(libs.plugins.kotlin.jvm) apply false
   alias(libs.plugins.kotlin.powerAssert) apply false
   alias(libs.plugins.kotlin.serialization) apply false
-  alias(libs.plugins.kover) apply false
   alias(libs.plugins.ksp) apply false
   alias(libs.plugins.ktlint) apply false
   alias(libs.plugins.licensee) apply false
@@ -25,6 +24,7 @@ plugins {
   alias(libs.plugins.dependencySort)
   alias(libs.plugins.dependencyVersions)
   alias(libs.plugins.doctor)
+  alias(libs.plugins.kover)
 
   id("nasa.convention.test")
 }
