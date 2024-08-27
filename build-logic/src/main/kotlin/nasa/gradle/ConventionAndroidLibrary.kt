@@ -25,6 +25,18 @@ class ConventionAndroidLibrary : Plugin<Project> {
       packaging {
         resources.excludes.add("META-INF/*")
       }
+
+      buildTypes {
+        getByName("debug") {
+          enableUnitTestCoverage = true
+          enableAndroidTestCoverage = true
+        }
+
+        getByName("release") {
+          enableUnitTestCoverage = false
+          enableAndroidTestCoverage = false
+        }
+      }
     }
   }
 }

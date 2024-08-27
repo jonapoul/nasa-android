@@ -57,6 +57,18 @@ class ConventionTest : Plugin<Project> {
           testImplementation(libs.test.mockk.android)
           testImplementation(libs.test.robolectric)
           testImplementation(libs.test.timber)
+
+          val debugImplementation = configurations.getByName("debugImplementation")
+          debugImplementation(libs.test.androidx.monitor)
+
+          val androidTestImplementation = configurations.getByName("androidTestImplementation")
+          androidTestImplementation(libs.test.androidx.arch)
+          androidTestImplementation(libs.test.androidx.coreKtx)
+          androidTestImplementation(libs.test.androidx.espresso)
+          androidTestImplementation(libs.test.androidx.junit)
+          androidTestImplementation(libs.test.androidx.rules)
+          androidTestImplementation(libs.test.androidx.runner)
+          androidTestImplementation(libs.test.timber)
         }
       }
     }

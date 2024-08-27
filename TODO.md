@@ -10,6 +10,7 @@
 ## General
 - error dialog when API usage runs out
 - Navigation animations
+- Molecule
 
 ## APOD
 - zoom/pan buttons on fullscreen images? Or some other way of making it more obvious that you can do it

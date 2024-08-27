@@ -18,6 +18,7 @@ class ConventionLicensee : Plugin<Project> {
         "Apache-2.0",
         "MIT",
         "EPL-1.0",
+        "EPL-2.0",
         "BSD-2-Clause",
       ).forEach { spdxId ->
         allow(spdxId)

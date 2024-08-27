@@ -117,11 +117,15 @@ android {
     getByName("debug") {
       isMinifyEnabled = false
       isShrinkResources = false
+      enableUnitTestCoverage = true
+      enableAndroidTestCoverage = true
     }
 
     getByName("release") {
       isMinifyEnabled = true
       isShrinkResources = true
+      enableUnitTestCoverage = false
+      enableAndroidTestCoverage = false
       signingConfig = signingConfigs.findByName("release")
       proguardFiles += listOf(
         getDefaultProguardFile("proguard-android-optimize.txt"),

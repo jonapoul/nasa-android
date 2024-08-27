@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package nasa.gradle
 
 import com.android.build.api.dsl.CommonExtension
@@ -25,6 +27,13 @@ class ConventionCompose : Plugin<Project> {
       buildFeatures {
         compose = true
       }
+
+      testOptions {
+        unitTests {
+          // For Robolectric
+          isIncludeAndroidResources = true
+        }
+      }
     }
 
     extensions.configure<ComposeCompilerGradlePluginExtension> {
@@ -35,12 +44,21 @@ class ConventionCompose : Plugin<Project> {
       targetKotlinPlatforms = setOf(KotlinPlatformType.androidJvm)
     }
 
+    val androidTestImplementation by configurations
+    val debugImplementation by configurations
     val implementation by configurations
     val lintChecks by configurations
 
     dependencies {
       implementation(platform(libs.androidx.compose.bom))
       lintChecks(libs.androidx.compose.lint)
+
+      // Testing
+      debugImplementation(libs.test.androidx.compose.ui.manifest)
+
+      // UI testing
+      androidTestImplementation(platform(libs.androidx.compose.bom))
+      androidTestImplementation(libs.test.androidx.compose.ui.junit4)
     }
   }
 }

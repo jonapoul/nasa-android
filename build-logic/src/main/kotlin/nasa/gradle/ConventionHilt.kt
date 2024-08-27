@@ -13,12 +13,17 @@ class ConventionHilt : Plugin<Project> {
       apply(KspGradleSubplugin::class.java)
     }
 
-    val testImplementation by configurations
     val ksp by configurations
+    val kspTest by configurations
+    val testImplementation by configurations
+    val androidTestImplementation by configurations
 
     dependencies {
       ksp(libs.hilt.compiler)
+      kspTest(libs.hilt.compiler)
+
       testImplementation(libs.test.hilt)
+      androidTestImplementation(libs.test.hilt)
     }
   }
 }
