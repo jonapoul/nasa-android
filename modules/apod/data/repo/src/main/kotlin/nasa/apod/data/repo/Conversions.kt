@@ -27,7 +27,7 @@ internal fun ApodResponseModel.toItem(): ApodItem = ApodItem(
   thumbnailUrl = thumbnailUrl,
 )
 
-internal fun ApodItem.toEntity(factory: ApodEntity.Factory): ApodEntity = factory(
+internal fun ApodItem.toEntity(): ApodEntity = ApodEntity(
   date = date,
   title = title,
   explanation = explanation,

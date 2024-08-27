@@ -10,18 +10,32 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.AutoMigrationSpec
+import nasa.db.apod.ApodDao
+import nasa.db.apod.ApodEntity
+import nasa.db.gallery.AlbumDao
+import nasa.db.gallery.AlbumEntity
+import nasa.db.gallery.CenterDao
+import nasa.db.gallery.CenterEntity
+import nasa.db.gallery.GalleryDao
+import nasa.db.gallery.GalleryEntity
+import nasa.db.gallery.KeywordDao
+import nasa.db.gallery.KeywordEntity
+import nasa.db.gallery.PhotographerDao
+import nasa.db.gallery.PhotographerEntity
+import nasa.db.gallery.UrlDao
+import nasa.db.gallery.UrlEntity
 
 @Database(
   version = RoomNasaDatabase.VERSION,
   exportSchema = true,
   entities = [
-    RoomApodEntity::class,
-    RoomAlbumEntity::class,
-    RoomCenterEntity::class,
-    RoomGalleryEntity::class,
-    RoomKeywordEntity::class,
-    RoomPhotographerEntity::class,
-    RoomUrlEntity::class,
+    ApodEntity::class,
+    AlbumEntity::class,
+    CenterEntity::class,
+    GalleryEntity::class,
+    KeywordEntity::class,
+    PhotographerEntity::class,
+    UrlEntity::class,
   ],
   autoMigrations = [
     AutoMigration(from = 1, to = 2), // added keyword, photographer and center tables
@@ -34,13 +48,13 @@ import androidx.room.migration.AutoMigrationSpec
   UrlCollectionTypeConverter::class,
 )
 abstract class RoomNasaDatabase : RoomDatabase() {
-  abstract fun apodDao(): RoomApodDao
-  abstract fun centreDao(): RoomCenterDao
-  abstract fun galleryDao(): RoomGalleryDao
-  abstract fun keywordDao(): RoomKeywordDao
-  abstract fun photographerDao(): RoomPhotographerDao
-  abstract fun albumDao(): RoomAlbumDao
-  abstract fun urlDao(): RoomUrlCollectionDao
+  abstract fun apodDao(): ApodDao
+  abstract fun centreDao(): CenterDao
+  abstract fun galleryDao(): GalleryDao
+  abstract fun keywordDao(): KeywordDao
+  abstract fun photographerDao(): PhotographerDao
+  abstract fun albumDao(): AlbumDao
+  abstract fun urlDao(): UrlDao
 
   @RenameColumn(tableName = "gallery", fromColumnName = "date", toColumnName = "id")
   @DeleteColumn(tableName = "gallery", columnName = "date")

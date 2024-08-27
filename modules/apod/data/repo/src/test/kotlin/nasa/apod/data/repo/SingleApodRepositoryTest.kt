@@ -11,11 +11,8 @@ import nasa.apod.data.api.ApodJson
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
 import nasa.core.model.ApiKey
-import nasa.db.DefaultApodEntityFactory
-import nasa.db.RoomApodDaoWrapper
 import nasa.db.RoomNasaDatabase
 import nasa.db.apod.ApodDao
-import nasa.db.apod.ApodEntity
 import nasa.test.MockWebServerRule
 import nasa.test.getResourceAsText
 import net.lachlanmckee.timberjunit.TimberTestRule
@@ -43,13 +40,11 @@ class SingleApodRepositoryTest {
   private lateinit var repository: SingleApodRepository
   private lateinit var dao: ApodDao
   private lateinit var api: ApodApi
-  private lateinit var entityFactory: ApodEntity.Factory
 
   @Before
   fun before() {
-    dao = RoomApodDaoWrapper(databaseRule.database)
+    dao = databaseRule.database.apodDao()
     api = webServerRule.buildApi(json = ApodJson)
-    entityFactory = DefaultApodEntityFactory
   }
 
   @Test
@@ -88,7 +83,7 @@ class SingleApodRepositoryTest {
   fun `Don't query API if it's cached locally`() = runTest {
     // Given the database has an entry for the specified date
     buildRepo()
-    val entity = ITEM.toEntity(entityFactory)
+    val entity = ITEM.toEntity()
     dao.insert(entity)
 
     // When
@@ -227,7 +222,6 @@ class SingleApodRepositoryTest {
       api = api,
       dao = dao,
       calendar = { TODAY },
-      entityFactory = entityFactory,
       sharedRepository = SharedRepository(),
     )
   }

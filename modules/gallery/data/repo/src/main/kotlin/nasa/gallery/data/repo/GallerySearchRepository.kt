@@ -5,11 +5,15 @@ import alakazam.kotlin.core.requireMessage
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
 import nasa.db.gallery.AlbumDao
+import nasa.db.gallery.AlbumEntity
 import nasa.db.gallery.CenterDao
+import nasa.db.gallery.CenterEntity
 import nasa.db.gallery.GalleryDao
 import nasa.db.gallery.GalleryEntity
 import nasa.db.gallery.KeywordDao
+import nasa.db.gallery.KeywordEntity
 import nasa.db.gallery.PhotographerDao
+import nasa.db.gallery.PhotographerEntity
 import nasa.gallery.data.api.Collection
 import nasa.gallery.data.api.CollectionLink
 import nasa.gallery.data.api.GalleryApi
@@ -30,7 +34,6 @@ class GallerySearchRepository @Inject internal constructor(
   private val galleryApi: GalleryApi,
   private val searchPreferences: SearchPreferences,
   private val galleryDao: GalleryDao,
-  private val entityFactory: GalleryEntity.Factory,
   private val centerDao: CenterDao,
   private val keywordDao: KeywordDao,
   private val photographerDao: PhotographerDao,
@@ -121,10 +124,10 @@ class GallerySearchRepository @Inject internal constructor(
         data.album?.let(albums::addAll)
       }
     }
-    centers.ifIsNotEmpty(centerDao::insert)
-    keywords.ifIsNotEmpty(keywordDao::insert)
-    photographers.ifIsNotEmpty(photographerDao::insert)
-    albums.ifIsNotEmpty(albumDao::insert)
+    centers.ifIsNotEmpty(centerDao::insert, ::CenterEntity)
+    keywords.ifIsNotEmpty(keywordDao::insert, ::KeywordEntity)
+    photographers.ifIsNotEmpty(photographerDao::insert, ::PhotographerEntity)
+    albums.ifIsNotEmpty(albumDao::insert, ::AlbumEntity)
     Timber.v("saveMetadata %s %s %s %s", centers, keywords, photographers, albums)
   }
 
@@ -133,7 +136,7 @@ class GallerySearchRepository @Inject internal constructor(
     for (collectionItem in collection.items) {
       val collectionUrl = collectionItem.collectionUrl
       for (searchItem in collectionItem.data) {
-        entities += entityFactory(searchItem.nasaId, collectionUrl, searchItem.mediaType)
+        entities += GalleryEntity(searchItem.nasaId, collectionUrl, searchItem.mediaType)
       }
     }
     if (entities.isNotEmpty()) {
@@ -141,8 +144,8 @@ class GallerySearchRepository @Inject internal constructor(
     }
   }
 
-  private suspend fun <T> Set<T>.ifIsNotEmpty(function: suspend (List<T>) -> Unit) {
-    if (isNotEmpty()) function(toList())
+  private suspend fun <T, R> Set<T>.ifIsNotEmpty(function: suspend (List<R>) -> Unit, mapper: (T) -> R) {
+    if (isNotEmpty()) function(map { mapper(it) })
   }
 
   private fun Collection.pageNumberWithRelation(relation: CollectionLink.Relation) =

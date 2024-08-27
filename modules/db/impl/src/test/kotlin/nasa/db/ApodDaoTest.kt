@@ -4,6 +4,8 @@ import alakazam.test.db.RoomDatabaseRule
 import app.cash.turbine.test
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
+import nasa.db.apod.ApodDao
+import nasa.db.apod.ApodEntity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -17,7 +19,7 @@ class ApodDaoTest {
   @get:Rule
   val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
 
-  private lateinit var apodDao: RoomApodDao
+  private lateinit var apodDao: ApodDao
 
   @Before
   fun before() {
@@ -70,7 +72,7 @@ class ApodDaoTest {
     assertEquals(expected = copy, actual = apodDao.get(DATE_2024))
   }
 
-  private fun imageEntity(date: LocalDate) = RoomApodEntity(
+  private fun imageEntity(date: LocalDate) = ApodEntity(
     date = date,
     title = "Foobar",
     explanation = "Here be dragons",
@@ -81,7 +83,7 @@ class ApodDaoTest {
     thumbnailUrl = null,
   )
 
-  private fun videoEntity(date: LocalDate) = RoomApodEntity(
+  private fun videoEntity(date: LocalDate) = ApodEntity(
     date = date,
     title = "Video",
     explanation = "Something goes here",

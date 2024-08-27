@@ -9,7 +9,6 @@ import nasa.apod.model.ApodItem
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
 import nasa.db.apod.ApodDao
-import nasa.db.apod.ApodEntity
 import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
@@ -24,7 +23,6 @@ import javax.inject.Inject
 class SingleApodRepository @Inject internal constructor(
   private val io: IODispatcher,
   private val api: ApodApi,
-  private val entityFactory: ApodEntity.Factory,
   private val dao: ApodDao,
   private val calendar: Calendar,
   private val sharedRepository: SharedRepository,
@@ -105,7 +103,7 @@ class SingleApodRepository @Inject internal constructor(
   private suspend fun saveToDatabaseIfSuccessful(result: SingleLoadResult) {
     if (result is SingleLoadResult.Success) {
       val item = result.item
-      val entity = item.toEntity(entityFactory)
+      val entity = item.toEntity()
       withContext(io) { dao.insert(entity) }
       Timber.d("Stored $entity in database")
     }

@@ -5,4 +5,6 @@ plugins {
 dependencies {
   api(libs.kotlinx.coroutines)
   api(projects.gallery.model)
+
+  implementation(libs.androidx.room.common)
 }

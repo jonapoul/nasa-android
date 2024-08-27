@@ -1,27 +1,34 @@
 package nasa.db.apod
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.datetime.LocalDate
 
-interface ApodEntity {
-  val date: LocalDate
-  val title: String
-  val explanation: String
-  val mediaType: String
-  val copyright: String?
-  val url: String?
-  val hdUrl: String?
-  val thumbnailUrl: String?
+@Entity(tableName = "apod")
+data class ApodEntity(
+  @PrimaryKey(autoGenerate = false)
+  @ColumnInfo("date")
+  val date: LocalDate,
 
-  fun interface Factory {
-    operator fun invoke(
-      date: LocalDate,
-      title: String,
-      explanation: String,
-      mediaType: String,
-      copyright: String?,
-      url: String?,
-      hdUrl: String?,
-      thumbnailUrl: String?,
-    ): ApodEntity
-  }
-}
+  @ColumnInfo("title")
+  val title: String,
+
+  @ColumnInfo("explanation")
+  val explanation: String,
+
+  @ColumnInfo("media_type")
+  val mediaType: String,
+
+  @ColumnInfo("copyright")
+  val copyright: String?,
+
+  @ColumnInfo("url")
+  val url: String?,
+
+  @ColumnInfo("hdurl")
+  val hdUrl: String?,
+
+  @ColumnInfo("thumbnail_url")
+  val thumbnailUrl: String?,
+)

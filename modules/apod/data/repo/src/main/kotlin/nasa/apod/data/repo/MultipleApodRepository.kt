@@ -8,7 +8,6 @@ import nasa.apod.model.EARLIEST_APOD_DATE
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
 import nasa.db.apod.ApodDao
-import nasa.db.apod.ApodEntity
 import timber.log.Timber
 import java.time.YearMonth
 import javax.inject.Inject
@@ -19,7 +18,6 @@ class MultipleApodRepository @Inject internal constructor(
   private val api: ApodApi,
   private val dao: ApodDao,
   private val calendar: Calendar,
-  private val factory: ApodEntity.Factory,
   private val sharedRepository: SharedRepository,
 ) {
   suspend fun loadThisMonth(key: ApiKey): MultipleLoadResult {
@@ -52,8 +50,8 @@ class MultipleApodRepository @Inject internal constructor(
   private suspend fun loadFromApiAndCache(key: ApiKey, start: LocalDate, end: LocalDate): MultipleLoadResult {
     val result = loadFromApi(key, start, end)
     if (result is MultipleLoadResult.Success) {
-      val entities = result.items.map { it.toEntity(factory) }
-      withContext(io) { dao.insertAll(entities) }
+      val entities = result.items.map { it.toEntity() }
+      withContext(io) { dao.insert(entities) }
       Timber.d("Stored ${entities.size} items in database")
     }
     return result

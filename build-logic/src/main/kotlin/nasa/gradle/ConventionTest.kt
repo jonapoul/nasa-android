@@ -160,3 +160,7 @@ private fun KoverReportsConfig.configureKoverReports(project: Project) {
     }
   }
 }
+
+fun KoverProjectExtension.excludeClasses(vararg classNames: String) {
+  reports.total.filters.excludes.classes(*classNames)
+}

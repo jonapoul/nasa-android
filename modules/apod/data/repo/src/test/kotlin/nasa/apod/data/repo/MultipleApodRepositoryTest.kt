@@ -10,8 +10,6 @@ import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
 import nasa.core.model.ApiKey
-import nasa.db.DefaultApodEntityFactory
-import nasa.db.RoomApodDaoWrapper
 import nasa.db.RoomNasaDatabase
 import nasa.db.apod.ApodDao
 import nasa.test.MockWebServerRule
@@ -43,7 +41,7 @@ class MultipleApodRepositoryTest {
 
   @Before
   fun before() {
-    dao = RoomApodDaoWrapper(databaseRule.database)
+    dao = databaseRule.database.apodDao()
     api = webServerRule.buildApi(json = ApodJson)
   }
 
@@ -137,7 +135,6 @@ class MultipleApodRepositoryTest {
       api = api,
       dao = dao,
       calendar = { TODAY },
-      factory = DefaultApodEntityFactory,
       sharedRepository = SharedRepository(),
     )
   }

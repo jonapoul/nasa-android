@@ -10,6 +10,7 @@ import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
+import nasa.db.apod.ApodEntity
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -70,7 +71,7 @@ class NasaDatabaseMigrationTest {
     val apod = db.apodDao()
     val dateNew = LocalDate.parse("2024-08-04")
     apod.insert(
-      RoomApodEntity(
+      ApodEntity(
         date = dateNew,
         title = "abc",
         explanation = "xyz",
@@ -87,7 +88,7 @@ class NasaDatabaseMigrationTest {
     // The initial APOD entity is still there
     assertEquals(
       actual = apod.get(dateInitial),
-      expected = RoomApodEntity(
+      expected = ApodEntity(
         date = dateInitial,
         title = "Hello world",
         explanation = "blah blah",

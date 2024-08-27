@@ -6,17 +6,11 @@ import alakazam.test.db.RoomDatabaseRule
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
-import nasa.db.DefaultGalleryEntityFactory
-import nasa.db.RoomAlbumDao
-import nasa.db.RoomAlbumDaoWrapper
-import nasa.db.RoomCenterDao
-import nasa.db.RoomCenterDaoWrapper
-import nasa.db.RoomGalleryDaoWrapper
-import nasa.db.RoomKeywordDao
-import nasa.db.RoomKeywordDaoWrapper
 import nasa.db.RoomNasaDatabase
-import nasa.db.RoomPhotographerDao
-import nasa.db.RoomPhotographerDaoWrapper
+import nasa.db.gallery.AlbumDao
+import nasa.db.gallery.CenterDao
+import nasa.db.gallery.KeywordDao
+import nasa.db.gallery.PhotographerDao
 import nasa.gallery.data.api.CollectionItem
 import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.api.GalleryApi
@@ -53,10 +47,10 @@ class GallerySearchRepositoryTest {
   private lateinit var repository: GallerySearchRepository
   private lateinit var searchPreferences: SearchPreferences
   private lateinit var db: RoomNasaDatabase
-  private lateinit var centerDao: RoomCenterDao
-  private lateinit var keywordDao: RoomKeywordDao
-  private lateinit var photographerDao: RoomPhotographerDao
-  private lateinit var albumDao: RoomAlbumDao
+  private lateinit var centerDao: CenterDao
+  private lateinit var keywordDao: KeywordDao
+  private lateinit var photographerDao: PhotographerDao
+  private lateinit var albumDao: AlbumDao
 
   // fakes
   private lateinit var galleryApi: GalleryApi
@@ -148,12 +142,11 @@ class GallerySearchRepositoryTest {
       io = IODispatcher(standardDispatcher),
       galleryApi = galleryApi,
       searchPreferences = searchPreferences,
-      galleryDao = RoomGalleryDaoWrapper(db),
-      entityFactory = DefaultGalleryEntityFactory,
-      centerDao = RoomCenterDaoWrapper(db),
-      keywordDao = RoomKeywordDaoWrapper(db),
-      photographerDao = RoomPhotographerDaoWrapper(db),
-      albumDao = RoomAlbumDaoWrapper(db),
+      galleryDao = db.galleryDao(),
+      centerDao = db.centreDao(),
+      keywordDao = db.keywordDao(),
+      photographerDao = db.photographerDao(),
+      albumDao = db.albumDao(),
     )
   }
 
