@@ -16,6 +16,7 @@ plugins {
   alias(libs.plugins.licenses)
   id("nasa.convention.kotlin")
   id("nasa.convention.android.base")
+  id("nasa.convention.android.devices")
   id("nasa.convention.compose")
   id("nasa.convention.hilt")
   id("nasa.convention.style")

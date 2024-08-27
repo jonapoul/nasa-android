@@ -12,6 +12,7 @@ class ModuleCompose : Plugin<Project> {
     with(pluginManager) {
       apply(KotlinAndroidPluginWrapper::class.java)
       apply(ConventionAndroidLibrary::class.java)
+      apply(ConventionAndroidManagedDevices::class.java)
       apply(ConventionCompose::class.java)
       apply(ConventionHilt::class.java)
       apply(ConventionStyle::class.java)
