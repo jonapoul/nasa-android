@@ -11,6 +11,7 @@ class ModuleAndroid : Plugin<Project> {
       apply(KotlinAndroidPluginWrapper::class.java)
       apply(ConventionAndroidLibrary::class.java)
       apply(ConventionAndroidManagedDevices::class.java)
+      apply(ConventionDiagrams::class.java)
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)
       apply(SortDependenciesPlugin::class.java)

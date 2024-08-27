@@ -112,7 +112,6 @@ graph ["rank"="same"]
 ":db:gallery" -> ":gallery:model"
 ":gallery:di" -> ":core:http"
 ":gallery:di" -> ":gallery:data:api"
-":gallery:di" -> ":core:model" ["style"="dotted"]
 ":gallery:data:api" -> ":gallery:model"
 ":gallery:nav" -> ":gallery:model" ["style"="dotted"]
 ":gallery:ui:image" -> ":core:model"

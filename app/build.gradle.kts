@@ -5,8 +5,6 @@ import blueprint.core.rootLocalPropertiesOrNull
 import blueprint.core.runGitCommandOrNull
 import blueprint.core.stringProperty
 import blueprint.core.stringPropertyOrNull
-import blueprint.diagrams.ModuleType
-import guru.nidi.graphviz.attribute.Rank
 import org.gradle.internal.extensions.stdlib.capitalized
 
 plugins {
@@ -18,37 +16,11 @@ plugins {
   id("nasa.convention.android.base")
   id("nasa.convention.android.devices")
   id("nasa.convention.compose")
+  id("nasa.convention.diagrams")
   id("nasa.convention.hilt")
   id("nasa.convention.style")
   id("nasa.convention.test")
-  alias(libs.plugins.blueprint.diagrams)
   alias(libs.plugins.dependencySort)
-}
-
-enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
-  AndroidApp(string = "Android App", color = "#FF5555"), // red
-  AndroidHilt(string = "Android Hilt", color = "#FCB103"), // orange
-  AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
-  AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
-  AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
-  Kotlin(string = "Kotlin", color = "#A17EFF"), // purple
-}
-
-diagramsBlueprint {
-  rankDir = Rank.RankDir.TOP_TO_BOTTOM
-  rankSeparation = 2.5
-  moduleTypes = NasaModuleType.values().toSet()
-  moduleTypeFinder = ModuleType.Finder { project ->
-    when {
-      project.plugins.hasPlugin("com.android.application") -> NasaModuleType.AndroidApp
-      project.plugins.hasPlugin("nasa.module.hilt") -> NasaModuleType.AndroidHilt
-      project.plugins.hasPlugin("nasa.module.compose") -> NasaModuleType.AndroidCompose
-      project.plugins.hasPlugin("nasa.module.android") -> NasaModuleType.AndroidLibrary
-      project.plugins.hasPlugin("nasa.module.resources") -> NasaModuleType.AndroidResources
-      project.plugins.hasPlugin("nasa.module.kotlin") -> NasaModuleType.Kotlin
-      else -> error("Unknown module type for ${project.path}")
-    }
-  }
 }
 
 val gitCommitHash = runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))

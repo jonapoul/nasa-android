@@ -14,6 +14,7 @@ class ModuleCompose : Plugin<Project> {
       apply(ConventionAndroidLibrary::class.java)
       apply(ConventionAndroidManagedDevices::class.java)
       apply(ConventionCompose::class.java)
+      apply(ConventionDiagrams::class.java)
       apply(ConventionHilt::class.java)
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)

@@ -10,6 +10,7 @@ class ModuleResources : Plugin<Project> {
   override fun apply(target: Project) = with(target) {
     with(pluginManager) {
       apply(ConventionAndroidLibrary::class.java)
+      apply(ConventionDiagrams::class.java)
       apply(ConventionLicensee::class.java)
       apply(ConventionSpotless::class.java)
       apply(SortDependenciesPlugin::class.java)

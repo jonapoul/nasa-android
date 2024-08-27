@@ -187,8 +187,8 @@ agp-app = { id = "com.android.application", version.ref = "agp" }
 agp-lib = { id = "com.android.library", version.ref = "agp" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 androidCacheFix = { id = "org.gradle.android.cache-fix", version.ref = "androidCacheFix" }
-blueprint-diagrams = { id = "dev.jonpoulton.blueprint.diagrams", version.ref = "blueprint" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
+dependencyGraph = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraph" }
 dependencySort = { id = "com.squareup.sort-dependencies", version.ref = "dependencySort" }
 dependencyVersions = { id = "com.github.ben-manes.versions", version.ref = "dependencyVersions" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

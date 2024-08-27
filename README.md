@@ -88,6 +88,8 @@ In the diagram below:
 
 Different types of module have been coloured to indicate their rough function. In this project I've separated the UI layer from the associated screen's ViewModel, as well as the various data layer components. This allows different Gradle build configs to be applied to each as required.
 
+See the diagrams in each submodule's README to view the web of modules underneath it.
+
 ![project-dependency-graph.png](app/project-dependency-graph.png)
 
 # Libraries

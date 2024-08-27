@@ -8,7 +8,6 @@ import dagger.hilt.components.SingletonComponent
 import nasa.core.http.ApiUsageInterceptor
 import nasa.core.http.buildOkHttp
 import nasa.core.http.buildRetrofit
-import nasa.core.model.GALLERY_API_URL
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.GalleryJson
 import retrofit2.create
@@ -24,6 +23,6 @@ class GalleryModule {
   ): GalleryApi = buildRetrofit(
     client = buildOkHttp(buildConfig.debug, interceptor) { Timber.tag("GALLERY").v(it) },
     json = GalleryJson,
-    url = GALLERY_API_URL,
+    url = "https://images-api.nasa.gov",
   ).create()
 }

@@ -6,7 +6,7 @@ plugins {
   alias(libs.plugins.agp.lib) apply false
   alias(libs.plugins.androidx.room) apply false
   alias(libs.plugins.androidCacheFix) apply false
-  alias(libs.plugins.blueprint.diagrams) apply false
+  alias(libs.plugins.dependencyGraph) apply false
   alias(libs.plugins.detekt) apply false
   alias(libs.plugins.hilt) apply false
   alias(libs.plugins.kotlin.android) apply false

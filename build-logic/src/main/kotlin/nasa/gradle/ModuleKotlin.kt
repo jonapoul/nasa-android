@@ -9,6 +9,7 @@ class ModuleKotlin : Plugin<Project> {
   override fun apply(target: Project) = with(target) {
     with(pluginManager) {
       apply(KotlinPluginWrapper::class.java)
+      apply(ConventionDiagrams::class.java)
       apply(ConventionKotlin::class.java)
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)
