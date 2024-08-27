@@ -2,18 +2,15 @@ package nasa.licenses.data
 
 import alakazam.kotlin.core.DefaultDispatcher
 import alakazam.kotlin.core.IODispatcher
-import alakazam.test.core.CoroutineRule
 import alakazam.test.core.getResourceAsStream
+import alakazam.test.core.standardDispatcher
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
-import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class LicensesRepositoryTest {
-  @get:Rule
-  val coroutineRule = CoroutineRule()
-
   private lateinit var licensesRepository: LicensesRepository
   private lateinit var assetsProvider: AssetsProvider
 
@@ -87,12 +84,12 @@ class LicensesRepositoryTest {
     assertIs<LicensesLoadState.Failure>(state)
   }
 
-  private fun buildRepo(assetResource: String) {
+  private fun TestScope.buildRepo(assetResource: String) {
     assetsProvider = AssetsProvider { getResourceAsStream(assetResource) }
     licensesRepository = LicensesRepository(
       assetsProvider = assetsProvider,
-      io = IODispatcher(coroutineRule.dispatcher),
-      default = DefaultDispatcher(coroutineRule.dispatcher),
+      io = IODispatcher(standardDispatcher),
+      default = DefaultDispatcher(standardDispatcher),
     )
   }
 }

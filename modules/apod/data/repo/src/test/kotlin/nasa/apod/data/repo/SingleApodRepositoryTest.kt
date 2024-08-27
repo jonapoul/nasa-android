@@ -1,8 +1,9 @@
 package nasa.apod.data.repo
 
 import alakazam.kotlin.core.IODispatcher
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import alakazam.test.db.RoomDatabaseRule
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
@@ -31,9 +32,6 @@ import kotlin.test.assertNull
 @RunWith(RobolectricTestRunner::class)
 class SingleApodRepositoryTest {
   @get:Rule
-  val coroutineRule = CoroutineRule()
-
-  @get:Rule
   val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
 
   @get:Rule
@@ -52,20 +50,12 @@ class SingleApodRepositoryTest {
     dao = RoomApodDaoWrapper(databaseRule.database)
     api = webServerRule.buildApi(json = ApodJson)
     entityFactory = DefaultApodEntityFactory
-
-    repository = SingleApodRepository(
-      io = IODispatcher(coroutineRule.dispatcher),
-      api = api,
-      dao = dao,
-      calendar = { TODAY },
-      entityFactory = entityFactory,
-      sharedRepository = SharedRepository(),
-    )
   }
 
   @Test
   fun `Fetch today and store in database`() = runTest {
     // Given a valid response is returned from the server
+    buildRepo()
     webServerRule.enqueue(
       code = 200,
       body = readJsonFromResource(name = "single-valid-with-newlines.json"),
@@ -97,6 +87,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Don't query API if it's cached locally`() = runTest {
     // Given the database has an entry for the specified date
+    buildRepo()
     val entity = ITEM.toEntity(entityFactory)
     dao.insert(entity)
 
@@ -113,6 +104,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Requesting out of valid range`() = runTest {
     // Given an error response is returned from the server
+    buildRepo()
     webServerRule.enqueue(
       code = 400,
       body = readJsonFromResource(name = "out-of-range.json"),
@@ -129,6 +121,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Requesting with an invalid API key`() = runTest {
     // Given an error response is returned from the server
+    buildRepo()
     webServerRule.enqueue(
       code = 403,
       body = readJsonFromResource(name = "invalid-api-key.json"),
@@ -147,6 +140,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Handle unexpected JSON response format`() = runTest {
     // Given an success response is returned from the server, but not in an expected JSON structure
+    buildRepo()
     webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "invalid-response-format.json"))
 
     // When we query the API
@@ -159,6 +153,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Handle date without an APOD item`() = runTest {
     // Given APOD doesn't have an item for the requested date
+    buildRepo()
     webServerRule.enqueue(code = 404, body = readJsonFromResource(name = "nonexistent-date.json"))
 
     // When we query the API
@@ -171,6 +166,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Handle network problems`() = runTest {
     // Given the mock server isn't running
+    buildRepo()
     webServerRule.server.shutdown()
 
     // When we query the API
@@ -183,6 +179,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Handle other HTTP code`() = runTest {
     // Given the server returns an unexpected code
+    buildRepo()
     webServerRule.enqueue(code = 405, body = readJsonFromResource(name = "other-http.json"))
 
     // When we query the API
@@ -198,6 +195,7 @@ class SingleApodRepositoryTest {
   @Test
   fun `Fetch random item`() = runTest {
     // Given the server returns a successful random response
+    buildRepo()
     webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "single-valid-random.json"))
 
     // When we query the API
@@ -222,6 +220,17 @@ class SingleApodRepositoryTest {
   }
 
   private fun readJsonFromResource(name: String): String = getResourceAsText(name)
+
+  private fun TestScope.buildRepo() {
+    repository = SingleApodRepository(
+      io = IODispatcher(standardDispatcher),
+      api = api,
+      dao = dao,
+      calendar = { TODAY },
+      entityFactory = entityFactory,
+      sharedRepository = SharedRepository(),
+    )
+  }
 
   private companion object {
     val API_KEY = ApiKey(value = "SOME_DUMMY_KEY")

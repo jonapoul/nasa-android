@@ -1,9 +1,10 @@
 package nasa.about.data
 
 import alakazam.kotlin.core.IODispatcher
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import nasa.test.MockWebServerRule
@@ -18,9 +19,6 @@ import kotlin.test.assertTrue
 
 class GithubRepositoryTest {
   @get:Rule
-  val coroutineRule = CoroutineRule()
-
-  @get:Rule
   val webServerRule = MockWebServerRule()
 
   private lateinit var githubRepository: GithubRepository
@@ -34,12 +32,12 @@ class GithubRepositoryTest {
       buildTime = Instant.fromEpochMilliseconds(1710786854286L), // Mon Mar 18 2024 18:34:14
     )
     githubApi = webServerRule.buildApi(json = GithubJson)
-    buildRepo()
   }
 
   @Test
   fun `Update available from three returned`() = runTest {
     // Given
+    buildRepo()
     val threeReleasesJson = readJson(filename = "new-release.json")
     webServerRule.enqueue(threeReleasesJson)
 
@@ -63,6 +61,7 @@ class GithubRepositoryTest {
   @Test
   fun `No new updates`() = runTest {
     // Given
+    buildRepo()
     val threeReleasesJson = readJson(filename = "no-new-update.json")
     webServerRule.enqueue(threeReleasesJson)
 
@@ -77,6 +76,7 @@ class GithubRepositoryTest {
   @Test
   fun `No releases`() = runTest {
     // Given
+    buildRepo()
     val emptyArrayResponse = "[]"
     webServerRule.enqueue(emptyArrayResponse)
 
@@ -90,6 +90,7 @@ class GithubRepositoryTest {
   @Test
   fun `Private repo`() = runTest {
     // Given
+    buildRepo()
     val privateRepoJson = readJson(filename = "not-found.json")
     webServerRule.enqueue(privateRepoJson)
 
@@ -103,6 +104,7 @@ class GithubRepositoryTest {
   @Test
   fun `Invalid JSON response`() = runTest {
     // Given
+    buildRepo()
     val jsonResponse = """
       {
         "foo" : "bar"
@@ -121,6 +123,7 @@ class GithubRepositoryTest {
   @Test
   fun `Network failure`() = runTest {
     // Given
+    buildRepo()
     githubApi = mockk { coEvery { getAppReleases() } throws IOException("Network broke!") }
     buildRepo()
 
@@ -134,9 +137,9 @@ class GithubRepositoryTest {
 
   private fun readJson(filename: String): String = getResourceAsText(filename)
 
-  private fun buildRepo() {
+  private fun TestScope.buildRepo() {
     githubRepository = GithubRepository(
-      io = IODispatcher(coroutineRule.dispatcher),
+      io = IODispatcher(standardDispatcher),
       api = githubApi,
       buildConfig = buildConfig,
     )

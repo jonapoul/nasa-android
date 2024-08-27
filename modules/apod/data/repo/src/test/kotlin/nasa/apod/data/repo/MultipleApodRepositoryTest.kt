@@ -1,9 +1,10 @@
 package nasa.apod.data.repo
 
 import alakazam.kotlin.core.IODispatcher
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import alakazam.test.db.RoomDatabaseRule
 import app.cash.turbine.test
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.data.api.ApodApi
@@ -28,9 +29,6 @@ import kotlin.test.fail
 @RunWith(RobolectricTestRunner::class)
 class MultipleApodRepositoryTest {
   @get:Rule
-  val coroutineRule = CoroutineRule()
-
-  @get:Rule
   val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
 
   @get:Rule
@@ -47,20 +45,12 @@ class MultipleApodRepositoryTest {
   fun before() {
     dao = RoomApodDaoWrapper(databaseRule.database)
     api = webServerRule.buildApi(json = ApodJson)
-
-    repository = MultipleApodRepository(
-      io = IODispatcher(coroutineRule.dispatcher),
-      api = api,
-      dao = dao,
-      calendar = { TODAY },
-      factory = DefaultApodEntityFactory,
-      sharedRepository = SharedRepository(),
-    )
   }
 
   @Test
   fun `Fetch this month and store in database`() = runTest {
     // Given a valid response is returned from the server
+    buildRepo()
     webServerRule.enqueue(
       code = 200,
       body = readJsonFromResource(name = "multiple-full.json"),
@@ -88,6 +78,7 @@ class MultipleApodRepositoryTest {
   @Test
   fun `Requesting before valid range`() = runTest {
     // Given the server returns a successful
+    buildRepo()
     webServerRule.enqueue(body = readJsonFromResource(name = "multiple-full.json"))
 
     // When we query the API for a date before the first available, but in the same month
@@ -103,6 +94,7 @@ class MultipleApodRepositoryTest {
   @Test
   fun `Requesting after valid range`() = runTest {
     // When we query the API for a date after the current date (15th april), but in the same month
+    buildRepo()
     val date = LocalDate.parse("2024-04-01")
     repository.loadSpecificMonth(API_KEY, date)
 
@@ -115,6 +107,7 @@ class MultipleApodRepositoryTest {
   @Test
   fun `Fetch random month`() = runTest {
     // Given the server returns a successful random response
+    buildRepo()
     webServerRule.enqueue(body = readJsonFromResource(name = "multiple-full.json"))
 
     dao.observeDates().test {
@@ -137,6 +130,17 @@ class MultipleApodRepositoryTest {
   }
 
   private fun readJsonFromResource(name: String): String = getResourceAsText(name)
+
+  private fun TestScope.buildRepo() {
+    repository = MultipleApodRepository(
+      io = IODispatcher(standardDispatcher),
+      api = api,
+      dao = dao,
+      calendar = { TODAY },
+      factory = DefaultApodEntityFactory,
+      sharedRepository = SharedRepository(),
+    )
+  }
 
   private companion object {
     val API_KEY = ApiKey(value = "SOME_DUMMY_KEY")

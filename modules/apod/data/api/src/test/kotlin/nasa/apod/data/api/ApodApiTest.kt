@@ -1,6 +1,5 @@
 package nasa.apod.data.api
 
-import alakazam.test.core.CoroutineRule
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodMediaType
@@ -15,9 +14,6 @@ import kotlin.test.assertNull
 import kotlin.test.fail
 
 class ApodApiTest {
-  @get:Rule
-  val coroutineRule = CoroutineRule()
-
   @get:Rule
   val webServerRule = MockWebServerRule()
 

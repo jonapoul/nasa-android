@@ -2,7 +2,7 @@ package nasa.settings.ui
 
 import alakazam.android.core.Toaster
 import alakazam.kotlin.core.IODispatcher
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import alakazam.test.db.RoomDatabaseRule
 import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
@@ -10,6 +10,7 @@ import io.mockk.coVerify
 import io.mockk.confirmVerified
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import nasa.core.android.UrlOpener
 import nasa.core.model.NASA_API_URL
@@ -30,9 +31,6 @@ class SettingsViewModelTest {
   val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class, allowMainThread = true)
 
   @get:Rule
-  val coroutineRule = CoroutineRule()
-
-  @get:Rule
   val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
   // real
@@ -50,22 +48,11 @@ class SettingsViewModelTest {
     toaster = mockk(relaxed = true)
     imageCache = ImageCache(ApplicationProvider.getApplicationContext())
     imageCache.cacheDir.mkdirs()
-
-    databaseClearer = DatabaseClearer(
-      io = IODispatcher(coroutineRule.dispatcher),
-      database = NasaDatabaseDelegate(databaseRule.database),
-    )
-
-    viewModel = SettingsViewModel(
-      urlOpener = urlOpener,
-      imageCache = imageCache,
-      databaseClearer = databaseClearer,
-      toaster = toaster,
-    )
   }
 
   @Test
   fun `Register for key`() = runTest {
+    buildViewModel()
     viewModel.registerForApiKey()
     verify { urlOpener.openUrl(NASA_API_URL) }
     confirmVerified(urlOpener)
@@ -73,6 +60,7 @@ class SettingsViewModelTest {
 
   @Test
   fun `Clear cache of files`() = runTest {
+    buildViewModel()
     viewModel.cacheSize.test {
       // Given the cache is empty
       assertEquals(0.bytes, awaitItem())
@@ -93,5 +81,19 @@ class SettingsViewModelTest {
       coVerify { toaster.coToast("Successfully cleared cache") }
       confirmVerified(toaster)
     }
+  }
+
+  private fun TestScope.buildViewModel() {
+    databaseClearer = DatabaseClearer(
+      io = IODispatcher(standardDispatcher),
+      database = NasaDatabaseDelegate(databaseRule.database),
+    )
+
+    viewModel = SettingsViewModel(
+      urlOpener = urlOpener,
+      imageCache = imageCache,
+      databaseClearer = databaseClearer,
+      toaster = toaster,
+    )
   }
 }

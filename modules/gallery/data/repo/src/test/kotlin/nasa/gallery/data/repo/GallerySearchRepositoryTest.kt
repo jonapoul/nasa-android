@@ -1,8 +1,9 @@
 package nasa.gallery.data.repo
 
 import alakazam.kotlin.core.IODispatcher
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import alakazam.test.db.RoomDatabaseRule
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import nasa.db.DefaultGalleryEntityFactory
@@ -43,9 +44,6 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class GallerySearchRepositoryTest {
   @get:Rule
-  val coroutineRule = CoroutineRule()
-
-  @get:Rule
   val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
 
   @get:Rule
@@ -54,6 +52,7 @@ class GallerySearchRepositoryTest {
   // real
   private lateinit var repository: GallerySearchRepository
   private lateinit var searchPreferences: SearchPreferences
+  private lateinit var db: RoomNasaDatabase
   private lateinit var centerDao: RoomCenterDao
   private lateinit var keywordDao: RoomKeywordDao
   private lateinit var photographerDao: RoomPhotographerDao
@@ -66,28 +65,18 @@ class GallerySearchRepositoryTest {
   fun before() {
     galleryApi = webServerRule.buildApi(json = GalleryJson)
 
-    searchPreferences = SearchPreferences(buildPreferences(coroutineRule.dispatcher))
-    val db = databaseRule.database
+    db = databaseRule.database
     centerDao = db.centreDao()
     keywordDao = db.keywordDao()
     photographerDao = db.photographerDao()
     albumDao = db.albumDao()
-
-    repository = GallerySearchRepository(
-      io = IODispatcher(coroutineRule.dispatcher),
-      galleryApi = galleryApi,
-      searchPreferences = searchPreferences,
-      galleryDao = RoomGalleryDaoWrapper(db),
-      entityFactory = DefaultGalleryEntityFactory,
-      centerDao = RoomCenterDaoWrapper(db),
-      keywordDao = RoomKeywordDaoWrapper(db),
-      photographerDao = RoomPhotographerDaoWrapper(db),
-      albumDao = RoomAlbumDaoWrapper(db),
-    )
   }
 
   @Test
   fun `Handle empty filter`() = runTest {
+    // given
+    buildRepo()
+
     // when
     val result = repository.search(FilterConfig.Empty, pageNumber = null)
 
@@ -98,6 +87,7 @@ class GallerySearchRepositoryTest {
   @Test
   fun `Handle failure`() = runTest {
     // given
+    buildRepo()
     val json = this@GallerySearchRepositoryTest.getResourceAsText("search-failure.json")
     webServerRule.enqueue(json, code = HTTP_NOT_FOUND)
 
@@ -118,6 +108,7 @@ class GallerySearchRepositoryTest {
   @Test
   fun `Handle success response`() = runTest {
     // given
+    buildRepo()
     val json = this@GallerySearchRepositoryTest.getResourceAsText("search-success.json")
     webServerRule.enqueue(json, code = HTTP_OK)
 
@@ -148,6 +139,21 @@ class GallerySearchRepositoryTest {
         prevPage = null,
         nextPage = 2,
       ),
+    )
+  }
+
+  private fun TestScope.buildRepo() {
+    searchPreferences = SearchPreferences(buildPreferences(standardDispatcher))
+    repository = GallerySearchRepository(
+      io = IODispatcher(standardDispatcher),
+      galleryApi = galleryApi,
+      searchPreferences = searchPreferences,
+      galleryDao = RoomGalleryDaoWrapper(db),
+      entityFactory = DefaultGalleryEntityFactory,
+      centerDao = RoomCenterDaoWrapper(db),
+      keywordDao = RoomKeywordDaoWrapper(db),
+      photographerDao = RoomPhotographerDaoWrapper(db),
+      albumDao = RoomAlbumDaoWrapper(db),
     )
   }
 

@@ -1,13 +1,13 @@
 package nasa.core.android
 
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import app.cash.turbine.test
 import dev.jonpoulton.preferences.core.Preferences
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.ApiKey
 import nasa.test.buildPreferences
 import net.lachlanmckee.timberjunit.TimberTestRule
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,22 +18,14 @@ import kotlin.test.assertNull
 @RunWith(RobolectricTestRunner::class)
 class PreferencesApiKeyProviderTest {
   @get:Rule
-  val coroutineRule = CoroutineRule()
-
-  @get:Rule
   val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
   private lateinit var provider: PreferencesApiKeyProvider
   private lateinit var prefs: Preferences
 
-  @Before
-  fun before() {
-    prefs = buildPreferences(coroutineRule.dispatcher)
-    provider = PreferencesApiKeyProvider(prefs)
-  }
-
   @Test
   fun `Empty prefs means key is not set`() = runTest {
+    buildProvider()
     provider.observe().test {
       assertNull(awaitItem())
       cancelAndIgnoreRemainingEvents()
@@ -42,6 +34,7 @@ class PreferencesApiKeyProviderTest {
 
   @Test
   fun `Setting null means key is still not set`() = runTest {
+    buildProvider()
     provider.observe().test {
       // Given
       assertNull(awaitItem())
@@ -58,6 +51,7 @@ class PreferencesApiKeyProviderTest {
 
   @Test
   fun `Setting to non-null means key is set`() = runTest {
+    buildProvider()
     provider.observe().test {
       // Given
       assertNull(awaitItem())
@@ -73,6 +67,7 @@ class PreferencesApiKeyProviderTest {
 
   @Test
   fun `Setting when already set does nothing`() = runTest {
+    buildProvider()
     provider.observe().test {
       // Given it's initially empty
       assertNull(awaitItem())
@@ -89,6 +84,11 @@ class PreferencesApiKeyProviderTest {
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
     }
+  }
+
+  private fun TestScope.buildProvider() {
+    prefs = buildPreferences(standardDispatcher)
+    provider = PreferencesApiKeyProvider(prefs)
   }
 
   private companion object {

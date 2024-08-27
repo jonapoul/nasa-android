@@ -1,6 +1,5 @@
 package nasa.gallery.data.api
 
-import alakazam.test.core.CoroutineRule
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableMap
@@ -38,9 +37,6 @@ import kotlin.test.assertTrue
 import kotlin.test.fail
 
 class GalleryApiTest {
-  @get:Rule
-  val coroutineRule = CoroutineRule()
-
   @get:Rule
   val webServerRule = MockWebServerRule()
 

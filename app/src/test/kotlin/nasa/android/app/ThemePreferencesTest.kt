@@ -1,12 +1,11 @@
 package nasa.android.app
 
-import alakazam.test.core.CoroutineRule
+import alakazam.test.core.standardDispatcher
 import app.cash.turbine.test
+import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.ThemeType
 import nasa.test.buildPreferences
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -14,24 +13,17 @@ import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 class ThemePreferencesTest {
-  @get:Rule
-  val coroutineRule = CoroutineRule()
-
   private lateinit var preferences: ThemePreferences
-
-  @Before
-  fun before() {
-    val prefs = buildPreferences(coroutineRule.dispatcher)
-    preferences = ThemePreferences(prefs)
-  }
 
   @Test
   fun `Get default value`() = runTest {
+    buildPreferences()
     assertEquals(preferences.theme.get(), ThemeType.System)
   }
 
   @Test
   fun `Change value`() = runTest {
+    buildPreferences()
     preferences.theme.asFlow().test {
       // Initial state
       assertEquals(ThemeType.System, awaitItem())
@@ -50,5 +42,10 @@ class ThemePreferencesTest {
       preferences.theme.delete()
       assertEquals(ThemeType.System, awaitItem())
     }
+  }
+
+  private fun TestScope.buildPreferences() {
+    val prefs = buildPreferences(standardDispatcher)
+    preferences = ThemePreferences(prefs)
   }
 }
