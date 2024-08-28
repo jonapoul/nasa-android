@@ -1,4 +1,5 @@
 import blueprint.core.rootLocalProperties
+import blueprint.core.rootLocalPropertiesOrNull
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
 plugins {
@@ -30,7 +31,7 @@ plugins {
 }
 
 // Place all local properties in the project-level gradle properties map
-rootLocalProperties().forEach { (key, value) ->
+rootLocalPropertiesOrNull()?.forEach { (key, value) ->
   ext[key.toString()] = value.toString()
 }
 
