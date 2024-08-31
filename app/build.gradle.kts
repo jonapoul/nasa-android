@@ -38,6 +38,7 @@ android {
     targetSdk = intProperty(key = "blueprint.android.targetSdk")
     versionCode = gitVersionCode()
     versionName = gitTagOrCommit
+    multiDexEnabled = true
     setProperty("archivesBaseName", "$applicationId-$versionName")
 
     val kotlinTime = "kotlinx.datetime.Instant.Companion.fromEpochMilliseconds(${System.currentTimeMillis()}L)"
@@ -45,9 +46,6 @@ android {
     buildConfigField("String", "GIT_HASH", "\"${gitCommitHash}\"")
     val apiKey = stringPropertyOrNull(key = "nasa.apiKey")
     buildConfigField("String", "API_KEY", if (apiKey == null) "null" else "\"${apiKey}\"")
-
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    multiDexEnabled = true
   }
 
   kotlinOptions {

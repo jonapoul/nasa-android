@@ -1,6 +1,12 @@
 plugins {
-  id("nasa.module.android")
+  kotlin("android")
+  id("com.android.library")
+  id("nasa.convention.android.library")
+  id("nasa.convention.diagrams")
   id("nasa.convention.hilt")
+  id("nasa.convention.style")
+  id("com.autonomousapps.dependency-analysis")
+  id("com.squareup.sort-dependencies")
   alias(libs.plugins.hilt)
 }
 
@@ -13,6 +19,7 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.hilt.android)
   api(libs.hilt.core)
+  api(libs.test.androidx.runner)
   api(libs.test.hilt)
 
   implementation(libs.androidx.annotation)
