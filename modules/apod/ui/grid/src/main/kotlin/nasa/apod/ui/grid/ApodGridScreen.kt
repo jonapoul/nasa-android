@@ -6,101 +6,91 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cafe.adriel.voyager.core.registry.rememberScreen
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import androidx.navigation.NavController
+import androidx.navigation.NavOptionsBuilder
+import androidx.navigation.PopUpToBuilder
 import kotlinx.datetime.DatePeriod
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.minus
 import kotlinx.datetime.plus
-import nasa.apod.nav.ApodGridNavScreen
+import nasa.apod.nav.ApodGridRandomNavScreen
+import nasa.apod.nav.ApodGridSpecificNavScreen
+import nasa.apod.nav.ApodGridTodayNavScreen
 import nasa.apod.nav.ApodScreenConfig
-import nasa.apod.nav.ApodSingleNavScreen
-import nasa.core.ui.getViewModel
+import nasa.apod.nav.ApodSingleSpecificNavScreen
 import nasa.core.ui.set
 import nasa.settings.nav.SettingsNavScreen
 
-data class ApodGridScreen(
-  val config: ApodScreenConfig,
-) : Screen {
-  @Suppress("CyclomaticComplexMethod")
-  @Composable
-  override fun Content() {
-    val navigator = LocalNavigator.currentOrThrow
-    val viewModel = getViewModel<ApodGridViewModel>()
-    val state by viewModel.state.collectAsStateWithLifecycle()
-    val apiKey by viewModel.apiKey.collectAsStateWithLifecycle()
-    val navButtons by viewModel.navButtonsState.collectAsStateWithLifecycle()
+@Composable
+fun ApodGridScreen(
+  config: ApodScreenConfig,
+  navController: NavController,
+  viewModel: ApodGridViewModel = hiltViewModel(),
+) {
+  val state by viewModel.state.collectAsStateWithLifecycle()
+  val apiKey by viewModel.apiKey.collectAsStateWithLifecycle()
+  val navButtons by viewModel.navButtonsState.collectAsStateWithLifecycle()
 
-    // Load counter increments if the API call failed and the user presses "reload"
-    val loadCounter = remember { mutableIntStateOf(0) }
-    apiKey?.let { key ->
-      LaunchedEffect(config, loadCounter.intValue) { viewModel.load(key, config) }
-    }
+  // Load counter increments if the API call failed and the user presses "reload"
+  val loadCounter = remember { mutableIntStateOf(0) }
+  apiKey?.let { key ->
+    LaunchedEffect(config, loadCounter.intValue) { viewModel.load(key, config) }
+  }
 
-    val loadSpecificDate = remember { mutableStateOf<LocalDate?>(null) }
-    val immutableSpecificDate = loadSpecificDate.value
-    if (immutableSpecificDate != null) {
-      val config = ApodScreenConfig.Specific(immutableSpecificDate)
-      val screen = rememberScreen(ApodGridNavScreen(config))
-      navigator.replace(screen)
-      loadSpecificDate.set(null)
-    }
-
-    val searchDate = remember { mutableStateOf<LocalDate?>(null) }
-    val immutableSearchDate = searchDate.value
-    if (immutableSearchDate != null) {
-      SearchMonthDialog(
-        initialDate = immutableSearchDate,
-        onConfirm = { newDate ->
-          searchDate.set(null)
-          loadSpecificDate.set(newDate)
-        },
-        onCancel = { searchDate.set(null) },
-      )
-    }
-
-    val loadItemDate = remember { mutableStateOf<LocalDate?>(null) }
-    val immutableItemDate = loadItemDate.value
-    if (immutableItemDate != null) {
-      val config = ApodScreenConfig.Specific(immutableItemDate)
-      val screen = rememberScreen(ApodSingleNavScreen(config))
-      navigator.push(screen)
-      loadItemDate.set(null)
-    }
-
-    val loadRandom = remember { mutableStateOf(false) }
-    if (loadRandom.value) {
-      val screen = rememberScreen(ApodGridNavScreen(ApodScreenConfig.Random()))
-      navigator.replace(screen)
-      loadRandom.set(false)
-    }
-
-    val settingsScreen = rememberScreen(SettingsNavScreen)
-
-    ApodGridScreenImpl(
-      state = state,
-      navButtons = navButtons,
-      showBackButton = navigator.size > 1,
-      onAction = { action ->
-        when (action) {
-          is ApodGridAction.NavToItem -> loadItemDate.set(action.item.date)
-          is ApodGridAction.SearchMonth -> searchDate.set(action.current)
-          is ApodGridAction.RetryLoad -> loadCounter.intValue++
-          is ApodGridAction.LoadNext -> loadSpecificDate.set(action.date + ONE_MONTH)
-          is ApodGridAction.LoadPrevious -> loadSpecificDate.set(action.date - ONE_MONTH)
-          is ApodGridAction.LoadRandom -> loadRandom.set(true)
-          ApodGridAction.NavBack -> navigator.pop()
-          ApodGridAction.NavSettings -> navigator.push(settingsScreen)
-          ApodGridAction.RegisterForApiKey -> viewModel.registerForApiKey()
-        }
+  val searchDate = remember { mutableStateOf<LocalDate?>(null) }
+  val immutableSearchDate = searchDate.value
+  if (immutableSearchDate != null) {
+    SearchMonthDialog(
+      initialDate = immutableSearchDate,
+      onConfirm = { newDate ->
+        searchDate.set(null)
+        navSpecific(navController, config, newDate)
       },
+      onCancel = { searchDate.set(null) },
     )
   }
 
-  private companion object {
-    private val ONE_MONTH = DatePeriod(months = 1)
+  ApodGridScreenImpl(
+    state = state,
+    navButtons = navButtons,
+    showBackButton = navController.previousBackStackEntry != null,
+    onAction = { action ->
+      when (action) {
+        is ApodGridAction.NavToItem -> navController.navigate(ApodSingleSpecificNavScreen(action.item.date))
+        is ApodGridAction.SearchMonth -> searchDate.set(action.current)
+        is ApodGridAction.RetryLoad -> loadCounter.intValue++
+        is ApodGridAction.LoadNext -> navSpecific(navController, config, date = action.date + ONE_MONTH)
+        is ApodGridAction.LoadPrevious -> navSpecific(navController, config, date = action.date - ONE_MONTH)
+        is ApodGridAction.LoadRandom -> navRandom(navController, config)
+        ApodGridAction.NavBack -> navController.popBackStack()
+        ApodGridAction.NavSettings -> navController.navigate(SettingsNavScreen)
+        ApodGridAction.RegisterForApiKey -> viewModel.registerForApiKey()
+      }
+    },
+  )
+}
+
+private fun navSpecific(navController: NavController, config: ApodScreenConfig, date: LocalDate) {
+  navController.navigate(route = ApodGridSpecificNavScreen(date)) {
+    popUp(config)
   }
 }
+
+private fun navRandom(navController: NavController, config: ApodScreenConfig) {
+  navController.navigate(route = ApodGridRandomNavScreen()) {
+    popUp(config)
+  }
+}
+
+private fun NavOptionsBuilder.popUp(config: ApodScreenConfig) {
+  val builder: PopUpToBuilder.() -> Unit = { inclusive = true }
+  when (config) {
+    is ApodScreenConfig.Random -> popUpTo<ApodGridRandomNavScreen>(builder)
+    is ApodScreenConfig.Specific -> popUpTo<ApodGridSpecificNavScreen>(builder)
+    ApodScreenConfig.Today -> popUpTo<ApodGridTodayNavScreen>(builder)
+  }
+}
+
+private val ONE_MONTH = DatePeriod(months = 1)

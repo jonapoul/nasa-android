@@ -96,19 +96,19 @@ See the diagrams in each submodule's README to view the web of modules underneat
 
 This project uses (amongst others):
 
-| Name | Purpose |
-|--|--|
-| Jetpack Compose | UI framework |
-| Voyager | Screen navigation in Compose |
-| Retrofit + OkHttp | HTTP API requests |
+| Name                  | Purpose |
+|-----------------------|--|
+| Jetpack Compose       | UI framework |
+| AndroidX Navigation   | Screen navigation in Compose |
+| Retrofit + OkHttp     | HTTP API requests |
 | kotlinx-serialization | JSON serialization |
-| Room | SQLite databases |
-| Timber | Logging |
-| Coil | Image loading |
-| Hilt | Dependency injection |
-| Turbine | Testing flows |
-| JUnit 4 | Testing |
-| MockK | Testing |
+| Room                  | SQLite databases |
+| Timber                | Logging |
+| Coil                  | Image loading |
+| Hilt                  | Dependency injection |
+| Turbine               | Testing flows |
+| JUnit 4               | Testing |
+| MockK                 | Testing |
 
 See the [libs.versions.toml](gradle/libs.versions.toml) file for a full listing.
 

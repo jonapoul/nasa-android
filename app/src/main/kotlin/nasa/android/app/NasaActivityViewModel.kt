@@ -10,7 +10,7 @@ import nasa.core.model.ThemeType
 import javax.inject.Inject
 
 @HiltViewModel
-internal class NasaActivityViewModel @Inject constructor(
+class NasaActivityViewModel @Inject internal constructor(
   themePreferences: ThemePreferences,
 ) : ViewModel() {
   val theme: StateFlow<ThemeType> = themePreferences

@@ -1,6 +1,13 @@
+@file:Suppress("DataClassPrivateConstructor")
+
 package nasa.apod.nav
 
-import cafe.adriel.voyager.core.registry.ScreenProvider
-import nasa.apod.model.ApodItem
+import kotlinx.datetime.LocalDate
+import kotlinx.serialization.Serializable
 
-data class ApodFullScreenNavScreen(val item: ApodItem) : ScreenProvider
+@Serializable
+data class ApodFullScreenNavScreen(val date: String) {
+  constructor(date: LocalDate) : this(date.toString())
+
+  val localDate: LocalDate get() = LocalDate.parse(date)
+}

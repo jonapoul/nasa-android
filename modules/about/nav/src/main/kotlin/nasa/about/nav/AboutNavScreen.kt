@@ -1,5 +1,6 @@
 package nasa.about.nav
 
-import cafe.adriel.voyager.core.registry.ScreenProvider
+import kotlinx.serialization.Serializable
 
-data object AboutNavScreen : ScreenProvider
+@Serializable
+data object AboutNavScreen

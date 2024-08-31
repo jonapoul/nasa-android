@@ -17,12 +17,12 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-internal class LicensesViewModel @Inject constructor(
+class LicensesViewModel @Inject internal constructor(
   private val licensesRepository: LicensesRepository,
   private val urlOpener: UrlOpener,
 ) : ViewModel() {
   private val mutableState = MutableStateFlow<LicensesState>(LicensesState.Loading)
-  val state: StateFlow<LicensesState> = mutableState.asStateFlow()
+  internal val state: StateFlow<LicensesState> = mutableState.asStateFlow()
 
   init {
     load()

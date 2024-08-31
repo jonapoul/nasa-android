@@ -20,13 +20,13 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-internal class ImageViewModel @Inject constructor(
+class ImageViewModel @Inject internal constructor(
   private val main: MainDispatcher,
   private val repository: GalleryImageUrlsRepository,
   progressStateHolder: DownloadProgressStateHolder,
 ) : ViewModel() {
   private val mutableImageState = MutableStateFlow<ImageState>(ImageState.Loading)
-  val imageState: StateFlow<ImageState> = mutableImageState.asStateFlow()
+  internal val imageState: StateFlow<ImageState> = mutableImageState.asStateFlow()
 
   val progress: StateFlow<Percent> = progressStateHolder.state
     .map { it.toProgress() }

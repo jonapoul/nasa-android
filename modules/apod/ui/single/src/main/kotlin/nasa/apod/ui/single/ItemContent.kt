@@ -59,7 +59,7 @@ internal fun ItemContent(
       .clickable(enabled = state is ScreenState.Success) {
         if (state is ScreenState.Success) {
           val action = when (state.item.mediaType) {
-            ApodMediaType.Image -> ApodSingleAction.ShowImageFullscreen(state.item)
+            ApodMediaType.Image -> ApodSingleAction.ShowImageFullscreen(state.item.date)
             ApodMediaType.Video -> ApodSingleAction.OpenVideo(state.item.url)
             ApodMediaType.Other -> return@clickable
           }

@@ -18,7 +18,7 @@ import nasa.core.model.bytes
 import javax.inject.Inject
 
 @HiltViewModel
-internal class SettingsViewModel @Inject constructor(
+class SettingsViewModel @Inject internal constructor(
   private val urlOpener: UrlOpener,
   private val imageCache: ImageCache,
   private val databaseClearer: DatabaseClearer,

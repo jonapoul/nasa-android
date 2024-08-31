@@ -29,7 +29,7 @@ import nasa.core.model.NASA_API_URL
 import javax.inject.Inject
 
 @HiltViewModel
-internal class ApodSingleViewModel @Inject constructor(
+class ApodSingleViewModel @Inject internal constructor(
   private val repository: SingleApodRepository,
   private val urlOpener: UrlOpener,
   apiKeyProvider: ApiKey.Provider,
@@ -47,7 +47,7 @@ internal class ApodSingleViewModel @Inject constructor(
     }
 
   private val mutableState = MutableStateFlow<ScreenState>(ScreenState.Inactive)
-  val state: StateFlow<ScreenState> = mutableState.asStateFlow()
+  internal val state: StateFlow<ScreenState> = mutableState.asStateFlow()
 
   private val mutableApodNavButtonsState = MutableStateFlow(ApodNavButtonsState.BothDisabled)
   val navButtonsState: StateFlow<ApodNavButtonsState> = mutableApodNavButtonsState.asStateFlow()

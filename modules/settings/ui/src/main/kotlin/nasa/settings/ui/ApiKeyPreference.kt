@@ -169,7 +169,7 @@ private fun ApiKeyPreferenceDialogContent(
         keyboardOptions = KeyboardOptions(
           keyboardType = KeyboardType.Text,
           capitalization = KeyboardCapitalization.None,
-          autoCorrect = false,
+          autoCorrectEnabled = false,
           imeAction = ImeAction.Done,
         ),
         keyboardActions = KeyboardActions(

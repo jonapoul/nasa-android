@@ -1,9 +1,7 @@
 plugins {
-  id("nasa.module.kotlin")
+  id("nasa.module.navigation")
 }
 
 dependencies {
-  api(libs.voyager.core)
-
   implementation(projects.gallery.model)
 }

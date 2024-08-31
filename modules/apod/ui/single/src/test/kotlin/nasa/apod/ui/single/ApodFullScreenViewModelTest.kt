@@ -2,6 +2,7 @@ package nasa.apod.ui.single
 
 import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
+import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import nasa.core.http.DownloadProgressStateHolder
 import nasa.core.http.DownloadState
@@ -25,6 +26,7 @@ class ApodFullScreenViewModelTest {
     stateHolder = DownloadProgressStateHolder()
     viewModel = ApodFullScreenViewModel(
       stateHolder = stateHolder,
+      repository = mockk(),
     )
   }
 

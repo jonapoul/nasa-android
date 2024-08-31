@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import coil.request.ImageRequest
+import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
 import nasa.core.http.DOWNLOAD_IDENTIFIER_HEADER
 import nasa.core.model.Percent
@@ -20,14 +21,16 @@ import nasa.core.ui.preview.ScreenPreview
 
 @Composable
 internal fun ApodFullScreenImpl(
-  item: ApodItem,
+  date: LocalDate,
+  item: ApodItem?,
   progress: Percent,
   onClickedBack: () -> Unit,
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { ApodFullScreenTopBar(item, theme, onClickedBack) },
+    topBar = { ApodFullScreenTopBar(date, item, theme, onClickedBack) },
   ) { innerPadding ->
+    item ?: return@Scaffold
     BackgroundSurface(theme = theme) {
       ApodFullScreenContent(
         modifier = Modifier.padding(innerPadding),
@@ -74,6 +77,7 @@ private const val MAX_ZOOM = 10f
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ApodFullScreenImpl(
+    date = EXAMPLE_DATE,
     item = EXAMPLE_ITEM,
     progress = 69.percent,
     onClickedBack = {},

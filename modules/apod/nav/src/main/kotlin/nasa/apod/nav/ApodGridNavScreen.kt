@@ -1,5 +1,20 @@
 package nasa.apod.nav
 
-import cafe.adriel.voyager.core.registry.ScreenProvider
+import kotlinx.datetime.LocalDate
+import kotlinx.serialization.Serializable
 
-data class ApodGridNavScreen(val config: ApodScreenConfig) : ScreenProvider
+@Serializable
+sealed interface ApodGridNavScreen
+
+@Serializable
+data object ApodGridTodayNavScreen : ApodGridNavScreen
+
+@Serializable
+data class ApodGridRandomNavScreen(val seed: Long = System.currentTimeMillis()) : ApodGridNavScreen
+
+@Serializable
+data class ApodGridSpecificNavScreen(val date: String) : ApodGridNavScreen {
+  constructor(date: LocalDate) : this(date.toString())
+
+  val localDate get() = LocalDate.parse(date)
+}

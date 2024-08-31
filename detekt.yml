@@ -12,6 +12,9 @@ complexity:
     ignorePrivate: true
   LongMethod:
     threshold: 100
+  CyclomaticComplexMethod:
+    ignoreSingleWhenExpression: true
+    threshold: 20
 exceptions:
   TooGenericExceptionCaught:
     active: false

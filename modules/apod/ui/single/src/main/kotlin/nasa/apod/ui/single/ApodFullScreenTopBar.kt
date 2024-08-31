@@ -17,14 +17,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
 import nasa.apod.res.R
+import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
+import nasa.core.ui.preview.PreviewScreen
+import nasa.core.ui.preview.ScreenPreview
 
 @Composable
 internal fun ApodFullScreenTopBar(
-  item: ApodItem,
+  date: LocalDate,
+  item: ApodItem?,
   theme: Theme,
   onClickedBack: () -> Unit,
 ) {
@@ -34,6 +39,7 @@ internal fun ApodFullScreenTopBar(
     TopAppBar(
       colors = theme.topAppBarColors(),
       title = {
+        item ?: return@TopAppBar
         Text(
           text = item.title,
           maxLines = 1,
@@ -58,11 +64,33 @@ internal fun ApodFullScreenTopBar(
       contentAlignment = Alignment.Center,
     ) {
       Text(
-        text = item.date.toString(),
+        text = date.toString(),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
         color = theme.toolbarTextSubdued,
       )
     }
   }
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewFull() = PreviewScreen {
+  ApodFullScreenTopBar(
+    date = EXAMPLE_DATE,
+    item = EXAMPLE_ITEM,
+    theme = LocalTheme.current,
+    onClickedBack = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewNullItem() = PreviewScreen {
+  ApodFullScreenTopBar(
+    date = EXAMPLE_DATE,
+    item = null,
+    theme = LocalTheme.current,
+    onClickedBack = {},
+  )
 }

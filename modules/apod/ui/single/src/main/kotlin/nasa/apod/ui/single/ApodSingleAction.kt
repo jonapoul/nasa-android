@@ -11,7 +11,7 @@ internal sealed interface ApodSingleAction {
   data object NavSettings : ApodSingleAction
   data class NavGrid(val current: LocalDate) : ApodSingleAction
   data object RegisterForApiKey : ApodSingleAction
-  data class ShowImageFullscreen(val item: ApodItem) : ApodSingleAction
+  data class ShowImageFullscreen(val date: LocalDate) : ApodSingleAction
   data class OpenVideo(val url: String) : ApodSingleAction
   data class ShowDescriptionDialog(val item: ApodItem) : ApodSingleAction
   data class LoadPrevious(val current: LocalDate) : ApodSingleAction

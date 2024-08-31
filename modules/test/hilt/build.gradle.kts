@@ -20,7 +20,7 @@ dependencies {
   api(libs.hilt.android)
   api(libs.hilt.core)
   api(libs.test.androidx.runner)
-  api(libs.test.hilt)
 
   implementation(libs.androidx.annotation)
+  implementation(libs.test.hilt)
 }

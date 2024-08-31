@@ -1,15 +1,9 @@
 plugins {
-  id("nasa.module.android")
-}
-
-android {
-  namespace = "nasa.apod.nav"
+  id("nasa.module.navigation")
 }
 
 dependencies {
   api(libs.kotlinx.datetime)
-  api(libs.voyager.core)
-  api(projects.apod.model)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

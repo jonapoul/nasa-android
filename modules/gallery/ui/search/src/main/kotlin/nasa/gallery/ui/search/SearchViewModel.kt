@@ -20,12 +20,12 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-internal class SearchViewModel @Inject constructor(
+class SearchViewModel @Inject internal constructor(
   private val main: MainDispatcher,
   private val repository: GallerySearchRepository,
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
-  val searchState: StateFlow<SearchState> = mutableSearchState.asStateFlow()
+  internal val searchState: StateFlow<SearchState> = mutableSearchState.asStateFlow()
 
   private val mutableFilterConfig = MutableStateFlow(FilterConfig.Empty)
   val filterConfig: StateFlow<FilterConfig> = mutableFilterConfig.asStateFlow()

@@ -50,9 +50,13 @@ class ConventionDiagrams : Plugin<Project> {
         val moduleTypeFinder = extension.moduleTypeFinder.get()
         node.add(Shape.BOX).add(moduleTypeFinder.color(proj))
       },
-      includeProject = { proj -> proj != proj.rootProject },
+      includeProject = { proj -> proj.shouldInclude() },
       graph = { graph ->
         if (extension.showLegend.get()) graph.addLegend(extension)
+        graph.graphAttrs().add(
+          Label.of(project.path).locate(Label.Location.TOP),
+          Font.size(LABEL_FONT_SIZE),
+        )
         graph.graphAttrs().add(
           Rank.sep(extension.rankSeparation.get()),
           Font.size(extension.nodeFontSize.get()),
@@ -108,17 +112,17 @@ class ConventionDiagrams : Plugin<Project> {
   }
 
   private fun MutableGraph.addLegend(extension: DiagramsBlueprintExtension) {
-    // Add the actual legend
-    val legend = buildLegend(extension)
-    add(legend)
-
     // Find the root module, probably ":app"
     val rootName = extension.topLevelProject.get()
     val rootNode = rootNodes()
       .filterNotNull()
       .distinct()
       .firstOrNull { it.name().toString() == rootName }
-      ?: error("No node matching '$rootName'")
+      ?: return
+
+    // Add the actual legend
+    val legend = buildLegend(extension)
+    add(legend)
 
     // Add a link from the legend to the root module
     val link = Link.to(rootNode).with(Style.INVIS)
@@ -196,7 +200,14 @@ class ConventionDiagrams : Plugin<Project> {
     }
   }
 
+  private fun Project.shouldInclude(): Boolean {
+    val isRoot = this == rootProject
+    val isTest = path.contains("test", ignoreCase = true)
+    return !isRoot && !isTest
+  }
+
   private companion object {
     const val LEGEND_LABEL = "Legend"
+    const val LABEL_FONT_SIZE = 35
   }
 }

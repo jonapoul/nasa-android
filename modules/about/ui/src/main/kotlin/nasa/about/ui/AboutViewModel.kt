@@ -21,15 +21,15 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
-internal class AboutViewModel @Inject constructor(
+class AboutViewModel @Inject internal constructor(
   private val buildConfig: IBuildConfig,
   private val githubRepository: GithubRepository,
   private val urlOpener: UrlOpener,
 ) : ViewModel() {
-  val buildState: StateFlow<BuildState> = MutableStateFlow(buildState())
+  internal val buildState: StateFlow<BuildState> = MutableStateFlow(buildState())
 
   private val mutableCheckUpdatesState = MutableStateFlow<CheckUpdatesState>(CheckUpdatesState.Inactive)
-  val checkUpdatesState: StateFlow<CheckUpdatesState> = mutableCheckUpdatesState.asStateFlow()
+  internal val checkUpdatesState: StateFlow<CheckUpdatesState> = mutableCheckUpdatesState.asStateFlow()
 
   private var checkUpdatesJob: Job? = null
 

@@ -24,12 +24,6 @@ class ConventionLicensee : Plugin<Project> {
         allow(spdxId)
       }
 
-      listOf(
-        "https://opensource.org/licenses/MIT", // Voyager
-      ).forEach { url ->
-        allowUrl(url)
-      }
-
       unusedAction(UnusedAction.IGNORE)
     }
   }

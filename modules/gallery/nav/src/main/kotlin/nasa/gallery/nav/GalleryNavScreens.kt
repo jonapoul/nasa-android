@@ -1,8 +1,12 @@
 package nasa.gallery.nav
 
-import cafe.adriel.voyager.core.registry.ScreenProvider
+import kotlinx.serialization.Serializable
 import nasa.gallery.model.NasaId
 
-data object GallerySearchNavScreen : ScreenProvider
+@Serializable
+data object GallerySearchNavScreen
 
-data class GalleryImageNavScreen(val id: NasaId) : ScreenProvider
+@Serializable
+data class GalleryImageNavScreen(val id: String) {
+  val nasaId get() = NasaId(id)
+}

@@ -1,12 +1,12 @@
 digraph {
 edge ["dir"="forward"]
-graph ["dpi"="100","label"="di","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
+graph ["dpi"="100","label"=":gallery:di","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
 ":gallery:di" ["shape"="box","fillcolor"="#FCB103"]
-":core:http" ["fillcolor"="#A17EFF","shape"="box"]
-":core:model" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:data:api" ["fillcolor"="#A17EFF","shape"="box"]
-":gallery:model" ["fillcolor"="#A17EFF","shape"="box"]
+":core:http" ["fillcolor"="#BB00FF","shape"="box"]
+":core:model" ["fillcolor"="#BB00FF","shape"="box"]
+":gallery:data:api" ["fillcolor"="#BB00FF","shape"="box"]
+":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
@@ -26,7 +26,8 @@ graph ["label"="Legend","fontsize"="20"]
 <TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
 <TR><TD>Android Resources</TD><TD BGCOLOR="#00FFFF">module-name</TD></TR>
-<TR><TD>Kotlin</TD><TD BGCOLOR="#A17EFF">module-name</TD></TR>
+<TR><TD>Navigation</TD><TD BGCOLOR="#7300FF">module-name</TD></TR>
+<TR><TD>Kotlin</TD><TD BGCOLOR="#BB00FF">module-name</TD></TR>
 </TABLE>
 >]
 } -> ":gallery:di" ["style"="invis"]

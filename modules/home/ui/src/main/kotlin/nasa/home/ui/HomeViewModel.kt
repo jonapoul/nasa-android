@@ -24,7 +24,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-internal class HomeViewModel @Inject constructor(
+class HomeViewModel @Inject internal constructor(
   private val stateHolder: ApiUsageStateHolder,
   private val urlOpener: UrlOpener,
   private val provider: ApiKey.Provider,
@@ -35,7 +35,7 @@ internal class HomeViewModel @Inject constructor(
 
   val galleryThumbnailUrl: Flow<String?> get() = flow { emit(fetchGalleryUrl()) }
 
-  fun apiUsage(): Flow<ApiUsageState> = combine(stateHolder.state, provider.observe(), ::toState)
+  internal fun apiUsage(): Flow<ApiUsageState> = combine(stateHolder.state, provider.observe(), ::toState)
 
   fun registerForApiKey() = urlOpener.openUrl(NASA_API_URL)
 
