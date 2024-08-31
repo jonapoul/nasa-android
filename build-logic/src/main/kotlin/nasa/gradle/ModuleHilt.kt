@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import com.autonomousapps.DependencyAnalysisPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -16,6 +17,7 @@ class ModuleHilt : Plugin<Project> {
       apply(ConventionDiagrams::class.java)
       apply(ConventionHilt::class.java)
       apply(ConventionStyle::class.java)
+      apply(DependencyAnalysisPlugin::class.java)
       apply(SortDependenciesPlugin::class.java)
     }
 

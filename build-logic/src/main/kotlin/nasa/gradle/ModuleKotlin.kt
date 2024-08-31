@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import com.autonomousapps.DependencyAnalysisPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,6 +14,7 @@ class ModuleKotlin : Plugin<Project> {
       apply(ConventionKotlin::class.java)
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)
+      apply(DependencyAnalysisPlugin::class.java)
       apply(SortDependenciesPlugin::class.java)
     }
   }

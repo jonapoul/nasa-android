@@ -62,7 +62,10 @@ dependencyAnalysis {
         exclude(
           libs.test.alakazam.core,
           libs.test.androidx.arch,
+          libs.test.androidx.compose.ui.junit4,
+          libs.test.androidx.espresso,
           libs.test.androidx.junit,
+          libs.test.androidx.monitor,
           libs.test.androidx.rules,
           libs.test.androidx.runner,
           libs.test.hilt,

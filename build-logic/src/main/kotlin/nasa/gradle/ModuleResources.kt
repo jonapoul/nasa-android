@@ -1,6 +1,7 @@
 package nasa.gradle
 
 import com.android.build.api.dsl.LibraryExtension
+import com.autonomousapps.DependencyAnalysisPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,6 +14,7 @@ class ModuleResources : Plugin<Project> {
       apply(ConventionDiagrams::class.java)
       apply(ConventionLicensee::class.java)
       apply(ConventionSpotless::class.java)
+      apply(DependencyAnalysisPlugin::class.java)
       apply(SortDependenciesPlugin::class.java)
     }
 

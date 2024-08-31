@@ -31,7 +31,6 @@ dependencies {
 
   implementation(libs.androidx.room.common)
   implementation(libs.androidx.sqlite.core)
-  implementation(libs.javaxInject)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.kotlinx.serialization.json)

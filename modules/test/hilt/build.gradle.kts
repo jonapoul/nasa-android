@@ -10,6 +10,10 @@ android {
 
 dependencies {
   api(libs.androidx.activity.core)
+  api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.hilt.android)
+  api(libs.hilt.core)
   api(libs.test.hilt)
+
+  implementation(libs.androidx.annotation)
 }
