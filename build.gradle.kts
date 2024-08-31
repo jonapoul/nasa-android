@@ -1,4 +1,3 @@
-import blueprint.core.rootLocalProperties
 import blueprint.core.rootLocalPropertiesOrNull
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 
