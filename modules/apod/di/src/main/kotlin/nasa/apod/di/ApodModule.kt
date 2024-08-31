@@ -13,11 +13,13 @@ import nasa.core.http.buildRetrofit
 import nasa.core.model.NASA_API_URL
 import retrofit2.create
 import timber.log.Timber
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class ApodModule {
   @Provides
+  @Singleton
   fun api(
     buildConfig: IBuildConfig,
     interceptor: ApiUsageInterceptor,
