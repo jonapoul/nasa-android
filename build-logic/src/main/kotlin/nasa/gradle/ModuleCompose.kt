@@ -4,6 +4,9 @@ import com.autonomousapps.DependencyAnalysisPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getValue
+import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.plugin.KotlinAndroidPluginWrapper
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -26,6 +29,13 @@ class ModuleCompose : Plugin<Project> {
     tasks.withType<KotlinCompile> {
       compilerOptions {
         freeCompilerArgs.add("-opt-in=androidx.compose.material3.ExperimentalMaterial3Api")
+      }
+    }
+
+    val androidTestImplementation by configurations
+    dependencies {
+      if (path != ":test:compose") {
+        androidTestImplementation(project(":test:compose"))
       }
     }
   }

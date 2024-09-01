@@ -43,4 +43,6 @@ dependencies {
   implementation(libs.hilt.core)
   implementation(projects.about.res)
   implementation(projects.licenses.nav)
+
+  androidTestImplementation(projects.core.di)
 }

@@ -1,18 +1,9 @@
-import nasa.gradle.excludeClasses
-
 plugins {
   id("nasa.module.compose")
 }
 
 android {
   namespace = "nasa.core.ui"
-}
-
-kover {
-  excludeClasses(
-    "nasa.core.ui.color.*",
-    "nasa.core.ui.preview.*",
-  )
 }
 
 dependencies {

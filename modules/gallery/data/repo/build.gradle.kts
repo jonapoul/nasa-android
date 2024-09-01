@@ -13,7 +13,6 @@ dependencies {
   api(projects.gallery.data.api)
 
   implementation(libs.alakazam.kotlin.core)
-  implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)

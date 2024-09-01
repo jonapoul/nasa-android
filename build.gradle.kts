@@ -49,13 +49,6 @@ dependencyAnalysis {
 
       onRuntimeOnly { severity(value = "ignore") }
 
-      onUsedTransitiveDependencies {
-        exclude(
-          libs.test.mockk.core,
-          libs.test.mockk.dsl,
-        )
-      }
-
       onIncorrectConfiguration {
         exclude(
           ":core:model",
@@ -66,28 +59,16 @@ dependencyAnalysis {
 
       onUnusedDependencies {
         exclude(
-          libs.test.alakazam.core,
-          libs.test.androidx.arch,
-          libs.test.androidx.compose.ui.junit4,
-          libs.test.androidx.espresso,
-          libs.test.androidx.junit,
-          libs.test.androidx.monitor,
-          libs.test.androidx.rules,
-          libs.test.androidx.runner,
-          libs.test.hilt,
-          libs.test.junit,
-          libs.test.mockk.android,
-          libs.test.mockk.core,
-          libs.test.mockk.dsl,
-          libs.test.robolectric,
-          libs.test.timber,
-          libs.test.turbine,
-          libs.androidx.compose.ui.toolingPreview,
-          libs.timber,
           libs.kotlin.stdlib,
+          libs.test.androidx.monitor,
+          libs.timber,
         )
-        exclude(":test:resources")
       }
+
+      ignoreSourceSet(
+        "androidTest",
+        "testFixtures",
+      )
     }
   }
 }

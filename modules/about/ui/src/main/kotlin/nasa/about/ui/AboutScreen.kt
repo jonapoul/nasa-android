@@ -21,18 +21,6 @@ fun AboutScreen(
   val theme = LocalTheme.current
   val buildState by viewModel.buildState.collectAsStateWithLifecycle()
 
-  val clickedBack = remember { mutableStateOf(false) }
-  if (clickedBack.value) {
-    navController.popBackStack()
-    clickedBack.set(false)
-  }
-
-  val clickedLicenses = remember { mutableStateOf(false) }
-  if (clickedLicenses.value) {
-    navController.navigate(LicensesNavScreen)
-    clickedLicenses.set(false)
-  }
-
   val checkUpdates = remember { mutableStateOf(false) }
   val onCancel = {
     checkUpdates.set(false)
@@ -67,8 +55,8 @@ fun AboutScreen(
         AboutAction.OpenSourceCode -> viewModel.openRepo()
         AboutAction.ReportIssue -> viewModel.reportIssues()
         AboutAction.CheckUpdates -> checkUpdates.set(true)
-        AboutAction.NavBack -> clickedBack.set(true)
-        AboutAction.ViewLicenses -> clickedLicenses.set(true)
+        AboutAction.NavBack -> navController.popBackStack()
+        AboutAction.ViewLicenses -> navController.navigate(LicensesNavScreen)
       }
     },
   )
