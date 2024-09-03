@@ -1,4 +1,4 @@
-package nasa.core.http
+package nasa.core.http.factories
 
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType

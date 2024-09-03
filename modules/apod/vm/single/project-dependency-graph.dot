@@ -8,18 +8,17 @@ node ["style"="filled"]
 ":apod:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:apod" ["fillcolor"="#BB00FF","shape"="box"]
-":core:http" ["fillcolor"="#BB00FF","shape"="box"]
+":apod:nav" ["fillcolor"="#5555FF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
 ":apod:vm:single" -> ":apod:data:repo"
-":apod:vm:single" -> ":core:http"
+":apod:vm:single" -> ":apod:nav"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":db:apod" ["style"="dotted"]
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
-":core:http" -> ":core:model"
 subgraph "cluster_legend" {
 edge ["dir"="none"]
 graph ["label"="Legend","fontsize"="20"]

@@ -20,5 +20,4 @@ dependencies {
   api(projects.core.android)
 
   implementation(libs.preferences.android)
-  implementation(projects.core.http)
 }

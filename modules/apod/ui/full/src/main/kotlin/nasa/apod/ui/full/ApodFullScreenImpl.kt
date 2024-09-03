@@ -11,7 +11,7 @@ import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
 import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
-import nasa.core.http.DOWNLOAD_IDENTIFIER_HEADER
+import nasa.core.http.progress.DownloadProgressInterceptor
 import nasa.core.model.Percent
 import nasa.core.model.percent
 import nasa.core.ui.BackgroundSurface
@@ -57,7 +57,7 @@ private fun ApodFullScreenContent(
       .Builder(ctx)
       .data(item.hdUrl)
       .crossfade(durationMillis = 200)
-      .addHeader(DOWNLOAD_IDENTIFIER_HEADER, item.date.toString())
+      .addHeader(DownloadProgressInterceptor.HEADER, item.date.toString())
       .build()
   }
 

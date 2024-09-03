@@ -1,4 +1,4 @@
-package nasa.core.http
+package nasa.core.http.factories
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

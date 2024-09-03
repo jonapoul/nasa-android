@@ -18,7 +18,7 @@ dependencies {
   implementation(libs.hilt.android)
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
-  implementation(projects.core.http)
+  implementation(projects.core.http.progress)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

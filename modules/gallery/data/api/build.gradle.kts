@@ -23,6 +23,5 @@ dependencies {
   testImplementation(libs.kotlinx.immutable)
   testImplementation(libs.okhttp.core)
   testImplementation(libs.test.okhttp)
-  testImplementation(projects.core.http)
   testImplementation(projects.test.http)
 }

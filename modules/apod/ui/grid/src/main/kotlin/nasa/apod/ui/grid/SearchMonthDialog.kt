@@ -122,8 +122,8 @@ private fun MonthYearPicker(
 
   Column(
     modifier = modifier
-        .background(theme.dialogBackground)
-        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
+      .background(theme.dialogBackground)
+      .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 16.dp),
   ) {
     Text(
       text = stringResource(R.string.search_dialog_title),

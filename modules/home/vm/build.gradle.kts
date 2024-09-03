@@ -11,7 +11,7 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.dagger.core)
   api(libs.javaxInject)
-  api(projects.core.http)
+  api(projects.core.http.usage)
 
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.core)

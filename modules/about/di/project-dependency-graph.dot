@@ -4,16 +4,14 @@ graph ["dpi"="100","label"=":about:di","labelloc"="t","fontsize"="30","ranksep"=
 node ["style"="filled"]
 ":about:di" ["shape"="box","fillcolor"="#FCB103"]
 ":about:data" ["fillcolor"="#BB00FF","shape"="box"]
-":core:http" ["fillcolor"="#BB00FF","shape"="box"]
-":core:model" ["fillcolor"="#BB00FF","shape"="box"]
+":core:http:factories" ["fillcolor"="#BB00FF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 ":about:di"
 }
 ":about:di" -> ":about:data"
-":about:di" -> ":core:http" ["style"="dotted"]
-":core:http" -> ":core:model"
+":about:di" -> ":core:http:factories" ["style"="dotted"]
 subgraph "cluster_legend" {
 edge ["dir"="none"]
 graph ["label"="Legend","fontsize"="20"]

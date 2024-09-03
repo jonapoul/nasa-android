@@ -21,8 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject internal constructor(
-    private val main: MainDispatcher,
-    private val repository: GallerySearchRepository,
+  private val main: MainDispatcher,
+  private val repository: GallerySearchRepository,
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
   val searchState: StateFlow<SearchState> = mutableSearchState.asStateFlow()
@@ -32,7 +32,7 @@ class SearchViewModel @Inject internal constructor(
 
   fun performSearch(pageNumber: Int? = null) {
     val config = mutableFilterConfig.value
-      Timber.v("performSearch %d %s", pageNumber, config)
+    Timber.v("performSearch %d %s", pageNumber, config)
     val loadingState = if (pageNumber == null) SearchState.Searching else SearchState.LoadingPage(pageNumber)
     mutableSearchState.update { loadingState }
 
@@ -44,13 +44,13 @@ class SearchViewModel @Inject internal constructor(
   }
 
   fun enterSearchTerm(text: String) {
-      Timber.v("enterSearchTerm %s", text)
+    Timber.v("enterSearchTerm %s", text)
     val newConfig = mutableFilterConfig.value.copy(query = text)
     mutableFilterConfig.update { newConfig }
   }
 
   fun setFilterConfig(config: FilterConfig) {
-      Timber.v("setFilterConfig %s", config)
+    Timber.v("setFilterConfig %s", config)
     mutableFilterConfig.update { config }
     performSearch(pageNumber = null)
   }
@@ -74,26 +74,26 @@ class SearchViewModel @Inject internal constructor(
       0 -> error("No data in $this")
       1 -> data.first()
       else -> {
-          Timber.w("More than one data, grabbing first")
+        Timber.w("More than one data, grabbing first")
         data.first()
       }
     }
     return SearchResultItem(
-        nasaId = item.nasaId,
-        collectionUrl = collectionUrl,
-        previewUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Preview }?.url,
-        captionsUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Captions }?.url,
-        albums = item.album?.toImmutableList()?.ifEmpty { null },
-        center = item.center,
-        title = item.title,
-        keywords = item.keywords,
-        location = item.location,
-        photographer = item.photographer,
-        dateCreated = item.dateCreated,
-        mediaType = item.mediaType,
-        secondaryCreator = item.secondaryCreator,
-        description = item.description,
-        description508 = item.description508,
+      nasaId = item.nasaId,
+      collectionUrl = collectionUrl,
+      previewUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Preview }?.url,
+      captionsUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Captions }?.url,
+      albums = item.album?.toImmutableList()?.ifEmpty { null },
+      center = item.center,
+      title = item.title,
+      keywords = item.keywords,
+      location = item.location,
+      photographer = item.photographer,
+      dateCreated = item.dateCreated,
+      mediaType = item.mediaType,
+      secondaryCreator = item.secondaryCreator,
+      description = item.description,
+      description508 = item.description508,
     )
   }
 }

@@ -5,8 +5,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import nasa.core.http.buildOkHttp
-import nasa.core.http.buildRetrofit
+import nasa.core.http.factories.buildOkHttp
+import nasa.core.http.factories.buildRetrofit
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.GalleryJson
 import retrofit2.create

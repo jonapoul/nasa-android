@@ -34,4 +34,5 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(projects.apod.preview)
   implementation(projects.apod.res)
+  implementation(projects.core.http.progress)
 }

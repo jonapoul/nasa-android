@@ -14,6 +14,7 @@ dependencies {
   api(libs.javaxInject)
   api(libs.kotlinx.datetime)
   api(projects.apod.data.repo)
+  api(projects.apod.nav)
 
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)

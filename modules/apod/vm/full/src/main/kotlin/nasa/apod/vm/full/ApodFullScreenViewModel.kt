@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.datetime.LocalDate
 import nasa.apod.data.repo.LocalDatabaseRepository
 import nasa.apod.model.ApodItem
-import nasa.core.http.DownloadProgressStateHolder
-import nasa.core.http.toProgress
+import nasa.core.http.progress.DownloadProgressStateHolder
+import nasa.core.http.progress.toProgress
 import nasa.core.model.Percent
 import timber.log.Timber
 import javax.inject.Inject

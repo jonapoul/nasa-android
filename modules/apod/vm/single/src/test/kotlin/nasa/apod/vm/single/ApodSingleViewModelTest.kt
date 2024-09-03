@@ -138,9 +138,7 @@ class ApodSingleViewModelTest {
   fun `Reload previous date, even if in random config`() = runTest {
     // Given the repo is set to return the data successfully
     val twelfthOfApril = LocalDate(year = 2024, month = Month.APRIL, dayOfMonth = 12)
-    coEvery { repository.loadSpecific(API_KEY, twelfthOfApril) } returns SingleLoadResult.Success(
-      EXAMPLE_ITEM_1
-    )
+    coEvery { repository.loadSpecific(API_KEY, twelfthOfApril) } returns SingleLoadResult.Success(EXAMPLE_ITEM_1)
 
     // and the saved state has a previously-loaded date saved. This happens if we selected random, so if we go back
     // to this screen from the nav stack, it'll reload the same random item
@@ -192,12 +190,7 @@ class ApodSingleViewModelTest {
 
     // and we can load data from May
     val item = EXAMPLE_ITEM_1.copy(date = firstOfMay)
-    coEvery {
-      repository.loadSpecific(
-        API_KEY,
-        firstOfMay
-      )
-    } returns SingleLoadResult.Success(item)
+    coEvery { repository.loadSpecific(API_KEY, firstOfMay) } returns SingleLoadResult.Success(item)
 
     viewModel.navButtonsState.test {
       // no data loaded yet, so both disabled

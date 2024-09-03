@@ -7,9 +7,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import nasa.apod.data.api.ApodApi
 import nasa.apod.data.api.ApodJson
-import nasa.core.http.ApiUsageInterceptor
-import nasa.core.http.buildOkHttp
-import nasa.core.http.buildRetrofit
+import nasa.core.http.factories.buildOkHttp
+import nasa.core.http.factories.buildRetrofit
+import nasa.core.http.usage.ApiUsageInterceptor
 import nasa.core.model.NASA_API_URL
 import retrofit2.create
 import timber.log.Timber

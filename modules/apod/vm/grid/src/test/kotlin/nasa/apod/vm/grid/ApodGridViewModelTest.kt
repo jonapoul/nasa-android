@@ -57,9 +57,7 @@ class ApodGridViewModelTest {
   fun `Loading random month`() = runTest {
     viewModel.state.test {
       // Given the repo is set to return the month successfully
-      coEvery { repository.loadRandomMonth(API_KEY) } returns MultipleLoadResult.Success(
-        EXAMPLE_ITEMS
-      )
+      coEvery { repository.loadRandomMonth(API_KEY) } returns MultipleLoadResult.Success(EXAMPLE_ITEMS)
       assertEquals(GridScreenState.Inactive, awaitItem())
 
       // When we load with random config
@@ -88,9 +86,7 @@ class ApodGridViewModelTest {
   fun `Loading this month`() = runTest {
     viewModel.state.test {
       // Given the repo is set to return the month successfully
-      coEvery { repository.loadThisMonth(API_KEY) } returns MultipleLoadResult.Success(
-        EXAMPLE_ITEMS
-      )
+      coEvery { repository.loadThisMonth(API_KEY) } returns MultipleLoadResult.Success(EXAMPLE_ITEMS)
       assertEquals(GridScreenState.Inactive, awaitItem())
 
       // When we load with today config
@@ -120,9 +116,7 @@ class ApodGridViewModelTest {
     viewModel.state.test {
       // Given the repo is set to return the month successfully
       val errorMessage = "foobar"
-      coEvery { repository.loadThisMonth(API_KEY) } returns FailureResult.OutOfRange(
-        errorMessage
-      )
+      coEvery { repository.loadThisMonth(API_KEY) } returns FailureResult.OutOfRange(errorMessage)
       assertEquals(GridScreenState.Inactive, awaitItem())
 
       // When we load the data
@@ -148,9 +142,7 @@ class ApodGridViewModelTest {
   fun `Reload previous date, even if in random config`() = runTest {
     // Given the repo is set to return the month successfully
     val april = LocalDate(year = 2024, month = Month.APRIL, dayOfMonth = 1)
-    coEvery { repository.loadSpecificMonth(API_KEY, april) } returns MultipleLoadResult.Success(
-      EXAMPLE_ITEMS
-    )
+    coEvery { repository.loadSpecificMonth(API_KEY, april) } returns MultipleLoadResult.Success(EXAMPLE_ITEMS)
 
     // and the saved state has a previously-loaded date saved. This happens if we selected random, so if we go back
     // to this screen from the nav stack, it'll reload the same random item
@@ -171,7 +163,7 @@ class ApodGridViewModelTest {
       assertEquals(
         expected = GridScreenState.Success(
           persistentListOf(EXAMPLE_ITEM_1, EXAMPLE_ITEM_2),
-          API_KEY
+          API_KEY,
         ),
         actual = awaitItem(),
       )
@@ -205,9 +197,7 @@ class ApodGridViewModelTest {
 
     // and we can load data from May
     val item = EXAMPLE_ITEM_1.copy(date = may)
-    coEvery { repository.loadSpecificMonth(API_KEY, may) } returns MultipleLoadResult.Success(
-      persistentListOf(item)
-    )
+    coEvery { repository.loadSpecificMonth(API_KEY, may) } returns MultipleLoadResult.Success(persistentListOf(item))
 
     viewModel.navButtonsState.test {
       // no data loaded yet, so both disabled

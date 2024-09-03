@@ -8,11 +8,13 @@ node ["style"="filled"]
 ":apod:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:apod" ["fillcolor"="#BB00FF","shape"="box"]
+":apod:nav" ["fillcolor"="#5555FF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
 ":apod:vm:grid" -> ":apod:data:repo"
+":apod:vm:grid" -> ":apod:nav"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":db:apod" ["style"="dotted"]
 ":apod:data:api" -> ":apod:model"

@@ -14,7 +14,7 @@ dependencies {
   api(libs.javaxInject)
   api(libs.kotlinx.datetime)
   api(projects.apod.data.repo)
-  api(projects.core.http)
+  api(projects.apod.nav)
 
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.core)

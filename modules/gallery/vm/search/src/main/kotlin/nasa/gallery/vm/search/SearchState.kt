@@ -16,12 +16,12 @@ sealed interface SearchState {
   data class LoadingPage(val pageNumber: Int) : SearchState
 
   data class Success(
-      val results: ImmutableList<SearchResultItem>,
-      val totalResults: Int,
-      val resultsPerPage: Int,
-      val prevPageNumber: Int?,
-      val pageNumber: Int,
-      val nextPageNumber: Int?,
+    val results: ImmutableList<SearchResultItem>,
+    val totalResults: Int,
+    val resultsPerPage: Int,
+    val prevPageNumber: Int?,
+    val pageNumber: Int,
+    val nextPageNumber: Int?,
   ) : SearchState
 
   data class Failed(

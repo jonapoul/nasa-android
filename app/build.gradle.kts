@@ -176,6 +176,8 @@ dependencies {
   implementation(projects.apod.ui.grid)
   implementation(projects.apod.ui.single)
   implementation(projects.core.di)
+  implementation(projects.core.http.factories)
+  implementation(projects.core.http.progress)
   implementation(projects.db.di)
   implementation(projects.gallery.di)
   implementation(projects.gallery.nav)

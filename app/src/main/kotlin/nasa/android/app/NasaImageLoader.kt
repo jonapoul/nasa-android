@@ -7,9 +7,9 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.memory.MemoryCache
 import coil.util.DebugLogger
-import nasa.core.http.DownloadProgressInterceptor
-import nasa.core.http.DownloadProgressStateHolder
-import nasa.core.http.buildOkHttp
+import nasa.core.http.factories.buildOkHttp
+import nasa.core.http.progress.DownloadProgressInterceptor
+import nasa.core.http.progress.DownloadProgressStateHolder
 import nasa.core.model.IMAGE_CACHE_DIR
 import nasa.core.model.megabytes
 import timber.log.Timber

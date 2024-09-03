@@ -1,10 +1,8 @@
-package nasa.core.http
+package nasa.core.http.usage
 
-import alakazam.kotlin.core.StateHolder
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class ApiUsageInterceptor @Inject constructor(
   private val stateHolder: ApiUsageStateHolder,
@@ -24,11 +22,3 @@ class ApiUsageInterceptor @Inject constructor(
 
   private fun Response.intHeaderOrNull(key: String): Int? = header(key, defaultValue = null)?.toIntOrNull()
 }
-
-data class ApiUsage(
-  val remaining: Int,
-  val upperLimit: Int,
-)
-
-@Singleton
-class ApiUsageStateHolder @Inject constructor() : StateHolder<ApiUsage?>(initialState = null)

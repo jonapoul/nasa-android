@@ -5,7 +5,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import coil.request.ImageRequest
-import nasa.core.http.DOWNLOAD_IDENTIFIER_HEADER
+import nasa.core.http.progress.DownloadProgressInterceptor
 import nasa.core.model.Percent
 import nasa.core.model.percent
 import nasa.core.ui.FullscreenLoadableImage
@@ -28,7 +28,7 @@ internal fun ImageSuccess(
       .Builder(ctx)
       .data(url)
       .crossfade(durationMillis = 200)
-      .addHeader(DOWNLOAD_IDENTIFIER_HEADER, IDENTIFIER)
+      .addHeader(DownloadProgressInterceptor.HEADER, IDENTIFIER)
       .build()
   }
 

@@ -26,6 +26,7 @@ graph ["rank"="same"]
 ":apod:ui:grid" -> ":apod:res" ["style"="dotted"]
 ":apod:ui:grid" -> ":settings:nav" ["style"="dotted"]
 ":apod:vm:grid" -> ":apod:data:repo"
+":apod:vm:grid" -> ":apod:nav"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":db:apod" ["style"="dotted"]
 ":apod:data:api" -> ":apod:model"

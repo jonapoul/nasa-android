@@ -10,7 +10,6 @@ node ["style"="filled"]
 ":apod:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:apod" ["fillcolor"="#BB00FF","shape"="box"]
-":core:http" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":core:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":apod:preview" ["fillcolor"="#BB00FF","shape"="box"]
@@ -27,12 +26,11 @@ graph ["rank"="same"]
 ":apod:ui:single" -> ":apod:res" ["style"="dotted"]
 ":apod:ui:single" -> ":settings:nav" ["style"="dotted"]
 ":apod:vm:single" -> ":apod:data:repo"
-":apod:vm:single" -> ":core:http"
+":apod:vm:single" -> ":apod:nav"
 ":apod:data:repo" -> ":apod:data:api"
 ":apod:data:repo" -> ":db:apod" ["style"="dotted"]
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
-":core:http" -> ":core:model"
 ":core:ui" -> ":core:model"
 ":core:ui" -> ":core:res"
 ":apod:preview" -> ":apod:model"

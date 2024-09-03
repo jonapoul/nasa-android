@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import nasa.core.http.DownloadProgressStateHolder
-import nasa.core.http.toProgress
+import nasa.core.http.progress.DownloadProgressStateHolder
+import nasa.core.http.progress.toProgress
 import nasa.core.model.Percent
 import nasa.gallery.data.repo.GalleryImageUrlsRepository
 import nasa.gallery.model.NasaId

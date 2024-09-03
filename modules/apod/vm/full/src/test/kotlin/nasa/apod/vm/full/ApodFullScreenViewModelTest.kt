@@ -4,8 +4,8 @@ import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import nasa.core.http.DownloadProgressStateHolder
-import nasa.core.http.DownloadState
+import nasa.core.http.progress.DownloadProgressStateHolder
+import nasa.core.http.progress.DownloadState
 import nasa.core.model.FileSize
 import nasa.core.model.Percent
 import nasa.core.model.bytes

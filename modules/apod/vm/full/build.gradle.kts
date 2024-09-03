@@ -13,10 +13,10 @@ dependencies {
   api(libs.javaxInject)
   api(libs.kotlinx.datetime)
   api(projects.apod.data.repo)
-  api(projects.core.http)
 
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
+  implementation(projects.core.http.progress)
 
   testImplementation(testFixtures(projects.core.model))
 }

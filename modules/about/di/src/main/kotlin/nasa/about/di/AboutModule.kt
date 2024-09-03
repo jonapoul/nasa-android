@@ -9,8 +9,8 @@ import nasa.about.data.BuildConfigProvider
 import nasa.about.data.BuildConfigProviderImpl
 import nasa.about.data.GithubApi
 import nasa.about.data.GithubJson
-import nasa.core.http.buildOkHttp
-import nasa.core.http.buildRetrofit
+import nasa.core.http.factories.buildOkHttp
+import nasa.core.http.factories.buildRetrofit
 import retrofit2.create
 import timber.log.Timber
 

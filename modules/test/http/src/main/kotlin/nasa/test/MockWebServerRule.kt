@@ -1,8 +1,8 @@
 package nasa.test
 
 import kotlinx.serialization.json.Json
-import nasa.core.http.buildOkHttp
-import nasa.core.http.buildRetrofit
+import nasa.core.http.factories.buildOkHttp
+import nasa.core.http.factories.buildRetrofit
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.rules.TestWatcher
