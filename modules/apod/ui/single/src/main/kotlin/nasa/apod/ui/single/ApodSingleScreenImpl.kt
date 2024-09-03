@@ -12,6 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import nasa.apod.model.ApodNavButtonsState
+import nasa.apod.preview.PREVIEW_DATE
+import nasa.apod.preview.PREVIEW_ITEM_1
+import nasa.apod.vm.single.ScreenState
+import nasa.core.model.ApiKey
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -90,7 +94,7 @@ private fun ApodSingleContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    state = ScreenState.Success(PREVIEW_ITEM_1, ApiKey.DEMO),
     navButtons = ApodNavButtonsState.BothEnabled,
     onAction = {},
     showBackButton = false,
@@ -102,8 +106,8 @@ private fun PreviewSuccess() = PreviewScreen {
 private fun PreviewFailure() = PreviewScreen {
   ApodSingleScreenImpl(
     state = ScreenState.Failed(
-      EXAMPLE_DATE,
-      EXAMPLE_KEY,
+      PREVIEW_DATE,
+      ApiKey.DEMO,
       message = "Something broke! Here's some more rubbish too for preview",
     ),
     navButtons = ApodNavButtonsState(enableNext = false, enablePrevious = true),
@@ -116,7 +120,7 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    state = ScreenState.Loading(PREVIEW_DATE, ApiKey.DEMO),
     navButtons = ApodNavButtonsState(enableNext = true, enablePrevious = false),
     onAction = {},
     showBackButton = false,
@@ -127,7 +131,7 @@ private fun PreviewLoading() = PreviewScreen {
 @Composable
 private fun PreviewNoApiKey() = PreviewScreen {
   ApodSingleScreenImpl(
-    state = ScreenState.NoApiKey(EXAMPLE_DATE),
+    state = ScreenState.NoApiKey(PREVIEW_DATE),
     navButtons = ApodNavButtonsState.BothDisabled,
     onAction = {},
     showBackButton = false,

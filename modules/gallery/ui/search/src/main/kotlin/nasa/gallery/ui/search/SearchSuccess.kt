@@ -30,6 +30,7 @@ import nasa.core.ui.color.scrollbarSettings
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.gallery.res.R
+import nasa.gallery.vm.search.SearchState
 
 @Composable
 internal fun SearchSuccess(
@@ -119,7 +120,7 @@ private val PADDING = 4.dp
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   SearchSuccess(
-    state = PreviewSuccessState,
+    state = PREVIEW_SUCCESS_STATE,
     onAction = {},
   )
 }

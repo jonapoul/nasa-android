@@ -21,6 +21,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.apod.model.ApodNavButtonsState
+import nasa.apod.preview.PREVIEW_DATE
+import nasa.apod.preview.PREVIEW_ITEM_1
+import nasa.apod.vm.single.ScreenState
+import nasa.core.model.ApiKey
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
@@ -164,7 +168,7 @@ private fun ItemDate(
 @Composable
 private fun PreviewSuccess() = PreviewColumn {
   ItemHeader(
-    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    state = ScreenState.Success(PREVIEW_ITEM_1, ApiKey.DEMO),
     navButtons = ApodNavButtonsState.BothEnabled,
     onAction = {},
   )
@@ -174,7 +178,7 @@ private fun PreviewSuccess() = PreviewColumn {
 @Composable
 private fun PreviewFailure() = PreviewColumn {
   ItemHeader(
-    state = ScreenState.Failed(EXAMPLE_DATE, EXAMPLE_KEY, message = "Something broke"),
+    state = ScreenState.Failed(PREVIEW_DATE, ApiKey.DEMO, message = "Something broke"),
     navButtons = ApodNavButtonsState(enableNext = false, enablePrevious = true),
     onAction = {},
   )
@@ -184,7 +188,7 @@ private fun PreviewFailure() = PreviewColumn {
 @Composable
 private fun PreviewLoading() = PreviewColumn {
   ItemHeader(
-    state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    state = ScreenState.Loading(PREVIEW_DATE, ApiKey.DEMO),
     navButtons = ApodNavButtonsState(enableNext = true, enablePrevious = false),
     onAction = {},
   )

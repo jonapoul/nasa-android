@@ -13,7 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
+import nasa.apod.vm.single.ScreenState
+import nasa.apod.vm.single.dateOrNull
+import nasa.core.model.ApiKey
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
@@ -82,7 +86,7 @@ internal fun ApodSingleTopBar(
 @Composable
 private fun PreviewSuccess() = PreviewColumn {
   ApodSingleTopBar(
-    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    state = ScreenState.Success(PREVIEW_ITEM_1, ApiKey.DEMO),
     showBackButton = true,
     onAction = {},
   )

@@ -51,6 +51,7 @@ import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.shimmer
 import nasa.gallery.model.MediaType
 import nasa.gallery.res.R
+import nasa.gallery.vm.search.SearchResultItem
 
 @Stable
 @Composable
@@ -268,7 +269,7 @@ private val LARGER_TEXT_SIZE = 14.sp
 @Composable
 private fun PreviewItem() = PreviewColumn {
   SearchSuccessItem(
-    item = PreviewItem1,
+    item = PREVIEW_ITEM_1,
     onAction = {},
   )
 }

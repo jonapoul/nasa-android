@@ -17,6 +17,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.set
 import nasa.gallery.model.NasaId
 import nasa.gallery.nav.GalleryImageNavScreen
+import nasa.gallery.vm.search.SearchViewModel
 
 @Composable
 fun GallerySearchScreen(

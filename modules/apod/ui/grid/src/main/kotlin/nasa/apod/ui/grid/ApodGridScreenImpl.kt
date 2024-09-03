@@ -17,7 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.persistentListOf
 import nasa.apod.model.ApodNavButtonsState
+import nasa.apod.preview.PREVIEW_DATE
+import nasa.apod.preview.PREVIEW_ITEM_1
+import nasa.apod.preview.PREVIEW_ITEM_2
+import nasa.core.model.ApiKey
 import nasa.core.ui.BackgroundSurface
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -145,7 +150,10 @@ private fun GridContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ApodGridScreenImpl(
-    state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
+    state = GridScreenState.Success(
+      persistentListOf(PREVIEW_ITEM_1, PREVIEW_ITEM_2),
+      ApiKey.DEMO,
+    ),
     navButtons = ApodNavButtonsState.BothEnabled,
     showBackButton = true,
     onAction = {},
@@ -157,8 +165,8 @@ private fun PreviewSuccess() = PreviewScreen {
 private fun PreviewFailure() = PreviewScreen {
   ApodGridScreenImpl(
     state = GridScreenState.Failed(
-      EXAMPLE_DATE,
-      EXAMPLE_KEY,
+      PREVIEW_DATE,
+      ApiKey.DEMO,
       message = "Something broke! Here's some more rubbish too for preview",
     ),
     navButtons = ApodNavButtonsState(enableNext = false, enablePrevious = true),
@@ -171,7 +179,7 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ApodGridScreenImpl(
-    state = GridScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    state = GridScreenState.Loading(PREVIEW_DATE, ApiKey.DEMO),
     navButtons = ApodNavButtonsState(enableNext = true, enablePrevious = false),
     showBackButton = true,
     onAction = {},

@@ -15,6 +15,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.screens.LoadFailure
+import nasa.gallery.vm.image.ImageState
 
 @Composable
 internal fun ImageScreenImpl(

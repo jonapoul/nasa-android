@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.apod.model.ApodItem
+import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
 import nasa.core.ui.CardShape
 import nasa.core.ui.color.LocalTheme
@@ -65,7 +66,7 @@ internal fun ItemFooter(
 @Composable
 private fun PreviewRegular() = PreviewColumn {
   ItemFooter(
-    item = EXAMPLE_ITEM,
+    item = PREVIEW_ITEM_1,
     onAction = {},
   )
 }

@@ -18,6 +18,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.screens.LoadFailure
+import nasa.gallery.vm.search.SearchState
 
 @Composable
 internal fun SearchScreenImpl(
@@ -103,7 +104,7 @@ private fun SearchContent(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
-    searchState = PreviewSuccessState,
+    searchState = PREVIEW_SUCCESS_STATE,
     onAction = {},
   )
 }

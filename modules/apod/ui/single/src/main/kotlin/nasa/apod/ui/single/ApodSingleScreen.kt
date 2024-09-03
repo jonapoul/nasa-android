@@ -22,6 +22,7 @@ import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.nav.ApodSingleRandomNavScreen
 import nasa.apod.nav.ApodSingleSpecificNavScreen
 import nasa.apod.nav.ApodSingleTodayNavScreen
+import nasa.apod.vm.single.ApodSingleViewModel
 import nasa.core.ui.set
 import nasa.settings.nav.SettingsNavScreen
 

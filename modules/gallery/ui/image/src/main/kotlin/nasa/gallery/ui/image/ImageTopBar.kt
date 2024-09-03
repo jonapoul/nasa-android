@@ -20,6 +20,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
+import nasa.gallery.vm.image.ImageState
 import nasa.core.res.R as CoreR
 
 @Composable

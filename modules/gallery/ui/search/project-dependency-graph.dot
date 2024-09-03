@@ -6,22 +6,24 @@ node ["style"="filled"]
 ":core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:res" ["fillcolor"="#00FFFF","shape"="box"]
+":gallery:vm:search" ["fillcolor"="#F5A6A6","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":db:gallery" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#BB00FF","shape"="box"]
-":gallery:nav" ["fillcolor"="#7300FF","shape"="box"]
+":gallery:nav" ["fillcolor"="#5555FF","shape"="box"]
 ":gallery:res" ["fillcolor"="#00FFFF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
 ":gallery:ui:search" -> ":core:ui"
-":gallery:ui:search" -> ":gallery:data:repo"
+":gallery:ui:search" -> ":gallery:vm:search"
 ":gallery:ui:search" -> ":gallery:nav" ["style"="dotted"]
 ":gallery:ui:search" -> ":gallery:res" ["style"="dotted"]
 ":core:ui" -> ":core:model"
 ":core:ui" -> ":core:res"
+":gallery:vm:search" -> ":gallery:data:repo"
 ":gallery:data:repo" -> ":db:gallery"
 ":gallery:data:repo" -> ":gallery:data:api"
 ":db:gallery" -> ":gallery:model"
@@ -33,11 +35,12 @@ graph ["label"="Legend","fontsize"="20"]
 "Legend" ["style"="filled","fillcolor"="#bbbbbb","shape"="none","margin"="0","fontsize"="15","label"=<
 <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4">
 <TR><TD>Android App</TD><TD BGCOLOR="#FF5555">module-name</TD></TR>
+<TR><TD>Android ViewModel</TD><TD BGCOLOR="#F5A6A6">module-name</TD></TR>
 <TR><TD>Android Hilt</TD><TD BGCOLOR="#FCB103">module-name</TD></TR>
 <TR><TD>Android Compose</TD><TD BGCOLOR="#FFFF55">module-name</TD></TR>
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
 <TR><TD>Android Resources</TD><TD BGCOLOR="#00FFFF">module-name</TD></TR>
-<TR><TD>Navigation</TD><TD BGCOLOR="#7300FF">module-name</TD></TR>
+<TR><TD>Navigation</TD><TD BGCOLOR="#5555FF">module-name</TD></TR>
 <TR><TD>Kotlin</TD><TD BGCOLOR="#BB00FF">module-name</TD></TR>
 </TABLE>
 >]

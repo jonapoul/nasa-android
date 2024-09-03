@@ -7,18 +7,16 @@ android {
 }
 
 dependencies {
-  api(libs.alakazam.kotlin.core)
   api(libs.androidx.compose.runtime)
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.androidx.navigation.runtime)
-  api(libs.dagger.core)
-  api(libs.javaxInject)
   api(libs.kotlinx.datetime)
   api(projects.core.ui)
-  api(projects.gallery.data.repo)
+  api(projects.gallery.vm.search)
 
   implementation(libs.alakazam.android.compose)
+  implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.annotation)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
@@ -39,8 +37,6 @@ dependencies {
   implementation(libs.androidx.navigation.common)
   implementation(libs.coil.compose)
   implementation(libs.coil.composeBase)
-  implementation(libs.hilt.android)
-  implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
   implementation(libs.lazycolumn.scrollbar)

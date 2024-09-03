@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
+import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -132,7 +133,7 @@ internal fun ApodGridItem(
 @Composable
 private fun PreviewGridItem() = PreviewColumn {
   ApodGridItem(
-    item = EXAMPLE_ITEM_1.copy(title = "Even longer title to show ellipsis at the end"),
+    item = PREVIEW_ITEM_1.copy(title = "Even longer title to show ellipsis at the end"),
     onAction = {},
   )
 }
@@ -141,8 +142,8 @@ private fun PreviewGridItem() = PreviewColumn {
 @Composable
 private fun PreviewVideoItem() = PreviewColumn {
   ApodGridItem(
-    item = EXAMPLE_ITEM_1.copy(
-      thumbnailUrl = EXAMPLE_ITEM_1.url,
+    item = PREVIEW_ITEM_1.copy(
+      thumbnailUrl = PREVIEW_ITEM_1.url,
       mediaType = ApodMediaType.Video,
     ),
     onAction = {},
@@ -153,7 +154,7 @@ private fun PreviewVideoItem() = PreviewColumn {
 @Composable
 private fun PreviewOtherItem() = PreviewColumn {
   ApodGridItem(
-    item = EXAMPLE_ITEM_1.copy(
+    item = PREVIEW_ITEM_1.copy(
       url = "",
       thumbnailUrl = null,
       hdUrl = null,

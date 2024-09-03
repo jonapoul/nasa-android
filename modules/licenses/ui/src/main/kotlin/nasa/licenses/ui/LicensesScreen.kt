@@ -8,6 +8,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import nasa.core.ui.set
+import nasa.licenses.vm.LicensesViewModel
 
 @Composable
 fun LicensesScreen(

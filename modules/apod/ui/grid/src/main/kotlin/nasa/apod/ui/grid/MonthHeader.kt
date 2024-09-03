@@ -22,9 +22,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.Month
 import nasa.apod.model.ApodNavButtonsState
+import nasa.apod.preview.PREVIEW_ITEM_1
+import nasa.apod.preview.PREVIEW_ITEM_2
 import nasa.apod.res.R
+import nasa.core.model.ApiKey
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
@@ -137,7 +141,10 @@ fun Month.string(): String = stringResource(
 @Composable
 private fun PreviewSuccess() = PreviewColumn {
   MonthHeader(
-    state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
+    state = GridScreenState.Success(
+      persistentListOf(PREVIEW_ITEM_1, PREVIEW_ITEM_2),
+      ApiKey.DEMO,
+    ),
     navButtons = ApodNavButtonsState.BothEnabled,
     onAction = {},
   )
@@ -147,7 +154,7 @@ private fun PreviewSuccess() = PreviewColumn {
 @Composable
 private fun PreviewLoading() = PreviewColumn {
   MonthHeader(
-    state = GridScreenState.Loading(date = null, EXAMPLE_KEY),
+    state = GridScreenState.Loading(date = null, ApiKey.DEMO),
     navButtons = ApodNavButtonsState(enableNext = false, enablePrevious = true),
     onAction = {},
   )

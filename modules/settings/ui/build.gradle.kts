@@ -7,17 +7,11 @@ android {
 }
 
 dependencies {
-  api(libs.alakazam.android.core)
-  api(libs.alakazam.kotlin.core)
   api(libs.androidx.compose.runtime)
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.androidx.navigation.runtime)
-  api(libs.dagger.core)
-  api(libs.javaxInject)
-  api(projects.apod.data.repo)
-  api(projects.core.android)
   api(projects.core.ui)
-  api(projects.db.api)
+  api(projects.settings.vm)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.animation.core)
@@ -40,13 +34,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.androidx.preference.ktx)
-  implementation(libs.hilt.android)
-  implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
   implementation(projects.settings.res)
-
-  testImplementation(libs.androidx.room.runtime)
-  testImplementation(libs.test.alakazam.db)
-  testImplementation(projects.db.impl)
 }

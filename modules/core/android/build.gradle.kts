@@ -11,7 +11,6 @@ dependencies {
   api(libs.kotlinx.coroutines)
   api(projects.core.model)
 
-  implementation(libs.androidx.core)
   implementation(libs.preferences.core)
 
   testImplementation(projects.test.prefs)

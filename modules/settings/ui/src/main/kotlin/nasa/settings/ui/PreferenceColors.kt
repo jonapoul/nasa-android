@@ -6,14 +6,14 @@ import androidx.compose.ui.graphics.Color
 import nasa.core.ui.color.Theme
 
 @Immutable
-data class PreferenceColors(
+internal data class PreferenceColors(
   val foreground: Color,
   val background: Color,
   val subtitle: Color,
 )
 
 @Stable
-fun Theme.preference(enabled: Boolean) = PreferenceColors(
+internal fun Theme.preference(enabled: Boolean) = PreferenceColors(
   foreground = if (enabled) preferenceForeground else preferenceForegroundDisabled,
   background = if (enabled) preferenceBackground else preferenceBackgroundDisabled,
   subtitle = if (enabled) preferenceSubtitle else preferenceSubtitleDisabled,

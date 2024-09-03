@@ -26,6 +26,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.home.res.R
+import nasa.home.vm.ApiUsageState
 
 @Composable
 internal fun ApiUsageDialog(

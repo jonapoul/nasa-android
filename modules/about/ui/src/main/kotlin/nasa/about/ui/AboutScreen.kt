@@ -9,6 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import nasa.about.vm.AboutViewModel
+import nasa.about.vm.CheckUpdatesState
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.set
 import nasa.licenses.nav.LicensesNavScreen

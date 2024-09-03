@@ -8,6 +8,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import nasa.core.ui.color.LocalTheme
 import nasa.gallery.model.NasaId
+import nasa.gallery.vm.image.ImageViewModel
 
 @Composable
 fun GalleryImageScreen(

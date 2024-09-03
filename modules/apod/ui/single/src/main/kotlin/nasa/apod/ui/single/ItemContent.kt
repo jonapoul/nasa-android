@@ -33,7 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nasa.apod.model.ApodMediaType
+import nasa.apod.preview.PREVIEW_DATE
+import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
+import nasa.apod.vm.single.ScreenState
+import nasa.core.model.ApiKey
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -215,7 +219,7 @@ private fun ItemContentLoading(
 @Composable
 private fun PreviewSuccess() = PreviewScreen {
   ItemContent(
-    state = ScreenState.Success(EXAMPLE_ITEM, EXAMPLE_KEY),
+    state = ScreenState.Success(PREVIEW_ITEM_1, ApiKey.DEMO),
     onAction = {},
   )
 }
@@ -223,12 +227,12 @@ private fun PreviewSuccess() = PreviewScreen {
 @ScreenPreview
 @Composable
 private fun PreviewSuccessVideo() = PreviewScreen {
-  val item = EXAMPLE_ITEM.copy(
-    thumbnailUrl = EXAMPLE_ITEM.url,
+  val item = PREVIEW_ITEM_1.copy(
+    thumbnailUrl = PREVIEW_ITEM_1.url,
     mediaType = ApodMediaType.Video,
   )
   ItemContent(
-    state = ScreenState.Success(item, EXAMPLE_KEY),
+    state = ScreenState.Success(item, ApiKey.DEMO),
     onAction = {},
   )
 }
@@ -236,14 +240,14 @@ private fun PreviewSuccessVideo() = PreviewScreen {
 @ScreenPreview
 @Composable
 private fun PreviewSuccessOther() = PreviewScreen {
-  val item = EXAMPLE_ITEM.copy(
+  val item = PREVIEW_ITEM_1.copy(
     url = "",
     thumbnailUrl = null,
     hdUrl = null,
     mediaType = ApodMediaType.Video,
   )
   ItemContent(
-    state = ScreenState.Success(item, EXAMPLE_KEY),
+    state = ScreenState.Success(item, ApiKey.DEMO),
     onAction = {},
   )
 }
@@ -253,8 +257,8 @@ private fun PreviewSuccessOther() = PreviewScreen {
 private fun PreviewFailure() = PreviewScreen {
   ItemContent(
     state = ScreenState.Failed(
-      EXAMPLE_DATE,
-      EXAMPLE_KEY,
+      PREVIEW_DATE,
+      ApiKey.DEMO,
       message = "Something broke! Here's some more rubbish too for preview",
     ),
     onAction = {},
@@ -265,7 +269,7 @@ private fun PreviewFailure() = PreviewScreen {
 @Composable
 private fun PreviewLoading() = PreviewScreen {
   ItemContent(
-    state = ScreenState.Loading(EXAMPLE_DATE, EXAMPLE_KEY),
+    state = ScreenState.Loading(PREVIEW_DATE, ApiKey.DEMO),
     onAction = {},
   )
 }
@@ -274,7 +278,7 @@ private fun PreviewLoading() = PreviewScreen {
 @Composable
 private fun PreviewNoApiKey() = PreviewScreen {
   ItemContent(
-    state = ScreenState.NoApiKey(EXAMPLE_DATE),
+    state = ScreenState.NoApiKey(PREVIEW_DATE),
     onAction = {},
   )
 }

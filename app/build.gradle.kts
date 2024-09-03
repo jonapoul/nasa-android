@@ -172,6 +172,7 @@ dependencies {
   implementation(projects.about.ui)
   implementation(projects.apod.di)
   implementation(projects.apod.nav)
+  implementation(projects.apod.ui.full)
   implementation(projects.apod.ui.grid)
   implementation(projects.apod.ui.single)
   implementation(projects.core.di)

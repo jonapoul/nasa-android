@@ -26,8 +26,8 @@ import nasa.apod.nav.ApodScreenConfig
 import nasa.apod.nav.ApodSingleRandomNavScreen
 import nasa.apod.nav.ApodSingleSpecificNavScreen
 import nasa.apod.nav.ApodSingleTodayNavScreen
+import nasa.apod.ui.full.ApodFullScreen
 import nasa.apod.ui.grid.ApodGridScreen
-import nasa.apod.ui.single.ApodFullScreen
 import nasa.apod.ui.single.ApodSingleScreen
 import nasa.core.ui.NasaTheme
 import nasa.gallery.nav.GalleryImageNavScreen

@@ -12,7 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.collections.immutable.persistentListOf
+import nasa.apod.preview.PREVIEW_ITEM_1
+import nasa.apod.preview.PREVIEW_ITEM_2
 import nasa.apod.res.R
+import nasa.core.model.ApiKey
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
@@ -66,7 +70,10 @@ internal fun ApodGridTopBar(
 @Composable
 private fun PreviewToolbar() = PreviewColumn {
   ApodGridTopBar(
-    state = GridScreenState.Success(EXAMPLE_ITEMS, EXAMPLE_KEY),
+    state = GridScreenState.Success(
+      persistentListOf(PREVIEW_ITEM_1, PREVIEW_ITEM_2),
+      ApiKey.DEMO,
+    ),
     showBackButton = true,
     onAction = {},
   )

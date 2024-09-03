@@ -10,11 +10,13 @@ import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
 import nasa.gallery.model.Photographer
+import nasa.gallery.vm.search.SearchResultItem
+import nasa.gallery.vm.search.SearchState
 
 // Mon May 06 2024 14:23:21
-internal val PreviewInstant = Instant.fromEpochMilliseconds(1715005401531L)
+internal val PREVIEW_TIME = Instant.fromEpochMilliseconds(1715005401531L)
 
-internal val PreviewItem1 = SearchResultItem(
+internal val PREVIEW_ITEM_1 = SearchResultItem(
   nasaId = NasaId(value = "abc"),
   collectionUrl = JsonUrl(url = "https://url.com/data.json"),
   previewUrl = ImageUrl(url = "https://url.com/data.jpg"),
@@ -25,7 +27,7 @@ internal val PreviewItem1 = SearchResultItem(
   keywords = Keywords("Apollo", "NASA", "Space"),
   location = "123 Road Street, Townsville",
   photographer = Photographer("Dick Dastardly"),
-  dateCreated = PreviewInstant,
+  dateCreated = PREVIEW_TIME,
   mediaType = MediaType.Image,
   secondaryCreator = "Willy Wonka",
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore" +
@@ -36,7 +38,7 @@ internal val PreviewItem1 = SearchResultItem(
   description508 = null,
 )
 
-internal val PreviewItem2 = PreviewItem1.copy(
+internal val PREVIEW_ITEM_2 = PREVIEW_ITEM_1.copy(
   nasaId = NasaId("xyz"),
   albums = null,
   title = "Here's another one",
@@ -46,8 +48,8 @@ internal val PreviewItem2 = PreviewItem1.copy(
   photographer = null,
 )
 
-internal val PreviewSuccessState = SearchState.Success(
-  results = persistentListOf(PreviewItem1, PreviewItem2),
+internal val PREVIEW_SUCCESS_STATE = SearchState.Success(
+  results = persistentListOf(PREVIEW_ITEM_1, PREVIEW_ITEM_2),
   totalResults = 123,
   prevPageNumber = null,
   pageNumber = 1,

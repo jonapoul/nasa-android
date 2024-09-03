@@ -16,11 +16,12 @@ fun ModuleType.Finder.color(project: Project): Color = Color.rgb(find(project).c
 
 enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
   AndroidApp(string = "Android App", color = "#FF5555"), // red
+  AndroidViewModel(string = "Android ViewModel", color = "#F5A6A6"), // pink
   AndroidHilt(string = "Android Hilt", color = "#FCB103"), // orange
   AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
-  AndroidResources(string = "Android Resources", color = "#00FFFF"), // blue
-  Navigation(string = "Navigation", color = "#7300FF"), // indigo
+  AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
+  Navigation(string = "Navigation", color = "#5555FF"), // blue
   Kotlin(string = "Kotlin", color = "#BB00FF"), // violet
   ;
 
@@ -28,6 +29,7 @@ enum class NasaModuleType(override val string: String, override val color: Strin
     override fun find(project: Project): ModuleType = when {
       project.plugins.hasPlugin("com.android.application") -> AndroidApp
       project.plugins.hasPlugin("nasa.module.hilt") -> AndroidHilt
+      project.plugins.hasPlugin("nasa.module.viewmodel") -> AndroidViewModel
       project.plugins.hasPlugin("nasa.module.compose") -> AndroidCompose
       project.plugins.hasPlugin("nasa.module.android") -> AndroidLibrary
       project.plugins.hasPlugin("nasa.module.resources") -> AndroidResources
