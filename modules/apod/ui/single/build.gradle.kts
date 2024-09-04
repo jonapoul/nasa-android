@@ -12,9 +12,9 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.androidx.navigation.runtime)
   api(libs.kotlinx.datetime)
-  api(projects.apod.nav)
   api(projects.apod.vm.single)
   api(projects.core.ui)
+  api(projects.settings.nav)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
@@ -39,5 +39,4 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(projects.apod.preview)
   implementation(projects.apod.res)
-  implementation(projects.settings.nav)
 }

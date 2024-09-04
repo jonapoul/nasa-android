@@ -43,6 +43,13 @@ dependencyAnalysis {
     bundle(name = "viewModel") { include(regex = "androidx.lifecycle:lifecycle-viewmodel.*".toRegex()) }
   }
 
+  abi {
+    exclusions {
+      ignoreInternalPackages()
+      ignoreGeneratedCode()
+    }
+  }
+
   issues {
     all {
       onAny { severity(value = "fail") }
@@ -51,8 +58,10 @@ dependencyAnalysis {
 
       onIncorrectConfiguration {
         exclude(
+          ":apod:model",
           ":core:model",
           ":core:res",
+          ":gallery:model",
           "javax.inject:javax.inject",
         )
       }

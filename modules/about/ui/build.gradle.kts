@@ -13,6 +13,7 @@ dependencies {
   api(libs.kotlinx.coroutines)
   api(projects.about.vm)
   api(projects.core.ui)
+  api(projects.licenses.nav)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -35,7 +36,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.androidx.navigation.common)
   implementation(projects.about.res)
-  implementation(projects.licenses.nav)
 
   androidTestImplementation(projects.core.di)
 }

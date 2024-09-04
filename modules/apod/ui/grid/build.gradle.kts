@@ -12,9 +12,9 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.androidx.navigation.runtime)
   api(libs.kotlinx.datetime)
-  api(projects.apod.nav)
   api(projects.apod.vm.grid)
   api(projects.core.ui)
+  api(projects.settings.nav)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
@@ -40,7 +40,6 @@ dependencies {
   implementation(libs.kotlinx.immutable)
   implementation(projects.apod.preview)
   implementation(projects.apod.res)
-  implementation(projects.settings.nav)
 
   testImplementation(testFixtures(projects.core.model))
 }

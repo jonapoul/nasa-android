@@ -12,13 +12,13 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.dagger.core)
   api(libs.javaxInject)
+  api(projects.core.http.progress)
   api(projects.gallery.data.repo)
 
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.android)
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
-  implementation(projects.core.http.progress)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

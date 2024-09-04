@@ -8,7 +8,7 @@ node ["style"="filled"]
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
-":gallery:nav" -> ":gallery:model" ["style"="dotted"]
+":gallery:nav" -> ":gallery:model"
 subgraph "cluster_legend" {
 edge ["dir"="none"]
 graph ["label"="Legend","fontsize"="20"]

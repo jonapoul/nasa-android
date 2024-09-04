@@ -8,16 +8,16 @@ node ["style"="filled"]
 ":core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:res" ["fillcolor"="#00FFFF","shape"="box"]
-":about:res" ["fillcolor"="#00FFFF","shape"="box"]
 ":licenses:nav" ["fillcolor"="#5555FF","shape"="box"]
+":about:res" ["fillcolor"="#00FFFF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
 ":about:ui" -> ":about:vm"
 ":about:ui" -> ":core:ui"
+":about:ui" -> ":licenses:nav"
 ":about:ui" -> ":about:res" ["style"="dotted"]
-":about:ui" -> ":licenses:nav" ["style"="dotted"]
 ":about:vm" -> ":about:data"
 ":core:ui" -> ":core:model"
 ":core:ui" -> ":core:res"

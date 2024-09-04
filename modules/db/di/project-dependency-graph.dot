@@ -3,8 +3,8 @@ edge ["dir"="forward"]
 graph ["dpi"="100","label"=":db:di","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
 ":db:di" ["shape"="box","fillcolor"="#FCB103"]
-":db:api" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:impl" ["fillcolor"="#55FF55","shape"="box"]
+":db:api" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:apod" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:gallery" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
@@ -13,7 +13,6 @@ edge ["dir"="none"]
 graph ["rank"="same"]
 ":db:di"
 }
-":db:di" -> ":db:api"
 ":db:di" -> ":db:impl"
 ":db:impl" -> ":db:api"
 ":db:impl" -> ":db:apod"

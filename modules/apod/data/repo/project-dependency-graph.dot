@@ -12,7 +12,7 @@ edge ["dir"="none"]
 graph ["rank"="same"]
 }
 ":apod:data:repo" -> ":apod:data:api"
-":apod:data:repo" -> ":db:apod" ["style"="dotted"]
+":apod:data:repo" -> ":db:apod"
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
 subgraph "cluster_legend" {

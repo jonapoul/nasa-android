@@ -11,14 +11,14 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.dagger.core)
   api(libs.javaxInject)
+  api(projects.apod.data.repo)
   api(projects.core.http.usage)
+  api(projects.gallery.data.repo)
 
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.core)
   implementation(libs.javaxInject)
   implementation(libs.kotlinx.coroutines)
-  implementation(projects.apod.data.repo)
-  implementation(projects.gallery.data.repo)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 }

@@ -10,7 +10,12 @@ dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.androidx.navigation.runtime)
+  api(projects.about.nav)
+  api(projects.apod.nav)
+  api(projects.core.ui)
+  api(projects.gallery.nav)
   api(projects.home.vm)
+  api(projects.settings.nav)
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
@@ -35,10 +40,5 @@ dependencies {
   implementation(libs.coil.composeBase)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.lazycolumn.scrollbar)
-  implementation(projects.about.nav)
-  implementation(projects.apod.nav)
-  implementation(projects.core.ui)
-  implementation(projects.gallery.nav)
   implementation(projects.home.res)
-  implementation(projects.settings.nav)
 }

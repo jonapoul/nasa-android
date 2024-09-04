@@ -13,6 +13,7 @@ dependencies {
   api(libs.androidx.navigation.runtime)
   api(libs.kotlinx.datetime)
   api(projects.core.ui)
+  api(projects.gallery.nav)
   api(projects.gallery.vm.search)
 
   implementation(libs.alakazam.android.compose)
@@ -40,6 +41,5 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
   implementation(libs.lazycolumn.scrollbar)
-  implementation(projects.gallery.nav)
   implementation(projects.gallery.res)
 }

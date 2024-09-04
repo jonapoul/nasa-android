@@ -11,7 +11,7 @@ graph ["rank"="same"]
 ":about:di"
 }
 ":about:di" -> ":about:data"
-":about:di" -> ":core:http:factories" ["style"="dotted"]
+":about:di" -> ":core:http:factories"
 subgraph "cluster_legend" {
 edge ["dir"="none"]
 graph ["label"="Legend","fontsize"="20"]

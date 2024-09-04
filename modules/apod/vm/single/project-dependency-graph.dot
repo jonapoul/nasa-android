@@ -16,7 +16,7 @@ graph ["rank"="same"]
 ":apod:vm:single" -> ":apod:data:repo"
 ":apod:vm:single" -> ":apod:nav"
 ":apod:data:repo" -> ":apod:data:api"
-":apod:data:repo" -> ":db:apod" ["style"="dotted"]
+":apod:data:repo" -> ":db:apod"
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
 subgraph "cluster_legend" {

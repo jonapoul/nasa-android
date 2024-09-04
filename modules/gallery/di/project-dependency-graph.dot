@@ -3,16 +3,16 @@ edge ["dir"="forward"]
 graph ["dpi"="100","label"=":gallery:di","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
 ":gallery:di" ["shape"="box","fillcolor"="#FCB103"]
+":core:http:factories" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
-":core:http:factories" ["fillcolor"="#BB00FF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 ":gallery:di"
 }
+":gallery:di" -> ":core:http:factories"
 ":gallery:di" -> ":gallery:data:api"
-":gallery:di" -> ":core:http:factories" ["style"="dotted"]
 ":gallery:data:api" -> ":gallery:model"
 subgraph "cluster_legend" {
 edge ["dir"="none"]

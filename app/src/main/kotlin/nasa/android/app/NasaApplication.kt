@@ -5,7 +5,7 @@ import android.app.Application
 import coil.Coil
 import dagger.hilt.android.HiltAndroidApp
 import nasa.android.BuildConfig
-import nasa.core.android.PreferencesApiKeyProvider
+import nasa.core.di.PreferencesApiKeyProvider
 import nasa.core.model.ApiKey
 import timber.log.Timber
 import javax.inject.Inject

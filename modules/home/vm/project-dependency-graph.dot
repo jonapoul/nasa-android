@@ -3,12 +3,12 @@ edge ["dir"="forward"]
 graph ["dpi"="100","label"=":home:vm","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
 ":home:vm" ["fillcolor"="#F5A6A6","shape"="box"]
-":core:http:usage" ["fillcolor"="#BB00FF","shape"="box"]
 ":apod:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":apod:data:api" ["fillcolor"="#BB00FF","shape"="box"]
 ":apod:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":db:apod" ["fillcolor"="#BB00FF","shape"="box"]
+":core:http:usage" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
 ":db:gallery" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
@@ -17,11 +17,11 @@ node ["style"="filled"]
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
+":home:vm" -> ":apod:data:repo"
 ":home:vm" -> ":core:http:usage"
-":home:vm" -> ":apod:data:repo" ["style"="dotted"]
-":home:vm" -> ":gallery:data:repo" ["style"="dotted"]
+":home:vm" -> ":gallery:data:repo"
 ":apod:data:repo" -> ":apod:data:api"
-":apod:data:repo" -> ":db:apod" ["style"="dotted"]
+":apod:data:repo" -> ":db:apod"
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
 ":gallery:data:repo" -> ":db:gallery"

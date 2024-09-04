@@ -1,4 +1,4 @@
-package nasa.core.android
+package nasa.core.di
 
 import dev.jonpoulton.preferences.core.Preferences
 import dev.jonpoulton.preferences.core.SimpleNullableStringSerializer
@@ -6,7 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import nasa.core.model.ApiKey
 import nasa.core.model.SettingsKeys
-import timber.log.Timber
 import javax.inject.Inject
 
 class PreferencesApiKeyProvider @Inject constructor(preferences: Preferences) : ApiKey.Provider {
@@ -16,7 +15,6 @@ class PreferencesApiKeyProvider @Inject constructor(preferences: Preferences) : 
 
   fun set(key: ApiKey?) {
     val existing = preference.get()
-    Timber.v("set $key, existing = $existing")
     if (existing == null && key != null) {
       preference.set(key)
     }

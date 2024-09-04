@@ -22,11 +22,10 @@ graph ["rank"="same"]
 ":apod:ui:full" -> ":core:ui"
 ":apod:ui:full" -> ":apod:preview" ["style"="dotted"]
 ":apod:ui:full" -> ":apod:res" ["style"="dotted"]
-":apod:ui:full" -> ":core:http:progress" ["style"="dotted"]
 ":apod:vm:full" -> ":apod:data:repo"
-":apod:vm:full" -> ":core:http:progress" ["style"="dotted"]
+":apod:vm:full" -> ":core:http:progress"
 ":apod:data:repo" -> ":apod:data:api"
-":apod:data:repo" -> ":db:apod" ["style"="dotted"]
+":apod:data:repo" -> ":db:apod"
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
 ":core:http:progress" -> ":core:model"

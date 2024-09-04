@@ -17,7 +17,7 @@ dependencies {
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
   api(libs.preferences.core)
-  api(projects.core.android)
+  api(projects.core.model)
 
   implementation(libs.preferences.android)
 }
