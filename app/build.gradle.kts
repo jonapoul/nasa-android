@@ -6,6 +6,7 @@ import blueprint.core.runGitCommandOrNull
 import blueprint.core.stringProperty
 import blueprint.core.stringPropertyOrNull
 import org.gradle.internal.extensions.stdlib.capitalized
+import java.time.LocalDate
 
 plugins {
   alias(libs.plugins.kotlin.android)
@@ -26,7 +27,10 @@ plugins {
 val gitCommitHash = runGitCommandOrNull(args = listOf("rev-parse", "--short=8", "HEAD"))
   ?: error("Failed getting git version from ${project.path}")
 
-val gitTagOrCommit = runGitCommandOrNull(args = listOf("describe", "--tags", "--abbrev=0")) ?: gitCommitHash
+fun versionCode(): String {
+  val date = LocalDate.now()
+  return "%04d.%02d.%02d".format(date.year, date.monthValue, date.dayOfMonth)
+}
 
 android {
   namespace = "nasa.android"
@@ -37,7 +41,7 @@ android {
     minSdk = intProperty(key = "blueprint.android.minSdk")
     targetSdk = intProperty(key = "blueprint.android.targetSdk")
     versionCode = gitVersionCode()
-    versionName = gitTagOrCommit
+    versionName = versionCode()
     multiDexEnabled = true
     setProperty("archivesBaseName", "$applicationId-$versionName")
 
