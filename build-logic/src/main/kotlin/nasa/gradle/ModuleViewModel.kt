@@ -29,7 +29,6 @@ class ModuleViewModel : Plugin<Project> {
     dependencies {
       api(libs.androidx.lifecycle.viewmodel.core)
       api(libs.dagger.core)
-      api(libs.javaxInject)
       implementation(libs.hilt.android)
     }
   }

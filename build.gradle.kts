@@ -57,17 +57,12 @@ dependencyAnalysis {
       onRuntimeOnly { severity(value = "ignore") }
 
       onIncorrectConfiguration {
-        exclude(
-          ":apod:model",
-          ":core:model",
-          ":core:res",
-          ":gallery:model",
-          "javax.inject:javax.inject",
-        )
+        recursiveSubProjects().forEach { exclude(it.path) }
       }
 
       onUnusedDependencies {
         exclude(
+          libs.androidx.compose.ui.tooling,
           libs.kotlin.stdlib,
           libs.test.androidx.monitor,
           libs.timber,
@@ -95,3 +90,10 @@ tasks.withType<DependencyUpdatesTask> {
 }
 
 private fun String.isStable(): Boolean = listOf("alpha", "beta", "rc").none { lowercase().contains(it) }
+
+private fun recursiveSubProjects(): Sequence<Project> {
+  return subprojects
+    .asSequence()
+    .flatMap { project -> project.subprojects + project }
+    .distinctBy { project -> project.path }
+}

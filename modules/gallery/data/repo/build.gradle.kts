@@ -7,12 +7,12 @@ android {
 }
 
 dependencies {
-  api(libs.javaxInject)
   api(libs.kotlinx.coroutines)
   api(projects.db.gallery)
   api(projects.gallery.data.api)
 
   implementation(libs.alakazam.kotlin.core)
+  implementation(libs.javaxInject)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)
