@@ -9,6 +9,7 @@ local.properties
 
 # Ignore all IDEA files, except those excluded below
 .idea/*
+!.idea/codeInsightSettings.xml
 !.idea/detekt.xml
 !.idea/icon.png
 !.idea/icon_dark.png
