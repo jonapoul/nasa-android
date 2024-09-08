@@ -52,6 +52,7 @@ internal fun PreviewWithTheme(
  * Previews three portrait phone screens in a row. Make sure to use the [ScreenPreview] annotation in conjunction with
  * the [PreviewScreen] composable below. Poor naming, I know
  */
+@Suppress("PreviewAnnotationNaming")
 @Preview(
   name = "Screen",
   showBackground = true,

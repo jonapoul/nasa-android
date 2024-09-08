@@ -15,6 +15,12 @@ complexity:
   CyclomaticComplexMethod:
     ignoreSingleWhenExpression: true
     threshold: 20
+# https://mrmans0n.github.io/compose-rules/detekt/
+Compose:
+  Material2:
+    active: true
+  UnstableCollections:
+    active: true
 exceptions:
   TooGenericExceptionCaught:
     active: false

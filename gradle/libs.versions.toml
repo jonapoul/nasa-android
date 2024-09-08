@@ -27,7 +27,7 @@ androidx-activity = "1.9.2"
 androidx-annotation = "1.8.2"
 androidx-compose-bom = "2024.09.00"
 androidx-compose-lint-slack = "1.3.1"
-androidx-compose-lint-twitter = "0.0.26"
+androidx-compose-rules = "0.4.11"
 androidx-core = "1.13.1"
 androidx-fragment = "1.8.3"
 androidx-hilt = "1.2.0"
@@ -76,6 +76,7 @@ plugin-dependencyAnalysis = { module = "com.autonomousapps:dependency-analysis-g
 plugin-dependencyGraph = { module = "com.vanniktech:gradle-dependency-graph-generator-plugin", version.ref = "dependencyGraph" }
 plugin-dependencySort = { module = "com.squareup.sort-dependencies:com.squareup.sort-dependencies.gradle.plugin", version.ref = "dependencySort" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+plugin-detektCompose = { module = "io.nlopez.compose.rules:detekt", version.ref = "androidx-compose-rules" }
 plugin-hilt = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 plugin-kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 plugin-kotlin-powerAssert = { module = "org.jetbrains.kotlin:kotlin-power-assert", version.ref = "kotlin" }

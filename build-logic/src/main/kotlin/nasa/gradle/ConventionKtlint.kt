@@ -6,9 +6,6 @@ import org.gradle.api.Project
 
 class ConventionKtlint : Plugin<Project> {
   override fun apply(target: Project) = with(target) {
-    ktlintBlueprint(
-      ktlintCliVersion = libs.versions.ktlint.cli,
-      ktlintComposeVersion = libs.versions.androidx.compose.lint.twitter,
-    )
+    ktlintBlueprint(libs.versions.ktlint.cli)
   }
 }

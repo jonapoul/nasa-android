@@ -1,3 +1,5 @@
+@file:Suppress("ContentTrailingLambda")
+
 package nasa.core.ui.button
 
 import androidx.compose.foundation.interaction.MutableInteractionSource

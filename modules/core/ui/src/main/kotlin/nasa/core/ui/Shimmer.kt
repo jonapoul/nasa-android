@@ -28,14 +28,18 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 
 private const val DEFAULT_DURATION_MS = 1000
+private const val DEFAULT_SHADOW_BRUSH_WIDTH = 500
+private const val DEFAULT_Y_AXIS_ANGLE = 270f
 
 // Adapted from https://proandroiddev.com/shimmer-shadow-loading-effect-animation-with-jetpack-compose-f4b3de28dc2b
+// TODO at some point - shift from composed to ModifierNodeElement. Tricky with an InfiniteTransition?
 @SuppressLint("ComposeModifierComposed")
+@Suppress("ModifierComposed")
 fun Modifier.shimmer(
   theme: Theme,
   color: Theme.() -> Color = { pageTextLoading },
-  widthOfShadowBrush: Int = 500,
-  angleOfAxisY: Float = 270f,
+  widthOfShadowBrush: Int = DEFAULT_SHADOW_BRUSH_WIDTH,
+  angleOfAxisY: Float = DEFAULT_Y_AXIS_ANGLE,
   durationMillis: Int = DEFAULT_DURATION_MS,
 ): Modifier = composed {
   val baseColor = theme.color()
@@ -74,13 +78,15 @@ fun ShimmeringBlock(
   shape: Shape = ShimmerBlockShape,
   theme: Theme = LocalTheme.current,
   color: Theme.() -> Color = { pageTextLoading },
+  widthOfShadowBrush: Int = DEFAULT_SHADOW_BRUSH_WIDTH,
+  angleOfAxisY: Float = DEFAULT_Y_AXIS_ANGLE,
   durationMillis: Int = DEFAULT_DURATION_MS,
 ) {
   Box(
     modifier = modifier
       .clip(shape)
       .height(30.dp)
-      .shimmer(theme, color, durationMillis = durationMillis),
+      .shimmer(theme, color, widthOfShadowBrush, angleOfAxisY, durationMillis),
   )
 }
 

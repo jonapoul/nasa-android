@@ -182,8 +182,8 @@ private fun ListPreferenceDialogContent(
             value = value,
             isSelected = value == selectedValue,
             theme = theme,
-            onEntryValueChanged = {
-              preferences.edit { putString(key, it) }
+            onValueChange = { newValue ->
+              preferences.edit { putString(key, newValue) }
               onDismiss()
             },
           )
@@ -206,19 +206,19 @@ private fun ListPreferenceDialogItem(
   entry: String,
   value: String,
   isSelected: Boolean,
-  onEntryValueChanged: (String) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
+  onValueChange: (String) -> Unit,
 ) {
   Row(
     modifier = modifier
       .fillMaxWidth()
-      .clickable { onEntryValueChanged(value) },
+      .clickable { onValueChange(value) },
     verticalAlignment = Alignment.CenterVertically,
   ) {
     RadioButton(
       selected = isSelected,
-      onClick = { onEntryValueChanged(value) },
+      onClick = { onValueChange(value) },
       colors = theme.radioButton(),
     )
 

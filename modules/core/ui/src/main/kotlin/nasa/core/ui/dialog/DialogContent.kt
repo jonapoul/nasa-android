@@ -26,12 +26,12 @@ import nasa.core.ui.color.Theme
 @Composable
 fun DialogContent(
   title: String?,
-  content: @Composable ColumnScope.() -> Unit,
   buttons: (@Composable RowScope.() -> Unit)?,
   modifier: Modifier = Modifier,
   icon: ImageVector? = null,
   theme: Theme = LocalTheme.current,
   titleColor: Color = theme.pageTextPrimary,
+  content: @Composable ColumnScope.() -> Unit,
 ) {
   Column(
     modifier = modifier

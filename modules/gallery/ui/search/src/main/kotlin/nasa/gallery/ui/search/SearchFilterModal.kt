@@ -88,35 +88,35 @@ private fun SearchFilterModalContents(
       start = mutableConfig.yearStart,
       end = mutableConfig.yearEnd,
       theme = theme,
-      onStartChanged = { mutableConfig.yearStart = it },
-      onEndChanged = { mutableConfig.yearEnd = it },
+      onStartChange = { mutableConfig.yearStart = it },
+      onEndChange = { mutableConfig.yearEnd = it },
     )
 
     ModalTextField(
       value = mutableConfig.title,
       label = R.string.search_label_title,
-      onValueChanged = { mutableConfig.title = it },
+      onValueChange = { mutableConfig.title = it },
       theme = theme,
     )
 
     ModalTextField(
       value = mutableConfig.center,
       label = R.string.search_label_center,
-      onValueChanged = { mutableConfig.center = it?.let(::Center) },
+      onValueChange = { mutableConfig.center = it?.let(::Center) },
       theme = theme,
     )
 
     ModalTextField(
       value = mutableConfig.location,
       label = R.string.search_label_location,
-      onValueChanged = { mutableConfig.location = it },
+      onValueChange = { mutableConfig.location = it },
       theme = theme,
     )
 
     ModalTextField(
       value = mutableConfig.photographer,
       label = R.string.search_label_photographer,
-      onValueChanged = { mutableConfig.photographer = it?.let(::Photographer) },
+      onValueChange = { mutableConfig.photographer = it?.let(::Photographer) },
       theme = theme,
     )
 
@@ -151,8 +151,8 @@ private fun SearchFilterModalContents(
 private fun YearRange(
   start: Year,
   end: Year,
-  onStartChanged: (Year) -> Unit,
-  onEndChanged: (Year) -> Unit,
+  onStartChange: (Year) -> Unit,
+  onEndChange: (Year) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -160,7 +160,7 @@ private fun YearRange(
   val allowedRange = remember { Year.Minimum.toFloat()..Year.Maximum.toFloat() }
 
   Column(
-    modifier = Modifier
+    modifier = modifier
       .fillMaxWidth()
       .padding(horizontal = 4.dp),
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -174,14 +174,14 @@ private fun YearRange(
     )
 
     RangeSlider(
-      modifier = modifier
+      modifier = Modifier
         .height(30.dp)
         .padding(horizontal = 4.dp),
       value = currentRange,
       valueRange = allowedRange,
       onValueChange = { newRange ->
-        onStartChanged(newRange.start.roundToInt().let(::Year))
-        onEndChanged(newRange.endInclusive.roundToInt().let(::Year))
+        onStartChange(newRange.start.roundToInt().let(::Year))
+        onEndChange(newRange.endInclusive.roundToInt().let(::Year))
       },
       colors = theme.slider(),
     )
@@ -192,7 +192,7 @@ private fun YearRange(
 private fun ModalTextField(
   value: CharSequence?,
   @StringRes label: Int,
-  onValueChanged: (String?) -> Unit,
+  onValueChange: (String?) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -201,7 +201,7 @@ private fun ModalTextField(
       .padding(FIELD_PADDING)
       .fillMaxWidth(),
     value = value?.toString().orEmpty(),
-    onValueChange = { onValueChanged(it.ifEmpty { null }) },
+    onValueChange = { onValueChange(it.ifEmpty { null }) },
     placeholderText = stringResource(id = R.string.search_input_placeholder),
     label = { Text(stringResource(label)) },
     clearable = true,
@@ -226,6 +226,7 @@ private fun MutableFilterConfig.toFilterConfig() = FilterConfig(
 
 private val FIELD_PADDING = 4.dp
 
+@Suppress("PreviewAnnotationNaming")
 @Preview(
   showBackground = true,
   uiMode = Configuration.UI_MODE_NIGHT_UNDEFINED,
