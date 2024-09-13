@@ -24,6 +24,7 @@ internal fun ImageSuccess(
 ) {
   val ctx = LocalContext.current
   val request = remember(url) {
+    // Adding a custom header to the request, so our DownloadProgressInterceptor can identify it and track progress
     ImageRequest
       .Builder(ctx)
       .data(url)

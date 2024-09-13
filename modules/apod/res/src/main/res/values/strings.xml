@@ -10,6 +10,8 @@
   <string name="apod_single_copyright">Copyright: %1$s</string>
   <string name="apod_desc_dialog_ok">OK</string>
   <string name="apod_fullscreen_back">Back</string>
+  <string name="apod_fullscreen_zoom_in">Zoom In</string>
+  <string name="apod_fullscreen_zoom_out">Zoom Out</string>
 
   <string name="apod_grid_toolbar_back">Back</string>
   <string name="apod_grid_toolbar_title">Month View</string>

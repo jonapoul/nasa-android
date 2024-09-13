@@ -32,9 +32,6 @@ import nasa.core.model.Percent
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 
-/**
- * Adapted from https://www.youtube.com/watch?v=3CjOyoqi_PQ
- */
 @Composable
 fun FullscreenLoadableImage(
   request: ImageRequest,
@@ -46,14 +43,43 @@ fun FullscreenLoadableImage(
   theme: Theme = LocalTheme.current,
 ) {
   var scale by remember { mutableFloatStateOf(1f) }
+  FullscreenLoadableImage(
+    request = request,
+    progress = progress,
+    contentDescription = contentDescription,
+    scale = scale,
+    onSetScale = { scale = it },
+    modifier = modifier,
+    minZoom = minZoom,
+    maxZoom = maxZoom,
+    theme = theme,
+  )
+}
+
+/**
+ * Adapted from https://www.youtube.com/watch?v=3CjOyoqi_PQ
+ */
+@Composable
+fun FullscreenLoadableImage(
+  request: ImageRequest,
+  progress: Percent,
+  contentDescription: String,
+  scale: Float,
+  onSetScale: (Float) -> Unit,
+  modifier: Modifier = Modifier,
+  minZoom: Float = 1f,
+  maxZoom: Float = 10f,
+  theme: Theme = LocalTheme.current,
+  onSuccess: () -> Unit = {},
+) {
   var offset by remember { mutableStateOf(Offset.Zero) }
 
   BoxWithConstraints(
     modifier = modifier,
     contentAlignment = Alignment.Center,
   ) {
-    val loadingSliderState = rememberTransformableState { zoomChange, panChange, _ ->
-      scale = (scale * zoomChange).coerceIn(minZoom, maxZoom)
+    val transformableState = rememberTransformableState { zoomChange, panChange, _ ->
+      onSetScale((scale * zoomChange).coerceIn(minZoom, maxZoom))
 
       val extraWidth = (scale - 1) * constraints.maxWidth
       val extraHeight = (scale - 1) * constraints.maxHeight
@@ -102,10 +128,9 @@ fun FullscreenLoadableImage(
           scaleY = scale
           translationX = offset.x
           translationY = offset.y
-        }.transformable(loadingSliderState)
+        }.transformable(transformableState)
     }
 
-    // Adding a custom header to the request, so our DownloadProgressInterceptor can identify it and track progress
     AsyncImage(
       modifier = imageModifier,
       model = request,
@@ -114,8 +139,11 @@ fun FullscreenLoadableImage(
       alignment = Alignment.Center,
       fallback = rememberVectorPainter(Icons.Filled.Warning),
       onLoading = { isLoading = true },
-      onSuccess = { isLoading = false },
       onError = { isLoading = false },
+      onSuccess = {
+        isLoading = false
+        onSuccess()
+      },
     )
   }
 }
