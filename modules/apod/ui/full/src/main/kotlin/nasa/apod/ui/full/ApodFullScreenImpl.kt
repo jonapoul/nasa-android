@@ -104,8 +104,8 @@ private fun ApodFullScreenContent(
     if (loaded) {
       ZoomButtons(
         modifier = Modifier
-            .wrapContentSize()
-            .padding(16.dp),
+          .wrapContentSize()
+          .padding(16.dp),
         scale = scale,
         onSetScale = { scale = it },
       )
