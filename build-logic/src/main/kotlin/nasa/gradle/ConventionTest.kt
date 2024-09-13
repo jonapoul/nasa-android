@@ -101,7 +101,7 @@ class ConventionTest : Plugin<Project> {
   @OptIn(ExperimentalKotlinGradlePluginApi::class)
   private fun Project.configurePowerAssert() {
     extensions.configure<PowerAssertGradleExtension> {
-      functions = listOf(
+      functions = setOf(
         "kotlin.assert",
         "kotlin.test.assertEquals",
         "kotlin.test.assertFalse",
