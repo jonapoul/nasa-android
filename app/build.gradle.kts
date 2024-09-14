@@ -169,6 +169,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.datetime)
   implementation(libs.material)
+  implementation(libs.molecule)
   implementation(libs.okhttp.core)
   implementation(libs.preferences.core)
   implementation(projects.about.di)

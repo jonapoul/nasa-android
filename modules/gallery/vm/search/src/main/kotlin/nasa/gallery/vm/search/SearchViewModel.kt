@@ -1,14 +1,17 @@
 package nasa.gallery.vm.search
 
 import alakazam.kotlin.core.MainDispatcher
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nasa.gallery.data.api.CollectionItem
@@ -25,10 +28,16 @@ class SearchViewModel @Inject internal constructor(
   private val repository: GallerySearchRepository,
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
-  val searchState: StateFlow<SearchState> = mutableSearchState.asStateFlow()
+  val searchState: StateFlow<SearchState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val mutableState by mutableSearchState.collectAsState()
+    mutableState
+  }
 
   private val mutableFilterConfig = MutableStateFlow(FilterConfig.Empty)
-  val filterConfig: StateFlow<FilterConfig> = mutableFilterConfig.asStateFlow()
+  val filterConfig: StateFlow<FilterConfig> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val mutableState by mutableFilterConfig.collectAsState()
+    mutableState
+  }
 
   fun performSearch(pageNumber: Int? = null) {
     val config = mutableFilterConfig.value

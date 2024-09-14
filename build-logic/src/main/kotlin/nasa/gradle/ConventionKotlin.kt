@@ -18,6 +18,7 @@ class ConventionKotlin : Plugin<Project> {
         freeCompilerArgs.addAll(
           "-Xjvm-default=all-compatibility",
           "-opt-in=kotlin.RequiresOptIn",
+          "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
         )
       }
     }

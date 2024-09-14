@@ -15,6 +15,7 @@ dependencies {
   api(projects.core.http.usage)
   api(projects.gallery.data.repo)
 
+  implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)

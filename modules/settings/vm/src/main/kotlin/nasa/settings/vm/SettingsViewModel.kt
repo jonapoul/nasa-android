@@ -2,14 +2,15 @@ package nasa.settings.vm
 
 import alakazam.android.core.Toaster
 import alakazam.android.core.UrlOpener
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nasa.core.model.FileSize
@@ -25,11 +26,15 @@ class SettingsViewModel @Inject internal constructor(
   private val toaster: Toaster,
 ) : ViewModel() {
   private val mutableCacheSize = MutableStateFlow(0.bytes)
-  val cacheSize: StateFlow<FileSize> = mutableCacheSize.asStateFlow()
+  val cacheSize: StateFlow<FileSize> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val mutableState by mutableCacheSize.collectAsState()
+    mutableState
+  }
 
-  val databaseSize: StateFlow<FileSize> = databaseClearer
-    .fileSize
-    .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = 0.bytes)
+  val databaseSize: StateFlow<FileSize> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val fileSize by databaseClearer.fileSize.collectAsState(initial = 0.bytes)
+    fileSize
+  }
 
   init {
     refreshCacheSize()
@@ -57,7 +62,8 @@ class SettingsViewModel @Inject internal constructor(
   }
 
   fun refreshCacheSize() {
-    mutableCacheSize.update { imageCache.calculateSize() }
+    val cacheSize = imageCache.calculateSize()
+    mutableCacheSize.update { cacheSize }
     databaseClearer.updateFileSize()
   }
 }

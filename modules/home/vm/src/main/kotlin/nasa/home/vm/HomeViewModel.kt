@@ -1,12 +1,18 @@
 package nasa.home.vm
 
 import alakazam.android.core.UrlOpener
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.StateFlow
 import nasa.apod.data.repo.SingleApodRepository
 import nasa.apod.data.repo.SingleLoadResult
 import nasa.core.http.usage.ApiUsage
@@ -25,33 +31,37 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject internal constructor(
-  private val stateHolder: ApiUsageStateHolder,
+  private val apiUsageStateHolder: ApiUsageStateHolder,
   private val urlOpener: UrlOpener,
-  private val provider: ApiKey.Provider,
+  private val apiKeyProvider: ApiKey.Provider,
   private val apodRepository: SingleApodRepository,
   private val galleryRepository: GallerySearchRepository,
 ) : ViewModel() {
-  val apodThumbnailUrl: Flow<String?> get() = provider.observe().map { key -> fetchApodUrl(key) }
+  val apodThumbnailUrl: StateFlow<String?> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val key by apiKeyProvider.observe().collectAsState(initial = null)
+    var apodUrl by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(key) { apodUrl = fetchApodUrl(key) }
+    apodUrl
+  }
 
-  val galleryThumbnailUrl: Flow<String?> get() = flow { emit(fetchGalleryUrl()) }
+  val galleryThumbnailUrl: StateFlow<String?> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    var url by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(Unit) { url = fetchGalleryUrl() }
+    url
+  }
 
-  fun apiUsage(): Flow<ApiUsageState> = combine(stateHolder.state, provider.observe(), ::toState)
+  fun apiUsage(): StateFlow<ApiUsageState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val usageState by apiUsageStateHolder.state.collectAsState()
+    val usage = usageState
+    val key by apiKeyProvider.observe().collectAsState(initial = null)
+    when (key) {
+      null -> ApiUsageState.NoApiKey
+      ApiKey.DEMO -> demoKeyState(usage)
+      else -> realKeyState(usage)
+    }
+  }
 
   fun registerForApiKey() = urlOpener.openUrl(NASA_API_URL)
-
-  private fun toState(usage: ApiUsage?, key: ApiKey?): ApiUsageState = when {
-    key == null -> ApiUsageState.NoApiKey
-
-    key == ApiKey.DEMO -> if (usage == null) {
-      ApiUsageState.DemoKeyNoUsage
-    } else {
-      ApiUsageState.DemoKeyHasUsage(usage.remaining, usage.upperLimit)
-    }
-
-    usage == null -> ApiUsageState.RealKeyNoUsage
-
-    else -> ApiUsageState.RealKeyHasUsage(usage.remaining, usage.upperLimit)
-  }
 
   private suspend fun fetchApodUrl(key: ApiKey?): String? = if (key == null) {
     null
@@ -82,5 +92,17 @@ class HomeViewModel @Inject internal constructor(
     } else {
       null
     }
+  }
+
+  private fun demoKeyState(usage: ApiUsage?) = if (usage == null) {
+    ApiUsageState.DemoKeyNoUsage
+  } else {
+    ApiUsageState.DemoKeyHasUsage(usage.remaining, usage.upperLimit)
+  }
+
+  private fun realKeyState(usage: ApiUsage?) = if (usage == null) {
+    ApiUsageState.RealKeyNoUsage
+  } else {
+    ApiUsageState.RealKeyHasUsage(usage.remaining, usage.upperLimit)
   }
 }

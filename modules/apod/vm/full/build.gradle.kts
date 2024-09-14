@@ -15,6 +15,7 @@ dependencies {
   api(projects.apod.data.repo)
   api(projects.core.http.progress)
 
+  implementation(libs.androidx.compose.runtime)
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
 

@@ -12,6 +12,7 @@ dependencies {
   api(libs.kotlinx.coroutines)
   api(projects.about.data)
 
+  implementation(libs.androidx.compose.runtime)
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.datetime)
 

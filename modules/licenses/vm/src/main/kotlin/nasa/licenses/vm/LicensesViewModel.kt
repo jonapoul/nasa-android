@@ -1,13 +1,16 @@
 package nasa.licenses.vm
 
 import alakazam.android.core.UrlOpener
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import nasa.licenses.data.LicensesLoadState
@@ -21,7 +24,11 @@ class LicensesViewModel @Inject internal constructor(
   private val urlOpener: UrlOpener,
 ) : ViewModel() {
   private val mutableState = MutableStateFlow<LicensesState>(LicensesState.Loading)
-  val state: StateFlow<LicensesState> = mutableState.asStateFlow()
+
+  val state: StateFlow<LicensesState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val mutableState by mutableState.collectAsState()
+    mutableState
+  }
 
   init {
     load()
@@ -40,7 +47,7 @@ class LicensesViewModel @Inject internal constructor(
     }
   }
 
-  private fun LicensesLoadState.Success.toLicensesState(): LicensesState = if (libraries.isEmpty()) {
+  private fun LicensesLoadState.Success.toLicensesState() = if (libraries.isEmpty()) {
     LicensesState.NoneFound
   } else {
     LicensesState.Loaded(libraries.toImmutableList())

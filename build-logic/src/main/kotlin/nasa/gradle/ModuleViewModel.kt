@@ -15,6 +15,7 @@ class ModuleViewModel : Plugin<Project> {
       apply(KotlinAndroidPluginWrapper::class.java)
       apply(ConventionAndroidLibrary::class.java)
       apply(ConventionAndroidManagedDevices::class.java)
+      apply(ConventionCompose::class.java)
       apply(ConventionDiagrams::class.java)
       apply(ConventionHilt::class.java)
       apply(ConventionStyle::class.java)
@@ -30,6 +31,7 @@ class ModuleViewModel : Plugin<Project> {
       api(libs.androidx.lifecycle.viewmodel.core)
       api(libs.dagger.core)
       implementation(libs.hilt.android)
+      implementation(libs.molecule)
     }
   }
 }

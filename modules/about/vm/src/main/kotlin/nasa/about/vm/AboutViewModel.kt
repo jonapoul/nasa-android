@@ -2,13 +2,16 @@ package nasa.about.vm
 
 import alakazam.android.core.IBuildConfig
 import alakazam.android.core.UrlOpener
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.toJavaInstant
@@ -25,10 +28,16 @@ class AboutViewModel @Inject internal constructor(
   private val githubRepository: GithubRepository,
   private val urlOpener: UrlOpener,
 ) : ViewModel() {
-  val buildState: StateFlow<BuildState> = MutableStateFlow(buildState())
+  val buildState: StateFlow<BuildState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    buildState()
+  }
 
   private val mutableCheckUpdatesState = MutableStateFlow<CheckUpdatesState>(CheckUpdatesState.Inactive)
-  val checkUpdatesState: StateFlow<CheckUpdatesState> = mutableCheckUpdatesState.asStateFlow()
+
+  val checkUpdatesState: StateFlow<CheckUpdatesState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val mutableState by mutableCheckUpdatesState.collectAsState()
+    mutableState
+  }
 
   private var checkUpdatesJob: Job? = null
 
@@ -68,7 +77,7 @@ class AboutViewModel @Inject internal constructor(
   }
 
   fun cancelUpdateCheck() {
-    Timber.v("stopCheckingUpdates")
+    Timber.v("cancelUpdateCheck")
     checkUpdatesJob?.cancel()
     checkUpdatesJob = null
     mutableCheckUpdatesState.update { CheckUpdatesState.Inactive }

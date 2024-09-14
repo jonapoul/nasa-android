@@ -1,15 +1,16 @@
 package nasa.gallery.vm.image
 
 import alakazam.kotlin.core.MainDispatcher
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import app.cash.molecule.RecompositionMode
+import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import nasa.core.http.progress.DownloadProgressStateHolder
 import nasa.core.http.progress.toProgress
@@ -23,14 +24,15 @@ import javax.inject.Inject
 class ImageViewModel @Inject internal constructor(
   private val main: MainDispatcher,
   private val repository: GalleryImageUrlsRepository,
-  progressStateHolder: DownloadProgressStateHolder,
+  private val progressStateHolder: DownloadProgressStateHolder,
 ) : ViewModel() {
   private val mutableImageState = MutableStateFlow<ImageState>(ImageState.Loading)
   val imageState: StateFlow<ImageState> = mutableImageState.asStateFlow()
 
-  val progress: StateFlow<Percent> = progressStateHolder.state
-    .map { it.toProgress() }
-    .stateIn(viewModelScope, SharingStarted.Eagerly, initialValue = Percent.Zero)
+  val progress: StateFlow<Percent> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+    val progressState by progressStateHolder.state.collectAsState()
+    progressState?.toProgress() ?: Percent.Zero
+  }
 
   suspend fun load(id: NasaId) {
     val fetchResult = repository.fetchUrls(id)

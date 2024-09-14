@@ -10,7 +10,6 @@
 ## General
 - error dialog when API usage runs out
 - Navigation animations
-- Molecule
 
 ## Gallery
 - Insert received keywords, photographers, etc in DB, populate dropdown with them

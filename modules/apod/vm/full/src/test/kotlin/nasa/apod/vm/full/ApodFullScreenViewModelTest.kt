@@ -25,7 +25,7 @@ class ApodFullScreenViewModelTest {
   fun before() {
     stateHolder = DownloadProgressStateHolder()
     viewModel = ApodFullScreenViewModel(
-      stateHolder = stateHolder,
+      progressStateHolder = stateHolder,
       repository = mockk(),
     )
   }

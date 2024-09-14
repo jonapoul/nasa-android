@@ -12,7 +12,6 @@ import nasa.apod.nav.ApodSingleTodayNavScreen
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.set
 import nasa.gallery.nav.GallerySearchNavScreen
-import nasa.home.vm.ApiUsageState
 import nasa.home.vm.HomeViewModel
 import nasa.settings.nav.SettingsNavScreen
 
@@ -23,15 +22,15 @@ fun HomeScreen(
 ) {
   val theme = LocalTheme.current
 
-  val apodThumbnailUrl by viewModel.apodThumbnailUrl.collectAsState(initial = null)
-  val galleryThumbnailUrl by viewModel.galleryThumbnailUrl.collectAsState(initial = null)
+  val apodThumbnailUrl by viewModel.apodThumbnailUrl.collectAsState()
+  val galleryThumbnailUrl by viewModel.galleryThumbnailUrl.collectAsState()
   val thumbnailUrls = remember(apodThumbnailUrl, galleryThumbnailUrl) {
     ThumbnailUrls(apodThumbnailUrl, galleryThumbnailUrl)
   }
 
   val showApiUsageDialog = remember { mutableStateOf(false) }
   if (showApiUsageDialog.value) {
-    val state by viewModel.apiUsage().collectAsState(initial = ApiUsageState.RealKeyNoUsage)
+    val state by viewModel.apiUsage().collectAsState()
     ApiUsageDialog(
       state = state,
       theme = theme,

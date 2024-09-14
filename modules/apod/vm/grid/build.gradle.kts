@@ -16,6 +16,7 @@ dependencies {
   api(projects.apod.data.repo)
   api(projects.apod.nav)
 
+  implementation(libs.androidx.compose.runtime)
   implementation(libs.hilt.core)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
