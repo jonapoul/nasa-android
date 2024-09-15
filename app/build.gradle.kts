@@ -166,7 +166,6 @@ dependencies {
   implementation(libs.hilt.core)
   implementation(libs.javaxInject)
   implementation(libs.kotlin.stdlib)
-  implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.datetime)
   implementation(libs.material)
   implementation(libs.molecule)

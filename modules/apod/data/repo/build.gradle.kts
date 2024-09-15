@@ -7,7 +7,6 @@ android {
 }
 
 dependencies {
-  api(libs.kotlinx.coroutines)
   api(projects.apod.data.api)
   api(projects.db.apod)
 

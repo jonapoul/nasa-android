@@ -10,7 +10,6 @@ dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.androidx.navigation.runtime)
-  api(libs.kotlinx.coroutines)
   api(projects.about.vm)
   api(projects.core.ui)
   api(projects.licenses.nav)

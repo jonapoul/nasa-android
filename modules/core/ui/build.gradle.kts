@@ -33,5 +33,4 @@ dependencies {
   implementation(libs.androidx.coreKtx)
   implementation(libs.coil.compose)
   implementation(libs.coil.composeBase)
-  implementation(libs.kotlinx.coroutines)
 }

@@ -33,7 +33,6 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.coil.base)
-  implementation(libs.kotlinx.coroutines)
   implementation(projects.apod.preview)
   implementation(projects.apod.res)
 }

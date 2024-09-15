@@ -17,7 +17,6 @@ dependencies {
 
   implementation(libs.androidx.compose.runtime)
   implementation(libs.hilt.core)
-  implementation(libs.kotlinx.coroutines)
 
   testImplementation(testFixtures(projects.core.model))
 }

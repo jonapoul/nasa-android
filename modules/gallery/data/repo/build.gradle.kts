@@ -7,7 +7,6 @@ android {
 }
 
 dependencies {
-  api(libs.kotlinx.coroutines)
   api(projects.db.gallery)
   api(projects.gallery.data.api)
 

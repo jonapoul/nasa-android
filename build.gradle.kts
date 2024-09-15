@@ -58,12 +58,14 @@ dependencyAnalysis {
 
       onIncorrectConfiguration {
         recursiveSubProjects().forEach { exclude(it.path) }
+        exclude(libs.kotlin.stdlib, libs.kotlinx.coroutines)
       }
 
       onUnusedDependencies {
         exclude(
           libs.androidx.compose.ui.tooling,
           libs.kotlin.stdlib,
+          libs.kotlinx.coroutines,
           libs.test.androidx.monitor,
           libs.timber,
         )

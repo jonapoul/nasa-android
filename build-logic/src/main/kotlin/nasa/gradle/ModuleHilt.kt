@@ -16,6 +16,7 @@ class ModuleHilt : Plugin<Project> {
       apply(ConventionAndroidLibrary::class.java)
       apply(ConventionDiagrams::class.java)
       apply(ConventionHilt::class.java)
+      apply(ConventionKotlin::class.java)
       apply(ConventionStyle::class.java)
       apply(DependencyAnalysisPlugin::class.java)
       apply(SortDependenciesPlugin::class.java)

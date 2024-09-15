@@ -16,7 +16,6 @@ dependencies {
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.core)
-  implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
