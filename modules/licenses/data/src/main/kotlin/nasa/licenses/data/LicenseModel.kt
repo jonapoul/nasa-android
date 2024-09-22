@@ -30,7 +30,7 @@ data class LicenseModel(
 
     val MIT = LicenseModel(
       license = "MIT",
-      licenseUrl = "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      licenseUrl = "https://api.github.com/licenses/mit",
     )
 
     private val LICENSES_MAP = mapOf(

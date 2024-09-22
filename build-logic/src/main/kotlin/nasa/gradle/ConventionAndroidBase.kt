@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package nasa.gradle
 
 import blueprint.recipes.androidBaseBlueprint
@@ -18,6 +20,13 @@ class ConventionAndroidBase : Plugin<Project> {
     extensions.findByType(CommonExtension::class)?.apply {
       defaultConfig {
         testInstrumentationRunner = "nasa.test.NasaHiltTestRunner"
+      }
+
+      testOptions {
+        unitTests {
+          // For Robolectric
+          isIncludeAndroidResources = true
+        }
       }
     }
 

@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
@@ -51,6 +52,7 @@ fun NasaTextField(
   shape: Shape = CardShape,
   readOnly: Boolean = false,
   label: @Composable (() -> Unit)? = null,
+  leadingIcon: @Composable (() -> Unit)? = null,
   trailingIcon: @Composable (() -> Unit)? = null,
   interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
   visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -67,7 +69,12 @@ fun NasaTextField(
   }
 
   val clearButton: (@Composable () -> Unit)? = if (clearable && value.isNotEmpty()) {
-    { ClearButton(theme, onClick = { onValueChange("") }) }
+    {
+      ClearButton(
+        tint = colors?.focusedTrailingIconColor ?: theme.pageText,
+        onClick = { onValueChange("") },
+      )
+    }
   } else {
     null
   }
@@ -84,6 +91,7 @@ fun NasaTextField(
     colors = colors ?: theme.textField(),
     readOnly = readOnly,
     label = label,
+    leadingIcon = leadingIcon,
     trailingIcon = trailingIcon ?: clearButton,
     interactionSource = interactionSource,
     visualTransformation = visualTransformation,
@@ -143,7 +151,7 @@ fun NasaExposedDropDownMenu(
 
 @Composable
 private fun ClearButton(
-  theme: Theme,
+  tint: Color,
   modifier: Modifier = Modifier,
   onClick: () -> Unit,
 ) {
@@ -154,7 +162,7 @@ private fun ClearButton(
     Icon(
       imageVector = Icons.Default.Clear,
       contentDescription = stringResource(id = R.string.input_clear),
-      tint = theme.formInputText,
+      tint = tint,
     )
   }
 }

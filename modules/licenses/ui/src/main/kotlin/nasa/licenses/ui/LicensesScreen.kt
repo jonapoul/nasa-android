@@ -15,7 +15,8 @@ fun LicensesScreen(
   navController: NavController,
   viewModel: LicensesViewModel = hiltViewModel<LicensesViewModel>(),
 ) {
-  val state by viewModel.state.collectAsStateWithLifecycle()
+  val licensesState by viewModel.licensesState.collectAsStateWithLifecycle()
+  val searchBarState by viewModel.searchBarState.collectAsStateWithLifecycle()
 
   val clickedBack = remember { mutableStateOf(false) }
   if (clickedBack.value) {
@@ -24,12 +25,15 @@ fun LicensesScreen(
   }
 
   LicensesScreenImpl(
-    state = state,
+    state = licensesState,
+    searchBarState = searchBarState,
     onAction = { action ->
       when (action) {
         LicensesAction.NavBack -> clickedBack.set(true)
         LicensesAction.Reload -> viewModel.load()
         is LicensesAction.LaunchUrl -> viewModel.openUrl(action.url)
+        LicensesAction.ToggleSearchBar -> viewModel.toggleSearchBar()
+        is LicensesAction.EditSearchText -> viewModel.setSearchText(action.text)
       }
     },
   )

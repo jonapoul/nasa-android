@@ -2,25 +2,40 @@ package nasa.licenses.ui
 
 import alakazam.android.ui.compose.VerticalSpacer
 import alakazam.kotlin.core.exhaustive
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -33,27 +48,105 @@ import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.scrollbarSettings
+import nasa.core.ui.color.textField
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
+import nasa.core.ui.text.NasaTextField
+import nasa.core.ui.text.keyboardFocusRequester
 import nasa.licenses.data.LibraryModel
 import nasa.licenses.res.R
 import nasa.licenses.vm.LicensesState
+import nasa.licenses.vm.SearchBarState
 
 @Composable
 internal fun LicensesScreenImpl(
   state: LicensesState,
+  searchBarState: SearchBarState,
   onAction: (LicensesAction) -> Unit,
 ) {
   val theme = LocalTheme.current
   Scaffold(
-    topBar = { LicensesTopBar(theme, onAction) },
+    topBar = { LicensesTopBar(searchBarState, theme, onAction) },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
-      LicensesScreenContent(
+      Column(
         modifier = Modifier.padding(innerPadding),
-        state = state,
+      ) {
+        LicensesSearchInput(
+          modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+          searchState = searchBarState,
+          licensesState = state,
+          onAction = onAction,
+          theme = theme,
+        )
+
+        LicensesScreenContent(
+          state = state,
+          theme = theme,
+          onAction = onAction,
+        )
+      }
+    }
+  }
+}
+
+@Composable
+private fun LicensesSearchInput(
+  searchState: SearchBarState,
+  licensesState: LicensesState,
+  onAction: (LicensesAction) -> Unit,
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
+) {
+  val keyboard = LocalSoftwareKeyboardController.current
+
+  val isVisible = searchState is SearchBarState.Visible
+  LaunchedEffect(isVisible) { if (isVisible) keyboard?.show() else keyboard?.hide() }
+
+  AnimatedVisibility(
+    visible = searchState is SearchBarState.Visible,
+    enter = slideInVertically() + fadeIn(),
+    exit = slideOutVertically() + fadeOut(),
+  ) {
+    val text = (searchState as? SearchBarState.Visible)?.text.orEmpty()
+    val colors = theme.textField(
+      focusedContainer = theme.toolbarBackgroundSubdued,
+      text = theme.toolbarTextSubdued,
+      icon = theme.toolbarTextSubdued,
+    )
+
+    Column(
+      modifier = modifier
+        .fillMaxWidth()
+        .background(theme.toolbarBackgroundSubdued),
+      horizontalAlignment = Alignment.End,
+    ) {
+      NasaTextField(
+        modifier = Modifier
+          .fillMaxWidth()
+          .focusRequester(keyboardFocusRequester(keyboard)),
+        value = text,
+        onValueChange = { query -> onAction(LicensesAction.EditSearchText(query)) },
+        placeholderText = stringResource(id = R.string.licenses_search_placeholder),
+        leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = null) },
+        clearable = true,
         theme = theme,
-        onAction = onAction,
+        colors = colors,
+      )
+
+      val numResults = remember(licensesState) {
+        (licensesState as? LicensesState.Loaded)?.libraries?.size ?: 0
+      }
+      val res = LocalContext.current.resources
+      Text(
+        modifier = Modifier
+          .wrapContentWidth()
+          .padding(horizontal = 8.dp),
+        text = res.getQuantityString(R.plurals.licenses_search_num_results, numResults, numResults),
+        fontSize = 12.sp,
+        color = theme.toolbarTextSubdued,
       )
     }
   }
@@ -192,6 +285,7 @@ private fun ErrorContent(
 private fun PreviewLoading() = PreviewScreen {
   LicensesScreenImpl(
     state = LicensesState.Loading,
+    searchBarState = SearchBarState.Gone,
     onAction = {},
   )
 }
@@ -201,6 +295,7 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewNoneFound() = PreviewScreen {
   LicensesScreenImpl(
     state = LicensesState.NoneFound,
+    searchBarState = SearchBarState.Gone,
     onAction = {},
   )
 }
@@ -212,6 +307,7 @@ private fun PreviewLoaded() = PreviewScreen {
     state = LicensesState.Loaded(
       libraries = persistentListOf(AlakazamAndroidCore, ComposeMaterialRipple, FragmentKtx, VoyagerScreenModel),
     ),
+    searchBarState = SearchBarState.Visible(text = "My wicked search query"),
     onAction = {},
   )
 }
@@ -221,6 +317,7 @@ private fun PreviewLoaded() = PreviewScreen {
 private fun PreviewError() = PreviewScreen {
   LicensesScreenImpl(
     state = LicensesState.Error(errorMessage = "Something broke lol! Here's some more shite to show how it looks"),
+    searchBarState = SearchBarState.Gone,
     onAction = {},
   )
 }

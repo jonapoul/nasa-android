@@ -66,19 +66,26 @@ fun Theme.radioButton() = RadioButtonColors(
 fun Theme.textField(
   focusedContainer: Color = formInputBackground,
   unfocusedContainer: Color = focusedContainer,
+  text: Color = formInputText,
+  textPlaceholder: Color = formInputTextPlaceholder,
+  icon: Color = formInputText,
 ): TextFieldColors = TextFieldDefaults.colors(
-  focusedTextColor = formInputText,
-  unfocusedTextColor = formInputText,
-  focusedPlaceholderColor = formInputTextPlaceholder,
-  unfocusedPlaceholderColor = formInputTextPlaceholder,
-  focusedLabelColor = formInputTextPlaceholder,
-  unfocusedLabelColor = formInputTextPlaceholder,
+  focusedTextColor = text,
+  unfocusedTextColor = text,
+  focusedPlaceholderColor = textPlaceholder,
+  unfocusedPlaceholderColor = textPlaceholder,
+  focusedLabelColor = textPlaceholder,
+  unfocusedLabelColor = textPlaceholder,
   focusedIndicatorColor = Color.Transparent,
   unfocusedIndicatorColor = Color.Transparent,
   disabledIndicatorColor = Color.Transparent,
   focusedContainerColor = focusedContainer,
   unfocusedContainerColor = unfocusedContainer,
-  cursorColor = formInputText,
+  cursorColor = text,
+  focusedLeadingIconColor = icon,
+  unfocusedLeadingIconColor = icon,
+  focusedTrailingIconColor = icon,
+  unfocusedTrailingIconColor = icon,
 )
 
 @Stable

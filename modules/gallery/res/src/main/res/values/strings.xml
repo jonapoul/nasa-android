@@ -11,7 +11,8 @@
   <string name="search_input_settings">More search options</string>
   <string name="search_input_placeholder">Enter text</string>
   <string name="search_input_apply">Apply</string>
-  <string name="search_input_cancel">Cancel</string>
+  <string name="search_input_clear">Clear</string>
+  <string name="search_input_cancel">Dismiss</string>
 
   <string name="search_no_action">Enter search keywords in the box above and click the search button to begin!</string>
   <string name="search_empty_title">No results found</string>

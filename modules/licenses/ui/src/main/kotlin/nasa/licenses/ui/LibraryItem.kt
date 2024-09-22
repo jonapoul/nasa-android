@@ -58,6 +58,7 @@ internal fun LibraryItem(
       LibraryTableRow(title = R.string.licenses_item_authors, value = library.developers.joinToString())
       LibraryTableRow(title = R.string.licenses_item_artifact, value = library.dependency)
       LibraryTableRow(title = R.string.licenses_item_version, value = library.version)
+      LibraryTableRow(title = R.string.licenses_item_year, value = library.year?.toString())
       LibraryTableRow(title = R.string.licenses_item_license, value = library.licenses.firstOrNull()?.license)
       LibraryTableRow(title = R.string.licenses_item_description, value = library.description)
     }
@@ -82,7 +83,7 @@ private fun LibraryTableRow(
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  if (value == null) {
+  if (value.isNullOrEmpty()) {
     // Nothing to show
     return
   }

@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cash.molecule.RecompositionMode
+import app.cash.molecule.RecompositionMode.Immediate
 import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
@@ -24,10 +24,25 @@ class LicensesViewModel @Inject internal constructor(
   private val urlOpener: UrlOpener,
 ) : ViewModel() {
   private val mutableState = MutableStateFlow<LicensesState>(LicensesState.Loading)
+  private val showSearchBar = MutableStateFlow(value = false)
+  private val searchTerm = MutableStateFlow(value = "")
 
-  val state: StateFlow<LicensesState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
-    val mutableState by mutableState.collectAsState()
-    mutableState
+  val searchBarState: StateFlow<SearchBarState> = viewModelScope.launchMolecule(Immediate) {
+    val showSearchBar by showSearchBar.collectAsState()
+    val searchTerm by searchTerm.collectAsState()
+    if (showSearchBar) SearchBarState.Visible(searchTerm) else SearchBarState.Gone
+  }
+
+  val licensesState: StateFlow<LicensesState> = viewModelScope.launchMolecule(Immediate) {
+    val licensesState by mutableState.collectAsState()
+    val searchBarState by searchBarState.collectAsState()
+    when (val searchState = searchBarState) {
+      SearchBarState.Gone -> licensesState
+      is SearchBarState.Visible -> when (val licenses = licensesState) {
+        is LicensesState.Loaded -> licenses.filteredBy(searchState.text)
+        else -> licenses
+      }
+    }
   }
 
   init {
@@ -56,5 +71,15 @@ class LicensesViewModel @Inject internal constructor(
   fun openUrl(url: String) {
     Timber.v("openUrl $url")
     urlOpener.openUrl(url)
+  }
+
+  fun toggleSearchBar() {
+    Timber.v("toggleSearchBar existing=%s", showSearchBar.value)
+    showSearchBar.update { alreadyVisible -> !alreadyVisible }
+  }
+
+  fun setSearchText(text: String) {
+    Timber.v("setSearchText %s", text)
+    searchTerm.update { text }
   }
 }

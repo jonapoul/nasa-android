@@ -1,5 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
 package nasa.gradle
 
 import com.android.build.api.dsl.CommonExtension
@@ -26,13 +24,6 @@ class ConventionCompose : Plugin<Project> {
     extensions.findByType(CommonExtension::class)?.apply {
       buildFeatures {
         compose = true
-      }
-
-      testOptions {
-        unitTests {
-          // For Robolectric
-          isIncludeAndroidResources = true
-        }
       }
     }
 
