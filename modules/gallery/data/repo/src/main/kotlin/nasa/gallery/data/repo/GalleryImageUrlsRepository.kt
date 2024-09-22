@@ -4,8 +4,6 @@ import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.requireMessage
 import kotlinx.coroutines.withContext
 import nasa.db.gallery.GalleryDao
-import nasa.db.gallery.UrlDao
-import nasa.db.gallery.UrlEntity
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
@@ -17,7 +15,6 @@ class GalleryImageUrlsRepository @Inject internal constructor(
   private val io: IODispatcher,
   private val galleryApi: GalleryApi,
   private val galleryDao: GalleryDao,
-  private val urlDao: UrlDao,
 ) {
   suspend fun fetchUrls(id: NasaId): FetchUrlsResult {
     Timber.v("fetchImageCollection $id")
@@ -27,17 +24,7 @@ class GalleryImageUrlsRepository @Inject internal constructor(
 
     val mediaType = galleryEntity.mediaType
 
-    // First try to grab previously-saved URLs
-    val cachedUrls = urlDao.get(id)?.urls
-    if (cachedUrls != null) {
-      try {
-        return getResult(urls = cachedUrls, galleryEntity.mediaType)
-      } catch (e: Exception) {
-        Timber.e(e, "Failed using $cachedUrls")
-      }
-    }
-
-    // If none, fetch them from the API
+    // Fetch them from the API
     val response = withContext(io) {
       galleryApi.getCollection(galleryEntity.collectionUrl)
     }
@@ -46,9 +33,6 @@ class GalleryImageUrlsRepository @Inject internal constructor(
     Timber.v("urlCollection = %s", fetchedUrls)
 
     return if (response.isSuccessful && fetchedUrls != null) {
-      // Save them locally for future reference
-      val entity = UrlEntity(galleryId = id, urls = fetchedUrls)
-      urlDao.insert(entity)
       try {
         getResult(fetchedUrls, mediaType)
       } catch (e: Exception) {

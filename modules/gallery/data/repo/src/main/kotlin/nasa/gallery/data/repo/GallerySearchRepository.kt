@@ -4,26 +4,14 @@ import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.requireMessage
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
-import nasa.db.gallery.AlbumDao
-import nasa.db.gallery.AlbumEntity
-import nasa.db.gallery.CenterDao
-import nasa.db.gallery.CenterEntity
 import nasa.db.gallery.GalleryDao
 import nasa.db.gallery.GalleryEntity
-import nasa.db.gallery.KeywordDao
-import nasa.db.gallery.KeywordEntity
-import nasa.db.gallery.PhotographerDao
-import nasa.db.gallery.PhotographerEntity
 import nasa.gallery.data.api.Collection
 import nasa.gallery.data.api.CollectionLink
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.data.api.GalleryJson
 import nasa.gallery.data.api.SearchResponse
-import nasa.gallery.model.Album
-import nasa.gallery.model.Center
 import nasa.gallery.model.FilterConfig
-import nasa.gallery.model.Keyword
-import nasa.gallery.model.Photographer
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.ResponseBody
 import timber.log.Timber
@@ -34,10 +22,6 @@ class GallerySearchRepository @Inject internal constructor(
   private val galleryApi: GalleryApi,
   private val searchPreferences: SearchPreferences,
   private val galleryDao: GalleryDao,
-  private val centerDao: CenterDao,
-  private val keywordDao: KeywordDao,
-  private val photographerDao: PhotographerDao,
-  private val albumDao: AlbumDao,
 ) {
   suspend fun search(config: FilterConfig, pageNumber: Int?): SearchResult {
     val pageSize = searchPreferences.pageSize.get()
@@ -93,13 +77,11 @@ class GallerySearchRepository @Inject internal constructor(
     }
   }
 
-  private suspend fun handleSuccess(pageNumber: Int?, pageSize: Int, collection: Collection): SearchResult {
+  private fun handleSuccess(pageNumber: Int?, pageSize: Int, collection: Collection): SearchResult {
     if (collection.metadata.totalHits == 0) {
       Timber.w("Received empty response collection: %s", collection)
       return SearchResult.Empty
     }
-
-    saveMetadata(collection)
 
     return SearchResult.Success(
       pagedResults = collection.items,
@@ -109,26 +91,6 @@ class GallerySearchRepository @Inject internal constructor(
       prevPage = collection.pageNumberWithRelation(CollectionLink.Relation.Previous),
       nextPage = collection.pageNumberWithRelation(CollectionLink.Relation.Next),
     )
-  }
-
-  private suspend fun saveMetadata(collection: Collection) {
-    val centers = hashSetOf<Center>()
-    val keywords = hashSetOf<Keyword>()
-    val photographers = hashSetOf<Photographer>()
-    val albums = hashSetOf<Album>()
-    for (item in collection.items) {
-      for (data in item.data) {
-        data.center?.let(centers::add)
-        data.keywords?.let(keywords::addAll)
-        data.photographer?.let(photographers::add)
-        data.album?.let(albums::addAll)
-      }
-    }
-    centers.ifIsNotEmpty(centerDao::insert, ::CenterEntity)
-    keywords.ifIsNotEmpty(keywordDao::insert, ::KeywordEntity)
-    photographers.ifIsNotEmpty(photographerDao::insert, ::PhotographerEntity)
-    albums.ifIsNotEmpty(albumDao::insert, ::AlbumEntity)
-    Timber.v("saveMetadata %s %s %s %s", centers, keywords, photographers, albums)
   }
 
   private suspend fun saveGalleryItems(collection: Collection) {
@@ -142,10 +104,6 @@ class GallerySearchRepository @Inject internal constructor(
     if (entities.isNotEmpty()) {
       galleryDao.insert(entities)
     }
-  }
-
-  private suspend fun <T, R> Set<T>.ifIsNotEmpty(function: suspend (List<R>) -> Unit, mapper: (T) -> R) {
-    if (isNotEmpty()) function(map { mapper(it) })
   }
 
   private fun Collection.pageNumberWithRelation(relation: CollectionLink.Relation) =

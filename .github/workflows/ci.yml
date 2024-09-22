@@ -35,7 +35,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           generate-job-summary: false
-          cache-read-only: false
 
       - name: Check
         run: ./gradlew check

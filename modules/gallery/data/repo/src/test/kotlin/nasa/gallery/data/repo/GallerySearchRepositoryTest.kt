@@ -7,10 +7,6 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
 import nasa.db.RoomNasaDatabase
-import nasa.db.gallery.AlbumDao
-import nasa.db.gallery.CenterDao
-import nasa.db.gallery.KeywordDao
-import nasa.db.gallery.PhotographerDao
 import nasa.gallery.data.api.CollectionItem
 import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.api.GalleryApi
@@ -47,10 +43,6 @@ class GallerySearchRepositoryTest {
   private lateinit var repository: GallerySearchRepository
   private lateinit var searchPreferences: SearchPreferences
   private lateinit var db: RoomNasaDatabase
-  private lateinit var centerDao: CenterDao
-  private lateinit var keywordDao: KeywordDao
-  private lateinit var photographerDao: PhotographerDao
-  private lateinit var albumDao: AlbumDao
 
   // fakes
   private lateinit var galleryApi: GalleryApi
@@ -58,12 +50,7 @@ class GallerySearchRepositoryTest {
   @Before
   fun before() {
     galleryApi = webServerRule.buildApi(json = GalleryJson)
-
     db = databaseRule.database
-    centerDao = db.centreDao()
-    keywordDao = db.keywordDao()
-    photographerDao = db.photographerDao()
-    albumDao = db.albumDao()
   }
 
   @Test
@@ -143,10 +130,6 @@ class GallerySearchRepositoryTest {
       galleryApi = galleryApi,
       searchPreferences = searchPreferences,
       galleryDao = db.galleryDao(),
-      centerDao = db.centreDao(),
-      keywordDao = db.keywordDao(),
-      photographerDao = db.photographerDao(),
-      albumDao = db.albumDao(),
     )
   }
 
