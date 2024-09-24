@@ -34,7 +34,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          generate-job-summary: false
+          add-job-summary: on-failure
 
       - name: Check
         run: ./gradlew check
