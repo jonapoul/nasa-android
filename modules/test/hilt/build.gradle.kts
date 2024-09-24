@@ -21,6 +21,5 @@ dependencies {
   api(libs.hilt.core)
   api(libs.test.androidx.runner)
 
-  implementation(libs.androidx.annotation)
   implementation(libs.test.hilt)
 }

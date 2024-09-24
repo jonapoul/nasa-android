@@ -64,6 +64,7 @@ dependencyAnalysis {
       onUnusedDependencies {
         exclude(
           libs.androidx.compose.ui.tooling,
+          libs.hilt.core,
           libs.kotlin.stdlib,
           libs.kotlinx.coroutines,
           libs.test.androidx.monitor,
