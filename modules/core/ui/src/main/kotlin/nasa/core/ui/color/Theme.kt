@@ -66,10 +66,12 @@ sealed interface Theme {
   val formInputText: Color
   val formInputTextPlaceholder: Color
 
-  val checkboxText: Color
-  val checkboxBackgroundSelected: Color
-  val checkboxBorderSelected: Color
-  val checkboxToggleBackground: Color
+  val checkboxChecked: Color
+  val checkboxCheckedDisabled: Color
+  val checkboxUnchecked: Color
+  val checkboxUncheckedDisabled: Color
+  val checkboxCheckmark: Color
+  val checkboxIndeterminateDisabled: Color
 
   val preferenceBackground: Color
   val preferenceBackgroundDisabled: Color

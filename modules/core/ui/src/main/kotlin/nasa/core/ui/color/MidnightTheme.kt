@@ -61,10 +61,12 @@ internal class MidnightTheme : Theme {
   override val formInputText = ColorPalette.grey50
   override val formInputTextPlaceholder = ColorPalette.grey400
 
-  override val checkboxText = ColorPalette.grey150
-  override val checkboxToggleBackground = ColorPalette.grey400
-  override val checkboxBackgroundSelected = ColorPalette.blue300
-  override val checkboxBorderSelected = ColorPalette.blue300
+  override val checkboxChecked = ColorPalette.blue300
+  override val checkboxCheckedDisabled = ColorPalette.grey400
+  override val checkboxUnchecked = ColorPalette.grey200
+  override val checkboxUncheckedDisabled = ColorPalette.grey400
+  override val checkboxCheckmark = ColorPalette.blue900
+  override val checkboxIndeterminateDisabled = ColorPalette.grey700
 
   override val preferenceBackground = Color.Transparent
   override val preferenceBackgroundDisabled = ColorPalette.black.copy(alpha = 0.35f)

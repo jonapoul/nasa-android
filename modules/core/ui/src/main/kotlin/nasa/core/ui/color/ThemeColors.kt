@@ -1,6 +1,8 @@
 package nasa.core.ui.color
 
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CheckboxColors
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.DatePickerColors
 import androidx.compose.material3.DatePickerDefaults
 import androidx.compose.material3.MenuDefaults
@@ -133,4 +135,15 @@ fun Theme.slider(): SliderColors = SliderDefaults.colors(
   activeTickColor = sliderActiveTick,
   inactiveTrackColor = sliderInactiveTrack,
   inactiveTickColor = sliderInactiveTick,
+)
+
+@Stable
+@Composable
+fun Theme.checkbox(): CheckboxColors = CheckboxDefaults.colors(
+  checkedColor = checkboxChecked,
+  uncheckedColor = checkboxUnchecked,
+  checkmarkColor = checkboxCheckmark,
+  disabledCheckedColor = checkboxCheckedDisabled,
+  disabledUncheckedColor = checkboxUncheckedDisabled,
+  disabledIndeterminateColor = checkboxIndeterminateDisabled,
 )
