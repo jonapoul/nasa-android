@@ -1,8 +1,5 @@
 package nasa.gallery.model
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
 data class FilterConfig(
   val query: String? = null,
   val center: Center? = null,
