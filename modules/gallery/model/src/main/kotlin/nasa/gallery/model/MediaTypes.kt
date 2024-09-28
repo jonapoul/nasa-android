@@ -12,8 +12,23 @@ value class MediaTypes private constructor(private val value: String) {
 
   override fun toString(): String = value
 
+  fun toSet(): Set<MediaType> {
+    if (value.isEmpty()) return emptySet()
+    return value
+      .split(SEPARATOR)
+      .map { name -> NAME_MAP[name] ?: error("Invalid MediaType '$name'") }
+      .toSet()
+  }
+
   companion object {
-    const val SEPARATOR = ","
+    val All = MediaTypes(MediaType.entries)
+    val Empty = MediaTypes(emptySet())
+
+    private const val SEPARATOR = ","
+
+    private val NAME_MAP: Map<String, MediaType> = MediaType
+      .entries
+      .associateBy { mediaType -> mediaType.serialName() }
 
     private fun MediaType.serialName() = MediaType::class.java
       .getDeclaredField(name)

@@ -84,6 +84,6 @@ internal class DarkTheme : Theme {
   override val sliderThumb = ColorPalette.blue400
   override val sliderActiveTrack = ColorPalette.blue800
   override val sliderActiveTick = ColorPalette.blue600
-  override val sliderInactiveTrack = ColorPalette.grey600
-  override val sliderInactiveTick = ColorPalette.grey700
+  override val sliderInactiveTrack = ColorPalette.grey700
+  override val sliderInactiveTick = ColorPalette.grey800
 }

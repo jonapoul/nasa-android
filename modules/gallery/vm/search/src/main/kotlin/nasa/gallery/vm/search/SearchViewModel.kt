@@ -19,6 +19,8 @@ import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.repo.GallerySearchRepository
 import nasa.gallery.data.repo.SearchResult
 import nasa.gallery.model.FilterConfig
+import nasa.gallery.model.MediaTypes
+import nasa.gallery.model.Year
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,19 +30,31 @@ class SearchViewModel @Inject internal constructor(
   private val repository: GallerySearchRepository,
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
+  private val mutableText = MutableStateFlow(value = "")
+  private val mutableYearStart = MutableStateFlow(Year.Minimum)
+  private val mutableYearEnd = MutableStateFlow(Year.Maximum)
+  private val mutableMediaTypes = MutableStateFlow(MediaTypes.All)
+
   val searchState: StateFlow<SearchState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
     val mutableState by mutableSearchState.collectAsState()
     mutableState
   }
 
-  private val mutableFilterConfig = MutableStateFlow(FilterConfig.Empty)
   val filterConfig: StateFlow<FilterConfig> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
-    val mutableState by mutableFilterConfig.collectAsState()
-    mutableState
+    val text by mutableText.collectAsState()
+    val yearStart by mutableYearStart.collectAsState()
+    val yearEnd by mutableYearEnd.collectAsState()
+    val mediaTypes by mutableMediaTypes.collectAsState()
+    FilterConfig(
+      query = text,
+      yearStart = yearStart,
+      yearEnd = yearEnd,
+      mediaTypes = mediaTypes,
+    )
   }
 
   fun performSearch(pageNumber: Int? = null) {
-    val config = mutableFilterConfig.value
+    val config = filterConfig.value
     Timber.v("performSearch %d %s", pageNumber, config)
     val loadingState = if (pageNumber == null) SearchState.Searching else SearchState.LoadingPage(pageNumber)
     mutableSearchState.update { loadingState }
@@ -54,14 +68,18 @@ class SearchViewModel @Inject internal constructor(
 
   fun enterSearchTerm(text: String) {
     Timber.v("enterSearchTerm %s", text)
-    val newConfig = mutableFilterConfig.value.copy(query = text)
-    mutableFilterConfig.update { newConfig }
+    mutableText.update { text }
   }
 
-  fun setFilterConfig(config: FilterConfig) {
-    Timber.v("setFilterConfig %s", config)
-    mutableFilterConfig.update { config }
-    performSearch(pageNumber = null)
+  fun setYearRange(start: Year, end: Year) {
+    Timber.v("setYearRange %d %d", start.value, end.value)
+    mutableYearStart.update { start }
+    mutableYearEnd.update { end }
+  }
+
+  fun setMediaTypes(types: MediaTypes) {
+    Timber.v("setMediaTypes %s", types)
+    mutableMediaTypes.update { types }
   }
 
   private fun SearchResult.toState() = when (this) {

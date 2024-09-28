@@ -18,11 +18,13 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.screens.LoadFailure
+import nasa.gallery.model.FilterConfig
 import nasa.gallery.vm.search.SearchState
 
 @Composable
 internal fun SearchScreenImpl(
   searchState: SearchState,
+  filterConfig: FilterConfig,
   onAction: (SearchAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
@@ -32,6 +34,7 @@ internal fun SearchScreenImpl(
     BackgroundSurface(theme = theme) {
       SearchContent(
         searchState = searchState,
+        filterConfig = filterConfig,
         onAction = onAction,
         modifier = Modifier.padding(innerPadding),
         theme = theme,
@@ -43,6 +46,7 @@ internal fun SearchScreenImpl(
 @Composable
 private fun SearchContent(
   searchState: SearchState,
+  filterConfig: FilterConfig,
   onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -53,6 +57,7 @@ private fun SearchContent(
   ) {
     SearchInput(
       modifier = Modifier.fillMaxWidth(),
+      filterConfig = filterConfig,
       onAction = onAction,
       theme = theme,
     )
@@ -105,6 +110,7 @@ private fun SearchContent(
 private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
     searchState = PREVIEW_SUCCESS_STATE,
+    filterConfig = PREVIEW_FILTER_CONFIG,
     onAction = {},
   )
 }
@@ -114,6 +120,7 @@ private fun PreviewSuccess() = PreviewScreen {
 private fun PreviewFailure() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Failed(reason = "Something broke! Here's some more rubbish too for preview"),
+    filterConfig = PREVIEW_FILTER_CONFIG,
     onAction = {},
   )
 }
@@ -123,6 +130,7 @@ private fun PreviewFailure() = PreviewScreen {
 private fun PreviewLoading() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Searching,
+    filterConfig = PREVIEW_FILTER_CONFIG,
     onAction = {},
   )
 }
@@ -132,6 +140,7 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewEmpty() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Empty,
+    filterConfig = PREVIEW_FILTER_CONFIG,
     onAction = {},
   )
 }
@@ -141,6 +150,7 @@ private fun PreviewEmpty() = PreviewScreen {
 private fun PreviewNoAction() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.NoAction,
+    filterConfig = PREVIEW_FILTER_CONFIG,
     onAction = {},
   )
 }

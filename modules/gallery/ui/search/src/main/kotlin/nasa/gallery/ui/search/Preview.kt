@@ -4,6 +4,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.datetime.Instant
 import nasa.gallery.model.Album
 import nasa.gallery.model.Center
+import nasa.gallery.model.FilterConfig
 import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
@@ -23,7 +24,8 @@ internal val PREVIEW_ITEM_1 = SearchResultItem(
   captionsUrl = ImageUrl(url = "https://url.com/data.src"),
   albums = persistentListOf(Album("Apollo")),
   center = Center(value = "ABCC"),
-  title = "Hello World, this is a long title which should be ellipsized when it gets longer than 2 lines",
+  title = "Hello World, this is a long title which should be ellipsized when it gets longer than 2 lines but here's" +
+    "some more rubbish that should be clipped",
   keywords = Keywords("Apollo", "NASA", "Space"),
   location = "123 Road Street, Townsville",
   photographer = Photographer("Dick Dastardly"),
@@ -55,4 +57,19 @@ internal val PREVIEW_SUCCESS_STATE = SearchState.Success(
   pageNumber = 1,
   nextPageNumber = 2,
   resultsPerPage = 50,
+)
+
+internal val PREVIEW_FILTER_CONFIG = FilterConfig(
+  query = null,
+  center = null,
+  description = null,
+  keywords = null,
+  location = null,
+  mediaTypes = null,
+  nasaId = null,
+  photographer = null,
+  secondaryCreator = null,
+  title = null,
+  yearStart = null,
+  yearEnd = null,
 )
