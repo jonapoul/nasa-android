@@ -206,9 +206,9 @@ private fun ListPreferenceDialogItem(
   entry: String,
   value: String,
   isSelected: Boolean,
+  onValueChange: (String) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
-  onValueChange: (String) -> Unit,
 ) {
   Row(
     modifier = modifier

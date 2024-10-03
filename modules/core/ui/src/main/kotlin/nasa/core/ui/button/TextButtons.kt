@@ -40,6 +40,7 @@ import nasa.core.ui.preview.PreviewColumn
 @Composable
 fun PrimaryTextButton(
   text: String,
+  onClick: () -> Unit,
   modifier: Modifier = Modifier,
   isEnabled: Boolean = true,
   contentPadding: PaddingValues = DefaultButtonPadding,
@@ -51,7 +52,6 @@ fun PrimaryTextButton(
   colors: @Composable (Theme, Boolean) -> ButtonColors = { t, pressed -> t.primaryButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
   theme: Theme = LocalTheme.current,
-  onClick: () -> Unit,
 ) {
   BasicTextButton(
     text = text,
@@ -74,6 +74,7 @@ fun PrimaryTextButton(
 @Composable
 fun RegularTextButton(
   text: String,
+  onClick: () -> Unit,
   modifier: Modifier = Modifier,
   isEnabled: Boolean = true,
   contentPadding: PaddingValues = DefaultButtonPadding,
@@ -85,7 +86,6 @@ fun RegularTextButton(
   colors: @Composable (Theme, Boolean) -> ButtonColors = { t, pressed -> t.regularButton(pressed) },
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
   theme: Theme = LocalTheme.current,
-  onClick: () -> Unit,
 ) {
   BasicTextButton(
     text = text,
@@ -109,6 +109,7 @@ fun RegularTextButton(
 fun PrimaryTextButtonWithLoading(
   text: String,
   isLoading: Boolean,
+  onClick: () -> Unit,
   modifier: Modifier = Modifier,
   isEnabled: Boolean = true,
   contentPadding: PaddingValues = DefaultButtonPadding,
@@ -119,7 +120,6 @@ fun PrimaryTextButtonWithLoading(
   prefix: (@Composable () -> Unit)? = null,
   colors: @Composable (Theme, Boolean) -> ButtonColors = { t, pressed -> t.primaryButton(pressed) },
   theme: Theme = LocalTheme.current,
-  onClick: () -> Unit,
 ) {
   PrimaryTextButton(
     text = text,
@@ -162,6 +162,7 @@ fun PrimaryTextButtonWithLoading(
 fun BasicTextButton(
   text: String,
   colors: @Composable (theme: Theme, isPressed: Boolean) -> ButtonColors,
+  onClick: () -> Unit,
   modifier: Modifier = Modifier,
   isEnabled: Boolean = true,
   contentPadding: PaddingValues = DefaultButtonPadding,
@@ -172,7 +173,6 @@ fun BasicTextButton(
   prefix: (@Composable () -> Unit)? = null,
   content: @Composable RowScope.() -> Unit = { DefaultTextButtonContent(text, style, fontSize, prefix) },
   theme: Theme = LocalTheme.current,
-  onClick: () -> Unit,
 ) {
   val isPressed by interactionSource.collectIsPressedAsState()
 
