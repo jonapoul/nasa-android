@@ -288,8 +288,8 @@ private fun submitTypesOnChange(
 private fun YearRange(
   config: FilterConfig,
   theme: Theme,
-  modifier: Modifier = Modifier,
   onAction: (SearchAction) -> Unit,
+  modifier: Modifier = Modifier,
 ) {
   val start = remember(config) { config.yearStart ?: Year.Minimum }
   val end = remember(config) { config.yearEnd ?: Year.Maximum }
