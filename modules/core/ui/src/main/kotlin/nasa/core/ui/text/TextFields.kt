@@ -152,8 +152,8 @@ fun NasaExposedDropDownMenu(
 @Composable
 private fun ClearButton(
   tint: Color,
-  modifier: Modifier = Modifier,
   onClick: () -> Unit,
+  modifier: Modifier = Modifier,
 ) {
   IconButton(
     modifier = modifier,
