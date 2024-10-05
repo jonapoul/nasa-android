@@ -27,6 +27,7 @@ fun GallerySearchScreen(
   val filterConfig by viewModel.filterConfig.collectAsStateWithLifecycle()
 
   val clickedImageId = remember { mutableStateOf<NasaId?>(null) }
+  val showExtraConfig = remember { mutableStateOf(false) }
   val immutableClickedImageId = clickedImageId.value
   if (immutableClickedImageId != null) {
     navController.navigate(route = GalleryImageNavScreen(immutableClickedImageId.value))
@@ -37,6 +38,7 @@ fun GallerySearchScreen(
     searchState = searchState,
     theme = theme,
     filterConfig = filterConfig,
+    showExtraConfig = showExtraConfig.value,
     onAction = { action ->
       when (action) {
         SearchAction.NavBack -> navController.popBackStack()
@@ -44,8 +46,8 @@ fun GallerySearchScreen(
         is SearchAction.EnterSearchTerm -> viewModel.enterSearchTerm(action.text)
         SearchAction.PerformSearch -> viewModel.performSearch()
         is SearchAction.SelectPage -> viewModel.performSearch(action.pageNumber)
-        is SearchAction.SetMediaTypes -> viewModel.setMediaTypes(action.types)
-        is SearchAction.SetYearRange -> viewModel.setYearRange(action.min, action.max)
+        is SearchAction.SetFilterConfig -> viewModel.setFilterConfig(action.config)
+        SearchAction.ToggleExtraConfig -> showExtraConfig.set(!showExtraConfig.value)
       }
     },
   )

@@ -33,7 +33,7 @@ value class MediaTypes private constructor(private val value: String) {
     private fun MediaType.serialName() = MediaType::class.java
       .getDeclaredField(name)
       .getAnnotation(SerialName::class.java)
-      .also { if (it == null) error("No SerialName for $this") }
-      .value
+      ?.value
+      ?: error("No SerialName for $this")
   }
 }

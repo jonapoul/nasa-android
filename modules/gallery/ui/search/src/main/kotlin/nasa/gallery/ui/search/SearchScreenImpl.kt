@@ -25,6 +25,7 @@ import nasa.gallery.vm.search.SearchState
 internal fun SearchScreenImpl(
   searchState: SearchState,
   filterConfig: FilterConfig,
+  showExtraConfig: Boolean,
   onAction: (SearchAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
@@ -34,11 +35,18 @@ internal fun SearchScreenImpl(
     BackgroundSurface(theme = theme) {
       SearchContent(
         searchState = searchState,
-        filterConfig = filterConfig,
         onAction = onAction,
         modifier = Modifier.padding(innerPadding),
         theme = theme,
       )
+
+      if (showExtraConfig) {
+        SearchConfigModal(
+          config = filterConfig,
+          onAction = onAction,
+          theme = theme,
+        )
+      }
     }
   }
 }
@@ -46,7 +54,6 @@ internal fun SearchScreenImpl(
 @Composable
 private fun SearchContent(
   searchState: SearchState,
-  filterConfig: FilterConfig,
   onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -57,7 +64,6 @@ private fun SearchContent(
   ) {
     SearchInput(
       modifier = Modifier.fillMaxWidth(),
-      filterConfig = filterConfig,
       onAction = onAction,
       theme = theme,
     )
@@ -111,6 +117,7 @@ private fun PreviewSuccess() = PreviewScreen {
   SearchScreenImpl(
     searchState = PREVIEW_SUCCESS_STATE,
     filterConfig = PREVIEW_FILTER_CONFIG,
+    showExtraConfig = false,
     onAction = {},
   )
 }
@@ -121,6 +128,7 @@ private fun PreviewFailure() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Failed(reason = "Something broke! Here's some more rubbish too for preview"),
     filterConfig = PREVIEW_FILTER_CONFIG,
+    showExtraConfig = false,
     onAction = {},
   )
 }
@@ -131,6 +139,7 @@ private fun PreviewLoading() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Searching,
     filterConfig = PREVIEW_FILTER_CONFIG,
+    showExtraConfig = false,
     onAction = {},
   )
 }
@@ -141,6 +150,7 @@ private fun PreviewEmpty() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Empty,
     filterConfig = PREVIEW_FILTER_CONFIG,
+    showExtraConfig = false,
     onAction = {},
   )
 }
@@ -151,6 +161,7 @@ private fun PreviewNoAction() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.NoAction,
     filterConfig = PREVIEW_FILTER_CONFIG,
+    showExtraConfig = false,
     onAction = {},
   )
 }

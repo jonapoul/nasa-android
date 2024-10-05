@@ -31,9 +31,9 @@ class SearchViewModel @Inject internal constructor(
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
   private val mutableText = MutableStateFlow(value = "")
-  private val mutableYearStart = MutableStateFlow(Year.Minimum)
-  private val mutableYearEnd = MutableStateFlow(Year.Maximum)
-  private val mutableMediaTypes = MutableStateFlow(MediaTypes.All)
+  private val mutableYearStart = MutableStateFlow<Year?>(null)
+  private val mutableYearEnd = MutableStateFlow<Year?>(null)
+  private val mutableMediaTypes = MutableStateFlow<MediaTypes?>(null)
 
   val searchState: StateFlow<SearchState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
     val mutableState by mutableSearchState.collectAsState()
@@ -55,6 +55,10 @@ class SearchViewModel @Inject internal constructor(
 
   fun performSearch(pageNumber: Int? = null) {
     val config = filterConfig.value
+    if (config.query.isNullOrBlank()) {
+      return
+    }
+
     Timber.v("performSearch %d %s", pageNumber, config)
     val loadingState = if (pageNumber == null) SearchState.Searching else SearchState.LoadingPage(pageNumber)
     mutableSearchState.update { loadingState }
@@ -71,15 +75,11 @@ class SearchViewModel @Inject internal constructor(
     mutableText.update { text }
   }
 
-  fun setYearRange(start: Year, end: Year) {
-    Timber.v("setYearRange %d %d", start.value, end.value)
-    mutableYearStart.update { start }
-    mutableYearEnd.update { end }
-  }
-
-  fun setMediaTypes(types: MediaTypes) {
-    Timber.v("setMediaTypes %s", types)
-    mutableMediaTypes.update { types }
+  fun setFilterConfig(config: FilterConfig) {
+    Timber.v("setYearRange %s", config)
+    mutableYearStart.update { config.yearStart}
+    mutableYearEnd.update { config.yearEnd }
+    mutableMediaTypes.update { config.mediaTypes }
   }
 
   private fun SearchResult.toState() = when (this) {

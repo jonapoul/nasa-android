@@ -6,6 +6,8 @@ import kotlinx.datetime.toLocalDateTime
 
 @JvmInline
 value class Year(val value: Int) : Comparable<Year> {
+  constructor(value: Number) : this(value.toInt())
+
   init {
     require(value > 0) { "Year must be positive, got $value" }
   }

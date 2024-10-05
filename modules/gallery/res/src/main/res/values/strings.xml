@@ -9,10 +9,6 @@
   <string name="search_input_hint">Enter search keywords</string>
   <string name="search_input_submit">Search</string>
   <string name="search_input_settings">More search options</string>
-  <string name="search_input_placeholder">Enter text</string>
-  <string name="search_input_apply">Apply</string>
-  <string name="search_input_clear">Clear</string>
-  <string name="search_input_cancel">Dismiss</string>
 
   <string name="search_no_action">Enter search keywords in the box above and click the search button to begin!</string>
   <string name="search_empty_title">No results found</string>
@@ -24,10 +20,13 @@
   <string name="search_page_previous">Previous page</string>
   <string name="search_page_next">Next page</string>
 
-  <string name="search_label_year">%1$d to %2$d inclusive</string>
-  <string name="search_label_image">Images</string>
-  <string name="search_label_video">Videos</string>
-  <string name="search_label_audio">Audio</string>
+  <string name="search_modal_year">%1$d to %2$d inclusive</string>
+  <string name="search_modal_image">Images</string>
+  <string name="search_modal_video">Videos</string>
+  <string name="search_modal_audio">Audio</string>
+  <string name="search_modal_no_media_selected">No media categories selected!</string>
+  <string name="search_modal_confirm">Confirm</string>
+  <string name="search_modal_dismiss">Cancel</string>
 
   <string name="search_item_center">Center:</string>
   <string name="search_item_keywords">Keywords:</string>
