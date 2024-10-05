@@ -2,7 +2,7 @@ digraph {
 edge ["dir"="forward"]
 graph ["dpi"="100","label"=":gallery:data:repo","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
-":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
+":gallery:data:repo" ["fillcolor"="#9D8DF1","shape"="box"]
 ":db" ["fillcolor"="#9D8DF1","shape"="box"]
 ":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#BB00FF","shape"="box"]
