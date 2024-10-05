@@ -3,16 +3,16 @@ edge ["dir"="forward"]
 graph ["dpi"="100","label"=":gallery:data:repo","labelloc"="t","fontsize"="30","ranksep"="2.5","rankdir"="TB"]
 node ["style"="filled"]
 ":gallery:data:repo" ["fillcolor"="#55FF55","shape"="box"]
-":db:gallery" ["fillcolor"="#BB00FF","shape"="box"]
+":db" ["fillcolor"="#9D8DF1","shape"="box"]
 ":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":gallery:data:api" ["fillcolor"="#BB00FF","shape"="box"]
 {
 edge ["dir"="none"]
 graph ["rank"="same"]
 }
-":gallery:data:repo" -> ":db:gallery"
+":gallery:data:repo" -> ":db"
 ":gallery:data:repo" -> ":gallery:data:api"
-":db:gallery" -> ":gallery:model"
+":db" -> ":gallery:model"
 ":gallery:data:api" -> ":gallery:model"
 subgraph "cluster_legend" {
 edge ["dir"="none"]
@@ -26,7 +26,8 @@ graph ["label"="Legend","fontsize"="20"]
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
 <TR><TD>Android Resources</TD><TD BGCOLOR="#00FFFF">module-name</TD></TR>
 <TR><TD>Navigation</TD><TD BGCOLOR="#5555FF">module-name</TD></TR>
-<TR><TD>Kotlin</TD><TD BGCOLOR="#BB00FF">module-name</TD></TR>
+<TR><TD>Kotlin Multiplatform</TD><TD BGCOLOR="#9D8DF1">module-name</TD></TR>
+<TR><TD>Kotlin JVM</TD><TD BGCOLOR="#BB00FF">module-name</TD></TR>
 </TABLE>
 >]
 } -> ":gallery:data:repo" ["style"="invis"]

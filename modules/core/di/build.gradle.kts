@@ -14,6 +14,7 @@ dependencies {
   api(libs.dagger.core)
   api(libs.hilt.android)
   api(libs.javaxInject)
+  api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
   api(libs.preferences.core)
   api(projects.core.model)

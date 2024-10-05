@@ -3,7 +3,7 @@ package nasa.gallery.data.repo
 import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.requireMessage
 import kotlinx.coroutines.withContext
-import nasa.db.gallery.GalleryDao
+import nasa.db.GalleryDao
 import nasa.gallery.data.api.GalleryApi
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId

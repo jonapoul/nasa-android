@@ -2,7 +2,7 @@ package nasa.apod.data.repo
 
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
-import nasa.db.apod.ApodDao
+import nasa.db.ApodDao
 import javax.inject.Inject
 
 class LocalDatabaseRepository @Inject internal constructor(

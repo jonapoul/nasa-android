@@ -4,8 +4,8 @@ import alakazam.kotlin.core.IODispatcher
 import alakazam.kotlin.core.requireMessage
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerializationException
-import nasa.db.gallery.GalleryDao
-import nasa.db.gallery.GalleryEntity
+import nasa.db.GalleryDao
+import nasa.db.GalleryEntity
 import nasa.gallery.data.api.Collection
 import nasa.gallery.data.api.CollectionLink
 import nasa.gallery.data.api.GalleryApi

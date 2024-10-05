@@ -36,6 +36,7 @@ dependencies {
   implementation(libs.androidx.navigation.common)
   implementation(libs.coil.compose)
   implementation(libs.coil.composeBase)
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
   implementation(projects.apod.preview)
   implementation(projects.apod.res)

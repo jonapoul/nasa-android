@@ -8,7 +8,7 @@ import nasa.apod.data.api.ApodResponseModel
 import nasa.apod.model.ApodItem
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
-import nasa.db.apod.ApodDao
+import nasa.db.ApodDao
 import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject

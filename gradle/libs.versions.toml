@@ -3,6 +3,7 @@
 agp = "8.6.1"
 androidCacheFix = "3.0.1"
 blueprint = "0.8.2"
+buildconfig = "5.5.0"
 dependencyAnalysis = "2.1.2"
 dependencyGraph = "0.9.0-SNAPSHOT"
 dependencySort = "0.8"
@@ -34,9 +35,9 @@ androidx-hilt = "1.2.0"
 androidx-lifecycle = "2.8.6"
 androidx-navigation = "2.8.1"
 androidx-preference = "1.2.1"
-androidx-room = "2.7.0-alpha08"
+androidx-room = "2.7.0-alpha09"
 androidx-splash = "1.0.1"
-androidx-sqlite = "2.5.0-alpha08"
+androidx-sqlite = "2.5.0-alpha09"
 coil = "2.7.0"
 javaxInject = "1"
 kotlinx-coroutines = "1.9.0"
@@ -134,8 +135,8 @@ androidx-room-common = { module = "androidx.room:room-common", version.ref = "an
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-splash = { module = "androidx.core:core-splashscreen", version.ref = "androidx-splash" }
+androidx-sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "androidx-sqlite" }
 androidx-sqlite-core = { module = "androidx.sqlite:sqlite", version.ref = "androidx-sqlite" }
-androidx-sqlite-framework = { module = "androidx.sqlite:sqlite-framework", version.ref = "androidx-sqlite" }
 coil-base = { module = "io.coil-kt:coil-base", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-composeBase = { module = "io.coil-kt:coil-compose-base", version.ref = "coil" }
@@ -145,7 +146,6 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "hilt" }
 javaxInject = { module = "javax.inject:javax.inject", version.ref = "javaxInject" }
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-immutable" }
@@ -180,7 +180,7 @@ test-androidx-rules = { module = "androidx.test:rules", version.ref = "test-andr
 test-androidx-runner = { module = "androidx.test:runner", version.ref = "test-androidx-runner" }
 test-hilt = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 test-junit = { module = "junit:junit", version.ref = "test-junit" }
-test-kotlin-common = { module = "org.jetbrains.kotlin:kotlin-test-common", version.ref = "kotlin" }
+test-kotlin-common = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 test-kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 test-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 test-mockk-android = { module = "io.mockk:mockk-android", version.ref = "test-mockk" }
@@ -196,6 +196,7 @@ agp-app = { id = "com.android.application", version.ref = "agp" }
 agp-lib = { id = "com.android.library", version.ref = "agp" }
 androidx-room = { id = "androidx.room", version.ref = "androidx-room" }
 androidCacheFix = { id = "org.gradle.android.cache-fix", version.ref = "androidCacheFix" }
+buildconfig = { id = "com.github.gmazzo.buildconfig", version.ref = "buildconfig" }
 dependencyAnalysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependencyAnalysis" }
 dependencyGraph = { id = "com.vanniktech.dependency.graph.generator", version.ref = "dependencyGraph" }
 dependencySort = { id = "com.squareup.sort-dependencies", version.ref = "dependencySort" }
@@ -206,6 +207,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-powerAssert = { id = "org.jetbrains.kotlin.plugin.power-assert", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

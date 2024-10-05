@@ -11,6 +11,7 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.dagger.core)
   api(libs.javaxInject)
+  api(libs.kotlinx.coroutines)
   api(projects.apod.data.repo)
   api(projects.core.http.usage)
   api(projects.gallery.data.repo)

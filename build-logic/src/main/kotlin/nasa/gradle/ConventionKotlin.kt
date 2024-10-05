@@ -6,9 +6,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -21,7 +18,6 @@ class ConventionKotlin : Plugin<Project> {
         freeCompilerArgs.addAll(
           "-Xjvm-default=all-compatibility",
           "-opt-in=kotlin.RequiresOptIn",
-          "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
         )
       }
     }
@@ -30,12 +26,6 @@ class ConventionKotlin : Plugin<Project> {
     extensions.configure<JavaPluginExtension> {
       sourceCompatibility = javaVersion
       targetCompatibility = javaVersion
-    }
-
-    val api by configurations
-    dependencies {
-      api(libs.kotlin.stdlib)
-      api(libs.kotlinx.coroutines)
     }
   }
 }

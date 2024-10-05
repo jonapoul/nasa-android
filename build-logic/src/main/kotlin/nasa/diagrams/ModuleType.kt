@@ -22,7 +22,8 @@ enum class NasaModuleType(override val string: String, override val color: Strin
   AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
   AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
   Navigation(string = "Navigation", color = "#5555FF"), // blue
-  Kotlin(string = "Kotlin", color = "#BB00FF"), // violet
+  Multiplatform(string = "Kotlin Multiplatform", color = "#9D8DF1"), // indigo
+  Kotlin(string = "Kotlin JVM", color = "#BB00FF"), // violet
   ;
 
   object Finder : ModuleType.Finder {
@@ -34,6 +35,7 @@ enum class NasaModuleType(override val string: String, override val color: Strin
       project.plugins.hasPlugin("nasa.module.android") -> AndroidLibrary
       project.plugins.hasPlugin("nasa.module.resources") -> AndroidResources
       project.plugins.hasPlugin("nasa.module.navigation") -> Navigation
+      project.plugins.hasPlugin("nasa.module.multiplatform") -> Multiplatform
       project.plugins.hasPlugin("nasa.module.kotlin") -> Kotlin
       else -> error("Unknown module type for ${project.path}")
     }

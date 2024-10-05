@@ -11,8 +11,8 @@ import nasa.apod.data.api.ApodJson
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
 import nasa.core.model.ApiKey
-import nasa.db.RoomNasaDatabase
-import nasa.db.apod.ApodDao
+import nasa.db.ApodDao
+import nasa.db.NasaDatabase
 import nasa.test.MockWebServerRule
 import nasa.test.getResourceAsText
 import net.lachlanmckee.timberjunit.TimberTestRule
@@ -29,7 +29,7 @@ import kotlin.test.assertNull
 @RunWith(RobolectricTestRunner::class)
 class SingleApodRepositoryTest {
   @get:Rule
-  val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
+  val databaseRule = RoomDatabaseRule(NasaDatabase::class)
 
   @get:Rule
   val webServerRule = MockWebServerRule()

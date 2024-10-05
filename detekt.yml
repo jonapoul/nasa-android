@@ -15,6 +15,7 @@ complexity:
   CyclomaticComplexMethod:
     ignoreSingleWhenExpression: true
     threshold: 20
+
 # https://mrmans0n.github.io/compose-rules/detekt/
 Compose:
   Material2:
@@ -27,6 +28,7 @@ exceptions:
   SwallowedException:
     ignoredExceptionTypes:
       - "CancellationException"
+
 naming:
   FunctionNaming:
     functionPattern: "[a-zA-Z][a-zA-Z0-9]*"

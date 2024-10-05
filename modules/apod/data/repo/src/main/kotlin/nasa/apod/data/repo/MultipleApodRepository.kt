@@ -7,7 +7,7 @@ import nasa.apod.data.api.ApodApi
 import nasa.apod.model.EARLIEST_APOD_DATE
 import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
-import nasa.db.apod.ApodDao
+import nasa.db.ApodDao
 import timber.log.Timber
 import java.time.YearMonth
 import javax.inject.Inject

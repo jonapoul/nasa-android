@@ -34,6 +34,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.runtime.compose)
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.immutable)
   implementation(libs.lazycolumn.scrollbar)
   implementation(projects.licenses.res)

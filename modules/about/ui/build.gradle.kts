@@ -34,6 +34,7 @@ dependencies {
   implementation(libs.androidx.lifecycle.viewmodel.compose)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.androidx.navigation.common)
+  implementation(libs.kotlinx.coroutines)
   implementation(projects.about.res)
 
   androidTestImplementation(projects.core.di)

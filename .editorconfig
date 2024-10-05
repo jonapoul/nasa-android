@@ -21,3 +21,8 @@ ktlint_standard_multiline-expression-wrapping = disabled
 ktlint_standard_no-blank-line-in-list = disabled
 ktlint_standard_spacing-between-declarations-with-annotations = disabled
 ktlint_standard_string-template-indent = disabled
+
+# noinspection EditorConfigKeyCorrectness
+# https://github.com/JLLeitschuh/ktlint-gradle/issues/266#issuecomment-2143319443
+[**/generated/**]
+ktlint = disabled

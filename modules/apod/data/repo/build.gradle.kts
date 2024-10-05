@@ -8,10 +8,11 @@ android {
 
 dependencies {
   api(projects.apod.data.api)
-  api(projects.db.apod)
+  api(projects.db)
 
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.javaxInject)
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.core)
   implementation(libs.kotlinx.serialization.json)
@@ -21,6 +22,5 @@ dependencies {
   testImplementation(libs.androidx.room.runtime)
   testImplementation(libs.test.alakazam.db)
   testImplementation(libs.test.okhttp)
-  testImplementation(projects.db.impl)
   testImplementation(projects.test.http)
 }

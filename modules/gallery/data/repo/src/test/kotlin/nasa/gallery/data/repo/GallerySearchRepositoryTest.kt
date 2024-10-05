@@ -6,7 +6,7 @@ import alakazam.test.db.RoomDatabaseRule
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Instant
-import nasa.db.RoomNasaDatabase
+import nasa.db.NasaDatabase
 import nasa.gallery.data.api.CollectionItem
 import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.api.GalleryApi
@@ -34,7 +34,7 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class GallerySearchRepositoryTest {
   @get:Rule
-  val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class)
+  val databaseRule = RoomDatabaseRule(NasaDatabase::class)
 
   @get:Rule
   val webServerRule = MockWebServerRule()
@@ -42,7 +42,7 @@ class GallerySearchRepositoryTest {
   // real
   private lateinit var repository: GallerySearchRepository
   private lateinit var searchPreferences: SearchPreferences
-  private lateinit var db: RoomNasaDatabase
+  private lateinit var db: NasaDatabase
 
   // fakes
   private lateinit var galleryApi: GalleryApi

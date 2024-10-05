@@ -3,7 +3,7 @@ package nasa.apod.data.repo
 import nasa.apod.data.api.ApodResponseModel
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
-import nasa.db.apod.ApodEntity
+import nasa.db.ApodEntity
 
 internal fun ApodEntity.toItem(): ApodItem = ApodItem(
   date = date,

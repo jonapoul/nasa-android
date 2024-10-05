@@ -30,6 +30,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import java.net.HttpURLConnection.HTTP_BAD_REQUEST
+import java.net.HttpURLConnection.HTTP_NOT_FOUND
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertIs
@@ -157,7 +158,7 @@ class GalleryApiTest {
   fun `Deserialize search response failure`() = runTest {
     // Given
     val json = readJson(filename = "search-failure.json")
-    webServerRule.enqueueError(json, code = HTTP_BAD_REQUEST)
+    webServerRule.enqueue(json, code = HTTP_BAD_REQUEST)
 
     // When we search with no parameters
     val response = galleryApi.search()
@@ -498,7 +499,7 @@ class GalleryApiTest {
   fun `Get albums failure`() = runTest {
     // Given
     val json = readJson(filename = "albums-failure.json")
-    webServerRule.enqueueError(json)
+    webServerRule.enqueue(json, code = HTTP_NOT_FOUND)
 
     // When we search with no parameters
     val response = galleryApi.search()

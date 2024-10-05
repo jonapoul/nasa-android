@@ -12,6 +12,7 @@ dependencies {
   api(libs.androidx.lifecycle.viewmodel.savedstate)
   api(libs.dagger.core)
   api(libs.javaxInject)
+  api(libs.kotlinx.coroutines)
   api(projects.core.http.progress)
   api(projects.gallery.data.repo)
 

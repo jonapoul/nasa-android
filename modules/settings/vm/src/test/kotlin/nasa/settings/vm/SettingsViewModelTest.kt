@@ -4,7 +4,7 @@ import alakazam.android.core.Toaster
 import alakazam.android.core.UrlOpener
 import alakazam.kotlin.core.IODispatcher
 import alakazam.test.core.standardDispatcher
-import alakazam.test.db.RoomDatabaseRule
+import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import app.cash.turbine.test
 import io.mockk.coVerify
@@ -15,9 +15,10 @@ import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.NASA_API_URL
 import nasa.core.model.bytes
-import nasa.db.NasaDatabaseDelegate
-import nasa.db.RoomNasaDatabase
+import nasa.db.NasaDatabase
+import nasa.db.getDatabaseBuilder
 import net.lachlanmckee.timberjunit.TimberTestRule
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -28,15 +29,14 @@ import kotlin.test.assertEquals
 @RunWith(RobolectricTestRunner::class)
 class SettingsViewModelTest {
   @get:Rule
-  val databaseRule = RoomDatabaseRule(RoomNasaDatabase::class, allowMainThread = true)
-
-  @get:Rule
   val timberRule = TimberTestRule.logAllWhenTestFails()!!
 
   // real
   private lateinit var viewModel: SettingsViewModel
   private lateinit var imageCache: ImageCache
   private lateinit var databaseClearer: DatabaseClearer
+  private lateinit var database: NasaDatabase
+  private lateinit var context: Context
 
   // mock
   private lateinit var urlOpener: UrlOpener
@@ -44,10 +44,16 @@ class SettingsViewModelTest {
 
   @Before
   fun before() {
+    context = ApplicationProvider.getApplicationContext()
     urlOpener = mockk(relaxed = true)
     toaster = mockk(relaxed = true)
-    imageCache = ImageCache(ApplicationProvider.getApplicationContext())
+    imageCache = ImageCache(context)
     imageCache.cacheDir.mkdirs()
+  }
+
+  @After
+  fun after() {
+    database.close()
   }
 
   @Test
@@ -84,9 +90,13 @@ class SettingsViewModelTest {
   }
 
   private fun TestScope.buildViewModel() {
+    val builder = getDatabaseBuilder(context)
+    database = NasaDatabase.build(builder, standardDispatcher)
+
     databaseClearer = DatabaseClearer(
+      context = context,
       io = IODispatcher(standardDispatcher),
-      database = NasaDatabaseDelegate(databaseRule.database),
+      database = database,
     )
 
     viewModel = SettingsViewModel(

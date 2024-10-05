@@ -30,15 +30,8 @@ class MockWebServerRule : TestWatcher() {
     }
   }
 
-  fun enqueueError(body: String, code: Int = 404) {
-    enqueue {
-      setResponseCode(code)
-      setBody(body)
-    }
-  }
-
   fun enqueue(builder: MockResponse.() -> MockResponse) {
-    enqueue(MockResponse().apply { builder() })
+    enqueue(MockResponse().builder())
   }
 
   fun enqueue(response: MockResponse) {

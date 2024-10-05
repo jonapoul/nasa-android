@@ -8,7 +8,8 @@ node ["style"="filled"]
 ":apod:data:api" ["fillcolor"="#BB00FF","shape"="box"]
 ":apod:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":core:model" ["fillcolor"="#BB00FF","shape"="box"]
-":db:apod" ["fillcolor"="#BB00FF","shape"="box"]
+":db" ["fillcolor"="#9D8DF1","shape"="box"]
+":gallery:model" ["fillcolor"="#BB00FF","shape"="box"]
 ":apod:nav" ["fillcolor"="#5555FF","shape"="box"]
 ":core:ui" ["fillcolor"="#FFFF55","shape"="box"]
 ":core:res" ["fillcolor"="#00FFFF","shape"="box"]
@@ -27,9 +28,10 @@ graph ["rank"="same"]
 ":apod:vm:single" -> ":apod:data:repo"
 ":apod:vm:single" -> ":apod:nav"
 ":apod:data:repo" -> ":apod:data:api"
-":apod:data:repo" -> ":db:apod"
+":apod:data:repo" -> ":db"
 ":apod:data:api" -> ":apod:model"
 ":apod:data:api" -> ":core:model"
+":db" -> ":gallery:model"
 ":core:ui" -> ":core:model"
 ":core:ui" -> ":core:res"
 ":apod:preview" -> ":apod:model"
@@ -45,7 +47,8 @@ graph ["label"="Legend","fontsize"="20"]
 <TR><TD>Android Library</TD><TD BGCOLOR="#55FF55">module-name</TD></TR>
 <TR><TD>Android Resources</TD><TD BGCOLOR="#00FFFF">module-name</TD></TR>
 <TR><TD>Navigation</TD><TD BGCOLOR="#5555FF">module-name</TD></TR>
-<TR><TD>Kotlin</TD><TD BGCOLOR="#BB00FF">module-name</TD></TR>
+<TR><TD>Kotlin Multiplatform</TD><TD BGCOLOR="#9D8DF1">module-name</TD></TR>
+<TR><TD>Kotlin JVM</TD><TD BGCOLOR="#BB00FF">module-name</TD></TR>
 </TABLE>
 >]
 } -> ":apod:ui:single" ["style"="invis"]

@@ -9,6 +9,7 @@ android {
 dependencies {
   api(libs.alakazam.android.core)
   api(libs.javaxInject)
+  api(libs.kotlinx.coroutines)
   api(projects.about.data)
 
   implementation(libs.androidx.compose.runtime)
