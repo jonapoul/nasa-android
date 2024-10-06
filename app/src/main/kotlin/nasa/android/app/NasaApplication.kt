@@ -29,14 +29,14 @@ class NasaApplication : Application() {
     Timber.d("name=${bc.versionName} code=${bc.versionCode} time=${bc.buildTime}")
     Timber.d("manufacturer=${bc.manufacturer} model=${bc.model} os=${bc.os} platform=${bc.platform}")
 
-    Timber.v("Setting API key...")
+    Timber.d("Setting API key...")
     // API_KEY can be null, based on gradle script logic
     @Suppress("UNNECESSARY_SAFE_CALL")
     val buildKey = BuildConfig.API_KEY?.let(::ApiKey)
     apiKeyProvider.set(buildKey)
 
-    Timber.v("Building ImageLoader...")
+    Timber.d("Building ImageLoader...")
     Coil.setImageLoader(imageLoader)
-    Timber.v("Done!")
+    Timber.d("Done!")
   }
 }

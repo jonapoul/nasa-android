@@ -50,12 +50,12 @@ class AboutViewModel @Inject internal constructor(
   }
 
   fun openUrl(url: String) {
-    Timber.v("openUrl $url")
+    Timber.d("openUrl $url")
     urlOpener.openUrl(url)
   }
 
   fun fetchLatestRelease() {
-    Timber.v("fetchLatestRelease")
+    Timber.d("fetchLatestRelease")
     checkUpdatesJob?.cancel()
     mutableCheckUpdatesState.update { CheckUpdatesState.Checking }
 
@@ -77,7 +77,7 @@ class AboutViewModel @Inject internal constructor(
   }
 
   fun cancelUpdateCheck() {
-    Timber.v("cancelUpdateCheck")
+    Timber.d("cancelUpdateCheck")
     checkUpdatesJob?.cancel()
     checkUpdatesJob = null
     mutableCheckUpdatesState.update { CheckUpdatesState.Inactive }

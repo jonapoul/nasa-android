@@ -50,7 +50,7 @@ class LicensesViewModel @Inject internal constructor(
   }
 
   fun load() {
-    Timber.v("load")
+    Timber.d("load")
     mutableState.update { LicensesState.Loading }
     viewModelScope.launch {
       val licensesState = when (val loadState = licensesRepository.loadLicenses()) {
@@ -69,17 +69,17 @@ class LicensesViewModel @Inject internal constructor(
   }
 
   fun openUrl(url: String) {
-    Timber.v("openUrl $url")
+    Timber.d("openUrl $url")
     urlOpener.openUrl(url)
   }
 
   fun toggleSearchBar() {
-    Timber.v("toggleSearchBar existing=%s", showSearchBar.value)
+    Timber.d("toggleSearchBar existing=%s", showSearchBar.value)
     showSearchBar.update { alreadyVisible -> !alreadyVisible }
   }
 
   fun setSearchText(text: String) {
-    Timber.v("setSearchText %s", text)
+    Timber.d("setSearchText %s", text)
     searchTerm.update { text }
   }
 }

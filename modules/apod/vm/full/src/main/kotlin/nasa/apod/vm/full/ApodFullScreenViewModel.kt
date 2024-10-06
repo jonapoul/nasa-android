@@ -54,7 +54,7 @@ class ApodFullScreenViewModel @Inject internal constructor(
   }
 
   override fun onCleared() {
-    Timber.v("onCleared")
+    Timber.d("onCleared")
     progressStateHolder.reset()
   }
 }

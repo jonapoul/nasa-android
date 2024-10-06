@@ -44,6 +44,6 @@ class ImageViewModel @Inject internal constructor(
   }
 
   fun loadMetadata(id: NasaId) {
-    Timber.v("loadMetadata $id")
+    Timber.d("loadMetadata $id")
   }
 }
