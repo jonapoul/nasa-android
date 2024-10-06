@@ -8,5 +8,6 @@ dependencies {
   api(libs.okhttp.core)
   api(projects.core.model)
 
+  implementation(libs.kotlinx.coroutines)
   implementation(libs.okio)
 }

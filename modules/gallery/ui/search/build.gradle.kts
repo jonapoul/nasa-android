@@ -18,8 +18,6 @@ dependencies {
 
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
-  implementation(libs.androidx.compose.animation.core)
-  implementation(libs.androidx.compose.animation.full)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
   implementation(libs.androidx.compose.material.icons.core)

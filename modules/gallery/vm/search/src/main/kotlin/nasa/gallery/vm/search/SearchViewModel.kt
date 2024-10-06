@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.cash.molecule.RecompositionMode
+import app.cash.molecule.RecompositionMode.Immediate
 import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
@@ -18,10 +18,9 @@ import kotlinx.coroutines.launch
 import nasa.gallery.data.api.CollectionItem
 import nasa.gallery.data.api.CollectionItemLink
 import nasa.gallery.data.repo.GallerySearchRepository
+import nasa.gallery.data.repo.SearchPreferences
 import nasa.gallery.data.repo.SearchResult
 import nasa.gallery.model.FilterConfig
-import nasa.gallery.model.MediaTypes
-import nasa.gallery.model.Year
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -29,19 +28,20 @@ import javax.inject.Inject
 class SearchViewModel @Inject internal constructor(
   private val main: MainDispatcher,
   private val repository: GallerySearchRepository,
+  private val searchPreferences: SearchPreferences,
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
   private val mutableText = MutableStateFlow(value = "")
-  private val mutableYearStart = StateHolder<Year?>(initialState = null)
-  private val mutableYearEnd = StateHolder<Year?>(initialState = null)
-  private val mutableMediaTypes = StateHolder<MediaTypes?>(initialState = null)
+  private val mutableYearStart = StateHolder(initialState = searchPreferences.yearStart.get())
+  private val mutableYearEnd = StateHolder(initialState = searchPreferences.yearEnd.get())
+  private val mutableMediaTypes = StateHolder(initialState = searchPreferences.mediaTypes.get())
 
-  val searchState: StateFlow<SearchState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+  val searchState: StateFlow<SearchState> = viewModelScope.launchMolecule(Immediate) {
     val mutableState by mutableSearchState.collectAsState()
     mutableState
   }
 
-  val filterConfig: StateFlow<FilterConfig> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
+  val filterConfig: StateFlow<FilterConfig> = viewModelScope.launchMolecule(Immediate) {
     val text by mutableText.collectAsState()
     val yearStart by mutableYearStart.collectAsState()
     val yearEnd by mutableYearEnd.collectAsState()
@@ -60,7 +60,14 @@ class SearchViewModel @Inject internal constructor(
       return
     }
 
-    Timber.v("performSearch %d %s", pageNumber, config)
+    // save entered search config for next time
+    with(searchPreferences) {
+      yearStart.set(config.yearStart)
+      yearEnd.set(config.yearEnd)
+      mediaTypes.set(config.mediaTypes)
+    }
+
+    Timber.d("performSearch %d %s", pageNumber, config)
     val loadingState = if (pageNumber == null) SearchState.Searching else SearchState.LoadingPage(pageNumber)
     mutableSearchState.update { loadingState }
 
@@ -72,12 +79,12 @@ class SearchViewModel @Inject internal constructor(
   }
 
   fun enterSearchTerm(text: String) {
-    Timber.v("enterSearchTerm %s", text)
+    Timber.d("enterSearchTerm %s", text)
     mutableText.update { text }
   }
 
   fun setFilterConfig(config: FilterConfig) {
-    Timber.v("setYearRange %s", config)
+    Timber.d("setFilterConfig %s", config)
     mutableYearStart.update { config.yearStart }
     mutableYearEnd.update { config.yearEnd }
     mutableMediaTypes.update { config.mediaTypes }

@@ -3,7 +3,7 @@ package nasa.gallery.model
 import kotlinx.serialization.SerialName
 
 @JvmInline
-value class MediaTypes private constructor(private val value: String) {
+value class MediaTypes(private val value: String) {
   constructor(vararg types: MediaType) : this(types.joinToString(SEPARATOR) { it.serialName() })
   constructor(types: Iterable<MediaType>) : this(types.joinToString(SEPARATOR) { it.serialName() })
 
