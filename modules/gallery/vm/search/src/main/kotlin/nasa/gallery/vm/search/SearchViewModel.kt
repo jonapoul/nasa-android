@@ -1,6 +1,7 @@
 package nasa.gallery.vm.search
 
 import alakazam.kotlin.core.MainDispatcher
+import alakazam.kotlin.core.StateHolder
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
@@ -31,9 +32,9 @@ class SearchViewModel @Inject internal constructor(
 ) : ViewModel() {
   private val mutableSearchState = MutableStateFlow<SearchState>(SearchState.NoAction)
   private val mutableText = MutableStateFlow(value = "")
-  private val mutableYearStart = MutableStateFlow<Year?>(null)
-  private val mutableYearEnd = MutableStateFlow<Year?>(null)
-  private val mutableMediaTypes = MutableStateFlow<MediaTypes?>(null)
+  private val mutableYearStart = StateHolder<Year?>(initialState = null)
+  private val mutableYearEnd = StateHolder<Year?>(initialState = null)
+  private val mutableMediaTypes = StateHolder<MediaTypes?>(initialState = null)
 
   val searchState: StateFlow<SearchState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
     val mutableState by mutableSearchState.collectAsState()
@@ -77,9 +78,21 @@ class SearchViewModel @Inject internal constructor(
 
   fun setFilterConfig(config: FilterConfig) {
     Timber.v("setYearRange %s", config)
-    mutableYearStart.update { config.yearStart}
+    mutableYearStart.update { config.yearStart }
     mutableYearEnd.update { config.yearEnd }
     mutableMediaTypes.update { config.mediaTypes }
+  }
+
+  fun resetExtraConfig() {
+    mutableYearStart.reset()
+    mutableYearEnd.reset()
+    mutableMediaTypes.reset()
+
+    with(searchPreferences) {
+      yearStart.delete()
+      yearEnd.delete()
+      mediaTypes.delete()
+    }
   }
 
   private fun SearchResult.toState() = when (this) {

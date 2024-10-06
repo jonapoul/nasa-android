@@ -3,6 +3,7 @@ package nasa.apod.vm.full
 import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
 import io.mockk.mockk
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.test.runTest
 import nasa.core.http.progress.DownloadProgressStateHolder
 import nasa.core.http.progress.DownloadState
@@ -59,22 +60,22 @@ class ApodFullScreenViewModelTest {
   }
 
   private fun setInProgress(read: FileSize) {
-    stateHolder.set(
+    stateHolder.update {
       DownloadState.InProgress(
         url = "some.url.com/whocares",
         read = read,
         total = DOWNLOAD_SIZE,
-      ),
-    )
+      )
+    }
   }
 
   private fun setDone() {
-    stateHolder.set(
+    stateHolder.update {
       DownloadState.Done(
         url = "some.url.com/whocares",
         total = DOWNLOAD_SIZE,
-      ),
-    )
+      )
+    }
   }
 
   private companion object {

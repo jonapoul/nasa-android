@@ -44,6 +44,7 @@ internal fun SearchConfigModal(
         onAction(SearchAction.SetFilterConfig(newConfig))
         onAction(SearchAction.PerformSearch)
       },
+      onReset = { onAction(SearchAction.ResetExtraConfig) },
       onCancel = { onAction(SearchAction.ToggleExtraConfig) },
     )
   }
@@ -53,13 +54,14 @@ internal fun SearchConfigModal(
 private fun SearchConfigModalContents(
   config: FilterConfig,
   onConfirm: (FilterConfig) -> Unit,
+  onReset: () -> Unit,
   onCancel: () -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
-  var mediaTypes by remember { mutableStateOf(config.mediaTypes ?: MediaTypes.All) }
-  var startYear by remember { mutableStateOf(config.yearStart ?: Year.Minimum) }
-  var endYear by remember { mutableStateOf(config.yearEnd ?: Year.Maximum) }
+  var mediaTypes by remember(config) { mutableStateOf(config.mediaTypes ?: MediaTypes.All) }
+  var startYear by remember(config) { mutableStateOf(config.yearStart ?: Year.Minimum) }
+  var endYear by remember(config) { mutableStateOf(config.yearEnd ?: Year.Maximum) }
 
   Column(
     modifier = modifier.fillMaxWidth(),
@@ -107,6 +109,15 @@ private fun SearchConfigModalContents(
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
+        text = stringResource(R.string.search_modal_reset),
+        theme = theme,
+        onClick = onReset,
+      )
+
+      HorizontalSpacer(4.dp)
+
+      RegularTextButton(
+        modifier = Modifier.weight(1f),
         text = stringResource(R.string.search_modal_dismiss),
         theme = theme,
         onClick = onCancel,
@@ -121,6 +132,7 @@ private fun PreviewStandard() = PreviewColumn {
   SearchConfigModalContents(
     config = PREVIEW_FILTER_CONFIG,
     onConfirm = {},
+    onReset = {},
     onCancel = {},
   )
 }
@@ -135,6 +147,7 @@ private fun PreviewAlt() = PreviewColumn {
       yearEnd = Year(1980),
     ),
     onConfirm = {},
+    onReset = {},
     onCancel = {},
   )
 }

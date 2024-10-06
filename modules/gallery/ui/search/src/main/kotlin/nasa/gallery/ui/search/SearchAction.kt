@@ -13,4 +13,5 @@ internal sealed interface SearchAction {
   data class SelectPage(val pageNumber: Int) : SearchAction
   data class SetFilterConfig(val config: FilterConfig) : SearchAction
   data object ToggleExtraConfig : SearchAction
+  data object ResetExtraConfig : SearchAction
 }

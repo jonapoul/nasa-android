@@ -51,7 +51,7 @@ class HomeViewModel @Inject internal constructor(
   }
 
   fun apiUsage(): StateFlow<ApiUsageState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
-    val usageState by apiUsageStateHolder.state.collectAsState()
+    val usageState by apiUsageStateHolder.collectAsState()
     val usage = usageState
     val key by apiKeyProvider.observe().collectAsState(initial = null)
     when (key) {

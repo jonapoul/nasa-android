@@ -26,6 +26,7 @@
   <string name="search_modal_audio">Audio</string>
   <string name="search_modal_no_media_selected">No media categories selected!</string>
   <string name="search_modal_confirm">Confirm</string>
+  <string name="search_modal_reset">Reset</string>
   <string name="search_modal_dismiss">Cancel</string>
 
   <string name="search_item_center">Center:</string>

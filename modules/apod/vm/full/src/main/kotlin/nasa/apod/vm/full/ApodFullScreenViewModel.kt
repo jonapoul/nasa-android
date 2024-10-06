@@ -29,7 +29,7 @@ class ApodFullScreenViewModel @Inject internal constructor(
   private val repository: LocalDatabaseRepository,
 ) : ViewModel() {
   val downloadProgress: StateFlow<Percent> = viewModelScope.launchMolecule(Immediate) {
-    val downloadState by progressStateHolder.state.collectAsState()
+    val downloadState by progressStateHolder.collectAsState()
     downloadState.toProgress()
   }
 

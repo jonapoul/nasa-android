@@ -1,5 +1,6 @@
 package nasa.core.http.progress
 
+import kotlinx.coroutines.flow.update
 import nasa.core.model.bytes
 import okhttp3.ResponseBody
 import okio.Buffer
@@ -36,7 +37,7 @@ internal class DownloadProgressResponseBody(
       } else {
         DownloadState.InProgress(url, totalBytesRead.bytes, contentLength().bytes)
       }
-      stateHolder.set(state)
+      stateHolder.update { state }
       return bytesRead
     }
   }

@@ -48,6 +48,7 @@ fun GallerySearchScreen(
         is SearchAction.SelectPage -> viewModel.performSearch(action.pageNumber)
         is SearchAction.SetFilterConfig -> viewModel.setFilterConfig(action.config)
         SearchAction.ToggleExtraConfig -> showExtraConfig.set(!showExtraConfig.value)
+        SearchAction.ResetExtraConfig -> viewModel.resetExtraConfig()
       }
     },
   )

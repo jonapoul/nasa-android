@@ -30,7 +30,7 @@ class ImageViewModel @Inject internal constructor(
   val imageState: StateFlow<ImageState> = mutableImageState.asStateFlow()
 
   val progress: StateFlow<Percent> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
-    val progressState by progressStateHolder.state.collectAsState()
+    val progressState by progressStateHolder.collectAsState()
     progressState?.toProgress() ?: Percent.Zero
   }
 
