@@ -8,7 +8,7 @@ import coil.request.ImageRequest
 import nasa.core.http.progress.DownloadProgressInterceptor
 import nasa.core.model.Percent
 import nasa.core.model.percent
-import nasa.core.ui.FullscreenLoadableImage
+import nasa.core.ui.LoadableImage
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
@@ -33,7 +33,7 @@ internal fun ImageSuccess(
       .build()
   }
 
-  FullscreenLoadableImage(
+  LoadableImage(
     modifier = modifier,
     request = request,
     progress = progress,

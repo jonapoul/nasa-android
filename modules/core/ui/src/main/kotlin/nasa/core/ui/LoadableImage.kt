@@ -33,7 +33,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 
 @Composable
-fun FullscreenLoadableImage(
+fun LoadableImage(
   request: ImageRequest,
   progress: Percent,
   contentDescription: String,
@@ -43,7 +43,7 @@ fun FullscreenLoadableImage(
   theme: Theme = LocalTheme.current,
 ) {
   var scale by remember { mutableFloatStateOf(1f) }
-  FullscreenLoadableImage(
+  LoadableImage(
     request = request,
     progress = progress,
     contentDescription = contentDescription,
@@ -60,7 +60,7 @@ fun FullscreenLoadableImage(
  * Adapted from https://www.youtube.com/watch?v=3CjOyoqi_PQ
  */
 @Composable
-fun FullscreenLoadableImage(
+fun LoadableImage(
   request: ImageRequest,
   progress: Percent,
   contentDescription: String,
@@ -120,7 +120,7 @@ fun FullscreenLoadableImage(
       }
     }
 
-    var imageModifier = Modifier.fillMaxSize()
+    var imageModifier: Modifier = Modifier
     if (!isLoading) {
       imageModifier = imageModifier
         .graphicsLayer {

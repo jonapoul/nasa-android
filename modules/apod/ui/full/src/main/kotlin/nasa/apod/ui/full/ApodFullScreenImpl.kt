@@ -33,7 +33,7 @@ import nasa.core.http.progress.DownloadProgressInterceptor
 import nasa.core.model.Percent
 import nasa.core.model.percent
 import nasa.core.ui.BackgroundSurface
-import nasa.core.ui.FullscreenLoadableImage
+import nasa.core.ui.LoadableImage
 import nasa.core.ui.button.RegularIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -87,7 +87,7 @@ private fun ApodFullScreenContent(
   ) {
     var scale by remember { mutableFloatStateOf(1f) }
     var loaded by remember { mutableStateOf(false) }
-    FullscreenLoadableImage(
+    LoadableImage(
       modifier = Modifier.fillMaxSize(),
       request = request,
       progress = progress,
