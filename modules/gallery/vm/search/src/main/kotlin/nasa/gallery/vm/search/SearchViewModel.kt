@@ -62,8 +62,8 @@ class SearchViewModel @Inject internal constructor(
 
     // save entered search config for next time
     with(searchPreferences) {
-      yearStart.set(config.yearStart)
-      yearEnd.set(config.yearEnd)
+      yearStart.set(config.startYear)
+      yearEnd.set(config.endYear)
       mediaTypes.set(config.mediaTypes)
     }
 
@@ -85,8 +85,8 @@ class SearchViewModel @Inject internal constructor(
 
   fun setFilterConfig(config: FilterConfig) {
     Timber.d("setFilterConfig %s", config)
-    mutableYearStart.update { config.yearStart }
-    mutableYearEnd.update { config.yearEnd }
+    mutableYearStart.update { config.startYear }
+    mutableYearEnd.update { config.endYear }
     mutableMediaTypes.update { config.mediaTypes }
   }
 

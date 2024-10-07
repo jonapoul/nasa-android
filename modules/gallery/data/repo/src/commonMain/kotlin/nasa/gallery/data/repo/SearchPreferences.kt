@@ -1,5 +1,6 @@
 package nasa.gallery.data.repo
 
+import dev.jonpoulton.preferences.core.IntSerializer
 import dev.jonpoulton.preferences.core.Preference
 import dev.jonpoulton.preferences.core.Preferences
 import dev.jonpoulton.preferences.core.SimpleNullableStringSerializer
@@ -11,15 +12,15 @@ class SearchPreferences @Inject constructor(preferences: Preferences) {
   // Number of results to be returned with each search request
   val pageSize: Preference<Int> = preferences.getInt(key = "search.pageSize", default = 100)
 
-  val yearStart: Preference<Year?> = preferences.getNullableObject(
+  val yearStart: Preference<Year> = preferences.getObject(
     key = "config.yearStart",
-    default = null,
+    default = Year.Minimum,
     serializer = YEAR_SERIALIZER,
   )
 
-  val yearEnd: Preference<Year?> = preferences.getNullableObject(
+  val yearEnd: Preference<Year> = preferences.getObject(
     key = "config.yearEnd",
-    default = null,
+    default = Year.Maximum,
     serializer = YEAR_SERIALIZER,
   )
 
@@ -30,6 +31,9 @@ class SearchPreferences @Inject constructor(preferences: Preferences) {
   )
 
   private companion object {
-    val YEAR_SERIALIZER = SimpleNullableStringSerializer { string -> string?.toIntOrNull()?.let(::Year) }
+    val YEAR_SERIALIZER = object : IntSerializer<Year> {
+      override fun deserialize(value: Int): Year = Year(value)
+      override fun serialize(value: Year): Int = value.value
+    }
   }
 }

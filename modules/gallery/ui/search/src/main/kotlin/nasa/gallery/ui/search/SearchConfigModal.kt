@@ -25,6 +25,7 @@ import nasa.gallery.model.FilterConfig
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.Year
+import nasa.gallery.model.year
 import nasa.gallery.res.R
 
 @Composable
@@ -60,8 +61,8 @@ private fun SearchConfigModalContents(
   theme: Theme = LocalTheme.current,
 ) {
   var mediaTypes by remember(config) { mutableStateOf(config.mediaTypes ?: MediaTypes.All) }
-  var startYear by remember(config) { mutableStateOf(config.yearStart ?: Year.Minimum) }
-  var endYear by remember(config) { mutableStateOf(config.yearEnd ?: Year.Maximum) }
+  var startYear by remember(config) { mutableStateOf(config.startYear) }
+  var endYear by remember(config) { mutableStateOf(config.endYear) }
 
   Column(
     modifier = modifier.fillMaxWidth(),
@@ -143,8 +144,8 @@ private fun PreviewAlt() = PreviewColumn {
   SearchConfigModalContents(
     config = PREVIEW_FILTER_CONFIG.copy(
       mediaTypes = MediaTypes(MediaType.Video),
-      yearStart = Year(1950),
-      yearEnd = Year(1980),
+      yearStart = 1950.year,
+      yearEnd = 1980.year,
     ),
     onConfirm = {},
     onReset = {},

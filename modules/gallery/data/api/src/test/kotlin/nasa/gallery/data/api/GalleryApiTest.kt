@@ -24,6 +24,7 @@ import nasa.gallery.model.StringListMetadata
 import nasa.gallery.model.StringMetadata
 import nasa.gallery.model.UrlCollection
 import nasa.gallery.model.Year
+import nasa.gallery.model.year
 import nasa.test.MockWebServerRule
 import nasa.test.getResourceAsText
 import org.junit.Before
@@ -99,8 +100,8 @@ class GalleryApiTest {
 
     // When
     galleryApi.search(
-      yearStart = Year(1900),
-      yearEnd = Year(2024),
+      yearStart = 1900.year,
+      yearEnd = 2024.year,
     )
 
     // Then

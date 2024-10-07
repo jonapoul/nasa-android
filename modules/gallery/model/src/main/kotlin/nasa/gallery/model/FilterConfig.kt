@@ -14,6 +14,9 @@ data class FilterConfig(
   val yearStart: Year? = null,
   val yearEnd: Year? = null,
 ) {
+  val startYear: Year get() = yearStart ?: Year.Minimum
+  val endYear: Year get() = yearEnd ?: Year.Maximum
+
   companion object {
     val Empty = FilterConfig()
   }

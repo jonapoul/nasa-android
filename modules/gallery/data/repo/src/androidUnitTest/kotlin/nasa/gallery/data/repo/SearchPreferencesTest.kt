@@ -9,6 +9,7 @@ import kotlinx.coroutines.test.runTest
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.Year
+import nasa.gallery.model.year
 import nasa.test.buildPreferences
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,14 +30,14 @@ class SearchPreferencesTest {
   fun `Year start`() = runTest {
     before()
     searchPreferences.yearStart.asFlow().test {
-      assertEquals(expected = null, actual = awaitItem())
+      assertEquals(expected = Year.Minimum, actual = awaitItem())
 
-      val year = Year(1234)
+      val year = 1234.year
       searchPreferences.yearStart.set(year)
       assertEquals(expected = year, actual = awaitItem())
 
       searchPreferences.yearStart.delete()
-      assertEquals(expected = null, actual = awaitItem())
+      assertEquals(expected = Year.Minimum, actual = awaitItem())
 
       advanceUntilIdle()
       ensureAllEventsConsumed()

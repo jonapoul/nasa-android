@@ -30,6 +30,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.color.slider
 import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.model.Year
+import nasa.gallery.model.year
 import kotlin.math.roundToInt
 
 @Composable
@@ -58,8 +59,8 @@ internal fun YearRangeSlider(
       endThumb = { Thumb(colors) },
       track = { state -> Track(state, colors) },
       onValueChange = { range ->
-        val newStart = Year(range.start.roundToInt())
-        val newEnd = Year(range.endInclusive.roundToInt())
+        val newStart = range.start.roundToInt().year
+        val newEnd = range.endInclusive.roundToInt().year
         onNewRange(newStart, newEnd)
       },
     )
@@ -161,8 +162,8 @@ private fun PreviewFullRange() = PreviewColumn {
 @Composable
 private fun PreviewPartialRange() = PreviewColumn {
   YearRangeSlider(
-    start = Year(1950),
-    end = Year(1993),
+    start = 1950.year,
+    end = 1993.year,
     onNewRange = { _, _ -> },
     modifier = Modifier.padding(10.dp),
   )
@@ -172,8 +173,8 @@ private fun PreviewPartialRange() = PreviewColumn {
 @Composable
 private fun PreviewTinyRange() = PreviewColumn {
   YearRangeSlider(
-    start = Year(1960),
-    end = Year(1961),
+    start = 1960.year,
+    end = 1961.year,
     onNewRange = { _, _ -> },
     modifier = Modifier.padding(10.dp),
   )
