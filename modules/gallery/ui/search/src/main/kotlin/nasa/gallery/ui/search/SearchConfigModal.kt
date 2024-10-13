@@ -24,7 +24,6 @@ import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.model.FilterConfig
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
-import nasa.gallery.model.Year
 import nasa.gallery.model.year
 import nasa.gallery.res.R
 
