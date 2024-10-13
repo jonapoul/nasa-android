@@ -12,7 +12,7 @@ value class Year(val value: Int) : Comparable<Year> {
       is Float -> value.roundToInt()
       is Double -> value.roundToInt()
       else -> value.toInt()
-    }
+    },
   )
 
   init {

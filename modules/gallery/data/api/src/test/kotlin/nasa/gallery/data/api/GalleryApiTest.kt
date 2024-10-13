@@ -23,7 +23,6 @@ import nasa.gallery.model.ObjectMetadata
 import nasa.gallery.model.StringListMetadata
 import nasa.gallery.model.StringMetadata
 import nasa.gallery.model.UrlCollection
-import nasa.gallery.model.Year
 import nasa.gallery.model.year
 import nasa.test.MockWebServerRule
 import nasa.test.getResourceAsText
