@@ -16,22 +16,25 @@ complexity:
     ignoreSingleWhenExpression: true
     threshold: 20
 
+coroutines:
+  SuspendFunSwallowedCancellation:
+    active: true
+
 # https://mrmans0n.github.io/compose-rules/detekt/
 Compose:
   Material2:
     active: true
   UnstableCollections:
     active: true
+
 exceptions:
   TooGenericExceptionCaught:
     active: false
-  SwallowedException:
-    ignoredExceptionTypes:
-      - "CancellationException"
 
 naming:
   FunctionNaming:
     functionPattern: "[a-zA-Z][a-zA-Z0-9]*"
+
 style:
   DestructuringDeclarationWithTooManyEntries:
     maxDestructuringEntries: 4
