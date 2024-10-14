@@ -101,14 +101,14 @@ internal fun SearchSuccessItem(
       TitleAndValue(
         title = stringResource(id = R.string.search_item_date),
         value = item.dateCreated,
-        toString = { dateFormat(it) },
+        stringifier = { dateFormat(it) },
         theme = theme,
       )
 
       TitleAndValue(
         title = stringResource(id = R.string.search_item_type),
         value = item.mediaType,
-        toString = { it.string() },
+        stringifier = { it.string() },
         theme = theme,
       )
 
@@ -142,11 +142,11 @@ internal fun SearchSuccessItem(
 
 @Stable
 @Composable
-private fun <T> TitleAndValue(
+private fun <T : Any> TitleAndValue(
   title: String,
   value: T?,
   modifier: Modifier = Modifier,
-  toString: @Composable (T) -> String = { it.toString() },
+  stringifier: @Composable (T) -> String = { it.toString() },
   maxLines: Int = 2,
   theme: Theme = LocalTheme.current,
 ) {
@@ -169,7 +169,7 @@ private fun <T> TitleAndValue(
 
     Text(
       modifier = Modifier.weight(1f),
-      text = toString(value),
+      text = stringifier(value),
       textAlign = TextAlign.End,
       fontSize = SMALLER_TEXT_SIZE,
       color = theme.pageTextSubdued,
