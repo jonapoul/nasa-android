@@ -65,7 +65,7 @@ test-junit = "4.13.2"
 test-mockk = "1.13.13"
 test-robolectric = "4.13"
 test-timber = "1.0.1"
-test-turbine = "1.1.0"
+test-turbine = "1.2.0"
 
 [libraries]
 # Plugins
