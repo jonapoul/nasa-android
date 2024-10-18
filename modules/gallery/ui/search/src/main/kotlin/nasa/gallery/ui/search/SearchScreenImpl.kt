@@ -19,22 +19,31 @@ import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.screens.LoadFailure
 import nasa.gallery.model.FilterConfig
+import nasa.gallery.model.SearchViewConfig
 import nasa.gallery.vm.search.SearchState
 
 @Composable
 internal fun SearchScreenImpl(
   searchState: SearchState,
   filterConfig: FilterConfig,
+  config: SearchViewConfig,
   showExtraConfig: Boolean,
+  showViewConfigModal: Boolean,
   onAction: (SearchAction) -> Unit,
   theme: Theme = LocalTheme.current,
 ) {
   Scaffold(
-    topBar = { SearchTopBar(onAction, theme) },
+    topBar = {
+      SearchTopBar(
+        onAction = onAction,
+        theme = theme,
+      )
+    },
   ) { innerPadding ->
     BackgroundSurface(theme = theme) {
       SearchContent(
         searchState = searchState,
+        viewConfig = config,
         onAction = onAction,
         modifier = Modifier.padding(innerPadding),
         theme = theme,
@@ -47,6 +56,14 @@ internal fun SearchScreenImpl(
           theme = theme,
         )
       }
+
+      if (showViewConfigModal) {
+        ViewConfigModal(
+          config = config,
+          onAction = onAction,
+          theme = theme,
+        )
+      }
     }
   }
 }
@@ -54,6 +71,7 @@ internal fun SearchScreenImpl(
 @Composable
 private fun SearchContent(
   searchState: SearchState,
+  viewConfig: SearchViewConfig,
   onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -104,6 +122,7 @@ private fun SearchContent(
       is SearchState.Success -> SearchSuccess(
         modifier = contentsModifier.weight(1f),
         state = searchState,
+        config = viewConfig,
         onAction = onAction,
         theme = theme,
       )
@@ -113,11 +132,26 @@ private fun SearchContent(
 
 @ScreenPreview
 @Composable
-private fun PreviewSuccess() = PreviewScreen {
+private fun PreviewSuccessCard() = PreviewScreen {
   SearchScreenImpl(
     searchState = PREVIEW_SUCCESS_STATE,
+    config = PREVIEW_CARD_CONFIG,
     filterConfig = PREVIEW_FILTER_CONFIG,
     showExtraConfig = false,
+    showViewConfigModal = false,
+    onAction = {},
+  )
+}
+
+@ScreenPreview
+@Composable
+private fun PreviewSuccessGrid() = PreviewScreen {
+  SearchScreenImpl(
+    searchState = PREVIEW_SUCCESS_STATE,
+    config = PREVIEW_GRID_CONFIG,
+    filterConfig = PREVIEW_FILTER_CONFIG,
+    showExtraConfig = false,
+    showViewConfigModal = false,
     onAction = {},
   )
 }
@@ -127,8 +161,10 @@ private fun PreviewSuccess() = PreviewScreen {
 private fun PreviewFailure() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Failed(reason = "Something broke! Here's some more rubbish too for preview"),
+    config = PREVIEW_CARD_CONFIG,
     filterConfig = PREVIEW_FILTER_CONFIG,
     showExtraConfig = false,
+    showViewConfigModal = false,
     onAction = {},
   )
 }
@@ -138,8 +174,10 @@ private fun PreviewFailure() = PreviewScreen {
 private fun PreviewLoading() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Searching,
+    config = PREVIEW_CARD_CONFIG,
     filterConfig = PREVIEW_FILTER_CONFIG,
     showExtraConfig = false,
+    showViewConfigModal = false,
     onAction = {},
   )
 }
@@ -149,8 +187,10 @@ private fun PreviewLoading() = PreviewScreen {
 private fun PreviewEmpty() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.Empty,
+    config = PREVIEW_CARD_CONFIG,
     filterConfig = PREVIEW_FILTER_CONFIG,
     showExtraConfig = false,
+    showViewConfigModal = false,
     onAction = {},
   )
 }
@@ -160,8 +200,10 @@ private fun PreviewEmpty() = PreviewScreen {
 private fun PreviewNoAction() = PreviewScreen {
   SearchScreenImpl(
     searchState = SearchState.NoAction,
+    config = PREVIEW_CARD_CONFIG,
     filterConfig = PREVIEW_FILTER_CONFIG,
     showExtraConfig = false,
+    showViewConfigModal = false,
     onAction = {},
   )
 }

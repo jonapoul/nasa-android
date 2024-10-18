@@ -15,7 +15,9 @@ import kotlinx.coroutines.launch
 import nasa.core.http.progress.DownloadProgressStateHolder
 import nasa.core.http.progress.toProgress
 import nasa.core.model.Percent
+import nasa.gallery.data.repo.FetchUrlsResult
 import nasa.gallery.data.repo.GalleryImageUrlsRepository
+import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.NasaId
 import timber.log.Timber
 import javax.inject.Inject
@@ -26,6 +28,9 @@ class ImageViewModel @Inject internal constructor(
   private val repository: GalleryImageUrlsRepository,
   private val progressStateHolder: DownloadProgressStateHolder,
 ) : ViewModel() {
+  @Suppress("unused")
+  private val metadataUrl = MutableStateFlow<JsonUrl?>(null)
+
   private val mutableImageState = MutableStateFlow<ImageState>(ImageState.Loading)
   val imageState: StateFlow<ImageState> = mutableImageState.asStateFlow()
 
@@ -36,7 +41,14 @@ class ImageViewModel @Inject internal constructor(
 
   suspend fun load(id: NasaId) {
     val fetchResult = repository.fetchUrls(id)
-    Timber.i("fetchResult=$fetchResult")
+    Timber.d("fetchResult=$fetchResult")
+
+    when (fetchResult) {
+      is FetchUrlsResult.Failure -> TODO()
+      is FetchUrlsResult.Audio -> TODO()
+      is FetchUrlsResult.Image -> TODO()
+      is FetchUrlsResult.Video -> TODO()
+    }
   }
 
   fun reload(id: NasaId) {

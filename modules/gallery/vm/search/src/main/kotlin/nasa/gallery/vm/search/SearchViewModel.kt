@@ -2,6 +2,8 @@ package nasa.gallery.vm.search
 
 import alakazam.kotlin.core.MainDispatcher
 import alakazam.kotlin.core.StateHolder
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
@@ -9,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import app.cash.molecule.RecompositionMode.Immediate
 import app.cash.molecule.launchMolecule
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.jonpoulton.preferences.core.Preference
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,6 +24,7 @@ import nasa.gallery.data.repo.GallerySearchRepository
 import nasa.gallery.data.repo.SearchPreferences
 import nasa.gallery.data.repo.SearchResult
 import nasa.gallery.model.FilterConfig
+import nasa.gallery.model.SearchViewConfig
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -52,6 +56,12 @@ class SearchViewModel @Inject internal constructor(
       yearEnd = yearEnd,
       mediaTypes = mediaTypes,
     )
+  }
+
+  val viewConfig: StateFlow<SearchViewConfig> = viewModelScope.launchMolecule(Immediate) {
+    val type by searchPreferences.viewType.collectAsState()
+    val columnWidthDp by searchPreferences.gridColumnWidthDp.collectAsState()
+    SearchViewConfig(type, columnWidthDp)
   }
 
   fun performSearch(pageNumber: Int? = null) {
@@ -102,6 +112,20 @@ class SearchViewModel @Inject internal constructor(
     }
   }
 
+  fun setViewConfig(config: SearchViewConfig) {
+    Timber.d("setViewConfig $config")
+    searchPreferences.viewType.set(config.type)
+    searchPreferences.gridColumnWidthDp.set(config.columnWidthDp)
+  }
+
+  fun resetViewConfig() {
+    Timber.d("resetViewConfig")
+    with(searchPreferences) {
+      viewType.delete()
+      gridColumnWidthDp.delete()
+    }
+  }
+
   private fun SearchResult.toState() = when (this) {
     SearchResult.Empty -> SearchState.Empty
     SearchResult.NoFilterSupplied -> SearchState.NoFilterConfig
@@ -143,4 +167,7 @@ class SearchViewModel @Inject internal constructor(
       description508 = item.description508,
     )
   }
+
+  @Composable
+  private fun <T> Preference<T>.collectAsState(): State<T> = asFlow().collectAsState(initial = get())
 }

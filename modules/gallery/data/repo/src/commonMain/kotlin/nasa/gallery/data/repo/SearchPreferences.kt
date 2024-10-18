@@ -4,7 +4,9 @@ import dev.jonpoulton.preferences.core.IntSerializer
 import dev.jonpoulton.preferences.core.Preference
 import dev.jonpoulton.preferences.core.Preferences
 import dev.jonpoulton.preferences.core.SimpleNullableStringSerializer
+import dev.jonpoulton.preferences.core.enumOrdinalSerializer
 import nasa.gallery.model.MediaTypes
+import nasa.gallery.model.SearchViewType
 import nasa.gallery.model.Year
 import javax.inject.Inject
 
@@ -28,6 +30,17 @@ class SearchPreferences @Inject constructor(preferences: Preferences) {
     key = "config.mediaTypes",
     default = null,
     serializer = SimpleNullableStringSerializer { string -> string?.let(::MediaTypes) },
+  )
+
+  val viewType: Preference<SearchViewType> = preferences.getObject(
+    key = "config.viewType",
+    default = SearchViewType.Card,
+    serializer = enumOrdinalSerializer(),
+  )
+
+  val gridColumnWidthDp: Preference<Int> = preferences.getInt(
+    key = "config.gridColumnWidthDp",
+    default = 120,
   )
 
   private companion object {

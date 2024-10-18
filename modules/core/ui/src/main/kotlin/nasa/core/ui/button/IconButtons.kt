@@ -42,7 +42,7 @@ fun PrimaryIconButton(
     imageVector = imageVector,
     contentDescription = contentDescription,
     onClick = onClick,
-    colors = { t, isPressed -> t.primary(isPressed) },
+    colors = { t, isPressed -> t.primaryIconButton(isPressed) },
     modifier = modifier,
     size = size,
     enabled = enabled,
@@ -71,7 +71,7 @@ fun RegularIconButton(
     imageVector = imageVector,
     contentDescription = contentDescription,
     onClick = onClick,
-    colors = { t, isPressed -> t.regular(isPressed) },
+    colors = { t, isPressed -> t.regularIconButton(isPressed) },
     modifier = modifier,
     size = size,
     enabled = enabled,
@@ -126,7 +126,7 @@ private fun DefaultIconButtonContent(
 
 @Stable
 @Composable
-private fun Theme.primary(isPressed: Boolean) = IconButtonDefaults.filledIconButtonColors(
+fun Theme.primaryIconButton(isPressed: Boolean) = IconButtonDefaults.filledIconButtonColors(
   containerColor = if (isPressed) buttonPrimaryBackgroundSelected else buttonPrimaryBackground,
   disabledContainerColor = buttonPrimaryDisabledBackground,
   contentColor = if (isPressed) buttonPrimaryTextSelected else buttonPrimaryText,
@@ -135,7 +135,7 @@ private fun Theme.primary(isPressed: Boolean) = IconButtonDefaults.filledIconBut
 
 @Stable
 @Composable
-private fun Theme.regular(isPressed: Boolean) = IconButtonDefaults.filledIconButtonColors(
+fun Theme.regularIconButton(isPressed: Boolean) = IconButtonDefaults.filledIconButtonColors(
   containerColor = if (isPressed) buttonRegularBackgroundSelected else buttonRegularBackground,
   disabledContainerColor = buttonRegularDisabledBackground,
   contentColor = if (isPressed) buttonRegularTextSelected else buttonRegularText,

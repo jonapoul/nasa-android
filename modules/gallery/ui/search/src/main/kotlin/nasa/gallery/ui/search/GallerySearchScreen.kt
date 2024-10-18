@@ -1,9 +1,5 @@
-@file:SuppressLint("ComposeModifierMissing")
-@file:Suppress("ModifierMissing")
-
 package nasa.gallery.ui.search
 
-import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +21,7 @@ fun GallerySearchScreen(
   val theme = LocalTheme.current
   val searchState by viewModel.searchState.collectAsStateWithLifecycle()
   val filterConfig by viewModel.filterConfig.collectAsStateWithLifecycle()
+  val viewConfig by viewModel.viewConfig.collectAsStateWithLifecycle()
 
   val clickedImageId = remember { mutableStateOf<NasaId?>(null) }
   val showExtraConfig = remember { mutableStateOf(false) }
@@ -34,11 +31,15 @@ fun GallerySearchScreen(
     clickedImageId.set(null)
   }
 
+  val showViewConfigModal = remember { mutableStateOf(false) }
+
   SearchScreenImpl(
     searchState = searchState,
     theme = theme,
     filterConfig = filterConfig,
+    config = viewConfig,
     showExtraConfig = showExtraConfig.value,
+    showViewConfigModal = showViewConfigModal.value,
     onAction = { action ->
       when (action) {
         SearchAction.NavBack -> navController.popBackStack()
@@ -49,6 +50,10 @@ fun GallerySearchScreen(
         is SearchAction.SetFilterConfig -> viewModel.setFilterConfig(action.config)
         SearchAction.ToggleExtraConfig -> showExtraConfig.set(!showExtraConfig.value)
         SearchAction.ResetExtraConfig -> viewModel.resetExtraConfig()
+        is SearchAction.ShowViewConfigDialog -> showViewConfigModal.set(true)
+        SearchAction.HideViewTypeDialog -> showViewConfigModal.set(false)
+        SearchAction.ResetViewConfig -> viewModel.resetViewConfig()
+        is SearchAction.SetViewConfig -> viewModel.setViewConfig(action.config)
       }
     },
   )

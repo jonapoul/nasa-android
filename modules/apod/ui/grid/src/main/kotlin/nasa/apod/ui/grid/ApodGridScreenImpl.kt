@@ -132,7 +132,7 @@ private fun GridContent(
           verticalArrangement = Arrangement.Top,
           horizontalArrangement = Arrangement.Center,
         ) {
-          items(state.items) { item ->
+          items(state.items, key = { it.date }) { item ->
             ApodGridItem(
               item = item,
               onAction = onAction,

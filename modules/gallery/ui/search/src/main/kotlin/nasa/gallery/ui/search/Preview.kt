@@ -11,6 +11,8 @@ import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
 import nasa.gallery.model.Photographer
+import nasa.gallery.model.SearchViewConfig
+import nasa.gallery.model.SearchViewType
 import nasa.gallery.vm.search.SearchResultItem
 import nasa.gallery.vm.search.SearchState
 
@@ -73,3 +75,6 @@ internal val PREVIEW_FILTER_CONFIG = FilterConfig(
   yearStart = null,
   yearEnd = null,
 )
+
+internal val PREVIEW_CARD_CONFIG = SearchViewConfig(SearchViewType.Card, columnWidthDp = 100)
+internal val PREVIEW_GRID_CONFIG = SearchViewConfig(SearchViewType.Grid, columnWidthDp = 100)

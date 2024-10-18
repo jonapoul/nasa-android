@@ -1,11 +1,9 @@
 package nasa.gallery.ui.search
 
 import alakazam.android.ui.compose.HorizontalSpacer
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,24 +11,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Audiotrack
-import androidx.compose.material.icons.filled.Image
-import androidx.compose.material.icons.filled.OndemandVideo
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -38,24 +24,21 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import nasa.core.ui.CardShape
-import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
-import nasa.core.ui.shimmer
 import nasa.gallery.model.MediaType
 import nasa.gallery.res.R
 import nasa.gallery.vm.search.SearchResultItem
 
 @Stable
 @Composable
-internal fun SearchSuccessItem(
+internal fun SearchSuccessItemCard(
   item: SearchResultItem,
   onAction: (SearchAction) -> Unit,
   modifier: Modifier = Modifier,
@@ -72,9 +55,10 @@ internal fun SearchSuccessItem(
     horizontalArrangement = Arrangement.Start,
     verticalAlignment = Alignment.Top,
   ) {
-    ItemPreview(
+    ItemThumbnail(
       item = item,
       theme = theme,
+      sizeModifier = { size(PREVIEW_SIZE) },
     )
 
     HorizontalSpacer(8.dp)
@@ -182,69 +166,6 @@ private fun <T : Any> TitleAndValue(
 
 @Stable
 @Composable
-private fun ItemPreview(
-  item: SearchResultItem,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-) {
-  val previewUrl = item.previewUrl
-  if (previewUrl == null) {
-    PlaceholderImage(
-      item = item,
-      modifier = Modifier.size(PREVIEW_SIZE),
-      theme = theme,
-    )
-  } else {
-    Box(
-      modifier = modifier,
-    ) {
-      var isLoading by remember { mutableStateOf(true) }
-      if (isLoading) {
-        Box(
-          modifier = Modifier
-            .size(PREVIEW_SIZE)
-            .clip(ShimmerBlockShape)
-            .shimmer(theme, durationMillis = 1000),
-        )
-      }
-
-      val fallback = rememberVectorPainter(Icons.Filled.Warning)
-      AsyncImage(
-        modifier = Modifier.size(PREVIEW_SIZE),
-        model = previewUrl.url,
-        contentDescription = item.title,
-        contentScale = ContentScale.Crop,
-        alignment = Alignment.Center,
-        fallback = fallback,
-        onLoading = { isLoading = true },
-        onSuccess = { isLoading = false },
-        onError = { isLoading = false },
-      )
-    }
-  }
-}
-
-@Stable
-@Composable
-private fun PlaceholderImage(
-  item: SearchResultItem,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-) {
-  Image(
-    modifier = modifier.size(PREVIEW_SIZE),
-    imageVector = when (item.mediaType) {
-      MediaType.Audio -> Icons.Filled.Audiotrack
-      MediaType.Image -> Icons.Filled.Image
-      MediaType.Video -> Icons.Filled.OndemandVideo
-    },
-    contentDescription = item.title,
-    colorFilter = ColorFilter.tint(theme.pageText),
-  )
-}
-
-@Stable
-@Composable
 private fun MediaType.string() = stringResource(
   id = when (this) {
     MediaType.Audio -> R.string.media_type_audio
@@ -261,14 +182,14 @@ private fun dateFormat(instant: Instant): String {
   return LocalDate.Formats.ISO.format(date)
 }
 
-private val PREVIEW_SIZE = 128.dp
+internal val PREVIEW_SIZE = 128.dp
 private val SMALLER_TEXT_SIZE = 12.sp
 private val LARGER_TEXT_SIZE = 14.sp
 
 @Preview
 @Composable
 private fun PreviewItem() = PreviewColumn {
-  SearchSuccessItem(
+  SearchSuccessItemCard(
     item = PREVIEW_ITEM_1,
     onAction = {},
   )

@@ -2,6 +2,7 @@ package nasa.gallery.ui.search
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -36,6 +37,14 @@ internal fun SearchTopBar(
         Icon(
           imageVector = Icons.AutoMirrored.Filled.ArrowBack,
           contentDescription = stringResource(id = CoreR.string.nav_back),
+        )
+      }
+    },
+    actions = {
+      IconButton(onClick = { onAction(SearchAction.ShowViewConfigDialog) }) {
+        Icon(
+          contentDescription = stringResource(id = R.string.search_toolbar_view_type),
+          imageVector = Icons.Filled.Settings,
         )
       }
     },
