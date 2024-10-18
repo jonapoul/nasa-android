@@ -1,9 +1,8 @@
-name: Check
+name: Main
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -34,18 +33,13 @@ jobs:
         with:
           add-job-summary: on-failure
 
-      - name: Check
-        run: ./gradlew check
-
       - name: Generate test coverage
-        if: github.actor != 'dependabot[bot]'
         shell: bash
         run: |
           COVERAGE=$(./gradlew :koverLog | grep "application line coverage:" | tail -n1 | cut -d ":" -f 2 | tr -d '[:space:]%')
           echo "COVERAGE=$(echo $COVERAGE)" >> $GITHUB_ENV
 
       - name: Update dynamic badge gist
-        if: github.actor != 'dependabot[bot]'
         uses: schneegans/dynamic-badges-action@v1.7.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
