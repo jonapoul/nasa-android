@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 
@@ -37,7 +38,7 @@ fun DialogContent(
     modifier = modifier
       .defaultMinSize(minWidth = 300.dp)
       .background(theme.dialogBackground)
-      .padding(12.dp),
+      .padding(Dimensions.VeryLarge),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
@@ -57,20 +58,20 @@ fun DialogContent(
 
       title?.let {
         Text(
-          modifier = Modifier.padding(vertical = 8.dp),
+          modifier = Modifier.padding(vertical = Dimensions.Large),
           text = title,
           color = titleColor,
         )
       }
     }
 
-    VerticalSpacer(4.dp)
+    VerticalSpacer(Dimensions.Medium)
 
     CompositionLocalProvider(LocalContentColor provides theme.pageText) {
       content()
     }
 
-    VerticalSpacer(4.dp)
+    VerticalSpacer(Dimensions.Medium)
 
     buttons?.let {
       CompositionLocalProvider(LocalContentColor provides theme.pageTextPrimary) {

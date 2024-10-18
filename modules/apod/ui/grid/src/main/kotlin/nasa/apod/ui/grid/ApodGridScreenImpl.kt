@@ -16,7 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.persistentListOf
 import nasa.apod.model.ApodNavButtonsState
 import nasa.apod.preview.PREVIEW_DATE
@@ -24,6 +23,7 @@ import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.preview.PREVIEW_ITEM_2
 import nasa.core.model.ApiKey
 import nasa.core.ui.BackgroundSurface
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
@@ -95,7 +95,7 @@ private fun GridContent(
   Box(
     modifier = modifier
       .fillMaxWidth()
-      .padding(horizontal = 8.dp),
+      .padding(horizontal = Dimensions.Large),
     contentAlignment = Alignment.Center,
   ) {
     when (state) {

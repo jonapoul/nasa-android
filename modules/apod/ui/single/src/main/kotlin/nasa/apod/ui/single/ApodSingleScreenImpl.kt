@@ -10,13 +10,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import nasa.apod.model.ApodNavButtonsState
 import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.vm.single.ScreenState
 import nasa.core.model.ApiKey
 import nasa.core.ui.BackgroundSurface
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
@@ -71,7 +71,7 @@ private fun ApodSingleContent(
     ItemContent(
       modifier = Modifier
         .weight(1f)
-        .padding(horizontal = 8.dp, vertical = 4.dp),
+        .padding(horizontal = Dimensions.Large, vertical = Dimensions.Medium),
       state = state,
       onAction = onAction,
       theme = theme,
@@ -81,7 +81,7 @@ private fun ApodSingleContent(
       ItemFooter(
         modifier = Modifier
           .wrapContentHeight()
-          .padding(horizontal = 8.dp, vertical = 4.dp),
+          .padding(horizontal = Dimensions.Large, vertical = Dimensions.Medium),
         item = state.item,
         onAction = onAction,
         theme = theme,

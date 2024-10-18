@@ -29,6 +29,7 @@ import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import nasa.core.ui.CardShape
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -48,9 +49,9 @@ internal fun SearchSuccessItemCard(
     modifier = modifier
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(4.dp)
+      .padding(Dimensions.Medium)
       .background(theme.cardBackground, CardShape)
-      .padding(8.dp)
+      .padding(Dimensions.Large)
       .clickable { onAction(SearchAction.NavToImage(item.nasaId)) },
     horizontalArrangement = Arrangement.Start,
     verticalAlignment = Alignment.Top,
@@ -61,7 +62,7 @@ internal fun SearchSuccessItemCard(
       sizeModifier = { size(PREVIEW_SIZE) },
     )
 
-    HorizontalSpacer(8.dp)
+    HorizontalSpacer(Dimensions.Large)
 
     Column(
       modifier = Modifier
@@ -149,7 +150,7 @@ private fun <T : Any> TitleAndValue(
       lineHeight = SMALLER_TEXT_SIZE,
     )
 
-    HorizontalSpacer(4.dp)
+    HorizontalSpacer(Dimensions.Medium)
 
     Text(
       modifier = Modifier.weight(1f),

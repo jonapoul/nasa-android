@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.core.res.R
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -35,7 +36,7 @@ fun LoadFailure(
   Column(
     modifier = modifier
       .wrapContentSize()
-      .padding(16.dp),
+      .padding(Dimensions.Large),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
   ) {

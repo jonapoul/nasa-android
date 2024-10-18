@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.button.RegularTextButton
 import nasa.core.ui.color.LocalTheme
@@ -76,11 +77,11 @@ private fun SearchConfigModalContents(
     )
 
     HorizontalDivider(
-      modifier = Modifier.padding(vertical = 4.dp),
+      modifier = Modifier.padding(vertical = Dimensions.Medium),
     )
 
     YearRangeSlider(
-      modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+      modifier = Modifier.padding(horizontal = Dimensions.Large, vertical = 10.dp),
       start = startYear,
       end = endYear,
       theme = theme,
@@ -105,7 +106,7 @@ private fun SearchConfigModalContents(
         },
       )
 
-      HorizontalSpacer(4.dp)
+      HorizontalSpacer(Dimensions.Medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
@@ -114,7 +115,7 @@ private fun SearchConfigModalContents(
         onClick = onReset,
       )
 
-      HorizontalSpacer(4.dp)
+      HorizontalSpacer(Dimensions.Medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),

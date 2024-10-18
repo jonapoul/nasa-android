@@ -15,12 +15,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.apod.model.ApodItem
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
 import nasa.core.ui.CardShape
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -38,7 +38,7 @@ internal fun ItemFooter(
       .wrapContentHeight()
       .background(theme.cardBackground, CardShape)
       .clickable { onAction(ApodSingleAction.ShowDescriptionDialog(item)) }
-      .padding(16.dp),
+      .padding(Dimensions.Large),
     verticalArrangement = Arrangement.Top,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {

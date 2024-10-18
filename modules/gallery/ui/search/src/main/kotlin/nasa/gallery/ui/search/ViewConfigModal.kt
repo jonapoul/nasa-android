@@ -21,7 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.button.RegularTextButton
 import nasa.core.ui.button.ToggleableButton
@@ -74,21 +74,21 @@ private fun ViewTypeModalContents(
   ) {
     if (mutableViewType == SearchViewType.Grid) {
       ColumnWidthSlider(
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+        modifier = Modifier.padding(horizontal = Dimensions.Huge, vertical = Dimensions.Large),
         value = mutableColumnWidth,
         theme = theme,
         onNewValue = { mutableColumnWidth = it },
       )
 
       HorizontalDivider(
-        modifier = Modifier.padding(vertical = 4.dp),
+        modifier = Modifier.padding(vertical = Dimensions.Medium),
       )
     }
 
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp),
+        .padding(Dimensions.Large),
       horizontalArrangement = Arrangement.Center,
     ) {
       ViewTypeButton(
@@ -111,7 +111,7 @@ private fun ViewTypeModalContents(
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(5.dp),
+        .padding(Dimensions.Medium),
     ) {
       PrimaryTextButton(
         modifier = Modifier.weight(1f),
@@ -120,7 +120,7 @@ private fun ViewTypeModalContents(
         onClick = { onConfirm(SearchViewConfig(mutableViewType, mutableColumnWidth)) },
       )
 
-      HorizontalSpacer(4.dp)
+      HorizontalSpacer(Dimensions.Medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
@@ -129,7 +129,7 @@ private fun ViewTypeModalContents(
         onClick = onReset,
       )
 
-      HorizontalSpacer(4.dp)
+      HorizontalSpacer(Dimensions.Medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
@@ -155,7 +155,7 @@ private fun ViewTypeButton(
     icon = type.icon(),
     onCheckedChange = { onSelect(type) },
     theme = theme,
-    modifier = modifier.padding(4.dp),
+    modifier = modifier.padding(Dimensions.Medium),
   )
 }
 

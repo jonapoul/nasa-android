@@ -38,7 +38,7 @@ fun NasaRangeSliderTrack(
   state: RangeSliderState,
   colors: SliderColors,
   modifier: Modifier = Modifier,
-  trackHeight: Dp = 8.dp,
+  trackHeight: Dp = Dimensions.Large,
 ) {
   val fractionStart by remember {
     derivedStateOf {
@@ -90,7 +90,7 @@ fun NasaSliderTrack(
   state: SliderState,
   colors: SliderColors,
   modifier: Modifier = Modifier,
-  trackHeight: Dp = 8.dp,
+  trackHeight: Dp = Dimensions.Large,
 ) {
   val fraction by remember {
     derivedStateOf {

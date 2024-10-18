@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -24,18 +25,18 @@ internal fun SearchSuccessItemGrid(
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
+  val padding = Dimensions.Medium
+
   ItemThumbnail(
     modifier = modifier.clickable { onAction(SearchAction.NavToImage(item.nasaId)) },
     item = item,
     theme = theme,
     sizeModifier = { isLoading ->
-      (if (isLoading) size(columnWidth - PADDING) else this)
-        .padding(PADDING)
+      (if (isLoading) size(columnWidth - padding) else this)
+        .padding(padding)
     },
   )
 }
-
-private val PADDING = 4.dp
 
 @Preview
 @Composable

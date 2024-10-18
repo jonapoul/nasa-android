@@ -44,6 +44,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import my.nanihadesuka.compose.LazyColumnScrollbar
 import nasa.core.ui.BackgroundSurface
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -143,7 +144,7 @@ private fun LicensesSearchInput(
       Text(
         modifier = Modifier
           .wrapContentWidth()
-          .padding(horizontal = 8.dp),
+          .padding(horizontal = Dimensions.Large),
         text = res.getQuantityString(R.plurals.licenses_search_num_results, numResults, numResults),
         fontSize = 12.sp,
         color = theme.toolbarTextSubdued,
@@ -200,7 +201,7 @@ private fun NoneFoundContent(
       tint = theme.warningText,
     )
 
-    VerticalSpacer(16.dp)
+    VerticalSpacer(Dimensions.Large)
 
     Text(
       text = stringResource(id = R.string.licenses_none_found),
@@ -222,7 +223,7 @@ private fun LoadedContent(
   LazyColumnScrollbar(
     modifier = modifier
       .fillMaxSize()
-      .padding(8.dp),
+      .padding(Dimensions.Large),
     state = listState,
     settings = theme.scrollbarSettings(),
   ) {
@@ -261,7 +262,7 @@ private fun ErrorContent(
       tint = theme.errorText,
     )
 
-    VerticalSpacer(16.dp)
+    VerticalSpacer(Dimensions.Large)
 
     Text(
       text = stringResource(id = R.string.licenses_failed, errorMessage),
@@ -270,7 +271,7 @@ private fun ErrorContent(
       color = theme.errorText,
     )
 
-    VerticalSpacer(16.dp)
+    VerticalSpacer(Dimensions.Large)
 
     PrimaryTextButton(
       text = stringResource(id = R.string.licenses_failed_retry),

@@ -35,6 +35,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import nasa.core.res.R
 import nasa.core.ui.CardShape
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.dropDownMenuItem
@@ -65,7 +66,7 @@ fun NasaTextField(
   val isFocused by interactionSource.collectIsFocusedAsState()
   var fieldModifier = modifier
   if (isFocused) {
-    fieldModifier = fieldModifier.shadow(4.dp, shape, ambientColor = theme.formInputShadow)
+    fieldModifier = fieldModifier.shadow(Dimensions.Medium, shape, ambientColor = theme.formInputShadow)
   }
 
   val clearButton: (@Composable () -> Unit)? = if (clearable && value.isNotEmpty()) {

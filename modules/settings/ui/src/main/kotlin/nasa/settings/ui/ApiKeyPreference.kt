@@ -31,10 +31,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
 import nasa.core.model.SettingsKeys
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.textFieldDialog
@@ -75,7 +75,7 @@ internal fun ApiKeyPreference(
   ) {
     Icon(
       imageVector = Icons.Filled.Key,
-      modifier = Modifier.padding(16.dp),
+      modifier = Modifier.padding(Dimensions.Large),
       contentDescription = title,
       tint = prefColors.foreground,
     )
@@ -83,7 +83,7 @@ internal fun ApiKeyPreference(
     Column(
       modifier = Modifier
         .weight(1f)
-        .padding(top = 8.dp, bottom = 8.dp, end = 16.dp),
+        .padding(top = Dimensions.Large, bottom = Dimensions.Large, end = Dimensions.Large),
     ) {
       Text(
         modifier = Modifier.fillMaxWidth(),

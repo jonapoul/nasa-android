@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import nasa.core.ui.CardShape
+import nasa.core.ui.Dimensions
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -53,9 +54,9 @@ private fun HomeGridItem(
     modifier = modifier
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(4.dp)
+      .padding(Dimensions.Medium)
       .background(theme.cardBackground, CardShape)
-      .padding(4.dp)
+      .padding(Dimensions.Medium)
       .clickable { onClick() },
     horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
@@ -77,7 +78,7 @@ private fun HomeGridItem(
       Text(
         modifier = Modifier
           .fillMaxWidth()
-          .padding(8.dp),
+          .padding(Dimensions.Large),
         text = description,
         textAlign = TextAlign.Center,
         fontWeight = FontWeight.Light,
@@ -90,7 +91,7 @@ private fun HomeGridItem(
     HomeGridImage(
       modifier = Modifier
         .size(IMAGE_SIZE)
-        .padding(8.dp),
+        .padding(Dimensions.Large),
       title = title,
       thumbnailUrl = thumbnailUrl,
       theme = theme,

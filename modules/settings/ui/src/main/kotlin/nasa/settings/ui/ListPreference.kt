@@ -28,11 +28,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.radioButton
@@ -83,7 +83,7 @@ internal fun ListPreference(
   ) {
     Icon(
       imageVector = icon,
-      modifier = Modifier.padding(16.dp),
+      modifier = Modifier.padding(Dimensions.Large),
       contentDescription = title,
       tint = prefColors.foreground,
     )
@@ -91,7 +91,7 @@ internal fun ListPreference(
     Column(
       modifier = Modifier
         .weight(1f)
-        .padding(top = 8.dp, bottom = 8.dp, end = 16.dp),
+        .padding(top = Dimensions.Large, bottom = Dimensions.Large, end = Dimensions.Large),
     ) {
       Text(
         modifier = Modifier.fillMaxWidth(),

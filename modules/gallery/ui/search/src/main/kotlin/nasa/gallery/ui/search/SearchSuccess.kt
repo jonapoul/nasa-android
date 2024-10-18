@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import my.nanihadesuka.compose.LazyColumnScrollbar
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -60,14 +61,14 @@ internal fun SearchSuccess(
   Column(
     modifier = modifier
       .fillMaxSize()
-      .padding(horizontal = PADDING),
+      .padding(horizontal = Dimensions.Medium),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
     Text(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp),
+        .padding(Dimensions.Large),
       fontWeight = FontWeight.Bold,
       style = MaterialTheme.typography.displaySmall,
       text = stringResource(R.string.search_results_header, state.totalResults),
@@ -93,7 +94,7 @@ internal fun SearchSuccess(
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(PADDING),
+        .padding(Dimensions.Medium),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       val previousPage = state.prevPageNumber
@@ -179,8 +180,6 @@ private fun SearchSuccessContentGrid(
     }
   }
 }
-
-private val PADDING = 4.dp
 
 @ScreenPreview
 @Composable

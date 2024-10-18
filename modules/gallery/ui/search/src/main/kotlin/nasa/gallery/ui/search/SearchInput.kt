@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.button.RegularIconButton
 import nasa.core.ui.color.LocalTheme
@@ -43,7 +43,7 @@ internal fun SearchInput(
   Row(
     modifier = modifier
       .fillMaxWidth()
-      .padding(4.dp),
+      .padding(Dimensions.Medium),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     val keyboard = LocalSoftwareKeyboardController.current
@@ -69,7 +69,7 @@ internal fun SearchInput(
       clearable = true,
     )
 
-    HorizontalSpacer(8.dp)
+    HorizontalSpacer(Dimensions.Large)
 
     PrimaryIconButton(
       imageVector = Icons.Filled.Search,
@@ -82,7 +82,7 @@ internal fun SearchInput(
       theme = theme,
     )
 
-    HorizontalSpacer(8.dp)
+    HorizontalSpacer(Dimensions.Large)
 
     RegularIconButton(
       imageVector = Icons.Filled.Tune,

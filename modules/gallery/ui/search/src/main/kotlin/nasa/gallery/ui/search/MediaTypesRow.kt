@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.ToggleableButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -46,7 +47,7 @@ internal fun MediaTypesRow(
       Row(
         modifier = Modifier
           .fillMaxWidth()
-          .padding(horizontal = 4.dp),
+          .padding(horizontal = Dimensions.Medium),
         horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically,
       ) {
@@ -57,7 +58,7 @@ internal fun MediaTypesRow(
           tint = theme.warningText,
         )
 
-        HorizontalSpacer(4.dp)
+        HorizontalSpacer(Dimensions.Medium)
 
         Text(
           text = stringResource(R.string.search_modal_no_media_selected),

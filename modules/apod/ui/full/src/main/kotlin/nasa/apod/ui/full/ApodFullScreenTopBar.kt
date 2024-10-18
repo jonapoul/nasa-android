@@ -18,12 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
 import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
+import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
@@ -65,7 +65,7 @@ internal fun ApodFullScreenTopBar(
       modifier = Modifier
         .fillMaxWidth()
         .background(theme.toolbarBackgroundSubdued)
-        .padding(4.dp),
+        .padding(Dimensions.Medium),
       contentAlignment = Alignment.Center,
     ) {
       Text(

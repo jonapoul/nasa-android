@@ -20,9 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nasa.core.ui.CardShape
+import nasa.core.ui.Dimensions
 import nasa.core.ui.button.RegularIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -39,10 +39,10 @@ internal fun LibraryItem(
 ) {
   Row(
     modifier = modifier
-      .shadow(4.dp)
-      .padding(2.dp)
+      .shadow(Dimensions.Medium)
+      .padding(Dimensions.Small)
       .background(theme.cardBackground, CardShape)
-      .padding(16.dp),
+      .padding(Dimensions.Huge),
     verticalAlignment = Alignment.Top,
   ) {
     Column(
@@ -106,7 +106,7 @@ private fun LibraryTableRow(
       fontWeight = FontWeight.Bold,
     )
 
-    HorizontalSpacer(4.dp)
+    HorizontalSpacer(Dimensions.Medium)
 
     Text(
       modifier = Modifier

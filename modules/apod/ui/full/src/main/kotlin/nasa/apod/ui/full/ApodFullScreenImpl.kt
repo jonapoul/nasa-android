@@ -22,7 +22,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import coil.request.ImageRequest
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
@@ -33,6 +32,7 @@ import nasa.core.http.progress.DownloadProgressInterceptor
 import nasa.core.model.Percent
 import nasa.core.model.percent
 import nasa.core.ui.BackgroundSurface
+import nasa.core.ui.Dimensions
 import nasa.core.ui.LoadableImage
 import nasa.core.ui.button.RegularIconButton
 import nasa.core.ui.color.LocalTheme
@@ -105,7 +105,7 @@ private fun ApodFullScreenContent(
       ZoomButtons(
         modifier = Modifier
           .wrapContentSize()
-          .padding(16.dp),
+          .padding(Dimensions.Huge),
         scale = scale,
         onSetScale = { scale = it },
       )
@@ -131,7 +131,7 @@ private fun ZoomButtons(
       onClick = { onSetScale((scale * ZOOM_FACTOR).coerceIn(MIN_ZOOM, MAX_ZOOM)) },
     )
 
-    VerticalSpacer(2.dp)
+    VerticalSpacer(Dimensions.Small)
 
     RegularIconButton(
       imageVector = Icons.Filled.ZoomOut,

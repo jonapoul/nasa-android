@@ -38,6 +38,7 @@ import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
 import nasa.apod.vm.single.ScreenState
 import nasa.core.model.ApiKey
+import nasa.core.ui.Dimensions
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -59,7 +60,7 @@ internal fun ItemContent(
   Box(
     modifier = modifier
       .fillMaxWidth()
-      .padding(horizontal = 8.dp)
+      .padding(horizontal = Dimensions.Large)
       .clickable(enabled = state is ScreenState.Success) {
         if (state is ScreenState.Success) {
           val action = when (state.item.mediaType) {
@@ -173,7 +174,7 @@ private fun NoUrlToLoad(
   Column(
     modifier = modifier
       .wrapContentSize()
-      .padding(16.dp),
+      .padding(Dimensions.Large),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
   ) {

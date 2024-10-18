@@ -29,6 +29,7 @@ import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.preview.PREVIEW_ITEM_2
 import nasa.apod.res.R
 import nasa.core.model.ApiKey
+import nasa.core.ui.Dimensions
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
@@ -53,7 +54,7 @@ internal fun MonthHeader(
       .background(theme.toolbarBackgroundSubdued)
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(8.dp),
+      .padding(Dimensions.Large),
     horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
   ) {
@@ -72,7 +73,7 @@ internal fun MonthHeader(
     MonthTitle(
       modifier = Modifier
         .weight(1f)
-        .padding(horizontal = 8.dp),
+        .padding(horizontal = Dimensions.Large),
       state = state,
       theme = theme,
     )
