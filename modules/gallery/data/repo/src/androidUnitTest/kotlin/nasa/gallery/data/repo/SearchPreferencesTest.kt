@@ -10,11 +10,11 @@ import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.Year
 import nasa.gallery.model.year
+import nasa.test.assertEmitted
 import nasa.test.buildPreferences
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -30,14 +30,14 @@ class SearchPreferencesTest {
   fun `Year start`() = runTest {
     before()
     searchPreferences.yearStart.asFlow().test {
-      assertEquals(expected = Year.Minimum, actual = awaitItem())
+      assertEmitted(Year.Minimum)
 
       val year = 1234.year
       searchPreferences.yearStart.set(year)
-      assertEquals(expected = year, actual = awaitItem())
+      assertEmitted(year)
 
       searchPreferences.yearStart.delete()
-      assertEquals(expected = Year.Minimum, actual = awaitItem())
+      assertEmitted(Year.Minimum)
 
       advanceUntilIdle()
       ensureAllEventsConsumed()
@@ -49,20 +49,20 @@ class SearchPreferencesTest {
   fun `Media types`() = runTest {
     before()
     searchPreferences.mediaTypes.asFlow().test {
-      assertEquals(expected = null, actual = awaitItem())
+      assertEmitted(null)
 
       searchPreferences.mediaTypes.set(MediaTypes.Empty)
-      assertEquals(expected = MediaTypes.Empty, actual = awaitItem())
+      assertEmitted(MediaTypes.Empty)
 
       searchPreferences.mediaTypes.set(MediaTypes.All)
-      assertEquals(expected = MediaTypes.All, actual = awaitItem())
+      assertEmitted(MediaTypes.All)
 
       val types = MediaTypes(MediaType.Audio, MediaType.Image)
       searchPreferences.mediaTypes.set(types)
-      assertEquals(expected = types, actual = awaitItem())
+      assertEmitted(types)
 
       searchPreferences.mediaTypes.delete()
-      assertEquals(expected = null, actual = awaitItem())
+      assertEmitted(null)
 
       advanceUntilIdle()
       ensureAllEventsConsumed()

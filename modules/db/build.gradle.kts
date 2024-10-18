@@ -40,6 +40,7 @@ kotlin {
     commonTest.dependencies {
       implementation(libs.test.alakazam.core)
       implementation(libs.test.androidx.room)
+      implementation(projects.test.flow)
     }
 
     jvmMain.dependencies {

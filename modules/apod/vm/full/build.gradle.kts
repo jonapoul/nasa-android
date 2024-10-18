@@ -19,5 +19,6 @@ dependencies {
   implementation(libs.androidx.compose.runtime)
   implementation(libs.hilt.core)
 
+  testImplementation(projects.test.flow)
   testImplementation(testFixtures(projects.core.model))
 }

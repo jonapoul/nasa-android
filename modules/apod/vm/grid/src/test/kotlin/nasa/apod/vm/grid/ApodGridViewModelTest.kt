@@ -22,6 +22,7 @@ import nasa.core.model.Calendar
 import nasa.test.EXAMPLE_ITEM_1
 import nasa.test.EXAMPLE_ITEM_2
 import nasa.test.InMemoryApiKeyProvider
+import nasa.test.assertEmitted
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -58,18 +59,15 @@ class ApodGridViewModelTest {
     viewModel.state.test {
       // Given the repo is set to return the month successfully
       coEvery { repository.loadRandomMonth(API_KEY) } returns MultipleLoadResult.Success(EXAMPLE_ITEMS)
-      assertEquals(GridScreenState.Inactive, awaitItem())
+      assertEmitted(GridScreenState.Inactive)
 
       // When we load with random config
       viewModel.load(API_KEY, ApodScreenConfig.Random())
-      assertEquals(GridScreenState.Loading(date = null, API_KEY), awaitItem())
+      assertEmitted(GridScreenState.Loading(date = null, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // Then we get a success state
-      assertEquals(
-        expected = GridScreenState.Success(EXAMPLE_ITEMS, API_KEY),
-        actual = awaitItem(),
-      )
+      assertEmitted(GridScreenState.Success(EXAMPLE_ITEMS, API_KEY))
 
       // and the saved state is updated with the loaded month
       assertEquals(
@@ -87,18 +85,15 @@ class ApodGridViewModelTest {
     viewModel.state.test {
       // Given the repo is set to return the month successfully
       coEvery { repository.loadThisMonth(API_KEY) } returns MultipleLoadResult.Success(EXAMPLE_ITEMS)
-      assertEquals(GridScreenState.Inactive, awaitItem())
+      assertEmitted(GridScreenState.Inactive)
 
       // When we load with today config
       viewModel.load(API_KEY, ApodScreenConfig.Today)
-      assertEquals(GridScreenState.Loading(date = null, API_KEY), awaitItem())
+      assertEmitted(GridScreenState.Loading(date = null, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // Then we get a success state
-      assertEquals(
-        expected = GridScreenState.Success(EXAMPLE_ITEMS, API_KEY),
-        actual = awaitItem(),
-      )
+      assertEmitted(GridScreenState.Success(EXAMPLE_ITEMS, API_KEY))
 
       // and the saved state is updated with the loaded month
       assertEquals(
@@ -117,11 +112,11 @@ class ApodGridViewModelTest {
       // Given the repo is set to return the month successfully
       val errorMessage = "foobar"
       coEvery { repository.loadThisMonth(API_KEY) } returns FailureResult.OutOfRange(errorMessage)
-      assertEquals(GridScreenState.Inactive, awaitItem())
+      assertEmitted(GridScreenState.Inactive)
 
       // When we load the data
       viewModel.load(API_KEY, ApodScreenConfig.Today)
-      assertEquals(GridScreenState.Loading(date = null, API_KEY), awaitItem())
+      assertEmitted(GridScreenState.Loading(date = null, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // Then we get a failure state
@@ -150,23 +145,17 @@ class ApodGridViewModelTest {
     buildViewModel()
 
     viewModel.state.test {
-      assertEquals(GridScreenState.Inactive, awaitItem())
+      assertEmitted(GridScreenState.Inactive)
 
       // When we load with a random config
       viewModel.load(API_KEY, ApodScreenConfig.Random())
 
       // then we start loading the previously-loaded month, not a new random one
-      assertEquals(GridScreenState.Loading(april, API_KEY), awaitItem())
+      assertEmitted(GridScreenState.Loading(april, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // and we get a success state
-      assertEquals(
-        expected = GridScreenState.Success(
-          persistentListOf(EXAMPLE_ITEM_1, EXAMPLE_ITEM_2),
-          API_KEY,
-        ),
-        actual = awaitItem(),
-      )
+      assertEmitted(GridScreenState.Success(persistentListOf(EXAMPLE_ITEM_1, EXAMPLE_ITEM_2), API_KEY))
 
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
@@ -182,7 +171,7 @@ class ApodGridViewModelTest {
 
     viewModel.state.test {
       // Then the UI is updated to tell the user
-      assertEquals(GridScreenState.NoApiKey, awaitItem())
+      assertEmitted(GridScreenState.NoApiKey)
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
     }
@@ -201,17 +190,14 @@ class ApodGridViewModelTest {
 
     viewModel.navButtonsState.test {
       // no data loaded yet, so both disabled
-      assertEquals(ApodNavButtonsState.BothDisabled, awaitItem())
+      assertEmitted(ApodNavButtonsState.BothDisabled)
 
       // When we load data
       viewModel.load(API_KEY, ApodScreenConfig.Specific(may))
       testScheduler.advanceUntilIdle()
 
       // Then the next button is disabled, since there isn't an available month after this one
-      assertEquals(
-        actual = awaitItem(),
-        expected = ApodNavButtonsState(enablePrevious = true, enableNext = false),
-      )
+      assertEmitted(ApodNavButtonsState(enablePrevious = true, enableNext = false))
     }
   }
 
@@ -224,17 +210,14 @@ class ApodGridViewModelTest {
 
     viewModel.navButtonsState.test {
       // no data loaded yet, so both disabled
-      assertEquals(ApodNavButtonsState.BothDisabled, awaitItem())
+      assertEmitted(ApodNavButtonsState.BothDisabled)
 
       // When we load data
       viewModel.load(API_KEY, ApodScreenConfig.Specific(EARLIEST_APOD_DATE))
       testScheduler.advanceUntilIdle()
 
       // Then the previous button is disabled, since there isn't an available month before this one
-      assertEquals(
-        actual = awaitItem(),
-        expected = ApodNavButtonsState(enablePrevious = false, enableNext = true),
-      )
+      assertEmitted(ApodNavButtonsState(enablePrevious = false, enableNext = true))
     }
   }
 

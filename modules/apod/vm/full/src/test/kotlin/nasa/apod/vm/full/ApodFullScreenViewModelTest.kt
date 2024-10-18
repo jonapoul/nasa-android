@@ -1,6 +1,5 @@
 package nasa.apod.vm.full
 
-import app.cash.turbine.TurbineTestContext
 import app.cash.turbine.test
 import io.mockk.mockk
 import kotlinx.coroutines.flow.update
@@ -8,14 +7,13 @@ import kotlinx.coroutines.test.runTest
 import nasa.core.http.progress.DownloadProgressStateHolder
 import nasa.core.http.progress.DownloadState
 import nasa.core.model.FileSize
-import nasa.core.model.Percent
 import nasa.core.model.bytes
 import nasa.core.model.percent
+import nasa.test.assertEmitted
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 class ApodFullScreenViewModelTest {
@@ -35,28 +33,24 @@ class ApodFullScreenViewModelTest {
   fun `Monitor download progress`() = runTest {
     viewModel.downloadProgress.test {
       setInProgress(read = 0.bytes)
-      assertDownloadProgress(expected = 0.percent)
+      assertEmitted(expected = 0.percent)
 
       setInProgress(read = 20.bytes)
-      assertDownloadProgress(expected = 20.percent)
+      assertEmitted(expected = 20.percent)
 
       setInProgress(read = 50.bytes)
-      assertDownloadProgress(expected = 50.percent)
+      assertEmitted(expected = 50.percent)
 
       setInProgress(read = 90.bytes)
-      assertDownloadProgress(expected = 90.percent)
+      assertEmitted(expected = 90.percent)
 
       setInProgress(read = 99.bytes)
-      assertDownloadProgress(expected = 99.percent)
+      assertEmitted(expected = 99.percent)
 
       setDone()
-      assertDownloadProgress(expected = 100.percent)
+      assertEmitted(expected = 100.percent)
       cancelAndIgnoreRemainingEvents()
     }
-  }
-
-  private suspend fun TurbineTestContext<Percent>.assertDownloadProgress(expected: Percent) {
-    assertEquals(expected, awaitItem())
   }
 
   private fun setInProgress(read: FileSize) {

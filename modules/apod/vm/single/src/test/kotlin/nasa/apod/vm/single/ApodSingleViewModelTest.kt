@@ -18,6 +18,7 @@ import nasa.core.model.ApiKey
 import nasa.core.model.Calendar
 import nasa.test.EXAMPLE_ITEM_1
 import nasa.test.InMemoryApiKeyProvider
+import nasa.test.assertEmitted
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -54,18 +55,15 @@ class ApodSingleViewModelTest {
     viewModel.state.test {
       // Given the repo is set to return an item successfully
       coEvery { repository.loadRandom(API_KEY) } returns SingleLoadResult.Success(EXAMPLE_ITEM_1)
-      assertEquals(ScreenState.Inactive, awaitItem())
+      assertEmitted(ScreenState.Inactive)
 
       // When we load with random config
       viewModel.load(API_KEY, ApodScreenConfig.Random())
-      assertEquals(ScreenState.Loading(date = null, API_KEY), awaitItem())
+      assertEmitted(ScreenState.Loading(date = null, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // Then we get a success state
-      assertEquals(
-        expected = ScreenState.Success(EXAMPLE_ITEM_1, API_KEY),
-        actual = awaitItem(),
-      )
+      assertEmitted(ScreenState.Success(EXAMPLE_ITEM_1, API_KEY))
 
       // and the saved state is updated with the loaded date
       assertEquals(
@@ -83,18 +81,15 @@ class ApodSingleViewModelTest {
     viewModel.state.test {
       // Given the repo is set to return the data successfully
       coEvery { repository.loadToday(API_KEY) } returns SingleLoadResult.Success(EXAMPLE_ITEM_1)
-      assertEquals(ScreenState.Inactive, awaitItem())
+      assertEmitted(ScreenState.Inactive)
 
       // When we load with today config
       viewModel.load(API_KEY, ApodScreenConfig.Today)
-      assertEquals(ScreenState.Loading(date = null, API_KEY), awaitItem())
+      assertEmitted(ScreenState.Loading(date = null, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // Then we get a success state
-      assertEquals(
-        expected = ScreenState.Success(EXAMPLE_ITEM_1, API_KEY),
-        actual = awaitItem(),
-      )
+      assertEmitted(ScreenState.Success(EXAMPLE_ITEM_1, API_KEY))
 
       // and the saved state is updated with the loaded date
       assertEquals(
@@ -113,11 +108,11 @@ class ApodSingleViewModelTest {
       // Given the repo is set to return the data successfully
       val errorMessage = "foobar"
       coEvery { repository.loadToday(API_KEY) } returns FailureResult.OutOfRange(errorMessage)
-      assertEquals(ScreenState.Inactive, awaitItem())
+      assertEmitted(ScreenState.Inactive)
 
       // When we load the data
       viewModel.load(API_KEY, ApodScreenConfig.Today)
-      assertEquals(ScreenState.Loading(date = null, API_KEY), awaitItem())
+      assertEmitted(ScreenState.Loading(date = null, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // Then we get a failure state
@@ -146,20 +141,17 @@ class ApodSingleViewModelTest {
     buildViewModel()
 
     viewModel.state.test {
-      assertEquals(ScreenState.Inactive, awaitItem())
+      assertEmitted(ScreenState.Inactive)
 
       // When we load with a random config
       viewModel.load(API_KEY, ApodScreenConfig.Random())
 
       // then we start loading the previously-loaded date, not a new random one
-      assertEquals(ScreenState.Loading(twelfthOfApril, API_KEY), awaitItem())
+      assertEmitted(ScreenState.Loading(twelfthOfApril, API_KEY))
       testScheduler.advanceUntilIdle()
 
       // and we get a success state
-      assertEquals(
-        expected = ScreenState.Success(EXAMPLE_ITEM_1, API_KEY),
-        actual = awaitItem(),
-      )
+      assertEmitted(ScreenState.Success(EXAMPLE_ITEM_1, API_KEY))
 
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
@@ -175,7 +167,7 @@ class ApodSingleViewModelTest {
 
     viewModel.state.test {
       // Then the UI is updated to tell the user
-      assertEquals(ScreenState.NoApiKey(null), awaitItem())
+      assertEmitted(ScreenState.NoApiKey(null))
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
     }
@@ -194,17 +186,14 @@ class ApodSingleViewModelTest {
 
     viewModel.navButtonsState.test {
       // no data loaded yet, so both disabled
-      assertEquals(ApodNavButtonsState.BothDisabled, awaitItem())
+      assertEmitted(ApodNavButtonsState.BothDisabled)
 
       // When we load data
       viewModel.load(API_KEY, ApodScreenConfig.Specific(firstOfMay))
       testScheduler.advanceUntilIdle()
 
       // Then the next button is disabled, since there isn't an available date after this one
-      assertEquals(
-        actual = awaitItem(),
-        expected = ApodNavButtonsState(enablePrevious = true, enableNext = false),
-      )
+      assertEmitted(ApodNavButtonsState(enablePrevious = true, enableNext = false))
     }
   }
 
@@ -217,17 +206,14 @@ class ApodSingleViewModelTest {
 
     viewModel.navButtonsState.test {
       // no data loaded yet, so both disabled
-      assertEquals(ApodNavButtonsState.BothDisabled, awaitItem())
+      assertEmitted(ApodNavButtonsState.BothDisabled)
 
       // When we load data
       viewModel.load(API_KEY, ApodScreenConfig.Specific(EARLIEST_APOD_DATE))
       testScheduler.advanceUntilIdle()
 
       // Then the previous button is disabled, since there isn't an available date before this one
-      assertEquals(
-        actual = awaitItem(),
-        expected = ApodNavButtonsState(enablePrevious = false, enableNext = true),
-      )
+      assertEmitted(ApodNavButtonsState(enablePrevious = false, enableNext = true))
     }
   }
 

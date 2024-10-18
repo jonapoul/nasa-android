@@ -13,13 +13,13 @@ import nasa.licenses.data.LibraryModel
 import nasa.licenses.data.LicenseModel
 import nasa.licenses.data.LicensesLoadState
 import nasa.licenses.data.LicensesRepository
+import nasa.test.assertEmitted
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 class LicensesViewModelTest {
@@ -50,7 +50,7 @@ class LicensesViewModelTest {
 
     viewModel.licensesState.test {
       // Then an error state is returned
-      assertState(LicensesState.Error(message))
+      assertEmitted(LicensesState.Error(message))
 
       // Given the repo now fetches successfully
       coEvery { repository.loadLicenses() } returns LicensesLoadState.Success(listOf(EXAMPLE_MODEL))
@@ -59,7 +59,7 @@ class LicensesViewModelTest {
       viewModel.load()
 
       // Then a success state is returned
-      assertState(LicensesState.Loading)
+      assertEmitted(LicensesState.Loading)
       assertLoaded(EXAMPLE_MODEL)
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
@@ -76,7 +76,7 @@ class LicensesViewModelTest {
 
     viewModel.licensesState.test {
       // Then
-      assertState(LicensesState.NoneFound)
+      assertEmitted(LicensesState.NoneFound)
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
     }
@@ -105,16 +105,16 @@ class LicensesViewModelTest {
 
     // Then
     viewModel.searchBarState.test {
-      assertEquals(expected = SearchBarState.Gone, actual = awaitItem())
+      assertEmitted(SearchBarState.Gone)
 
       viewModel.toggleSearchBar()
-      assertEquals(expected = SearchBarState.Visible(text = ""), actual = awaitItem())
+      assertEmitted(SearchBarState.Visible(text = ""))
 
       viewModel.setSearchText(text = "Hello world")
-      assertEquals(expected = SearchBarState.Visible(text = "Hello world"), actual = awaitItem())
+      assertEmitted(SearchBarState.Visible(text = "Hello world"))
 
       viewModel.toggleSearchBar()
-      assertEquals(expected = SearchBarState.Gone, actual = awaitItem())
+      assertEmitted(SearchBarState.Gone)
 
       cancelAndIgnoreRemainingEvents()
     }
@@ -177,16 +177,12 @@ class LicensesViewModelTest {
     )
   }
 
-  private suspend fun TurbineTestContext<LicensesState>.assertState(state: LicensesState) {
-    assertEquals(expected = state, actual = awaitItem())
-  }
-
   private suspend fun TurbineTestContext<LicensesState>.assertLoaded(vararg models: LibraryModel) {
     assertLoaded(models.toList())
   }
 
   private suspend fun TurbineTestContext<LicensesState>.assertLoaded(models: List<LibraryModel>) {
-    assertState(LicensesState.Loaded(models.toImmutableList()))
+    assertEmitted(LicensesState.Loaded(models.toImmutableList()))
   }
 
   private companion object {

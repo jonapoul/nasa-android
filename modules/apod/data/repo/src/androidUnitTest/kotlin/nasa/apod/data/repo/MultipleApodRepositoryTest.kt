@@ -13,6 +13,7 @@ import nasa.core.model.ApiKey
 import nasa.db.ApodDao
 import nasa.db.NasaDatabase
 import nasa.test.MockWebServerRule
+import nasa.test.assertEmissionSize
 import nasa.test.getResourceAsText
 import org.junit.Rule
 import org.junit.Test
@@ -58,7 +59,7 @@ class MultipleApodRepositoryTest {
 
     dao.observeDates().test {
       // and the database doesn't have anything initially
-      assertEquals(expected = 0, actual = awaitItem().size)
+      assertEmissionSize(expected = 0)
 
       // When we query for the latest from the API
       val result = repository.loadThisMonth(API_KEY)
@@ -71,7 +72,8 @@ class MultipleApodRepositoryTest {
       webServerRule.assertRequestCount(expected = 1)
 
       // and the database has 30 new entries
-      assertEquals(expected = 30, actual = awaitItem().size)
+      assertEmissionSize(expected = 30)
+      cancelAndIgnoreRemainingEvents()
     }
   }
 
@@ -112,7 +114,7 @@ class MultipleApodRepositoryTest {
 
     dao.observeDates().test {
       // and the database doesn't have anything initially
-      assertEquals(expected = 0, actual = awaitItem().size)
+      assertEmissionSize(expected = 0)
 
       // When we query for the latest from the API
       val result = repository.loadRandomMonth(API_KEY)
@@ -125,7 +127,8 @@ class MultipleApodRepositoryTest {
       webServerRule.assertRequestCount(expected = 1)
 
       // and the database has 30 new entries
-      assertEquals(expected = 30, actual = awaitItem().size)
+      assertEmissionSize(expected = 30)
+      cancelAndIgnoreRemainingEvents()
     }
   }
 

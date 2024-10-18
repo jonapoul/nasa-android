@@ -17,6 +17,7 @@ import nasa.core.model.NASA_API_URL
 import nasa.core.model.bytes
 import nasa.db.NasaDatabase
 import nasa.db.getDatabaseBuilder
+import nasa.test.assertEmitted
 import net.lachlanmckee.timberjunit.TimberTestRule
 import org.junit.After
 import org.junit.Before
@@ -24,7 +25,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 class SettingsViewModelTest {
@@ -69,20 +69,20 @@ class SettingsViewModelTest {
     buildViewModel()
     viewModel.cacheSize.test {
       // Given the cache is empty
-      assertEquals(0.bytes, awaitItem())
+      assertEmitted(0.bytes)
 
       // When we write some files
       imageCache.writeBytesToFile(filename = "a.txt", numBytes = 123)
       viewModel.refreshCacheSize()
 
       // Then
-      assertEquals(123.bytes, awaitItem())
+      assertEmitted(123.bytes)
 
       // When we clear
       viewModel.clearCache()
 
       // Then we have no cache, and a toast was shown
-      assertEquals(0.bytes, awaitItem())
+      assertEmitted(0.bytes)
       testScheduler.advanceUntilIdle()
       coVerify { toaster.coToast("Successfully cleared cache") }
       confirmVerified(toaster)

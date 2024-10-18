@@ -5,6 +5,7 @@ import app.cash.turbine.test
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
 import nasa.core.model.ThemeType
+import nasa.test.assertEmitted
 import nasa.test.buildPreferences
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,21 +27,21 @@ class ThemePreferencesTest {
     buildPreferences()
     preferences.theme.asFlow().test {
       // Initial state
-      assertEquals(ThemeType.System, awaitItem())
+      assertEmitted(ThemeType.System)
 
       // Change to all possible values
       preferences.theme.set(ThemeType.Light)
-      assertEquals(ThemeType.Light, awaitItem())
+      assertEmitted(ThemeType.Light)
 
       preferences.theme.set(ThemeType.Dark)
-      assertEquals(ThemeType.Dark, awaitItem())
+      assertEmitted(ThemeType.Dark)
 
       preferences.theme.set(ThemeType.Midnight)
-      assertEquals(ThemeType.Midnight, awaitItem())
+      assertEmitted(ThemeType.Midnight)
 
       // Back to default
       preferences.theme.delete()
-      assertEquals(ThemeType.System, awaitItem())
+      assertEmitted(ThemeType.System)
     }
   }
 

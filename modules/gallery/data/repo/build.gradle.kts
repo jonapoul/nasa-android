@@ -28,6 +28,7 @@ kotlin {
       implementation(libs.test.kotlin.common)
       implementation(libs.test.okhttp)
       implementation(libs.test.turbine)
+      implementation(projects.test.flow)
       implementation(projects.test.http)
       implementation(projects.test.prefs)
     }

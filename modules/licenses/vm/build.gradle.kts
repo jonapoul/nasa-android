@@ -20,4 +20,6 @@ dependencies {
   implementation(libs.kotlinx.immutable)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+
+  testImplementation(projects.test.flow)
 }

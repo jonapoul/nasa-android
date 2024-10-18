@@ -23,6 +23,7 @@ dependencies {
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
 
+  testImplementation(projects.test.flow)
   testImplementation(testFixtures(projects.apod.model))
   testImplementation(testFixtures(projects.core.model))
 }

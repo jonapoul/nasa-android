@@ -4,6 +4,7 @@ import alakazam.test.core.standardDispatcher
 import app.cash.turbine.test
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
+import nasa.test.assertEmitted
 import org.junit.After
 import org.junit.Rule
 import org.junit.Test
@@ -34,15 +35,15 @@ class ApodDaoTest {
     before()
     apodDao.observeDates().test {
       // Empty initially
-      assertEquals(expected = emptyList(), actual = awaitItem())
+      assertEmitted(emptyList())
 
       // Insert entity from 2024
       apodDao.insert(imageEntity(DATE_2024))
-      assertEquals(expected = listOf(DATE_2024), actual = awaitItem())
+      assertEmitted(listOf(DATE_2024))
 
       // Insert entity from 1995
       apodDao.insert(videoEntity(DATE_1995))
-      assertEquals(expected = listOf(DATE_1995, DATE_2024), actual = awaitItem())
+      assertEmitted(listOf(DATE_1995, DATE_2024))
 
       ensureAllEventsConsumed()
       cancelAndIgnoreRemainingEvents()

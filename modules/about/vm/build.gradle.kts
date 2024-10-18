@@ -17,4 +17,6 @@ dependencies {
   implementation(libs.kotlinx.datetime)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+
+  testImplementation(projects.test.flow)
 }

@@ -26,6 +26,7 @@ kotlin {
       implementation(libs.androidx.room.runtime)
       implementation(libs.test.alakazam.db)
       implementation(libs.test.okhttp)
+      implementation(projects.test.flow)
       implementation(projects.test.http)
     }
   }

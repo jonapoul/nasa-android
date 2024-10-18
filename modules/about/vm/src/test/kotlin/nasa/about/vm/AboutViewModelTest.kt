@@ -10,11 +10,11 @@ import kotlinx.coroutines.test.runTest
 import nasa.about.data.GithubReleaseModel
 import nasa.about.data.GithubRepository
 import nasa.about.data.LatestReleaseState
+import nasa.test.assertEmitted
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
 
 @RunWith(RobolectricTestRunner::class)
 class AboutViewModelTest {
@@ -45,20 +45,20 @@ class AboutViewModelTest {
     coEvery { repository.fetchLatestRelease() } returns LatestReleaseState.UpdateAvailable(model)
 
     viewModel.checkUpdatesState.test {
-      assertEquals(CheckUpdatesState.Inactive, awaitItem())
+      assertEmitted(CheckUpdatesState.Inactive)
 
       // When we fetch updates
       viewModel.fetchLatestRelease()
-      assertEquals(CheckUpdatesState.Checking, awaitItem())
+      assertEmitted(CheckUpdatesState.Checking)
 
       // Then an update is returned
-      assertEquals(CheckUpdatesState.UpdateFound(version, url), awaitItem())
+      assertEmitted(CheckUpdatesState.UpdateFound(version, url))
 
       // When we cancel the dialog
       viewModel.cancelUpdateCheck()
 
       // Then the dialog is dismissed
-      assertEquals(CheckUpdatesState.Inactive, awaitItem())
+      assertEmitted(CheckUpdatesState.Inactive)
       expectNoEvents()
       cancelAndIgnoreRemainingEvents()
     }
