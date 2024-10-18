@@ -21,7 +21,7 @@ import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradleExtension
 import org.jetbrains.kotlin.powerassert.gradle.PowerAssertGradlePlugin
 
 class ConventionTest : Plugin<Project> {
-  override fun apply(target: Project) = with(target) {
+  override fun apply(target: Project): Unit = with(target) {
     with(pluginManager) {
       apply(KoverGradlePlugin::class.java)
       apply(PowerAssertGradlePlugin::class.java)
@@ -30,6 +30,11 @@ class ConventionTest : Plugin<Project> {
     configureTesting()
     configurePowerAssert()
     configureKover()
+
+    // Suppresses warning. See https://github.com/mockk/mockk/issues/1171
+    tasks.withType<Test> {
+      jvmArgs("-XX:+EnableDynamicAgentLoading")
+    }
   }
 
   private fun Project.configureTesting() {
