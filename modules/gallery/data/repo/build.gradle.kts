@@ -1,5 +1,6 @@
 plugins {
   id("nasa.module.multiplatform")
+  id("nasa.convention.coroutines")
 }
 
 android {
