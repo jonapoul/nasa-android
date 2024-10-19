@@ -27,7 +27,7 @@ class ApodApiTest {
   @Test
   fun `No API key gives failure`() = runTest {
     // Given
-    val errorJson = readJson(filename = "no-api-key.json")
+    val errorJson = getResourceAsText(filename = "no-api-key.json")
     webServerRule.enqueue(errorJson, code = 404)
 
     // When
@@ -41,7 +41,7 @@ class ApodApiTest {
   @Test
   fun `Fetch valid single item`() = runTest {
     // Given
-    val json = readJson(filename = "valid-single.json")
+    val json = getResourceAsText(filename = "valid-single.json")
     webServerRule.enqueue(json)
 
     // When
@@ -60,7 +60,7 @@ class ApodApiTest {
   @Test
   fun `Fetch specific date`() = runTest {
     // Given
-    val json = readJson(filename = "valid-single.json")
+    val json = getResourceAsText(filename = "valid-single.json")
     webServerRule.enqueue(json)
 
     // When
@@ -82,8 +82,6 @@ class ApodApiTest {
     // also including a date
     assertEquals(actual = url.queryParameter(name = "date"), expected = date)
   }
-
-  private fun readJson(filename: String): String = getResourceAsText(filename)
 
   private companion object {
     const val API_KEY = "SOME_DUMMY_API_KEY"

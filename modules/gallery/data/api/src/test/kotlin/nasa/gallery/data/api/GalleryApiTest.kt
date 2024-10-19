@@ -157,7 +157,7 @@ class GalleryApiTest {
   @Test
   fun `Deserialize search response failure`() = runTest {
     // Given
-    val json = readJson(filename = "search-failure.json")
+    val json = getResourceAsText(filename = "search-failure.json")
     webServerRule.enqueue(json, code = HTTP_BAD_REQUEST)
 
     // When we search with no parameters
@@ -177,7 +177,7 @@ class GalleryApiTest {
   @Test
   fun `Deserialize search response success`() = runTest {
     // Given
-    val json = readJson(filename = "search-success-no-links.json")
+    val json = getResourceAsText(filename = "search-success-no-links.json")
     webServerRule.enqueue(json)
 
     // When we search
@@ -340,7 +340,7 @@ class GalleryApiTest {
   @Test
   fun `Get collection`() = runTest {
     // Given
-    val collectionJson = readJson(filename = "collection-success.json")
+    val collectionJson = getResourceAsText(filename = "collection-success.json")
     webServerRule.enqueue(collectionJson)
 
     // When
@@ -366,7 +366,7 @@ class GalleryApiTest {
   @Test
   fun `Get metadata`() = runTest {
     // Given
-    val collectionJson = readJson(filename = "metadata-success.json")
+    val collectionJson = getResourceAsText(filename = "metadata-success.json")
     webServerRule.enqueue(collectionJson)
 
     // When
@@ -429,7 +429,7 @@ class GalleryApiTest {
   @Test
   fun `Get album contents`() = runTest {
     // Given
-    val json = readJson(filename = "albums-success.json")
+    val json = getResourceAsText(filename = "albums-success.json")
     webServerRule.enqueue(json)
 
     // When
@@ -498,7 +498,7 @@ class GalleryApiTest {
   @Test
   fun `Get albums failure`() = runTest {
     // Given
-    val json = readJson(filename = "albums-failure.json")
+    val json = getResourceAsText(filename = "albums-failure.json")
     webServerRule.enqueue(json, code = HTTP_NOT_FOUND)
 
     // When we search with no parameters
@@ -526,9 +526,7 @@ class GalleryApiTest {
   private fun buildObject(vararg content: Pair<String, Any>): Object = content.toMap().toImmutableMap()
 
   private fun enqueueDefault() {
-    val errorJson = readJson(filename = "search-failure.json")
+    val errorJson = getResourceAsText(filename = "search-failure.json")
     webServerRule.enqueue(errorJson, code = 404)
   }
-
-  private fun readJson(filename: String): String = getResourceAsText(filename)
 }

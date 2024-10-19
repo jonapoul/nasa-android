@@ -75,7 +75,7 @@ class GallerySearchRepositoryTest {
   fun `Handle failure`() = runTest {
     // given
     before()
-    val json = this@GallerySearchRepositoryTest.getResourceAsText("search-failure.json")
+    val json = getResourceAsText(filename = "search-failure.json")
     webServerRule.enqueue(json, code = HTTP_NOT_FOUND)
 
     // when
@@ -96,7 +96,7 @@ class GallerySearchRepositoryTest {
   fun `Handle success response`() = runTest {
     // given
     before()
-    val json = this@GallerySearchRepositoryTest.getResourceAsText("search-success.json")
+    val json = getResourceAsText(filename = "search-success.json")
     webServerRule.enqueue(json, code = HTTP_OK)
 
     val pageSize = 50

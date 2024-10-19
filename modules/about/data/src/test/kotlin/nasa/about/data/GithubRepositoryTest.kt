@@ -38,7 +38,7 @@ class GithubRepositoryTest {
   fun `Update available from three returned`() = runTest {
     // Given
     buildRepo()
-    val threeReleasesJson = readJson(filename = "new-release.json")
+    val threeReleasesJson = getResourceAsText(filename = "new-release.json")
     webServerRule.enqueue(threeReleasesJson)
 
     // When
@@ -62,7 +62,7 @@ class GithubRepositoryTest {
   fun `No new updates`() = runTest {
     // Given
     buildRepo()
-    val threeReleasesJson = readJson(filename = "no-new-update.json")
+    val threeReleasesJson = getResourceAsText(filename = "no-new-update.json")
     webServerRule.enqueue(threeReleasesJson)
 
     // When
@@ -91,7 +91,7 @@ class GithubRepositoryTest {
   fun `Private repo`() = runTest {
     // Given
     buildRepo()
-    val privateRepoJson = readJson(filename = "not-found.json")
+    val privateRepoJson = getResourceAsText(filename = "not-found.json")
     webServerRule.enqueue(privateRepoJson)
 
     // When
@@ -134,8 +134,6 @@ class GithubRepositoryTest {
     assertIs<LatestReleaseState.Failure>(state)
     assertTrue(state.errorMessage.contains("IO failure"), state.errorMessage)
   }
-
-  private fun readJson(filename: String): String = getResourceAsText(filename)
 
   private fun TestScope.buildRepo() {
     githubRepository = GithubRepository(

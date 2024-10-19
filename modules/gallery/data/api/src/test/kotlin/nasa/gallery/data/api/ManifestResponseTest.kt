@@ -7,7 +7,7 @@ import kotlin.test.assertEquals
 class ManifestResponseTest {
   @Test
   fun `Deserialize failure`() {
-    val json = getJson(filename = "manifest-failure.json")
+    val json = getResourceAsText(filename = "manifest-failure.json")
     val response = GalleryJson.decodeFromString<ManifestResponse>(json)
     assertEquals(
       expected = ManifestResponse.Failure(reason = "No AssetDB records for nasaid=as11-40-584"),
@@ -17,7 +17,7 @@ class ManifestResponseTest {
 
   @Test
   fun `Deserialize success`() {
-    val json = getJson(filename = "manifest-success.json")
+    val json = getResourceAsText(filename = "manifest-success.json")
     val response = GalleryJson.decodeFromString<ManifestResponse>(json)
     assertEquals(
       expected = ManifestResponse.Success(
@@ -37,6 +37,4 @@ class ManifestResponseTest {
       actual = response,
     )
   }
-
-  private fun getJson(filename: String): String = getResourceAsText(filename)
 }

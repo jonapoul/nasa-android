@@ -54,7 +54,7 @@ class MultipleApodRepositoryTest {
     before()
     webServerRule.enqueue(
       code = 200,
-      body = readJsonFromResource(name = "multiple-full.json"),
+      body = getResourceAsText(filename = "multiple-full.json"),
     )
 
     dao.observeDates().test {
@@ -81,7 +81,7 @@ class MultipleApodRepositoryTest {
   fun `Requesting before valid range`() = runTest {
     // Given the server returns a successful
     before()
-    webServerRule.enqueue(body = readJsonFromResource(name = "multiple-full.json"))
+    webServerRule.enqueue(body = getResourceAsText(filename = "multiple-full.json"))
 
     // When we query the API for a date before the first available, but in the same month
     val invalidDate = LocalDate.parse("1995-06-01")
@@ -110,7 +110,7 @@ class MultipleApodRepositoryTest {
   fun `Fetch random month`() = runTest {
     // Given the server returns a successful random response
     before()
-    webServerRule.enqueue(body = readJsonFromResource(name = "multiple-full.json"))
+    webServerRule.enqueue(body = getResourceAsText(filename = "multiple-full.json"))
 
     dao.observeDates().test {
       // and the database doesn't have anything initially
@@ -131,8 +131,6 @@ class MultipleApodRepositoryTest {
       cancelAndIgnoreRemainingEvents()
     }
   }
-
-  private fun readJsonFromResource(name: String): String = getResourceAsText(name)
 
   private companion object {
     val API_KEY = ApiKey(value = "SOME_DUMMY_KEY")

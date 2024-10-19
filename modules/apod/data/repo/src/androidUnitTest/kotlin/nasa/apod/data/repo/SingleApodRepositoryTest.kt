@@ -55,7 +55,7 @@ class SingleApodRepositoryTest {
     before()
     webServerRule.enqueue(
       code = 200,
-      body = readJsonFromResource(name = "single-valid-with-newlines.json"),
+      body = getResourceAsText(filename = "single-valid-with-newlines.json"),
     )
 
     // and the database doesn't have anything
@@ -104,7 +104,7 @@ class SingleApodRepositoryTest {
     before()
     webServerRule.enqueue(
       code = 400,
-      body = readJsonFromResource(name = "out-of-range.json"),
+      body = getResourceAsText(filename = "out-of-range.json"),
     )
 
     // When we query the API
@@ -121,7 +121,7 @@ class SingleApodRepositoryTest {
     before()
     webServerRule.enqueue(
       code = 403,
-      body = readJsonFromResource(name = "invalid-api-key.json"),
+      body = getResourceAsText(filename = "invalid-api-key.json"),
     )
 
     // and our key is dodgy
@@ -138,7 +138,7 @@ class SingleApodRepositoryTest {
   fun `Handle unexpected JSON response format`() = runTest {
     // Given an success response is returned from the server, but not in an expected JSON structure
     before()
-    webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "invalid-response-format.json"))
+    webServerRule.enqueue(code = 200, body = getResourceAsText(filename = "invalid-response-format.json"))
 
     // When we query the API
     val result = repository.loadSpecific(API_KEY, DATE)
@@ -151,7 +151,7 @@ class SingleApodRepositoryTest {
   fun `Handle date without an APOD item`() = runTest {
     // Given APOD doesn't have an item for the requested date
     before()
-    webServerRule.enqueue(code = 404, body = readJsonFromResource(name = "nonexistent-date.json"))
+    webServerRule.enqueue(code = 404, body = getResourceAsText(filename = "nonexistent-date.json"))
 
     // When we query the API
     val result = repository.loadSpecific(API_KEY, DATE)
@@ -177,7 +177,7 @@ class SingleApodRepositoryTest {
   fun `Handle other HTTP code`() = runTest {
     // Given the server returns an unexpected code
     before()
-    webServerRule.enqueue(code = 405, body = readJsonFromResource(name = "other-http.json"))
+    webServerRule.enqueue(code = 405, body = getResourceAsText(filename = "other-http.json"))
 
     // When we query the API
     val result = repository.loadSpecific(API_KEY, DATE)
@@ -193,7 +193,7 @@ class SingleApodRepositoryTest {
   fun `Fetch random item`() = runTest {
     // Given the server returns a successful random response
     before()
-    webServerRule.enqueue(code = 200, body = readJsonFromResource(name = "single-valid-random.json"))
+    webServerRule.enqueue(code = 200, body = getResourceAsText(filename = "single-valid-random.json"))
 
     // When we query the API
     val result = repository.loadRandom(API_KEY)
@@ -215,8 +215,6 @@ class SingleApodRepositoryTest {
     // and the database has an entry on the given date
     assertNotNull(dao.get(date))
   }
-
-  private fun readJsonFromResource(name: String): String = getResourceAsText(name)
 
   private companion object {
     val API_KEY = ApiKey(value = "SOME_DUMMY_KEY")

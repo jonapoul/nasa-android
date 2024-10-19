@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 class SearchResponseTest {
   @Test
   fun `Deserialize failure`() {
-    val json = getJson(filename = "search-failure.json")
+    val json = getResourceAsText(filename = "search-failure.json")
     val response = GalleryJson.decodeFromString<SearchResponse>(json)
     assertEquals(
       expected = SearchResponse.Failure(reason = "Expected 'q' text search parameter or other keywords."),
@@ -24,7 +24,7 @@ class SearchResponseTest {
 
   @Test
   fun `Deserialize success`() {
-    val json = getJson(filename = "search-success.json")
+    val json = getResourceAsText(filename = "search-success.json")
     val response = GalleryJson.decodeFromString<SearchResponse>(json)
     assertEquals(
       expected = SearchResponse.Success(
@@ -85,6 +85,4 @@ class SearchResponseTest {
       actual = response,
     )
   }
-
-  private fun getJson(filename: String): String = getResourceAsText(filename)
 }
