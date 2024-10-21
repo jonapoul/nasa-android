@@ -24,7 +24,9 @@ import nasa.gallery.data.repo.GallerySearchRepository
 import nasa.gallery.data.repo.SearchPreferences
 import nasa.gallery.data.repo.SearchResult
 import nasa.gallery.model.FilterConfig
+import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.SearchViewConfig
+import nasa.gallery.model.SubtitleUrl
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -152,8 +154,8 @@ class SearchViewModel @Inject internal constructor(
     return SearchResultItem(
       nasaId = item.nasaId,
       collectionUrl = collectionUrl,
-      previewUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Preview }?.url,
-      captionsUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Captions }?.url,
+      previewUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Preview }?.url?.let(::ImageUrl),
+      captionsUrl = links?.firstOrNull { it.rel == CollectionItemLink.Relation.Captions }?.url?.let(::SubtitleUrl),
       albums = item.album?.toImmutableList()?.ifEmpty { null },
       center = item.center,
       title = item.title,

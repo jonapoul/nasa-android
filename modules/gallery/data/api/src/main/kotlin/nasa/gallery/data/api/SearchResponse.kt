@@ -8,7 +8,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.UseSerializers
 import nasa.gallery.model.Album
 import nasa.gallery.model.Center
-import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
@@ -62,7 +61,7 @@ data class SearchItem(
 
 @Serializable
 data class CollectionItemLink(
-  @SerialName("href") val url: ImageUrl,
+  @SerialName("href") val url: String,
   @SerialName("rel") val rel: Relation,
   @SerialName("render") val render: String? = null,
 ) {

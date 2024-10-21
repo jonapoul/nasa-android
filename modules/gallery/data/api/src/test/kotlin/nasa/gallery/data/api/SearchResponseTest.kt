@@ -2,7 +2,6 @@ package nasa.gallery.data.api
 
 import kotlinx.datetime.Instant
 import nasa.gallery.model.Center
-import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
@@ -55,18 +54,14 @@ class SearchResponseTest {
               ),
               links = listOf(
                 CollectionItemLink(
-                  url = ImageUrl(
-                    "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
-                      "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg",
-                  ),
+                  url = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
+                    "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg",
                   rel = CollectionItemLink.Relation.Preview,
                   render = "image",
                 ),
                 CollectionItemLink(
-                  url = ImageUrl(
-                    "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
-                      "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
-                  ),
+                  url = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
+                    "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
                   rel = CollectionItemLink.Relation.Captions,
                 ),
               ),

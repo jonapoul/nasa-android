@@ -223,7 +223,7 @@ class GalleryApiTest {
       ),
       links = listOf(
         CollectionItemLink(
-          url = ImageUrl("https://images-assets.nasa.gov/image/sts065-05-037/sts065-05-037~thumb.jpg"),
+          url = "https://images-assets.nasa.gov/image/sts065-05-037/sts065-05-037~thumb.jpg",
           rel = CollectionItemLink.Relation.Preview,
           render = "image",
         ),
@@ -269,7 +269,7 @@ class GalleryApiTest {
       ),
       links = listOf(
         CollectionItemLink(
-          url = ImageUrl("https://images-assets.nasa.gov/image/sts065-214-010/sts065-214-010~thumb.jpg"),
+          url = "https://images-assets.nasa.gov/image/sts065-214-010/sts065-214-010~thumb.jpg",
           rel = CollectionItemLink.Relation.Preview,
           render = "image",
         ),
@@ -453,18 +453,14 @@ class GalleryApiTest {
               ),
               links = listOf(
                 CollectionItemLink(
-                  url = ImageUrl(
-                    "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
-                      "GSFC_20190130_NICER_m12854_BlkHole~thumb.jpg",
-                  ),
+                  url = "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
+                    "GSFC_20190130_NICER_m12854_BlkHole~thumb.jpg",
                   rel = CollectionItemLink.Relation.Preview,
                   render = "image",
                 ),
                 CollectionItemLink(
-                  url = ImageUrl(
-                    "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
-                      "GSFC_20190130_NICER_m12854_BlkHole.srt",
-                  ),
+                  url = "https://images-assets.nasa.gov/video/GSFC_20190130_NICER_m12854_BlkHole/" +
+                    "GSFC_20190130_NICER_m12854_BlkHole.srt",
                   rel = CollectionItemLink.Relation.Captions,
                 ),
               ),

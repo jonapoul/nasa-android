@@ -14,7 +14,6 @@ import nasa.gallery.data.api.GalleryJson
 import nasa.gallery.data.api.SearchItem
 import nasa.gallery.model.Center
 import nasa.gallery.model.FilterConfig
-import nasa.gallery.model.ImageUrl
 import nasa.gallery.model.JsonUrl
 import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
@@ -135,15 +134,11 @@ class GallerySearchRepositoryTest {
         "TO-PAD-39A/collection.json",
     )
 
-    val IMAGE_URL = ImageUrl(
-      "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
-        "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg",
-    )
+    const val IMAGE_URL = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB" +
+      "-ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A~thumb.jpg"
 
-    val CAPTIONS_URL = ImageUrl(
-      "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
-        "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt",
-    )
+    const val CAPTIONS_URL = "https://images-assets.nasa.gov/video/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-" +
+      "ENROUTE-TO-PAD-39A/T803303_A_AS-503-APOLLO-8-CREW-DEPARTING-MSOB-ENROUTE-TO-PAD-39A.srt"
 
     val SEARCH_ITEM_DATA = SearchItem(
       center = Center("JSC"),

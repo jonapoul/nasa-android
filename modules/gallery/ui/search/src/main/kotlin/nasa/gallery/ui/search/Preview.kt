@@ -13,6 +13,7 @@ import nasa.gallery.model.NasaId
 import nasa.gallery.model.Photographer
 import nasa.gallery.model.SearchViewConfig
 import nasa.gallery.model.SearchViewType
+import nasa.gallery.model.SubtitleUrl
 import nasa.gallery.vm.search.SearchResultItem
 import nasa.gallery.vm.search.SearchState
 
@@ -23,7 +24,7 @@ internal val PREVIEW_ITEM_1 = SearchResultItem(
   nasaId = NasaId(value = "abc"),
   collectionUrl = JsonUrl(url = "https://url.com/data.json"),
   previewUrl = ImageUrl(url = "https://url.com/data.jpg"),
-  captionsUrl = ImageUrl(url = "https://url.com/data.src"),
+  captionsUrl = SubtitleUrl(url = "https://url.com/data.src"),
   albums = persistentListOf(Album("Apollo")),
   center = Center(value = "ABCC"),
   title = "Hello World, this is a long title which should be ellipsized when it gets longer than 2 lines but here's" +

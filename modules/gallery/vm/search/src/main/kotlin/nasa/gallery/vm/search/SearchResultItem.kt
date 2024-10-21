@@ -11,13 +11,14 @@ import nasa.gallery.model.Keywords
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.NasaId
 import nasa.gallery.model.Photographer
+import nasa.gallery.model.SubtitleUrl
 
 @Immutable
 data class SearchResultItem(
   val nasaId: NasaId,
   val collectionUrl: JsonUrl,
   val previewUrl: ImageUrl?,
-  val captionsUrl: ImageUrl?,
+  val captionsUrl: SubtitleUrl?,
   val albums: ImmutableList<Album>?,
   val center: Center?,
   val title: String,

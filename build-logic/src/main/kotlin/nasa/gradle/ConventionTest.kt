@@ -136,6 +136,11 @@ private fun KoverReportsConfig.configureKoverReports(project: Project) {
   total {
     filters {
       excludes {
+        packages(
+          // themes, composables, etc.
+          "nasa.core.ui",
+        )
+
         classes(
           "*Activity*",
           "*Application*",

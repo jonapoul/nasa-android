@@ -40,11 +40,13 @@ class SearchPreferences @Inject constructor(preferences: Preferences) {
 
   val gridColumnWidthDp: Preference<Int> = preferences.getInt(
     key = "config.gridColumnWidthDp",
-    default = 120,
+    default = DEFAULT_GRID_COLUMN_WIDTH,
   )
 
-  private companion object {
-    val YEAR_SERIALIZER = object : IntSerializer<Year> {
+  companion object {
+    const val DEFAULT_GRID_COLUMN_WIDTH = 120
+
+    private val YEAR_SERIALIZER = object : IntSerializer<Year> {
       override fun deserialize(value: Int): Year = Year(value)
       override fun serialize(value: Year): Int = value.value
     }

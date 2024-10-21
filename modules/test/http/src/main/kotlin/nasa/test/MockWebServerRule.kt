@@ -3,6 +3,7 @@ package nasa.test
 import kotlinx.serialization.json.Json
 import nasa.core.http.factories.buildOkHttp
 import nasa.core.http.factories.buildRetrofit
+import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.rules.TestWatcher
@@ -42,9 +43,12 @@ class MockWebServerRule : TestWatcher() {
     assertEquals(expected = expected, actual = server.requestCount)
   }
 
-  inline fun <reified T : Any> buildApi(json: Json = Json): T {
+  inline fun <reified T : Any> buildApi(
+    json: Json = Json,
+    client: OkHttpClient = buildOkHttp(debug = true, log = null),
+  ): T {
     val retrofit = buildRetrofit(
-      client = buildOkHttp(debug = true, log = null),
+      client = client,
       url = server.url(path = "/").toString(),
       json = json,
     )

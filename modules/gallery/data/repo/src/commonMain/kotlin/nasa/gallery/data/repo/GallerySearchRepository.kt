@@ -16,7 +16,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.ResponseBody
 import javax.inject.Inject
 
-class GallerySearchRepository @Inject internal constructor(
+class GallerySearchRepository @Inject constructor(
   private val io: IODispatcher,
   private val galleryApi: GalleryApi,
   private val searchPreferences: SearchPreferences,
