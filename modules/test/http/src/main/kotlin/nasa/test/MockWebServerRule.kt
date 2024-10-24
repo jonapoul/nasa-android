@@ -8,6 +8,7 @@ import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
+import retrofit2.Converter
 import retrofit2.create
 import kotlin.test.assertEquals
 
@@ -51,6 +52,18 @@ class MockWebServerRule : TestWatcher() {
       client = client,
       url = server.url(path = "/").toString(),
       json = json,
+    )
+    return retrofit.create<T>()
+  }
+
+  inline fun <reified T : Any> buildApi(
+    client: OkHttpClient = buildOkHttp(debug = true, log = null),
+    vararg factories: Converter.Factory,
+  ): T {
+    val retrofit = buildRetrofit(
+      client = client,
+      url = server.url(path = "/").toString(),
+      *factories,
     )
     return retrofit.create<T>()
   }

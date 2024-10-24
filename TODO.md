@@ -5,6 +5,10 @@
   - Filtering panel
   - Insert SearchItems in database
 
+## Build
+- Publish build-logic scripts to maven repo somewhere
+  - https://developer.squareup.com/blog/herding-elephants/
+
 # Mid Priority
 
 ## General

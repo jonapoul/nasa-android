@@ -44,6 +44,13 @@ dependencies {
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
+tasks {
+  validatePlugins {
+    enableStricterValidation = true
+    failOnWarning = true
+  }
+}
+
 gradlePlugin {
   plugins {
     create(id = "nasa.convention.android.base", impl = "nasa.gradle.ConventionAndroidBase")

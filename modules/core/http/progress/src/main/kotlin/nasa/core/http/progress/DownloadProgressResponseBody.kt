@@ -2,6 +2,7 @@ package nasa.core.http.progress
 
 import kotlinx.coroutines.flow.update
 import nasa.core.model.bytes
+import okhttp3.MediaType
 import okhttp3.ResponseBody
 import okio.Buffer
 import okio.BufferedSource
@@ -16,11 +17,11 @@ internal class DownloadProgressResponseBody(
 ) : ResponseBody() {
   private var bufferedSource: BufferedSource? = null
 
-  override fun contentLength() = responseBody.contentLength()
+  override fun contentLength(): Long = responseBody.contentLength()
 
-  override fun contentType() = responseBody.contentType()
+  override fun contentType(): MediaType? = responseBody.contentType()
 
-  override fun source() = bufferedSource
+  override fun source(): BufferedSource = bufferedSource
     ?: getForwardSource(responseBody.source())
       .buffer()
       .also { bufferedSource = it }

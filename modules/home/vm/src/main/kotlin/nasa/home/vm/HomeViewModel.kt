@@ -52,12 +52,11 @@ class HomeViewModel @Inject internal constructor(
 
   fun apiUsage(): StateFlow<ApiUsageState> = viewModelScope.launchMolecule(RecompositionMode.Immediate) {
     val usageState by apiUsageStateHolder.collectAsState()
-    val usage = usageState
     val key by apiKeyProvider.observe().collectAsState(initial = null)
     when (key) {
       null -> ApiUsageState.NoApiKey
-      ApiKey.DEMO -> demoKeyState(usage)
-      else -> realKeyState(usage)
+      ApiKey.DEMO -> demoKeyState(usageState)
+      else -> realKeyState(usageState)
     }
   }
 
@@ -88,7 +87,6 @@ class HomeViewModel @Inject internal constructor(
         ?.links
         ?.firstOrNull { it.rel == Preview }
         ?.url
-        ?.toString()
     } else {
       null
     }

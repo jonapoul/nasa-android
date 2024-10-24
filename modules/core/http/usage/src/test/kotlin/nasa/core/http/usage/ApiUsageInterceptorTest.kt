@@ -30,7 +30,7 @@ class ApiUsageInterceptorTest {
     stateHolder = ApiUsageStateHolder()
     apiUsageInterceptor = ApiUsageInterceptor(stateHolder)
 
-    val client = buildOkHttp(debug = true, apiUsageInterceptor, log = { println(it) })
+    val client = buildOkHttp(debug = true, apiUsageInterceptor, log = null)
     testApi = webServerRule.buildApi(client = client)
   }
 
@@ -49,11 +49,8 @@ class ApiUsageInterceptorTest {
       assertEmitted(null)
 
       // When the response is fetched
-      println("Getting")
       testApi.getTestData()
-      println("advancing")
       advanceUntilIdle()
-      println("advanced")
 
       // Then no usage state is emitted
       ensureAllEventsConsumed()

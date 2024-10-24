@@ -150,6 +150,8 @@ private fun KoverReportsConfig.configureKoverReports(project: Project) {
           "*_Impl*",
           "*Module_*",
           "hilt_aggregated_deps*",
+          "*ComposableSingletons*",
+          "*Preview*Kt*",
         )
 
         annotatedBy(

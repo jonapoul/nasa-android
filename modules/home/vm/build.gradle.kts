@@ -1,5 +1,6 @@
 plugins {
   id("nasa.module.viewmodel")
+  id("nasa.convention.coroutines")
 }
 
 android {
@@ -21,4 +22,9 @@ dependencies {
   implementation(libs.hilt.core)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+
+  testImplementation(testFixtures(projects.apod.model))
+  testImplementation(projects.test.flow)
+  testImplementation(projects.test.http)
+  testImplementation(projects.test.prefs)
 }
