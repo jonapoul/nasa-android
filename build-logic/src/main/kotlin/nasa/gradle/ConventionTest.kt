@@ -1,12 +1,7 @@
 package nasa.gradle
 
-import blueprint.core.intProperty
 import com.android.build.gradle.api.AndroidBasePlugin
 import kotlinx.kover.gradle.plugin.KoverGradlePlugin
-import kotlinx.kover.gradle.plugin.dsl.AggregationType
-import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
-import kotlinx.kover.gradle.plugin.dsl.KoverProjectExtension
-import kotlinx.kover.gradle.plugin.dsl.KoverReportsConfig
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.testing.Test
@@ -29,7 +24,6 @@ class ConventionTest : Plugin<Project> {
     }
     configureTesting()
     configurePowerAssert()
-    configureKover()
 
     // Suppresses warning. See https://github.com/mockk/mockk/issues/1171
     tasks.withType<Test> {
@@ -117,72 +111,4 @@ class ConventionTest : Plugin<Project> {
       )
     }
   }
-
-  private fun Project.configureKover() {
-    extensions.configure<KoverProjectExtension> {
-      useJacoco = false
-      reports { configureKoverReports(project) }
-    }
-
-    rootProject.dependencies {
-      // Include this module in test coverage
-      val kover = rootProject.configurations.getByName("kover")
-      kover(project)
-    }
-  }
-}
-
-private fun KoverReportsConfig.configureKoverReports(project: Project) {
-  total {
-    filters {
-      excludes {
-        packages(
-          // themes, composables, etc.
-          "nasa.core.ui",
-        )
-
-        classes(
-          "*Activity*",
-          "*Application*",
-          "*BuildConfig*",
-          "*_Factory*",
-          "*_HiltModules*",
-          "*_Impl*",
-          "*Module_*",
-          "hilt_aggregated_deps*",
-          "*ComposableSingletons*",
-          "*Preview*Kt*",
-        )
-
-        annotatedBy(
-          "androidx.compose.runtime.Composable",
-          "dagger.Generated",
-          "dagger.Module",
-          "dagger.Provides",
-          "javax.annotation.processing.Generated",
-        )
-      }
-    }
-
-    log {
-      onCheck = true
-      coverageUnits = CoverageUnit.INSTRUCTION
-      aggregationForGroup = AggregationType.COVERED_PERCENTAGE
-    }
-  }
-
-  verify {
-    rule {
-      disabled = project != project.rootProject
-      bound {
-        minValue = project.intProperty(key = "blueprint.kover.minCoverage")
-        coverageUnits = CoverageUnit.INSTRUCTION
-        aggregationForGroup = AggregationType.COVERED_PERCENTAGE
-      }
-    }
-  }
-}
-
-fun KoverProjectExtension.excludeClasses(vararg classNames: String) {
-  reports.total.filters.excludes.classes(*classNames)
 }

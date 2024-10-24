@@ -29,6 +29,7 @@ plugins {
   alias(libs.plugins.kover)
 
   id("nasa.convention.test")
+  id("nasa.convention.kover")
 }
 
 // Place all local properties in the project-level gradle properties map

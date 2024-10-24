@@ -62,6 +62,7 @@ gradlePlugin {
     create(id = "nasa.convention.diagrams", impl = "nasa.gradle.ConventionDiagrams")
     create(id = "nasa.convention.hilt", impl = "nasa.gradle.ConventionHilt")
     create(id = "nasa.convention.kotlin", impl = "nasa.gradle.ConventionKotlin")
+    create(id = "nasa.convention.kover", impl = "nasa.gradle.ConventionKover")
     create(id = "nasa.convention.ktlint", impl = "nasa.gradle.ConventionKtlint")
     create(id = "nasa.convention.licensee", impl = "nasa.gradle.ConventionLicensee")
     create(id = "nasa.convention.spotless", impl = "nasa.gradle.ConventionSpotless")

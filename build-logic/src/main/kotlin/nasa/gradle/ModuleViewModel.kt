@@ -19,6 +19,7 @@ class ModuleViewModel : Plugin<Project> {
       apply(ConventionDiagrams::class.java)
       apply(ConventionHilt::class.java)
       apply(ConventionKotlin::class.java)
+      apply(ConventionKover::class.java)
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)
       apply(DependencyAnalysisPlugin::class.java)
