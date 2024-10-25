@@ -1,9 +1,11 @@
+import nasa.gradle.commonMainDependencies
+
 plugins {
-  alias(libs.plugins.module.kotlin)
+  alias(libs.plugins.module.multiplatform)
   alias(libs.plugins.kotlin.serialization)
 }
 
-dependencies {
+commonMainDependencies {
   api(libs.kotlinx.serialization.core)
 
   implementation(libs.alakazam.kotlin.core)

@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.android)
 }
 
-android {
-  namespace = "nasa.test.prefs"
-}
-
 dependencies {
   api(libs.preferences.core)
 

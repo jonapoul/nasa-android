@@ -1,8 +1,5 @@
 package nasa.core.model
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
 @JvmInline
 value class FileSize private constructor(private val bytes: Long) : Comparable<FileSize> {
   constructor(bytes: Number) : this(bytes.toLong())

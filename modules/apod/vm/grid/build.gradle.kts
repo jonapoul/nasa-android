@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.viewmodel)
 }
 
-android {
-  namespace = "nasa.apod.vm.grid"
-}
-
 dependencies {
   api(libs.alakazam.android.core)
   api(libs.androidx.lifecycle.viewmodel.core)

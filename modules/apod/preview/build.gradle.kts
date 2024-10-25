@@ -1,9 +1,10 @@
+import nasa.gradle.commonMainDependencies
+
 plugins {
-  alias(libs.plugins.module.kotlin)
-  alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.module.multiplatform)
 }
 
-dependencies {
+commonMainDependencies {
   api(libs.kotlinx.datetime)
   api(projects.apod.model)
 }

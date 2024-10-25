@@ -1,15 +1,15 @@
+import nasa.gradle.commonMainDependencies
+
 plugins {
-  alias(libs.plugins.module.kotlin)
+  alias(libs.plugins.module.multiplatform)
 }
 
-dependencies {
-  api(libs.test.junit)
+commonMainDependencies {
   api(libs.test.okhttp)
 
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)
   implementation(libs.retrofit.core)
   implementation(libs.test.kotlin.common)
-  implementation(libs.test.kotlin.junit)
   implementation(projects.core.http.factories)
 }

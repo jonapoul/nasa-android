@@ -61,7 +61,6 @@ test-androidx-junit = "1.2.1"
 test-androidx-monitor = "1.7.2"
 test-androidx-rules = "1.6.1"
 test-androidx-runner = "1.6.2"
-test-junit = "4.13.2"
 test-mockk = "1.13.13"
 test-robolectric = "4.13"
 test-timber = "1.0.1"
@@ -180,13 +179,10 @@ test-androidx-room = { module = "androidx.room:room-testing", version.ref = "and
 test-androidx-rules = { module = "androidx.test:rules", version.ref = "test-androidx-rules" }
 test-androidx-runner = { module = "androidx.test:runner", version.ref = "test-androidx-runner" }
 test-hilt = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
-test-junit = { module = "junit:junit", version.ref = "test-junit" }
 test-kotlin-common = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-test-kotlin-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 test-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 test-mockk-android = { module = "io.mockk:mockk-android", version.ref = "test-mockk" }
 test-mockk-core = { module = "io.mockk:mockk", version.ref = "test-mockk" }
-test-mockk-dsl = { module = "io.mockk:mockk-dsl", version.ref = "test-mockk" }
 test-okhttp = { module = "com.squareup.okhttp3:mockwebserver", version.ref = "okhttp" }
 test-robolectric = { module = "org.robolectric:robolectric", version.ref = "test-robolectric" }
 test-timber = { module = "net.lachlanmckee:timber-junit-rule", version.ref = "test-timber" }

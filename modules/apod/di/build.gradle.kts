@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.hilt)
 }
 
-android {
-  namespace = "nasa.apod.di"
-}
-
 dependencies {
   api(libs.alakazam.android.core)
   api(libs.dagger.core)

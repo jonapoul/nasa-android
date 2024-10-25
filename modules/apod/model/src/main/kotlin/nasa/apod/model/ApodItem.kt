@@ -1,9 +1,7 @@
 package nasa.apod.model
 
-import androidx.compose.runtime.Immutable
 import kotlinx.datetime.LocalDate
 
-@Immutable
 data class ApodItem(
   val date: LocalDate,
   val title: String,

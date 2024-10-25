@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.viewmodel)
 }
 
-android {
-  namespace = "nasa.settings.vm"
-}
-
 dependencies {
   api(libs.alakazam.android.core)
   api(libs.alakazam.kotlin.core)

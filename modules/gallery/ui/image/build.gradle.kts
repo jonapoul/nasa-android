@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.compose)
 }
 
-android {
-  namespace = "nasa.gallery.ui.image"
-}
-
 dependencies {
   api(libs.androidx.compose.runtime)
   api(libs.androidx.lifecycle.viewmodel.core)

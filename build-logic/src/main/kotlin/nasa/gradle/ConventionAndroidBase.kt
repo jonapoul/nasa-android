@@ -18,6 +18,9 @@ class ConventionAndroidBase : Plugin<Project> {
     androidDesugaringBlueprint(libs.versions.android.desugaring)
 
     extensions.findByType(CommonExtension::class)?.apply {
+      // e.g. "nasa.path.to.my.module"
+      namespace = "nasa" + path.split(":").joinToString(".")
+
       defaultConfig {
         testInstrumentationRunner = "nasa.test.NasaHiltTestRunner"
       }

@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.viewmodel)
 }
 
-android {
-  namespace = "nasa.gallery.vm.image"
-}
-
 dependencies {
   api(libs.alakazam.kotlin.core)
   api(libs.androidx.lifecycle.viewmodel.core)

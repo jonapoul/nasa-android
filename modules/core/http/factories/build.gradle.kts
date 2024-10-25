@@ -1,8 +1,10 @@
+import nasa.gradle.commonMainDependencies
+
 plugins {
-  alias(libs.plugins.module.kotlin)
+  alias(libs.plugins.module.multiplatform)
 }
 
-dependencies {
+commonMainDependencies {
   api(libs.kotlinx.serialization.json)
   api(libs.okhttp.core)
   api(libs.retrofit.core)

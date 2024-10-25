@@ -10,10 +10,6 @@ plugins {
   alias(libs.plugins.hilt)
 }
 
-android {
-  namespace = "nasa.test.hilt"
-}
-
 dependencies {
   api(libs.androidx.activity.core)
   api(libs.androidx.lifecycle.viewmodel.core)

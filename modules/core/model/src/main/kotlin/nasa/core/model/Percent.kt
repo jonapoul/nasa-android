@@ -2,11 +2,8 @@
 
 package nasa.core.model
 
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.Stable
 import kotlin.math.roundToInt
 
-@Immutable
 @JvmInline
 value class Percent(val value: Int) : Comparable<Percent> {
   constructor(value: Number) : this(value.toFloat().roundToInt())
@@ -19,7 +16,6 @@ value class Percent(val value: Int) : Comparable<Percent> {
 
   override fun toString(): String = "$value%"
 
-  @Stable
   fun toFraction(): Float = value.toFloat() / 100f
 
   companion object {

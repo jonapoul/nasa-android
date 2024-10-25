@@ -1,8 +1,5 @@
 package nasa.apod.model
 
-import androidx.compose.runtime.Immutable
-
-@Immutable
 data class ApodNavButtonsState(
   val enableNext: Boolean,
   val enablePrevious: Boolean,

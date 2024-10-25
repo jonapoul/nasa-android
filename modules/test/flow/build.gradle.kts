@@ -1,17 +1,10 @@
+import nasa.gradle.commonMainDependencies
+
 plugins {
   alias(libs.plugins.module.multiplatform)
 }
 
-android {
-  namespace = "nasa.test.flow"
-}
-
-kotlin {
-  sourceSets {
-    commonMain.dependencies {
-      api(libs.test.kotlin.common)
-      api(libs.test.kotlin.junit)
-      api(libs.test.turbine)
-    }
-  }
+commonMainDependencies {
+  api(libs.test.kotlin.common)
+  api(libs.test.turbine)
 }

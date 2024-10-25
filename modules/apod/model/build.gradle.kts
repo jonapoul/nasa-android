@@ -7,7 +7,5 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(libs.kotlinx.serialization.core)
 
-  compileOnly(libs.alakazam.kotlin.compose.annotations)
-
   testFixturesApi(projects.apod.model)
 }

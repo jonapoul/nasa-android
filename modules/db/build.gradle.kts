@@ -1,3 +1,7 @@
+import nasa.gradle.commonMainDependencies
+import nasa.gradle.commonTestDependencies
+import nasa.gradle.jvmMainDependencies
+
 plugins {
   alias(libs.plugins.module.multiplatform)
   alias(libs.plugins.ksp)
@@ -19,34 +23,26 @@ buildConfig {
   }
 }
 
-android {
-  namespace = "nasa.db"
+commonMainDependencies {
+  api(libs.androidx.room.runtime)
+  api(libs.kotlinx.coroutines)
+  api(projects.gallery.model)
+
+  implementation(libs.androidx.room.common)
+  implementation(libs.androidx.sqlite.core)
+  implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.serialization.core)
+  implementation(libs.kotlinx.serialization.json)
 }
 
-kotlin {
-  sourceSets {
-    commonMain.dependencies {
-      api(libs.androidx.room.runtime)
-      api(libs.kotlinx.coroutines)
-      api(projects.gallery.model)
+commonTestDependencies {
+  implementation(libs.test.alakazam.core)
+  implementation(libs.test.androidx.room)
+  implementation(projects.test.flow)
+}
 
-      implementation(libs.androidx.room.common)
-      implementation(libs.androidx.sqlite.core)
-      implementation(libs.kotlinx.datetime)
-      implementation(libs.kotlinx.serialization.core)
-      implementation(libs.kotlinx.serialization.json)
-    }
-
-    commonTest.dependencies {
-      implementation(libs.test.alakazam.core)
-      implementation(libs.test.androidx.room)
-      implementation(projects.test.flow)
-    }
-
-    jvmMain.dependencies {
-      implementation(libs.androidx.sqlite.bundled)
-    }
-  }
+jvmMainDependencies {
+  implementation(libs.androidx.sqlite.bundled)
 }
 
 dependencies {

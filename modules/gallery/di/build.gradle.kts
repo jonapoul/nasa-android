@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.hilt)
 }
 
-android {
-  namespace = "nasa.gallery.di"
-}
-
 dependencies {
   api(libs.alakazam.android.core)
   api(libs.dagger.core)

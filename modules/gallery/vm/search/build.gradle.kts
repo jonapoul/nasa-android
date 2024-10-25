@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.viewmodel)
 }
 
-android {
-  namespace = "nasa.gallery.vm.search"
-}
-
 dependencies {
   api(libs.alakazam.kotlin.core)
   api(libs.androidx.lifecycle.viewmodel.core)
@@ -26,7 +22,6 @@ dependencies {
 
   testImplementation(testFixtures(projects.gallery.model))
   testImplementation(libs.test.alakazam.db)
-  testImplementation(libs.test.okhttp)
   testImplementation(projects.test.flow)
   testImplementation(projects.test.http)
   testImplementation(projects.test.prefs)

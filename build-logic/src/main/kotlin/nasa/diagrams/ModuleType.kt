@@ -15,15 +15,15 @@ interface ModuleType {
 fun ModuleType.Finder.color(project: Project): Color = Color.rgb(find(project).color).fill()
 
 enum class NasaModuleType(override val string: String, override val color: String) : ModuleType {
-  AndroidApp(string = "Android App", color = "#FF5555"), // red
-  AndroidViewModel(string = "Android ViewModel", color = "#F5A6A6"), // pink
-  AndroidHilt(string = "Android Hilt", color = "#FCB103"), // orange
-  AndroidCompose(string = "Android Compose", color = "#FFFF55"), // yellow
-  AndroidLibrary(string = "Android Library", color = "#55FF55"), // green
-  AndroidResources(string = "Android Resources", color = "#00FFFF"), // cyan
+  AndroidApp(string = "App", color = "#FF5555"), // red
+  AndroidViewModel(string = "ViewModel", color = "#F5A6A6"), // pink
+  AndroidHilt(string = "Hilt", color = "#FCB103"), // orange
+  AndroidCompose(string = "Compose", color = "#FFFF55"), // yellow
+  AndroidLibrary(string = "Library", color = "#55FF55"), // green
+  AndroidResources(string = "Resources", color = "#00FFFF"), // cyan
   Navigation(string = "Navigation", color = "#5555FF"), // blue
-  Multiplatform(string = "Kotlin Multiplatform", color = "#9D8DF1"), // indigo
-  Kotlin(string = "Kotlin JVM", color = "#BB00FF"), // violet
+  Multiplatform(string = "Multiplatform", color = "#9D8DF1"), // indigo
+  Kotlin(string = "JVM", color = "#BB00FF"), // violet
   ;
 
   object Finder : ModuleType.Finder {

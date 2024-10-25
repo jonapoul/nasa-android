@@ -1,9 +1,12 @@
+import nasa.gradle.commonMainDependencies
+import nasa.gradle.commonTestDependencies
+
 plugins {
-  alias(libs.plugins.module.kotlin)
+  alias(libs.plugins.module.multiplatform)
   alias(libs.plugins.kotlin.serialization)
 }
 
-dependencies {
+commonMainDependencies {
   api(libs.kotlinx.datetime)
   api(libs.kotlinx.serialization.core)
   api(libs.retrofit.core)
@@ -12,7 +15,9 @@ dependencies {
   implementation(libs.javaxInject)
   implementation(libs.kotlinx.coroutines)
   implementation(libs.kotlinx.serialization.json)
+}
 
-  testImplementation(libs.test.okhttp)
-  testImplementation(projects.test.http)
+commonTestDependencies {
+  implementation(projects.test.http)
+  implementation(projects.test.resources)
 }

@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.viewmodel)
 }
 
-android {
-  namespace = "nasa.apod.vm.full"
-}
-
 dependencies {
   api(libs.androidx.lifecycle.viewmodel.core)
   api(libs.androidx.lifecycle.viewmodel.savedstate)

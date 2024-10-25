@@ -2,10 +2,6 @@ plugins {
   alias(libs.plugins.module.viewmodel)
 }
 
-android {
-  namespace = "nasa.home.vm"
-}
-
 dependencies {
   api(libs.alakazam.android.core)
   api(libs.androidx.lifecycle.viewmodel.core)
