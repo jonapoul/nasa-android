@@ -6,6 +6,7 @@ import nasa.core.http.factories.buildRetrofit
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.intellij.lang.annotations.Language
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 import retrofit2.Converter
@@ -25,7 +26,10 @@ class MockWebServerRule : TestWatcher() {
     server.shutdown()
   }
 
-  fun enqueue(body: String, code: Int = 200) {
+  fun enqueue(
+    @Language("JSON") body: String,
+    code: Int = 200,
+  ) {
     enqueue {
       setResponseCode(code)
       setBody(body)

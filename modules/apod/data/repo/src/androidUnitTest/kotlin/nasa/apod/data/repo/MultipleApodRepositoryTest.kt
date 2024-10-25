@@ -21,6 +21,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlin.test.assertTrue
 import kotlin.test.fail
 
 @RunWith(RobolectricTestRunner::class)
@@ -52,10 +53,7 @@ class MultipleApodRepositoryTest {
   fun `Fetch this month and store in database`() = runTest {
     // Given a valid response is returned from the server
     before()
-    webServerRule.enqueue(
-      code = 200,
-      body = getResourceAsText(filename = "multiple-full.json"),
-    )
+    enqueue(resource = "multiple-full.json")
 
     dao.observeDates().test {
       // and the database doesn't have anything initially
@@ -81,10 +79,11 @@ class MultipleApodRepositoryTest {
   fun `Requesting before valid range`() = runTest {
     // Given the server returns a successful
     before()
-    webServerRule.enqueue(body = getResourceAsText(filename = "multiple-full.json"))
+    enqueue(resource = "multiple-full.json")
 
     // When we query the API for a date before the first available, but in the same month
     val invalidDate = LocalDate.parse("1995-06-01")
+    assertTrue(invalidDate < TODAY)
     repository.loadSpecificMonth(API_KEY, invalidDate)
 
     // then the start date request parameter is locked to the minimum possible value
@@ -95,9 +94,13 @@ class MultipleApodRepositoryTest {
 
   @Test
   fun `Requesting after valid range`() = runTest {
+    // Given a dummy response is returned
+    webServerRule.enqueue(body = """{"abc": 123}""")
+
     // When we query the API for a date after the current date (15th april), but in the same month
     before()
-    val date = LocalDate.parse("2024-04-01")
+    val date = LocalDate.parse("2024-04-20")
+    assertTrue(date > TODAY)
     repository.loadSpecificMonth(API_KEY, date)
 
     // then the end date request parameter is locked before the current date
@@ -110,7 +113,7 @@ class MultipleApodRepositoryTest {
   fun `Fetch random month`() = runTest {
     // Given the server returns a successful random response
     before()
-    webServerRule.enqueue(body = getResourceAsText(filename = "multiple-full.json"))
+    enqueue(resource = "multiple-full.json")
 
     dao.observeDates().test {
       // and the database doesn't have anything initially
@@ -130,6 +133,10 @@ class MultipleApodRepositoryTest {
       assertEmissionSize(expected = 30)
       cancelAndIgnoreRemainingEvents()
     }
+  }
+
+  private fun enqueue(resource: String) {
+    webServerRule.enqueue(body = getResourceAsText(filename = resource))
   }
 
   private companion object {
