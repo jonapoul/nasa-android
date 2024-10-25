@@ -1,6 +1,5 @@
 plugins {
-  id("nasa.module.kotlin")
-  id("nasa.convention.coroutines")
+  alias(libs.plugins.module.kotlin)
 }
 
 dependencies {

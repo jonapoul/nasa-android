@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  id("nasa.module.kotlin")
+  alias(libs.plugins.module.kotlin)
   alias(libs.plugins.kotlin.serialization)
 }
 

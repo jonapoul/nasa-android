@@ -28,10 +28,7 @@ class ModuleMultiplatform : Plugin<Project> {
 
     tasks.withType<KotlinCompile> {
       compilerOptions {
-        freeCompilerArgs.addAll(
-          "-Xjvm-default=all-compatibility",
-          "-opt-in=kotlin.RequiresOptIn",
-        )
+        freeCompilerArgs.addAll(COMPILER_ARGS)
       }
     }
   }

@@ -1,5 +1,5 @@
 plugins {
-  id("nasa.module.hilt")
+  alias(libs.plugins.module.hilt)
 }
 
 android {

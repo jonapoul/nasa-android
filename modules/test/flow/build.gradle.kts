@@ -1,5 +1,5 @@
 plugins {
-  id("nasa.module.multiplatform")
+  alias(libs.plugins.module.multiplatform)
 }
 
 android {

@@ -1,5 +1,5 @@
 plugins {
-  id("nasa.module.compose")
+  alias(libs.plugins.module.compose)
 }
 
 android {

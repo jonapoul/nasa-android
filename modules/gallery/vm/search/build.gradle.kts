@@ -1,6 +1,5 @@
 plugins {
-  id("nasa.module.viewmodel")
-  id("nasa.convention.coroutines")
+  alias(libs.plugins.module.viewmodel)
 }
 
 android {

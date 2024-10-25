@@ -8,6 +8,7 @@
 ## Build
 - Publish build-logic scripts to maven repo somewhere
   - https://developer.squareup.com/blog/herding-elephants/
+- Use `extensions.getByType<VersionCatalogsExtension>().named("libs")` instead of actual libs
 
 # Mid Priority
 

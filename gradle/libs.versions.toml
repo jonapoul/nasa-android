@@ -217,3 +217,23 @@ ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
 licensee = { id = "app.cash.licensee", version.ref = "licensee" }
 licenses = { id = "com.jaredsburrows.license", version.ref = "licenses" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+
+convention-android-base = { id = "nasa.convention.android.base" }
+convention-android-library = { id = "nasa.convention.android.library" }
+convention-android-devices = { id = "nasa.convention.android.devices" }
+convention-compose = { id = "nasa.convention.compose" }
+convention-diagrams = { id = "nasa.convention.diagrams" }
+convention-hilt = { id = "nasa.convention.hilt" }
+convention-kotlin = { id = "nasa.convention.kotlin" }
+convention-kover = { id = "nasa.convention.kover" }
+convention-style = { id = "nasa.convention.style" }
+convention-test = { id = "nasa.convention.test" }
+
+module-android = { id = "nasa.module.android" }
+module-compose = { id = "nasa.module.compose" }
+module-hilt = { id = "nasa.module.hilt" }
+module-kotlin = { id = "nasa.module.kotlin" }
+module-multiplatform = { id = "nasa.module.multiplatform" }
+module-navigation = { id = "nasa.module.navigation" }
+module-resources = { id = "nasa.module.resources" }
+module-viewmodel = { id = "nasa.module.viewmodel" }

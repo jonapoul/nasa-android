@@ -15,10 +15,7 @@ class ConventionKotlin : Plugin<Project> {
     tasks.withType<KotlinCompile> {
       compilerOptions {
         jvmTarget.set(JvmTarget.fromTarget(javaVersionString()))
-        freeCompilerArgs.addAll(
-          "-Xjvm-default=all-compatibility",
-          "-opt-in=kotlin.RequiresOptIn",
-        )
+        freeCompilerArgs.addAll(COMPILER_ARGS)
       }
     }
 

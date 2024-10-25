@@ -1,6 +1,5 @@
 plugins {
-  id("nasa.module.multiplatform")
-  id("nasa.convention.coroutines")
+  alias(libs.plugins.module.multiplatform)
   alias(libs.plugins.ksp)
   alias(libs.plugins.androidx.room)
   alias(libs.plugins.buildconfig)

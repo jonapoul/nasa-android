@@ -1,5 +1,5 @@
 plugins {
-  id("nasa.module.navigation")
+  alias(libs.plugins.module.navigation)
 }
 
 dependencies {
