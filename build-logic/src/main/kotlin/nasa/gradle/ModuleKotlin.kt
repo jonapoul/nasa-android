@@ -15,6 +15,7 @@ class ModuleKotlin : Plugin<Project> {
       apply(ConventionKover::class.java)
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)
+      apply("java-test-fixtures")
       apply(DependencyAnalysisPlugin::class.java)
       apply(SortDependenciesPlugin::class.java)
     }

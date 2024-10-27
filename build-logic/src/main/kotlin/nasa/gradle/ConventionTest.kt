@@ -9,7 +9,6 @@ import org.gradle.kotlin.dsl.withType
 class ConventionTest : Plugin<Project> {
   override fun apply(target: Project): Unit = with(target) {
     with(pluginManager) {
-      apply("java-test-fixtures")
       apply(ConventionTestPowerAssert::class.java)
       apply(ConventionTestDependencies::class.java)
     }
