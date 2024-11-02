@@ -1,12 +1,12 @@
 plugins {
-  kotlin("android")
-  id("com.android.library")
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.agp.lib)
   alias(libs.plugins.convention.android.library)
   alias(libs.plugins.convention.diagrams)
   alias(libs.plugins.convention.hilt)
   alias(libs.plugins.convention.style)
-  id("com.autonomousapps.dependency-analysis")
-  id("com.squareup.sort-dependencies")
+  alias(libs.plugins.dependencyAnalysis)
+  alias(libs.plugins.dependencySort)
   alias(libs.plugins.hilt)
 }
 
@@ -17,5 +17,6 @@ dependencies {
   api(libs.hilt.core)
   api(libs.test.androidx.runner)
 
+  implementation(libs.androidx.annotation)
   implementation(libs.test.hilt)
 }
