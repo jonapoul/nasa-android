@@ -21,27 +21,25 @@ kotlin {
 }
 
 dependencies {
-  implementation(libs.plugin.agp)
-  implementation(libs.plugin.androidCacheFix)
+  compileOnly(libs.plugin.agp)
+  compileOnly(libs.plugin.androidCacheFix)
+  compileOnly(libs.plugin.compose)
+  compileOnly(libs.plugin.dependencyAnalysis)
+  compileOnly(libs.plugin.dependencyGraph)
+  compileOnly(libs.plugin.dependencySort)
+  compileOnly(libs.plugin.detekt)
+  compileOnly(libs.plugin.hilt)
+  compileOnly(libs.plugin.kotlin.gradle)
+  compileOnly(libs.plugin.kotlin.powerAssert)
+  compileOnly(libs.plugin.kover)
+  compileOnly(libs.plugin.ksp)
+  compileOnly(libs.plugin.ktlint)
+  compileOnly(libs.plugin.licensee)
+  compileOnly(libs.plugin.spotless)
+
   implementation(libs.plugin.blueprint.core)
   implementation(libs.plugin.blueprint.recipes)
-  implementation(libs.plugin.compose)
-  implementation(libs.plugin.dependencyAnalysis)
-  implementation(libs.plugin.dependencyGraph)
-  implementation(libs.plugin.dependencySort)
-  implementation(libs.plugin.detekt)
-  implementation(libs.plugin.hilt)
-  implementation(libs.plugin.kotlin.gradle)
-  implementation(libs.plugin.kotlin.powerAssert)
-  implementation(libs.plugin.kover)
-  implementation(libs.plugin.ksp)
-  implementation(libs.plugin.ktlint)
-  implementation(libs.plugin.licensee)
-  implementation(libs.plugin.spotless)
   implementation(libs.plugin.turtle)
-
-  // https://stackoverflow.com/a/70878181/15634757
-  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
 tasks {

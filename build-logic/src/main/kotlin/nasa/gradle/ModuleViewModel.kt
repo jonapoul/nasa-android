@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import com.autonomousapps.DependencyAnalysisPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
@@ -29,10 +30,10 @@ class ModuleViewModel : Plugin<Project> {
     val implementation by configurations
 
     dependencies {
-      api(libs.androidx.lifecycle.viewmodel.core)
-      api(libs.dagger.core)
-      implementation(libs.hilt.android)
-      implementation(libs.molecule)
+      api(libs.getLibrary("androidx.lifecycle.viewmodel.core"))
+      api(libs.getLibrary("dagger.core"))
+      implementation(libs.getLibrary("hilt.android"))
+      implementation(libs.getLibrary("molecule"))
     }
   }
 }

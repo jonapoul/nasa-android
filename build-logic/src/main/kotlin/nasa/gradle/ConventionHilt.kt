@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import com.google.devtools.ksp.gradle.KspGradleSubplugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -19,11 +20,11 @@ class ConventionHilt : Plugin<Project> {
     val androidTestImplementation by configurations
 
     dependencies {
-      ksp(libs.hilt.compiler)
-      kspTest(libs.hilt.compiler)
+      ksp(libs.getLibrary("hilt.compiler"))
+      kspTest(libs.getLibrary("hilt.compiler"))
 
-      testImplementation(libs.test.hilt)
-      androidTestImplementation(libs.test.hilt)
+      testImplementation(libs.getLibrary("test.hilt"))
+      androidTestImplementation(libs.getLibrary("test.hilt"))
     }
   }
 }

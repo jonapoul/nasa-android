@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import blueprint.recipes.DetektAll
 import blueprint.recipes.detektBlueprint
 import org.gradle.api.Plugin
@@ -16,7 +17,7 @@ class ConventionDetekt : Plugin<Project> {
 
     val detektPlugins by configurations
     dependencies {
-      detektPlugins(libs.plugin.detektCompose)
+      detektPlugins(libs.getLibrary("plugin.detektCompose"))
     }
   }
 }

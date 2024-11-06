@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -15,7 +16,7 @@ class ModuleNavigation : Plugin<Project> {
 
     val implementation by configurations
     dependencies {
-      implementation(libs.kotlinx.serialization.core)
+      implementation(libs.getLibrary("kotlinx.serialization.core"))
     }
   }
 }

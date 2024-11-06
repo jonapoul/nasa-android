@@ -2,6 +2,8 @@
 
 package nasa.gradle
 
+import blueprint.core.getLibrary
+import blueprint.core.getVersion
 import blueprint.recipes.androidBaseBlueprint
 import blueprint.recipes.androidDesugaringBlueprint
 import com.android.build.api.dsl.CommonExtension
@@ -9,13 +11,12 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.findByType
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.provideDelegate
 
 class ConventionAndroidBase : Plugin<Project> {
   override fun apply(target: Project) = with(target) {
     androidBaseBlueprint()
-    androidDesugaringBlueprint(libs.versions.android.desugaring)
+
+    androidDesugaringBlueprint(libs.getVersion("android.desugaring"))
 
     extensions.findByType(CommonExtension::class)?.apply {
       // e.g. "nasa.path.to.my.module"
@@ -33,9 +34,8 @@ class ConventionAndroidBase : Plugin<Project> {
       }
     }
 
-    val implementation by configurations
     dependencies {
-      implementation(libs.timber)
+      add("implementation", libs.getLibrary("timber"))
     }
   }
 }

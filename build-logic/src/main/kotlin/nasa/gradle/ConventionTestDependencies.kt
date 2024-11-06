@@ -1,10 +1,13 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import com.android.build.gradle.api.AndroidBasePlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.project
+import org.gradle.kotlin.dsl.provideDelegate
 
 class ConventionTestDependencies : Plugin<Project> {
   override fun apply(target: Project): Unit = with(target) {
@@ -17,33 +20,33 @@ class ConventionTestDependencies : Plugin<Project> {
         testImplementation(project(":test:resources"))
 
         if (isAndroid) {
-          testImplementation(libs.test.androidx.arch)
-          testImplementation(libs.test.androidx.coreKtx)
-          testImplementation(libs.test.androidx.junit)
-          testImplementation(libs.test.androidx.rules)
-          testImplementation(libs.test.androidx.runner)
-          testImplementation(libs.test.mockk.android)
-          testImplementation(libs.test.robolectric)
-          testImplementation(libs.test.timber)
+          testImplementation(libs.getLibrary("test.androidx.arch"))
+          testImplementation(libs.getLibrary("test.androidx.coreKtx"))
+          testImplementation(libs.getLibrary("test.androidx.junit"))
+          testImplementation(libs.getLibrary("test.androidx.rules"))
+          testImplementation(libs.getLibrary("test.androidx.runner"))
+          testImplementation(libs.getLibrary("test.mockk.android"))
+          testImplementation(libs.getLibrary("test.robolectric"))
+          testImplementation(libs.getLibrary("test.timber"))
 
-          val debugImplementation = configurations.getByName("debugImplementation")
-          debugImplementation(libs.test.androidx.monitor)
+          val debugImplementation by configurations
+          debugImplementation(libs.getLibrary("test.androidx.monitor"))
           debugImplementation(project(":test:hilt"))
 
-          val androidTestImplementation = configurations.getByName("androidTestImplementation")
-          androidTestImplementation(libs.test.alakazam.core)
-          androidTestImplementation(libs.test.androidx.arch)
-          androidTestImplementation(libs.test.androidx.coreKtx)
-          androidTestImplementation(libs.test.androidx.espresso.core)
-          androidTestImplementation(libs.test.androidx.espresso.intents)
-          androidTestImplementation(libs.test.androidx.junit)
-          androidTestImplementation(libs.test.androidx.navigation)
-          androidTestImplementation(libs.test.androidx.rules)
-          androidTestImplementation(libs.test.androidx.runner)
-          androidTestImplementation(libs.test.kotlin.common)
-          androidTestImplementation(libs.test.kotlinx.coroutines)
-          androidTestImplementation(libs.test.timber)
-          androidTestImplementation(libs.test.turbine)
+          val androidTestImplementation by configurations
+          androidTestImplementation(libs.getLibrary("test.alakazam.core"))
+          androidTestImplementation(libs.getLibrary("test.androidx.arch"))
+          androidTestImplementation(libs.getLibrary("test.androidx.coreKtx"))
+          androidTestImplementation(libs.getLibrary("test.androidx.espresso.core"))
+          androidTestImplementation(libs.getLibrary("test.androidx.espresso.intents"))
+          androidTestImplementation(libs.getLibrary("test.androidx.junit"))
+          androidTestImplementation(libs.getLibrary("test.androidx.navigation"))
+          androidTestImplementation(libs.getLibrary("test.androidx.rules"))
+          androidTestImplementation(libs.getLibrary("test.androidx.runner"))
+          androidTestImplementation(libs.getLibrary("test.kotlin.common"))
+          androidTestImplementation(libs.getLibrary("test.kotlinx.coroutines"))
+          androidTestImplementation(libs.getLibrary("test.timber"))
+          androidTestImplementation(libs.getLibrary("test.turbine"))
           androidTestImplementation(project(":test:resources"))
         }
       }

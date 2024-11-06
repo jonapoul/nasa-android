@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import com.autonomousapps.DependencyAnalysisPlugin
 import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
@@ -25,7 +26,7 @@ class ModuleHilt : Plugin<Project> {
     val implementation by configurations
 
     dependencies {
-      implementation(libs.hilt.core)
+      implementation(libs.getLibrary("hilt.core"))
     }
   }
 }

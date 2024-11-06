@@ -1,5 +1,6 @@
 package nasa.gradle
 
+import blueprint.core.getLibrary
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -41,15 +42,15 @@ class ConventionCompose : Plugin<Project> {
     val lintChecks by configurations
 
     dependencies {
-      implementation(platform(libs.androidx.compose.bom))
-      lintChecks(libs.androidx.compose.lint)
+      implementation(platform(libs.getLibrary("androidx.compose.bom")))
+      lintChecks(libs.getLibrary("androidx.compose.lint"))
 
       // Testing
-      debugImplementation(libs.test.androidx.compose.ui.manifest)
+      debugImplementation(libs.getLibrary("test.androidx.compose.ui.manifest"))
 
       // UI testing
-      androidTestImplementation(platform(libs.androidx.compose.bom))
-      androidTestImplementation(libs.test.androidx.compose.ui.junit4)
+      androidTestImplementation(platform(libs.getLibrary("androidx.compose.bom")))
+      androidTestImplementation(libs.getLibrary("test.androidx.compose.ui.junit4"))
     }
   }
 }
