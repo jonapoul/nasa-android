@@ -55,7 +55,6 @@ gradlePlugin {
   plugins {
     create(id = "nasa.convention.android.base", impl = "nasa.gradle.ConventionAndroidBase")
     create(id = "nasa.convention.android.library", impl = "nasa.gradle.ConventionAndroidLibrary")
-    create(id = "nasa.convention.android.devices", impl = "nasa.gradle.ConventionAndroidManagedDevices")
     create(id = "nasa.convention.compose", impl = "nasa.gradle.ConventionCompose")
     create(id = "nasa.convention.detekt", impl = "nasa.gradle.ConventionDetekt")
     create(id = "nasa.convention.diagrams", impl = "nasa.gradle.ConventionDiagrams")

@@ -216,7 +216,6 @@ spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 convention-android-base = { id = "nasa.convention.android.base" }
 convention-android-library = { id = "nasa.convention.android.library" }
-convention-android-devices = { id = "nasa.convention.android.devices" }
 convention-compose = { id = "nasa.convention.compose" }
 convention-diagrams = { id = "nasa.convention.diagrams" }
 convention-hilt = { id = "nasa.convention.hilt" }

@@ -14,7 +14,6 @@ class ModuleViewModel : Plugin<Project> {
     with(pluginManager) {
       apply(KotlinAndroidPluginWrapper::class.java)
       apply(ConventionAndroidLibrary::class.java)
-      apply(ConventionAndroidManagedDevices::class.java)
       apply(ConventionCompose::class.java)
       apply(ConventionDiagrams::class.java)
       apply(ConventionHilt::class.java)

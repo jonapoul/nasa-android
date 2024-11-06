@@ -15,7 +15,6 @@ plugins {
   alias(libs.plugins.licenses)
   alias(libs.plugins.convention.kotlin)
   alias(libs.plugins.convention.android.base)
-  alias(libs.plugins.convention.android.devices)
   alias(libs.plugins.convention.compose)
   alias(libs.plugins.convention.diagrams)
   alias(libs.plugins.convention.hilt)
