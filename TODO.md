@@ -8,7 +8,11 @@
 ## Build
 - Publish build-logic scripts to maven repo somewhere
   - https://developer.squareup.com/blog/herding-elephants/
-- Use `extensions.getByType<VersionCatalogsExtension>().named("libs")` instead of actual libs
+
+## APOD
+- Crash when going to grid screen? Saveable key wrong type when using a date?
+- First time going full screen doesn't load image, second time does
+- Flash of the android icon when loading images?
 
 # Mid Priority
 
@@ -27,6 +31,9 @@
 
 ## Settings
 - Add search page size option
+
+## APOD
+- Save images to favourites, view in grid/list
 
 # Low Priority
 

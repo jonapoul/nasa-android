@@ -12,27 +12,28 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.hazeChild
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
-import nasa.apod.preview.PREVIEW_DATE
-import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.res.R
 import nasa.core.ui.Dimensions
-import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
-import nasa.core.ui.color.topAppBarColors
-import nasa.core.ui.preview.PreviewColumn
 
 @Composable
 internal fun ApodFullScreenTopBar(
   date: LocalDate,
   item: ApodItem?,
+  hazeState: HazeState,
+  hazeStyle: HazeStyle,
   theme: Theme,
   onClickedBack: () -> Unit,
 ) {
@@ -42,7 +43,11 @@ internal fun ApodFullScreenTopBar(
       .wrapContentHeight(),
   ) {
     TopAppBar(
-      colors = theme.topAppBarColors(),
+      modifier = Modifier.hazeChild(hazeState, hazeStyle),
+      colors = TopAppBarDefaults.largeTopAppBarColors(
+        containerColor = Color.Transparent,
+        scrolledContainerColor = Color.Transparent,
+      ),
       title = {
         item ?: return@TopAppBar
         Text(
@@ -63,8 +68,9 @@ internal fun ApodFullScreenTopBar(
 
     Box(
       modifier = Modifier
+        .hazeChild(hazeState, hazeStyle)
         .fillMaxWidth()
-        .background(theme.toolbarBackgroundSubdued)
+        .background(Color.Transparent)
         .padding(Dimensions.Medium),
       contentAlignment = Alignment.Center,
     ) {
@@ -72,30 +78,8 @@ internal fun ApodFullScreenTopBar(
         text = date.toString(),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
-        color = theme.toolbarTextSubdued,
+        color = theme.pageText,
       )
     }
   }
-}
-
-@Preview
-@Composable
-private fun PreviewFull() = PreviewColumn {
-  ApodFullScreenTopBar(
-    date = PREVIEW_DATE,
-    item = PREVIEW_ITEM_1,
-    theme = LocalTheme.current,
-    onClickedBack = {},
-  )
-}
-
-@Preview
-@Composable
-private fun PreviewNullItem() = PreviewColumn {
-  ApodFullScreenTopBar(
-    date = PREVIEW_DATE,
-    item = null,
-    theme = LocalTheme.current,
-    onClickedBack = {},
-  )
 }

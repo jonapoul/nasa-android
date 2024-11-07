@@ -39,6 +39,7 @@ androidx-room = "2.7.0-alpha10"
 androidx-splash = "1.0.1"
 androidx-sqlite = "2.5.0-alpha10"
 coil = "2.7.0"
+haze = "1.0.0"
 javaxInject = "1"
 kotlinx-coroutines = "1.9.0"
 kotlinx-datetime = "0.6.1"
@@ -141,6 +142,8 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-composeBase = { module = "io.coil-kt:coil-compose-base", version.ref = "coil" }
 coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 dagger-core = { module = "com.google.dagger:dagger", version.ref = "hilt" }
+haze-core = { module = "dev.chrisbanes.haze:haze", version.ref = "haze" }
+haze-materials = { module = "dev.chrisbanes.haze:haze-materials", version.ref = "haze" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "hilt" }
