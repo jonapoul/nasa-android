@@ -39,7 +39,7 @@ The app pulls metadata about each image from the APOD service, then caches that 
 # Building
 
 ## JDK
-This project uses JDK 22 - so make sure you have this installed and selected in your IDE settings before building. I personally used the Zulu variant, but ideally there shouldn't be any practical difference.
+This project uses JDK 21 - so make sure you have this installed and selected in your IDE settings before building. I personally used the Zulu variant, but ideally there shouldn't be any practical difference.
 
 ## Command Line
 Open in Android Studio and run:
@@ -96,21 +96,21 @@ See the diagrams in each submodule's README to view the web of modules underneat
 
 This project uses (amongst others):
 
-| Name                  | Purpose |
-|-----------------------|--|
-| Jetpack Compose       | UI framework |
+| Name                  | Purpose                      |
+|-----------------------|------------------------------|
+| Jetpack Compose       | UI framework                 |
 | AndroidX Navigation   | Screen navigation in Compose |
-| Retrofit + OkHttp     | HTTP API requests |
-| kotlinx-serialization | JSON serialization |
-| Room                  | SQLite databases |
-| Timber                | Logging |
-| Coil                  | Image loading |
-| Hilt                  | Dependency injection |
-| Turbine               | Testing flows |
-| JUnit 4               | Testing |
-| MockK                 | Testing |
+| Retrofit + OkHttp     | HTTP API requests            |
+| kotlinx-serialization | JSON serialization           |
+| Room                  | SQLite databases             |
+| Timber                | Logging                      |
+| Coil                  | Image loading                |
+| Hilt                  | Dependency injection         |
+| Turbine               | Testing flows                |
+| JUnit 4               | Testing                      |
+| MockK                 | Testing                      |
 
-See the [libs.versions.toml](gradle/libs.versions.toml) file for a full listing.
+See the [libs.versions.toml](gradle/libs.versions.toml) file for a full listing, or the Licenses screen in-app (accessible via the About screen).
 
 # License
 
