@@ -23,6 +23,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import coil.request.ImageRequest
+import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.haze
+import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
+import dev.chrisbanes.haze.materials.HazeMaterials
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
 import nasa.apod.preview.PREVIEW_DATE
@@ -40,6 +44,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
 
+@OptIn(ExperimentalHazeMaterialsApi::class)
 @Composable
 internal fun ApodFullScreenImpl(
   date: LocalDate,
@@ -48,8 +53,11 @@ internal fun ApodFullScreenImpl(
   onClickedBack: () -> Unit,
 ) {
   val theme = LocalTheme.current
+  val hazeState = remember { HazeState() }
+  val hazeStyle = HazeMaterials.ultraThin(theme.pageBackground)
+
   Scaffold(
-    topBar = { ApodFullScreenTopBar(date, item, theme, onClickedBack) },
+    topBar = { ApodFullScreenTopBar(date, item, hazeState, hazeStyle, theme, onClickedBack) },
   ) { innerPadding ->
     item ?: return@Scaffold
     BackgroundSurface(theme = theme) {
@@ -57,6 +65,7 @@ internal fun ApodFullScreenImpl(
         modifier = Modifier.padding(innerPadding),
         item = item,
         progress = progress,
+        hazeState = hazeState,
         theme = theme,
       )
     }
@@ -67,6 +76,7 @@ internal fun ApodFullScreenImpl(
 private fun ApodFullScreenContent(
   item: ApodItem,
   progress: Percent,
+  hazeState: HazeState,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
 ) {
@@ -87,8 +97,11 @@ private fun ApodFullScreenContent(
   ) {
     var scale by remember { mutableFloatStateOf(1f) }
     var loaded by remember { mutableStateOf(false) }
+
     LoadableImage(
-      modifier = Modifier.fillMaxSize(),
+      modifier = Modifier
+        .haze(hazeState)
+        .fillMaxSize(),
       request = request,
       progress = progress,
       contentDescription = item.title,
