@@ -10,7 +10,12 @@ import androidx.core.view.WindowCompat
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 
+/**
+ * [android.view.Window.setNavigationBarColor] and [android.view.Window.setStatusBarColor] are deprecated, and have no
+ * effect in Android 15
+ */
 @Composable
+@Suppress("DEPRECATION")
 internal fun SetStatusBarColors(
   theme: Theme = LocalTheme.current,
   statusBarColor: Color = theme.toolbarBackground,
