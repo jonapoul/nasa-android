@@ -19,7 +19,7 @@ enum class NasaModuleType(override val string: String, override val color: Strin
   AndroidViewModel(string = "ViewModel", color = "#F5A6A6"), // pink
   AndroidHilt(string = "Hilt", color = "#FCB103"), // orange
   AndroidCompose(string = "Compose", color = "#FFFF55"), // yellow
-  AndroidLibrary(string = "Library", color = "#55FF55"), // green
+  AndroidLibrary(string = "Android", color = "#55FF55"), // green
   AndroidResources(string = "Resources", color = "#00FFFF"), // cyan
   Navigation(string = "Navigation", color = "#5555FF"), // blue
   Multiplatform(string = "Multiplatform", color = "#9D8DF1"), // indigo
