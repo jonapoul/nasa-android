@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
+import nasa.core.res.CoreStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -37,7 +37,7 @@ internal fun AboutHeader(
     horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
   ) {
-    val appName = stringResource(id = CoreR.string.app_name)
+    val appName = CoreStrings.appName
     Image(
       modifier = Modifier.size(80.dp),
       painter = painterResource(id = CoreR.mipmap.app_icon_round),
@@ -57,11 +57,11 @@ internal fun AboutHeader(
         color = theme.pageText,
       )
       Text(
-        text = stringResource(id = R.string.about_subtitle1, year),
+        text = AboutStrings.subtitle1(year),
         color = theme.pageTextSubdued,
       )
       Text(
-        text = stringResource(id = R.string.about_subtitle2),
+        text = AboutStrings.subtitle2,
         color = theme.pageTextSubdued,
       )
     }

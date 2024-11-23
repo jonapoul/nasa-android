@@ -15,7 +15,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,7 +24,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
-import nasa.home.res.R
+import nasa.home.res.HomeStrings
 import nasa.home.vm.ApiUsageState
 
 @Composable
@@ -62,7 +61,7 @@ private fun ApiUsageDialogContent(
     modifier = modifier,
     theme = theme,
     icon = Icons.Filled.Api,
-    title = stringResource(id = R.string.home_usage_dialog_title),
+    title = HomeStrings.usageDialogTitle,
     content = {
       ApiUsageDialogContentImpl(
         state = state,
@@ -72,7 +71,7 @@ private fun ApiUsageDialogContent(
     buttons = {
       TextButton(onClick = onDismiss) {
         Text(
-          text = stringResource(id = R.string.home_usage_dialog_ok),
+          text = HomeStrings.usageDialogOk,
           color = theme.pageTextPrimary,
         )
       }
@@ -118,7 +117,7 @@ private fun NoKey(
     modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Text(text = stringResource(id = R.string.home_usage_dialog_no_key))
+    Text(text = HomeStrings.usageDialogNoKey)
     RegisterButton(onClickRegister)
   }
 }
@@ -132,7 +131,7 @@ private fun HasDemoKey(
     modifier = modifier,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Text(text = stringResource(id = R.string.home_usage_dialog_demo_key))
+    Text(text = HomeStrings.usageDialogDemoKey)
     RegisterButton(onClickRegister)
   }
 }
@@ -144,7 +143,7 @@ private fun NoUsage(
   Column(
     modifier = modifier,
   ) {
-    Text(text = stringResource(id = R.string.home_usage_dialog_no_usage))
+    Text(text = HomeStrings.usageDialogNoUsage)
   }
 }
 
@@ -155,7 +154,7 @@ private fun RegisterButton(
 ) {
   PrimaryTextButton(
     modifier = modifier,
-    text = stringResource(id = R.string.home_usage_dialog_register),
+    text = HomeStrings.usageDialogRegister,
     onClick = onClickRegister,
   )
 }
@@ -170,11 +169,11 @@ private fun ApiUsageTable(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     ApiUsageRow(
-      title = stringResource(R.string.home_usage_dialog_remaining),
+      title = HomeStrings.usageDialogRemaining,
       value = state.remaining.toString(),
     )
     ApiUsageRow(
-      title = stringResource(R.string.home_usage_dialog_limit),
+      title = HomeStrings.usageDialogLimit,
       value = state.upperLimit.toString(),
     )
   }

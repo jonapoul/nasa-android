@@ -13,14 +13,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.core.res.R
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
+import nasa.core.res.CoreStrings
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -36,7 +35,7 @@ fun LoadFailure(
   Column(
     modifier = modifier
       .wrapContentSize()
-      .padding(Dimensions.Large),
+      .padding(CoreDimens.large),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
   ) {
@@ -50,7 +49,7 @@ fun LoadFailure(
     VerticalSpacer(10.dp)
 
     Text(
-      text = stringResource(id = R.string.failed_title),
+      text = CoreStrings.failedTitle,
       textAlign = TextAlign.Center,
       fontWeight = FontWeight.Bold,
       color = theme.errorText,
@@ -67,7 +66,7 @@ fun LoadFailure(
     VerticalSpacer(20.dp)
 
     PrimaryTextButton(
-      text = stringResource(id = R.string.failed_retry),
+      text = CoreStrings.failedRetry,
       onClick = onRetryLoad,
       theme = theme,
     )

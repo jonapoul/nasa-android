@@ -28,7 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.primaryButton
@@ -143,7 +143,7 @@ fun PrimaryTextButtonWithLoading(
             .alpha(if (isLoading) 1f else 0f)
             .size(20.dp),
           color = LocalTheme.current.buttonPrimaryText,
-          strokeWidth = Dimensions.Small,
+          strokeWidth = CoreDimens.small,
         )
 
         Text(
@@ -178,7 +178,7 @@ fun BasicTextButton(
   val isPressed by interactionSource.collectIsPressedAsState()
 
   TextButton(
-    modifier = modifier.widthIn(min = Dimensions.Tiny),
+    modifier = modifier.widthIn(min = CoreDimens.tiny),
     enabled = isEnabled,
     shape = shape,
     colors = colors(theme, isPressed),

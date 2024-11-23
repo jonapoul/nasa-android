@@ -32,7 +32,7 @@ import coil.compose.AsyncImage
 import nasa.apod.model.ApodItem
 import nasa.apod.model.ApodMediaType
 import nasa.apod.preview.PREVIEW_ITEM_1
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -50,7 +50,7 @@ internal fun ApodGridItem(
   Box(
     modifier = modifier
       .width(ITEM_SIZE)
-      .padding(Dimensions.Large)
+      .padding(CoreDimens.large)
       .clickable { onAction(ApodGridAction.NavToItem(item)) },
     contentAlignment = Alignment.BottomCenter,
   ) {
@@ -108,7 +108,7 @@ internal fun ApodGridItem(
         modifier = Modifier
           .fillMaxWidth()
           .background(theme.cardBackground.copy(alpha = 0.6f))
-          .padding(Dimensions.Large),
+          .padding(CoreDimens.large),
       ) {
         Text(
           text = item.title,

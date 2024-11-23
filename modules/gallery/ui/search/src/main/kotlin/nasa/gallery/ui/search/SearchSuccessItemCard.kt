@@ -17,7 +17,6 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -28,13 +27,13 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import nasa.core.res.CoreDimens
 import nasa.core.ui.CardShape
-import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.model.MediaType
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 import nasa.gallery.vm.search.SearchResultItem
 
 @Stable
@@ -49,9 +48,9 @@ internal fun SearchSuccessItemCard(
     modifier = modifier
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(Dimensions.Medium)
+      .padding(CoreDimens.medium)
       .background(theme.cardBackground, CardShape)
-      .padding(Dimensions.Large)
+      .padding(CoreDimens.large)
       .clickable { onAction(SearchAction.NavToImage(item.nasaId)) },
     horizontalArrangement = Arrangement.Start,
     verticalAlignment = Alignment.Top,
@@ -62,7 +61,7 @@ internal fun SearchSuccessItemCard(
       sizeModifier = { size(PREVIEW_SIZE) },
     )
 
-    HorizontalSpacer(Dimensions.Large)
+    HorizontalSpacer(CoreDimens.large)
 
     Column(
       modifier = Modifier
@@ -84,39 +83,39 @@ internal fun SearchSuccessItemCard(
       )
 
       TitleAndValue(
-        title = stringResource(id = R.string.search_item_date),
+        title = GalleryStrings.searchItemDate,
         value = item.dateCreated,
         stringifier = { dateFormat(it) },
         theme = theme,
       )
 
       TitleAndValue(
-        title = stringResource(id = R.string.search_item_type),
+        title = GalleryStrings.searchItemType,
         value = item.mediaType,
         stringifier = { it.string() },
         theme = theme,
       )
 
       TitleAndValue(
-        title = stringResource(id = R.string.search_item_center),
+        title = GalleryStrings.searchItemCenter,
         value = item.center,
         theme = theme,
       )
 
       TitleAndValue(
-        title = stringResource(id = R.string.search_item_location),
+        title = GalleryStrings.searchItemLocation,
         value = item.location,
         theme = theme,
       )
 
       TitleAndValue(
-        title = stringResource(id = R.string.search_item_photographer),
+        title = GalleryStrings.searchItemPhotographer,
         value = item.photographer,
         theme = theme,
       )
 
       TitleAndValue(
-        title = stringResource(id = R.string.search_item_description),
+        title = GalleryStrings.searchItemDescription,
         value = item.description508,
         theme = theme,
         maxLines = 5,
@@ -150,7 +149,7 @@ private fun <T : Any> TitleAndValue(
       lineHeight = SMALLER_TEXT_SIZE,
     )
 
-    HorizontalSpacer(Dimensions.Medium)
+    HorizontalSpacer(CoreDimens.medium)
 
     Text(
       modifier = Modifier.weight(1f),
@@ -167,13 +166,11 @@ private fun <T : Any> TitleAndValue(
 
 @Stable
 @Composable
-private fun MediaType.string() = stringResource(
-  id = when (this) {
-    MediaType.Audio -> R.string.media_type_audio
-    MediaType.Image -> R.string.media_type_image
-    MediaType.Video -> R.string.media_type_video
-  },
-)
+private fun MediaType.string() = when (this) {
+  MediaType.Audio -> GalleryStrings.mediaTypeAudio
+  MediaType.Image -> GalleryStrings.mediaTypeImage
+  MediaType.Video -> GalleryStrings.mediaTypeVideo
+}
 
 @Stable
 @Composable

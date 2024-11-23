@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
@@ -30,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import my.nanihadesuka.compose.LazyColumnScrollbar
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -40,7 +39,7 @@ import nasa.core.ui.preview.ScreenPreview
 import nasa.gallery.model.NasaId
 import nasa.gallery.model.SearchViewConfig
 import nasa.gallery.model.SearchViewType
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 import nasa.gallery.vm.search.SearchResultItem
 import nasa.gallery.vm.search.SearchState
 
@@ -61,17 +60,17 @@ internal fun SearchSuccess(
   Column(
     modifier = modifier
       .fillMaxSize()
-      .padding(horizontal = Dimensions.Medium),
+      .padding(horizontal = CoreDimens.medium),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Top,
   ) {
     Text(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(Dimensions.Large),
+        .padding(CoreDimens.large),
       fontWeight = FontWeight.Bold,
       style = MaterialTheme.typography.displaySmall,
-      text = stringResource(R.string.search_results_header, state.totalResults),
+      text = GalleryStrings.searchResultsHeader(state.totalResults),
     )
 
     when (config.type) {
@@ -94,13 +93,13 @@ internal fun SearchSuccess(
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(Dimensions.Medium),
+        .padding(CoreDimens.medium),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       val previousPage = state.prevPageNumber
       PrimaryIconButton(
         imageVector = Icons.Filled.ArrowBackIosNew,
-        contentDescription = stringResource(R.string.search_page_previous),
+        contentDescription = GalleryStrings.searchPagePrevious,
         enabled = previousPage != null,
         onClick = { if (previousPage != null) onAction(SearchAction.SelectPage(previousPage)) },
       )
@@ -109,13 +108,13 @@ internal fun SearchSuccess(
         modifier = Modifier.weight(1f),
         style = MaterialTheme.typography.bodyLarge,
         textAlign = TextAlign.Center,
-        text = stringResource(R.string.search_results_page, state.pageNumber, estimatedNumPages),
+        text = GalleryStrings.searchResultsPage(state.pageNumber, estimatedNumPages),
       )
 
       val nextPage = state.nextPageNumber
       PrimaryIconButton(
         imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
-        contentDescription = stringResource(R.string.search_page_next),
+        contentDescription = GalleryStrings.searchPageNext,
         enabled = nextPage != null,
         onClick = { if (nextPage != null) onAction(SearchAction.SelectPage(nextPage)) },
       )

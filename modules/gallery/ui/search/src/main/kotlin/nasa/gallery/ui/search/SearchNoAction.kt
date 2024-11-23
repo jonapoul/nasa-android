@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -18,7 +17,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 
 @Composable
 internal fun SearchNoAction(
@@ -37,7 +36,7 @@ internal fun SearchNoAction(
     )
 
     Text(
-      text = stringResource(id = R.string.search_no_action),
+      text = GalleryStrings.searchNoAction,
       color = theme.pageText,
       fontSize = 18.sp,
       textAlign = TextAlign.Center,

@@ -14,14 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import nasa.apod.model.EARLIEST_APOD_DATE
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.datePicker
@@ -55,7 +54,7 @@ internal fun SearchDayDialog(
     dismissButton = {
       TextButton(onClick = onCancel) {
         Text(
-          text = stringResource(R.string.search_dialog_cancel),
+          text = ApodStrings.searchDialogCancel,
           color = theme.pageTextPrimary,
         )
       }
@@ -63,7 +62,7 @@ internal fun SearchDayDialog(
     confirmButton = {
       TextButton(onClick = { onConfirm(selectedDate ?: initialDate) }) {
         Text(
-          text = stringResource(R.string.search_dialog_confirm),
+          text = ApodStrings.searchDialogConfirm,
           color = theme.pageTextPrimary,
         )
       }

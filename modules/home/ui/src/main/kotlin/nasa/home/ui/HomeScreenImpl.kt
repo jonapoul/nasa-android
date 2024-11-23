@@ -30,7 +30,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import my.nanihadesuka.compose.LazyColumnScrollbar
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.scrollbarSettings
@@ -104,7 +104,7 @@ private fun HomeScreenContent(
   LazyColumnScrollbar(
     modifier = modifier
       .fillMaxSize()
-      .padding(Dimensions.Medium),
+      .padding(CoreDimens.medium),
     state = state,
     settings = theme.scrollbarSettings(),
   ) {

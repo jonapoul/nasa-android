@@ -9,11 +9,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
-import nasa.licenses.res.R
+import nasa.licenses.res.LicensesStrings
 import nasa.licenses.vm.SearchBarState
 
 @Composable
@@ -28,13 +27,13 @@ internal fun LicensesTopBar(
       IconButton(onClick = { onAction(LicensesAction.NavBack) }) {
         Icon(
           imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-          contentDescription = stringResource(id = R.string.licenses_toolbar_back),
+          contentDescription = LicensesStrings.toolbarBack,
         )
       }
     },
     title = {
       Text(
-        text = stringResource(id = R.string.licenses_toolbar_title),
+        text = LicensesStrings.toolbarTitle,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
@@ -46,7 +45,7 @@ internal fun LicensesTopBar(
             SearchBarState.Gone -> Icons.Filled.Search
             is SearchBarState.Visible -> Icons.Filled.SearchOff
           },
-          contentDescription = stringResource(R.string.licenses_toolbar_search),
+          contentDescription = LicensesStrings.toolbarSearch,
         )
       }
     },

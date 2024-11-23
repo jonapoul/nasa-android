@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,9 +26,9 @@ import kotlinx.datetime.Month
 import nasa.apod.model.ApodNavButtonsState
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.preview.PREVIEW_ITEM_2
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.core.model.ApiKey
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
@@ -54,7 +53,7 @@ internal fun MonthHeader(
       .background(theme.toolbarBackgroundSubdued)
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(Dimensions.Large),
+      .padding(CoreDimens.large),
     horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
   ) {
@@ -73,7 +72,7 @@ internal fun MonthHeader(
     MonthTitle(
       modifier = Modifier
         .weight(1f)
-        .padding(horizontal = Dimensions.Large),
+        .padding(horizontal = CoreDimens.large),
       state = state,
       theme = theme,
     )
@@ -121,22 +120,20 @@ private fun MonthTitle(
 
 @Stable
 @Composable
-fun Month.string(): String = stringResource(
-  when (this) {
-    JavaMonth.JANUARY -> R.string.month_1
-    JavaMonth.FEBRUARY -> R.string.month_2
-    JavaMonth.MARCH -> R.string.month_3
-    JavaMonth.APRIL -> R.string.month_4
-    JavaMonth.MAY -> R.string.month_5
-    JavaMonth.JUNE -> R.string.month_6
-    JavaMonth.JULY -> R.string.month_7
-    JavaMonth.AUGUST -> R.string.month_8
-    JavaMonth.SEPTEMBER -> R.string.month_9
-    JavaMonth.OCTOBER -> R.string.month_10
-    JavaMonth.NOVEMBER -> R.string.month_11
-    JavaMonth.DECEMBER -> R.string.month_12
-  },
-)
+fun Month.string(): String = when (this) {
+  JavaMonth.JANUARY -> ApodStrings.month1
+  JavaMonth.FEBRUARY -> ApodStrings.month2
+  JavaMonth.MARCH -> ApodStrings.month3
+  JavaMonth.APRIL -> ApodStrings.month4
+  JavaMonth.MAY -> ApodStrings.month5
+  JavaMonth.JUNE -> ApodStrings.month6
+  JavaMonth.JULY -> ApodStrings.month7
+  JavaMonth.AUGUST -> ApodStrings.month8
+  JavaMonth.SEPTEMBER -> ApodStrings.month9
+  JavaMonth.OCTOBER -> ApodStrings.month10
+  JavaMonth.NOVEMBER -> ApodStrings.month11
+  JavaMonth.DECEMBER -> ApodStrings.month12
+}
 
 @Preview
 @Composable

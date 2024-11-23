@@ -10,10 +10,9 @@ import androidx.compose.material.icons.filled.Code
 import androidx.compose.material.icons.filled.Numbers
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.about.vm.BuildState
 import nasa.core.ui.preview.PreviewColumn
 
@@ -27,21 +26,21 @@ internal fun AboutBuildState(
     AboutBuildStateItem(
       modifier = Modifier.padding(ItemMargin),
       icon = Icons.Filled.Numbers,
-      title = stringResource(id = R.string.about_version),
+      title = AboutStrings.version,
       subtitle = buildState.buildVersion,
     )
 
     AboutBuildStateItem(
       modifier = Modifier.padding(ItemMargin),
       icon = Icons.Filled.CalendarToday,
-      title = stringResource(id = R.string.about_date),
+      title = AboutStrings.date,
       subtitle = buildState.buildDate,
     )
 
     AboutBuildStateItem(
       modifier = Modifier.padding(ItemMargin),
       icon = Icons.Filled.Code,
-      title = stringResource(id = R.string.about_repo),
+      title = AboutStrings.repo,
       subtitle = buildState.sourceCodeRepo,
       onClick = { onAction(AboutAction.OpenSourceCode) },
     )

@@ -24,7 +24,6 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastMap
@@ -42,7 +41,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
-import nasa.settings.res.R
+import nasa.settings.res.SettingsStrings
 
 @Composable
 internal fun SettingsScreenImpl(
@@ -88,14 +87,14 @@ private fun SettingsScreenContent(
   ) {
     SettingsCategory(
       icon = Icons.Filled.FormatPaint,
-      title = stringResource(id = R.string.settings_style_category),
+      title = SettingsStrings.styleCategory,
       theme = theme,
     )
 
     ListPreference(
       key = SettingsKeys.APP_THEME,
       defaultValue = ThemeType.System?.toString(),
-      title = stringResource(id = R.string.settings_theme_title),
+      title = SettingsStrings.themeTitle,
       icon = Icons.Filled.ColorLens,
       entryValues = ThemeType.entries.fastMap { it.name }.toPersistentList(),
       entries = themeEntries(),
@@ -107,7 +106,7 @@ private fun SettingsScreenContent(
 
     SettingsCategory(
       icon = Icons.Filled.Lock,
-      title = stringResource(id = R.string.settings_auth_category),
+      title = SettingsStrings.authCategory,
       theme = theme,
     )
 
@@ -118,7 +117,7 @@ private fun SettingsScreenContent(
 
     PrimaryTextButton(
       modifier = Modifier.wrapContentWidth(),
-      text = stringResource(id = R.string.settings_key_button),
+      text = SettingsStrings.keyButton,
       theme = theme,
       onClick = { onAction(SettingsAction.RegisterForKey) },
     )
@@ -127,7 +126,7 @@ private fun SettingsScreenContent(
 
     SettingsCategory(
       icon = Icons.Filled.Storage,
-      title = stringResource(id = R.string.settings_clear_cache_title),
+      title = SettingsStrings.clearCacheTitle,
       theme = theme,
     )
 
@@ -142,7 +141,7 @@ private fun SettingsScreenContent(
 
     PrimaryTextButton(
       modifier = Modifier.wrapContentWidth(),
-      text = stringResource(id = R.string.settings_clear_cache_button),
+      text = SettingsStrings.clearCacheButton,
       theme = theme,
       onClick = { onAction(SettingsAction.ClearCache) },
     )
@@ -152,10 +151,10 @@ private fun SettingsScreenContent(
 @Stable
 @Composable
 private fun themeEntries() = persistentListOf(
-  stringResource(id = R.string.settings_theme_system),
-  stringResource(id = R.string.settings_theme_light),
-  stringResource(id = R.string.settings_theme_dark),
-  stringResource(id = R.string.settings_theme_midnight),
+  SettingsStrings.themeSystem,
+  SettingsStrings.themeLight,
+  SettingsStrings.themeDark,
+  SettingsStrings.themeMidnight,
 )
 
 @Composable
@@ -169,16 +168,16 @@ private fun CachedImagesText(
     modifier = modifier,
   ) {
     persistentMapOf(
-      images to R.string.settings_clear_cache_images,
-      database to R.string.settings_clear_cache_db,
-    ).forEach { (size, stringRes) ->
+      images to SettingsStrings.clearCacheImages,
+      database to SettingsStrings.clearCacheDb,
+    ).forEach { (size, text) ->
       Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
       ) {
         Text(
           modifier = Modifier.weight(1f),
-          text = stringResource(stringRes),
+          text = text,
           textAlign = TextAlign.End,
           color = theme.pageTextSubdued,
         )

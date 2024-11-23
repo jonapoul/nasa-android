@@ -23,6 +23,7 @@ kotlin {
 dependencies {
   compileOnly(libs.plugin.agp)
   compileOnly(libs.plugin.androidCacheFix)
+  compileOnly(libs.plugin.catalog)
   compileOnly(libs.plugin.compose)
   compileOnly(libs.plugin.dependencyAnalysis)
   compileOnly(libs.plugin.dependencyGraph)

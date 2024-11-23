@@ -13,10 +13,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.button.RegularTextButton
 import nasa.core.ui.color.LocalTheme
@@ -26,7 +25,7 @@ import nasa.gallery.model.FilterConfig
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
 import nasa.gallery.model.year
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 
 @Composable
 internal fun SearchConfigModal(
@@ -77,11 +76,11 @@ private fun SearchConfigModalContents(
     )
 
     HorizontalDivider(
-      modifier = Modifier.padding(vertical = Dimensions.Medium),
+      modifier = Modifier.padding(vertical = CoreDimens.medium),
     )
 
     YearRangeSlider(
-      modifier = Modifier.padding(horizontal = Dimensions.Large, vertical = 10.dp),
+      modifier = Modifier.padding(horizontal = CoreDimens.large, vertical = 10.dp),
       start = startYear,
       end = endYear,
       theme = theme,
@@ -98,7 +97,7 @@ private fun SearchConfigModalContents(
     ) {
       PrimaryTextButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_confirm),
+        text = GalleryStrings.searchModalConfirm,
         theme = theme,
         onClick = {
           val newConfig = config.copy(yearStart = startYear, yearEnd = endYear, mediaTypes = mediaTypes)
@@ -106,20 +105,20 @@ private fun SearchConfigModalContents(
         },
       )
 
-      HorizontalSpacer(Dimensions.Medium)
+      HorizontalSpacer(CoreDimens.medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_reset),
+        text = GalleryStrings.searchModalReset,
         theme = theme,
         onClick = onReset,
       )
 
-      HorizontalSpacer(Dimensions.Medium)
+      HorizontalSpacer(CoreDimens.medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_dismiss),
+        text = GalleryStrings.searchModalDismiss,
         theme = theme,
         onClick = onCancel,
       )

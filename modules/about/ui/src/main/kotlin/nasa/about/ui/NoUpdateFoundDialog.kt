@@ -5,9 +5,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
@@ -40,14 +39,14 @@ private fun NoUpdateFoundDialogContent(
   DialogContent(
     modifier = modifier,
     theme = theme,
-    title = stringResource(id = R.string.about_no_update_title),
+    title = AboutStrings.noUpdateTitle,
     content = {
-      Text(text = stringResource(id = R.string.about_no_update_message))
+      Text(text = AboutStrings.noUpdateMessage)
     },
     buttons = {
       TextButton(onClick = onDismiss) {
         Text(
-          text = stringResource(id = R.string.about_no_update_ok),
+          text = AboutStrings.noUpdateOk,
           color = theme.pageTextPrimary,
         )
       }

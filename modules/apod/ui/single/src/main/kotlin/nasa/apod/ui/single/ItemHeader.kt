@@ -25,7 +25,7 @@ import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.vm.single.ScreenState
 import nasa.core.model.ApiKey
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
@@ -47,7 +47,7 @@ internal fun ItemHeader(
       .background(theme.toolbarBackgroundSubdued)
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(Dimensions.Large),
+      .padding(CoreDimens.large),
     horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.Top,
   ) {
@@ -65,7 +65,7 @@ internal fun ItemHeader(
     Column(
       modifier = Modifier
         .weight(1f)
-        .padding(horizontal = Dimensions.Large)
+        .padding(horizontal = CoreDimens.large)
         .wrapContentHeight(),
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.Center,
@@ -111,7 +111,7 @@ private fun ItemTitle(
       ShimmeringBlock(
         modifier = modifier
           .height(20.dp)
-          .padding(horizontal = Dimensions.Large, vertical = Dimensions.Zero),
+          .padding(horizontal = CoreDimens.large, vertical = CoreDimens.zero),
         theme = theme,
         color = { toolbarText },
       )
@@ -151,7 +151,7 @@ private fun ItemDate(
     ShimmeringBlock(
       modifier = modifier
         .height(20.dp)
-        .padding(horizontal = Dimensions.Large, vertical = Dimensions.Small),
+        .padding(horizontal = CoreDimens.large, vertical = CoreDimens.small),
       theme = theme,
       color = { toolbarTextSubdued },
     )

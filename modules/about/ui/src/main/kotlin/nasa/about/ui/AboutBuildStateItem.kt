@@ -19,10 +19,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.core.ui.CardShape
 import nasa.core.ui.button.PrimaryIconButton
 import nasa.core.ui.color.LocalTheme
@@ -80,7 +79,7 @@ internal fun AboutBuildStateItem(
       PrimaryIconButton(
         modifier = Modifier.padding(ItemPadding),
         imageVector = Icons.AutoMirrored.Filled.Launch,
-        contentDescription = stringResource(id = R.string.about_launch),
+        contentDescription = AboutStrings.launch,
         onClick = onClick,
       )
     }

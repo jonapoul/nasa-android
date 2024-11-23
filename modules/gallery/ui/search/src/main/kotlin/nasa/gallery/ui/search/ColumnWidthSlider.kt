@@ -11,7 +11,6 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,7 +21,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.slider
 import nasa.core.ui.preview.PreviewColumn
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 import kotlin.math.roundToInt
 
 @Composable
@@ -43,7 +42,7 @@ internal fun ColumnWidthSlider(
     ) {
       Text(
         modifier = Modifier.wrapContentWidth(),
-        text = stringResource(R.string.search_config_width),
+        text = GalleryStrings.searchConfigWidth,
         textAlign = TextAlign.Start,
         fontSize = 13.sp,
       )

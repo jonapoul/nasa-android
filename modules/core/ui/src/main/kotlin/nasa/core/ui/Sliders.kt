@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import nasa.core.res.CoreDimens
 
 @Composable
 fun NasaSliderThumb(
@@ -38,7 +39,7 @@ fun NasaRangeSliderTrack(
   state: RangeSliderState,
   colors: SliderColors,
   modifier: Modifier = Modifier,
-  trackHeight: Dp = Dimensions.Large,
+  trackHeight: Dp = CoreDimens.large,
 ) {
   val fractionStart by remember {
     derivedStateOf {
@@ -90,7 +91,7 @@ fun NasaSliderTrack(
   state: SliderState,
   colors: SliderColors,
   modifier: Modifier = Modifier,
-  trackHeight: Dp = Dimensions.Large,
+  trackHeight: Dp = CoreDimens.large,
 ) {
   val fraction by remember {
     derivedStateOf {

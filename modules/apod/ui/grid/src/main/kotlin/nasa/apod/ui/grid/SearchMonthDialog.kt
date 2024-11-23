@@ -24,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,8 +37,8 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import nasa.apod.model.EARLIEST_APOD_DATE
 import nasa.apod.preview.PREVIEW_DATE
-import nasa.apod.res.R
-import nasa.core.ui.Dimensions
+import nasa.apod.res.ApodStrings
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.datePicker
@@ -64,7 +63,7 @@ internal fun SearchMonthDialog(
     dismissButton = {
       TextButton(onClick = onCancel) {
         Text(
-          text = stringResource(R.string.search_dialog_cancel),
+          text = ApodStrings.searchDialogCancel,
           color = theme.pageTextPrimary,
         )
       }
@@ -75,7 +74,7 @@ internal fun SearchMonthDialog(
         onClick = { onConfirm(selectedDate) },
       ) {
         Text(
-          text = stringResource(R.string.search_dialog_confirm),
+          text = ApodStrings.searchDialogConfirm,
           color = if (enableConfirmButton) theme.pageTextPrimary else theme.pageTextSubdued,
         )
       }
@@ -125,14 +124,14 @@ private fun MonthYearPicker(
     modifier = modifier
       .background(theme.dialogBackground)
       .padding(
-        start = Dimensions.Large,
-        end = Dimensions.Large,
-        top = Dimensions.Large,
-        bottom = Dimensions.Large,
+        start = CoreDimens.large,
+        end = CoreDimens.large,
+        top = CoreDimens.large,
+        bottom = CoreDimens.large,
       ),
   ) {
     Text(
-      text = stringResource(R.string.search_dialog_title),
+      text = ApodStrings.searchDialogTitle,
       color = theme.pageTextPrimary,
       fontWeight = FontWeight.Bold,
       fontSize = 13.sp,
@@ -191,7 +190,7 @@ private fun MonthYearPicker(
 
         val thisMonth = "${today.month.capitalized()} ${today.year}"
         Text(
-          text = stringResource(R.string.search_dialog_out_of_range, thisMonth),
+          text = ApodStrings.searchDialogOutOfRange(thisMonth),
           color = theme.warningText,
           textAlign = TextAlign.Center,
           fontWeight = FontWeight.Bold,

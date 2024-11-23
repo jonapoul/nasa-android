@@ -19,9 +19,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.button.RegularTextButton
 import nasa.core.ui.button.ToggleableButton
@@ -30,7 +29,7 @@ import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.model.SearchViewConfig
 import nasa.gallery.model.SearchViewType
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 
 @Composable
 internal fun ViewConfigModal(
@@ -74,21 +73,21 @@ private fun ViewTypeModalContents(
   ) {
     if (mutableViewType == SearchViewType.Grid) {
       ColumnWidthSlider(
-        modifier = Modifier.padding(horizontal = Dimensions.Huge, vertical = Dimensions.Large),
+        modifier = Modifier.padding(horizontal = CoreDimens.huge, vertical = CoreDimens.large),
         value = mutableColumnWidth,
         theme = theme,
         onNewValue = { mutableColumnWidth = it },
       )
 
       HorizontalDivider(
-        modifier = Modifier.padding(vertical = Dimensions.Medium),
+        modifier = Modifier.padding(vertical = CoreDimens.medium),
       )
     }
 
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(Dimensions.Large),
+        .padding(CoreDimens.large),
       horizontalArrangement = Arrangement.Center,
     ) {
       ViewTypeButton(
@@ -111,29 +110,29 @@ private fun ViewTypeModalContents(
     Row(
       modifier = Modifier
         .fillMaxWidth()
-        .padding(Dimensions.Medium),
+        .padding(CoreDimens.medium),
     ) {
       PrimaryTextButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_confirm),
+        text = GalleryStrings.searchModalConfirm,
         theme = theme,
         onClick = { onConfirm(SearchViewConfig(mutableViewType, mutableColumnWidth)) },
       )
 
-      HorizontalSpacer(Dimensions.Medium)
+      HorizontalSpacer(CoreDimens.medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_reset),
+        text = GalleryStrings.searchModalReset,
         theme = theme,
         onClick = onReset,
       )
 
-      HorizontalSpacer(Dimensions.Medium)
+      HorizontalSpacer(CoreDimens.medium)
 
       RegularTextButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_dismiss),
+        text = GalleryStrings.searchModalDismiss,
         theme = theme,
         onClick = onDismiss,
       )
@@ -155,15 +154,15 @@ private fun ViewTypeButton(
     icon = type.icon(),
     onCheckedChange = { onSelect(type) },
     theme = theme,
-    modifier = modifier.padding(Dimensions.Medium),
+    modifier = modifier.padding(CoreDimens.medium),
   )
 }
 
 @Stable
 @Composable
 private fun SearchViewType.string() = when (this) {
-  SearchViewType.Card -> stringResource(R.string.search_view_type_card)
-  SearchViewType.Grid -> stringResource(R.string.search_view_type_grid)
+  SearchViewType.Card -> GalleryStrings.searchViewTypeCard
+  SearchViewType.Grid -> GalleryStrings.searchViewTypeGrid
 }
 
 @Stable

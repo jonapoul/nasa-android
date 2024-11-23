@@ -17,11 +17,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
-import nasa.home.res.R
+import nasa.home.res.HomeStrings
 
 @Composable
 internal fun HomeTopBar(
@@ -34,7 +33,7 @@ internal fun HomeTopBar(
     colors = theme.topAppBarColors(),
     title = {
       Text(
-        text = stringResource(id = R.string.home_toolbar_title),
+        text = HomeStrings.toolbarTitle,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
@@ -45,7 +44,7 @@ internal fun HomeTopBar(
       IconButton(onClick = { showMenu = !showMenu }) {
         Icon(
           imageVector = Icons.Default.MoreVert,
-          contentDescription = stringResource(id = R.string.home_toolbar_menu),
+          contentDescription = HomeStrings.toolbarMenu,
         )
       }
 
@@ -53,19 +52,19 @@ internal fun HomeTopBar(
         expanded = showMenu,
         onDismissRequest = { showMenu = false },
       ) {
-        val settingsText = stringResource(id = R.string.home_menu_settings)
+        val settingsText = HomeStrings.menuSettings
         DropdownMenuItem(
           onClick = { onAction(HomeAction.NavSettings) },
           text = { Text(settingsText) },
           leadingIcon = { Icon(imageVector = Icons.Filled.Settings, contentDescription = settingsText) },
         )
-        val aboutText = stringResource(id = R.string.home_menu_about)
+        val aboutText = HomeStrings.menuAbout
         DropdownMenuItem(
           onClick = { onAction(HomeAction.NavAbout) },
           text = { Text(aboutText) },
           leadingIcon = { Icon(imageVector = Icons.Filled.Info, contentDescription = aboutText) },
         )
-        val apiUsageText = stringResource(id = R.string.home_menu_api_usage)
+        val apiUsageText = HomeStrings.menuApiUsage
         DropdownMenuItem(
           onClick = {
             onAction(HomeAction.ShowApiUsage)

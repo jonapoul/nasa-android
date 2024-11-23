@@ -17,15 +17,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.hazeChild
 import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
-import nasa.apod.res.R
-import nasa.core.ui.Dimensions
+import nasa.apod.res.ApodStrings
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.Theme
 
 @Composable
@@ -60,7 +59,7 @@ internal fun ApodFullScreenTopBar(
         IconButton(onClick = onClickedBack) {
           Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = stringResource(id = R.string.apod_fullscreen_back),
+            contentDescription = ApodStrings.fullscreenBack,
           )
         }
       },
@@ -71,7 +70,7 @@ internal fun ApodFullScreenTopBar(
         .hazeChild(hazeState, hazeStyle)
         .fillMaxWidth()
         .background(Color.Transparent)
-        .padding(Dimensions.Medium),
+        .padding(CoreDimens.medium),
       contentAlignment = Alignment.Center,
     ) {
       Text(

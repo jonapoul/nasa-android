@@ -15,13 +15,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.core.res.R
+import nasa.core.res.CoreStrings
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -53,7 +52,7 @@ fun NoApiKey(
     VerticalSpacer(10.dp)
 
     Text(
-      text = stringResource(id = R.string.no_key_title),
+      text = CoreStrings.noKeyTitle,
       textAlign = TextAlign.Center,
       fontWeight = FontWeight.Bold,
       color = theme.warningText,
@@ -63,7 +62,7 @@ fun NoApiKey(
     VerticalSpacer(20.dp)
 
     Text(
-      text = stringResource(id = R.string.no_key_message),
+      text = CoreStrings.noKeyMessage,
       textAlign = TextAlign.Center,
       color = theme.warningText,
     )
@@ -72,7 +71,7 @@ fun NoApiKey(
 
     Row {
       PrimaryTextButton(
-        text = stringResource(id = R.string.no_key_register),
+        text = CoreStrings.noKeyRegister,
         onClick = onClickRegister,
         theme = theme,
       )
@@ -80,7 +79,7 @@ fun NoApiKey(
       HorizontalSpacer(20.dp)
 
       PrimaryTextButton(
-        text = stringResource(id = R.string.no_key_settings),
+        text = CoreStrings.noKeySettings,
         onClick = onClickSettings,
         theme = theme,
       )

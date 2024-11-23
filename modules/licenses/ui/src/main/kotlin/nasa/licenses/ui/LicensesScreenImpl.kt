@@ -34,17 +34,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import my.nanihadesuka.compose.LazyColumnScrollbar
+import nasa.core.res.CoreDimens
 import nasa.core.ui.BackgroundSurface
-import nasa.core.ui.Dimensions
 import nasa.core.ui.button.PrimaryTextButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -55,7 +53,8 @@ import nasa.core.ui.preview.ScreenPreview
 import nasa.core.ui.text.NasaTextField
 import nasa.core.ui.text.keyboardFocusRequester
 import nasa.licenses.data.LibraryModel
-import nasa.licenses.res.R
+import nasa.licenses.res.LicensesPlurals
+import nasa.licenses.res.LicensesStrings
 import nasa.licenses.vm.LicensesState
 import nasa.licenses.vm.SearchBarState
 
@@ -130,7 +129,7 @@ private fun LicensesSearchInput(
           .focusRequester(keyboardFocusRequester(keyboard)),
         value = text,
         onValueChange = { query -> onAction(LicensesAction.EditSearchText(query)) },
-        placeholderText = stringResource(id = R.string.licenses_search_placeholder),
+        placeholderText = LicensesStrings.searchPlaceholder,
         leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = null) },
         clearable = true,
         theme = theme,
@@ -140,12 +139,11 @@ private fun LicensesSearchInput(
       val numResults = remember(licensesState) {
         (licensesState as? LicensesState.Loaded)?.libraries?.size ?: 0
       }
-      val res = LocalContext.current.resources
       Text(
         modifier = Modifier
           .wrapContentWidth()
-          .padding(horizontal = Dimensions.Large),
-        text = res.getQuantityString(R.plurals.licenses_search_num_results, numResults, numResults),
+          .padding(horizontal = CoreDimens.large),
+        text = LicensesPlurals.searchNumResults(numResults, numResults),
         fontSize = 12.sp,
         color = theme.toolbarTextSubdued,
       )
@@ -201,10 +199,10 @@ private fun NoneFoundContent(
       tint = theme.warningText,
     )
 
-    VerticalSpacer(Dimensions.Large)
+    VerticalSpacer(CoreDimens.large)
 
     Text(
-      text = stringResource(id = R.string.licenses_none_found),
+      text = LicensesStrings.noneFound,
       fontSize = 20.sp,
       textAlign = TextAlign.Center,
       color = theme.warningText,
@@ -223,7 +221,7 @@ private fun LoadedContent(
   LazyColumnScrollbar(
     modifier = modifier
       .fillMaxSize()
-      .padding(Dimensions.Large),
+      .padding(CoreDimens.large),
     state = listState,
     settings = theme.scrollbarSettings(),
   ) {
@@ -262,19 +260,19 @@ private fun ErrorContent(
       tint = theme.errorText,
     )
 
-    VerticalSpacer(Dimensions.Large)
+    VerticalSpacer(CoreDimens.large)
 
     Text(
-      text = stringResource(id = R.string.licenses_failed, errorMessage),
+      text = LicensesStrings.failed(errorMessage),
       fontSize = 20.sp,
       textAlign = TextAlign.Center,
       color = theme.errorText,
     )
 
-    VerticalSpacer(Dimensions.Large)
+    VerticalSpacer(CoreDimens.large)
 
     PrimaryTextButton(
-      text = stringResource(id = R.string.licenses_failed_retry),
+      text = LicensesStrings.failedRetry,
       theme = theme,
       onClick = { onAction(LicensesAction.Reload) },
     )

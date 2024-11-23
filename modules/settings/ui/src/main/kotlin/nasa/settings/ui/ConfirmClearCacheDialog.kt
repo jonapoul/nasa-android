@@ -6,7 +6,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import nasa.core.model.FileSize
 import nasa.core.model.megabytes
@@ -14,7 +13,7 @@ import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
-import nasa.settings.res.R
+import nasa.settings.res.SettingsStrings
 
 @Composable
 internal fun ConfirmClearCacheDialog(
@@ -49,23 +48,23 @@ private fun ConfirmClearCacheDialogContent(
   DialogContent(
     modifier = modifier,
     theme = theme,
-    title = stringResource(R.string.settings_clear_cache_dialog_title),
+    title = SettingsStrings.clearCacheDialogTitle,
     content = {
       Text(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(R.string.settings_clear_cache_dialog_message, totalSize.toString()),
+        text = SettingsStrings.clearCacheDialogMessage(totalSize.toString()),
       )
     },
     buttons = {
       TextButton(onClick = onCancel) {
         Text(
-          text = stringResource(R.string.settings_clear_cache_dialog_cancel),
+          text = SettingsStrings.clearCacheDialogCancel,
           color = theme.pageTextPrimary,
         )
       }
       TextButton(onClick = onConfirm) {
         Text(
-          text = stringResource(R.string.settings_clear_cache_dialog_confirm),
+          text = SettingsStrings.clearCacheDialogConfirm,
           color = theme.pageTextPrimary,
         )
       }

@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -51,7 +51,7 @@ fun ToggleableButton(
 
   Row(
     modifier = modifier
-      .padding(vertical = Dimensions.Medium, horizontal = Dimensions.Small)
+      .padding(vertical = CoreDimens.medium, horizontal = CoreDimens.small)
       .background(theme.buttonRegularBackground, BUTTON_SHAPE)
       .toggleableBorder(isChecked, isPressed, theme)
       .padding(6.dp)
@@ -60,14 +60,14 @@ fun ToggleableButton(
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Icon(
-      modifier = Modifier.padding(Dimensions.Medium),
+      modifier = Modifier.padding(CoreDimens.medium),
       imageVector = icon,
       contentDescription = null,
       tint = contentsColor,
     )
 
     Text(
-      modifier = Modifier.padding(Dimensions.Medium),
+      modifier = Modifier.padding(CoreDimens.medium),
       text = text,
       fontSize = 14.sp,
       color = contentsColor,

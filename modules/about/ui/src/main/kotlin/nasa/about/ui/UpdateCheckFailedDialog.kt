@@ -7,9 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
@@ -45,14 +44,14 @@ private fun UpdateCheckFailedDialogContent(
   DialogContent(
     modifier = modifier,
     theme = theme,
-    title = stringResource(id = R.string.about_check_failed_title),
+    title = AboutStrings.checkFailedTitle,
     icon = Icons.Filled.Warning,
     titleColor = theme.errorText,
     content = { Text(cause) },
     buttons = {
       TextButton(onClick = onDismiss) {
         Text(
-          text = stringResource(id = R.string.about_check_failed_ok),
+          text = AboutStrings.checkFailedOk,
           color = theme.errorText,
         )
       }

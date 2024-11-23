@@ -11,17 +11,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import nasa.core.res.CoreStrings
 import nasa.core.ui.ShimmeringBlock
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.vm.image.ImageState
-import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ImageTopBar(
@@ -41,7 +40,7 @@ internal fun ImageTopBar(
       IconButton(onClick = { onAction(ImageAction.NavBack) }) {
         Icon(
           imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-          contentDescription = stringResource(id = CoreR.string.nav_back),
+          contentDescription = CoreStrings.navBack,
         )
       }
     },

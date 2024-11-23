@@ -6,12 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
 import nasa.core.ui.preview.ScreenPreview
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 
 @Composable
 internal fun SearchEmpty(
@@ -24,7 +23,7 @@ internal fun SearchEmpty(
     verticalArrangement = Arrangement.Center,
   ) {
     Text(
-      text = stringResource(id = R.string.search_empty_title),
+      text = GalleryStrings.searchEmptyTitle,
       color = theme.pageText,
     )
   }

@@ -8,9 +8,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 
@@ -26,13 +25,13 @@ internal fun AboutTopBar(
       IconButton(onClick = { onAction(AboutAction.NavBack) }) {
         Icon(
           imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-          contentDescription = stringResource(id = R.string.about_toolbar_back),
+          contentDescription = AboutStrings.toolbarBack,
         )
       }
     },
     title = {
       Text(
-        text = stringResource(id = R.string.about_toolbar_title),
+        text = AboutStrings.toolbarTitle,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )

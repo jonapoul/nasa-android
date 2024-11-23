@@ -1,7 +1,6 @@
 package nasa.licenses.ui
 
 import alakazam.android.ui.compose.HorizontalSpacer
-import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,19 +15,18 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import nasa.core.res.CoreDimens
 import nasa.core.ui.CardShape
-import nasa.core.ui.Dimensions
 import nasa.core.ui.button.RegularIconButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.licenses.data.LibraryModel
-import nasa.licenses.res.R
+import nasa.licenses.res.LicensesStrings
 
 @Composable
 internal fun LibraryItem(
@@ -39,10 +37,10 @@ internal fun LibraryItem(
 ) {
   Row(
     modifier = modifier
-      .shadow(Dimensions.Medium)
-      .padding(Dimensions.Small)
+      .shadow(CoreDimens.medium)
+      .padding(CoreDimens.small)
       .background(theme.cardBackground, CardShape)
-      .padding(Dimensions.Huge),
+      .padding(CoreDimens.huge),
     verticalAlignment = Alignment.Top,
   ) {
     Column(
@@ -55,19 +53,19 @@ internal fun LibraryItem(
         fontSize = 15.sp,
       )
 
-      LibraryTableRow(title = R.string.licenses_item_authors, value = library.developers.joinToString())
-      LibraryTableRow(title = R.string.licenses_item_artifact, value = library.dependency)
-      LibraryTableRow(title = R.string.licenses_item_version, value = library.version)
-      LibraryTableRow(title = R.string.licenses_item_year, value = library.year?.toString())
-      LibraryTableRow(title = R.string.licenses_item_license, value = library.licenses.firstOrNull()?.license)
-      LibraryTableRow(title = R.string.licenses_item_description, value = library.description)
+      LibraryTableRow(title = LicensesStrings.itemAuthors, value = library.developers.joinToString())
+      LibraryTableRow(title = LicensesStrings.itemArtifact, value = library.dependency)
+      LibraryTableRow(title = LicensesStrings.itemVersion, value = library.version)
+      LibraryTableRow(title = LicensesStrings.itemYear, value = library.year?.toString())
+      LibraryTableRow(title = LicensesStrings.itemLicense, value = library.licenses.firstOrNull()?.license)
+      LibraryTableRow(title = LicensesStrings.itemDescription, value = library.description)
     }
 
     val url = library.url
     if (url != null) {
       RegularIconButton(
         imageVector = Icons.AutoMirrored.Filled.OpenInNew,
-        contentDescription = stringResource(id = R.string.licenses_item_launch),
+        contentDescription = LicensesStrings.itemLaunch,
         onClick = { onLaunchUrl.invoke(url) },
       )
     }
@@ -78,7 +76,7 @@ internal fun LibraryItem(
 @Stable
 @Composable
 private fun LibraryTableRow(
-  @StringRes title: Int,
+  title: String,
   value: String?,
   modifier: Modifier = Modifier,
   theme: Theme = LocalTheme.current,
@@ -98,7 +96,7 @@ private fun LibraryTableRow(
       modifier = Modifier
         .weight(1f)
         .wrapContentHeight(),
-      text = stringResource(id = title),
+      text = title,
       textAlign = TextAlign.Start,
       color = theme.pageTextSubdued,
       lineHeight = LineHeight,
@@ -106,7 +104,7 @@ private fun LibraryTableRow(
       fontWeight = FontWeight.Bold,
     )
 
-    HorizontalSpacer(Dimensions.Medium)
+    HorizontalSpacer(CoreDimens.medium)
 
     Text(
       modifier = Modifier

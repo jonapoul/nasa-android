@@ -9,19 +9,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import kotlinx.collections.immutable.persistentListOf
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.preview.PREVIEW_ITEM_2
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.core.model.ApiKey
+import nasa.core.res.CoreStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
-import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ApodGridTopBar(
@@ -34,7 +33,7 @@ internal fun ApodGridTopBar(
     colors = theme.topAppBarColors(),
     title = {
       Text(
-        text = stringResource(id = R.string.apod_grid_toolbar_title),
+        text = ApodStrings.gridToolbarTitle,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
@@ -44,7 +43,7 @@ internal fun ApodGridTopBar(
         IconButton(onClick = { onAction(ApodGridAction.NavBack) }) {
           Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = stringResource(id = CoreR.string.nav_back),
+            contentDescription = CoreStrings.navBack,
           )
         }
       }
@@ -53,13 +52,13 @@ internal fun ApodGridTopBar(
       IconButton(onClick = { onAction(ApodGridAction.LoadRandom) }) {
         Icon(
           imageVector = Icons.Filled.Shuffle,
-          contentDescription = stringResource(id = R.string.apod_grid_toolbar_random),
+          contentDescription = ApodStrings.gridToolbarRandom,
         )
       }
       IconButton(onClick = { onAction(ApodGridAction.SearchMonth(state.dateOrNull())) }) {
         Icon(
           imageVector = Icons.Filled.Search,
-          contentDescription = stringResource(id = R.string.apod_grid_toolbar_search),
+          contentDescription = ApodStrings.gridToolbarSearch,
         )
       }
     },

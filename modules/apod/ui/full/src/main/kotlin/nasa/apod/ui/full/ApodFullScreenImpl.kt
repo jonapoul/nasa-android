@@ -21,7 +21,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import coil.request.ImageRequest
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
@@ -31,12 +30,12 @@ import kotlinx.datetime.LocalDate
 import nasa.apod.model.ApodItem
 import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.core.http.progress.DownloadProgressInterceptor
 import nasa.core.model.Percent
 import nasa.core.model.percent
+import nasa.core.res.CoreDimens
 import nasa.core.ui.BackgroundSurface
-import nasa.core.ui.Dimensions
 import nasa.core.ui.LoadableImage
 import nasa.core.ui.button.RegularIconButton
 import nasa.core.ui.color.LocalTheme
@@ -118,7 +117,7 @@ private fun ApodFullScreenContent(
       ZoomButtons(
         modifier = Modifier
           .wrapContentSize()
-          .padding(Dimensions.Huge),
+          .padding(CoreDimens.huge),
         scale = scale,
         onSetScale = { scale = it },
       )
@@ -140,15 +139,15 @@ private fun ZoomButtons(
   ) {
     RegularIconButton(
       imageVector = Icons.Filled.ZoomIn,
-      contentDescription = stringResource(id = R.string.apod_fullscreen_zoom_in),
+      contentDescription = ApodStrings.fullscreenZoomIn,
       onClick = { onSetScale((scale * ZOOM_FACTOR).coerceIn(MIN_ZOOM, MAX_ZOOM)) },
     )
 
-    VerticalSpacer(Dimensions.Small)
+    VerticalSpacer(CoreDimens.small)
 
     RegularIconButton(
       imageVector = Icons.Filled.ZoomOut,
-      contentDescription = stringResource(id = R.string.apod_fullscreen_zoom_out),
+      contentDescription = ApodStrings.fullscreenZoomOut,
       onClick = { onSetScale((scale / ZOOM_FACTOR).coerceIn(MIN_ZOOM, MAX_ZOOM)) },
     )
   }

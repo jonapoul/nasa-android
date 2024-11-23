@@ -26,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -35,10 +34,11 @@ import coil.compose.AsyncImage
 import nasa.apod.model.ApodMediaType
 import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.apod.vm.single.ScreenState
 import nasa.core.model.ApiKey
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
+import nasa.core.res.CoreStrings
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
@@ -48,7 +48,6 @@ import nasa.core.ui.screens.LoadFailure
 import nasa.core.ui.screens.NoApiKey
 import nasa.core.ui.screens.VideoOverlay
 import nasa.core.ui.shimmer
-import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ItemContent(
@@ -60,7 +59,7 @@ internal fun ItemContent(
   Box(
     modifier = modifier
       .fillMaxWidth()
-      .padding(horizontal = Dimensions.Large)
+      .padding(horizontal = CoreDimens.large)
       .clickable(enabled = state is ScreenState.Success) {
         if (state is ScreenState.Success) {
           val action = when (state.item.mediaType) {
@@ -174,7 +173,7 @@ private fun NoUrlToLoad(
   Column(
     modifier = modifier
       .wrapContentSize()
-      .padding(Dimensions.Large),
+      .padding(CoreDimens.large),
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center,
   ) {
@@ -188,7 +187,7 @@ private fun NoUrlToLoad(
     VerticalSpacer(10.dp)
 
     Text(
-      text = stringResource(id = CoreR.string.failed_title),
+      text = CoreStrings.failedTitle,
       textAlign = TextAlign.Center,
       fontWeight = FontWeight.Bold,
       color = theme.warningText,
@@ -198,7 +197,7 @@ private fun NoUrlToLoad(
     VerticalSpacer(10.dp)
 
     Text(
-      text = stringResource(R.string.apod_no_url),
+      text = ApodStrings.noUrl,
       textAlign = TextAlign.Center,
     )
   }

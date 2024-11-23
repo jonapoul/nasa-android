@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
@@ -90,7 +90,7 @@ private fun PreviewTypography() = PreviewScreen {
   Column {
     styles.fastForEach { style ->
       Text(
-        modifier = Modifier.padding(Dimensions.Large),
+        modifier = Modifier.padding(CoreDimens.large),
         text = "Quick brown fox? Jumped over the lazy dog!",
         style = style,
       )

@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
@@ -34,7 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
 import nasa.core.model.SettingsKeys
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.textFieldDialog
@@ -42,7 +41,7 @@ import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.text.NasaTextField
 import nasa.core.ui.text.keyboardFocusRequester
-import nasa.settings.res.R
+import nasa.settings.res.SettingsStrings
 
 @Composable
 internal fun ApiKeyPreference(
@@ -64,7 +63,7 @@ internal fun ApiKeyPreference(
 
   var showDialog by remember { mutableStateOf(false) }
   val prefColors = theme.preference(enabled = true)
-  val title = stringResource(id = R.string.settings_key_title)
+  val title = SettingsStrings.keyTitle
 
   Row(
     modifier = modifier
@@ -75,7 +74,7 @@ internal fun ApiKeyPreference(
   ) {
     Icon(
       imageVector = Icons.Filled.Key,
-      modifier = Modifier.padding(Dimensions.Large),
+      modifier = Modifier.padding(CoreDimens.large),
       contentDescription = title,
       tint = prefColors.foreground,
     )
@@ -83,7 +82,7 @@ internal fun ApiKeyPreference(
     Column(
       modifier = Modifier
         .weight(1f)
-        .padding(top = Dimensions.Large, bottom = Dimensions.Large, end = Dimensions.Large),
+        .padding(top = CoreDimens.large, bottom = CoreDimens.large, end = CoreDimens.large),
     ) {
       Text(
         modifier = Modifier.fillMaxWidth(),
@@ -95,7 +94,7 @@ internal fun ApiKeyPreference(
       val isSet = currentValue != null
       Text(
         modifier = Modifier.fillMaxWidth(),
-        text = if (isSet) stringResource(R.string.settings_key_set) else stringResource(R.string.settings_key_not_set),
+        text = if (isSet) SettingsStrings.keySet else SettingsStrings.keyNotSet,
         color = if (isSet) prefColors.subtitle else theme.errorText,
         lineHeight = 18.sp,
         fontSize = 14.sp,
@@ -163,7 +162,7 @@ private fun ApiKeyPreferenceDialogContent(
         modifier = Modifier.focusRequester(keyboardFocusRequester(keyboard)),
         value = mutableValue,
         onValueChange = { mutableValue = it },
-        placeholderText = stringResource(id = R.string.settings_key_hint),
+        placeholderText = SettingsStrings.keyHint,
         theme = theme,
         colors = theme.textFieldDialog(),
         keyboardOptions = KeyboardOptions(
@@ -184,14 +183,14 @@ private fun ApiKeyPreferenceDialogContent(
     buttons = {
       TextButton(
         onClick = { onDismiss() },
-        content = { Text(text = stringResource(id = R.string.settings_dialog_cancel), color = theme.pageTextPrimary) },
+        content = { Text(text = SettingsStrings.dialogCancel, color = theme.pageTextPrimary) },
       )
       TextButton(
         onClick = {
           preferences.edit { putString(key, mutableValue) }
           onDismiss()
         },
-        content = { Text(text = stringResource(id = R.string.settings_dialog_ok), color = theme.pageTextPrimary) },
+        content = { Text(text = SettingsStrings.dialogOk, color = theme.pageTextPrimary) },
       )
     },
   )

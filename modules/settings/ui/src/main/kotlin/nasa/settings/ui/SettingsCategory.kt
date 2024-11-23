@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -30,7 +30,7 @@ internal fun SettingsCategory(
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Icon(
-      modifier = Modifier.padding(horizontal = Dimensions.Huge, vertical = Dimensions.VeryLarge),
+      modifier = Modifier.padding(horizontal = CoreDimens.huge, vertical = CoreDimens.veryLarge),
       imageVector = icon,
       contentDescription = title,
       tint = theme.pageTextPrimary,

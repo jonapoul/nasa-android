@@ -10,19 +10,18 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import nasa.apod.preview.PREVIEW_ITEM_1
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.apod.vm.single.ScreenState
 import nasa.apod.vm.single.dateOrNull
 import nasa.core.model.ApiKey
+import nasa.core.res.CoreStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.topAppBarColors
 import nasa.core.ui.preview.PreviewColumn
-import nasa.core.res.R as CoreR
 
 @Composable
 internal fun ApodSingleTopBar(
@@ -38,7 +37,7 @@ internal fun ApodSingleTopBar(
     colors = theme.topAppBarColors(),
     title = {
       Text(
-        text = stringResource(id = R.string.apod_single_toolbar_title),
+        text = ApodStrings.singleToolbarTitle,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
       )
@@ -48,7 +47,7 @@ internal fun ApodSingleTopBar(
         IconButton(onClick = { onAction(ApodSingleAction.NavBack) }) {
           Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = stringResource(id = CoreR.string.nav_back),
+            contentDescription = CoreStrings.navBack,
           )
         }
       }
@@ -58,7 +57,7 @@ internal fun ApodSingleTopBar(
         IconButton(onClick = { onAction(ApodSingleAction.NavGrid(date)) }) {
           Icon(
             imageVector = Icons.Filled.GridView,
-            contentDescription = stringResource(id = R.string.apod_single_toolbar_grid),
+            contentDescription = ApodStrings.singleToolbarGrid,
           )
         }
       }
@@ -67,7 +66,7 @@ internal fun ApodSingleTopBar(
         IconButton(onClick = { onAction(ApodSingleAction.LoadRandom) }) {
           Icon(
             imageVector = Icons.Filled.Shuffle,
-            contentDescription = stringResource(id = R.string.apod_single_toolbar_random),
+            contentDescription = ApodStrings.singleToolbarRandom,
           )
         }
       }
@@ -75,7 +74,7 @@ internal fun ApodSingleTopBar(
       IconButton(onClick = { onAction(ApodSingleAction.SearchDate(state.dateOrNull())) }) {
         Icon(
           imageVector = Icons.Filled.Search,
-          contentDescription = stringResource(id = R.string.apod_single_toolbar_search),
+          contentDescription = ApodStrings.singleToolbarSearch,
         )
       }
     },

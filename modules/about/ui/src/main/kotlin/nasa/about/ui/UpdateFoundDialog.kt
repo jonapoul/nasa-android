@@ -7,11 +7,10 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
@@ -56,22 +55,22 @@ private fun UpdateFoundDialogContent(
   DialogContent(
     modifier = modifier,
     theme = theme,
-    title = stringResource(id = R.string.about_update_found_title),
+    title = AboutStrings.updateFoundTitle,
     titleColor = theme.successText,
     content = {
-      TextContent(stringResource(id = R.string.about_update_found_installed), currentVersion)
-      TextContent(stringResource(id = R.string.about_update_found_latest), latestVersion)
+      TextContent(AboutStrings.updateFoundInstalled, currentVersion)
+      TextContent(AboutStrings.updateFoundLatest, latestVersion)
     },
     buttons = {
       TextButton(onClick = onDismiss) {
         Text(
-          text = stringResource(id = R.string.about_update_found_dismiss),
+          text = AboutStrings.updateFoundDismiss,
           color = theme.successText,
         )
       }
       TextButton(onClick = { onOpenUrl(latestUrl) }) {
         Text(
-          text = stringResource(id = R.string.about_update_found_view),
+          text = AboutStrings.updateFoundView,
           color = theme.successText,
         )
       }

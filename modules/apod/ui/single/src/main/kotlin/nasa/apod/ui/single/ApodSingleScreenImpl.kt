@@ -15,8 +15,8 @@ import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.vm.single.ScreenState
 import nasa.core.model.ApiKey
+import nasa.core.res.CoreDimens
 import nasa.core.ui.BackgroundSurface
-import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
@@ -71,7 +71,7 @@ private fun ApodSingleContent(
     ItemContent(
       modifier = Modifier
         .weight(1f)
-        .padding(horizontal = Dimensions.Large, vertical = Dimensions.Medium),
+        .padding(horizontal = CoreDimens.large, vertical = CoreDimens.medium),
       state = state,
       onAction = onAction,
       theme = theme,
@@ -81,7 +81,7 @@ private fun ApodSingleContent(
       ItemFooter(
         modifier = Modifier
           .wrapContentHeight()
-          .padding(horizontal = Dimensions.Large, vertical = Dimensions.Medium),
+          .padding(horizontal = CoreDimens.large, vertical = CoreDimens.medium),
         item = state.item,
         onAction = onAction,
         theme = theme,

@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -32,14 +31,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import nasa.core.res.CoreDimens
 import nasa.core.ui.CardShape
-import nasa.core.ui.Dimensions
 import nasa.core.ui.ShimmerBlockShape
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.core.ui.shimmer
-import nasa.home.res.R
+import nasa.home.res.HomeStrings
 
 @Composable
 private fun HomeGridItem(
@@ -54,9 +53,9 @@ private fun HomeGridItem(
     modifier = modifier
       .fillMaxWidth()
       .wrapContentHeight()
-      .padding(Dimensions.Medium)
+      .padding(CoreDimens.medium)
       .background(theme.cardBackground, CardShape)
-      .padding(Dimensions.Medium)
+      .padding(CoreDimens.medium)
       .clickable { onClick() },
     horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
@@ -78,7 +77,7 @@ private fun HomeGridItem(
       Text(
         modifier = Modifier
           .fillMaxWidth()
-          .padding(Dimensions.Large),
+          .padding(CoreDimens.large),
         text = description,
         textAlign = TextAlign.Center,
         fontWeight = FontWeight.Light,
@@ -91,7 +90,7 @@ private fun HomeGridItem(
     HomeGridImage(
       modifier = Modifier
         .size(IMAGE_SIZE)
-        .padding(Dimensions.Large),
+        .padding(CoreDimens.large),
       title = title,
       thumbnailUrl = thumbnailUrl,
       theme = theme,
@@ -144,8 +143,8 @@ internal fun ApodGridItem(
 ) {
   HomeGridItem(
     modifier = modifier,
-    title = stringResource(id = R.string.home_nav_apod),
-    description = stringResource(id = R.string.home_nav_apod_desc),
+    title = HomeStrings.navApod,
+    description = HomeStrings.navApodDesc,
     thumbnailUrl = thumbnailUrl,
     onClick = { onAction(HomeAction.NavApodToday) },
     theme = theme,
@@ -161,8 +160,8 @@ internal fun GalleryGridItem(
 ) {
   HomeGridItem(
     modifier = modifier,
-    title = stringResource(id = R.string.home_nav_gallery),
-    description = stringResource(id = R.string.home_nav_gallery_desc),
+    title = HomeStrings.navGallery,
+    description = HomeStrings.navGalleryDesc,
     thumbnailUrl = thumbnailUrl,
     onClick = { onAction(HomeAction.NavGallery) },
     theme = theme,

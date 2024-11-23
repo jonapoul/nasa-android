@@ -18,19 +18,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.button.ToggleableButton
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
 import nasa.gallery.model.MediaType
 import nasa.gallery.model.MediaTypes
-import nasa.gallery.res.R
+import nasa.gallery.res.GalleryStrings
 
 @Composable
 internal fun MediaTypesRow(
@@ -47,7 +46,7 @@ internal fun MediaTypesRow(
       Row(
         modifier = Modifier
           .fillMaxWidth()
-          .padding(horizontal = Dimensions.Medium),
+          .padding(horizontal = CoreDimens.medium),
         horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.CenterVertically,
       ) {
@@ -58,10 +57,10 @@ internal fun MediaTypesRow(
           tint = theme.warningText,
         )
 
-        HorizontalSpacer(Dimensions.Medium)
+        HorizontalSpacer(CoreDimens.medium)
 
         Text(
-          text = stringResource(R.string.search_modal_no_media_selected),
+          text = GalleryStrings.searchModalNoMediaSelected,
           textAlign = TextAlign.End,
           color = theme.warningText,
           fontSize = 11.sp,
@@ -74,7 +73,7 @@ internal fun MediaTypesRow(
 
       ToggleableButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_image),
+        text = GalleryStrings.searchModalImage,
         icon = Icons.Filled.Image,
         isChecked = MediaType.Image in types,
         onCheckedChange = { checked -> submitTypesOnChange(checked, types, MediaType.Image, onChange) },
@@ -82,7 +81,7 @@ internal fun MediaTypesRow(
       )
       ToggleableButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_video),
+        text = GalleryStrings.searchModalVideo,
         icon = Icons.Filled.VideoLibrary,
         isChecked = MediaType.Video in types,
         onCheckedChange = { checked -> submitTypesOnChange(checked, types, MediaType.Video, onChange) },
@@ -90,7 +89,7 @@ internal fun MediaTypesRow(
       )
       ToggleableButton(
         modifier = Modifier.weight(1f),
-        text = stringResource(R.string.search_modal_audio),
+        text = GalleryStrings.searchModalAudio,
         icon = Icons.Filled.Audiotrack,
         isChecked = MediaType.Audio in types,
         onCheckedChange = { checked -> submitTypesOnChange(checked, types, MediaType.Audio, onChange) },

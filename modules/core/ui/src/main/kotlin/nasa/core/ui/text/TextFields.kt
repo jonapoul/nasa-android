@@ -26,16 +26,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import nasa.core.res.R
+import nasa.core.res.CoreDimens
+import nasa.core.res.CoreStrings
 import nasa.core.ui.CardShape
-import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.dropDownMenuItem
@@ -66,7 +65,7 @@ fun NasaTextField(
   val isFocused by interactionSource.collectIsFocusedAsState()
   var fieldModifier = modifier
   if (isFocused) {
-    fieldModifier = fieldModifier.shadow(Dimensions.Medium, shape, ambientColor = theme.formInputShadow)
+    fieldModifier = fieldModifier.shadow(CoreDimens.medium, shape, ambientColor = theme.formInputShadow)
   }
 
   val clearButton: (@Composable () -> Unit)? = if (clearable && value.isNotEmpty()) {
@@ -162,7 +161,7 @@ private fun ClearButton(
   ) {
     Icon(
       imageVector = Icons.Default.Clear,
-      contentDescription = stringResource(id = R.string.input_clear),
+      contentDescription = CoreStrings.inputClear,
       tint = tint,
     )
   }

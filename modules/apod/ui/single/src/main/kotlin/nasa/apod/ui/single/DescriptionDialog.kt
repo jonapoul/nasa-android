@@ -8,12 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import nasa.apod.model.ApodItem
 import nasa.apod.preview.PREVIEW_ITEM_1
-import nasa.apod.res.R
+import nasa.apod.res.ApodStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
@@ -62,7 +61,7 @@ private fun DescriptionDialogContent(
     buttons = {
       TextButton(onClick = onCancel) {
         Text(
-          text = stringResource(id = R.string.apod_desc_dialog_ok),
+          text = ApodStrings.descDialogOk,
           color = theme.pageTextPrimary,
         )
       }

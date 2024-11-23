@@ -11,11 +11,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import nasa.about.res.R
+import nasa.about.res.AboutStrings
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.dialog.DialogContent
@@ -64,7 +63,7 @@ private fun CheckUpdatesLoadingDialogContent(
         HorizontalSpacer(15.dp)
 
         Text(
-          text = stringResource(id = R.string.about_checking_updates_loading),
+          text = AboutStrings.checkingUpdatesLoading,
           color = theme.pageText,
         )
       }
@@ -72,7 +71,7 @@ private fun CheckUpdatesLoadingDialogContent(
     buttons = {
       TextButton(onClick = onCancel) {
         Text(
-          text = stringResource(id = R.string.about_checking_updates_cancel),
+          text = AboutStrings.checkingUpdatesCancel,
           color = theme.pageTextPrimary,
         )
       }

@@ -1,6 +1,5 @@
 package nasa.settings.ui
 
-import alakazam.android.ui.compose.OnDispose
 import android.content.SharedPreferences
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,6 +17,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,19 +26,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.core.content.edit
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import nasa.core.ui.Dimensions
+import nasa.core.res.CoreDimens
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.radioButton
 import nasa.core.ui.dialog.DialogContent
 import nasa.core.ui.preview.PreviewColumn
-import nasa.settings.res.R
+import nasa.settings.res.SettingsStrings
 
 @Composable
 internal fun ListPreference(
@@ -69,7 +68,7 @@ internal fun ListPreference(
     }
   }
   LaunchedEffect(key) { preferences.registerOnSharedPreferenceChangeListener(listener) }
-  OnDispose { preferences.unregisterOnSharedPreferenceChangeListener(listener) }
+  DisposableEffect(Unit) { onDispose { preferences.unregisterOnSharedPreferenceChangeListener(listener) } }
 
   var showDialog by remember { mutableStateOf(false) }
   val prefColors = theme.preference(enabled)
@@ -83,7 +82,7 @@ internal fun ListPreference(
   ) {
     Icon(
       imageVector = icon,
-      modifier = Modifier.padding(Dimensions.Large),
+      modifier = Modifier.padding(CoreDimens.large),
       contentDescription = title,
       tint = prefColors.foreground,
     )
@@ -91,7 +90,7 @@ internal fun ListPreference(
     Column(
       modifier = Modifier
         .weight(1f)
-        .padding(top = Dimensions.Large, bottom = Dimensions.Large, end = Dimensions.Large),
+        .padding(top = CoreDimens.large, bottom = CoreDimens.large, end = CoreDimens.large),
     ) {
       Text(
         modifier = Modifier.fillMaxWidth(),
@@ -104,7 +103,7 @@ internal fun ListPreference(
         modifier = Modifier.fillMaxWidth(),
         text = entries.getOrNull(entryValues.indexOf(currentValue))
           ?: entries.getOrNull(entryValues.indexOf(defaultValue))
-          ?: stringResource(id = R.string.settings_not_set),
+          ?: SettingsStrings.notSet,
         maxLines = 1,
         color = prefColors.subtitle,
         fontSize = 14.sp,
@@ -193,7 +192,7 @@ private fun ListPreferenceDialogContent(
     buttons = {
       TextButton(onClick = onDismiss) {
         Text(
-          text = stringResource(id = R.string.settings_dialog_cancel),
+          text = SettingsStrings.dialogCancel,
           color = theme.pageTextPrimary,
         )
       }

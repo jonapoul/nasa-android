@@ -22,8 +22,8 @@ import nasa.apod.preview.PREVIEW_DATE
 import nasa.apod.preview.PREVIEW_ITEM_1
 import nasa.apod.preview.PREVIEW_ITEM_2
 import nasa.core.model.ApiKey
+import nasa.core.res.CoreDimens
 import nasa.core.ui.BackgroundSurface
-import nasa.core.ui.Dimensions
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewScreen
@@ -95,7 +95,7 @@ private fun GridContent(
   Box(
     modifier = modifier
       .fillMaxWidth()
-      .padding(horizontal = Dimensions.Large),
+      .padding(horizontal = CoreDimens.large),
     contentAlignment = Alignment.Center,
   ) {
     when (state) {
