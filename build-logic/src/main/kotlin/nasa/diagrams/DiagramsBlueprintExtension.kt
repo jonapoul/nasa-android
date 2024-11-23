@@ -76,4 +76,8 @@ open class DiagramsBlueprintExtension @Inject constructor(
   val moduleTypeFinder: Property<ModuleType.Finder> = objects
     .property(ModuleType.Finder::class.java)
     .convention(NasaModuleType.Finder)
+
+  val checkReadmeContents: Property<Boolean> = objects
+    .property(Boolean::class.java)
+    .convention(true)
 }
