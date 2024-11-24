@@ -14,11 +14,11 @@ dependencies {
 
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.lifecycle.viewmodel.core)
-  implementation(libs.hilt.core)
   implementation(libs.kotlinx.immutable)
   implementation(libs.preferences.core)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+  compileOnly(libs.hilt.core)
 
   testImplementation(testFixtures(projects.gallery.model))
   testImplementation(libs.test.alakazam.db)

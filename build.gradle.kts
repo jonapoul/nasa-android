@@ -66,6 +66,7 @@ dependencyAnalysis {
       onUnusedDependencies {
         exclude(
           libs.androidx.compose.ui.tooling,
+          libs.androidx.compose.ui.toolingPreview,
           libs.hilt.core,
           libs.test.androidx.monitor,
           libs.timber,

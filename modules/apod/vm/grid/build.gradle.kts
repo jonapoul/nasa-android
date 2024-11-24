@@ -14,10 +14,10 @@ dependencies {
   api(projects.apod.nav)
 
   implementation(libs.androidx.compose.runtime)
-  implementation(libs.hilt.core)
   implementation(libs.kotlinx.immutable)
 
   compileOnly(libs.alakazam.kotlin.compose.annotations)
+  compileOnly(libs.hilt.core)
 
   testImplementation(testFixtures(projects.apod.model))
   testImplementation(testFixtures(projects.core.model))

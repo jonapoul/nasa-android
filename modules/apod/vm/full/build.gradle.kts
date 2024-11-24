@@ -13,7 +13,8 @@ dependencies {
   api(projects.core.http.progress)
 
   implementation(libs.androidx.compose.runtime)
-  implementation(libs.hilt.core)
+
+  compileOnly(libs.hilt.core)
 
   testImplementation(testFixtures(projects.core.model))
   testImplementation(projects.test.flow)
