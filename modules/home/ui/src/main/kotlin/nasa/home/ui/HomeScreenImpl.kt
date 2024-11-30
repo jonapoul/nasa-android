@@ -2,6 +2,7 @@ package nasa.home.ui
 
 import alakazam.kotlin.core.exhaustive
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import my.nanihadesuka.compose.LazyColumnScrollbar
 import nasa.core.res.CoreDimens
+import nasa.core.ui.StarryBackground
+import nasa.core.ui.StarryBackgroundConfig
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.color.scrollbarSettings
@@ -34,12 +37,25 @@ internal fun HomeScreenImpl(
     modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = { HomeTopBar(onAction, theme, scrollBehavior) },
   ) { innerPadding ->
-    HomeScreenContent(
+    Box(
       modifier = Modifier.padding(innerPadding),
-      thumbnailUrls = thumbnailUrls,
-      onAction = onAction,
-      theme = theme,
-    )
+    ) {
+      StarryBackground(
+        modifier = Modifier.fillMaxSize(),
+        theme = theme,
+        config = StarryBackgroundConfig(
+          density = 5e-5f,
+          minSize = 0.5f,
+          maxSize = 10f,
+        )
+      )
+
+      HomeScreenContent(
+        thumbnailUrls = thumbnailUrls,
+        onAction = onAction,
+        theme = theme,
+      )
+    }
   }
 }
 

@@ -29,5 +29,7 @@ dependencies {
   implementation(libs.androidx.coreKtx)
   implementation(libs.coil.compose)
   implementation(libs.coil.composeBase)
+  implementation(libs.haze.core)
+  implementation(libs.haze.materials)
   implementation(libs.kotlinx.coroutines)
 }
