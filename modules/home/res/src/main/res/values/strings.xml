@@ -5,7 +5,7 @@
   <string name="home_menu_about">About</string>
   <string name="home_menu_api_usage">API Usage</string>
 
-  <string name="home_nav_apod">Astronomy Photo Of The Day (APOD)</string>
+  <string name="home_nav_apod">Astronomy Photo Of The Day</string>
   <string name="home_nav_apod_desc">Discover the cosmos! Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.</string>
   <string name="home_nav_gallery">Image/Video Gallery</string>
   <string name="home_nav_gallery_desc">Discover our intergalactic multimedia collections.</string>

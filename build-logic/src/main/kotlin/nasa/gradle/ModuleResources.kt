@@ -23,6 +23,7 @@ class ModuleResources : Plugin<Project> {
     with(pluginManager) {
       apply(KotlinAndroidPluginWrapper::class.java)
       apply(ConventionAndroidLibrary::class.java)
+      apply(ConventionCompose::class.java)
       apply(ConventionDiagrams::class.java)
       apply(ConventionLicensee::class.java)
       apply(ConventionSpotless::class.java)
