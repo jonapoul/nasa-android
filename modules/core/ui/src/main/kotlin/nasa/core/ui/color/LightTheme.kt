@@ -12,6 +12,8 @@ internal class LightTheme : Theme {
   override val pageTextPrimary = ColorPalette.blue600
   override val pageTextLoading = ColorPalette.grey500
 
+  override val backgroundStar = ColorPalette.black
+
   override val cardBackground = ColorPalette.white
   override val cardShadow = ColorPalette.navy700
 

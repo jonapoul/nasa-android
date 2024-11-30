@@ -12,6 +12,8 @@ internal class DarkTheme : Theme {
   override val pageTextPrimary = ColorPalette.blue200
   override val pageTextLoading = ColorPalette.grey200
 
+  override val backgroundStar = ColorPalette.white
+
   override val cardBackground = ColorPalette.grey600
   override val cardShadow = ColorPalette.navy700
 

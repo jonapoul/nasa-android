@@ -24,9 +24,6 @@ fun HomeScreen(
 
   val apodThumbnailUrl by viewModel.apodThumbnailUrl.collectAsState()
   val galleryThumbnailUrl by viewModel.galleryThumbnailUrl.collectAsState()
-  val thumbnailUrls = remember(apodThumbnailUrl, galleryThumbnailUrl) {
-    ThumbnailUrls(apodThumbnailUrl, galleryThumbnailUrl)
-  }
 
   val showApiUsageDialog = remember { mutableStateOf(false) }
   if (showApiUsageDialog.value) {
@@ -40,7 +37,7 @@ fun HomeScreen(
   }
 
   HomeScreenImpl(
-    thumbnailUrls = thumbnailUrls,
+    thumbnailUrls = ThumbnailUrls(apodThumbnailUrl, galleryThumbnailUrl),
     theme = theme,
     onAction = { action ->
       when (action) {
