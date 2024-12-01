@@ -43,11 +43,7 @@ internal fun HomeScreenImpl(
       StarryBackground(
         modifier = Modifier.fillMaxSize(),
         theme = theme,
-        config = StarryBackgroundConfig(
-          density = 5e-5f,
-          minSize = 0.5f,
-          maxSize = 10f,
-        )
+        config = StarryBackgroundConfig(density = 2e-5f)
       )
 
       HomeScreenContent(

@@ -1,5 +1,8 @@
 # High Priority
 
+## General
+- Second toolbar shown in pixels?
+
 ## Gallery
 - Search screen
   - Filtering panel

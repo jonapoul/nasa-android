@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -26,16 +27,19 @@ import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.HazeChildScope
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
+import dev.chrisbanes.haze.haze
+import dev.chrisbanes.haze.hazeChild
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
+import timber.log.Timber
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
 @Composable
 fun StarryBackground(
   modifier: Modifier = Modifier,
-  config: StarryBackgroundConfig = StarryBackgroundConfig.Default,
+  config: StarryBackgroundConfig = StarryBackgroundConfig(),
   theme: Theme = LocalTheme.current,
   seed: Long = remember { System.currentTimeMillis() },
 ) {
@@ -44,23 +48,38 @@ fun StarryBackground(
   val particles = remember { mutableStateListOf<Particle>() }
 
   BoxWithConstraints(modifier = modifier) {
-    DisposableEffect(constraints, random, config) {
+    val constraints = constraints
+
+    DisposableEffect(config) {
       val starCount = (constraints.maxWidth * constraints.maxHeight * config.density).roundToInt()
-      repeat(starCount) { particles.add(generateParticle(constraints, random, config)) }
+      repeat(starCount) { particles.add(generateParticle(InitialCoordinateFactory, constraints, random, config)) }
       onDispose { particles.clear() }
     }
 
-    particles.forEachIndexed { index, particle ->
-      ParticleAnimation(
-        constraints = constraints,
-        particle = particle,
-        theme = theme,
-        onDisappear = {
-          particles.removeAt(index)
-          particles.add(generateParticle(constraints, random, config))
-        },
-      )
+    Box(
+      modifier = Modifier
+        .haze(hazeState)
+        .fillMaxSize(),
+    ) {
+      val particleList = particles.toList()
+      particleList.forEachIndexed { index, particle ->
+        ParticleAnimation(
+          constraints = constraints,
+          particle = particle,
+          theme = theme,
+          onDisappear = {
+            Timber.i("Disappearing $index")
+            particles[index] = generateParticle(LaterCoordinateFactory, constraints, random, config)
+          },
+        )
+      }
     }
+
+    Box(
+      modifier = Modifier
+        .hazeChild(hazeState) { setStyle(theme, config.blur) }
+        .fillMaxSize(),
+    )
   }
 }
 
@@ -97,16 +116,16 @@ private fun ParticleAnimation(
   val xRange = remember(constraints) { 0f..constraints.maxWidth.toFloat() }
   val yRange = remember(constraints) { 0f..constraints.maxHeight.toFloat() }
 
-  if (x !in xRange || y !in yRange) {
-    onDisappear()
-  }
-
   Canvas(modifier = modifier.fillMaxSize()) {
     drawCircle(
       color = theme.backgroundStar,
       radius = particle.size,
       center = Offset(x, y),
     )
+  }
+
+  if (x !in xRange || y !in yRange) {
+    onDisappear()
   }
 }
 
@@ -115,17 +134,13 @@ private fun ParticleAnimation(
  */
 @Immutable
 data class StarryBackgroundConfig(
-  val density: Float = 0.0001f,
-  val minSize: Float = 1f,
+  val density: Float = 1e-4f,
+  val minSize: Float = 0.5f,
   val maxSize: Float = 10f,
-  val minSpeed: Float = 0.5f,
-  val maxSpeed: Float = 5f,
+  val minSpeed: Float = 0.01f,
+  val maxSpeed: Float = 0.2f,
   val blur: StarryBlur = StarryBlur.Medium,
-) {
-  companion object {
-    val Default = StarryBackgroundConfig()
-  }
-}
+)
 
 @Immutable
 enum class StarryBlur { None, Low, Medium, High, Max, }
@@ -140,27 +155,67 @@ private data class Particle(
 )
 
 private enum class XDirection(val factor: Int) { Left(factor = 1), Right(factor = -1), }
+
 private enum class YDirection(val factor: Int) { Up(factor = 1), Down(factor = -1), }
 
+private enum class StartingAxis { Top, Right, Bottom, Left, }
+
+private data class Coordinates(val x: Float, val y: Float)
+
+private fun interface CoordinateFactory {
+  fun generate(random: Random, constraints: Constraints): Coordinates
+}
+
+private object InitialCoordinateFactory : CoordinateFactory {
+  override fun generate(random: Random, constraints: Constraints) = Coordinates(
+    x = random.nextFloat() * constraints.maxWidth,
+    y = random.nextFloat() * constraints.maxHeight,
+  )
+    .also { Timber.i("Initial generated $it") }
+}
+
+private object LaterCoordinateFactory : CoordinateFactory {
+  override fun generate(random: Random, constraints: Constraints): Coordinates {
+    val axis = StartingAxis.entries.random(random)
+    var x = 0f
+    var y = 0f
+    when (axis) {
+      StartingAxis.Top -> {
+        x = random.nextFloat() * constraints.maxWidth
+      }
+
+      StartingAxis.Right -> {
+        x = constraints.maxWidth.toFloat()
+        y = random.nextFloat() * constraints.maxHeight
+      }
+
+      StartingAxis.Bottom -> {
+        x = random.nextFloat() * constraints.maxWidth
+        y = constraints.maxHeight.toFloat()
+      }
+
+      StartingAxis.Left -> {
+        y = random.nextFloat() * constraints.maxHeight
+      }
+    }
+    return Coordinates(x, y)
+      .also { Timber.i("Later generated $it") }
+  }
+}
+
 private fun generateParticle(
+  coordinateFactory: CoordinateFactory,
   constraints: Constraints,
   random: Random,
   config: StarryBackgroundConfig,
 ): Particle {
+  val coordinates = coordinateFactory.generate(random, constraints)
   val xDir = if (random.nextBoolean()) XDirection.Left else XDirection.Right
   val yDir = if (random.nextBoolean()) YDirection.Up else YDirection.Down
-  val x = when (xDir) {
-    XDirection.Left -> constraints.maxWidth.toFloat()
-    XDirection.Right -> 0f
-  }
-  val y = when (yDir) {
-    YDirection.Up -> constraints.maxWidth.toFloat()
-    YDirection.Down -> 0f
-  }
   val size = random.nextFloat() * (config.maxSize - config.minSize) + config.minSize
   val vx = (random.nextFloat() * (config.maxSpeed - config.minSpeed) + config.minSpeed) * xDir.factor
   val vy = (random.nextFloat() * (config.maxSpeed - config.minSpeed) + config.minSpeed) * yDir.factor
-  return Particle(x, y, vx, vy, size)
+  return Particle(coordinates.x, coordinates.y, vx, vy, size)
 }
 
 @Stable
@@ -204,9 +259,11 @@ private fun PreviewStarryBackground(blur: StarryBlur) = PreviewColumn {
   StarryBackground(
     modifier = Modifier.size(200.dp, 200.dp),
     config = StarryBackgroundConfig(
-      density = 5e-4f,
+      density = 1e-4f,
       minSize = 0.5f,
       maxSize = 10f,
+      minSpeed = 0.01f,
+      maxSpeed = 0.2f,
       blur = blur,
     ),
   )
