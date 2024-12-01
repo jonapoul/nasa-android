@@ -1,26 +1,31 @@
 package nasa.core.ui
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import dev.chrisbanes.haze.HazeChildScope
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
-import dev.chrisbanes.haze.haze
-import dev.chrisbanes.haze.hazeChild
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
@@ -35,38 +40,72 @@ fun StarryBackground(
   seed: Long = remember { System.currentTimeMillis() },
 ) {
   val hazeState = remember { HazeState() }
+  val random = remember(seed) { Random(seed) }
+  val particles = remember { mutableStateListOf<Particle>() }
 
-  Box(modifier = modifier) {
-    Canvas(
-      modifier = Modifier
-        .fillMaxSize()
-        .haze(hazeState),
-    ) {
-      val random = Random(seed)
-      val paint = Paint().apply { color = theme.backgroundStar }
-      val starCount = (size.width * size.height * config.density).roundToInt()
-
-      repeat(starCount) {
-        val x = random.nextFloat() * size.width
-        val y = random.nextFloat() * size.height
-        val starSize = random.nextFloat() * (config.maxSize - config.minSize) + config.minSize
-
-        drawIntoCanvas { canvas ->
-          translate(left = x, top = y) {
-            canvas.drawCircle(
-              radius = starSize / 2f,
-              center = Offset(x = 0f, y = 0f),
-              paint = paint,
-            )
-          }
-        }
-      }
+  BoxWithConstraints(modifier = modifier) {
+    DisposableEffect(constraints, random, config) {
+      val starCount = (constraints.maxWidth * constraints.maxHeight * config.density).roundToInt()
+      repeat(starCount) { particles.add(generateParticle(constraints, random, config)) }
+      onDispose { particles.clear() }
     }
 
-    Box(
-      modifier = Modifier
-        .hazeChild(hazeState) { setStyle(theme, config.blur) }
-        .fillMaxSize(),
+    particles.forEachIndexed { index, particle ->
+      ParticleAnimation(
+        constraints = constraints,
+        particle = particle,
+        theme = theme,
+        onDisappear = {
+          particles.removeAt(index)
+          particles.add(generateParticle(constraints, random, config))
+        },
+      )
+    }
+  }
+}
+
+@Composable
+private fun ParticleAnimation(
+  constraints: Constraints,
+  particle: Particle,
+  onDisappear: () -> Unit,
+  modifier: Modifier = Modifier,
+  theme: Theme = LocalTheme.current,
+) {
+  val infiniteTransition = rememberInfiniteTransition(label = "infinite")
+
+  val x by infiniteTransition.animateFloat(
+    label = "x",
+    initialValue = particle.startX,
+    targetValue = particle.startX + particle.velocityX * 300f, // Assume 300 frames of movement
+    animationSpec = infiniteRepeatable(
+      animation = tween(durationMillis = 3000, easing = LinearEasing),
+      repeatMode = RepeatMode.Restart,
+    ),
+  )
+
+  val y by infiniteTransition.animateFloat(
+    label = "y",
+    initialValue = particle.startY,
+    targetValue = particle.startY + particle.velocityY * 300f,
+    animationSpec = infiniteRepeatable(
+      animation = tween(durationMillis = 3000, easing = LinearEasing),
+      repeatMode = RepeatMode.Restart,
+    ),
+  )
+
+  val xRange = remember(constraints) { 0f..constraints.maxWidth.toFloat() }
+  val yRange = remember(constraints) { 0f..constraints.maxHeight.toFloat() }
+
+  if (x !in xRange || y !in yRange) {
+    onDisappear()
+  }
+
+  Canvas(modifier = modifier.fillMaxSize()) {
+    drawCircle(
+      color = theme.backgroundStar,
+      radius = particle.size,
+      center = Offset(x, y),
     )
   }
 }
@@ -79,6 +118,8 @@ data class StarryBackgroundConfig(
   val density: Float = 0.0001f,
   val minSize: Float = 1f,
   val maxSize: Float = 10f,
+  val minSpeed: Float = 0.5f,
+  val maxSpeed: Float = 5f,
   val blur: StarryBlur = StarryBlur.Medium,
 ) {
   companion object {
@@ -88,6 +129,39 @@ data class StarryBackgroundConfig(
 
 @Immutable
 enum class StarryBlur { None, Low, Medium, High, Max, }
+
+@Immutable
+private data class Particle(
+  val startX: Float,
+  val startY: Float,
+  val velocityX: Float,
+  val velocityY: Float,
+  val size: Float,
+)
+
+private enum class XDirection(val factor: Int) { Left(factor = 1), Right(factor = -1), }
+private enum class YDirection(val factor: Int) { Up(factor = 1), Down(factor = -1), }
+
+private fun generateParticle(
+  constraints: Constraints,
+  random: Random,
+  config: StarryBackgroundConfig,
+): Particle {
+  val xDir = if (random.nextBoolean()) XDirection.Left else XDirection.Right
+  val yDir = if (random.nextBoolean()) YDirection.Up else YDirection.Down
+  val x = when (xDir) {
+    XDirection.Left -> constraints.maxWidth.toFloat()
+    XDirection.Right -> 0f
+  }
+  val y = when (yDir) {
+    YDirection.Up -> constraints.maxWidth.toFloat()
+    YDirection.Down -> 0f
+  }
+  val size = random.nextFloat() * (config.maxSize - config.minSize) + config.minSize
+  val vx = (random.nextFloat() * (config.maxSpeed - config.minSpeed) + config.minSpeed) * xDir.factor
+  val vy = (random.nextFloat() * (config.maxSpeed - config.minSpeed) + config.minSpeed) * yDir.factor
+  return Particle(x, y, vx, vy, size)
+}
 
 @Stable
 private fun HazeChildScope.setStyle(theme: Theme, blur: StarryBlur) {
