@@ -32,7 +32,7 @@ class ConventionCompose : Plugin<Project> {
       val metricReportDir = project.layout.buildDirectory.dir("compose_metrics").get().asFile
       metricsDestination = metricReportDir
       reportsDestination = metricReportDir
-      stabilityConfigurationFile = rootProject.file("compose-stability.conf")
+      stabilityConfigurationFiles.add(rootProject.layout.projectDirectory.file("compose-stability.conf"))
       targetKotlinPlatforms = setOf(KotlinPlatformType.androidJvm)
     }
 
