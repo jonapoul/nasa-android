@@ -1,13 +1,11 @@
 package nasa.home.ui
 
-import alakazam.kotlin.core.exhaustive
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
@@ -55,11 +53,6 @@ internal fun HomeScreenImpl(
   }
 }
 
-private enum class GridItem {
-  Apod,
-  Gallery,
-}
-
 @Composable
 private fun HomeScreenContent(
   thumbnailUrls: ThumbnailUrls,
@@ -80,21 +73,8 @@ private fun HomeScreenContent(
       verticalArrangement = Arrangement.Top,
       contentPadding = PaddingValues(GRID_CONTENT_PADDING),
     ) {
-      items(GridItem.entries) { item ->
-        when (item) {
-          GridItem.Apod -> ApodGridItem(
-            thumbnailUrl = thumbnailUrls.apod,
-            onAction = onAction,
-            theme = theme,
-          )
-
-          GridItem.Gallery -> GalleryGridItem(
-            thumbnailUrl = thumbnailUrls.gallery,
-            onAction = onAction,
-            theme = theme,
-          )
-        }.exhaustive
-      }
+      item { ApodGridItem(thumbnailUrls.apod, onAction, theme = theme) }
+      item { GalleryGridItem(thumbnailUrls.gallery, onAction, theme = theme) }
     }
   }
 }
