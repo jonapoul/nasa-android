@@ -24,6 +24,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.fastForEach
+import androidx.compose.ui.util.fastForEachIndexed
+import androidx.compose.ui.util.fastMap
 import dev.chrisbanes.haze.HazeChildScope
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.HazeStyle
@@ -32,9 +35,11 @@ import dev.chrisbanes.haze.hazeChild
 import nasa.core.ui.color.LocalTheme
 import nasa.core.ui.color.Theme
 import nasa.core.ui.preview.PreviewColumn
-import timber.log.Timber
 import kotlin.math.roundToInt
+import kotlin.math.roundToLong
 import kotlin.random.Random
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 @Composable
 fun StarryBackground(
@@ -43,11 +48,11 @@ fun StarryBackground(
   theme: Theme = LocalTheme.current,
   seed: Long = remember { System.currentTimeMillis() },
 ) {
-  val hazeState = remember { HazeState() }
-  val random = remember(seed) { Random(seed) }
-  val particles = remember { mutableStateListOf<Particle>() }
-
   BoxWithConstraints(modifier = modifier) {
+    val hazeState = remember { HazeState() }
+    val random = remember(seed) { Random(seed) }
+    val particles = remember { mutableStateListOf<Particle>() }
+    val particlesToRegenerate = remember { mutableStateListOf<Int>() }
     val constraints = constraints
 
     DisposableEffect(config) {
@@ -61,17 +66,31 @@ fun StarryBackground(
         .haze(hazeState)
         .fillMaxSize(),
     ) {
-      val particleList = particles.toList()
-      particleList.forEachIndexed { index, particle ->
-        ParticleAnimation(
-          constraints = constraints,
-          particle = particle,
-          theme = theme,
-          onDisappear = {
-            Timber.i("Disappearing $index")
-            particles[index] = generateParticle(LaterCoordinateFactory, constraints, random, config)
-          },
-        )
+      val particleOffsets = particles.fastMap { p -> p to generateAnimatedOffset(p, constraints) }
+
+      Canvas(
+        modifier = Modifier.fillMaxSize(),
+      ) {
+        particleOffsets.fastForEach { (particle, offset) ->
+          drawCircle(
+            color = theme.backgroundStar,
+            radius = particle.size,
+            center = offset,
+          )
+        }
+      }
+
+      particleOffsets.fastForEachIndexed { index, (_, offset) ->
+        if (!isInRange(offset, constraints)) {
+          particlesToRegenerate.add(index)
+        }
+      }
+
+      if (particlesToRegenerate.isNotEmpty()) {
+        particlesToRegenerate.fastForEach { index ->
+          particles[index] = generateParticle(LaterCoordinateFactory, constraints, random, config)
+        }
+        particlesToRegenerate.clear()
       }
     }
 
@@ -83,50 +102,52 @@ fun StarryBackground(
   }
 }
 
+private val Constraints.xRange: ClosedFloatingPointRange<Float>
+  @Stable get() = 0f..maxWidth.toFloat()
+
+private val Constraints.yRange: ClosedFloatingPointRange<Float>
+  @Stable get() = 0f..maxHeight.toFloat()
+
+@Stable
 @Composable
-private fun ParticleAnimation(
-  constraints: Constraints,
-  particle: Particle,
-  onDisappear: () -> Unit,
-  modifier: Modifier = Modifier,
-  theme: Theme = LocalTheme.current,
-) {
+private fun isInRange(offset: Offset, constraints: Constraints): Boolean {
+  return offset.x in constraints.xRange && offset.y in constraints.yRange
+}
+
+@Composable
+private fun generateAnimatedOffset(particle: Particle, constraints: Constraints): Offset {
+  val expectedDuration = calculateTweenDuration(particle, constraints)
   val infiniteTransition = rememberInfiniteTransition(label = "infinite")
+  val animationSpec = infiniteRepeatable<Float>(
+    animation = tween(durationMillis = expectedDuration.inWholeMilliseconds.toInt(), easing = LinearEasing),
+    repeatMode = RepeatMode.Restart,
+  )
 
   val x by infiniteTransition.animateFloat(
     label = "x",
     initialValue = particle.startX,
     targetValue = particle.startX + particle.velocityX * 300f, // Assume 300 frames of movement
-    animationSpec = infiniteRepeatable(
-      animation = tween(durationMillis = 3000, easing = LinearEasing),
-      repeatMode = RepeatMode.Restart,
-    ),
+    animationSpec = animationSpec,
   )
 
   val y by infiniteTransition.animateFloat(
     label = "y",
     initialValue = particle.startY,
     targetValue = particle.startY + particle.velocityY * 300f,
-    animationSpec = infiniteRepeatable(
-      animation = tween(durationMillis = 3000, easing = LinearEasing),
-      repeatMode = RepeatMode.Restart,
-    ),
+    animationSpec = animationSpec,
   )
 
-  val xRange = remember(constraints) { 0f..constraints.maxWidth.toFloat() }
-  val yRange = remember(constraints) { 0f..constraints.maxHeight.toFloat() }
+  return Offset(x, y)
+}
 
-  Canvas(modifier = modifier.fillMaxSize()) {
-    drawCircle(
-      color = theme.backgroundStar,
-      radius = particle.size,
-      center = Offset(x, y),
-    )
-  }
+@Stable
+private fun Int.orOne(): Int = if (this == 0) 1 else this
 
-  if (x !in xRange || y !in yRange) {
-    onDisappear()
-  }
+@Stable
+private fun calculateTweenDuration(particle: Particle, constraints: Constraints): Duration {
+  val dtX = particle.velocityX / constraints.maxWidth.orOne()
+  val dtY = particle.velocityY / constraints.maxHeight.orOne()
+  return minOf(dtX, dtY).roundToLong().seconds
 }
 
 /**
@@ -171,7 +192,6 @@ private object InitialCoordinateFactory : CoordinateFactory {
     x = random.nextFloat() * constraints.maxWidth,
     y = random.nextFloat() * constraints.maxHeight,
   )
-    .also { Timber.i("Initial generated $it") }
 }
 
 private object LaterCoordinateFactory : CoordinateFactory {
@@ -199,7 +219,6 @@ private object LaterCoordinateFactory : CoordinateFactory {
       }
     }
     return Coordinates(x, y)
-      .also { Timber.i("Later generated $it") }
   }
 }
 
