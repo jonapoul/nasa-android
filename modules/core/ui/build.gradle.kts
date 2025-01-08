@@ -9,7 +9,6 @@ dependencies {
   api(libs.lazycolumn.scrollbar)
   api(projects.core.model)
   api(projects.core.res)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.annotation)
   implementation(libs.androidx.compose.animation.core)

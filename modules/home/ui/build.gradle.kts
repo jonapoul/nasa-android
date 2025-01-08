@@ -12,7 +12,6 @@ dependencies {
   api(projects.gallery.nav)
   api(projects.home.vm)
   api(projects.settings.nav)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.compose.animation.core)

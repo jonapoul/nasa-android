@@ -1,7 +1,6 @@
 package nasa.gradle
 
 import com.autonomousapps.DependencyAnalysisPlugin
-import com.squareup.sort.SortDependenciesPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.plugin.KotlinPluginWrapper
@@ -17,7 +16,7 @@ class ModuleKotlin : Plugin<Project> {
       apply(ConventionTest::class.java)
       apply("java-test-fixtures")
       apply(DependencyAnalysisPlugin::class.java)
-      apply(SortDependenciesPlugin::class.java)
+      apply(ConventionSortDependencies::class.java)
     }
   }
 }

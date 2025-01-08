@@ -9,7 +9,6 @@ dependencies {
   api(libs.androidx.navigation.runtime)
   api(projects.core.ui)
   api(projects.gallery.vm.image)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.compose.foundation.core)

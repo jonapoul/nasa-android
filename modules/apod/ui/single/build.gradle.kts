@@ -11,7 +11,6 @@ dependencies {
   api(projects.apod.vm.single)
   api(projects.core.ui)
   api(projects.settings.nav)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

@@ -11,11 +11,9 @@ dependencies {
   api(libs.kotlinx.coroutines)
   api(projects.core.http.progress)
   api(projects.gallery.data.repo)
-
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.lifecycle.viewmodel.core)
   implementation(libs.hilt.android)
-
   compileOnly(libs.alakazam.kotlin.compose.annotations)
   compileOnly(libs.hilt.core)
 }

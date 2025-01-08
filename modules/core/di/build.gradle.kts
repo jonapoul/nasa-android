@@ -14,6 +14,5 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(libs.preferences.core)
   api(projects.core.model)
-
   implementation(libs.preferences.android)
 }

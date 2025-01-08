@@ -8,7 +8,6 @@ dependencies {
   api(libs.javaxInject)
   api(projects.about.data)
   api(projects.core.http.factories)
-
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.okhttp.core)

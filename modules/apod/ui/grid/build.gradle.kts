@@ -11,7 +11,6 @@ dependencies {
   api(projects.apod.vm.grid)
   api(projects.core.ui)
   api(projects.settings.nav)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)
@@ -36,6 +35,5 @@ dependencies {
   implementation(libs.kotlinx.immutable)
   implementation(projects.apod.preview)
   implementation(projects.apod.res)
-
   testImplementation(testFixtures(projects.core.model))
 }

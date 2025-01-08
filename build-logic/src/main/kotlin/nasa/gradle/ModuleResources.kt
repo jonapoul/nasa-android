@@ -4,7 +4,6 @@ import blueprint.core.getLibrary
 import blueprint.core.stringProperty
 import com.android.build.api.dsl.LibraryExtension
 import com.autonomousapps.DependencyAnalysisPlugin
-import com.squareup.sort.SortDependenciesPlugin
 import dev.jonpoulton.catalog.gradle.CatalogExtension
 import dev.jonpoulton.catalog.gradle.CatalogParameterNaming
 import dev.jonpoulton.catalog.gradle.CatalogPlugin
@@ -29,7 +28,7 @@ class ModuleResources : Plugin<Project> {
       apply(ConventionSpotless::class.java)
       apply(CatalogPlugin::class.java)
       apply(DependencyAnalysisPlugin::class.java)
-      apply(SortDependenciesPlugin::class.java)
+      apply(ConventionSortDependencies::class.java)
     }
 
     extensions.configure<LibraryExtension> {

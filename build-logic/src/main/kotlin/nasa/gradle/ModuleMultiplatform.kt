@@ -23,7 +23,7 @@ class ModuleMultiplatform : Plugin<Project> {
       apply(ConventionStyle::class.java)
       apply(ConventionTest::class.java)
 //      apply(DependencyAnalysisPlugin::class.java) // doesn't support KMP
-//      apply(SortDependenciesPlugin::class.java) // doesn't support KMP
+//      apply(ConventionSortDependencies::class.java) // doesn't support KMP
     }
 
     kotlin {

@@ -37,7 +37,6 @@ dependencies {
   compileOnly(libs.plugin.ktlint)
   compileOnly(libs.plugin.licensee)
   compileOnly(libs.plugin.spotless)
-
   implementation(libs.plugin.blueprint.core)
   implementation(libs.plugin.blueprint.recipes)
   implementation(libs.plugin.turtle)
@@ -62,6 +61,7 @@ gradlePlugin {
     create(id = "nasa.convention.kover", impl = "nasa.gradle.ConventionKover")
     create(id = "nasa.convention.ktlint", impl = "nasa.gradle.ConventionKtlint")
     create(id = "nasa.convention.licensee", impl = "nasa.gradle.ConventionLicensee")
+    create(id = "nasa.convention.sortdependencies", impl = "nasa.gradle.ConventionSortDependencies")
     create(id = "nasa.convention.spotless", impl = "nasa.gradle.ConventionSpotless")
     create(id = "nasa.convention.style", impl = "nasa.gradle.ConventionStyle")
     create(id = "nasa.convention.test", impl = "nasa.gradle.ConventionTest")

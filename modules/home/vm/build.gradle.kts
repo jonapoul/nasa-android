@@ -11,13 +11,10 @@ dependencies {
   api(projects.apod.data.repo)
   api(projects.core.http.usage)
   api(projects.gallery.data.repo)
-
   implementation(libs.androidx.compose.runtime)
   implementation(libs.androidx.lifecycle.viewmodel.core)
-
   compileOnly(libs.alakazam.kotlin.compose.annotations)
   compileOnly(libs.hilt.core)
-
   testImplementation(testFixtures(projects.apod.model))
   testImplementation(projects.test.flow)
   testImplementation(projects.test.http)

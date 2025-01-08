@@ -8,7 +8,6 @@ dependencies {
   api(libs.androidx.navigation.runtime)
   api(projects.core.ui)
   api(projects.licenses.vm)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.alakazam.kotlin.core)
   implementation(libs.androidx.compose.animation.core)

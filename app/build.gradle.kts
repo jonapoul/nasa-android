@@ -184,7 +184,6 @@ dependencies {
   implementation(projects.licenses.di)
   implementation(projects.licenses.ui)
   implementation(projects.settings.ui)
-
   testImplementation(projects.test.flow)
   testImplementation(projects.test.prefs)
 }

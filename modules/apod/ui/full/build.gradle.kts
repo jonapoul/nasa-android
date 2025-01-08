@@ -10,7 +10,6 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(projects.apod.vm.full)
   api(projects.core.ui)
-
   implementation(libs.alakazam.android.compose)
   implementation(libs.androidx.compose.foundation.core)
   implementation(libs.androidx.compose.foundation.layout)

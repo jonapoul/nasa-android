@@ -11,11 +11,8 @@ dependencies {
   api(libs.kotlinx.datetime)
   api(projects.apod.data.repo)
   api(projects.core.http.progress)
-
   implementation(libs.androidx.compose.runtime)
-
   compileOnly(libs.hilt.core)
-
   testImplementation(testFixtures(projects.core.model))
   testImplementation(projects.test.flow)
 }

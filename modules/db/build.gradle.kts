@@ -27,7 +27,6 @@ commonMainDependencies {
   api(libs.androidx.room.runtime)
   api(libs.kotlinx.coroutines)
   api(projects.gallery.model)
-
   implementation(libs.androidx.room.common)
   implementation(libs.androidx.sqlite.core)
   implementation(libs.kotlinx.datetime)

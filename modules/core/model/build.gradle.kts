@@ -6,6 +6,5 @@ plugins {
 dependencies {
   api(libs.kotlinx.coroutines)
   api(libs.kotlinx.datetime)
-
   testFixturesApi(projects.core.model)
 }
