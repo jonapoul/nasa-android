@@ -19,7 +19,7 @@ ktlint-cli = "1.5.0"
 ktlint-gradle = "12.1.2"
 licensee = "1.12.0"
 licenses = "0.9.8"
-spotless = "7.0.1"
+spotless = "7.0.2"
 turtle = "0.10.0"
 
 # Libraries
